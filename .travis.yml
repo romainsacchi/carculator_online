@@ -8,6 +8,7 @@ python:
 # install dependencies
 install:
   - pip install -r requirements/dev.txt;
+  - pip install pytest pytest-cov coveralls;
 
 script:
   - pytest --cov=carculator_online;
