@@ -16,4 +16,4 @@ script:
   - coveralls;
 
 after_success:
-  - sh .travis/deply_dockerhub.sh
+  - sh .travis/deploy_dockerhub.sh
