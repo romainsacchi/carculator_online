@@ -6,4 +6,4 @@ COPY . /carculator_online
 WORKDIR /carculator_online
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
-CMD ["carculator_online/__init__.py"]
+CMD ["carculator_online/main.py"]
