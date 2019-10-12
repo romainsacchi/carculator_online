@@ -1,6 +1,0 @@
-# Everything needed in production
-# Flask
-Flask==1.0
-
-# Deployment
-gunicorn==19.7.1

@@ -1,1 +1,1 @@
-web: gunicorn app:carculator_online
+web: gunicorn app:app
