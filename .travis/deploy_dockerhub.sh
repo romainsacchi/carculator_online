@@ -5,5 +5,5 @@ else
 TAG="$TRAVIS_BRANCH"
 fi
 docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
-docker tag $TRAVIS_REPO_SLUG carculator_online
-docker push carculator_online:latest
+docker tag $TRAVIS_REPO_SLUG romainsacchi/carculator_online
+docker push romainsacchi/carculator_online:latest
