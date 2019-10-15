@@ -8,7 +8,7 @@ from carculator import *
 
 
 # Instantiate Flask app
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__, instance_path=os.path.join(os.path.abspath(os.curdir), 'instance')
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
 
