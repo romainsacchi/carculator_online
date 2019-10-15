@@ -5,10 +5,11 @@ from flask_mail import Mail, Message
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
+import os
 
 
 # Instantiate Flask app
-app = Flask(__name__, instance_path=os.path.join(os.path.abspath(os.curdir), 'instance')
+app = Flask(__name__)
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
 
