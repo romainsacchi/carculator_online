@@ -70,3 +70,4 @@ xarray==0.13.0
 xlrd==1.2.0
 XlsxWriter==1.2.1
 gunicorn
+flask-mail
