@@ -114,9 +114,9 @@
         m.current_length = 0;
         m.fadeBuffer = false;
         m.messages = [
-          'Are electric cars better than my old diesel car?',
+          'Are electric cars really better than diesel car?',
           'Is it time to consider fuel cell cars?',
-          'Will my driving affect the range of my electric car?',
+          'Will petrol cars improve much in the future?',
           'Find it out now with carculator.'
         ];
 
