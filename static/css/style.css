@@ -495,12 +495,26 @@ button:focus {
 
 
 
+
+
+#mu-install {
+    background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	display: inline;
+	float: left;
+	position: relative;
+	width: 100%;
+	background: linear-gradient(to right, #4568DC, #B06AB3);
+
+}
+
 /*--------------------*/
 /* COUNTER */
 /*--------------------*/
 
+
 #mu-counter {
-	background-image: url("assets/images/counter-bg.jpeg");
 	background-position: center center;
 	background-size: cover;
 	background-attachment: fixed;
@@ -530,6 +544,57 @@ button:focus {
 .mu-counter-area h2 {
 	color: #fff;
 	text-align: center;
+}
+
+.mu-counter-area h3 {
+	color: #fff;
+	text-align: center;
+}
+
+.mu-counter-area .pip-span {
+    font-family: 'Source Code Pro', monospace;
+    font-size:20px;
+    background-color: rgba(0,0,0,.15);
+    padding:8px;
+    border:1px dotted;
+    line-height:30px;
+    position: relative;
+    color:white;
+    vertical-align:middle;
+    display:inline;
+
+}
+
+.mu-counter-area .pip-button {
+    color: #fff;
+    line-height:30px;
+    cursor:pointer;
+    background-color: rgba(0,0,0,.15);
+    border: 1px dotted;
+    border-left: 1px;
+    vertical-align:middle;
+    display:inline;
+}
+
+.mu-counter-area .online-button {
+	border-radius: 4px;
+	border: 1px solid #888;
+	background-color: transparent;
+	font-size: 20px;
+	font-weight: 600;
+	color:white;
+	letter-spacing: 1px;
+	text-align: center;
+	padding: 14px 24px;
+	margin-top: 10px;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	width: 230px;
+}
+
+.mu-counter-area .online-button:hover{
+     background: white;
+     color:#6969ce;
 }
 
 .mu-counter-block {
@@ -628,6 +693,13 @@ button:focus {
 }
 
 .mu-service-icon-box {
+	font-size: 35px;
+	margin-bottom: 20px;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.mu-install-icon-box {
 	font-size: 35px;
 	margin-bottom: 20px;
 	display: inline-block;
@@ -895,7 +967,7 @@ button:focus {
 /*--------------------*/
 
 #mu-testimonials {
-	background-image: url("assets/images/testimonials-bg.jpeg");
+
 	background-position: center center;
 	background-size: cover;
 	background-attachment: fixed;
@@ -1109,6 +1181,12 @@ button:focus {
 
 .mu-contact-form button {
 	float: left;
+	margin-left: 0;
+	border-radius: 0px;
+}
+
+.mu-counter-area button {
+
 	margin-left: 0;
 	border-radius: 0px;
 }

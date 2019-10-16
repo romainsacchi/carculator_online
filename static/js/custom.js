@@ -1,9 +1,4 @@
 /**	
-	* Template Name: Biziness
-	* Version: 1.0	
-	* Template Scripts
-	* Author: MarkUps
-	* Author URI: http://www.markups.io/
 
 	Custom JS
 	
@@ -35,20 +30,6 @@
 	        $('#mu-header').removeClass('mu-fixed-nav');
 	    }
 	});
-
-		
-	/* ----------------------------------------------------------- */
-	/*  2. FEATURED SLIDE (SLICK SLIDER)
-	/* ----------------------------------------------------------- */
-
-		$('.mu-featured-slide').slick({
-		  arrows: false,
-		  dots: true,
-		  infinite: true,
-		  speed: 500,
-		  autoplay: true,
-		  cssEase: 'linear'
-		});
 
 
 
@@ -105,17 +86,7 @@
 		})
 
 
-	/* ----------------------------------------------------------- */
-	/*  4. PORTFOLIO GALLERY
-	/* ----------------------------------------------------------- */ 
-		$('.filtr-container').filterizr();
 
-		//Simple filter controls
-
-	    $('.mu-simplefilter li').click(function() {
-	        $('.mu-simplefilter li').removeClass('active');
-	        $(this).addClass('active');
-	    });
 	
 	/* ----------------------------------------------------------- */
 	/*  5. GOOGLE MAP
@@ -128,36 +99,10 @@
 		$("#mu-google-map").mouseleave(function() {
 		  $('#mu-google-map iframe').css("pointer-events", "none"); 
 		});
-		
-		
-
-	/* ----------------------------------------------------------- */
-	/*  6. PORTFOLIO POPUP VIEW ( IMAGE LIGHTBOX )
-	/* ----------------------------------------------------------- */ 
-
-	$('.mu-imglink').magnificPopup({
-	  type: 'image',
-	  mainClass: 'mfp-fade',
-	  gallery:{
-	    enabled:true
-	  }
-	});
-
-	/* ----------------------------------------------------------- */
-	/*  7. CLIENT TESTIMONIALS (SLICK SLIDER)
-	/* ----------------------------------------------------------- */
-
-		$('.mu-testimonial-slide').slick({
-		  arrows: false,
-		  dots: true,
-		  infinite: true,
-		  speed: 500,
-		  autoplay: true,
-		  cssEase: 'linear'
-		});
 
 
-	
+	new ClipboardJS('.btn');
+	$("#bgndVideo").YTPlayer();
 	
 })( jQuery );
 

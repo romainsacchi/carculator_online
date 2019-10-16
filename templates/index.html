@@ -9,7 +9,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/icon" href="static/images/favicon.ico"/>
     <!-- Font Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <!-- Line icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
     <!-- Bootstrap -->
@@ -20,7 +20,8 @@
     <link href="static/css/magnific-popup.css" rel="stylesheet">
     <!-- Theme color -->
     <link id="switcher" href="static/css/theme-color/default-theme.css" rel="stylesheet">
-
+	  <!-- Source Code pro font -->
+	  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <!-- Main Style -->
     <link href="static/css/style.css" rel="stylesheet">
 
@@ -82,6 +83,79 @@
 
 	<!-- Start main content -->
 	<main role="main">
+
+		<!-- Start About -->
+		<section id="mu-intro">
+			<div class="container" style="width:100%;height:100%;">
+				<div class="row" style="height:700px;">
+
+					<div id="myVideoBanner" class="myVideoBanner" style="height:700px;background:none !important;"></div>
+							<div id="bgndVideo" class="player" style="height:700px;"
+								 data-property="{videoURL:'https://youtu.be/nt3D26lrkho'
+								 ,containment:'#myVideoBanner',
+								 optimizeDisplay:true,autoPlay:true,
+								 ratio:'auto',
+								 mute:true, startAt:0, opacity:.3,
+								 videoWidth: true,showYTLogo: false,
+								 showControls:false}">
+							</div>
+
+				</div>
+			</div>
+		</section>
+
+		<!-- Start Install -->
+		<section id="mu-install">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mu-counter-area">
+							<div class="col-md-4" style="text-align:center;">
+
+								<span class="mu-install-icon-box">
+									<i class="icon-globe" style="color:white;font-size:50px;"></i>
+								</span>
+								<h2 class="mu-heading-title">Online</h2>
+								<div style="text-align:center;">
+
+									<p style="color:white;">Make fast comparisons between different cars, under different scenarios.
+										Save and export your results. Import them in your models.</p>
+									<button class="online-button">Try it out now!</button>
+
+									</div>
+
+							</div>
+							<div class="col-md-4">
+								<h3 style="font-size:50px;">or</h3>
+							</div>
+							<div class="col-md-4" style="text-align:center;vertical-align: middle;">
+
+								<span class="mu-install-icon-box">
+									<i class="icon-screen-desktop" style="color:white;font-size:50px;"></i>
+								</span>
+
+								<h2 class="mu-heading-title">Install</h2>
+								<span>
+									<i class="fab fa-python" style="font-size:40px;color:white;"></i>
+									<h3 class="mu-heading-title">carculator 0.0.1</h3>
+								</span>
+
+								<p style="padding-bottom:0px;display:inline-block;margin:0px;color:white;">
+										<span class="pip-span" id="pip-command">pip install carculator
+									</span><button type="button" class="btn pip-button" data-clipboard-target="#pip-command"
+											data-tooltip-label="Copy to clipboard">
+										<i class="fa fa-copy" aria-hidden="true"></i>
+									</button>
+									requires python >=3.6
+								</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</section>
 
 		<!-- Start About -->
 		<section id="mu-about">
@@ -198,7 +272,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="mu-counter-area">
-                            <h2 class="mu-heading-title">Some facts about <i>
+                            <h2 class="mu-heading-title">Some facts about
 								<span><img src="static/images/carculator logo.png" style="height:40px;margin-bottom:15px;"></span>
 							</h2>
 
@@ -436,7 +510,10 @@
 									<!-- Client Single Content -->
 									<div class="col-sm-6 col-md-4">
 										<div class="mu-clients-content-single">
-											<img src="static/images/psi_logo.svg" alt="brand image">
+											<a href="https://www.psi.ch/en"
+											   target="_blank">
+												<img src="static/images/psi_logo.svg" alt="brand image">
+											</a>
 										</div>
 									</div>
 									<!-- / Client Single Content -->
@@ -444,7 +521,11 @@
 									<!-- Client Single Content -->
 									<div class="col-sm-6 col-md-4">
 										<div class="mu-clients-content-single">
-											<img src="static/images/sccer_logo.png" alt="brand image">
+											<a href="https://sccer-mobility.ch/"
+											   target="_blank">
+												<img src="static/images/sccer_logo.png" alt="brand image">
+											</a>
+
 										</div>
 									</div>
 									<!-- / Client Single Content -->
@@ -452,7 +533,11 @@
 									<!-- Client Single Content -->
 									<div class="col-sm-6 col-md-4">
 										<div class="mu-clients-content-single">
-											<img src="static/images/ecoinvent_logo.png" alt="brand image">
+											<a href="https://www.ecoinvent.org/"
+											   target="_blank">
+												<img src="static/images/ecoinvent_logo.png" alt="brand image">
+											</a>
+
 										</div>
 									</div>
 									<!-- / Client Single Content -->
@@ -485,7 +570,8 @@
 											and Detlef P. van Vuuren.
 											<br>
 											Environmental Science and Technology. 2018 52 (8), 4989-4995.
-											DOI: 10.1021/acs.est.8b00261
+											<a href="https://doi.org/10.1021/acs.est.8b00261" target="_blank"
+											   style="color:#f5f0f0">DOI: 10.1021/acs.est.8b00261</a>
 										</td>
 									</tr>
 									<tr>
@@ -608,11 +694,11 @@
 
 		<!-- Start Google Map -->
 		<section id="mu-google-map">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.5005869918787!2d8.
-			227525150058918!3d47.53858520056689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47906a19d66b4
-			c2d%3A0x1e969b64228e0333!2sPaul%20Scherrer%20Institute!5e0!3m2!1sen!2sch!4v1571077802658!5m2!1sen!2sch"
-					width=100% height="500" frameborder="0" style="border:0;" allowfullscreen></iframe>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10774.003087845414!2d8.2297192!3d47.5385816!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1e969b64228e0333!2sInstitut%20Paul%20Scherrer!5e0!3m2!1sfr!2sch!4v1571211333980!5m2!1sfr!2sch"
+					width=100% height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 		</section>
+
+
 		<!-- End Google Map -->
 
 	</main>
@@ -651,21 +737,18 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Bootstrap -->
     <script src="static/js/bootstrap.min.js"></script>
-	<!-- Slick slider -->
-    <script type="text/javascript" src="static/js/slick.min.js"></script>
     <!-- Counter js -->
     <script type="text/javascript" src="static/js/counter.js"></script>
-    <!-- Filterable Gallery js -->
-    <script type="text/javascript" src="static/js/jquery.filterizr.min.js"></script>
-    <!-- Gallery Lightbox -->
-    <script type="text/javascript" src="static/js/jquery.magnific-popup.min.js"></script>
     <!-- Ajax contact form  -->
     <script type="text/javascript" src="static/js/app.js"></script>
-
+	<!-- Clipboard button -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+	<!-- Youtube player -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.2.10/jquery.mb.YTPlayer.min.js"></script>
 
     <!-- Custom js -->
 	<script type="text/javascript" src="static/js/custom.js"></script>
-	
+
     
   </body>
 </html>
