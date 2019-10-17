@@ -44,7 +44,7 @@ msgstr ""
 
 #: templates/index.html:74
 msgid "PUBLICATIONS"
-msgstr "PUBLICAZIONI"
+msgstr "PUBBLICAZIONI"
 
 #: templates/index.html:75
 msgid "CONTACT US"
@@ -58,7 +58,7 @@ msgstr ""
 msgid ""
 "Make fast comparisons between different cars, under different scenarios. "
 "Save and export your results. Import them in your model."
-msgstr "Fornire un rapido confronto tra veicoli diversi, con scenari differenti. "
+msgstr "Fornisce un rapido confronto tra veicoli diversi, con scenari differenti. "
 "Salva ed esporta i tuoi risultati. Importali nel tuo modello."
 
 #: templates/index.html:133
@@ -83,8 +83,8 @@ msgid ""
 "tool for passenger cars. It allows for an economic and environmental "
 "evaluation of different types of cars under several driving and energy "
 "supply scenarios."
-msgstr "È uno strumento per l'analisi del ciclo di vita open-source, completo e trasparente "
-"per autovetture. Esegue una valutazione economica e ambientale "
+msgstr "è uno strumento per l'analisi del ciclo di vita di autovetture, open-source, completo e trasparente. "
+"Esegue una valutazione economica e ambientale "
 "di tipi differenti di vetture in diversi scenari di guida e approvvigionamento energetico."
 
 #: templates/index.html:195
@@ -101,7 +101,7 @@ msgstr "Molte funzionalità"
 
 #: templates/index.html:208
 msgid "Allows for fast and highly parametrized life cycle assessments."
-msgstr "Analisi del ciclo di vita veloci e fortemente parametrizzati."
+msgstr "Analisi del ciclo di vita veloci e fortemente parametrizzate."
 
 #: templates/index.html:219
 msgid "Fast Library"
@@ -117,7 +117,7 @@ msgstr "Compatibile"
 
 #: templates/index.html:232
 msgid "Export inventories compatible with"
-msgstr "Esportare inventari compatibili con "
+msgstr "Consente di esportare inventari compatibili con "
 
 #: templates/index.html:245
 msgid "State-of-the-art"
@@ -125,7 +125,7 @@ msgstr "Stato dell’arte"
 
 #: templates/index.html:246
 msgid "Relies on recent published inventories to model energy chains."
-msgstr "Si affida ad inventari recentemente pubblicati per modellare le catene dell’energia."
+msgstr "Si affida ad inventari recentemente pubblicati per modellare le catene energetiche."
 
 #: templates/index.html:257
 msgid "Well Documented"
@@ -161,7 +161,7 @@ msgstr "Tipologie di batterie Li-ion"
 
 #: templates/index.html:363
 msgid "Electricity mixes"
-msgstr "Mix di elettricita’"
+msgstr "Mix di elettricità"
 
 #: templates/index.html:375
 msgid "Time horizons"
@@ -173,7 +173,7 @@ msgstr "Vetture usate per la calibrazione"
 
 #: templates/index.html:412
 msgid "OUR TEAM"
-msgstr "Il nostro team "
+msgstr "Il nostro team"
 
 #: templates/index.html:414
 msgid "The team behind the development of"
@@ -203,7 +203,7 @@ msgstr "I nostri partner"
 msgid ""
 "has been developed in the context of the SCCER project financed bz XXX. "
 "Additionally, we are receiving support form XXX and XXX."
-msgstr "È stato sviluppato nel quadro del progetto SCCER, finanziato da XXX. "
+msgstr "è stato sviluppato nel quadro del progetto SCCER, finanziato da XXX. "
 "Inoltre, stiamo ricevendo supporto da XXX e YYY."
 
 #: templates/index.html:568

@@ -1,12 +1,13 @@
 """Flask App Project."""
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
 import os
+import csv
 
 
 # Instantiate Flask app
@@ -31,10 +32,37 @@ mail = Mail(app)
 # Setup flask-babel
 babel = Babel(app)
 
+def load_map_file():
+    with open('data/car_to_class_map.csv', 'r') as f:
+        data = [tuple(line) for line in csv.reader(f, delimiter=';')]
+    return data
+
+car_to_class_map = load_map_file()
+
 @app.route('/')
 def index():
     """Return homepage."""
     return render_template('index.html')
+
+@app.route('/tool')
+def tool_page():
+    """Return tool page"""
+    cip = CarInputParameters()
+    powertrains = [pt for pt in cip.powertrains if pt not in ('PHEV-c', 'PHEV-e')]
+    sizes = cip.sizes
+    years = cip.years
+    driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
+                      'CADC Motorway 130','CADC','NEDC']
+
+    return render_template('tool.html', powertrains=powertrains, sizes=sizes, years=years, driving_cycles=driving_cycles)
+
+
+@app.route('/search_car_model/<search_item>')
+def search_car_model(search_item):
+    cars = [car for car in car_to_class_map if any(search_item.lower() in x.lower() for x in car)]
+
+
+    return jsonify(cars[:5])
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -45,11 +73,9 @@ def send_email():
     Sends an email after submission of the contact form.
     :return:
     """
-
     name = request.form["name_input"]
     email = request.form["email_input"]
     message = request.form["message_input"]
-
 
     msg = Message(subject="",
                   sender=app.config['ADMINS'],
@@ -60,5 +86,10 @@ def send_email():
 
 @babel.localeselector
 def get_locale():
+    """
+    Retrieve the favorite language of the browser and display text in the corresponding language.
+    :return:
+    """
     print(request.accept_languages.best_match(app.config['LANGUAGES']))
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
