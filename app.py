@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request
 from flask_mail import Mail, Message
+from flask_babel import Babel, _
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
@@ -26,6 +27,9 @@ app.logger.addHandler(mail_handler)
 
 # Setup flask_mail
 mail = Mail(app)
+
+# Setup flask-babel
+babel = Babel(app)
 
 @app.route('/')
 def index():
@@ -52,4 +56,8 @@ def send_email():
                   recipients=[app.config['ADMINS']],  # replace with your email for testing
                   body=message + " email: {}, name: {}".format(email, name))
     mail.send(msg)
-    return "Email sent!"
+    return _("Email sent!")
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
