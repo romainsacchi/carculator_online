@@ -26,7 +26,7 @@ mail_handler = SMTPHandler(
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
 
-# Setup flask_mail
+# Setup flask-mail
 mail = Mail(app)
 
 # Setup flask-babel
@@ -34,7 +34,7 @@ babel = Babel(app)
 
 def load_map_file():
     print('load ok')
-    with open('data/car_to_class_map.csv', 'r') as f:
+    with open('data/car_to_class_map.csv', 'r', encoding='ISO-8859-1') as f:
         data = [tuple(line) for line in csv.reader(f, delimiter=';')]
     print('return ok')
     return data
