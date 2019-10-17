@@ -61,4 +61,5 @@ def send_email():
 @babel.localeselector
 def get_locale():
     print(request.accept_languages.best_match(app.config['LANGUAGES']))
+    
     return request.accept_languages.best_match(app.config['LANGUAGES'])
