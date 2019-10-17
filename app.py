@@ -33,8 +33,10 @@ mail = Mail(app)
 babel = Babel(app)
 
 def load_map_file():
+    print('load ok')
     with open('data/car_to_class_map.csv', 'r') as f:
         data = [tuple(line) for line in csv.reader(f, delimiter=';')]
+    print('return ok')
     return data
 
 car_to_class_map = load_map_file()
