@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-17 11:52+0200\n"
+"POT-Creation-Date: 2019-10-17 13:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -244,6 +244,6 @@ msgid "Paul Scherrer Institut"
 msgstr ""
 
 #: templates/index.html:725
-msgid "All right reserved"
+msgid "All rights reserved"
 msgstr ""
 

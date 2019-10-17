@@ -1,4 +1,4 @@
-# French translations for PROJECT.
+# Italian translations for PROJECT.
 # Copyright (C) 2019 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2019-10-17 13:28+0200\n"
-"PO-Revision-Date: 2019-10-17 10:51+0200\n"
+"PO-Revision-Date: 2019-10-17 13:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: fr\n"
-"Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language: it\n"
+"Language-Team: it <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,64 +20,62 @@ msgstr ""
 
 #: app.py:59
 msgid "Email sent!"
-msgstr "Email envoyé!"
+msgstr "Email inviata!"
 
 #: templates/index.html:69
 msgid "HOME"
-msgstr "ACCEUIL"
+msgstr ""
 
 #: templates/index.html:70 templates/index.html:178
 msgid "ABOUT"
-msgstr "A PROPOS"
+msgstr "SULLO STRUMENTO"
 
 #: templates/index.html:71
 msgid "FACTS"
-msgstr "STATISTIQUES"
+msgstr "FATTI"
 
 #: templates/index.html:72
 msgid "TEAM"
-msgstr "EQUIPE"
+msgstr ""
 
 #: templates/index.html:73
 msgid "PARTNERS"
-msgstr "PARTENAIRES"
+msgstr ""
 
 #: templates/index.html:74
 msgid "PUBLICATIONS"
-msgstr "PUBLICATIONS"
+msgstr "PUBLICAZIONI"
 
 #: templates/index.html:75
 msgid "CONTACT US"
-msgstr "CONTACTEZ-NOUS"
+msgstr "CONTATTACI"
 
 #: templates/index.html:129
 msgid "Online"
-msgstr "En ligne"
+msgstr ""
 
 #: templates/index.html:132
 msgid ""
 "Make fast comparisons between different cars, under different scenarios. "
 "Save and export your results. Import them in your model."
-msgstr ""
-"Faites des comparisons rapides entre véhicules de différentes catégories,"
-" soumis à des scénarios énergétiques distincts. Sauvegardez et exportez "
-"vos résultats. Importez-les dans votre propre modèle."
+msgstr "Fornire un rapido confronto tra veicoli diversi, con scenari differenti. "
+"Salva ed esporta i tuoi risultati. Importali nel tuo modello."
 
 #: templates/index.html:133
 msgid "Try it out now!"
-msgstr "Essayez-le maintenant!"
+msgstr "Provalo adesso!"
 
 #: templates/index.html:139
 msgid "or"
-msgstr "ou"
+msgstr "oppure"
 
 #: templates/index.html:147
 msgid "Install"
-msgstr "Logiciel"
+msgstr "Installa"
 
 #: templates/index.html:159
 msgid "requires python >=3.6"
-msgstr "requiert python >=3.6"
+msgstr "richiede python >=3.6"
 
 #: templates/index.html:182
 msgid ""
@@ -85,207 +83,173 @@ msgid ""
 "tool for passenger cars. It allows for an economic and environmental "
 "evaluation of different types of cars under several driving and energy "
 "supply scenarios."
-msgstr ""
-"est un outil d'évaluation de cycle de vie en libre usage, exhaustif et "
-"transparent pour les véhicules de tourisme. Il permet d'évaluer "
-"l'empreinte environnmentale ainsi que le coût d'utilisation de différents"
-" types de véhicules pour différents cycles de conduite et scénarios "
-"énergétiques."
+msgstr "È uno strumento per l'analisi del ciclo di vita open-source, completo e trasparente "
+"per autovetture. Esegue una valutazione economica e ambientale "
+"di tipi differenti di vetture in diversi scenari di guida e approvvigionamento energetico."
 
 #: templates/index.html:195
 msgid "Clean Code"
-msgstr "Code sain"
+msgstr ""
 
 #: templates/index.html:196
 msgid "The code is kept as clean and accessible as possible."
-msgstr "Le code est gardé aussi propre et compréhensible que possible."
+msgstr "Il codice è tenuto il più “pulito” e accessibile possibile."
 
 #: templates/index.html:207
 msgid "Great Features"
-msgstr "Plein de fonctionnalités"
+msgstr "Molte funzionalità"
 
 #: templates/index.html:208
 msgid "Allows for fast and highly parametrized life cycle assessments."
-msgstr "Permet l'exéction d'analyses de cycle de vie totalement paramétrées."
+msgstr "Analisi del ciclo di vita veloci e fortemente parametrizzati."
 
 #: templates/index.html:219
 msgid "Fast Library"
-msgstr "Librairie rapide"
+msgstr "Libreria efficiente"
 
 #: templates/index.html:220
 msgid "A Python library version allows for even more specific assessments."
-msgstr ""
-"La librairie python permet l'exécution d'analyses encore plus rapides et "
-"spécifiques."
+msgstr "Una libreria Python che offre valutazioni ancora più specifiche."
 
 #: templates/index.html:231
 msgid "Compatible"
-msgstr "Compatible"
+msgstr "Compatibile"
 
 #: templates/index.html:232
 msgid "Export inventories compatible with"
-msgstr "Les inventaires calculés sont compatibles avec"
+msgstr "Esportare inventari compatibili con "
 
 #: templates/index.html:245
 msgid "State-of-the-art"
-msgstr "Etat de l'art"
+msgstr "Stato dell’arte"
 
 #: templates/index.html:246
 msgid "Relies on recent published inventories to model energy chains."
-msgstr ""
-"Utilise des inventaires récents et vérifiés pour modéliser les "
-"différentes chaînes d'approvisionnement d'énergie"
+msgstr "Si affida ad inventari recentemente pubblicati per modellare le catene dell’energia."
 
 #: templates/index.html:257
 msgid "Well Documented"
-msgstr "Documentation"
+msgstr "Ben documentato "
 
 #: templates/index.html:258
 msgid "The library is fully tested, documented and hosted on"
-msgstr "La librairie est entièrement documentée et hébergée sur"
+msgstr "La libreria è interamente testata, documentata e disponibile su"
 
 #: templates/index.html:283
 msgid "Some facts about"
-msgstr "Quelques statistiques sur"
+msgstr "Alcune informazioni riguardo"
 
 #: templates/index.html:298
 msgid "Powertrains"
-msgstr "Propulsions"
+msgstr "Motopropulsori"
 
 #: templates/index.html:311
 msgid "Size classes"
-msgstr "Catégories de taille"
+msgstr "Classi di dimensione"
 
 #: templates/index.html:324
 msgid "Driving cycles"
-msgstr "Cycles de conduite"
+msgstr "Cicli di guida"
 
 #: templates/index.html:337
 msgid "Parameters"
-msgstr "Paramètres"
+msgstr "Parametri"
 
 #: templates/index.html:350
 msgid "Li-ion battery types"
-msgstr "Types de batterie au Lithium"
+msgstr "Tipologie di batterie Li-ion"
 
 #: templates/index.html:363
 msgid "Electricity mixes"
-msgstr "Mixes électriques"
+msgstr "Mix di elettricita’"
 
 #: templates/index.html:375
 msgid "Time horizons"
-msgstr "Horizons temporels"
+msgstr "Orizzonti temporali"
 
 #: templates/index.html:388
 msgid "Cars used for calibration"
-msgstr "Véhicules utilisés pour la calibration"
+msgstr "Vetture usate per la calibrazione"
 
 #: templates/index.html:412
 msgid "OUR TEAM"
-msgstr "NOTRE EQUIPE"
+msgstr "Il nostro team "
 
 #: templates/index.html:414
 msgid "The team behind the development of"
-msgstr "L'équipe en charge du développement de"
+msgstr "Il team che si è occupato dello sviluppo del"
 
 #: templates/index.html:414
 msgid "sits at the Paul Scherrer Institute."
-msgstr "se trouve dans les locaux de l'Institut Paul Scherrer."
+msgstr "presso il Paul Scherrer Institute."
 
 #: templates/index.html:438
 msgid "Pilot"
-msgstr "Pilote"
+msgstr "Pilota"
 
 #: templates/index.html:462
 msgid "Pit-stop manager"
-msgstr "Chef d'atelier"
+msgstr "Manager del pit-stop"
 
 #: templates/index.html:482
 msgid "Mechanic"
-msgstr "Mécanicien"
+msgstr "Meccanico"
 
 #: templates/index.html:508
 msgid "OUR PARTNERS"
-msgstr "NOS PARTENAIRES"
+msgstr "I nostri partner"
 
 #: templates/index.html:510
 msgid ""
 "has been developed in the context of the SCCER project financed bz XXX. "
 "Additionally, we are receiving support form XXX and XXX."
-msgstr ""
-"a été développé dans le contexte du projet SCCER Mobilité, financé par "
-"XXX. De plus, nous recevons un soutient actif de la part de XXX et XXX."
+msgstr "È stato sviluppato nel quadro del progetto SCCER, finanziato da XXX. "
+"Inoltre, stiamo ricevendo supporto da XXX e YYY."
 
 #: templates/index.html:568
 msgid "Publications on"
-msgstr "Publications sur le thème de la "
+msgstr "Pubblicazioni sul tema della "
 
 #: templates/index.html:568
 msgid "mobility"
-msgstr "mobilité"
+msgstr "mobilità"
 
 #: templates/index.html:642
 msgid "CONTACT"
-msgstr "CONTACTEZ-"
+msgstr "Contattaci"
 
 #: templates/index.html:642
 msgid "US"
-msgstr "NOUS"
+msgstr " "
 
 #: templates/index.html:644
 msgid "We are always happy to hear from you."
-msgstr "Nous serions ravis d'avoir un retour de votre part."
+msgstr "Siamo sempre felici di ricevere la vostra opinione"
 
 #: templates/index.html:668
 msgid "SUBMIT"
-msgstr "ENVOYER"
+msgstr "Inviare"
 
 #: templates/index.html:675
 msgid "carculator support"
-msgstr "Questions à propos de carculator"
+msgstr "Domande su carculator"
 
 #: templates/index.html:676
 msgid ""
 "Write to use if you have questions about the tool, or if you would like "
 "to discuss the methods, results, etc."
-msgstr ""
-"Ecrivez-nous si vous avez des questions à propos de l'outil, ou si vous "
-"désirez en savoir plus sur la méthodologie, les résultats, etc."
+msgstr "Scrivici se hai domande riguardo lo strumento, o se vuoi "
+"discutere del metodo, dei risultati, etc."
 
 #: templates/index.html:724
 msgid "Copyright"
-msgstr "Droits d'auteur attribués à l'"
+msgstr "Diritti d’autore"
 
 #: templates/index.html:724
 msgid "Paul Scherrer Institut"
-msgstr "Institut Paul Scherrer"
+msgstr ""
 
 #: templates/index.html:725
 msgid "All rights reserved"
-msgstr "Tous droits réservés"
-
-#~ msgid ""
-#~ "Make fast comparisons between different "
-#~ "cars, under different scenarios.Save and "
-#~ "export your results. Import them in "
-#~ "your model."
-#~ msgstr ""
-#~ "Faites de rapides comparaisons entre "
-#~ "différents types de véhicules, sous "
-#~ "différents scénarios.Sauvegardez et exportez "
-#~ "vos résultats. Importez-les dans votre"
-#~ " propre modèle."
-
-#~ msgid ""
-#~ "Make fast comparisons between different "
-#~ "cars, under different scenarios.\n"
-#~ "\t\t\t\t\t\t\t\t\t\tSave and export your "
-#~ "results. Import them in your model."
-#~ msgstr ""
-
-#~ msgid "OUR"
-#~ msgstr "NOS"
-
-#~ msgid "All right reserved"
-#~ msgstr "Tout droit réservé"
+msgstr "Tutti i diritti sono riservati"
 
