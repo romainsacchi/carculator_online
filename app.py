@@ -33,10 +33,8 @@ mail = Mail(app)
 babel = Babel(app)
 
 def load_map_file():
-    print('load ok')
     with open('data/car_to_class_map.csv', 'r', encoding='ISO-8859-1') as f:
         data = [tuple(line) for line in csv.reader(f, delimiter=';')]
-    print('return ok')
     return data
 
 car_to_class_map = load_map_file()
@@ -62,9 +60,12 @@ def tool_page():
 @app.route('/search_car_model/<search_item>')
 def search_car_model(search_item):
     cars = [car for car in car_to_class_map if any(search_item.lower() in x.lower() for x in car)]
-
-
     return jsonify(cars[:5])
+
+@app.route('/get_driving_cycle/<driving_cycle>')
+def get_driving_cycle(driving_cycle):
+    dc = get_standard_driving_cycle(driving_cycle)
+    return jsonify(dc.to_dict())
 
 if __name__ == '__main__':
     app.run(debug=True)

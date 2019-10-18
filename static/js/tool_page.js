@@ -586,6 +586,8 @@
     }, false);
 
 })();
+
+// Populate table with search results as the search field is updated.
 $('#search_input').keyup(function() {
             var search_val = $(this).val();
             $.when($.ajax({
@@ -615,3 +617,131 @@ $('#search_input').keyup(function() {
             }
      );
  });
+
+ // Update driving cycles chart when selection is changed.
+ $("#table_driving_cycles").on("click", "li", function () {
+    var driving_cycle = $(this).text();
+    generate_driving_cycle_graph(driving_cycle);
+});
+
+generate_driving_cycle_graph('WLTC');
+
+function generate_driving_cycle_graph(driving_cycle){
+    $.when($.ajax({
+        type:'GET',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        url: 'get_driving_cycle/'+driving_cycle,
+        error: function(xhr,errmsg,err){
+            alert('error; '+ err);
+            },
+        success : function(data) {
+        },
+        timeout: 10000}
+        )).then(function(data){
+
+            var arr_data = [];
+            for (var i = 1; i < Object.keys(data).length; i++){
+                 arr_data.push({"x":i, "y": data[i]})
+            }
+            nv.addGraph(function() {
+              var chart = nv.models.lineChart()
+                            .margin({left: 80})  //Adjust chart margins to give the x-axis some breathing room.
+                            .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                            //.transitionDuration(350)  //how fast do you want the lines to transition?
+                            .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                            .showYAxis(true)        //Show the y-axis
+                            .showXAxis(true)        //Show the x-axis
+                            .width(500).height(300);
+              ;
+
+              chart.xAxis     //Chart x-axis settings
+                  .axisLabel('Time (s)')
+                  .tickFormat(d3.format(',r'))
+                  ;
+
+              chart.yAxis     //Chart y-axis settings
+                  .axisLabel('Speed (km/h)')
+                  .tickFormat(d3.format('.r'));
+
+              /* Done setting the chart up? Time to render it!*/
+
+              var datum = [{values:arr_data, key:'km/h', color: 'white', area:true}];
+
+              d3.select('#chart-driving-cycle')    //Select the <svg> element you want to render the chart in.
+                  .datum(datum)         //Populate the <svg> element with chart data...
+                  .call(chart);          //Finally, render the chart!
+
+              d3.select('#chart-driving-cycle').style('fill', "white");
+
+              //Update the chart when window resizes.
+              nv.utils.windowResize(function() { chart.update() });
+              return chart;
+            });
+
+        });
+ };
+
+ /**
+ * Create the map
+ */
+var map = AmCharts.makeChart("chartdiv", {
+  "type": "map",
+  "theme": "dark",
+  "projection": "eckert3",
+  "color": "rgba(0,0,0,0)",
+
+  "dataProvider": {
+    "map": "worldLow",
+    "getAreasFromMap": true
+  },
+  "areasSettings": {
+    "selectedColor": "grey",
+    "selectable": true
+  },
+  /**
+   * Add click event to track country selection/unselection
+   */
+  "listeners": [{
+    "event": "clickMapObject",
+    "method": function(e) {
+
+      // Ignore any click not on area
+      if (e.mapObject.objectType !== "MapArea")
+        return;
+
+      var area = e.mapObject;
+      // Toggle showAsSelected
+      area.showAsSelected = !area.showAsSelected;
+      e.chart.returnInitialColor(area);
+
+      // Update the list
+      document.getElementById("country-selected").innerHTML = JSON.stringify(getSelectedCountries());
+    }
+  }]
+});
+
+/**
+ * Function which extracts currently selected country list.
+ * Returns array consisting of country ISO2 codes
+ */
+function getSelectedCountries() {
+  var selected = [];
+  for(var i = 0; i < map.dataProvider.areas.length; i++) {
+    if(map.dataProvider.areas[i].showAsSelected){
+        selected.push(map.dataProvider.areas[i].id);
+    }
+  }
+  // At least two countries are selected
+  if (selected.length>0){
+    var existing_selection = $("#country-selected")
+    if (existing_selection.text().length>6){
+        alert("Currently, only one country can be selected.")
+        return existing_selection.text()
+    };
+
+  };
+  return selected;
+}
+
+
