@@ -31,6 +31,10 @@
 	  <!-- World map Style -->
     <link href="static/css/world_map_style.css" rel="stylesheet">
 
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.css" rel="stylesheet">
+
+
+
     <!-- Fonts -->
 
     <!-- Open Sans for body font -->
@@ -51,9 +55,9 @@
 
   	<!-- Start Header -->
 	<header id="mu-header" class="" role="banner">
-		<div class="container">
+		<div class="container" style="width:100%;">
 			<nav class="navbar navbar-default mu-navbar">
-		  <div class="container-fluid">
+		  <div class="container-fluid" >
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
 		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -67,8 +71,15 @@
 		      <!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="static/images/carculator logo.png" style="height:30px;"></a>
 
+
 		    </div>
 
+			  <button class="online-button"
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" disabled>Calculate</button>
+				<button class="online-button"
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Reset parameters</button>
+				 <button class="online-button"
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share configuration</button>
 
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -80,12 +91,18 @@
 	<!-- Start main content -->
 	<main role="main">
 
-		<!-- Start About -->
+		<!-- Start SCOPE -->
 		<section id="mu-about">
-			<div class="container" style="width:100%;">
+			<div class="container" style="width:90%;">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="mu-about-area">
+						<div class="row" style="padding-top:80px;">
+							<h2><img class="image" src="static/images/icons/scope_icon_grey.png"
+												  style="height:80px; border-right:3px solid rgba(0,0,0,0.6);
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:grey;">SCOPE</span></h2></div>
+						<div class="mu-about-area" style="padding-top:50px;">
 
 							<div class="mu-about-header">
 								<h2 class="mu-heading-title">{{_('Year, size and powertrain selection')}}</h2>
@@ -191,14 +208,140 @@
 				</div>
 			</div>
 		</section>
-		<!-- End About -->
+		<!-- End SCOPE -->
 
+		<!-- Start MANUFACTURE -->
+		<section id="mu-about" style="background-color:grey;">
+			<div class="container" style="width:90%;">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row" >
+							<h2><img class="image" src="static/images/icons/manufacture_icon.png"
+												  style="height:80px; border-right:3px solid white;
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:white;">MANUFACTURE</span></h2></div>
+						<div class="mu-about-area" style="padding-top:50px;">
+
+							<div class="mu-about-header">
+								<h2 class="mu-heading-title">{{_('Year, size and powertrain selection')}}</h2>
+								<p>{{_('Select the powertrain types and size classes you wish to conduct an assessment of. You may do so by moving elements from one frame to the other.')}}</p>
+							</div>
+
+							<!-- Start About Us Content -->
+							<div class="mu-about-content">
+								<div class="row">
+
+									<div class="col-md-8" style="text-align:center;vertical-align: middle;">
+										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
+											<h2 class="mu-heading-title">{{_('Year')}}</h2>
+											<div style="width:50%;margin: 0 auto;">
+													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
+														margin:0px;display:inline;">
+														Select from
+													</div>
+													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
+														margin:0px;display:inline;">Selected
+													</div>
+													<ol data-draggable="target">
+														{% for y in years %}
+														<li data-draggable="item">{{ y }}</li>
+														{% endfor %}
+													</ol>
+													<ol data-draggable="target">
+													</ol>
+											</div>
+										</div>
+										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
+											<h2 class="mu-heading-title">{{_('Powertrain')}}</h2>
+											<div style="width:50%;margin: 0 auto;">
+													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
+														margin:0px;display:inline;">
+														Select from
+													</div>
+													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
+														margin:0px;display:inline;">Selected</div>
+												<ol data-draggable="target">
+													{% for pt in powertrains %}
+													<li data-draggable="item">{{ pt }}</li>
+													{% endfor %}
+												</ol>
+												<ol data-draggable="target">
+												</ol>
+											</div>
+										</div>
+
+										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
+											<h2 class="mu-heading-title">{{_('Size')}}</h2>
+												<div style="width:50%;margin: 0 auto;">
+													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
+														margin:0px;display:inline;">
+														Select from
+													</div>
+													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
+														margin:0px;display:inline;">Selected</div>
+													<ol data-draggable="target">
+														{% for s in sizes %}
+														<li data-draggable="item">{{ s }}</li>
+														{% endfor %}
+													</ol>
+													<ol data-draggable="target">
+													</ol>
+												</div>
+										</div>
+									</div>
+
+									<div class="col-md-4" style="text-align:center;vertical-align: middle;">
+										<div class="col-md-12" style="text-align:center;vertical-align: middle;">
+										<h2 class="mu-heading-title">{{_('What is what?')}}</h2>
+										<p>{{_('If you are unsure about the definitions of powertrains and sizes carculator uses, you may look up a familiar car model below.')}}</p>
+
+											<form class="form-inline" style="margin: 0 auto;">
+											  <input class="form-control mr-sm-2" type="search"
+													 placeholder="Search for car models"
+													 aria-label="Search"
+													 id="search_input"
+													 style="width:400px;">
+											</form>
+											<div class="table-responsive">
+												<table class="table table-hover" id="table_search_results" style="font-size:12px;">
+													<thead>
+														<tr>
+
+														<tr>
+													</thead>
+													<tbody>
+													<tr>
+
+														<tr>
+
+												  	</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End MANUFACTURE -->
+
+		<!-- Start USE -->
 		<section id="mu-testimonials">
 			<div class="container" style="width:90%;">
 				<div class="row" >
 					<div class="col-md-12">
-						<div class="mu-testimonials-area" style="text-align:center;">
-							<div class="col-md-6">
+						<div class="row">
+							<h2><img class="image" src="static/images/icons/driving_cycle_icon.png"
+												  style="height:80px; border-right:3px solid #fff;
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:white;">USE</span></h2></div>
+						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;">
+							<div class="col-md-5" >
 								<div class="row">
 									<h2 style="color:white;">Driving cycle</h2>
 									<div class="col-md-3"  style="margin: 0 auto;">
@@ -206,7 +349,7 @@
 											<p  style="color:white;float:left;">Select a driving cycle</p>
 										</div>
 										<div class="row" >
-											<ol class = "select-table" style="width:50%;margin: 0 auto;"
+											<ol class = "select-table" style="width:100%;margin: 0 auto;"
 												id="table_driving_cycles">
 												{% for dc in driving_cycles %}
 												<li tabindex="1">{{ dc }}</li>
@@ -219,16 +362,27 @@
 									<div class="col-md-9">
 										<div class="col" style="background-color:none;">
 										  <svg id="chart-driving-cycle"
-											   style="width:100%;height:300px; font-size:16px; color:grey;"></svg>
+											   style="width:100%;height:480px; font-size:16px; color:grey;"></svg>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-5">
 								<h2>Geographical conditions</h2>
 								<p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
 
 								<div id="chartdiv"></div>
+							</div>
+							<div class="col-md-2">
+								<h2>Lifetime</h2>
+								<p style="color:white;margin-top:30px;">Adjust the total lifetime of the vehicles</p>
+								<div style="margin-bottom:20px;" id="lifetime-slider"></div>
+								<span id="lifetime-value" style="color:white;font-size:30px;"></span>
+
+								<p style="color:white;margin-top:30px;">Adjust the yearly mileage</p>
+								<div style="margin-bottom:20px;" id="mileage-slider"></div>
+								<span id="mileage-value" style="color:white;font-size:30px;"></span>
+
 							</div>
 
 						</div>
@@ -280,10 +434,18 @@
 	<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
 
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script
+		  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+		  crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Bootstrap -->
     <script src="static/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.js"></script>
+
+
 
     <!-- Ajax contact form  -->
     <script type="text/javascript" src="static/js/app.js"></script>
@@ -294,15 +456,11 @@
 	<!-- Anime.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
     <!-- Custom js -->
-	<!--<script type="text/javascript" src="static/js/custom.js"></script>-->
-
+	<script type="text/javascript" src="static/js/custom.js"></script>
 
   	<!-- Tool page js -->
 	<script type="text/javascript" src="static/js/tool_page.js"></script>
 
 
-
-
-    
   </body>
 </html>

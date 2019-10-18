@@ -646,13 +646,13 @@ function generate_driving_cycle_graph(driving_cycle){
             }
             nv.addGraph(function() {
               var chart = nv.models.lineChart()
-                            .margin({left: 80})  //Adjust chart margins to give the x-axis some breathing room.
+                            .margin({left: 80, bottom:80})  //Adjust chart margins to give the x-axis some breathing room.
                             .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                             //.transitionDuration(350)  //how fast do you want the lines to transition?
                             .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                             .showYAxis(true)        //Show the y-axis
                             .showXAxis(true)        //Show the x-axis
-                            .width(500).height(300);
+                            .width(700).height(500);
               ;
 
               chart.xAxis     //Chart x-axis settings
@@ -693,7 +693,11 @@ var map = AmCharts.makeChart("chartdiv", {
 
   "dataProvider": {
     "map": "worldLow",
-    "getAreasFromMap": true
+    "getAreasFromMap": true,
+     "zoomLevel": 2,
+    "zoomLongitude": 7.87,
+    "zoomLatitude": 46.96,
+
   },
   "areasSettings": {
     "selectedColor": "grey",
@@ -733,15 +737,54 @@ function getSelectedCountries() {
     }
   }
   // At least two countries are selected
-  if (selected.length>0){
+  if (selected.length>1){
     var existing_selection = $("#country-selected")
-    if (existing_selection.text().length>6){
-        alert("Currently, only one country can be selected.")
-        return existing_selection.text()
-    };
-
+    alert("Currently, only one country can be selected.")
+    return selected.slice(0,1)
   };
   return selected;
 }
 
+var slider_lifetime = document.getElementById('lifetime-slider');
+  noUiSlider.create(slider_lifetime, {
+     start: [200000],
+    range: {
+        'min': [100000],
+        'max': [400000]
+    },
+    step: 10000,
+    format: wNumb({
+        decimals: 0,
+        thousand: ' ',
+        suffix: ' km'
 
+    })
+});
+
+var rangeSliderValueElement = document.getElementById('lifetime-value');
+
+slider_lifetime.noUiSlider.on('update', function (values, handle) {
+    rangeSliderValueElement.innerHTML = values[handle];
+});
+
+var slider_mileage = document.getElementById('mileage-slider');
+  noUiSlider.create(slider_mileage, {
+     start: [12000],
+    range: {
+        'min': [1000],
+        'max': [30000]
+    },
+    step: 1000,
+    format: wNumb({
+        decimals: 0,
+        thousand: ' ',
+        suffix: ' km'
+
+    })
+});
+
+var rangeSliderValueElement = document.getElementById('mileage-value');
+
+slider_mileage.noUiSlider.on('update', function (values, handle) {
+    rangeSliderValueElement.innerHTML = values[handle];
+});
