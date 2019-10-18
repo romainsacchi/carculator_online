@@ -761,10 +761,10 @@ var slider_lifetime = document.getElementById('lifetime-slider');
     })
 });
 
-var rangeSliderValueElement = document.getElementById('lifetime-value');
+var lifetime_ValueElement = document.getElementById('lifetime-value');
 
 slider_lifetime.noUiSlider.on('update', function (values, handle) {
-    rangeSliderValueElement.innerHTML = values[handle];
+    lifetime_ValueElement.innerHTML = values[handle];
 });
 
 var slider_mileage = document.getElementById('mileage-slider');
@@ -783,8 +783,8 @@ var slider_mileage = document.getElementById('mileage-slider');
     })
 });
 
-var rangeSliderValueElement = document.getElementById('mileage-value');
+var mileage_ValueElement = document.getElementById('mileage-value');
 
 slider_mileage.noUiSlider.on('update', function (values, handle) {
-    rangeSliderValueElement.innerHTML = values[handle];
+    mileage_ValueElement.innerHTML = values[handle];
 });
