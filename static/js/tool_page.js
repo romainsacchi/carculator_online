@@ -1,6 +1,5 @@
 (function()
 {
-
     //exclude older browsers by the features we need them to support
     //and legacy opera explicitly so we don't waste time on a dead browser
     if
@@ -33,12 +32,10 @@
         items[i].setAttribute('tabindex', '0');
     }
 
-
-
     //dictionary for storing the selections data
     //comprising an array of the currently selected items
     //a reference to the selected items' owning container
-    //and a refernce to the current drop target container
+    //and a reference to the current drop target container
     var selections =
     {
         items      : [],
@@ -49,6 +46,7 @@
     //function for selecting an item
     function addSelection(item)
     {
+
         //if the owner reference is still null, set it to this item's parent
         //so that further selection is only allowed within the same container
         if(!selections.owner)
@@ -112,7 +110,6 @@
     {
         return (e.ctrlKey || e.metaKey || e.shiftKey);
     }
-
 
     //function for applying dropeffect to the target containers
     function addDropeffects()
@@ -195,9 +192,6 @@
 
         return null;
     }
-
-
-
     //mousedown event to implement single selection
     document.addEventListener('mousedown', function(e)
     {
@@ -308,8 +302,6 @@
         addDropeffects();
 
     }, false);
-
-
 
     //keydown event to implement selection and abort
     document.addEventListener('keydown', function(e)
@@ -449,8 +441,6 @@
 
     }, false);
 
-
-
     //related variable is needed to maintain a reference to the
     //dragleave's relatedTarget, since it doesn't have e.relatedTarget
     var related = null;
@@ -508,12 +498,11 @@
 
     }, false);
 
-
-
     //dragend event to implement items being validly dropped into targets,
     //or invalidly dropped elsewhere, and to clean-up the interface either way
     document.addEventListener('dragend', function(e)
     {
+
         //if we have a valid drop target reference
         //(which implies that we have some selected items)
         if(selections.droptarget)
@@ -526,6 +515,7 @@
 
             //prevent default to allow the action
             e.preventDefault();
+            power_list_update();
         }
 
         //if we have any selected items
@@ -586,6 +576,47 @@
     }, false);
 
 })();
+
+
+
+// Detect when powertrains are added
+function power_list_update(){
+    var listItems = document.querySelectorAll( '#powertrain_list > li' );
+    var item_labels = [];
+
+    var row = document.getElementById('powertrain_row')
+    row.innerHTML="";
+
+    for (var item = 0; item < listItems.length; item++){
+            item_labels.push(listItems[item].innerHTML)
+        };
+
+    var d_pt = {
+        'ICEV-d' : 'Diesel car',
+        'ICEV-p' : 'Petrol car',
+        'ICEV-g' : 'CNG car',
+        'BEV' : 'Electric car',
+        'FCEV' : 'Fuel cell car',
+        'PHEV' : '(Plugin) Hybrid car',
+        'HEV-p' : 'Hybrid car'
+    };
+
+    var existing_labels = []
+    for (var pt in item_labels){
+            var col = document.createElement('div');
+            col.className="col-sm";
+            //col.style = "height:200px";
+            //col.style = "width:"+String(100/item_labels.length)+"%";
+            var h2 = document.createElement('h2');
+            h2.style = "color:white";
+            h2.innerHTML = d_pt[item_labels[pt]];
+            col.appendChild(h2);
+            row.appendChild(col);
+    }
+
+
+
+};
 
 // Populate table with search results as the search field is updated.
 $('#search_input').keyup(function() {
@@ -651,8 +682,8 @@ function generate_driving_cycle_graph(driving_cycle){
                             //.transitionDuration(350)  //how fast do you want the lines to transition?
                             .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                             .showYAxis(true)        //Show the y-axis
-                            .showXAxis(true)        //Show the x-axis
-                            .width(700).height(500);
+                            .showXAxis(true) ;       //Show the x-axis
+                            //.width(700).height(500);
               ;
 
               chart.xAxis     //Chart x-axis settings
@@ -787,4 +818,61 @@ var mileage_ValueElement = document.getElementById('mileage-value');
 
 slider_mileage.noUiSlider.on('update', function (values, handle) {
     mileage_ValueElement.innerHTML = values[handle];
+});
+
+var slider_passenger = document.getElementById('passenger-slider');
+  noUiSlider.create(slider_passenger, {
+     start: [1.5],
+    range: {
+        'min': [1],
+        'max': [6]
+    },
+    step: .5,
+    format: wNumb({
+        decimals: 1,
+        thousand: ' ',
+        suffix: ''
+
+    })
+});
+
+slider_passenger.noUiSlider.on('update', function (values, handle) {
+    var val = parseFloat(values);
+    var d = {
+        1.0 : "static/images/icons/one_passenger_icon.png",
+        1.5: "static/images/icons/one_half_passenger_icon.png",
+        2.0: "static/images/icons/two_passenger_icon.png",
+        2.5: "static/images/icons/two_half_passenger_icon.png",
+        3.0: "static/images/icons/three_passenger_icon.png",
+        3.5: "static/images/icons/three_half_passenger_icon.png",
+        4.0: "static/images/icons/four_passenger_icon.png",
+        4.5: "static/images/icons/four_half_passenger_icon.png",
+        5.0: "static/images/icons/five_passenger_icon.png",
+        5.5: "static/images/icons/five_half_passenger_icon.png",
+        6.0: "static/images/icons/six_passenger_icon.png"
+
+    };
+    $("#image_passenger").attr("src",d[val]);
+});
+
+var slider_cargo = document.getElementById('cargo-slider');
+  noUiSlider.create(slider_cargo, {
+     start: [150],
+    range: {
+        'min': [50],
+        'max': [500]
+    },
+    step: 10,
+    format: wNumb({
+        decimals: 0,
+        thousand: ' ',
+        suffix: ''
+
+    })
+});
+
+slider_cargo.noUiSlider.on('update', function (values, handle) {
+    var val = parseFloat(values) / 5;
+    $("#image_cargo").height(val);
+    $('#cargo-value').text(values + " kg");
 });
