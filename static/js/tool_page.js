@@ -582,7 +582,11 @@
 // Detect when powertrains are added
 function power_list_update(){
     var listItems = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
     var item_labels = [];
+
+    if (listYears.length == 0){alert('Select one or several time horizons before selecting powertrain types.');return;};
+
 
     var row = document.getElementById('powertrain_row')
     row.innerHTML="";
@@ -601,18 +605,326 @@ function power_list_update(){
         'HEV-p' : 'Hybrid car'
     };
 
+    var table = document.createElement('table');
+    table.setAttribute('style', 'width:100%;text-align:center;');
+    var thead = document.createElement('thead');
+    var tr = document.createElement('tr');
+    var tbody = document.createElement('tbody');
+
     var existing_labels = []
     for (var pt in item_labels){
-            var col = document.createElement('div');
-            col.className="col-sm";
-            //col.style = "height:200px";
-            //col.style = "width:"+String(100/item_labels.length)+"%";
-            var h2 = document.createElement('h2');
-            h2.style = "color:white";
-            h2.innerHTML = d_pt[item_labels[pt]];
-            col.appendChild(h2);
-            row.appendChild(col);
+        var th = document.createElement('th');
+        th.setAttribute('scope', 'col');
+        th.innerHTML = '<h2 style="color:white;">'+d_pt[item_labels[pt]]+'</h2>';
+        th.setAttribute('style', 'text-align:center;');
+        if (item_labels[pt]=="BEV"){
+            // Battery chemistry
+            var header_chemistry = document.createElement('h4');
+            header_chemistry.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_chemistry.innerHTML = 'Battery type';
+
+
+            var select_chemistry = document.createElement('select');
+            select_chemistry.className = "form-control";
+            select_chemistry.setAttribute('style', 'width:30%;margin: 0 auto;')
+
+            var option_chemistry_1 = document.createElement('option');
+            option_chemistry_1.value = "1";
+            option_chemistry_1.innerHTML = "Lithium Iron Phosphate (LFP)";
+            var option_chemistry_2 = document.createElement('option');
+            option_chemistry_2.value = "2";
+            option_chemistry_2.innerHTML = "Lithium Nickel Manganese Cobalt (NCM)";
+            var option_chemistry_3 = document.createElement('option');
+            option_chemistry_3.value = "3";
+            option_chemistry_3.innerHTML = "Lithium Nickel Cobalt Aluminum oxide (NCA)";
+            select_chemistry.appendChild(option_chemistry_1);
+            select_chemistry.appendChild(option_chemistry_2);
+            select_chemistry.appendChild(option_chemistry_3);
+
+            // Battery geography
+            var header_batt_geography = document.createElement('h4');
+            header_batt_geography.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_batt_geography.innerHTML = 'Battery origin';
+
+            var select_batt_geography = document.createElement('select');
+            select_batt_geography.className = "form-control";
+            select_batt_geography.setAttribute('style', 'width:30%;margin: 0 auto;')
+
+            var option_batt_geo_1 = document.createElement('option');
+            option_batt_geo_1.value = "1";
+            option_batt_geo_1.innerHTML = "Asia";
+            var option_batt_geo_2 = document.createElement('option');
+            option_batt_geo_2.value = "2";
+            option_batt_geo_2.innerHTML = "Europe";
+            var option_batt_geo_3 = document.createElement('option');
+            option_batt_geo_3.value = "3";
+            option_batt_geo_3.innerHTML = "United States";
+            select_batt_geography.appendChild(option_batt_geo_1);
+            select_batt_geography.appendChild(option_batt_geo_2);
+            select_batt_geography.appendChild(option_batt_geo_3);
+
+            // Battery cell energy density
+            var header_cell_density = document.createElement('h4');
+            header_cell_density.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_cell_density.innerHTML = 'Cell energy density [kWh/kg]';
+
+
+            var slider_energy_cell = document.createElement('div');
+            slider_energy_cell.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [.2, .4];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [.2];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [.4];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_energy_cell, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [0.05],
+                    'max': [0.5]
+                },
+                step: 0.05,
+
+            });
+
+            th.appendChild(header_chemistry);
+            th.appendChild(select_chemistry);
+            th.appendChild(header_batt_geography);
+            th.appendChild(select_batt_geography);
+            th.appendChild(header_cell_density);
+            th.appendChild(slider_energy_cell);
+
+        };
+
+        if (item_labels[pt] =="FCEV"){
+
+            // Fuel cell stack type
+            var header_stack_tech = document.createElement('h4');
+            header_stack_tech.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_stack_tech.innerHTML = 'Fuel cell stack type';
+
+
+            var select_stack_tech = document.createElement('select');
+            select_stack_tech.className = "form-control";
+            select_stack_tech.setAttribute('style', 'width:30%;margin: 0 auto;')
+
+            var option_stack_tech_1 = document.createElement('option');
+            option_stack_tech_1.value = "1";
+            option_stack_tech_1.innerHTML = "Proton Exchange Membrane (PEM) (Simons and Bauer, 2015)";
+            var option_stack_tech_2 = document.createElement('option');
+            option_stack_tech_2.value = "2";
+            option_stack_tech_2.innerHTML = "Proton Exchange Membrane (PEM) (Miotti et al., 2017)";
+            var option_stack_tech_3 = document.createElement('option');
+            option_stack_tech_3.value = "3";
+            option_stack_tech_3.innerHTML = "Proton Exchange Membrane (PEM) (Notter et al., 2015)";
+            var option_stack_tech_4 = document.createElement('option');
+            option_stack_tech_4.value = "4";
+            option_stack_tech_4.innerHTML = "Proton Exchange Membrane (PEM) (Manufacturer data)";
+            select_stack_tech.appendChild(option_stack_tech_1);
+            select_stack_tech.appendChild(option_stack_tech_2);
+            select_stack_tech.appendChild(option_stack_tech_3);
+            select_stack_tech.appendChild(option_stack_tech_4);
+
+            // Fuel cell stack geography
+            var header_stack_origin = document.createElement('h4');
+            header_stack_origin.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_stack_origin.innerHTML = 'Fuel cell stack origin';
+
+            var select_stack_geography = document.createElement('select');
+            select_stack_geography.className = "form-control";
+            select_stack_geography.setAttribute('style', 'width:30%;margin: 0 auto;')
+
+            var option_stack_geo_1 = document.createElement('option');
+            option_stack_geo_1.value = "1";
+            option_stack_geo_1.innerHTML = "Asia";
+            var option_stack_geo_2 = document.createElement('option');
+            option_stack_geo_2.value = "2";
+            option_stack_geo_2.innerHTML = "Europe";
+            var option_stack_geo_3 = document.createElement('option');
+            option_stack_geo_3.value = "3";
+            option_stack_geo_3.innerHTML = "United States";
+            select_stack_geography.appendChild(option_stack_geo_1);
+            select_stack_geography.appendChild(option_stack_geo_2);
+            select_stack_geography.appendChild(option_stack_geo_3);
+
+            // Hydrogen manufacture
+            var header_h2_tech = document.createElement('h4');
+            header_h2_tech.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_h2_tech.innerHTML = 'Hydrogen manufacture';
+
+            var select_h2_tech = document.createElement('select');
+            select_h2_tech.className = "form-control";
+            select_h2_tech.setAttribute('style', 'width:30%;margin: 0 auto;');
+
+            var option_h2_tech_1 = document.createElement('option');
+            option_h2_tech_1.value = "1";
+            option_h2_tech_1.innerHTML = "Steam Reforming of natural gas (SMR)";
+            var option_h2_tech_2 = document.createElement('option');
+            option_h2_tech_2.value = "2";
+            option_h2_tech_2.innerHTML = "Electrolysis";
+            select_h2_tech.appendChild(option_h2_tech_1);
+            select_h2_tech.appendChild(option_h2_tech_2);
+
+
+
+
+            th.appendChild(header_stack_tech);
+            th.appendChild(select_stack_tech);
+            th.appendChild(header_stack_origin);
+            th.appendChild(select_stack_geography);
+            th.appendChild(header_h2_tech);
+            th.appendChild(select_h2_tech);
+
+
+
+        };
+
+        if (['ICEV-p', 'ICEV-d', 'ICEV-g', 'HEV-p', 'PHEV'].includes(item_labels[pt])){
+            // Drivetrain efficiency
+            var header_drive_eff = document.createElement('h4');
+            header_drive_eff.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_drive_eff.innerHTML = 'Drivetrain efficiency';
+
+
+            var slider_drive_eff = document.createElement('div');
+            slider_drive_eff.id = "slider_drive_eff_" + item_labels[pt]
+            slider_drive_eff.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [.85,.87];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [.85];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [.87];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_drive_eff, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [0.8],
+                    'max': [0.95]
+                },
+                step: 0.01,
+
+            });
+
+            // Engine efficiency
+
+            var header_engine_eff = document.createElement('h4');
+            header_engine_eff.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_engine_eff.innerHTML = 'Engine efficiency';
+
+
+            var slider_engine_eff = document.createElement('div');
+            slider_engine_eff.id = "slider_drive_eff_" + item_labels[pt]
+            slider_engine_eff.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [.25,.32];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [.25];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [.32];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_engine_eff, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [0.15],
+                    'max': [0.35]
+                },
+                step: 0.01,
+
+            });
+
+
+
+            th.appendChild(header_drive_eff);
+            th.appendChild(slider_drive_eff);
+            th.appendChild(header_engine_eff);
+            th.appendChild(slider_engine_eff);
+        };
+
+        tr.appendChild(th);
+
+
     }
+    thead.appendChild(tr);
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    row.appendChild(table);
 
 
 
