@@ -616,7 +616,7 @@ function power_list_update(){
         var th = document.createElement('th');
         th.setAttribute('scope', 'col');
         th.innerHTML = '<h2 style="color:white;">'+d_pt[item_labels[pt]]+'</h2>';
-        th.setAttribute('style', 'text-align:center;');
+        th.setAttribute('style', 'text-align:center;vertical-align: top;');
         if (item_labels[pt]=="BEV"){
             // Battery chemistry
             var header_chemistry = document.createElement('h4');

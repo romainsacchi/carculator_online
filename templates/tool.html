@@ -371,12 +371,113 @@
 												  style="height:85px; width:80px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">CALCULATIONS</span></h2></div>
+						<span style="color:white;">CALCULATION SETTINGS</span></h2></div>
 						<div class="mu-about-area" style="padding-top:50px;">
 							<!-- Start About Us Content -->
 							<div class="mu-about-content">
 								<div class="container" style="width:100%;">
-									<div class="row" style="width:100%;">
+									<div class="row" style="width:100%;color:white;">
+										<table style="width:100%;text-align:center;">
+											<thead>
+												<tr>
+
+													<th style="text-align:center;margin:20px;">
+														<h2>Linking algorithm</h2>
+														</th>
+													<th style="text-align:center;margin:20px;"><h2>Functional unit</h2></th>
+													<th style="text-align:center;margin:20px;"><h2>Calculation mode</h2></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="vertical-align: top;">
+														<div class="help-tip" style="position:relative;margin:0 auto;margin-bottom:25px;
+																					top:0;right:0;">
+																<p>{{_('A so-called "attributional" linking
+															 algorithm will reflect average impacts
+														 associated to the life cycle of the vehicle, in proportion of the function unit specified.
+														A "consequential" linking algorithm will instead reflect the marginal impacts associated
+															to the realization of the functional unit specified, departing from a steady-state system.')}}</p>
+															</div>
+														<div class="form-check">
+
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+														  <label class="form-check-label" for="defaultCheck1">
+															Attributional
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
+														  <label class="form-check-label" for="defaultCheck2">
+															Consequential
+														  </label>
+														</div></td>
+													<td style="vertical-align: top;">
+														<div class="help-tip" style="position:relative;margin:0 auto;margin-bottom:25px;
+																					top:0;right:0;">
+																<p>{{_('Three types of functional unit are offered. The user can opt for a comparison normalized
+																	per kilometer driven. The user can also choose a specific distance driven instead. Finally, it is also possible
+																	to define a fleet composition over time.')}}</p>
+															</div>
+
+														<div class="form-check" style="vertical-align:middle;">
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
+														  <label class="form-check-label" for="defaultCheck3">
+															Unit, per km
+														  </label>
+														</div>
+														<div class="form-check" style="vertical-align:middle;">
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" >
+														  <label class="form-check-label" for="defaultCheck4">
+															Driven distance
+														  </label>
+															<div class="form-group">
+															  <input placeholder="in km" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto">
+															</div>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck5" disabled>
+														  <label class="form-check-label" for="defaultCheck5">
+															Fleet
+														  </label>
+															<div class="form-group">
+															<button class="online-button"
+															  style="margin:5px;
+															  background-color:transparent;color:white;
+															  border:1px solid white;" disabled>Specify fleet composition</button></div>
+
+
+														</div></td>
+													<td style="vertical-align: top;">
+														<div class="help-tip" style="position:relative;margin:0 auto;margin-bottom:25px;
+																					top:0;right:0;">
+																<p>{{_('A simple calculation will use "most likely" values as model inputs and outputs.
+																	This leads to a single "most likely" result. Error propagation calculation,
+																	here using the Monte Carlo approach, will consider instead uncertainty around
+																	input and output values of the model. This leads to the generation of results
+																	 represented by probability intervals.')}}</p>
+															</div>
+														<div class="form-check">
+
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
+														  <label class="form-check-label" for="defaultCheck3">
+															Simple calculation
+														  </label>
+														</div>
+														<div class="form-check" style="vertical-align:middle;">
+														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" disabled>
+														  <label class="form-check-label" for="defaultCheck4">
+															Error propagation (Monte Carlo)
+														  </label>
+															<div class="form-group">
+															  <input placeholder="number of iterations" type="text" class="form-control" style="width:200px;text-align:center;margin: 0 auto" disabled>
+															</div>
+														</div>
+														</td>
+												</tr>
+											</tbody>
+
+										</table>
 									</div>
 								</div>
 						</div>
