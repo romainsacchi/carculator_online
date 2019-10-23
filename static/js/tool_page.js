@@ -713,12 +713,116 @@ function power_list_update(){
 
             });
 
+            // Battery energy cost
+            var header_batt_cost = document.createElement('h4');
+            header_batt_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_batt_cost.innerHTML = 'Battery cost [Euro/kWh]';
+
+
+            var slider_battery_cost = document.createElement('div');
+            slider_battery_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [90, 225];
+                var tooltip =  [wNumb({
+                    decimals: 0,
+                    prefix: '2040: '
+
+                }), wNumb({
+                    decimals: 0,
+                    prefix: '2017: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [225];
+                        var tooltip =  [wNumb({
+                            decimals: 0,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [90];
+                        var tooltip =  [wNumb({
+                            decimals: 0,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_battery_cost, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [60],
+                    'max': [270]
+                },
+                step: 5,
+
+            });
+
+            // Energy cost
+            var header_energy_cost = document.createElement('h4');
+            header_energy_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_energy_cost.innerHTML = 'Electricity cost [€/kWh]';
+
+
+            var slider_energy_cost = document.createElement('div');
+            slider_energy_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [.16, .22];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [.22];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [.16];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_energy_cost, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [.1],
+                    'max': [.4]
+                },
+                step: .01,
+
+            });
+
             th.appendChild(header_chemistry);
             th.appendChild(select_chemistry);
             th.appendChild(header_batt_geography);
             th.appendChild(select_batt_geography);
             th.appendChild(header_cell_density);
             th.appendChild(slider_energy_cell);
+            th.appendChild(header_batt_cost);
+            th.appendChild(slider_battery_cost);
+            th.appendChild(header_energy_cost);
+            th.appendChild(slider_energy_cost);
 
         };
 
@@ -792,7 +896,105 @@ function power_list_update(){
             select_h2_tech.appendChild(option_h2_tech_2);
 
 
+            // Fuel cell cost
+            var header_fuel_cell_cost = document.createElement('h4');
+            header_fuel_cell_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_fuel_cell_cost.innerHTML = 'Fuel cell cost [Euro/kW]';
 
+
+            var slider_fuel_cell_cost = document.createElement('div');
+            slider_fuel_cell_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [60, 160];
+                var tooltip =  [wNumb({
+                    decimals: 0,
+                    prefix: '2040: '
+
+                }), wNumb({
+                    decimals: 0,
+                    prefix: '2017: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [160];
+                        var tooltip =  [wNumb({
+                            decimals: 0,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [60];
+                        var tooltip =  [wNumb({
+                            decimals: 0,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_fuel_cell_cost, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [40],
+                    'max': [200]
+                },
+                step: 10,
+
+            });
+
+            // Hydrogen cost
+            var header_h2_cost = document.createElement('h4');
+            header_h2_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_h2_cost.innerHTML = 'Hydrogen cost [€/kWh]';
+
+
+            var slider_h2_cost = document.createElement('div');
+            slider_h2_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [.17, .24];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [.24];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [.17];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_h2_cost, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [.1],
+                    'max': [.4]
+                },
+                step: .01,
+
+            });
 
             th.appendChild(header_stack_tech);
             th.appendChild(select_stack_tech);
@@ -800,6 +1002,10 @@ function power_list_update(){
             th.appendChild(select_stack_geography);
             th.appendChild(header_h2_tech);
             th.appendChild(select_h2_tech);
+            th.appendChild(header_fuel_cell_cost);
+            th.appendChild(slider_fuel_cell_cost);
+            th.appendChild(header_h2_cost);
+            th.appendChild(slider_h2_cost);
 
 
 
@@ -909,12 +1115,79 @@ function power_list_update(){
 
             });
 
+            // Fuel cost
+            var header_fuel_cost = document.createElement('h4');
+            header_fuel_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_fuel_cost.innerHTML = 'Fuel cost [€/kWh]';
+
+
+            var slider_fuel_cost = document.createElement('div');
+            slider_fuel_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (['ICEV-p', 'HEV-p', 'PHEV'].includes(item_labels[pt])){
+                var val_fuel_2017 = [0.1, 0.16, 0.2];
+                var val_fuel_2040 = [0.1, 0.18, 0.2];
+            };
+            if (item_labels[pt]=="ICEV-d"){
+                var val_fuel_2017 = [0.1, 0.12, 0.2];
+                var val_fuel_2040 = [0.1, 0.14, 0.2];
+            };
+            if (item_labels[pt]=="ICEV-g"){
+                var val_fuel_2017 = [0, 0.07, 0.2];
+                var val_fuel_2040 = [0, 0.11, 0.2];
+            };
+
+
+            if (listYears.length>1){
+
+                var start_val = [val_fuel_2017[1], val_fuel_2040[1]];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = val_fuel_2017[1];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = val_fuel_2040[1];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_fuel_cost, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': val_fuel_2017[0],
+                    'max': val_fuel_2017[2]
+                },
+                step: .01,
+
+            });
+
 
 
             th.appendChild(header_drive_eff);
             th.appendChild(slider_drive_eff);
             th.appendChild(header_engine_eff);
             th.appendChild(slider_engine_eff);
+            th.appendChild(header_fuel_cost);
+            th.appendChild(slider_fuel_cost);
         };
 
         tr.appendChild(th);

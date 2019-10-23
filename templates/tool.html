@@ -98,7 +98,7 @@
 					<div class="col-md-12">
 						<div class="row" style="padding-top:80px;">
 							<h2><img class="image" src="static/images/icons/scope_icon_grey.png"
-												  style="height:80px; width:65pw;; border-right:3px solid rgba(0,0,0,0.6);
+												  style="height:70px; width:80px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:grey;">SCOPE</span></h2></div>
@@ -116,6 +116,9 @@
 									<div class="col-md-8" style="text-align:center;vertical-align:middle;display:table">
 										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
 											<h2 class="mu-heading-title">{{_('Year')}}</h2>
+											<div class="help-tip">
+												<p>{{_('Carculator can model the life cycle impacts of passenger cars at different time horizons, considering expected improvements in vehicles design, energy chains, etc.')}}</p>
+											</div>
 											<div style="width:50%;margin: 0 auto;">
 													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
 														margin:0px;display:inline;">
@@ -135,6 +138,9 @@
 										</div>
 										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
 											<h2 class="mu-heading-title">{{_('Powertrain')}}</h2>
+											<div class="help-tip">
+												<p>{{_('Different powertrains, or propulsion technologies, can be considered.')}}</p>
+											</div>
 											<div style="width:50%;margin: 0 auto;">
 													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
 														margin:0px;display:inline;">
@@ -154,6 +160,10 @@
 
 										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
 											<h2 class="mu-heading-title">{{_('Size')}}</h2>
+											<div class="help-tip">
+												<p>{{_('Different size categories are available, for any given powertrain type. For reference, a VW Golf corresponds to the Lower medium size class.')}}
+											</p>
+											</div>
 												<div style="width:50%;margin: 0 auto;">
 													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
 														margin:0px;display:inline;">
@@ -251,6 +261,13 @@
 							<div class="col-md-4" style="border-right:3px solid white;display:table-cell;">
 								<div class="row">
 									<h2 style="color:white;">Driving cycle</h2>
+									<div class="help-tip">
+												<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
+													Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
+													It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
+													associated to the urban air compartment.
+													All the vehicles are compared against the same driving cycle.')}}</p>
+									</div>
 									<div class="col-md-3"  style="margin: 0 auto;">
 										<div class="row">
 											<p  style="color:white;float:left;">Select a driving cycle</p>
@@ -276,6 +293,11 @@
 							</div>
 							<div class="col-md-4" style="border-right:3px solid white;display:table-cell;">
 								<h2>Geographical conditions</h2>
+								<div class="help-tip">
+												<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
+													For example, the electricity mix used to charge batteries of electric vehicles
+													 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
+									</div>
 								<p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
 
 								<div id="chartdiv"></div>
@@ -283,6 +305,10 @@
 							<div class="col-md-2" style="border-right:3px solid white;display:table-cell;">
 
 								<h2 style="margin-left:3px;">Passengers</h2>
+								<div class="help-tip">
+									<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
+										The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
+								</div>
 								<div class="row" style="margin:3px;">
 								<img id = "image_passenger" src="static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
 								<p style="color:white;margin-top:30px;">Adjust the number of passengers</p>
@@ -296,6 +322,7 @@
 									</div>
 
 								<p style="color:white;margin-top:30px;">Adjust the cargo mass</p>
+
 								<div style="margin-bottom:20px;" id="cargo-slider"></div>
 								<span id="cargo-value" style="color:white;font-size:30px;">150 kg</span>
 								</div>
@@ -304,6 +331,11 @@
 							<div class="col-md-2" style="border-right:3px solid white;display:table-cell;">
 
 								<h2 style="margin-left:3px;">Lifetime</h2>
+								<div class="help-tip">
+									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
+										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
+										to calculate amortized costs of ownership.')}}</p>
+								</div>
 								<div class="row" style="margin:3px;">
 								<img src="static/images/icons/car_icon.png" style="height:50px;margin-top:10px;">
 								<p style="color:white;margin-top:30px;">Adjust the total mileage</p>
@@ -328,6 +360,32 @@
 			</div>
 		</section>
 		<!-- End Publications -->
+
+		<!-- Start CALCULATIONS -->
+		<section id="mu-about" style="background-color:grey;">
+			<div class="container" style="width:90%;">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row" >
+							<h2><img class="image" src="static/images/icons/calculator_icon.png"
+												  style="height:85px; width:80px; border-right:3px solid white;
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:white;">CALCULATIONS</span></h2></div>
+						<div class="mu-about-area" style="padding-top:50px;">
+							<!-- Start About Us Content -->
+							<div class="mu-about-content">
+								<div class="container" style="width:100%;">
+									<div class="row" style="width:100%;">
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End CALCULATIONS -->
+
 	</main>
 	<!-- End main content -->
 
