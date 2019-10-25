@@ -584,7 +584,18 @@ $('#vehicle_type label').click(function() {
         $(this).addClass('selected').siblings().removeClass('selected');
         $("#powertrain_section").attr('style', 'display:block;');
     }else{
-        alert('This type of vehicle is not yet available.');
+        $.notify({
+        icon: 'glyphicon glyphicon-warning-sign',
+        message: "Sorry, this category of vehicle is not available yet."},
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+            type:'warning'
+        }
+        );
+
         return;
     };
 
@@ -597,7 +608,19 @@ function power_list_update(){
     var item_labels = [];
 
     if (listYears.length == 0){
-        alert('Select one or several time horizons before selecting any type of powertrain.');return;
+       $.notify({
+        icon: 'glyphicon glyphicon-warning-sign',
+        message: "A time horizon must be selected first."},
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+            type:'warning'
+        }
+        );
+
+       return;
     }
     else{
         if (listItems.length>0){
@@ -1329,7 +1352,7 @@ function generate_driving_cycle_graph(driving_cycle){
             }
             nv.addGraph(function() {
               var chart = nv.models.lineChart()
-                            .margin({left: 80, bottom:80})  //Adjust chart margins to give the x-axis some breathing room.
+                            .margin({left: 60, bottom:80})  //Adjust chart margins to give the x-axis some breathing room.
                             .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                             //.transitionDuration(350)  //how fast do you want the lines to transition?
                             .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
@@ -1460,7 +1483,17 @@ function getSelectedCountries() {
   // At least two countries are selected
   if (selected.length>1){
     var existing_selection = $("#country-selected")
-    alert("Currently, only one country can be selected.")
+    $.notify({
+        icon: 'glyphicon glyphicon-warning-sign',
+        message: "Currently, only one country can be selected.."},
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+            type:'warning'
+        }
+        );
     return selected.slice(0,1)
   };
   return selected;
@@ -1566,3 +1599,4 @@ slider_cargo.noUiSlider.on('update', function (values, handle) {
     $("#image_cargo").height(val);
     $('#cargo-value').text(values + " kg");
 });
+

@@ -1605,9 +1605,9 @@ button:focus {
 /* TOOLTIP STYLE */
 /*--------------------*/
 .help-tip{
-    position: absolute;
-    top: 18px;
-    right: 58px;
+    position: relative;
+    bottom:10px;
+    margin:0 auto;
     text-align: center;
     background-color: #BCDBEA;
     border-radius: 50%;
@@ -1666,23 +1666,4 @@ button:focus {
     position: absolute;
     top:-40px;
     left:0;
-}
-
-/* CSS animation */
-
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity:0;
-        transform: scale(0.6);
-    }
-
-    100% {
-        opacity:100%;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeIn {
-    0% { opacity:0; }
-    100% { opacity:100%; }
 }

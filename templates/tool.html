@@ -24,15 +24,17 @@
 	  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <!-- Main Style -->
     <link href="static/css/style.css" rel="stylesheet">
-	  <!-- Tool page Style -->
-    <link href="static/css/tool_style.css" rel="stylesheet">
+
 	  <!-- NVD3 Style -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" rel="stylesheet">
 	  <!-- World map Style -->
     <link href="static/css/world_map_style.css" rel="stylesheet">
-
+	<!-- NoUISlider -->
 	  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.css" rel="stylesheet">
-
+	<!-- Animate.css -->
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+	    <!-- Tool page Style -->
+    <link href="static/css/tool_style.css" rel="stylesheet">
 
 
     <!-- Fonts -->
@@ -110,11 +112,11 @@
 								<div id="vehicle_type">
 									<input type="radio" name="site" id="motorbike" value="motorbike" /><label id ="label_motorbike" for="motorbike"><img src="static/images/icons/motorbike_icon_grey.png" height="70px;" style="margin:15px;"/></label>
 									<input type="radio" name="site" id="car" value="car" /><label id ="label_car" for="car"><img src="static/images/icons/car_icon_grey.png" height="70px;" style="margin:15px;"/></label>
+									<input type="radio" name="site" id="bus" value="bus" /><label id ="label_bus" for="bus"><img src="static/images/icons/bus_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
 									<input type="radio" name="site" id="truck" value="truck" /><label id ="label_truck" for="train"><img src="static/images/icons/truck_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
 									<input type="radio" name="site" id="train" value="train" /><label id ="label_train" for="train"><img src="static/images/icons/tram_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
 									<input type="radio" name="site" id="plane" value="plane" /><label id ="label_plane" for="plane"><img src="static/images/icons/plane_icon_grey.png"  height="70px;" style="margin:15px;"/></label>
 								</div>
-
 
 							</div>
 
@@ -272,21 +274,21 @@
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">USE</span></h2></div>
-						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;display:none;"
-							id="use_section">
-
-							<table class="table">
+						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;">
+							<div class="mu-testimonials-content" style="display:none;" id="use_section">
+								<table class="table">
 							  <thead>
 								<tr>
 									<th scope="col"><h2>Driving cycle</h2>
-								  <div class="help-tip">
-									<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
-										Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
-										It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
-										associated to the urban air compartment.
-										All the vehicles are compared against the same driving cycle.')}}
-									</p>
-								  </div>
+									<div class="help-tip">
+										<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
+											Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
+											It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
+											associated to the urban air compartment.
+											All the vehicles are compared against the same driving cycle.')}}
+										</p>
+								  	</div>
+
 								  </th>
 									<th scope="col"><h2>Geographical conditions</h2>
 								  <div class="help-tip">
@@ -294,8 +296,11 @@
 										For example, the electricity mix used to charge batteries of electric vehicles
 										 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
 								  </div>
-
 								  </th>
+									<th scope="col">
+										<h2>Electricity mix</h2>
+									</th>
+
 								  <th scope="col"><h2>Passengers</h2>
 									  <div class="help-tip">
 										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
@@ -316,6 +321,7 @@
 								  <td>
 									  <div class="row">
 										<p  style="color:white;">Select a driving cycle</p>
+
 									  </div>
 										<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
 											id="table_driving_cycles">
@@ -330,7 +336,100 @@
 								  </td>
 								  <td>
 									  <p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
-									  <div id="chartdiv" style="width:100%;"></div></td>
+									  <div id="chartdiv" style="width:100%;"></div>
+								  </td>
+
+								<td>
+								  <p style="color:white;">Our projection models suggest the following electricity mixes in 2017 and 2040 for the selected country.
+									You may modify them.</p>
+
+									<table class="table" style="background:none;color:white;text-align:left;width:600px;margin:0 auto;">
+										<thead>
+											<tr>
+												<th>in %</th>
+												<th>2017</th>
+
+												<th>2040</th>
+
+											</tr>
+										</thead>
+									  <tbody>
+										<tr>
+
+										  <td>Hydro</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr>
+										<tr>
+
+										  <td>Nuclear</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Gas</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Solar</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Wind</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Biomass</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Coal</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Oil</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Geothermal</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr><tr>
+
+										  <td>Waste</td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+
+										</tr>
+									  </tbody>
+									</table>
+
+								</td>
 								  <td>
 									  <img id = "image_passenger" src="static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
 										<p style="color:white">Adjust the number of passengers</p>
@@ -365,10 +464,9 @@
 								</tr>
 							  </tbody>
 							</table>
+							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</section>
@@ -596,6 +694,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.2.10/jquery.mb.YTPlayer.min.js"></script>
 	<!-- Anime.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+	<!-- Bootstrap notify.js -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
+
     <!-- Custom js -->
 	<script type="text/javascript" src="static/js/custom.js"></script>
 

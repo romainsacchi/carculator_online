@@ -109,3 +109,22 @@
 
 }
 
+.c-1-color { background: red; }
+.c-2-color { background: yellow; }
+.c-3-color { background: green; }
+.c-4-color { background: blue; }
+.c-5-color { background: purple; }
+.c-6-color { background: brown; }
+.c-7-color { background: red; }
+.c-8-color { background: yellow; }
+.c-9-color { background: green; }
+.c-10-color { background: purple; }
+
+.color-box {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background-color: #ccc;
+    left: 5px;
+    top: 5px;
+}
