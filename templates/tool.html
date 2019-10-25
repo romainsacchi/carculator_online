@@ -259,6 +259,8 @@
 		</section>
 		<!-- End MANUFACTURE -->
 
+
+
 		<!-- Start USE -->
 		<section id="mu-testimonials">
 			<div class="container" style="width:90%;">
@@ -272,107 +274,97 @@
 						<span style="color:white;">USE</span></h2></div>
 						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;display:none;"
 							id="use_section">
-							<div style="display:table;width:100%;">
-							<div class="col-md-4" style="border-right:3px solid white;display:table-cell;">
-								<div class="row">
-									<h2 style="color:white;">Driving cycle</h2>
-									<div class="help-tip">
-												<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
-													Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
-													It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
-													associated to the urban air compartment.
-													All the vehicles are compared against the same driving cycle.')}}</p>
-									</div>
-									<div class="col-md-3"  style="margin: 0 auto;">
-										<div class="row">
-											<p  style="color:white;float:left;">Select a driving cycle</p>
-										</div>
-										<div class="row" >
-											<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
-												id="table_driving_cycles">
-												{% for dc in driving_cycles %}
-												<li tabindex="1">{{ dc }}</li>
-												{% endfor %}
-											</ol>
-										</div>
 
+							<table class="table">
+							  <thead>
+								<tr>
+									<th scope="col"><h2>Driving cycle</h2>
+								  <div class="help-tip">
+									<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
+										Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
+										It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
+										associated to the urban air compartment.
+										All the vehicles are compared against the same driving cycle.')}}
+									</p>
+								  </div>
+								  </th>
+									<th scope="col"><h2>Geographical conditions</h2>
+								  <div class="help-tip">
+									<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
+										For example, the electricity mix used to charge batteries of electric vehicles
+										 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
+								  </div>
 
-									</div>
-									<div class="col-md-9">
-										<div class="col" style="background-color:none;">
-										  <svg id="chart-driving-cycle"
-											   style="width:100%;height:480px; font-size:16px; color:grey;"></svg>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4" style="border-right:3px solid white;display:table-cell;">
-								<h2>Geographical conditions</h2>
-								<div class="help-tip">
-												<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
-													For example, the electricity mix used to charge batteries of electric vehicles
-													 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
-									</div>
-								<p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
-
-								<div id="chartdiv"></div>
-
-							<button class="online-button"
-							  style="border:1px solid white;" data-toggle="modal" data-target="#modal_electricity_mix">Specify electricity mix</button>
-
-
-
-							</div>
-							<div class="col-md-2" style="border-right:3px solid white;display:table-cell;">
-
-								<h2 style="margin-left:3px;">Passengers</h2>
-								<div class="help-tip">
-									<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
-										The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
-								</div>
-								<div class="row" style="margin:3px;">
-								<img id = "image_passenger" src="static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
-								<p style="color:white;margin-top:30px;">Adjust the number of passengers</p>
-								<div style="margin-bottom:20px;" id="passenger-slider"></div>
-								<span id="passenger-value" style="color:white;font-size:30px;"></span>
-								</div>
-								<div class="row" style="margin:3px;">
-									<div style="height:100px;position:relative;">
-										<img id="image_cargo" src="static/images/icons/cargo_icon.png"
-											 style="height:50px;position:absolute; top:0;bottom:0;left:0;right:0;margin:auto;">
-									</div>
-
-								<p style="color:white;margin-top:30px;">Adjust the cargo mass</p>
-
-								<div style="margin-bottom:20px;" id="cargo-slider"></div>
-								<span id="cargo-value" style="color:white;font-size:30px;">150 kg</span>
-								</div>
-
-							</div>
-							<div class="col-md-2" style="border-right:3px solid white;display:table-cell;">
-
-								<h2 style="margin-left:3px;">Lifetime</h2>
-								<div class="help-tip">
+								  </th>
+								  <th scope="col"><h2>Passengers</h2>
+									  <div class="help-tip">
+										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
+											The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
+									  </div>
+								  </th>
+								  <th scope="col"><h2>Lifetime</h2>
+								  <div class="help-tip">
 									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
 										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
 										to calculate amortized costs of ownership.')}}</p>
-								</div>
-								<div class="row" style="margin:3px;">
-								<img src="static/images/icons/car_icon.png" style="height:50px;margin-top:10px;">
-								<p style="color:white;margin-top:30px;">Adjust the total mileage</p>
-								<div style="margin-bottom:20px;" id="lifetime-slider"></div>
-								<span id="lifetime-value" style="color:white;font-size:30px;"></span>
-								</div>
-								<div class="row" style="margin:3px;">
-									<img src="static/images/icons/odometer_icon.png" style="height:50px;margin-top:10px;">
-								<p style="color:white;margin-top:30px;">Adjust the yearly mileage</p>
-								<div style="margin-bottom:20px;" id="mileage-slider"></div>
-								<span id="mileage-value" style="color:white;font-size:30px;"></span>
-								</div>
+								  </div>
+								  </th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<tr>
+								  <td>
+									  <div class="row">
+										<p  style="color:white;">Select a driving cycle</p>
+									  </div>
+										<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
+											id="table_driving_cycles">
+											{% for dc in driving_cycles %}
+											<li tabindex="1">{{ dc }}</li>
+											{% endfor %}
+										</ol>
+										<div class="col" style="background-color:none;">
+										  <svg id="chart-driving-cycle"
+											   style="width:100%;height:300px; font-size:16px; color:grey;"></svg>
+										</div>
+								  </td>
+								  <td>
+									  <p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
+									  <div id="chartdiv" style="width:100%;"></div></td>
+								  <td>
+									  <img id = "image_passenger" src="static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
+										<p style="color:white">Adjust the number of passengers</p>
+										<div style="margin:30px;" id="passenger-slider"></div>
 
-							</div>
-							</div>
 
+										<div class="row" style="margin:30px;">
+											<div style="height:100px;position:relative;">
+												<img id="image_cargo" src="static/images/icons/cargo_icon.png"
+													 style="height:50px;position:absolute; top:0;bottom:0;left:0;right:0;margin:auto;">
+											</div>
+
+										<p style="color:white;">Adjust the cargo mass</p>
+										<div style="margin-bottom:20px;" id="cargo-slider"></div>
+											<span id="cargo-value" style="color:white;font-size:30px;">150 kg</span>
+										</div>
+								  </td>
+								  <td>
+									  <img src="static/images/icons/car_icon.png" style="height:50px;margin-top:10px;">
+										<p style="color:white;">Adjust the total mileage</p>
+										<div style="margin-top:30px;" id="lifetime-slider"></div>
+										<span id="lifetime-value" style="color:white;font-size:30px;"></span>
+
+									<div class="row" style="margin:3px;">
+										<img src="static/images/icons/odometer_icon.png" style="height:50px;margin-top:10px;">
+										<p style="color:white;margin-top:25px;">Adjust the yearly mileage</p>
+										<div style="margin-bottom:20px;" id="mileage-slider"></div>
+										<span id="mileage-value" style="color:white;font-size:30px;"></span>
+									</div>
+
+								  </td>
+								</tr>
+							  </tbody>
+							</table>
 						</div>
 					</div>
 

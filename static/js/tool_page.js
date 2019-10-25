@@ -627,9 +627,11 @@ function power_list_update(){
     };
 
     var table = document.createElement('table');
+    table.className = "table";
     table.setAttribute('style', 'width:100%;text-align:center;');
     var thead = document.createElement('thead');
     var tr = document.createElement('tr');
+    var tr_body = document.createElement('tr');
     var tbody = document.createElement('tbody');
 
     var existing_labels = []
@@ -638,6 +640,7 @@ function power_list_update(){
         th.setAttribute('scope', 'col');
         th.innerHTML = '<h2 style="color:white;">'+d_pt[item_labels[pt]]+'</h2>';
         th.setAttribute('style', 'text-align:center;vertical-align: top;');
+        var td_body = document.createElement('td');
         if (item_labels[pt]=="BEV"){
             // Battery chemistry
             var header_chemistry = document.createElement('h4');
@@ -833,16 +836,16 @@ function power_list_update(){
 
             });
 
-            th.appendChild(header_chemistry);
-            th.appendChild(select_chemistry);
-            th.appendChild(header_batt_geography);
-            th.appendChild(select_batt_geography);
-            th.appendChild(header_cell_density);
-            th.appendChild(slider_energy_cell);
-            th.appendChild(header_batt_cost);
-            th.appendChild(slider_battery_cost);
-            th.appendChild(header_energy_cost);
-            th.appendChild(slider_energy_cost);
+            td_body.appendChild(header_chemistry);
+            td_body.appendChild(select_chemistry);
+            td_body.appendChild(header_batt_geography);
+            td_body.appendChild(select_batt_geography);
+            td_body.appendChild(header_cell_density);
+            td_body.appendChild(slider_energy_cell);
+            td_body.appendChild(header_batt_cost);
+            td_body.appendChild(slider_battery_cost);
+            td_body.appendChild(header_energy_cost);
+            td_body.appendChild(slider_energy_cost);
 
         };
 
@@ -1016,16 +1019,16 @@ function power_list_update(){
 
             });
 
-            th.appendChild(header_stack_tech);
-            th.appendChild(select_stack_tech);
-            th.appendChild(header_stack_origin);
-            th.appendChild(select_stack_geography);
-            th.appendChild(header_h2_tech);
-            th.appendChild(select_h2_tech);
-            th.appendChild(header_fuel_cell_cost);
-            th.appendChild(slider_fuel_cell_cost);
-            th.appendChild(header_h2_cost);
-            th.appendChild(slider_h2_cost);
+            td_body.appendChild(header_stack_tech);
+            td_body.appendChild(select_stack_tech);
+            td_body.appendChild(header_stack_origin);
+            td_body.appendChild(select_stack_geography);
+            td_body.appendChild(header_h2_tech);
+            td_body.appendChild(select_h2_tech);
+            td_body.appendChild(header_fuel_cell_cost);
+            td_body.appendChild(slider_fuel_cell_cost);
+            td_body.appendChild(header_h2_cost);
+            td_body.appendChild(slider_h2_cost);
 
         };
 
@@ -1245,20 +1248,22 @@ function power_list_update(){
 
             });
 
-            th.appendChild(header_drive_eff);
-            th.appendChild(slider_drive_eff);
-            th.appendChild(header_engine_eff);
-            th.appendChild(slider_engine_eff);
-            th.appendChild(header_combust_share);
-            th.appendChild(slider_combust_share);
-            th.appendChild(header_fuel_cost);
-            th.appendChild(slider_fuel_cost);
+            td_body.appendChild(header_drive_eff);
+            td_body.appendChild(slider_drive_eff);
+            td_body.appendChild(header_engine_eff);
+            td_body.appendChild(slider_engine_eff);
+            td_body.appendChild(header_combust_share);
+            td_body.appendChild(slider_combust_share);
+            td_body.appendChild(header_fuel_cost);
+            td_body.appendChild(slider_fuel_cost);
         };
 
         tr.appendChild(th);
+        tr_body.appendChild(td_body);
 
     }
     thead.appendChild(tr);
+    tbody.appendChild(tr_body);
     table.appendChild(thead);
     table.appendChild(tbody);
     row.appendChild(table);
@@ -1366,52 +1371,52 @@ function generate_driving_cycle_graph(driving_cycle){
 var map = AmCharts.makeChart("chartdiv", {
    "type": "map",
   "theme": "dark",
+  "color": "rgba(0,0,0,0)",
   "dataProvider": {
     "map": "worldLow",
     "zoomLevel": 2,
     "zoomLongitude": 7.87,
     "zoomLatitude": 46.96,
+
     "areas": [
       {"id":"AT"},
-{"id":"AU"},
-{"id":"BE"},
-{"id":"BG"},
-{"id":"BR"},
-{"id":"CA"},
-{"id":"CH"},
-{"id":"CL"},
-{"id":"CN"},
-{"id":"CY"},
-{"id":"CZ"},
-{"id":"DE"},
-{"id":"DK"},
-{"id":"EE"},
-{"id":"ES"},
-{"id":"FI"},
-{"id":"FR"},
-{"id":"GB"},
-{"id":"GR"},
-{"id":"HR"},
-{"id":"HU"},
-{"id":"IE"},
-{"id":"IN"},
-{"id":"IT"},
-{"id":"JP"},
-{"id":"LT"},
-{"id":"LU"},
-{"id":"LV"},
-{"id":"MT"},
-{"id":"PL"},
-{"id":"PT"},
-{"id":"RO"},
-{"id":"RU"},
-{"id":"SE"},
-{"id":"SI"},
-{"id":"SK"},
-{"id":"US"},
-{"id":"ZA"},
-
-
+        {"id":"AU"},
+        {"id":"BE"},
+        {"id":"BG"},
+        {"id":"BR"},
+        {"id":"CA"},
+        {"id":"CH"},
+        {"id":"CL"},
+        {"id":"CN"},
+        {"id":"CY"},
+        {"id":"CZ"},
+        {"id":"DE"},
+        {"id":"DK"},
+        {"id":"EE"},
+        {"id":"ES"},
+        {"id":"FI"},
+        {"id":"FR"},
+        {"id":"GB"},
+        {"id":"GR"},
+        {"id":"HR"},
+        {"id":"HU"},
+        {"id":"IE"},
+        {"id":"IN"},
+        {"id":"IT"},
+        {"id":"JP"},
+        {"id":"LT"},
+        {"id":"LU"},
+        {"id":"LV"},
+        {"id":"MT"},
+        {"id":"PL"},
+        {"id":"PT"},
+        {"id":"RO"},
+        {"id":"RU"},
+        {"id":"SE"},
+        {"id":"SI"},
+        {"id":"SK"},
+        {"id":"US"},
+        {"id":"ZA"},
     ]
   },
   "areasSettings": {

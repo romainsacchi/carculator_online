@@ -40,20 +40,7 @@ def load_map_file():
 
 car_to_class_map = load_map_file()
 
-# Load dictionary with electricity mixes
-def load_electricity_mix_file():
-    filename='data/electricity_mixes.csv'
-    df = pd.read_csv(filename, sep=";")
-    df['Year'] = (df['Year'].astype('i8') - 1970).view('datetime64[Y]')
-    df = df.pivot(index='Year', columns='Country code')
-    df = df.resample('A').mean()
-    df = df.interpolate(method='time')
-    df = df.T * 100
-    df.columns = df.columns.year
-
-    return df
-
-electricity_mixes = load_electricity_mix_file()
+electricity_mix = BackgroundSystemModel().electricity_mix
 
 @app.route('/')
 def index():
@@ -106,8 +93,7 @@ def send_email():
 @app.route('/get_electricity_mix/<ISO>')
 def get_electricity_mix(ISO):
     # Return the electricity mix for the ISO country code and the year(s) given
-    response = electricity_mixes.loc[electricity_mixes.index.get_level_values('Country code')==ISO,[2015,2040]]
-    response.index = response.index.droplevel('Country code')
+    response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=[2017, 2040])
     return jsonify(response.to_dict())
 
 @babel.localeselector
