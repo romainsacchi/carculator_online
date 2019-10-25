@@ -577,7 +577,18 @@
 
 })();
 
+// Radio buttons for vehicle type selection
+$('#vehicle_type input:radio').addClass('input_hidden');
+$('#vehicle_type label').click(function() {
+    if ($(this).attr('id') == "label_car"){
+        $(this).addClass('selected').siblings().removeClass('selected');
+        $("#powertrain_section").attr('style', 'display:block;');
+    }else{
+        alert('This type of vehicle is not yet available.');
+        return;
+    };
 
+});
 
 // Detect when powertrains are added
 function power_list_update(){
@@ -585,7 +596,17 @@ function power_list_update(){
     var listYears = document.querySelectorAll( '#years_list > li' );
     var item_labels = [];
 
-    if (listYears.length == 0){alert('Select one or several time horizons before selecting powertrain types.');return;};
+    if (listYears.length == 0){
+        alert('Select one or several time horizons before selecting any type of powertrain.');return;
+    }
+    else{
+        if (listItems.length>0){
+            $("#manufacture_section").attr('style', 'display:block;');
+            $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
+            $("#calculation_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
+            generate_driving_cycle_graph('WLTC');}
+        else{return;};
+    };
 
 
     var row = document.getElementById('powertrain_row')
@@ -767,7 +788,6 @@ function power_list_update(){
             var header_energy_cost = document.createElement('h4');
             header_energy_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
             header_energy_cost.innerHTML = 'Electricity cost [€/kWh]';
-
 
             var slider_energy_cost = document.createElement('div');
             slider_energy_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
@@ -1007,8 +1027,6 @@ function power_list_update(){
             th.appendChild(header_h2_cost);
             th.appendChild(slider_h2_cost);
 
-
-
         };
 
         if (['ICEV-p', 'ICEV-d', 'ICEV-g', 'HEV-p', 'PHEV'].includes(item_labels[pt])){
@@ -1016,7 +1034,6 @@ function power_list_update(){
             var header_drive_eff = document.createElement('h4');
             header_drive_eff.setAttribute('style', 'color:white;text-align:center;margin:20px;')
             header_drive_eff.innerHTML = 'Drivetrain efficiency';
-
 
             var slider_drive_eff = document.createElement('div');
             slider_drive_eff.id = "slider_drive_eff_" + item_labels[pt]
@@ -1064,11 +1081,9 @@ function power_list_update(){
             });
 
             // Engine efficiency
-
             var header_engine_eff = document.createElement('h4');
             header_engine_eff.setAttribute('style', 'color:white;text-align:center;margin:20px;')
             header_engine_eff.innerHTML = 'Engine efficiency';
-
 
             var slider_engine_eff = document.createElement('div');
             slider_engine_eff.id = "slider_drive_eff_" + item_labels[pt]
@@ -1112,7 +1127,57 @@ function power_list_update(){
                     'max': [0.35]
                 },
                 step: 0.01,
+            });
 
+            // Combustion share
+
+            var header_combust_share = document.createElement('h4');
+            header_combust_share.setAttribute('style', 'color:white;text-align:center;margin:20px;')
+            header_combust_share.innerHTML = 'Share of combustion power';
+
+
+            var slider_combust_share = document.createElement('div');
+            slider_combust_share.id = "slider_drive_eff_" + item_labels[pt]
+            slider_combust_share.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
+
+            if (listYears.length>1){
+                var start_val = [.9,1];
+                var tooltip =  [wNumb({
+                    decimals: 2,
+                    prefix: '2017: '
+
+                }), wNumb({
+                    decimals: 2,
+                    prefix: '2040: '
+
+                })]}else{
+
+                    if (listYears[0].innerHTML == "2017"){
+                        var start_val = [1];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2017: '
+
+                        })]
+                    }
+                    else {
+                        var start_val = [.9];
+                        var tooltip =  [wNumb({
+                            decimals: 2,
+                            prefix: '2040: '
+
+                        })];
+                    };
+                };
+
+            noUiSlider.create(slider_combust_share, {
+                 start: start_val,
+                 tooltips:tooltip,
+                range: {
+                    'min': [.5],
+                    'max': [1]
+                },
+                step: 0.05,
             });
 
             // Fuel cost
@@ -1180,26 +1245,23 @@ function power_list_update(){
 
             });
 
-
-
             th.appendChild(header_drive_eff);
             th.appendChild(slider_drive_eff);
             th.appendChild(header_engine_eff);
             th.appendChild(slider_engine_eff);
+            th.appendChild(header_combust_share);
+            th.appendChild(slider_combust_share);
             th.appendChild(header_fuel_cost);
             th.appendChild(slider_fuel_cost);
         };
 
         tr.appendChild(th);
 
-
     }
     thead.appendChild(tr);
     table.appendChild(thead);
     table.appendChild(tbody);
     row.appendChild(table);
-
-
 
 };
 
@@ -1240,7 +1302,7 @@ $('#search_input').keyup(function() {
     generate_driving_cycle_graph(driving_cycle);
 });
 
-generate_driving_cycle_graph('WLTC');
+
 
 function generate_driving_cycle_graph(driving_cycle){
     $.when($.ajax({
@@ -1302,22 +1364,60 @@ function generate_driving_cycle_graph(driving_cycle){
  * Create the map
  */
 var map = AmCharts.makeChart("chartdiv", {
-  "type": "map",
+   "type": "map",
   "theme": "dark",
-  "projection": "eckert3",
-  "color": "rgba(0,0,0,0)",
-
   "dataProvider": {
     "map": "worldLow",
-    "getAreasFromMap": true,
-     "zoomLevel": 2,
+    "zoomLevel": 2,
     "zoomLongitude": 7.87,
     "zoomLatitude": 46.96,
+    "areas": [
+      {"id":"AT"},
+{"id":"AU"},
+{"id":"BE"},
+{"id":"BG"},
+{"id":"BR"},
+{"id":"CA"},
+{"id":"CH"},
+{"id":"CL"},
+{"id":"CN"},
+{"id":"CY"},
+{"id":"CZ"},
+{"id":"DE"},
+{"id":"DK"},
+{"id":"EE"},
+{"id":"ES"},
+{"id":"FI"},
+{"id":"FR"},
+{"id":"GB"},
+{"id":"GR"},
+{"id":"HR"},
+{"id":"HU"},
+{"id":"IE"},
+{"id":"IN"},
+{"id":"IT"},
+{"id":"JP"},
+{"id":"LT"},
+{"id":"LU"},
+{"id":"LV"},
+{"id":"MT"},
+{"id":"PL"},
+{"id":"PT"},
+{"id":"RO"},
+{"id":"RU"},
+{"id":"SE"},
+{"id":"SI"},
+{"id":"SK"},
+{"id":"US"},
+{"id":"ZA"},
 
+
+    ]
   },
   "areasSettings": {
     "selectedColor": "grey",
-    "selectable": true
+    "selectable": true,
+    "unlistedAreasAlpha": 0
   },
   /**
    * Add click event to track country selection/unselection

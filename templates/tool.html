@@ -105,12 +105,26 @@
 						<div class="mu-about-area" style="padding-top:50px;">
 
 							<div class="mu-about-header">
-								<h2 class="mu-heading-title">{{_('Year, size and powertrain selection')}}</h2>
-								<p>{{_('Select the powertrain types and size classes you wish to conduct an assessment of. You may do so by moving elements from one frame to the other.')}}</p>
+								<h2 class="mu-heading-title">{{_('Selection of vehicle type')}}</h2>
+
+								<div id="vehicle_type">
+									<input type="radio" name="site" id="motorbike" value="motorbike" /><label id ="label_motorbike" for="motorbike"><img src="static/images/icons/motorbike_icon_grey.png" height="70px;" style="margin:15px;"/></label>
+									<input type="radio" name="site" id="car" value="car" /><label id ="label_car" for="car"><img src="static/images/icons/car_icon_grey.png" height="70px;" style="margin:15px;"/></label>
+									<input type="radio" name="site" id="truck" value="truck" /><label id ="label_truck" for="train"><img src="static/images/icons/truck_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
+									<input type="radio" name="site" id="train" value="train" /><label id ="label_train" for="train"><img src="static/images/icons/tram_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
+									<input type="radio" name="site" id="plane" value="plane" /><label id ="label_plane" for="plane"><img src="static/images/icons/plane_icon_grey.png"  height="70px;" style="margin:15px;"/></label>
+								</div>
+
+
 							</div>
 
 							<!-- Start About Us Content -->
-							<div class="mu-about-content">
+							<div class="mu-about-content" style="display:none" id="powertrain_section">
+
+								<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
+								<p style="text-align:center;">{{_('Select the powertrain types and size classes you wish to conduct an assessment of. You may do so by moving elements from one frame to the other.')}}</p>
+
+
 								<div class="row">
 
 									<div class="col-md-8" style="text-align:center;vertical-align:middle;display:table">
@@ -231,9 +245,9 @@
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">MANUFACTURE</span></h2></div>
-						<div class="mu-about-area" style="padding-top:50px;">
+						<div class="mu-about-area" style="padding-top:50px;" >
 							<!-- Start About Us Content -->
-							<div class="mu-about-content">
+							<div class="mu-about-content" style="display:none;" id="manufacture_section">
 								<div class="container" style="width:100%;">
 									<div class="row" id="powertrain_row" style="width:100%;">
 									</div>
@@ -256,7 +270,8 @@
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">USE</span></h2></div>
-						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;">
+						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;display:none;"
+							id="use_section">
 							<div style="display:table;width:100%;">
 							<div class="col-md-4" style="border-right:3px solid white;display:table-cell;">
 								<div class="row">
@@ -301,6 +316,12 @@
 								<p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
 
 								<div id="chartdiv"></div>
+
+							<button class="online-button"
+							  style="border:1px solid white;" data-toggle="modal" data-target="#modal_electricity_mix">Specify electricity mix</button>
+
+
+
 							</div>
 							<div class="col-md-2" style="border-right:3px solid white;display:table-cell;">
 
@@ -374,7 +395,7 @@
 						<span style="color:white;">CALCULATION SETTINGS</span></h2></div>
 						<div class="mu-about-area" style="padding-top:50px;">
 							<!-- Start About Us Content -->
-							<div class="mu-about-content">
+							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="calculation_section">
 								<div class="container" style="width:100%;">
 									<div class="row" style="width:100%;color:white;">
 										<table style="width:100%;text-align:center;">
@@ -489,6 +510,41 @@
 
 	</main>
 	<!-- End main content -->
+
+	<!-- The Modal -->
+	<div class="modal" tabindex="-1" role="dialog" id="modal_electricity_mix">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="modal_electricity_mix_title"></h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			  <p>The projection models used by carculator suggest the following gross electricity mixes.
+				  You may either accept them as they are, or modify them. Click the "Save changes" button to consider any changes.</p>
+			  <table class="table">
+				  <thead>
+					<tr>
+					  <th scope="col"></th>
+					  <th scope="col">2017</th>
+					  <th scope="col">2040</th>
+					</tr>
+				  </thead>
+				  <tbody>
+
+				  </tbody>
+				</table>
+
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-primary">Save changes</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
 
 
 	<!-- Start footer -->

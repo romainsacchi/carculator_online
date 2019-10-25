@@ -84,3 +84,28 @@
 	background:#8ad;
 	color:#fff;
 }
+
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.selected {
+    background-color: #efefef;
+}
+
+#vehicle_type label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+#vehicle_type label:hover {
+    background-color: #efefef;
+}
+
+#vehicle_type label img {
+    padding: 3px;
+
+}
+
