@@ -77,7 +77,7 @@
 		    </div>
 
 			  <button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" disabled>Calculate</button>
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onClick="get_results()">Calculate</button>
 				<button class="online-button"
 						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Reset parameters</button>
 				 <button class="online-button"
@@ -135,7 +135,7 @@
 											<div class="help-tip">
 												<p>{{_('Carculator can model the life cycle impacts of passenger cars at different time horizons, considering expected improvements in vehicles design, energy chains, etc.')}}</p>
 											</div>
-											<div style="width:50%;margin: 0 auto;">
+											<div style=";margin: 0 auto;">
 													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
 														margin:0px;display:inline;">
 														Choice
@@ -157,7 +157,7 @@
 											<div class="help-tip">
 												<p>{{_('Different powertrains, or propulsion technologies, can be considered.')}}</p>
 											</div>
-											<div style="width:50%;margin: 0 auto;">
+											<div style="margin: 0 auto;">
 													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
 														margin:0px;display:inline;">
 														Choice
@@ -180,7 +180,7 @@
 												<p>{{_('Different size categories are available, for any given powertrain type. For reference, a VW Golf corresponds to the Lower medium size class.')}}
 											</p>
 											</div>
-												<div style="width:50%;margin: 0 auto;">
+												<div style="margin: 0 auto;">
 													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
 														margin:0px;display:inline;">
 														Choice
@@ -192,7 +192,7 @@
 														<li data-draggable="item">{{ s }}</li>
 														{% endfor %}
 													</ol>
-													<ol data-draggable="target">
+													<ol data-draggable="target" id="size_list">
 													</ol>
 												</div>
 										</div>
@@ -276,7 +276,7 @@
 						<span style="color:white;">USE</span></h2></div>
 						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;">
 							<div class="mu-testimonials-content" style="display:none;" id="use_section">
-								<table class="table">
+								<table class="table" id="table_use">
 							  <thead>
 								<tr>
 									<th scope="col"><h2>Driving cycle</h2>
@@ -299,6 +299,12 @@
 								  </th>
 									<th scope="col">
 										<h2>Electricity mix</h2>
+										<div class="help-tip">
+									<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
+										the operate teh car during its Use phase. This may concern, for example, the electricity to charge teh battery fo an electric vehicle,
+										but also teh electricity needed to operate the electrolysis process to produce hydrogen
+										for a fuel cell-powered vehicle.')}}</p>
+								  </div>
 									</th>
 
 								  <th scope="col"><h2>Passengers</h2>
@@ -320,7 +326,7 @@
 								<tr>
 								  <td>
 									  <div class="row">
-										<p  style="color:white;">Select a driving cycle</p>
+										<p  style="color:white;">Select a driving cycle</p><span id="driving_cycle_selected"  style="color:white;margin:10px;">WLTC</span>
 
 									  </div>
 										<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
@@ -335,95 +341,94 @@
 										</div>
 								  </td>
 								  <td>
-									  <p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected"></span></p>
-									  <div id="chartdiv" style="width:100%;"></div>
+									  <p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected""></span></p>
+									  <div id="chartdiv" style="width:700px;"></div>
 								  </td>
 
-								<td>
+								<td width="400px">
 								  <p style="color:white;">Our projection models suggest the following electricity mixes in 2017 and 2040 for the selected country.
 									You may modify them.</p>
 
-									<table class="table" style="background:none;color:white;text-align:left;width:600px;margin:0 auto;">
+									<table class="table" style="background:none;color:white;text-align:left;margin:0 auto;"
+										id="electricity_mix_table">
 										<thead>
 											<tr>
-												<th>in %</th>
+												<td>in %</td>
 												<th>2017</th>
-
 												<th>2040</th>
-
 											</tr>
 										</thead>
 									  <tbody>
 										<tr>
 
 										  <td>Hydro</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="hydro_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="hydro_2040"></td>
 
 										</tr>
 										<tr>
 
 										  <td>Nuclear</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="nuclear_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="nuclear_2040"></td>
 
 										</tr><tr>
 
 										  <td>Gas</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="gas_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="gas_2040"></td>
 
 										</tr><tr>
 
 										  <td>Solar</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="solar_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="solar_2040"></td>
 
 										</tr><tr>
 
 										  <td>Wind</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="wind_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="wind_2040"></td>
 
 										</tr><tr>
 
 										  <td>Biomass</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="biomass_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="biomass_2040"></td>
 
 										</tr><tr>
 
 										  <td>Coal</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="coal_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="coal_2040"></td>
 
 										</tr><tr>
 
 										  <td>Oil</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="oil_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="oil_2040"></td>
 
 										</tr><tr>
 
 										  <td>Geothermal</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="geo_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="geo_2040"></td>
 
 										</tr><tr>
 
 										  <td>Waste</td>
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="waste_2017"></td>
 
-											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:grey"></td>
+											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="waste_2040"></td>
 
 										</tr>
 									  </tbody>
@@ -543,7 +548,7 @@
 															Driven distance
 														  </label>
 															<div class="form-group">
-															  <input placeholder="in km" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto">
+															  <input placeholder="in km" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto" disabled>
 															</div>
 														</div>
 														<div class="form-check">
@@ -601,42 +606,6 @@
 	</main>
 	<!-- End main content -->
 
-	<!-- The Modal -->
-	<div class="modal" tabindex="-1" role="dialog" id="modal_electricity_mix">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title" id="modal_electricity_mix_title"></h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body">
-			  <p>The projection models used by carculator suggest the following gross electricity mixes.
-				  You may either accept them as they are, or modify them. Click the "Save changes" button to consider any changes.</p>
-			  <table class="table">
-				  <thead>
-					<tr>
-					  <th scope="col"></th>
-					  <th scope="col">2017</th>
-					  <th scope="col">2040</th>
-					</tr>
-				  </thead>
-				  <tbody>
-
-				  </tbody>
-				</table>
-
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-primary">Save changes</button>
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
-
-
 	<!-- Start footer -->
 	<footer id="mu-footer" role="contentinfo">
 			<div class="container" style="width:100%;">
@@ -659,6 +628,8 @@
 			</div>
 
 	</footer>
+
+
 	<!-- End footer -->
 
 	<!-- D3.js -->
@@ -680,27 +651,16 @@
 		  crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Bootstrap -->
-    <script src="static/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.js"></script>
 
-
-
-    <!-- Ajax contact form  -->
-    <script type="text/javascript" src="static/js/app.js"></script>
-	<!-- Clipboard button -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-	<!-- Youtube player -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.2.10/jquery.mb.YTPlayer.min.js"></script>
-	<!-- Anime.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 	<!-- Bootstrap notify.js -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
 
-    <!-- Custom js -->
-	<script type="text/javascript" src="static/js/custom.js"></script>
-
   	<!-- Tool page js -->
+	<script type="text/javascript" src="static/js/custom.js"></script>
 	<script type="text/javascript" src="static/js/tool_page.js"></script>
 
 

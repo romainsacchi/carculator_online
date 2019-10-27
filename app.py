@@ -1,14 +1,13 @@
 """Flask App Project."""
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response, json
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
-import os
 import csv
-import pandas as pd
+
 
 
 # Instantiate Flask app
@@ -51,7 +50,7 @@ def index():
 def tool_page():
     """Return tool page"""
     cip = CarInputParameters()
-    powertrains = [pt for pt in cip.powertrains if pt not in ('PHEV-c', 'PHEV-e')]
+    powertrains = ["Petrol", 'Diesel', 'Natural gas', 'Electric', 'Fuel cell', 'Hybrid-petrol', '(Plugin) Hybrid-petrol']
     sizes = cip.sizes
     years = cip.years
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
@@ -96,12 +95,55 @@ def get_electricity_mix(ISO):
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=[2017, 2040])
     return jsonify(response.to_dict())
 
+@app.route('/get_results/', methods = ['POST'])
+def get_results():
+    res = request.get_json()
+
+    d={}
+    for k in res:
+        d[k['key']] = k['value']
+
+    print(d)
+    cip = CarInputParameters()
+    cip.static()
+    dcts, array = fill_xarray_from_input_parameters(cip)
+    cm = CarModel(array, cycle= d['driving_cycle'])
+    cm.set_all()
+    ic = InventoryCalculation(cm.array)
+    results = ic.calculate_impacts()
+    year = results.coords['year'].values.tolist()
+    powertrain = results.coords['powertrain'].values.tolist()
+    impact = results.coords['impact'].values.tolist()
+    size = results.coords['size'].values.tolist()
+    impact_category = results.coords['impact_category'].values.tolist()
+
+    list_res=[]
+    list_res.append(['impact category', 'powertrain', 'year', 'category', 'value'])
+    for imp in impact_category:
+        for pt in powertrain:
+            for s in size:
+                for y in year:
+                    for cat in impact:
+                        list_res.append([imp, pt, y, cat,
+                            results.loc[dict(year=y, powertrain=pt, impact=cat, impact_category=imp, value=0)].values.tolist()[0]])
+
+    global response
+    response = json.dumps(list_res)
+
+    res = make_response(jsonify({"message": "OK"}), 200)
+    return res
+
+@app.route('/result')
+def display_result():
+    return render_template('result.html', data = response)
+
+
+
 @babel.localeselector
 def get_locale():
     """
     Retrieve the favorite language of the browser and display text in the corresponding language.
     :return:
     """
-    print(request.accept_languages.best_match(app.config['LANGUAGES']))
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
