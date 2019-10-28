@@ -1830,7 +1830,8 @@ function get_results(){
     fetch('/get_results/', opts).then(function (response) {
       return response.json();
     }).then(function () {
-        window.open('/result', '_blank');
+        return;
+        //window.open('/result', '_blank');
     });
 
 
