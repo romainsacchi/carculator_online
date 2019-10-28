@@ -3,6 +3,8 @@
 from flask import Flask, render_template, request, jsonify, make_response, json
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
+from flask.ext.rqify import init_rqify
+from flask.ext.rq import job
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
@@ -12,6 +14,8 @@ import csv
 
 # Instantiate Flask app
 app = Flask(__name__)
+# Redis instantiation
+init_rqify(app)
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
 
@@ -95,19 +99,12 @@ def get_electricity_mix(ISO):
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=[2017, 2040])
     return jsonify(response.to_dict())
 
-@app.route('/get_results/', methods = ['POST'])
-def get_results():
-    res = request.get_json()
-
-    d={}
-    for k in res:
-        d[k['key']] = k['value']
-
-    print(d)
+@job
+def process_results(d):
     cip = CarInputParameters()
     cip.static()
     dcts, array = fill_xarray_from_input_parameters(cip)
-    cm = CarModel(array, cycle= d['driving_cycle'])
+    cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts()
@@ -118,7 +115,7 @@ def get_results():
     size = results.coords['size'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
 
-    list_res=[]
+    list_res = []
     list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
     for imp in range(0, len(impact_category)):
         for s in range(0, len(size)):
@@ -130,6 +127,17 @@ def get_results():
 
     global response
     response = json.dumps(list_res)
+
+
+@app.route('/get_results/', methods = ['POST'])
+def get_results():
+    res = request.get_json()
+
+    d={}
+    for k in res:
+        d[k['key']] = k['value']
+
+    process_results(d)
 
     res = make_response(jsonify({"message": "OK"}), 200)
     return res
