@@ -99,7 +99,6 @@ def get_electricity_mix(ISO):
     return jsonify(response.to_dict())
 
 def process_results(d):
-
     dcts, array = fill_xarray_from_input_parameters(cip)
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
@@ -133,8 +132,8 @@ def process_results(d):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
-    global response
-    response = json.dumps(list_res)
+    global results_to_render
+    results_to_render = json.dumps(list_res)
 
 
 @app.route('/get_results/', methods = ['POST'])
@@ -152,7 +151,7 @@ def get_results():
 
 @app.route('/result')
 def display_result():
-    return render_template('result.html', data = response)
+    return render_template('result.html', data = results_to_render)
 
 
 
