@@ -1833,21 +1833,18 @@ function get_results(){
         var job_id = response['job id'];
         // Check task status every 5 seconds
         const interval = setInterval(function() {
-            console.log('interval started')
+
 
             fetch('/check_status/'+job_id).then(function (status) {
                 return status.json();
                 }).then(function (status) {
-
                     if (status['job status'] == 'finished'){
                         var redirectWindow = window.open('/display_result/'+job_id, '_blank');
                         redirectWindow.location;
                         clearInterval(interval);
                         return;
                     }
-
                     })
-
          }, 5000);
 
 
