@@ -168,7 +168,7 @@ def display_result(job_key):
     job = Job.fetch(job_key, connection=conn)
     print(job)
     if job.is_finished:
-        return render_template('result.html', data = results_to_render)
+        return render_template('result.html', data = job.result)
     else:
         return "Nay!", 202
 
