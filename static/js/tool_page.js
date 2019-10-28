@@ -1829,9 +1829,10 @@ function get_results(){
 
     fetch('/get_results/', opts).then(function (response) {
       return response.json();
-    }).then(function () {
-        return;
-        //window.open('/result', '_blank');
+    }).then(function (body) {
+        var id = body[0];
+
+        window.open('/result/'+id, '_blank');
     });
 
 

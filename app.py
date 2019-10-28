@@ -151,20 +151,16 @@ def get_results():
     for k in res:
         d[k['key']] = k['value']
 
-    job = q.enqueue_call(
+    job =  q.enqueue_call(
         func=process_results, args=(d,), result_ttl=5000
     )
-    print(job.get_id())
 
-
-
-    res = make_response(jsonify({"message": "OK"}), 200)
+    res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
 @app.route('/result/<job_key>', methods=['GET'])
 def display_result(job_key):
     job = Job.fetch(job_key, connection=conn)
-    print(job)
     if job.is_finished:
         return render_template('result.html', data = job.result)
     else:
