@@ -7,12 +7,19 @@ import logging
 from logging.handlers import SMTPHandler
 from carculator import *
 import csv
+from rq import Queue
+from rq.job import Job
+from worker import conn
 
 # Instantiate Flask app
 app = Flask(__name__)
 
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
+
+db = SQLAlchemy(app)
+
+q = Queue(connection=conn)
 
 
 # Setup logger to log errors by email
@@ -102,6 +109,16 @@ def get_electricity_mix(ISO):
     return jsonify(response.to_dict())
 
 def process_results(d):
+    errors = []
+
+    try:
+        r = requests.get(url)
+    except:
+        errors.append(
+            "Unable to get URL. Please make sure it's valid and try again."
+        )
+        return {"error": errors}
+
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
@@ -137,6 +154,18 @@ def process_results(d):
     global results_to_render
     results_to_render = json.dumps(list_res)
 
+    # save the results
+    try:
+        result = Result(
+            result_all=results_to_render,
+        )
+        db.session.add(result)
+        db.session.commit()
+        return result.id
+    except:
+        errors.append("Unable to add item to database.")
+        return {"error": errors}
+
 
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
@@ -146,16 +175,25 @@ def get_results():
     for k in res:
         d[k['key']] = k['value']
 
-    process_results(d)
+    job = q.enqueue_call(
+        func=process_results, args=(d,), result_ttl=5000
+    )
+    print(job.get_id())
+
+
 
     res = make_response(jsonify({"message": "OK"}), 200)
     return res
 
-@app.route('/result')
-def display_result():
-    return render_template('result.html', data = results_to_render)
+@app.route('/result/<job_key>', methods=['GET'])
+def display_result(job_key):
+    job = Job.fetch(job_key, connection=conn)
 
-
+    if job.is_finished:
+        result = Result.query.filter_by(id=job.result).first()
+        return render_template('result.html', data = result)
+    else:
+        return "Nay!", 202
 
 @babel.localeselector
 def get_locale():
