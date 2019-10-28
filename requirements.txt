@@ -8,7 +8,7 @@ bw2calc==1.7.5
 bw2data==3.6
 bw2io==0.7.10
 bw2parameters==0.6.6
--e git+https://github.com/romainsacchi/carculator.git
+-e git+https://github.com/romainsacchi/carculator#egg=carculator
 certifi==2019.9.11
 chardet==3.0.4
 Click==7.0
