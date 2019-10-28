@@ -108,16 +108,6 @@ def get_electricity_mix(ISO):
     return jsonify(response.to_dict())
 
 def process_results(d):
-    errors = []
-
-    try:
-        r = requests.get(url)
-    except:
-        errors.append(
-            "Unable to get URL. Please make sure it's valid and try again."
-        )
-        return {"error": errors}
-
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
