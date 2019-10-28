@@ -168,6 +168,7 @@ def display_result(job_key):
     
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
+    job = Job.fetch(job_key, connection=conn)
     response = jsonify({"job status": job.get_status()})
     print(response)
     return make_response(response, 200)
