@@ -168,7 +168,9 @@ def display_result(job_key):
     
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
-    return make_response(jsonify({"job status": job.get_status()}), 200)
+    response = jsonify({"job status": job.get_status()})
+    print(response)
+    return make_response(response, 200)
 
 @babel.localeselector
 def get_locale():

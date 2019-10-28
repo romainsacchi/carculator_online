@@ -1831,7 +1831,7 @@ function get_results(){
       return response.json();
     }).then(function (response) {
         var job_id = response['job id'];
-
+        // Check task status every 5 seconds
         const interval = setInterval(function() {
             console.log('interval started')
 
@@ -1845,7 +1845,7 @@ function get_results(){
 
 
 
-        // Check task status every 5 seconds
+
 
     });
 
