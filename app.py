@@ -3,21 +3,17 @@
 from flask import Flask, render_template, request, jsonify, make_response, json
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
-from flask.ext.rqify import init_rqify
-from flask.ext.rq import job
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
 import csv
 
-
-
 # Instantiate Flask app
 app = Flask(__name__)
-# Redis instantiation
-init_rqify(app)
+
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
+
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -99,7 +95,6 @@ def get_electricity_mix(ISO):
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=[2017, 2040])
     return jsonify(response.to_dict())
 
-@job
 def process_results(d):
     cip = CarInputParameters()
     cip.static()
@@ -118,8 +113,8 @@ def process_results(d):
     list_res = []
     list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
     for imp in range(0, len(impact_category)):
-        for s in range(0, len(size)):
-            for pt in range(0, len(powertrain)):
+        for s in range(0, 1):
+            for pt in range(0, 3):
                 for y in range(0, len(year)):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
