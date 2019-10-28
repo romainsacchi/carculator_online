@@ -51,8 +51,6 @@ cip = CarInputParameters()
 cip.static()
 dcts, array = fill_xarray_from_input_parameters(cip)
 
-results_to_render = ''
-
 @app.route('/')
 def index():
     """Return homepage."""
@@ -140,8 +138,8 @@ def process_results(d):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
-    global results_to_render
-    results_to_render = json.dumps(list_res)
+
+    return json.dumps(list_res)
 
 
 
