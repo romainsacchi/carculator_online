@@ -44,6 +44,8 @@ electricity_mix = BackgroundSystemModel().electricity_mix
 cip = CarInputParameters()
 cip.static()
 
+results_to_render = ''
+
 @app.route('/')
 def index():
     """Return homepage."""
