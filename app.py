@@ -105,7 +105,7 @@ def process_results(d):
     cm.set_all()
     print('set_all')
     ic = InventoryCalculation(cm.array)
-    results = ic.calculate_impacts(FU={'powertrain':['ICEV-d', 'BEV'], 'year':[2017], 'size':['Large']})
+    results = ic.calculate_impacts(FU={'powertrain':['ICEV-d', 'BEV', 'ICEV-g', 'ICEV-p', 'FCEV'], 'year':[2017], 'size':['Large']})
     print('results')
     data = results.values
     year = results.coords['year'].values.tolist()
