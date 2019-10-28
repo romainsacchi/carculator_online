@@ -43,6 +43,7 @@ electricity_mix = BackgroundSystemModel().electricity_mix
 
 cip = CarInputParameters()
 cip.static()
+dcts, array = fill_xarray_from_input_parameters(cip)
 
 results_to_render = ''
 
@@ -101,7 +102,6 @@ def get_electricity_mix(ISO):
     return jsonify(response.to_dict())
 
 def process_results(d):
-    dcts, array = fill_xarray_from_input_parameters(cip)
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
