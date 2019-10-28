@@ -111,6 +111,7 @@ def get_results():
     cm.set_all()
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts()
+    data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = results.coords['powertrain'].values.tolist()
     impact = results.coords['impact'].values.tolist()
@@ -118,14 +119,14 @@ def get_results():
     impact_category = results.coords['impact_category'].values.tolist()
 
     list_res=[]
-    list_res.append(['impact category', 'powertrain', 'year', 'category', 'value'])
-    for imp in impact_category:
-        for pt in powertrain:
-            for s in size:
-                for y in year:
-                    for cat in impact:
-                        list_res.append([imp, pt, y, cat,
-                            results.loc[dict(year=y, powertrain=pt, impact=cat, impact_category=imp, value=0)].values.tolist()[0]])
+    list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
+    for imp in range(0, len(impact_category)):
+        for s in range(0, len(size)):
+            for pt in range(0, len(powertrain)):
+                for y in range(0, len(year)):
+                    for cat in range(0, len(impact)):
+                        list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
+                                         data[imp, s, pt, y, cat, 0]])
 
     global response
     response = json.dumps(list_res)

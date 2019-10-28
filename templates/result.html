@@ -73,16 +73,11 @@
 
 		      <!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="static/images/carculator logo.png" style="height:30px;"></a>
-
-
 		    </div>
-
-			  <button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onClick="get_results()">Calculate</button>
 				<button class="online-button"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Reset parameters</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share configuration</button>
 				 <button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share configuration</button>
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share results</button>
 
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -165,7 +160,7 @@
     $("#output").pivotUI(
       data, {
         rows: ["impact category", "category"],
-        cols: ["year", "powertrain"],
+        cols: ["year", "powertrain", 'size'],
         vals: ["value"],
         inclusions: {'impact category':["climate change"]},
         "colOrder": "value_a_to_z",
