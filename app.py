@@ -97,23 +97,31 @@ def get_electricity_mix(ISO):
 
 def process_results(d):
     cip = CarInputParameters()
-    print('cip')
     cip.static()
     dcts, array = fill_xarray_from_input_parameters(cip)
-    print('array')
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
-    print('set_all')
     ic = InventoryCalculation(cm.array)
-    results = ic.calculate_impacts(FU={'powertrain':['ICEV-d', 'BEV', 'ICEV-g', 'ICEV-p', 'FCEV'], 'year':[2017], 'size':['Large']})
-    print('results')
+
+    dict_pt = {
+        'Diesel' : 'ICEV-p',
+        'Petrol' : 'ICEV-d',
+        'Natural gas': 'ICEV-g',
+        'Electric': 'BEV',
+        'Fuel cell': 'FCEV',
+        'Hybrid-petrol': 'HEV-p',
+        '(Plugin) Hybrid-petrol': 'PHEV'
+    }
+
+    results = ic.calculate_impacts(FU={'powertrain':[dict_pt[pt] for pt in d['type']],
+                                       'year':d['year'],
+                                       'size':d['size']})
     data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = results.coords['powertrain'].values.tolist()
     impact = results.coords['impact'].values.tolist()
     size = results.coords['size'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
-    print('before loop')
     list_res = []
     list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
     for imp in range(0, len(impact_category)):
@@ -123,8 +131,6 @@ def process_results(d):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
-    print('after loop')
-
     global response
     response = json.dumps(list_res)
 
