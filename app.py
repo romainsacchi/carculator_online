@@ -97,12 +97,16 @@ def get_electricity_mix(ISO):
 
 def process_results(d):
     cip = CarInputParameters()
+    print('cip')
     cip.static()
     dcts, array = fill_xarray_from_input_parameters(cip)
+    print('array')
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
+    print('set_all')
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts()
+    print('results')
     data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = results.coords['powertrain'].values.tolist()
