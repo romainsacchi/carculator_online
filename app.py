@@ -165,6 +165,10 @@ def display_result(job_key):
         return render_template('result.html', data = job.result)
     else:
         return "Nay!", 202
+    
+@app.route('/check_status/<job_key>')
+def get_job_status(job_key):
+    return make_response(jsonify({"job status": job.get_status()}), 200)
 
 @babel.localeselector
 def get_locale():

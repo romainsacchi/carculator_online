@@ -1830,10 +1830,22 @@ function get_results(){
     fetch('/get_results/', opts).then(function (response) {
       return response.json();
     }).then(function (response) {
-        console.log(response);
-        var id = response[0];
+        var job_id = response['job id'];
 
-        window.open('/result/'+id, '_blank');
+        const interval = setInterval(function() {
+
+            fetch('/check_status/'+job_id).then(function (status) {
+                return status.json();
+                }).then(function (status) {
+                    console.log(status);
+                    })
+
+         }, 5000);
+
+        clearInterval(interval); // thanks @Luca D'Amico
+
+        // Check task status every 5 seconds
+
     });
 
 
