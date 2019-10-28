@@ -1,3 +1,5 @@
+(function( $ ){
+
 	//MENU SCROLLING WITH ACTIVE ITEM SELECTED
 
 		// Cache selectors
@@ -46,7 +48,7 @@
 		   }
 		})
 
-
+})( jQuery );
 
 
 (function()
