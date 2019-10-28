@@ -11,6 +11,7 @@ from rq import Queue
 from rq.job import Job
 from worker import conn
 
+
 # Instantiate Flask app
 app = Flask(__name__)
 
