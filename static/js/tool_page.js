@@ -1,5 +1,21 @@
 (function( $ ){
 
+/* ----------------------------------------------------------- */
+	/*  2. FIXED MENU
+	/* ----------------------------------------------------------- */
+
+
+	jQuery(window).bind('scroll', function () {
+    if ($(window).scrollTop() > 150) {
+        $('#mu-header').addClass('mu-fixed-nav');
+
+	    } else {
+	        $('#mu-header').removeClass('mu-fixed-nav');
+	    }
+	});
+
+
+
 	//MENU SCROLLING WITH ACTIVE ITEM SELECTED
 
 		// Cache selectors
