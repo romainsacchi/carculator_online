@@ -109,7 +109,7 @@ def process_results(d):
     impact = results.coords['impact'].values.tolist()
     size = results.coords['size'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
-
+    print('before loop')
     list_res = []
     list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
     for imp in range(0, len(impact_category)):
@@ -119,6 +119,7 @@ def process_results(d):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
+    print('after loop')
 
     global response
     response = json.dumps(list_res)
