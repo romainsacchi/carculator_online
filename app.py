@@ -17,8 +17,6 @@ app = Flask(__name__)
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
 
-db = SQLAlchemy(app)
-
 q = Queue(connection=conn)
 
 
@@ -154,17 +152,6 @@ def process_results(d):
     global results_to_render
     results_to_render = json.dumps(list_res)
 
-    # save the results
-    try:
-        result = Result(
-            result_all=results_to_render,
-        )
-        db.session.add(result)
-        db.session.commit()
-        return result.id
-    except:
-        errors.append("Unable to add item to database.")
-        return {"error": errors}
 
 
 @app.route('/get_results/', methods = ['POST'])
@@ -190,8 +177,7 @@ def display_result(job_key):
     job = Job.fetch(job_key, connection=conn)
 
     if job.is_finished:
-        result = Result.query.filter_by(id=job.result).first()
-        return render_template('result.html', data = result)
+        return render_template('result.html', data = results_to_render)
     else:
         return "Nay!", 202
 
