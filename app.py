@@ -41,6 +41,9 @@ car_to_class_map = load_map_file()
 
 electricity_mix = BackgroundSystemModel().electricity_mix
 
+cip = CarInputParameters()
+cip.static()
+
 @app.route('/')
 def index():
     """Return homepage."""
@@ -49,7 +52,7 @@ def index():
 @app.route('/tool')
 def tool_page():
     """Return tool page"""
-    cip = CarInputParameters()
+
     powertrains = ["Petrol", 'Diesel', 'Natural gas', 'Electric', 'Fuel cell', 'Hybrid-petrol', '(Plugin) Hybrid-petrol']
     sizes = cip.sizes
     years = cip.years
@@ -96,8 +99,7 @@ def get_electricity_mix(ISO):
     return jsonify(response.to_dict())
 
 def process_results(d):
-    cip = CarInputParameters()
-    cip.static()
+
     dcts, array = fill_xarray_from_input_parameters(cip)
     cm = CarModel(array, cycle=d['driving_cycle'])
     cm.set_all()
