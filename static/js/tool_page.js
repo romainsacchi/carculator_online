@@ -1830,7 +1830,7 @@ function get_results(){
     fetch('/get_results/', opts).then(function (response) {
       return response.json();
     }).then(function (response) {
-        console.log(reponse);
+        console.log(response);
         var id = response[0];
 
         window.open('/result/'+id, '_blank');
