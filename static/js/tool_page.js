@@ -1838,7 +1838,14 @@ function get_results(){
             fetch('/check_status/'+job_id).then(function (status) {
                 return status.json();
                 }).then(function (status) {
-                    console.log(status);
+
+                    if (status['job status'] == 'finished'){
+                        var redirectWindow = window.open('/display_result/'+job_id, '_blank');
+                        redirectWindow.location;
+                        clearInterval(interval);
+                        return;
+                    }
+
                     })
 
          }, 5000);

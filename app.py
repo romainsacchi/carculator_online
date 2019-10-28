@@ -158,19 +158,17 @@ def get_results():
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
-@app.route('/result/<job_key>', methods=['GET'])
+@app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
     job = Job.fetch(job_key, connection=conn)
     if job.is_finished:
         return render_template('result.html', data = job.result)
-    else:
-        return "Nay!", 202
+
     
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
     job = Job.fetch(job_key, connection=conn)
     response = jsonify({"job status": job.get_status()})
-    print(response)
     return make_response(response, 200)
 
 @babel.localeselector
