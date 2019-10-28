@@ -1818,7 +1818,7 @@ function get_results(){
     };
     $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "Calculation in progress. A new tab will open in a few seconds."},
+        message: "Your job has been queued. Results will be displayed in a new tab whenever ready."},
         {
             animate: {
                 enter: 'animated bounceInDown',
@@ -1833,6 +1833,7 @@ function get_results(){
         var job_id = response['job id'];
 
         const interval = setInterval(function() {
+            console.log('interval started')
 
             fetch('/check_status/'+job_id).then(function (status) {
                 return status.json();
@@ -1842,7 +1843,7 @@ function get_results(){
 
          }, 5000);
 
-        clearInterval(interval); // thanks @Luca D'Amico
+
 
         // Check task status every 5 seconds
 
