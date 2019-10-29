@@ -1534,7 +1534,7 @@ var map = AmCharts.makeChart("chartdiv", {
       e.chart.returnInitialColor(area);
 
       // Update the list
-      document.getElementById("country-selected").innerHTML = JSON.stringify(getSelectedCountries());
+      document.getElementById("country-selected").innerHTML = getSelectedCountries();
     }
   }]
 });
@@ -1863,9 +1863,6 @@ function get_results(){
 
     // Retrieve country selected
     var country = $("#country-selected").text()
-    country = country.replace('[', '')
-    country = country.replace(']', '')
-    country = country.replace('"', '')
 
     data.push({key: 'background_country', value: country})
 
