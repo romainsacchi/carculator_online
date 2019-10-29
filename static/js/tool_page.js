@@ -1238,11 +1238,11 @@ function power_list_update(){
                 var start_val = [.9,1];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2040: '
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2040: '
+                    prefix: '2017: '
 
                 })]}else{
 
@@ -1891,7 +1891,7 @@ function get_results(){
     };
     $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "Your job has been queued. Results will be displayed in a new tab whenever ready."},
+        message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take a few seconds."},
         {
             animate: {
                 enter: 'animated bounceInDown',
@@ -1904,7 +1904,7 @@ function get_results(){
       return response.json();
     }).then(function (response) {
         var job_id = response['job id'];
-        // Check task status every 5 seconds
+        // Check task status every 3 seconds
         const interval = setInterval(function() {
 
 
@@ -1918,7 +1918,7 @@ function get_results(){
                         return;
                     }
                     })
-         }, 5000);
+         }, 3000);
 
 
 

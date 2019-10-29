@@ -231,7 +231,9 @@ def format_dictionary(raw_dict):
             key = raw_dict[i]['key']
             vals = raw_dict[i]['value']
             if isinstance(vals, list):
-                if key in ('fuel_cell_cost', 'Fuel_cell_hydrogen_cost', 'electric_battery_cost', 'Electric_energy_cost'):
+                if key in ('fuel_cell_cost', 'Fuel_cell_hydrogen_cost', 'electric_battery_cost', 'Electric_energy_cost',
+                           'Petrol_combustion_share', 'Diesel_combustion_share', 'Natural gas_combustion_share',
+                           'Hybrid-petrol_combustion_share', '(Plugin) Hybrid-petrol_combustion_share'):
                     v = {
                         (2017,'loc'): float(vals[1]),
                         (2040, 'loc'): float(vals[0])
