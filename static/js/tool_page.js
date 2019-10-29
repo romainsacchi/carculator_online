@@ -1865,6 +1865,7 @@ function get_results(){
     var country = $("#country-selected").text()
     country = country.replace('[', '')
     country = country.replace(']', '')
+    country = country.replace('"', '')
 
     data.push({key: 'background_country', value: country})
 
