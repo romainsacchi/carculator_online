@@ -242,7 +242,7 @@ def format_dictionary(raw_dict):
                         (2040, 'loc'): float(vals[1])
                     }
             else:
-                v = {(int(new_dict[('Functional unit',)]['year'][0],'loc')): float(vals.replace(' ', ''))}
+                v = {(int(new_dict[('Functional unit',)]['year'][0]),'loc'): float(vals.replace(' ', ''))}
             new_dict[k] = v
     return new_dict
 
