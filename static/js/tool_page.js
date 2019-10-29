@@ -1866,7 +1866,7 @@ function get_results(){
     country = country.replace('[', '')
     country = country.replace(']', '')
 
-    data.psuh({key: 'background_country', value: country})
+    data.push({key: 'background_country', value: country})
 
     // Retrieve electricity mix
     $.each($('#electricity_mix_table input'), function() {
