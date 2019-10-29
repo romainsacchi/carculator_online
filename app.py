@@ -246,7 +246,6 @@ def format_dictionary(raw_dict):
             new_dict[k] = v
     return new_dict
 
-
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
