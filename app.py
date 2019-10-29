@@ -156,8 +156,8 @@ def format_dictionary(raw_dict):
     new_dict[('Driving cycle',)] = [raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                     if raw_dict[k]['key'] == 'driving_cycle'][0]
 
-    new_dict[('Background',)] = [{raw_dict[k]['key']:raw_dict[k]['value']} for k in range(0, len(raw_dict))
-                                    if raw_dict[k]['key'].startswith('background')]
+    new_dict[('Background',)] = {raw_dict[k]['key']:raw_dict[k]['value'] for k in range(0, len(raw_dict))
+                                    if raw_dict[k]['key'].startswith('background')}
 
     map_dict = {
         'electric_cell_density':
