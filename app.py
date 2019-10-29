@@ -161,68 +161,68 @@ def format_dictionary(raw_dict):
 
     map_dict = {
         'electric_cell_density':
-            {('Energy Storage', 'BEV', 'battery cell energy density', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            {('Energy Storage', 'BEV', 'all', 'battery cell energy density', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'electric_battery_cost':
-            {('Costs', 'BEV', 'energy battery cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            {('Costs', 'BEV', 'all', 'energy battery cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Electric_energy_cost':
-            {('Costs', 'BEV', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            {('Costs', 'BEV', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'fuel_cell_cost':
-            {('Costs', 'FCEV', 'fuel cell cost per kW', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            {('Costs', 'FCEV', 'all', 'fuel cell cost per kW', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Fuel_cell_hydrogen_cost':
-            {('Costs', 'FCEV', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            {('Costs', 'FCEV', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Petrol_drivetrain_eff':
-            {('Powertrain', 'ICEV-p', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            {('Powertrain', 'ICEV-p', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Petrol_engine_eff': {
-            ('Powertrain', 'ICEV-p', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-p', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Petrol_combustion_share': {
-            ('Powertrain', 'ICEV-p', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-p', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Petrol_fuel_cost': {
-            ('Costs', 'ICEV-p', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Costs', 'ICEV-p', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Diesel_drivetrain_eff': {
-            ('Powertrain', 'ICEV-d', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-d', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Diesel_engine_eff': {
-            ('Powertrain', 'ICEV-d', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-d', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Diesel_combustion_share': {
-            ('Powertrain', 'ICEV-d', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-d', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Diesel_fuel_cost': {
-            ('Costs', 'ICEV-d', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Costs', 'ICEV-d', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Natural gas_drivetrain_eff': {
-            ('Powertrain', 'ICEV-g', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-g', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Natural gas_engine_eff': {
-            ('Powertrain', 'ICEV-g', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-g',  'all','engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Natural gas_combustion_share': {
-            ('Powertrain', 'ICEV-g', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'ICEV-g', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Natural gas_fuel_cost': {
-            ('Costs', 'ICEV-g', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Costs', 'ICEV-g', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Hybrid-petrol_drivetrain_eff': {
-            ('Powertrain', 'HEV-p', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'HEV-p', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Hybrid-petrol_engine_eff': {
-            ('Powertrain', 'HEV-p', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'HEV-p', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Hybrid-petrol_combustion_share': {
-            ('Powertrain', 'HEV-p', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'HEV-p', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         'Hybrid-petrol_fuel_cost': {
-            ('Costs', 'HEV-p', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Costs', 'HEV-p',  'all','energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         '(Plugin) Hybrid-petrol_drivetrain_eff': {
-            ('Powertrain', 'PHEV-e', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Powertrain', 'PHEV-c', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'PHEV-e',  'all','drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Powertrain', 'PHEV-c', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         '(Plugin) Hybrid-petrol_engine_eff': {
-            ('Powertrain', 'PHEV-e', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Powertrain', 'PHEV-c', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'PHEV-e', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Powertrain', 'PHEV-c',  'all','engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         '(Plugin) Hybrid-petrol_combustion_share': {
-            ('Powertrain', 'PHEV-e', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Powertrain', 'PHEV-c', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Powertrain', 'PHEV-e', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Powertrain', 'PHEV-c', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
         '(Plugin) Hybrid-petrol_fuel_cost': {
-            ('Costs', 'PHEV-e', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Costs', 'PHEV-c', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Costs', 'PHEV-e', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Costs', 'PHEV-c', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
 
         'mileage-slider': {
-            ('Driving', 'all', 'kilometers per year', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
             'lifetime-slider': {
-                ('Driving', 'all', 'lifetime kilometers', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+                ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
                 'cargo-slider': {
-                    ('Glider', 'all', 'cargo mass', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+                    ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
                     'passenger-slider': {
-                        ('Glider', 'all', 'average passengers', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+                        ('Glider', 'all', 'all', 'average passengers', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
                     }
 
     for i in range(0, len(raw_dict)):
