@@ -145,14 +145,14 @@ def format_dictionary(raw_dict):
 
     new_dict = {}
     new_dict[('Functional unit',)] = {'powertrain':
-                                          [d_pt[sub_key] for raw_dict[k]['value'] in range(0, len(raw_dict))
-                                            for sub_key in raw_dict[k]['value']
+                                          [raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                                    if raw_dict[k]['key'] == 'type'][0],
-
                                        'year':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                                if raw_dict[k]['key'] == 'year'][0],
                                        'size':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                                if raw_dict[k]['key'] == 'size'][0]}
+
+    new_dict[('Functional unit',)]['powertrain'] = [d_pt[pt] for pt in new_dict[('Functional unit',)]['powertrain']]
     new_dict[('Driving cycle',)] = [raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                     if raw_dict[k]['key'] == 'driving_cycle'][0]
 
