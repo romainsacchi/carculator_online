@@ -233,23 +233,25 @@ def format_dictionary(raw_dict):
             if isinstance(vals, list):
                 if key in ('fuel_cell_cost', 'Fuel_cell_hydrogen_cost', 'electric_battery_cost', 'Electric_energy_cost'):
                     v = {
-                        (2040,'loc'): float(vals[0]),
-                        (2017, 'loc'): float(vals[1])
+                        (2017,'loc'): float(vals[1]),
+                        (2040, 'loc'): float(vals[0])
                          }
                 else:
                     v = {
-                        (2017, 'loc'): float(vals[1]),
-                        (2040, 'loc'): float(vals[0])
+                        (2017, 'loc'): float(vals[0]),
+                        (2040, 'loc'): float(vals[1])
                     }
             else:
                 v = {(new_dict[('Functional unit',)]['year'][0],'loc'): float(vals.replace(' ', ''))}
             new_dict[k] = v
     return new_dict
 
+
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = format_dictionary(request.get_json())
+    print(d)
     job = q.enqueue_call(
         func=process_results, args=(d,), result_ttl=5000
     )
