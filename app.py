@@ -18,8 +18,8 @@ app = Flask(__name__)
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
 
+# Create a connection to the Redis server
 q = Queue(connection=conn)
-
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -43,10 +43,9 @@ def load_map_file():
         data = [tuple(line) for line in csv.reader(f, delimiter=';')]
     return data
 
+# Pre-load stuff
 car_to_class_map = load_map_file()
-
 electricity_mix = BackgroundSystemModel().electricity_mix
-
 cip = CarInputParameters()
 cip.static()
 dcts, array = fill_xarray_from_input_parameters(cip)
@@ -59,23 +58,23 @@ def index():
 @app.route('/tool')
 def tool_page():
     """Return tool page"""
-
     powertrains = ["Petrol", 'Diesel', 'Natural gas', 'Electric', 'Fuel cell', 'Hybrid-petrol', '(Plugin) Hybrid-petrol']
     sizes = cip.sizes
     years = cip.years
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
                       'CADC Motorway 130','CADC','NEDC']
-
     return render_template('tool.html', powertrains=powertrains, sizes=sizes, years=years, driving_cycles=driving_cycles)
 
 
 @app.route('/search_car_model/<search_item>')
 def search_car_model(search_item):
+    """ Return a list of cars if cars contain `search item`"""
     cars = [car for car in car_to_class_map if any(search_item.lower() in x.lower() for x in car)]
     return jsonify(cars[:5])
 
 @app.route('/get_driving_cycle/<driving_cycle>')
 def get_driving_cycle(driving_cycle):
+    """ Return a driving cycle"""
     dc = get_standard_driving_cycle(driving_cycle)
     return jsonify(dc.to_dict())
 
@@ -101,28 +100,18 @@ def send_email():
 
 @app.route('/get_electricity_mix/<ISO>')
 def get_electricity_mix(ISO):
-    # Return the electricity mix for the ISO country code and the year(s) given
+    """ Return the electricity mix for the ISO country code and the year(s) given """
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=[2017, 2040])
     return jsonify(response.to_dict())
 
 def process_results(d):
-    cm = CarModel(array, cycle=d['driving_cycle'])
+    """ Calculate LCIA and store results in an array of arrays """
+    modify_xarray_from_custom_parameters(d, array)
+    cm = CarModel(array, cycle=d[('Driving cycle', )])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
 
-    dict_pt = {
-        'Diesel' : 'ICEV-p',
-        'Petrol' : 'ICEV-d',
-        'Natural gas': 'ICEV-g',
-        'Electric': 'BEV',
-        'Fuel cell': 'FCEV',
-        'Hybrid-petrol': 'HEV-p',
-        '(Plugin) Hybrid-petrol': 'PHEV'
-    }
-
-    results = ic.calculate_impacts(FU={'powertrain':[dict_pt[pt] for pt in d['type']],
-                                       'year':d['year'],
-                                       'size':d['size']})
+    results = ic.calculate_impacts(d[('Functional unit',)])
     data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = results.coords['powertrain'].values.tolist()
@@ -141,25 +130,123 @@ def process_results(d):
 
     return json.dumps(list_res)
 
+def format_dictionary(raw_dict):
+    """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
+    new_dict = {}
+    new_dict[('Functional unit',)] = {'powertrain':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
+                                                   if raw_dict[k]['key'] == 'type'][0],
+                                       'year':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
+                                               if raw_dict[k]['key'] == 'year'][0],
+                                       'size':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
+                                               if raw_dict[k]['key'] == 'size'][0]}
+    new_dict[('Driving cycle',)] = [raw_dict[k]['value'] for k in range(0, len(raw_dict))
+                                    if raw_dict[k]['key'] == 'driving_cycle'][0]
+
+    new_dict[('Background',)] = [{raw_dict[k]['key']:raw_dict[k]['value']} for k in range(0, len(raw_dict))
+                                    if raw_dict[k]['key'].startswith('background')]
+
+    map_dict = {
+        'electric_cell_density':
+            {('Energy Storage', 'BEV', 'battery cell energy density', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'electric_battery_cost':
+            {('Costs', 'BEV', 'energy battery cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Electric_energy_cost':
+            {('Costs', 'BEV', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'fuel_cell_cost':
+            {('Costs', 'FCEV', 'fuel cell cost per kW', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Fuel_cell_hydrogen_cost':
+            {('Costs', 'FCEV', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Petrol_drivetrain_eff':
+            {('Powertrain', 'ICEV-p', 'drivetrain efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Petrol_engine_eff': {
+            ('Powertrain', 'ICEV-p', 'engine efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Petrol_combustion_share': {
+            ('Powertrain', 'ICEV-p', 'combustion power share', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Petrol_fuel_cost': {
+            ('Costs', 'ICEV-p', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Diesel_drivetrain_eff': {
+            ('Powertrain', 'ICEV-d', 'drivetrain efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Diesel_engine_eff': {
+            ('Powertrain', 'ICEV-d', 'engine efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Diesel_combustion_share': {
+            ('Powertrain', 'ICEV-d', 'combustion power share', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Diesel_fuel_cost': {
+            ('Costs', 'ICEV-d', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Natural gas_drivetrain_eff': {
+            ('Powertrain', 'ICEV-g', 'drivetrain efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Natural gas_engine_eff': {
+            ('Powertrain', 'ICEV-g', 'engine efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Natural gas_combustion_share': {
+            ('Powertrain', 'ICEV-g', 'combustion power share', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Natural gas_fuel_cost': {
+            ('Costs', 'ICEV-g', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Hybrid-petrol_drivetrain_eff': {
+            ('Powertrain', 'HEV-p', 'drivetrain efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Hybrid-petrol_engine_eff': {
+            ('Powertrain', 'HEV-p', 'engine efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Hybrid-petrol_combustion_share': {
+            ('Powertrain', 'HEV-p', 'combustion power share', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        'Hybrid-petrol_fuel_cost': {
+            ('Costs', 'HEV-p', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        '(Plugin) Hybrid-petrol_drivetrain_eff': {
+            ('Powertrain', 'PHEV-e', 'drivetrain efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Powertrain', 'PHEV-c', 'drivetrain efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        '(Plugin) Hybrid-petrol_engine_eff': {
+            ('Powertrain', 'PHEV-e', 'engine efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Powertrain', 'PHEV-c', 'engine efficiency', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        '(Plugin) Hybrid-petrol_combustion_share': {
+            ('Powertrain', 'PHEV-e', 'combustion power share', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Powertrain', 'PHEV-c', 'combustion power share', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+        '(Plugin) Hybrid-petrol_fuel_cost': {
+            ('Costs', 'PHEV-e', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0},
+            ('Costs', 'PHEV-c', 'energy cost per kWh', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+
+        'mileage-slider': {
+            ('Driving', 'all', 'kilometers per year', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+            'lifetime-slider': {
+                ('Driving', 'all', 'lifetime kilometers', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+                'cargo-slider': {
+                    ('Glider', 'all', 'cargo mass', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+                    'passenger-slider': {
+                        ('Glider', 'all', 'average passengers', 0): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
+                    }
+
+    for i in range(0, len(raw_dict)):
+        if raw_dict[i]['key'] in map_dict:
+            k = list(map_dict[raw_dict[i]['key']].keys())[0]
+            key = raw_dict[i]['key']
+            vals = raw_dict[i]['value']
+            if isinstance(vals, list):
+                if key in ('fuel_cell_cost', 'Fuel_cell_hydrogen_cost', 'electric_battery_cost', 'Electric_energy_cost'):
+                    v = {
+                        (2040,'loc'): float(vals[0]),
+                        (2017, 'loc'): float(vals[1])
+                         }
+                else:
+                    v = {
+                        (2017, 'loc'): float(vals[1]),
+                        (2040, 'loc'): float(vals[0])
+                    }
+            else:
+                v = {(new_dict[('Functional unit',)]['year'][0],'loc'): float(vals.replace(' ', ''))}
+            new_dict[k] = v
+    return new_dict
 
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
-    res = request.get_json()
-
-    d={}
-    for k in res:
-        d[k['key']] = k['value']
-
-    job =  q.enqueue_call(
+    """ Receive LCA calculation request and dispatch the job to the Redis server """
+    d = format_dictionary(request.get_json())
+    job = q.enqueue_call(
         func=process_results, args=(d,), result_ttl=5000
     )
-
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
+
 @app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
+    """ If the job is finished, render `result.html` along with the results """
     job = Job.fetch(job_key, connection=conn)
     if job.is_finished:
         return render_template('result.html', data = job.result)
@@ -167,6 +254,7 @@ def display_result(job_key):
     
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
+    """ Check the status of the job for the given `job_id` """
     job = Job.fetch(job_key, connection=conn)
     response = jsonify({"job status": job.get_status()})
     return make_response(response, 200)

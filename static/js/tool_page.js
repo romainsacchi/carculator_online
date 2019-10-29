@@ -14,8 +14,6 @@
 	    }
 	});
 
-
-
 	//MENU SCROLLING WITH ACTIVE ITEM SELECTED
 
 		// Cache selectors
@@ -734,7 +732,7 @@ function power_list_update(){
             var select_chemistry = document.createElement('select');
             select_chemistry.className = "form-control";
             select_chemistry.setAttribute('style', 'width:30%;margin: 0 auto;');
-            select_chemistry.id = "Electric_chemistry";
+            select_chemistry.id = "background_Electric_chemistry";
 
             var option_chemistry_1 = document.createElement('option');
             option_chemistry_1.value = "1";
@@ -755,7 +753,7 @@ function power_list_update(){
             header_batt_geography.innerHTML = 'Battery origin';
 
             var select_batt_geography = document.createElement('select');
-            select_batt_geography.id = "electric_battery_geography";
+            select_batt_geography.id = "background_Electric_battery_geography";
             select_batt_geography.className = "form-control";
             select_batt_geography.setAttribute('style', 'width:30%;margin: 0 auto;');
 
@@ -946,7 +944,7 @@ function power_list_update(){
 
 
             var select_stack_tech = document.createElement('select');
-            select_stack_tech.id = "Fuel_cell_type";
+            select_stack_tech.id = "background_Fuel_cell_type";
             select_stack_tech.className = "form-control";
             select_stack_tech.setAttribute('style', 'width:30%;margin: 0 auto;')
 
@@ -973,7 +971,7 @@ function power_list_update(){
             header_stack_origin.innerHTML = 'Fuel cell stack origin';
 
             var select_stack_geography = document.createElement('select');
-            select_stack_geography.id = "Fuel_cell_geography";
+            select_stack_geography.id = "background_Fuel_cell_geography";
             select_stack_geography.className = "form-control";
             select_stack_geography.setAttribute('style', 'width:30%;margin: 0 auto;')
 
@@ -996,7 +994,7 @@ function power_list_update(){
             header_h2_tech.innerHTML = 'Hydrogen manufacture';
 
             var select_h2_tech = document.createElement('select');
-            select_h2_tech.id = "Fuel_cell_hydrogen_technology";
+            select_h2_tech.id = "background_Fuel_cell_hydrogen_technology";
             select_h2_tech.className = "form-control";
             select_h2_tech.setAttribute('style', 'width:30%;margin: 0 auto;');
 
@@ -1590,10 +1588,12 @@ function get_electricity_mix(ISO){
            total_2040 += body['data'][1][row];
         }
 
-        var list_input_ids_2017 = ["hydro_2017", "nuclear_2017", "gas_2017", "solar_2017", "wind_2017", "biomass_2017",
-                                    "coal_2017", "oil_2017", "geo_2017", "waste_2017"]
-        var list_input_ids_2040 = ["hydro_2040", "nuclear_2040", "gas_2040", "solar_2040", "wind_2040", "biomass_2040",
-                                    "coal_2040", "oil_2040", "geo_2040", "waste_2040"]
+        var list_input_ids_2017 = ["background_hydro_2017", "background_nuclear_2017", "background_gas_2017",
+                                    "background_solar_2017", "background_wind_2017", "background_biomass_2017",
+                                    "background_coal_2017", "background_oil_2017", "background_geo_2017", "background_waste_2017"]
+        var list_input_ids_2040 = ["background_hydro_2040", "background_nuclear_2040", "background_gas_2040",
+                                    "background_solar_2040", "background_wind_2040", "background_biomass_2040",
+                                    "background_coal_2040", "background_oil_2040", "background_geo_2040", "background_waste_2040"]
 
         for (var row in body['data'][0]){
             document.getElementById(list_input_ids_2017[row]).value = ((body['data'][0][row]/total_2017)*100).toFixed(2);
@@ -1628,7 +1628,7 @@ var slider_mileage = document.getElementById('mileage-slider');
   noUiSlider.create(slider_mileage, {
      start: [12000],
     range: {
-        'min': [1000],
+        'min': [5000],
         'max': [30000]
     },
     step: 1000,
@@ -1793,10 +1793,12 @@ function get_results(){
     var cumul_pct_2017 = 0;
     var cumul_pct_2040 = 0;
 
-    var list_input_ids_2017 = ["hydro_2017", "nuclear_2017", "gas_2017", "solar_2017", "wind_2017", "biomass_2017",
-                                    "coal_2017", "oil_2017", "geo_2017", "waste_2017"]
-    var list_input_ids_2040 = ["hydro_2040", "nuclear_2040", "gas_2040", "solar_2040", "wind_2040", "biomass_2040",
-                                "coal_2040", "oil_2040", "geo_2040", "waste_2040"]
+    var list_input_ids_2017 = ["background_hydro_2017", "background_nuclear_2017", "background_gas_2017",
+                                    "background_solar_2017", "background_wind_2017", "background_biomass_2017",
+                                    "background_coal_2017", "background_oil_2017", "background_geo_2017", "background_waste_2017"]
+    var list_input_ids_2040 = ["background_hydro_2040", "background_nuclear_2040", "background_gas_2040",
+                                    "background_solar_2040", "background_wind_2040", "background_biomass_2040",
+                                    "background_coal_2040", "background_oil_2040", "background_geo_2040", "background_waste_2040"]
 
     for (var row in list_input_ids_2017){
         cumul_pct_2017 += Number($("#"+list_input_ids_2017[row]).val());
@@ -1862,7 +1864,6 @@ function get_results(){
 
     // Retrieve electricity mix
     $.each($('#electricity_mix_table input'), function() {
-
             data.push({key: this.id, value:this.value
         });
     });
@@ -1875,6 +1876,7 @@ function get_results(){
             });
         };
     });
+    console.log(data);
 
     var opts = {
       method: 'POST',
