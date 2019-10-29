@@ -256,7 +256,6 @@ def get_results():
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
-
 @app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
