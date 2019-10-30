@@ -784,7 +784,7 @@ function power_list_update(){
                 var start_val = [.2, .4];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 }), wNumb({
                     decimals: 2,
@@ -792,11 +792,11 @@ function power_list_update(){
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [.2];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -839,15 +839,15 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 0,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [225];
                         var tooltip =  [wNumb({
                             decimals: 0,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -889,15 +889,15 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [.22];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -1026,15 +1026,15 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 0,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [160];
                         var tooltip =  [wNumb({
                             decimals: 0,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -1077,15 +1077,15 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [.24];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -1137,7 +1137,7 @@ function power_list_update(){
                 var start_val = [.85,.87];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 }), wNumb({
                     decimals: 2,
@@ -1145,11 +1145,11 @@ function power_list_update(){
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [.85];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -1187,7 +1187,7 @@ function power_list_update(){
                 var start_val = [.25,.32];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 }), wNumb({
                     decimals: 2,
@@ -1195,11 +1195,11 @@ function power_list_update(){
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [.25];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -1242,15 +1242,15 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = [1];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }
@@ -1303,7 +1303,7 @@ function power_list_update(){
                 var start_val = [val_fuel_2017[1], val_fuel_2040[1]];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2017: '
+                    prefix: '2018: '
 
                 }), wNumb({
                     decimals: 2,
@@ -1311,11 +1311,11 @@ function power_list_update(){
 
                 })]}else{
 
-                    if (listYears[0].innerHTML == "2017"){
+                    if (listYears[0].innerHTML == "2018"){
                         var start_val = val_fuel_2017[1];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2017: '
+                            prefix: '2018: '
 
                         })]
                     }

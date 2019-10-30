@@ -62,7 +62,7 @@ def tool_page():
     """Return tool page"""
     powertrains = ["Petrol", 'Diesel', 'Natural gas', 'Electric', 'Fuel cell', 'Hybrid-petrol', '(Plugin) Hybrid-petrol']
     sizes = cip.sizes
-    years = cip.years
+    years = [2018, 2040]
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
                       'CADC Motorway 130','CADC','NEDC']
     return render_template('tool.html', powertrains=powertrains, sizes=sizes, years=years, driving_cycles=driving_cycles)
@@ -106,6 +106,23 @@ def get_electricity_mix(ISO):
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=[2017, 2040])
     return jsonify(response.to_dict())
 
+d_pt = {
+        'Petrol':'ICEV-p',
+        'Diesel':'ICEV-d',
+        'Natural gas':'ICEV-g',
+        'Electric':'BEV',
+        'Fuel cell':'FCEV',
+        'Hybrid-petrol':'HEV-p',
+        '(Plugin) Hybrid-petrol':'PHEV'
+    }
+
+d_rev_pt = {v:k for k, v, in d_pt.items()}
+
+d_year = {
+    2017:2018,
+    2040:2040
+    }
+
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
     modify_xarray_from_custom_parameters(d, array)
@@ -115,8 +132,8 @@ def process_results(d):
 
     results = ic.calculate_impacts(d[('Functional unit',)], d[('Background',)])
     data = results.values
-    year = results.coords['year'].values.tolist()
-    powertrain = results.coords['powertrain'].values.tolist()
+    year = [d_year[y] for y in results.coords['year'].values.tolist()]
+    powertrain = [d_rev_pt[pt] for pt in results.coords['powertrain'].values.tolist()]
     impact = results.coords['impact'].values.tolist()
     size = results.coords['size'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
@@ -135,16 +152,6 @@ def process_results(d):
 def format_dictionary(raw_dict):
     """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
-    d_pt = {
-        'Petrol':'ICEV-p',
-        'Diesel':'ICEV-d',
-        'Natural gas':'ICEV-g',
-        'Electric':'BEV',
-        'Fuel cell':'FCEV',
-        'Hybrid-petrol':'HEV-p',
-        '(Plugin) Hybrid-petrol':'PHEV'
-    }
-
     new_dict = {}
     new_dict[('Functional unit',)] = {'powertrain':
                                           [raw_dict[k]['value'] for k in range(0, len(raw_dict))
@@ -155,6 +162,7 @@ def format_dictionary(raw_dict):
                                                if raw_dict[k]['key'] == 'size'][0]}
 
     new_dict[('Functional unit',)]['powertrain'] = [d_pt[pt] for pt in new_dict[('Functional unit',)]['powertrain']]
+    new_dict[('Functional unit',)]['year'] = [d_year[y] for y in new_dict[('Functional unit',)]['year']]
     new_dict[('Driving cycle',)] = [raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                     if raw_dict[k]['key'] == 'driving_cycle'][0]
 
