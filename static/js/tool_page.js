@@ -653,7 +653,7 @@ $('#vehicle_type label').click(function() {
     }else{
         $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "Sorry, this category of vehicle is not available yet."},
+        message: "{{_('Sorry, this category of vehicle is not available yet.')}}"},
         {
             animate: {
                 enter: 'animated bounceInDown',

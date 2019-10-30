@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-17 13:28+0200\n"
+"POT-Creation-Date: 2019-10-30 11:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app.py:59
+#: app.py:99
 msgid "Email sent!"
+msgstr ""
+
+#: static/js/tool_page.js:656
+msgid "Sorry, this category of vehicle is not available yet."
 msgstr ""
 
 #: templates/index.html:69
@@ -235,15 +239,327 @@ msgid ""
 "to discuss the methods, results, etc."
 msgstr ""
 
-#: templates/index.html:724
+#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
 msgid "Copyright"
 msgstr ""
 
-#: templates/index.html:724
+#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:725
+#: templates/index.html:725 templates/result.html:113 templates/tool.html:663
 msgid "All rights reserved"
+msgstr ""
+
+#: templates/tool.html:8
+msgid "Carculator : Configuration"
+msgstr ""
+
+#: templates/tool.html:80
+msgid "Calculate"
+msgstr ""
+
+#: templates/tool.html:82
+msgid "Reset parameters"
+msgstr ""
+
+#: templates/tool.html:84
+msgid "Share configuration"
+msgstr ""
+
+#: templates/tool.html:106
+msgid "SCOPE"
+msgstr ""
+
+#: templates/tool.html:110
+msgid "Selection of vehicle type"
+msgstr ""
+
+#: templates/tool.html:126
+msgid "Year, size and powertrain selection"
+msgstr ""
+
+#: templates/tool.html:127
+msgid ""
+"Select the powertrain types and size classes you wish to conduct an "
+"assessment of. You may do so by moving elements from one frame to the "
+"other."
+msgstr ""
+
+#: templates/tool.html:134
+msgid "Year"
+msgstr ""
+
+#: templates/tool.html:135
+msgid "Powertrain"
+msgstr ""
+
+#: templates/tool.html:136
+msgid "Size"
+msgstr ""
+
+#: templates/tool.html:142
+msgid ""
+"Carculator can model the life cycle impacts of passenger cars at "
+"different time horizons, considering expected improvements in vehicles "
+"design, energy chains, etc."
+msgstr ""
+
+#: templates/tool.html:147
+msgid "Different powertrains, or propulsion technologies, can be considered."
+msgstr ""
+
+#: templates/tool.html:152
+msgid ""
+"Different size categories are available, for any given powertrain type. "
+"For reference, a VW Golf corresponds to the Lower medium size class."
+msgstr ""
+
+#: templates/tool.html:163 templates/tool.html:192 templates/tool.html:222
+msgid "Choice"
+msgstr ""
+
+#: templates/tool.html:164 templates/tool.html:193 templates/tool.html:223
+msgid "Selection"
+msgstr ""
+
+#: templates/tool.html:249
+msgid "What is what?"
+msgstr ""
+
+#: templates/tool.html:250
+msgid ""
+"If you are unsure about the definitions of powertrains and sizes "
+"carculator uses, you may look up a familiar car model below."
+msgstr ""
+
+#: templates/tool.html:292
+msgid "MANUFACTURE"
+msgstr ""
+
+#: templates/tool.html:319
+msgid "USE"
+msgstr ""
+
+#: templates/tool.html:325
+msgid "Driving cycle"
+msgstr ""
+
+#: templates/tool.html:327
+msgid ""
+"Driving cycles are meant to represent real conditions of use of the "
+"vehicle.\n"
+"\t\t\t\t\t\t\t\t\t\t\tCarculator uses the driving cycle to obtain the "
+"acceleration requirement of the vehicle over time.\n"
+"\t\t\t\t\t\t\t\t\t\t\tIt also uses speed intervals to locate emissions. "
+"For example, emissions that occurs below 50 km/h are\n"
+"\t\t\t\t\t\t\t\t\t\t\tassociated to the urban air compartment.\n"
+"\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
+"driving cycle."
+msgstr ""
+
+#: templates/tool.html:336
+msgid "Geographical conditions"
+msgstr ""
+
+#: templates/tool.html:338
+msgid ""
+"The country of use will influence several important parameters in the "
+"life cycle assessment of vehicles.\n"
+"\t\t\t\t\t\t\t\t\t\tFor example, the electricity mix used to charge "
+"batteries of electric vehicles\n"
+"\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will be "
+"selected accordingly."
+msgstr ""
+
+#: templates/tool.html:344
+msgid "Electricity mix"
+msgstr ""
+
+#: templates/tool.html:346
+msgid ""
+"Electricity mixes will determine the carbon intensity of the electricity "
+"necessary\n"
+"\t\t\t\t\t\t\t\t\t\tthe operate teh car during its Use phase. This may "
+"concern, for example, the electricity to charge teh battery fo an "
+"electric vehicle,\n"
+"\t\t\t\t\t\t\t\t\t\tbut also teh electricity needed to operate the "
+"electrolysis process to produce hydrogen\n"
+"\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
+msgstr ""
+
+#: templates/tool.html:353
+msgid "Passengers"
+msgstr ""
+
+#: templates/tool.html:355
+msgid ""
+"Each passenger has a body mass of 75 kilograms. The average number of "
+"passengers per car in Europe is 1.5.\n"
+"\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
+"passenger mass, the cargo mass and the curb mass of the vehicle."
+msgstr ""
+
+#: templates/tool.html:359
+msgid "Lifetime"
+msgstr ""
+
+#: templates/tool.html:361
+msgid ""
+"The total mileage of the car is used to normalize life cycle impacts per "
+"kilometer driven.\n"
+"\t\t\t\t\t\t\t\t\t\tThe annual mileage is used to differentiate emissions"
+" and energy requirement over time, as well as\n"
+"\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
+msgstr ""
+
+#: templates/tool.html:372
+msgid "Select a driving cycle"
+msgstr ""
+
+#: templates/tool.html:388
+msgid "Select the country where the vehicles should be operated:"
+msgstr ""
+
+#: templates/tool.html:393
+msgid ""
+"Our projection models suggest the following electricity mixes in 2017 and"
+" 2040 for the selected country.\n"
+"\t\t\t\t\t\t\t\t\tYou may modify them."
+msgstr ""
+
+#: templates/tool.html:408
+msgid "Hydro"
+msgstr ""
+
+#: templates/tool.html:416
+msgid "Nuclear"
+msgstr ""
+
+#: templates/tool.html:423
+msgid "Gas"
+msgstr ""
+
+#: templates/tool.html:430
+msgid "Solar"
+msgstr ""
+
+#: templates/tool.html:437
+msgid "Wind"
+msgstr ""
+
+#: templates/tool.html:444
+msgid "Biomass"
+msgstr ""
+
+#: templates/tool.html:451
+msgid "Coal"
+msgstr ""
+
+#: templates/tool.html:458
+msgid "Oil"
+msgstr ""
+
+#: templates/tool.html:465
+msgid "Geothermal"
+msgstr ""
+
+#: templates/tool.html:472
+msgid "Waste"
+msgstr ""
+
+#: templates/tool.html:484
+msgid "Adjust the number of passengers"
+msgstr ""
+
+#: templates/tool.html:494
+msgid "Adjust the cargo mass"
+msgstr ""
+
+#: templates/tool.html:501
+msgid "Adjust the total mileage"
+msgstr ""
+
+#: templates/tool.html:507
+msgid "Adjust the yearly mileage"
+msgstr ""
+
+#: templates/tool.html:534
+msgid "CALCULATION SETTINGS"
+msgstr ""
+
+#: templates/tool.html:545
+msgid "Linking algorithm"
+msgstr ""
+
+#: templates/tool.html:547
+msgid "Functional unit"
+msgstr ""
+
+#: templates/tool.html:548
+msgid "Calculation mode"
+msgstr ""
+
+#: templates/tool.html:556
+msgid ""
+"A so-called \"attributional\" linking\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t algorithm will reflect average impacts\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t associated to the life cycle of the vehicle,"
+" in proportion of the function unit specified.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\tA \"consequential\" linking algorithm will "
+"instead reflect the marginal impacts associated\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto the realization of the functional unit "
+"specified, departing from a steady-state system."
+msgstr ""
+
+#: templates/tool.html:566
+msgid "Attributional"
+msgstr ""
+
+#: templates/tool.html:572
+msgid "Consequential"
+msgstr ""
+
+#: templates/tool.html:578
+msgid ""
+"Three types of functional unit are offered. The user can opt for a "
+"comparison normalized\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tper kilometer driven. The user can also"
+" choose a specific distance driven instead. Finally, it is also possible"
+"\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto define a fleet composition over time."
+msgstr ""
+
+#: templates/tool.html:586
+msgid "Unit, per km"
+msgstr ""
+
+#: templates/tool.html:592
+msgid "Driven distance"
+msgstr ""
+
+#: templates/tool.html:601
+msgid "Fleet"
+msgstr ""
+
+#: templates/tool.html:614
+msgid ""
+"A simple calculation will use \"most likely\" values as model inputs and "
+"outputs.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis leads to a single \"most likely\" "
+"result. Error propagation calculation,\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\there using the Monte Carlo approach, "
+"will consider instead uncertainty around\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tinput and output values of the model. "
+"This leads to the generation of results\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
+msgstr ""
+
+#: templates/tool.html:624
+msgid "Simple calculation"
+msgstr ""
+
+#: templates/tool.html:630
+msgid "Error propagation (Monte Carlo)"
 msgstr ""
 

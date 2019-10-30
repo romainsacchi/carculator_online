@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Carculator : Configuration</title>
+    <title>{{_('Carculator : Configuration')}}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/icon" href="static/images/favicon.ico"/>
     <!-- Font Awesome -->
@@ -77,11 +77,11 @@
 		    </div>
 
 			  <button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onClick="get_results()">Calculate</button>
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onClick="get_results()">{{_('Calculate')}}</button>
 				<button class="online-button"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Reset parameters</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Reset parameters')}}</button>
 				 <button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share configuration</button>
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Share configuration')}}</button>
 
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -103,7 +103,7 @@
 												  style="height:70px; width:80px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">SCOPE</span></h2></div>
+						<span style="color:grey;">{{_('SCOPE')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:50px;">
 
 							<div class="mu-about-header">
@@ -128,82 +128,127 @@
 
 
 								<div class="row">
-
-									<div class="col-md-8" style="text-align:center;vertical-align:middle;display:table">
-										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
-											<h2 class="mu-heading-title">{{_('Year')}}</h2>
-											<div class="help-tip">
+									<table class="table-borderless" style="margin:0 auto;width:80%;">
+									  <tbody>
+										<tr>
+										  <td style="text-align:center;"><h2 class="mu-heading-title">{{_('Year')}}</h2></td>
+										  <td style="text-align:center;"><h2 class="mu-heading-title">{{_('Powertrain')}}</h2></td>
+										  <td style="text-align:center;"><h2 class="mu-heading-title">{{_('Size')}}</h2></td>
+										  <td style="text-align:center;"></td>
+										</tr>
+										<tr>
+										  <td style="text-align:center;">
+											  <div class="help-tip">
 												<p>{{_('Carculator can model the life cycle impacts of passenger cars at different time horizons, considering expected improvements in vehicles design, energy chains, etc.')}}</p>
 											</div>
-											<div style=";margin: 0 auto;">
-													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
-														margin:0px;display:inline;">
-														Choice
-													</div>
-													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
-														margin:0px;display:inline;">Selection
-													</div>
-													<ol data-draggable="target">
+										  </td>
+										  <td style="text-align:center;">
+											  <div class="help-tip">
+												<p>{{_('Different powertrains, or propulsion technologies, can be considered.')}}</p>
+											</div>
+										  </td>
+										  <td style="text-align:center;">
+											  <div class="help-tip">
+												<p>{{_('Different size categories are available, for any given powertrain type. For reference, a VW Golf corresponds to the Lower medium size class.')}}
+												</p>
+											</div>
+										  </td>
+
+										</tr>
+										<tr>
+										  <td style="text-align:center;">
+											  <table class="table-borderless" style="margin:0 auto;">
+												  <thead>
+													<tr style="text-align:center;">
+													  <th scope="col">{{_('Choice')}}</th>
+													  <th scope="col">{{_('Selection')}}</th>
+													</tr>
+												  </thead>
+												  <tbody>
+													<tr  style="text-align:center;">
+													  <td><ol data-draggable="target">
 														{% for y in years %}
 														<li data-draggable="item">{{ y }}</li>
 														{% endfor %}
-													</ol>
-													<ol data-draggable="target" id="years_list">
-													</ol>
-											</div>
-										</div>
-										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
-											<h2 class="mu-heading-title">{{_('Powertrain')}}</h2>
-											<div class="help-tip">
-												<p>{{_('Different powertrains, or propulsion technologies, can be considered.')}}</p>
-											</div>
-											<div style="margin: 0 auto;">
-													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
-														margin:0px;display:inline;">
-														Choice
-													</div>
-													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
-														margin:0px;display:inline;">Selection</div>
-												<ol data-draggable="target">
-													{% for pt in powertrains %}
-													<li data-draggable="item">{{ pt }}</li>
-													{% endfor %}
-												</ol>
-												<ol data-draggable="target" id="powertrain_list">
-												</ol>
-											</div>
-										</div>
+													</ol></td>
+													  <td><ol data-draggable="target" id="years_list">
+													</ol></td>
+													</tr>
+												  	<tr>
+														<td colspan="2">
+															<img class="image" src="static/images/icons/drag_icon.png"
+												  style="width:90px; padding:15px;margin:0 auto;"
+												 alt="image">
+														</td>
 
-										<div class="col-md-4" style="text-align:center;vertical-align: middle;">
-											<h2 class="mu-heading-title">{{_('Size')}}</h2>
-											<div class="help-tip">
-												<p>{{_('Different size categories are available, for any given powertrain type. For reference, a VW Golf corresponds to the Lower medium size class.')}}
-											</p>
-											</div>
-												<div style="margin: 0 auto;">
-													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
-														margin:0px;display:inline;">
-														Choice
-													</div>
-													<div class="col-md-6" style="text-align:center;width:42%;padding:0px;
-														margin:0px;display:inline;">Selection</div>
-													<ol data-draggable="target">
+													</tr>
+												  </tbody>
+												</table>
+										  </td>
+										  <td style="text-align:center;">
+											  <table class="table-borderless" style="margin:0 auto;">
+												  <thead>
+													<tr>
+													  <th scope="col">{{_('Choice')}}</th>
+													  <th scope="col">{{_('Selection')}}</th>
+													</tr>
+												  </thead>
+												  <tbody>
+													<tr>
+													  <td><ol data-draggable="target">
+														{% for pt in powertrains %}
+														<li data-draggable="item">{{ pt }}</li>
+														{% endfor %}
+													</ol></td>
+													  <td><ol data-draggable="target" id="powertrain_list">
+													</ol></td>
+													</tr>
+												  	<tr>
+														<td colspan="2">
+															<img class="image" src="static/images/icons/drag_icon.png"
+												  style="width:90px; padding:15px;margin:0 auto;"
+												 alt="image">
+														</td>
+
+													</tr>
+												  </tbody>
+												</table>
+
+										  </td>
+										  <td style="text-align:center;">
+											  <table class="table-borderless" style="margin:0 auto;">
+												  <thead>
+													<tr>
+													  <th scope="col">{{_('Choice')}}</th>
+													  <th scope="col">{{_('Selection')}}</th>
+													</tr>
+												  </thead>
+												  <tbody>
+													<tr>
+													  <td><ol data-draggable="target">
 														{% for s in sizes %}
 														<li data-draggable="item">{{ s }}</li>
 														{% endfor %}
-													</ol>
-													<ol data-draggable="target" id="size_list">
-													</ol>
-												</div>
-										</div>
-									</div>
+													</ol></td>
+													  <td><ol data-draggable="target" id="size_list">
+													</ol></td>
+													</tr>
+												  	<tr>
+														<td colspan="2">
+															<img class="image" src="static/images/icons/drag_icon.png"
+												  style="width:90px; padding:15px;margin:0 auto;"
+												 alt="image">
+														</td>
 
-									<div class="col-md-4" style="text-align:center;vertical-align: middle;">
-										<div class="col-md-12" style="text-align:center;vertical-align: middle;">
-										<h2 class="mu-heading-title">{{_('What is what?')}}</h2>
-										<p>{{_('If you are unsure about the definitions of powertrains and sizes carculator uses, you may look up a familiar car model below.')}}</p>
+													</tr>
+												  </tbody>
+												</table>
 
-											<form class="form-inline" style="margin: 0 auto;">
+										  </td>
+										  <td class ="align-middle" style="text-align:center;width:500px;">
+											<h2 class="mu-heading-title">{{_('What is what?')}}</h2>
+											<p >{{_('If you are unsure about the definitions of powertrains and sizes carculator uses, you may look up a familiar car model below.')}}</p>
+										  	<form class="form-inline" style="margin: 0 auto;">
 											  <input class="form-control mr-sm-2" type="search"
 													 placeholder="Search for car models"
 													 aria-label="Search"
@@ -214,19 +259,17 @@
 												<table class="table table-hover" id="table_search_results" style="font-size:12px;">
 													<thead>
 														<tr>
-
 														<tr>
 													</thead>
 													<tbody>
 													<tr>
-
 														<tr>
-
 												  	</tbody>
 												</table>
-											</div>
-										</div>
-									</div>
+											</div></td>
+										</tr>
+									  </tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -246,7 +289,7 @@
 												  style="height:65px; width:80px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">MANUFACTURE</span></h2></div>
+						<span style="color:white;">{{_('MANUFACTURE')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:50px;" >
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;" id="manufacture_section">
@@ -273,13 +316,13 @@
 												  style="height:80px; width:80px; border-right:3px solid #fff;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">USE</span></h2></div>
+						<span style="color:white;">{{_('USE')}}</span></h2></div>
 						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;">
 							<div class="mu-testimonials-content" style="display:none;" id="use_section">
 								<table class="table" id="table_use">
 							  <thead>
 								<tr>
-									<th scope="col"><h2>Driving cycle</h2>
+									<th scope="col"><h2>{{_('Driving cycle')}}</h2>
 									<div class="help-tip">
 										<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
 											Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
@@ -290,7 +333,7 @@
 								  	</div>
 
 								  </th>
-									<th scope="col"><h2>Geographical conditions</h2>
+									<th scope="col"><h2>{{_('Geographical conditions')}}</h2>
 								  <div class="help-tip">
 									<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
 										For example, the electricity mix used to charge batteries of electric vehicles
@@ -298,22 +341,22 @@
 								  </div>
 								  </th>
 									<th scope="col">
-										<h2>Electricity mix</h2>
+										<h2>{{_('Electricity mix')}}</h2>
 										<div class="help-tip">
 									<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
-										the operate teh car during its Use phase. This may concern, for example, the electricity to charge teh battery fo an electric vehicle,
-										but also teh electricity needed to operate the electrolysis process to produce hydrogen
+										to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery fo an electric vehicle,
+										but also the electricity needed to operate the electrolysis process to produce hydrogen
 										for a fuel cell-powered vehicle.')}}</p>
 								  </div>
 									</th>
 
-								  <th scope="col"><h2>Passengers</h2>
+								  <th scope="col"><h2>{{_('Passengers')}}</h2>
 									  <div class="help-tip">
 										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
 											The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
 									  </div>
 								  </th>
-								  <th scope="col"><h2>Lifetime</h2>
+								  <th scope="col"><h2>{{_('Lifetime')}}</h2>
 								  <div class="help-tip">
 									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
 										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
@@ -326,7 +369,8 @@
 								<tr>
 								  <td>
 									  <div class="row">
-										<p  style="color:white;">Select a driving cycle</p><span id="driving_cycle_selected"  style="color:white;margin:10px;">WLTC</span>
+										<p  style="color:white;">{{_('Select a driving cycle')}}</p><span id="driving_cycle_selected"
+																										  style="color:white;margin:10px;">WLTC</span>
 
 									  </div>
 										<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
@@ -341,13 +385,13 @@
 										</div>
 								  </td>
 								  <td>
-									  <p style="color:white;">Select the country where the vehicles should be operated: <span id="country-selected""></span></p>
+									  <p style="color:white;">{{_('Select the country where the vehicles should be operated:')}} <span id="country-selected""></span></p>
 									  <div id="chartdiv" style="width:700px;"></div>
 								  </td>
 
 								<td width="400px">
-								  <p style="color:white;">Our projection models suggest the following electricity mixes in 2017 and 2040 for the selected country.
-									You may modify them.</p>
+								  <p style="color:white;">{{_('Our projection models suggest the following electricity mixes in 2017 and 2040 for the selected country.
+									You may modify them.')}}</p>
 
 									<table class="table" style="background:none;color:white;text-align:left;margin:0 auto;"
 										id="electricity_mix_table">
@@ -361,7 +405,7 @@
 									  <tbody>
 										<tr>
 
-										  <td>Hydro</td>
+										  <td>{{_('Hydro')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_hydro_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_hydro_2040"></td>
@@ -369,63 +413,63 @@
 										</tr>
 										<tr>
 
-										  <td>Nuclear</td>
+										  <td>{{_('Nuclear')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_nuclear_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_nuclear_2040"></td>
 
 										</tr><tr>
 
-										  <td>Gas</td>
+										  <td>{{_('Gas')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_gas_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_gas_2040"></td>
 
 										</tr><tr>
 
-										  <td>Solar</td>
+										  <td>{{_('Solar')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_solar_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_solar_2040"></td>
 
 										</tr><tr>
 
-										  <td>Wind</td>
+										  <td>{{_('Wind')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_wind_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_wind_2040"></td>
 
 										</tr><tr>
 
-										  <td>Biomass</td>
+										  <td>{{_('Biomass')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_biomass_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_biomass_2040"></td>
 
 										</tr><tr>
 
-										  <td>Coal</td>
+										  <td>{{_('Coal')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_coal_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_coal_2040"></td>
 
 										</tr><tr>
 
-										  <td>Oil</td>
+										  <td>{{_('Oil')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_oil_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_oil_2040"></td>
 
 										</tr><tr>
 
-										  <td>Geothermal</td>
+										  <td>{{_('Geothermal')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_geo_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_geo_2040"></td>
 
 										</tr><tr>
 
-										  <td>Waste</td>
+										  <td>{{_('Waste')}}</td>
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_waste_2017"></td>
 
 											<td><input type="number" min="0" max="100" step="1" style="width:70px;color:white;background:none;" id="background_waste_2040"></td>
@@ -437,7 +481,7 @@
 								</td>
 								  <td>
 									  <img id = "image_passenger" src="static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
-										<p style="color:white">Adjust the number of passengers</p>
+										<p style="color:white">{{_('Adjust the number of passengers')}}</p>
 										<div style="margin:30px;" id="passenger-slider"></div>
 
 
@@ -447,20 +491,20 @@
 													 style="height:50px;position:absolute; top:0;bottom:0;left:0;right:0;margin:auto;">
 											</div>
 
-										<p style="color:white;">Adjust the cargo mass</p>
+										<p style="color:white;">{{_('Adjust the cargo mass')}}</p>
 										<div style="margin-bottom:20px;" id="cargo-slider"></div>
 											<span id="cargo-value" style="color:white;font-size:30px;">150 kg</span>
 										</div>
 								  </td>
 								  <td>
 									  <img src="static/images/icons/car_icon.png" style="height:50px;margin-top:10px;">
-										<p style="color:white;">Adjust the total mileage</p>
+										<p style="color:white;">{{_('Adjust the total mileage')}}</p>
 										<div style="margin-top:30px;" id="lifetime-slider"></div>
 										<span id="lifetime-value" style="color:white;font-size:30px;"></span>
 
 									<div class="row" style="margin:3px;">
 										<img src="static/images/icons/odometer_icon.png" style="height:50px;margin-top:10px;">
-										<p style="color:white;margin-top:25px;">Adjust the yearly mileage</p>
+										<p style="color:white;margin-top:25px;">{{_('Adjust the yearly mileage')}}</p>
 										<div style="margin-bottom:20px;" id="mileage-slider"></div>
 										<span id="mileage-value" style="color:white;font-size:30px;"></span>
 									</div>
@@ -487,7 +531,7 @@
 												  style="height:85px; width:80px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">CALCULATION SETTINGS</span></h2></div>
+						<span style="color:white;">{{_('CALCULATION SETTINGS')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:50px;">
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="calculation_section">
@@ -498,10 +542,10 @@
 												<tr>
 
 													<th style="text-align:center;margin:20px;">
-														<h2>Linking algorithm</h2>
+														<h2>{{_('Linking algorithm')}}</h2>
 														</th>
-													<th style="text-align:center;margin:20px;"><h2>Functional unit</h2></th>
-													<th style="text-align:center;margin:20px;"><h2>Calculation mode</h2></th>
+													<th style="text-align:center;margin:20px;"><h2>{{_('Functional unit')}}</h2></th>
+													<th style="text-align:center;margin:20px;"><h2>{{_('Calculation mode')}}</h2></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -519,13 +563,13 @@
 
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
 														  <label class="form-check-label" for="defaultCheck1">
-															Attributional
+															{{_('Attributional')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
 														  <label class="form-check-label" for="defaultCheck2">
-															Consequential
+															{{_('Consequential')}}
 														  </label>
 														</div></td>
 													<td style="vertical-align: top;">
@@ -539,13 +583,13 @@
 														<div class="form-check" style="vertical-align:middle;">
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
 														  <label class="form-check-label" for="defaultCheck3">
-															Unit, per km
+															{{_('Unit, per km')}}
 														  </label>
 														</div>
 														<div class="form-check" style="vertical-align:middle;">
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" disabled>
 														  <label class="form-check-label" for="defaultCheck4">
-															Driven distance
+															{{_('Driven distance')}}
 														  </label>
 															<div class="form-group">
 															  <input placeholder="in km" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto" disabled>
@@ -554,13 +598,13 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck5" disabled>
 														  <label class="form-check-label" for="defaultCheck5">
-															Fleet
+															{{_('Fleet')}}
 														  </label>
 															<div class="form-group">
 															<button class="online-button"
 															  style="margin:5px;
 															  background-color:transparent;color:white;
-															  border:1px solid white;" disabled>Specify fleet composition</button></div>
+															  border:1px solid white;" disabled>{{_('Specify fleet composition')}}</button></div>
 
 
 														</div></td>
@@ -577,13 +621,13 @@
 
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
 														  <label class="form-check-label" for="defaultCheck3">
-															Simple calculation
+															{{_('Simple calculation')}}
 														  </label>
 														</div>
 														<div class="form-check" style="vertical-align:middle;">
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" disabled>
 														  <label class="form-check-label" for="defaultCheck4">
-															Error propagation (Monte Carlo)
+															{{_('Error propagation (Monte Carlo)')}}
 														  </label>
 															<div class="form-group">
 															  <input placeholder="number of iterations" type="text" class="form-control" style="width:200px;text-align:center;margin: 0 auto" disabled>

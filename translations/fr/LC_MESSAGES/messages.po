@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-17 13:28+0200\n"
+"POT-Creation-Date: 2019-10-30 11:21+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -18,9 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app.py:59
+#: app.py:99
 msgid "Email sent!"
 msgstr "Email envoyé!"
+
+#: static/js/tool_page.js:656
+msgid "Sorry, this category of vehicle is not available yet."
+msgstr "Désolé, cette catégorie de véhicule n'est pas encore disponible."
 
 #: templates/index.html:69
 msgid "HOME"
@@ -252,17 +256,366 @@ msgstr ""
 "Ecrivez-nous si vous avez des questions à propos de l'outil, ou si vous "
 "désirez en savoir plus sur la méthodologie, les résultats, etc."
 
-#: templates/index.html:724
+#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
-#: templates/index.html:724
+#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
-#: templates/index.html:725
+#: templates/index.html:725 templates/result.html:113 templates/tool.html:663
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
+
+#: templates/tool.html:8
+msgid "Carculator : Configuration"
+msgstr "Carculator : Configuration"
+
+#: templates/tool.html:80
+msgid "Calculate"
+msgstr "Calculer"
+
+#: templates/tool.html:82
+msgid "Reset parameters"
+msgstr "Réinitialiser les paramètres"
+
+#: templates/tool.html:84
+msgid "Share configuration"
+msgstr "Partager cette configuration"
+
+#: templates/tool.html:106
+msgid "SCOPE"
+msgstr "ETENDUE de L'ANALYSE"
+
+#: templates/tool.html:110
+msgid "Selection of vehicle type"
+msgstr "Sélection du type de véhicule"
+
+#: templates/tool.html:126
+msgid "Year, size and powertrain selection"
+msgstr "Sélection de l'année, la taille et le moyen de propulsion"
+
+#: templates/tool.html:127
+msgid ""
+"Select the powertrain types and size classes you wish to conduct an "
+"assessment of. You may do so by moving elements from one frame to the "
+"other."
+msgstr ""
+"Sélectionnez le type de propulsion et la catégorie de taille pour lesquels vous souhaitez "
+"effectuer cette analyse. Pour cela, veuillez déplacer les élements choisis dans le cadre de droite."
+
+#: templates/tool.html:134
+msgid "Year"
+msgstr "Année"
+
+#: templates/tool.html:135
+msgid "Powertrain"
+msgstr "Propulsion"
+
+#: templates/tool.html:136
+msgid "Size"
+msgstr "Taille"
+
+#: templates/tool.html:142
+msgid ""
+"Carculator can model the life cycle impacts of passenger cars at "
+"different time horizons, considering expected improvements in vehicles "
+"design, energy chains, etc."
+msgstr ""
+"Carculator peut modéliser les impacts environnementaux de véhicules de tourisme "
+"pour un horizon temporel donné, en considérant les progrès technologiques attendus "
+"en terme de design, motorisation, production énergétique, etc."
+
+#: templates/tool.html:147
+msgid "Different powertrains, or propulsion technologies, can be considered."
+msgstr "Différents moyens de propulsion peuvent être considérés."
+
+#: templates/tool.html:152
+msgid ""
+"Different size categories are available, for any given powertrain type. "
+"For reference, a VW Golf corresponds to the Lower medium size class."
+msgstr ""
+"Différentes catégories de taille sont disponibles, pour n'importe quel type de propulsion. "
+"Pour référence, une VW Golf appartient à la catégorie 'Moyenne inférieure'."
+
+#: templates/tool.html:163 templates/tool.html:192 templates/tool.html:222
+msgid "Choice"
+msgstr "Choix"
+
+#: templates/tool.html:164 templates/tool.html:193 templates/tool.html:223
+msgid "Selection"
+msgstr "Sélection"
+
+#: templates/tool.html:249
+msgid "What is what?"
+msgstr "A quelle catégorie de taille appartient ce véhicule?"
+
+#: templates/tool.html:250
+msgid ""
+"If you are unsure about the definitions of powertrains and sizes "
+"carculator uses, you may look up a familiar car model below."
+msgstr ""
+"Si vous avez des doutes quant à la catégorie de taille à laquelle appartient "
+"un véhicule, vous pouvez l'obtenir en cherchant un modèle spécifique ci-dessous."
+
+#: templates/tool.html:292
+msgid "MANUFACTURE"
+msgstr "PRODUCTION"
+
+#: templates/tool.html:319
+msgid "USE"
+msgstr "UTILISATION"
+
+#: templates/tool.html:325
+msgid "Driving cycle"
+msgstr "Cycle de conduite"
+
+#: templates/tool.html:327
+msgid ""
+"Driving cycles are meant to represent real conditions of use of the "
+"vehicle.\n"
+"\t\t\t\t\t\t\t\t\t\t\tCarculator uses the driving cycle to obtain the "
+"acceleration requirement of the vehicle over time.\n"
+"\t\t\t\t\t\t\t\t\t\t\tIt also uses speed intervals to locate emissions. "
+"For example, emissions that occurs below 50 km/h are\n"
+"\t\t\t\t\t\t\t\t\t\t\tassociated to the urban air compartment.\n"
+"\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
+"driving cycle."
+msgstr ""
+"Les cycles de conduite sont utilisés pour représenter une utilisation moyenne "
+"du véchicule sur le temps. Les intervalles de vitesse, définis à partir du "
+"cycle de conduite, sont également utilisés afin de localiser les émissions directes "
+" du véhicule. Par exemple, les émissions (polluants, bruit) calculées pour une vitesse inférieure à "
+"50 km/h seront émises dans un environnment urbain."
+
+#: templates/tool.html:336
+msgid "Geographical conditions"
+msgstr "Conditions géographiques"
+
+#: templates/tool.html:338
+msgid ""
+"The country of use will influence several important parameters in the "
+"life cycle assessment of vehicles.\n"
+"\t\t\t\t\t\t\t\t\t\tFor example, the electricity mix used to charge "
+"batteries of electric vehicles\n"
+"\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will be "
+"selected accordingly."
+msgstr ""
+"Le pays défini pour l'utilisation du véhicule est déterminant pour plusieurs raisons. "
+"Il conditionne, par exemple, le mix électrique choisi pour recharger la batterie d'un "
+"véhicule électrique ou pour produire l'hydrogène utilisé par un véhicule utilisant une pile à combustible. "
+"Le pays choisi définit également les pertes observées dans le réseau électrique."
+
+#: templates/tool.html:344
+msgid "Electricity mix"
+msgstr "Mix électrique"
+
+#: templates/tool.html:346
+msgid ""
+"Electricity mixes will determine the carbon intensity of the electricity "
+"necessary\n"
+"\t\t\t\t\t\t\t\t\t\tthe operate teh car during its Use phase. This may "
+"concern, for example, the electricity to charge teh battery fo an "
+"electric vehicle,\n"
+"\t\t\t\t\t\t\t\t\t\tbut also teh electricity needed to operate the "
+"electrolysis process to produce hydrogen\n"
+"\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
+msgstr ""
+"Le mix électrique suggéré (ou défini par l'utilisateur) sera utilisé pour pour "
+"modéliser l'aport d'électricité pour toute activité qui en a besoin lors de l'utilisation du véhicule. "
+"Par exemple, la charge d'une batterie, ou la production d'hydrogène par électrolyse."
+
+#: templates/tool.html:353
+msgid "Passengers"
+msgstr "Passagers"
+
+#: templates/tool.html:355
+msgid ""
+"Each passenger has a body mass of 75 kilograms. The average number of "
+"passengers per car in Europe is 1.5.\n"
+"\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
+"passenger mass, the cargo mass and the curb mass of the vehicle."
+msgstr ""
+"Chaque passager a une masse corporelle moyenne de 75 kilogrammes. Le nombre moyen de passagers "
+"en Europe pour un véhicule de tourisme est de 1.5. La masse totale de conduite est égale à la masse "
+"du véchicule à vide plus la masse de passagers (nombre de passagers x 75 kg) et que la masse des "
+"objets transportés."
+
+#: templates/tool.html:359
+msgid "Lifetime"
+msgstr "Durée de vie"
+
+#: templates/tool.html:361
+msgid ""
+"The total mileage of the car is used to normalize life cycle impacts per "
+"kilometer driven.\n"
+"\t\t\t\t\t\t\t\t\t\tThe annual mileage is used to differentiate emissions"
+" and energy requirement over time, as well as\n"
+"\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
+msgstr ""
+"Le kilométrage total du véhicule est utilisé afin de normaliser les résultats par kilomètre parcouru. "
+"Le kilométrage annuel est utilisé afin de différencier les émissions sur le temps (par exemple, l'évolution "
+"du mix électrique année après année), ainsi que pour calculer l'amortissement du véhicule."
+
+#: templates/tool.html:372
+msgid "Select a driving cycle"
+msgstr "Sélectionnez un cycle de conduite"
+
+#: templates/tool.html:388
+msgid "Select the country where the vehicles should be operated:"
+msgstr "Sélectionnez le pays où les véhicules sont utilisés:"
+
+#: templates/tool.html:393
+msgid ""
+"Our projection models suggest the following electricity mixes in 2017 and"
+" 2040 for the selected country.\n"
+"\t\t\t\t\t\t\t\t\tYou may modify them."
+msgstr ""
+"Nos modèles de projection suggèrent les mixes électriques suivant pour 2017 et 2040:"
+
+#: templates/tool.html:408
+msgid "Hydro"
+msgstr "Hydro"
+
+#: templates/tool.html:416
+msgid "Nuclear"
+msgstr "Nucléaire"
+
+#: templates/tool.html:423
+msgid "Gas"
+msgstr "Gaz"
+
+#: templates/tool.html:430
+msgid "Solar"
+msgstr "Photovoltaïque"
+
+#: templates/tool.html:437
+msgid "Wind"
+msgstr "Eolien"
+
+#: templates/tool.html:444
+msgid "Biomass"
+msgstr "Biomasse"
+
+#: templates/tool.html:451
+msgid "Coal"
+msgstr "Charbon"
+
+#: templates/tool.html:458
+msgid "Oil"
+msgstr "Pétrole"
+
+#: templates/tool.html:465
+msgid "Geothermal"
+msgstr "Géothermie"
+
+#: templates/tool.html:472
+msgid "Waste"
+msgstr "Incinération"
+
+#: templates/tool.html:484
+msgid "Adjust the number of passengers"
+msgstr "Ajustez le nombre de passagers"
+
+#: templates/tool.html:494
+msgid "Adjust the cargo mass"
+msgstr "Ajustez la masse des objets transportés"
+
+#: templates/tool.html:501
+msgid "Adjust the total mileage"
+msgstr "Ajustez le kilométrage total"
+
+#: templates/tool.html:507
+msgid "Adjust the yearly mileage"
+msgstr "Ajustez le kilométrage annuel"
+
+#: templates/tool.html:534
+msgid "CALCULATION SETTINGS"
+msgstr "PARAMETRES DE CALCUL"
+
+#: templates/tool.html:545
+msgid "Linking algorithm"
+msgstr "Algorithme de calcul"
+
+#: templates/tool.html:547
+msgid "Functional unit"
+msgstr "Unité fonctionnelle"
+
+#: templates/tool.html:548
+msgid "Calculation mode"
+msgstr "Mode de calcul"
+
+#: templates/tool.html:556
+msgid ""
+"A so-called \"attributional\" linking\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t algorithm will reflect average impacts\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t associated to the life cycle of the vehicle,"
+" in proportion of the function unit specified.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\tA \"consequential\" linking algorithm will "
+"instead reflect the marginal impacts associated\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto the realization of the functional unit "
+"specified, departing from a steady-state system."
+msgstr ""
+"Une évaluation des impacts environnementaux qui utilise un algorithme dit 'attributionnel' reflète les "
+"impacts moyens associés au cycle de vie moyen du véhicule pour l'unité fonctionnelle spécifiee. "
+"Une évalution utilisant un algorithme dit 'conséquentiel' reflète les impacts environnmentaux associés à "
+"la réalisation marginale de l'unité fonctionelle."
+
+#: templates/tool.html:566
+msgid "Attributional"
+msgstr "Attributionnel"
+
+#: templates/tool.html:572
+msgid "Consequential"
+msgstr "Conséquentiel"
+
+#: templates/tool.html:578
+msgid ""
+"Three types of functional unit are offered. The user can opt for a "
+"comparison normalized\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tper kilometer driven. The user can also"
+" choose a specific distance driven instead. Finally, it is also possible"
+"\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto define a fleet composition over time."
+msgstr ""
+"Trois types d'unité fonctionnelle sont proposés afin de comparer les performances environnementales "
+"des véhicules choisis: par véhicule-kilomètre parcouru, pour un nombre de kilomètres défini ou pour une composition de flotte donnée."
+
+#: templates/tool.html:586
+msgid "Unit, per km"
+msgstr "Unitaire, par véhicule-kilomètre parcouru"
+
+#: templates/tool.html:592
+msgid "Driven distance"
+msgstr "Pour une distance donnée"
+
+#: templates/tool.html:601
+msgid "Fleet"
+msgstr "Pour une composition de flotte spécifique"
+
+#: templates/tool.html:614
+msgid ""
+"A simple calculation will use \"most likely\" values as model inputs and "
+"outputs.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis leads to a single \"most likely\" "
+"result. Error propagation calculation,\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\there using the Monte Carlo approach, "
+"will consider instead uncertainty around\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tinput and output values of the model. "
+"This leads to the generation of results\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
+msgstr ""
+"Le mode de calcul 'simple' fournit au modèle de calcul du cycle de vie des valeurs moyennes, alors que "
+"le mode de calcul avec incertitude fournit au modèle des invertalles de probabilité."
+
+#: templates/tool.html:624
+msgid "Simple calculation"
+msgstr "Mode de calcul simple"
+
+#: templates/tool.html:630
+msgid "Error propagation (Monte Carlo)"
+msgstr "Mode de calcul incluant les incertitudes"
 
 #~ msgid ""
 #~ "Make fast comparisons between different "

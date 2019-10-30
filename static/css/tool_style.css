@@ -1,11 +1,14 @@
 
+
+
 /* draggable targets */
 [data-draggable="target"]
 {
 	float:left;
 	list-style-type:none;
 
-	width:42%;
+	width:95%;
+
 	height:220px;
 	overflow-y:auto;
 

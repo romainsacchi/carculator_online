@@ -166,7 +166,8 @@
             $.pivotUtilities.renderers,
           $.pivotUtilities.plotly_renderers
         ),
-        rendererOptions: {plotly: { yaxis: { title: list_unit['climate change']} }},
+        rendererOptions: {plotly: { yaxis: { title: list_unit['climate change']},
+        							title: {text: 'Climate change impacts, per vehicle-kilometer'}}},
 
         onRefresh: function(config){
         	var imp = config['inclusions']['impact category'][0]
@@ -174,6 +175,9 @@
         	new_config['rendererOptions']['plotly']['yaxis']['title'] = list_unit[imp]
             }
       });
+
+      $("#output").on('plotly_click', function(){
+      	alert('plot clicked')})
 
 	</script>
 </body>
