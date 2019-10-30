@@ -1599,6 +1599,18 @@ function get_electricity_mix(ISO){
             document.getElementById(list_input_ids_2017[row]).value = ((body['data'][0][row]/total_2017)*100).toFixed(2);
             document.getElementById(list_input_ids_2040[row]).value = ((body['data'][1][row]/total_2040)*100).toFixed(2);
         }
+
+        $.notify({
+        icon: '	glyphicon glyphicon-time',
+        message: "You have entered all the required parameters. Whenever ready, hit the 'Calculate' button."},
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+            type:'success'
+        });
+
     });
 };
 
