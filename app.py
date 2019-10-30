@@ -159,7 +159,7 @@ def format_dictionary(raw_dict):
     new_dict[('Functional unit',)] = {'powertrain':
                                           [raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                                    if raw_dict[k]['key'] == 'type'][0],
-                                       'year':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
+                                       'year':[int(raw_dict[k]['value']) for k in range(0, len(raw_dict))
                                                if raw_dict[k]['key'] == 'year'][0],
                                        'size':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                                if raw_dict[k]['key'] == 'size'][0]}
