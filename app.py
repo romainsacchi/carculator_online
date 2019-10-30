@@ -172,6 +172,7 @@ def format_dictionary(raw_dict):
     new_dict[('Background',)] = {raw_dict[k]['key']:raw_dict[k]['value'] for k in range(0, len(raw_dict))
                                     if raw_dict[k]['key'].startswith('background')}
 
+
     map_dict = {
         'electric_cell_density':
             {('Energy Storage', 'BEV', 'all', 'battery cell energy density', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
