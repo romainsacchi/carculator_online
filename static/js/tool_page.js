@@ -1602,7 +1602,7 @@ function get_electricity_mix(ISO){
 
         $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "You have entered all the required parameters. Whenever ready, hit the 'Calculate' button."},
+        message: "You have set all the required parameters. Whenever ready, hit the 'Calculate' button."},
         {
             animate: {
                 enter: 'animated bounceInDown',
