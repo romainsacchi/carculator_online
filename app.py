@@ -1,12 +1,13 @@
 """Flask App Project."""
 
-from flask import Flask, render_template, request, jsonify, make_response, json
+from flask import Flask, render_template, request, jsonify, make_response, json, session, redirect, url_for
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
 import logging
 from logging.handlers import SMTPHandler
 from carculator import *
 import csv
+import secrets
 from rq import Queue
 from rq.job import Job
 from worker import conn
@@ -14,7 +15,8 @@ from worker import conn
 
 # Instantiate Flask app
 app = Flask(__name__)
-
+session_token = secrets.token_urlsafe(16)
+app.config["SECRET_KEY"] = session_token
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
 
@@ -281,5 +283,21 @@ def get_locale():
     Retrieve the favorite language of the browser and display text in the corresponding language.
     :return:
     """
+    try:
+        language = session['language']
+    except KeyError:
+        language = None
+    if language is not None:
+        return language
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+@app.context_processor
+def inject_conf_var():
+    return dict(
+                AVAILABLE_LANGUAGES=app.config['LANGUAGES'],
+                CURRENT_LANGUAGE=session.get('language',request.accept_languages.best_match(app.config['LANGUAGES'].keys())))
+
+@app.route('/language/<language>')
+def set_language(language=None):
+    session['language'] = language
+    return redirect(url_for('index'))

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-30 11:21+0100\n"
+"POT-Creation-Date: 2019-10-30 17:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,63 +191,79 @@ msgstr ""
 msgid "Pit-stop manager"
 msgstr ""
 
-#: templates/index.html:482
+#: templates/index.html:480
+msgid "Car designer"
+msgstr ""
+
+#: templates/index.html:500
 msgid "Mechanic"
 msgstr ""
 
-#: templates/index.html:508
+#: templates/index.html:525
 msgid "OUR PARTNERS"
 msgstr ""
 
-#: templates/index.html:510
-msgid ""
-"has been developed in the context of the SCCER project financed bz XXX. "
-"Additionally, we are receiving support form XXX and XXX."
+#: templates/index.html:527
+msgid "carculator was developed within the "
 msgstr ""
 
-#: templates/index.html:568
+#: templates/index.html:528
+msgid ""
+"funded by innosuisse. We received additional\n"
+"\t\t\t\t\t\t\t\tfunding via the research projects "
+msgstr ""
+
+#: templates/index.html:530 templates/index.html:532
+msgid "and "
+msgstr ""
+
+#: templates/index.html:531
+msgid "as well as "
+msgstr ""
+
+#: templates/index.html:593
 msgid "Publications on"
 msgstr ""
 
-#: templates/index.html:568
+#: templates/index.html:593
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:642
+#: templates/index.html:667
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:642
+#: templates/index.html:667
 msgid "US"
 msgstr ""
 
-#: templates/index.html:644
+#: templates/index.html:669
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:668
+#: templates/index.html:693
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:675
+#: templates/index.html:700
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:676
+#: templates/index.html:701
 msgid ""
 "Write to use if you have questions about the tool, or if you would like "
 "to discuss the methods, results, etc."
 msgstr ""
 
-#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
+#: templates/index.html:749 templates/result.html:112 templates/tool.html:662
 msgid "Copyright"
 msgstr ""
 
-#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
+#: templates/index.html:749 templates/result.html:112 templates/tool.html:662
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:725 templates/result.html:113 templates/tool.html:663
+#: templates/index.html:750 templates/result.html:113 templates/tool.html:663
 msgid "All rights reserved"
 msgstr ""
 
@@ -380,10 +396,10 @@ msgstr ""
 msgid ""
 "Electricity mixes will determine the carbon intensity of the electricity "
 "necessary\n"
-"\t\t\t\t\t\t\t\t\t\tthe operate teh car during its Use phase. This may "
-"concern, for example, the electricity to charge teh battery fo an "
+"\t\t\t\t\t\t\t\t\t\tto operate the car during its Use phase. This may "
+"concern, for example, the electricity to charge the battery fo an "
 "electric vehicle,\n"
-"\t\t\t\t\t\t\t\t\t\tbut also teh electricity needed to operate the "
+"\t\t\t\t\t\t\t\t\t\tbut also the electricity needed to operate the "
 "electrolysis process to produce hydrogen\n"
 "\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
 msgstr ""
@@ -540,6 +556,10 @@ msgstr ""
 
 #: templates/tool.html:601
 msgid "Fleet"
+msgstr ""
+
+#: templates/tool.html:607
+msgid "Specify fleet composition"
 msgstr ""
 
 #: templates/tool.html:614

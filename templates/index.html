@@ -20,10 +20,14 @@
     <link href="static/css/magnific-popup.css" rel="stylesheet">
     <!-- Theme color -->
     <link id="switcher" href="static/css/theme-color/default-theme.css" rel="stylesheet">
+	 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css'>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css'>
+
 	  <!-- Source Code pro font -->
 	  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <!-- Main Style -->
     <link href="static/css/style.css" rel="stylesheet">
+
 
     <!-- Fonts -->
 
@@ -45,7 +49,11 @@
 
   	<!-- Start Header -->
 	<header id="mu-header" class="" role="banner">
-		<div class="container">
+		<img src="static/images/psi_logo.svg" style="height:40px;position:absolute;vertical-align:middle;margin-left:25px;"></a>
+		<img src="static/images/sccer_logo.png" style="float:right;height:40px;margin-right:25px;"></a>
+		<div class="container" style="width:1300px;">
+
+
 			<nav class="navbar navbar-default mu-navbar">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -59,7 +67,7 @@
 		      </button>
 
 		      <!-- Image Logo -->
-		      <a class="navbar-brand" href="#"><img src="static/images/carculator logo.png" style="height:30px;"></a>
+		      <a class="navbar-brand" href="#"><img src="static/images/carculator logo.png" style="height:25px;margin-top:-5px;"></a>
 
 		    </div>
 
@@ -73,7 +81,13 @@
 					<li><a href="#mu-clients">{{_('PARTNERS')}}</a></li>
 		            <li><a href="#mu-testimonials">{{_('PUBLICATIONS')}}</a></li>
 		            <li><a href="#mu-contact">{{_('CONTACT US')}}</a></li>
+					<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
+					<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
+					<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
+					<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
 		      	</ul>
+
+
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -419,7 +433,7 @@
 								<div class="row">
 
 									<!-- Team Single Content -->
-									<div class="col-sm-6 col-md-4">
+									<div class="col-sm-6 col-md-3">
 										<div class="mu-team-content-single">
 											<div class="mu-team-profile">
 												<img src="static/images/christian.jpg" alt="team member"
@@ -443,7 +457,7 @@
 									<!-- / Team Single Content -->
 
 									<!-- Service Single Content -->
-									<div class="col-sm-6 col-md-4">
+									<div class="col-sm-6 col-md-3">
 										<div class="mu-team-content-single">
 											<div class="mu-team-profile">
 												<img src="static/images/chris.png" alt="team member"
@@ -466,7 +480,25 @@
 									<!-- / Service Single Content -->
 
 									<!-- Service Single Content -->
-									<div class="col-sm-6 col-md-4">
+									<div class="col-sm-6 col-md-3">
+										<div class="mu-team-content-single">
+											<div class="mu-team-profile">
+												<img src="static/images/brian.png" alt="team member"
+												width="330px">
+												<div class="mu-team-social-info">
+													<a href="mailto:brianlcox@gmail.com"><i class="icon-envelope"></i></a>
+													</div>
+											</div>
+											<div class="mu-team-info">
+												<h4>Brian Cox</h4>
+												<span>{{_('Car designer')}}</span>
+											</div>
+										</div>
+									</div>
+									<!-- / Service Single Content -->
+
+									<!-- Service Single Content -->
+									<div class="col-sm-6 col-md-3">
 										<div class="mu-team-content-single">
 											<div class="mu-team-profile">
 												<img src="static/images/romain.png" alt="team member"
@@ -503,12 +535,18 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="mu-clients-area">
-
 							<div class="mu-clients-header">
 								<h2 class="mu-heading-title"><span>{{_('OUR PARTNERS')}}</span></h2>
 								<span class="mu-header-dot"></span>
-								<p><i>carculator</i> {{_('has been developed in the context of the SCCER Mobility project financed by InnoSuisse.
-									Additionally, we are receiving support from  and XXX.')}}</p>
+								<p>{{_('carculator was developed within the ')}} <a target='_blank' href="https://sccer-mobility.ch/"> <u>Swiss Competence Center for Energy Research (SCCER) Efficient Technologies
+									and Systems for Mobility</u></a> {{_('funded by innosuisse. We received additional
+								funding via the research projects ')}} <a target='_blank' href="https://www.sintef.no/projectweb/elegancy/"><u>ELEGANCY</u></a>
+									{{_('and ')}} <a target='_blank' href="https://www.mcc-berlin.net/next-generation-policies/mission.html"><u>Transformation towards Sustainable Transport Systems – The Next Generation Policies</u></a>
+								 {{_('as well as ')}} <a target='_blank' href="http://www.sccer-hae.ch/"><u>SCCER Heat and
+										electricity storage</u></a> {{_('and ')}} <a target='_blank' href="http://www.sccer-soe.ch/en/home/"><u>SCCER Supply of Electricity</u> </a>
+								</p>
+
+
 							</div>
 
 							<!-- Start Clients Content -->
@@ -727,7 +765,7 @@
 					  </div>
 				  </div>
 				  <div class="column" style="width:33.33%;float: right;text-align:center;">
-					  <img src="static/images/ecoinvent_logo.png" style="height:50px;">
+					  <img src="static/images/sccer_logo.png" style="height:50px;">
 				  </div>
 				</div>
 
@@ -742,6 +780,7 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+
     <!-- Bootstrap -->
     <script src="static/js/bootstrap.min.js"></script>
     <!-- Counter js -->

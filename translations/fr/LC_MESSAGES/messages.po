@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-30 11:21+0100\n"
+"POT-Creation-Date: 2019-10-30 17:26+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -204,51 +204,67 @@ msgstr "Pilote"
 msgid "Pit-stop manager"
 msgstr "Chef d'atelier"
 
-#: templates/index.html:482
+#: templates/index.html:480
+msgid "Car designer"
+msgstr "Designeur automobile"
+
+#: templates/index.html:500
 msgid "Mechanic"
 msgstr "Mécanicien"
 
-#: templates/index.html:508
+#: templates/index.html:525
 msgid "OUR PARTNERS"
 msgstr "NOS PARTENAIRES"
 
-#: templates/index.html:510
-msgid ""
-"has been developed in the context of the SCCER project financed bz XXX. "
-"Additionally, we are receiving support form XXX and XXX."
-msgstr ""
-"a été développé dans le contexte du projet SCCER Mobilité, financé par "
-"XXX. De plus, nous recevons un soutient actif de la part de XXX et XXX."
+#: templates/index.html:527
+msgid "carculator was developed within the "
+msgstr "carculator a été developpé dans le contexte du projet "
 
-#: templates/index.html:568
+#: templates/index.html:528
+msgid ""
+"funded by innosuisse. We received additional\n"
+"\t\t\t\t\t\t\t\tfunding via the research projects "
+msgstr ""
+"financé par InnoSuisse. Nous avons reçu un soutient financier additionnel"
+" de la part de "
+
+#: templates/index.html:530 templates/index.html:532
+msgid "and "
+msgstr "et "
+
+#: templates/index.html:531
+msgid "as well as "
+msgstr "ainsi que "
+
+#: templates/index.html:593
 msgid "Publications on"
 msgstr "Publications sur le thème de la "
 
-#: templates/index.html:568
+#: templates/index.html:593
 msgid "mobility"
 msgstr "mobilité"
 
-#: templates/index.html:642
+#: templates/index.html:667
 msgid "CONTACT"
 msgstr "CONTACTEZ-"
 
-#: templates/index.html:642
+#: templates/index.html:667
 msgid "US"
 msgstr "NOUS"
 
-#: templates/index.html:644
+#: templates/index.html:669
 msgid "We are always happy to hear from you."
 msgstr "Nous serions ravis d'avoir un retour de votre part."
 
-#: templates/index.html:668
+#: templates/index.html:693
 msgid "SUBMIT"
 msgstr "ENVOYER"
 
-#: templates/index.html:675
+#: templates/index.html:700
 msgid "carculator support"
 msgstr "Questions à propos de carculator"
 
-#: templates/index.html:676
+#: templates/index.html:701
 msgid ""
 "Write to use if you have questions about the tool, or if you would like "
 "to discuss the methods, results, etc."
@@ -256,15 +272,15 @@ msgstr ""
 "Ecrivez-nous si vous avez des questions à propos de l'outil, ou si vous "
 "désirez en savoir plus sur la méthodologie, les résultats, etc."
 
-#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
+#: templates/index.html:749 templates/result.html:112 templates/tool.html:662
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
-#: templates/index.html:724 templates/result.html:112 templates/tool.html:662
+#: templates/index.html:749 templates/result.html:112 templates/tool.html:662
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
-#: templates/index.html:725 templates/result.html:113 templates/tool.html:663
+#: templates/index.html:750 templates/result.html:113 templates/tool.html:663
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
 
@@ -302,8 +318,9 @@ msgid ""
 "assessment of. You may do so by moving elements from one frame to the "
 "other."
 msgstr ""
-"Sélectionnez le type de propulsion et la catégorie de taille pour lesquels vous souhaitez "
-"effectuer cette analyse. Pour cela, veuillez déplacer les élements choisis dans le cadre de droite."
+"Sélectionnez le type de propulsion et la catégorie de taille pour "
+"lesquels vous souhaitez effectuer cette analyse. Pour cela, veuillez "
+"déplacer les élements choisis dans le cadre de droite."
 
 #: templates/tool.html:134
 msgid "Year"
@@ -323,9 +340,10 @@ msgid ""
 "different time horizons, considering expected improvements in vehicles "
 "design, energy chains, etc."
 msgstr ""
-"Carculator peut modéliser les impacts environnementaux de véhicules de tourisme "
-"pour un horizon temporel donné, en considérant les progrès technologiques attendus "
-"en terme de design, motorisation, production énergétique, etc."
+"Carculator peut modéliser les impacts environnementaux de véhicules de "
+"tourisme pour un horizon temporel donné, en considérant les progrès "
+"technologiques attendus en terme de design, motorisation, production "
+"énergétique, etc."
 
 #: templates/tool.html:147
 msgid "Different powertrains, or propulsion technologies, can be considered."
@@ -336,8 +354,9 @@ msgid ""
 "Different size categories are available, for any given powertrain type. "
 "For reference, a VW Golf corresponds to the Lower medium size class."
 msgstr ""
-"Différentes catégories de taille sont disponibles, pour n'importe quel type de propulsion. "
-"Pour référence, une VW Golf appartient à la catégorie 'Moyenne inférieure'."
+"Différentes catégories de taille sont disponibles, pour n'importe quel "
+"type de propulsion. Pour référence, une VW Golf appartient à la catégorie"
+" 'Moyenne inférieure'."
 
 #: templates/tool.html:163 templates/tool.html:192 templates/tool.html:222
 msgid "Choice"
@@ -356,8 +375,9 @@ msgid ""
 "If you are unsure about the definitions of powertrains and sizes "
 "carculator uses, you may look up a familiar car model below."
 msgstr ""
-"Si vous avez des doutes quant à la catégorie de taille à laquelle appartient "
-"un véhicule, vous pouvez l'obtenir en cherchant un modèle spécifique ci-dessous."
+"Si vous avez des doutes quant à la catégorie de taille à laquelle "
+"appartient un véhicule, vous pouvez l'obtenir en cherchant un modèle "
+"spécifique ci-dessous."
 
 #: templates/tool.html:292
 msgid "MANUFACTURE"
@@ -383,11 +403,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
 "driving cycle."
 msgstr ""
-"Les cycles de conduite sont utilisés pour représenter une utilisation moyenne "
-"du véchicule sur le temps. Les intervalles de vitesse, définis à partir du "
-"cycle de conduite, sont également utilisés afin de localiser les émissions directes "
-" du véhicule. Par exemple, les émissions (polluants, bruit) calculées pour une vitesse inférieure à "
-"50 km/h seront émises dans un environnment urbain."
+"Les cycles de conduite sont utilisés pour représenter une utilisation "
+"moyenne du véchicule sur le temps. Les intervalles de vitesse, définis à "
+"partir du cycle de conduite, sont également utilisés afin de localiser "
+"les émissions directes  du véhicule. Par exemple, les émissions "
+"(polluants, bruit) calculées pour une vitesse inférieure à 50 km/h seront"
+" émises dans un environnment urbain."
 
 #: templates/tool.html:336
 msgid "Geographical conditions"
@@ -402,10 +423,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will be "
 "selected accordingly."
 msgstr ""
-"Le pays défini pour l'utilisation du véhicule est déterminant pour plusieurs raisons. "
-"Il conditionne, par exemple, le mix électrique choisi pour recharger la batterie d'un "
-"véhicule électrique ou pour produire l'hydrogène utilisé par un véhicule utilisant une pile à combustible. "
-"Le pays choisi définit également les pertes observées dans le réseau électrique."
+"Le pays défini pour l'utilisation du véhicule est déterminant pour "
+"plusieurs raisons. Il conditionne, par exemple, le mix électrique choisi "
+"pour recharger la batterie d'un véhicule électrique ou pour produire "
+"l'hydrogène utilisé par un véhicule utilisant une pile à combustible. Le "
+"pays choisi définit également les pertes observées dans le réseau "
+"électrique."
 
 #: templates/tool.html:344
 msgid "Electricity mix"
@@ -415,16 +438,13 @@ msgstr "Mix électrique"
 msgid ""
 "Electricity mixes will determine the carbon intensity of the electricity "
 "necessary\n"
-"\t\t\t\t\t\t\t\t\t\tthe operate teh car during its Use phase. This may "
-"concern, for example, the electricity to charge teh battery fo an "
+"\t\t\t\t\t\t\t\t\t\tto operate the car during its Use phase. This may "
+"concern, for example, the electricity to charge the battery fo an "
 "electric vehicle,\n"
-"\t\t\t\t\t\t\t\t\t\tbut also teh electricity needed to operate the "
+"\t\t\t\t\t\t\t\t\t\tbut also the electricity needed to operate the "
 "electrolysis process to produce hydrogen\n"
 "\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
 msgstr ""
-"Le mix électrique suggéré (ou défini par l'utilisateur) sera utilisé pour pour "
-"modéliser l'aport d'électricité pour toute activité qui en a besoin lors de l'utilisation du véhicule. "
-"Par exemple, la charge d'une batterie, ou la production d'hydrogène par électrolyse."
 
 #: templates/tool.html:353
 msgid "Passengers"
@@ -437,10 +457,11 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
 "passenger mass, the cargo mass and the curb mass of the vehicle."
 msgstr ""
-"Chaque passager a une masse corporelle moyenne de 75 kilogrammes. Le nombre moyen de passagers "
-"en Europe pour un véhicule de tourisme est de 1.5. La masse totale de conduite est égale à la masse "
-"du véchicule à vide plus la masse de passagers (nombre de passagers x 75 kg) et que la masse des "
-"objets transportés."
+"Chaque passager a une masse corporelle moyenne de 75 kilogrammes. Le "
+"nombre moyen de passagers en Europe pour un véhicule de tourisme est de "
+"1.5. La masse totale de conduite est égale à la masse du véchicule à vide"
+" plus la masse de passagers (nombre de passagers x 75 kg) et que la masse"
+" des objets transportés."
 
 #: templates/tool.html:359
 msgid "Lifetime"
@@ -454,9 +475,11 @@ msgid ""
 " and energy requirement over time, as well as\n"
 "\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
 msgstr ""
-"Le kilométrage total du véhicule est utilisé afin de normaliser les résultats par kilomètre parcouru. "
-"Le kilométrage annuel est utilisé afin de différencier les émissions sur le temps (par exemple, l'évolution "
-"du mix électrique année après année), ainsi que pour calculer l'amortissement du véhicule."
+"Le kilométrage total du véhicule est utilisé afin de normaliser les "
+"résultats par kilomètre parcouru. Le kilométrage annuel est utilisé afin "
+"de différencier les émissions sur le temps (par exemple, l'évolution du "
+"mix électrique année après année), ainsi que pour calculer "
+"l'amortissement du véhicule."
 
 #: templates/tool.html:372
 msgid "Select a driving cycle"
@@ -472,7 +495,8 @@ msgid ""
 " 2040 for the selected country.\n"
 "\t\t\t\t\t\t\t\t\tYou may modify them."
 msgstr ""
-"Nos modèles de projection suggèrent les mixes électriques suivant pour 2017 et 2040:"
+"Nos modèles de projection suggèrent les mixes électriques suivant pour "
+"2017 et 2040:"
 
 #: templates/tool.html:408
 msgid "Hydro"
@@ -557,10 +581,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto the realization of the functional unit "
 "specified, departing from a steady-state system."
 msgstr ""
-"Une évaluation des impacts environnementaux qui utilise un algorithme dit 'attributionnel' reflète les "
-"impacts moyens associés au cycle de vie moyen du véhicule pour l'unité fonctionnelle spécifiee. "
-"Une évalution utilisant un algorithme dit 'conséquentiel' reflète les impacts environnmentaux associés à "
-"la réalisation marginale de l'unité fonctionelle."
+"Une évaluation des impacts environnementaux qui utilise un algorithme dit"
+" 'attributionnel' reflète les impacts moyens associés au cycle de vie "
+"moyen du véhicule pour l'unité fonctionnelle spécifiee. Une évalution "
+"utilisant un algorithme dit 'conséquentiel' reflète les impacts "
+"environnmentaux associés à la réalisation marginale de l'unité "
+"fonctionelle."
 
 #: templates/tool.html:566
 msgid "Attributional"
@@ -579,8 +605,10 @@ msgid ""
 "\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto define a fleet composition over time."
 msgstr ""
-"Trois types d'unité fonctionnelle sont proposés afin de comparer les performances environnementales "
-"des véhicules choisis: par véhicule-kilomètre parcouru, pour un nombre de kilomètres défini ou pour une composition de flotte donnée."
+"Trois types d'unité fonctionnelle sont proposés afin de comparer les "
+"performances environnementales des véhicules choisis: par véhicule-"
+"kilomètre parcouru, pour un nombre de kilomètres défini ou pour une "
+"composition de flotte donnée."
 
 #: templates/tool.html:586
 msgid "Unit, per km"
@@ -594,6 +622,10 @@ msgstr "Pour une distance donnée"
 msgid "Fleet"
 msgstr "Pour une composition de flotte spécifique"
 
+#: templates/tool.html:607
+msgid "Specify fleet composition"
+msgstr "Spécifiez la composition de la flotte"
+
 #: templates/tool.html:614
 msgid ""
 "A simple calculation will use \"most likely\" values as model inputs and "
@@ -606,8 +638,9 @@ msgid ""
 "This leads to the generation of results\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
 msgstr ""
-"Le mode de calcul 'simple' fournit au modèle de calcul du cycle de vie des valeurs moyennes, alors que "
-"le mode de calcul avec incertitude fournit au modèle des invertalles de probabilité."
+"Le mode de calcul 'simple' fournit au modèle de calcul du cycle de vie "
+"des valeurs moyennes, alors que le mode de calcul avec incertitude "
+"fournit au modèle des invertalles de probabilité."
 
 #: templates/tool.html:624
 msgid "Simple calculation"
@@ -641,4 +674,49 @@ msgstr "Mode de calcul incluant les incertitudes"
 
 #~ msgid "All right reserved"
 #~ msgstr "Tout droit réservé"
+
+#~ msgid ""
+#~ "has been developed in the context "
+#~ "of the SCCER project financed bz "
+#~ "XXX. Additionally, we are receiving "
+#~ "support form XXX and XXX."
+#~ msgstr ""
+#~ "a été développé dans le contexte "
+#~ "du projet SCCER Mobilité, financé par"
+#~ " XXX. De plus, nous recevons un "
+#~ "soutient actif de la part de XXX"
+#~ " et XXX."
+
+#~ msgid ""
+#~ "Electricity mixes will determine the "
+#~ "carbon intensity of the electricity "
+#~ "necessary\n"
+#~ "\t\t\t\t\t\t\t\t\t\tthe operate teh car "
+#~ "during its Use phase. This may "
+#~ "concern, for example, the electricity to"
+#~ " charge teh battery fo an electric"
+#~ " vehicle,\n"
+#~ "\t\t\t\t\t\t\t\t\t\tbut also teh electricity"
+#~ " needed to operate the electrolysis "
+#~ "process to produce hydrogen\n"
+#~ "\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
+#~ msgstr ""
+#~ "Le mix électrique suggéré (ou défini "
+#~ "par l'utilisateur) sera utilisé pour "
+#~ "pour modéliser l'aport d'électricité pour "
+#~ "toute activité qui en a besoin "
+#~ "lors de l'utilisation du véhicule. Par"
+#~ " exemple, la charge d'une batterie, "
+#~ "ou la production d'hydrogène par "
+#~ "électrolyse."
+
+#~ msgid ""
+#~ "has been developed in the context "
+#~ "of the SCCER Mobility project financed"
+#~ " by InnoSuisse.\n"
+#~ "\t\t\t\t\t\t\t\t\tAdditionally, we are receiving support from  and XXX."
+#~ msgstr ""
+#~ "a été développé dans le contexte "
+#~ "du projet SCCER Mobilité financé par "
+#~ "InnoSuisse. "
 
