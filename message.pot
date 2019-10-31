@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-30 17:26+0100\n"
+"POT-Creation-Date: 2019-10-31 11:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app.py:99
+#: app.py:101
 msgid "Email sent!"
 msgstr ""
 
@@ -25,61 +25,61 @@ msgstr ""
 msgid "Sorry, this category of vehicle is not available yet."
 msgstr ""
 
-#: templates/index.html:69
+#: templates/index.html:77
 msgid "HOME"
 msgstr ""
 
-#: templates/index.html:70 templates/index.html:178
+#: templates/index.html:78 templates/index.html:192
 msgid "ABOUT"
 msgstr ""
 
-#: templates/index.html:71
+#: templates/index.html:79
 msgid "FACTS"
 msgstr ""
 
-#: templates/index.html:72
+#: templates/index.html:80
 msgid "TEAM"
 msgstr ""
 
-#: templates/index.html:73
+#: templates/index.html:81
 msgid "PARTNERS"
 msgstr ""
 
-#: templates/index.html:74
+#: templates/index.html:82
 msgid "PUBLICATIONS"
 msgstr ""
 
-#: templates/index.html:75
+#: templates/index.html:83
 msgid "CONTACT US"
 msgstr ""
 
-#: templates/index.html:129
+#: templates/index.html:143
 msgid "Online"
 msgstr ""
 
-#: templates/index.html:132
+#: templates/index.html:146
 msgid ""
 "Make fast comparisons between different cars, under different scenarios. "
 "Save and export your results. Import them in your model."
 msgstr ""
 
-#: templates/index.html:133
+#: templates/index.html:147
 msgid "Try it out now!"
 msgstr ""
 
-#: templates/index.html:139
+#: templates/index.html:153
 msgid "or"
 msgstr ""
 
-#: templates/index.html:147
+#: templates/index.html:161
 msgid "Install"
 msgstr ""
 
-#: templates/index.html:159
+#: templates/index.html:173
 msgid "requires python >=3.6"
 msgstr ""
 
-#: templates/index.html:182
+#: templates/index.html:196
 msgid ""
 "is an open-source, comprehensive and transparent life cycle assessment "
 "tool for passenger cars. It allows for an economic and environmental "
@@ -87,183 +87,183 @@ msgid ""
 "supply scenarios."
 msgstr ""
 
-#: templates/index.html:195
+#: templates/index.html:209
 msgid "Clean Code"
 msgstr ""
 
-#: templates/index.html:196
+#: templates/index.html:210
 msgid "The code is kept as clean and accessible as possible."
 msgstr ""
 
-#: templates/index.html:207
+#: templates/index.html:221
 msgid "Great Features"
 msgstr ""
 
-#: templates/index.html:208
+#: templates/index.html:222
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr ""
 
-#: templates/index.html:219
+#: templates/index.html:233
 msgid "Fast Library"
 msgstr ""
 
-#: templates/index.html:220
+#: templates/index.html:234
 msgid "A Python library version allows for even more specific assessments."
 msgstr ""
 
-#: templates/index.html:231
+#: templates/index.html:245
 msgid "Compatible"
 msgstr ""
 
-#: templates/index.html:232
+#: templates/index.html:246
 msgid "Export inventories compatible with"
 msgstr ""
 
-#: templates/index.html:245
+#: templates/index.html:259
 msgid "State-of-the-art"
 msgstr ""
 
-#: templates/index.html:246
+#: templates/index.html:260
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 
-#: templates/index.html:257
+#: templates/index.html:271
 msgid "Well Documented"
 msgstr ""
 
-#: templates/index.html:258
+#: templates/index.html:272
 msgid "The library is fully tested, documented and hosted on"
 msgstr ""
 
-#: templates/index.html:283
+#: templates/index.html:297
 msgid "Some facts about"
 msgstr ""
 
-#: templates/index.html:298
+#: templates/index.html:312
 msgid "Powertrains"
 msgstr ""
 
-#: templates/index.html:311
+#: templates/index.html:325
 msgid "Size classes"
 msgstr ""
 
-#: templates/index.html:324
+#: templates/index.html:338
 msgid "Driving cycles"
 msgstr ""
 
-#: templates/index.html:337
+#: templates/index.html:351
 msgid "Parameters"
 msgstr ""
 
-#: templates/index.html:350
+#: templates/index.html:364
 msgid "Li-ion battery types"
 msgstr ""
 
-#: templates/index.html:363
+#: templates/index.html:377
 msgid "Electricity mixes"
 msgstr ""
 
-#: templates/index.html:375
+#: templates/index.html:389
 msgid "Time horizons"
 msgstr ""
 
-#: templates/index.html:388
+#: templates/index.html:402
 msgid "Cars used for calibration"
 msgstr ""
 
-#: templates/index.html:412
+#: templates/index.html:426
 msgid "OUR TEAM"
 msgstr ""
 
-#: templates/index.html:414
+#: templates/index.html:428
 msgid "The team behind the development of"
 msgstr ""
 
-#: templates/index.html:414
-msgid "sits at the Paul Scherrer Institute."
+#: templates/index.html:428
+msgid "sits at the Paul Scherrer Institute, in the "
 msgstr ""
 
-#: templates/index.html:438
+#: templates/index.html:453
 msgid "Pilot"
 msgstr ""
 
-#: templates/index.html:462
+#: templates/index.html:477
 msgid "Pit-stop manager"
 msgstr ""
 
-#: templates/index.html:480
-msgid "Car designer"
+#: templates/index.html:495
+msgid "Car designer, working at INFRAS"
 msgstr ""
 
-#: templates/index.html:500
+#: templates/index.html:516
 msgid "Mechanic"
 msgstr ""
 
-#: templates/index.html:525
+#: templates/index.html:541
 msgid "OUR PARTNERS"
 msgstr ""
 
-#: templates/index.html:527
+#: templates/index.html:543
 msgid "carculator was developed within the "
 msgstr ""
 
-#: templates/index.html:528
+#: templates/index.html:544
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
 msgstr ""
 
-#: templates/index.html:530 templates/index.html:532
+#: templates/index.html:546 templates/index.html:548
 msgid "and "
 msgstr ""
 
-#: templates/index.html:531
+#: templates/index.html:547
 msgid "as well as "
 msgstr ""
 
-#: templates/index.html:593
+#: templates/index.html:609
 msgid "Publications on"
 msgstr ""
 
-#: templates/index.html:593
+#: templates/index.html:609
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:667
+#: templates/index.html:741
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:667
+#: templates/index.html:741
 msgid "US"
 msgstr ""
 
-#: templates/index.html:669
+#: templates/index.html:743
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:693
+#: templates/index.html:767
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:700
+#: templates/index.html:774
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:701
+#: templates/index.html:775
 msgid ""
 "Write to use if you have questions about the tool, or if you would like "
 "to discuss the methods, results, etc."
 msgstr ""
 
-#: templates/index.html:749 templates/result.html:112 templates/tool.html:662
+#: templates/index.html:823 templates/result.html:112 templates/tool.html:662
 msgid "Copyright"
 msgstr ""
 
-#: templates/index.html:749 templates/result.html:112 templates/tool.html:662
+#: templates/index.html:823 templates/result.html:112 templates/tool.html:662
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:750 templates/result.html:113 templates/tool.html:663
+#: templates/index.html:824 templates/result.html:113 templates/tool.html:663
 msgid "All rights reserved"
 msgstr ""
 
@@ -439,7 +439,7 @@ msgstr ""
 
 #: templates/tool.html:393
 msgid ""
-"Our projection models suggest the following electricity mixes in 2017 and"
+"Our projection models suggest the following electricity mixes in 2018 and"
 " 2040 for the selected country.\n"
 "\t\t\t\t\t\t\t\t\tYou may modify them."
 msgstr ""
