@@ -173,11 +173,11 @@
         	var imp = config['inclusions']['impact category'][0]
         	var new_config = config
         	new_config['rendererOptions']['plotly']['yaxis']['title'] = list_unit[imp]
+        	Plotly.relayout($("#output"), update)
             }
       });
 
-      $("#output").on('plotly_redraw', function(){
-      	alert('plot redrawn')})
+
 
 	</script>
 </body>
