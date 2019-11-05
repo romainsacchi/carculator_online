@@ -153,6 +153,7 @@
         };
 
     var data = {{data|safe}};
+    var imp;
     $("#output").pivotUI(
       data, {
         rows: ["impact category", "category"],
@@ -170,14 +171,12 @@
         							title: {text: 'Climate change impacts, per vehicle-kilometer'}}},
 
         onRefresh: function(config){
-        	var imp = config['inclusions']['impact category'][0]
-        	$("#output").on('plotly_afterplot', refresh_graph(imp));
-
+        	imp = config['inclusions']['impact category'][0]
             }
       });
 
 
-
+	$("#output").on('plotly_afterplot', refresh_graph(imp));
   function refresh_graph(imp){
   	var update = {
 				title: imp, // updates the title
