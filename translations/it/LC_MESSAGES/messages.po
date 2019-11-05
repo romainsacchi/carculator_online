@@ -202,7 +202,7 @@ msgstr "Manager del pit-stop"
 
 #: templates/index.html:480
 msgid "Car designer"
-msgstr ""
+msgstr "Designer di automobile"
 
 #: templates/index.html:500
 msgid "Mechanic"
@@ -214,21 +214,23 @@ msgstr "I nostri partner"
 
 #: templates/index.html:527
 msgid "carculator was developed within the "
-msgstr ""
+msgstr "carculator è stato sviluppato all’interno del "
 
 #: templates/index.html:528
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
 msgstr ""
+"fondato da innosuisse. Abbiamo ricevuto finanziamenti supplementari "
+"tramite i progetti di ricerca "
 
 #: templates/index.html:530 templates/index.html:532
 msgid "and "
-msgstr ""
+msgstr "e "
 
 #: templates/index.html:531
 msgid "as well as "
-msgstr ""
+msgstr "così come "
 
 #: templates/index.html:593
 msgid "Publications on"
@@ -280,31 +282,31 @@ msgstr "Tutti i diritti sono riservati"
 
 #: templates/tool.html:8
 msgid "Carculator : Configuration"
-msgstr ""
+msgstr "Carculator: Configurazione"
 
 #: templates/tool.html:80
 msgid "Calculate"
-msgstr ""
+msgstr "Calcolare"
 
 #: templates/tool.html:82
 msgid "Reset parameters"
-msgstr ""
+msgstr "Resettare i parametri"
 
 #: templates/tool.html:84
 msgid "Share configuration"
-msgstr ""
+msgstr "Condividi la configurazione"
 
 #: templates/tool.html:106
 msgid "SCOPE"
-msgstr ""
+msgstr "SCOPO"
 
 #: templates/tool.html:110
 msgid "Selection of vehicle type"
-msgstr ""
+msgstr "Selezione del tipo di veicolo"
 
 #: templates/tool.html:126
 msgid "Year, size and powertrain selection"
-msgstr ""
+msgstr "Anno, dimensioni e selezione del gruppo di propulsione"
 
 #: templates/tool.html:127
 msgid ""
@@ -312,18 +314,20 @@ msgid ""
 "assessment of. You may do so by moving elements from one frame to the "
 "other."
 msgstr ""
+"Seleziona i tipi di gruppo di propulsione e le classi di dimensioni per i quali desideri condurre l’analisi. "
+"Puoi farlo spostando gli elementi da un riquadro all’altro."
 
 #: templates/tool.html:134
 msgid "Year"
-msgstr ""
+msgstr "Anno"
 
 #: templates/tool.html:135
 msgid "Powertrain"
-msgstr ""
+msgstr "Gruppo di propulsione"
 
 #: templates/tool.html:136
 msgid "Size"
-msgstr ""
+msgstr "Dimensioni"
 
 #: templates/tool.html:142
 msgid ""
@@ -331,46 +335,52 @@ msgid ""
 "different time horizons, considering expected improvements in vehicles "
 "design, energy chains, etc."
 msgstr ""
+""Carculator può modellare gli impatti del ciclo di vita di autovetture per diversi orizzonti temporali, tenendo
+ in considerazione i miglioramenti previsti nel design dei veicoli,  catene energetiche, etc."
 
 #: templates/tool.html:147
 msgid "Different powertrains, or propulsion technologies, can be considered."
-msgstr ""
+msgstr "Diversi gruppi di propulsione, o tecnologie di propulsione, possono essere considerate."
 
 #: templates/tool.html:152
 msgid ""
 "Different size categories are available, for any given powertrain type. "
 "For reference, a VW Golf corresponds to the Lower medium size class."
 msgstr ""
+"Diverse categorie di dimensioni sono disponibili, per ogni determinato tipo di gruppo di propulsione."
+"Come riferimento, una Golf VW corrisponde alla classe di dimensioni 'Inferiore-Medio' "
 
 #: templates/tool.html:163 templates/tool.html:192 templates/tool.html:222
 msgid "Choice"
-msgstr ""
+msgstr "Scelta"
 
 #: templates/tool.html:164 templates/tool.html:193 templates/tool.html:223
 msgid "Selection"
-msgstr ""
+msgstr "Selezione"
 
 #: templates/tool.html:249
 msgid "What is what?"
-msgstr ""
+msgstr "Cos’è?"
 
 #: templates/tool.html:250
 msgid ""
 "If you are unsure about the definitions of powertrains and sizes "
 "carculator uses, you may look up a familiar car model below."
 msgstr ""
+"Se hai dei dubbi sulle definizioni di 'gruppi di propulsione' e 'dimensioni' usate da carculator, "
+"puoi dare un’occhiata a un familiare modello di vettura qui sotto."
 
 #: templates/tool.html:292
 msgid "MANUFACTURE"
-msgstr ""
+msgstr "FABBRICAZIONE"
 
 #: templates/tool.html:319
 msgid "USE"
-msgstr ""
+msgstr "USO"
 
 #: templates/tool.html:325
 msgid "Driving cycle"
-msgstr ""
+msgstr "Ciclo di guida"
 
 #: templates/tool.html:327
 msgid ""
@@ -384,10 +394,15 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
 "driving cycle."
 msgstr ""
+"I cicli di guida vogliono rappresentare le reali condizioni d’uso del veicolo. Carculator usa il ciclo di guida per
+ ottenere le caratteristiche di accelerazione del veicolo nel corso del tempo. "
+ "Usa anche gli intervalli di velocità allo scopo di localizzare le emissioni.
+  Ad esempio, le emissioni che avvengono sotto i 50km/h sono associate al contesto di aria urbana. "
+  "Tutti i veicoli sono confrontati con lo stesso ciclo di guida."
 
 #: templates/tool.html:336
 msgid "Geographical conditions"
-msgstr ""
+msgstr "Condizioni geografiche"
 
 #: templates/tool.html:338
 msgid ""
@@ -398,10 +413,13 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will be "
 "selected accordingly."
 msgstr ""
+"Lo Stato interessato influenzerà molti parametri importanti nell’analisi del ciclo di vita dei veicoli. "
+"Per esempio, il mix energetico usato per ricaricare le batterie dei veicoli elettrici o per produrre idrogeno
+ tramite elettrolisi verrà selezionato di conseguenza."
 
 #: templates/tool.html:344
 msgid "Electricity mix"
-msgstr ""
+msgstr "Mix energetico"
 
 #: templates/tool.html:346
 msgid ""
@@ -414,10 +432,14 @@ msgid ""
 "electrolysis process to produce hydrogen\n"
 "\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
 msgstr ""
+"I mix energetici determineranno l’intensità  di carbonio dell’elettricità necessaria per far funzionare
+ il veicolo durante la sua fase di utilizzo. Ciò potrebbe riguardare, ad esempio, l’elettricità richiesta per
+ ricaricare la batteria di un veicolo elettrico, o anche quella necessaria al processo di elettrolisi per la
+ produzione di idrogeno nel caso di veicolo alimentato con fuel cell. "
 
 #: templates/tool.html:353
 msgid "Passengers"
-msgstr ""
+msgstr "Passeggeri"
 
 #: templates/tool.html:355
 msgid ""
@@ -426,10 +448,13 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
 "passenger mass, the cargo mass and the curb mass of the vehicle."
 msgstr ""
+msgstr "Ciascun passeggero ha una massa corporea di 75 chilogrammi. Il numero medio di passeggeri per veicolo in
+ Europa è pari a 1.5. La massa totale di guida corrisponde pertanto alla somma della massa totale dei passeggeri,
+  della massa della merce trasportata e del peso a vuoto del veicolo."
 
 #: templates/tool.html:359
 msgid "Lifetime"
-msgstr ""
+msgstr "Durata"
 
 #: templates/tool.html:361
 msgid ""
@@ -439,14 +464,17 @@ msgid ""
 " and energy requirement over time, as well as\n"
 "\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
 msgstr ""
+"Il chilometraggio totale della macchina è usato per normalizzare gli impatti del ciclo di vita per chilometro
+ effettuato. Il chilometraggio annuale è usato per differenziare le emissioni e il consumo di energia nel corso
+  del tempo, così come per calcolare i costi ammortizzati di proprietà."
 
 #: templates/tool.html:372
 msgid "Select a driving cycle"
-msgstr ""
+msgstr "Seleziona un ciclo di guida"
 
 #: templates/tool.html:388
 msgid "Select the country where the vehicles should be operated:"
-msgstr ""
+msgstr "Seleziona lo Stato dove i veicoli dovrebbero essere utilizzati:"
 
 #: templates/tool.html:393
 msgid ""
@@ -454,14 +482,15 @@ msgid ""
 " 2040 for the selected country.\n"
 "\t\t\t\t\t\t\t\t\tYou may modify them."
 msgstr ""
+"I nostri modelli di proiezione suggeriscono i seguenti mix energetici nel 2017 e nel 2040 per gli Stati selezionati."
 
 #: templates/tool.html:408
 msgid "Hydro"
-msgstr ""
+msgstr "Idroelettrico"
 
 #: templates/tool.html:416
 msgid "Nuclear"
-msgstr ""
+msgstr "Nucleare"
 
 #: templates/tool.html:423
 msgid "Gas"
@@ -469,11 +498,11 @@ msgstr ""
 
 #: templates/tool.html:430
 msgid "Solar"
-msgstr ""
+msgstr "Solare"
 
 #: templates/tool.html:437
 msgid "Wind"
-msgstr ""
+msgstr "Eolico"
 
 #: templates/tool.html:444
 msgid "Biomass"
