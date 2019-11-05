@@ -306,7 +306,7 @@ msgstr "Selezione del tipo di veicolo"
 
 #: templates/tool.html:126
 msgid "Year, size and powertrain selection"
-msgstr "Anno, dimensioni e selezione del gruppo di propulsione"
+msgstr "Seleziona anno, dimensioni e gruppo di propulsione"
 
 #: templates/tool.html:127
 msgid ""
@@ -314,7 +314,7 @@ msgid ""
 "assessment of. You may do so by moving elements from one frame to the "
 "other."
 msgstr ""
-"Seleziona i tipi di gruppo di propulsione e le classi di dimensioni per i quali desideri condurre l’analisi. "
+"Seleziona il gruppo di propulsione e le classi di dimensioni per i quali desideri condurre l’analisi. "
 "Puoi farlo spostando gli elementi da un riquadro all’altro."
 
 #: templates/tool.html:134
@@ -366,8 +366,8 @@ msgid ""
 "If you are unsure about the definitions of powertrains and sizes "
 "carculator uses, you may look up a familiar car model below."
 msgstr ""
-"Se hai dei dubbi sulle definizioni di 'gruppi di propulsione' e 'dimensioni' usate da carculator, "
-"puoi dare un’occhiata a un familiare modello di vettura qui sotto."
+"Se hai dei dubbi sulle definizioni di 'gruppo di propulsione' e 'dimensioni' usate da carculator, "
+"qui sotto puoi dare un’occhiata a un modello di vettura a te familiare."
 
 #: templates/tool.html:292
 msgid "MANUFACTURE"
@@ -413,7 +413,7 @@ msgid ""
 "selected accordingly."
 msgstr ""
 "Lo Stato interessato influenzerà molti parametri importanti nell’analisi del ciclo di vita dei veicoli. "
-"Per esempio, il mix energetico usato per ricaricare le batterie dei veicoli elettrici o per produrre idrogeno tramite elettrolisi verrà selezionato di conseguenza."
+"Per esempio, il mix energetico usato per ricaricare le batterie dei veicoli elettrici o per produrre idrogeno tramite elettrolisi."
 
 #: templates/tool.html:344
 msgid "Electricity mix"
