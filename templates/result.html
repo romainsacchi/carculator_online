@@ -171,9 +171,12 @@
 
         onRefresh: function(config){
         	var imp = config['inclusions']['impact category'][0]
-        	refresh_graph(imp);
+        	$("#output").on('plotly_afterplot', refresh_graph(imp));
+
             }
       });
+
+
 
   function refresh_graph(imp){
   	var update = {
