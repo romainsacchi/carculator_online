@@ -335,8 +335,7 @@ msgid ""
 "different time horizons, considering expected improvements in vehicles "
 "design, energy chains, etc."
 msgstr ""
-""Carculator può modellare gli impatti del ciclo di vita di autovetture per diversi orizzonti temporali, tenendo
- in considerazione i miglioramenti previsti nel design dei veicoli,  catene energetiche, etc."
+"Carculator può modellare gli impatti del ciclo di vita di autovetture per diversi orizzonti temporali, tenendo in considerazione i miglioramenti previsti nel design dei veicoli,  catene energetiche, etc."
 
 #: templates/tool.html:147
 msgid "Different powertrains, or propulsion technologies, can be considered."
@@ -394,11 +393,11 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
 "driving cycle."
 msgstr ""
-"I cicli di guida vogliono rappresentare le reali condizioni d’uso del veicolo. Carculator usa il ciclo di guida per
- ottenere le caratteristiche di accelerazione del veicolo nel corso del tempo. "
- "Usa anche gli intervalli di velocità allo scopo di localizzare le emissioni.
-  Ad esempio, le emissioni che avvengono sotto i 50km/h sono associate al contesto di aria urbana. "
-  "Tutti i veicoli sono confrontati con lo stesso ciclo di guida."
+"I cicli di guida vogliono rappresentare le reali condizioni d’uso del veicolo. "
+"Carculator usa il ciclo di guida per ottenere le caratteristiche di accelerazione del veicolo nel corso del tempo. "
+"Usa anche gli intervalli di velocità allo scopo di localizzare le emissioni. "
+"Ad esempio, le emissioni che avvengono sotto i 50km/h sono associate al contesto di aria urbana. "
+"Tutti i veicoli sono confrontati con lo stesso ciclo di guida."
 
 #: templates/tool.html:336
 msgid "Geographical conditions"
@@ -414,8 +413,7 @@ msgid ""
 "selected accordingly."
 msgstr ""
 "Lo Stato interessato influenzerà molti parametri importanti nell’analisi del ciclo di vita dei veicoli. "
-"Per esempio, il mix energetico usato per ricaricare le batterie dei veicoli elettrici o per produrre idrogeno
- tramite elettrolisi verrà selezionato di conseguenza."
+"Per esempio, il mix energetico usato per ricaricare le batterie dei veicoli elettrici o per produrre idrogeno tramite elettrolisi verrà selezionato di conseguenza."
 
 #: templates/tool.html:344
 msgid "Electricity mix"
@@ -432,10 +430,8 @@ msgid ""
 "electrolysis process to produce hydrogen\n"
 "\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
 msgstr ""
-"I mix energetici determineranno l’intensità  di carbonio dell’elettricità necessaria per far funzionare
- il veicolo durante la sua fase di utilizzo. Ciò potrebbe riguardare, ad esempio, l’elettricità richiesta per
- ricaricare la batteria di un veicolo elettrico, o anche quella necessaria al processo di elettrolisi per la
- produzione di idrogeno nel caso di veicolo alimentato con fuel cell. "
+"I mix energetici determineranno l’intensità  di carbonio dell’elettricità necessaria per far funzionare il veicolo durante la sua fase di utilizzo. "
+"Ciò potrebbe riguardare, ad esempio, l’elettricità richiesta per ricaricare la batteria di un veicolo elettrico, o anche quella necessaria al processo di elettrolisi per la produzione di idrogeno nel caso di veicolo alimentato con fuel cell. "
 
 #: templates/tool.html:353
 msgid "Passengers"
@@ -448,9 +444,8 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
 "passenger mass, the cargo mass and the curb mass of the vehicle."
 msgstr ""
-msgstr "Ciascun passeggero ha una massa corporea di 75 chilogrammi. Il numero medio di passeggeri per veicolo in
- Europa è pari a 1.5. La massa totale di guida corrisponde pertanto alla somma della massa totale dei passeggeri,
-  della massa della merce trasportata e del peso a vuoto del veicolo."
+msgstr "Ciascun passeggero ha una massa corporea di 75 chilogrammi. "
+"Il numero medio di passeggeri per veicolo in Europa è pari a 1.5. La massa totale di guida corrisponde pertanto alla somma della massa totale dei passeggeri, della massa della merce trasportata e del peso a vuoto del veicolo."
 
 #: templates/tool.html:359
 msgid "Lifetime"
@@ -464,9 +459,8 @@ msgid ""
 " and energy requirement over time, as well as\n"
 "\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
 msgstr ""
-"Il chilometraggio totale della macchina è usato per normalizzare gli impatti del ciclo di vita per chilometro
- effettuato. Il chilometraggio annuale è usato per differenziare le emissioni e il consumo di energia nel corso
-  del tempo, così come per calcolare i costi ammortizzati di proprietà."
+"Il chilometraggio totale della macchina è usato per normalizzare gli impatti del ciclo di vita per chilometro effettuato. "
+"Il chilometraggio annuale è usato per differenziare le emissioni e il consumo di energia nel corso del tempo, così come per calcolare i costi ammortizzati di proprietà."
 
 #: templates/tool.html:372
 msgid "Select a driving cycle"
@@ -506,55 +500,55 @@ msgstr "Eolico"
 
 #: templates/tool.html:444
 msgid "Biomass"
-msgstr ""
+msgstr "Biomasse"
 
 #: templates/tool.html:451
 msgid "Coal"
-msgstr ""
+msgstr "Carbone"
 
 #: templates/tool.html:458
 msgid "Oil"
-msgstr ""
+msgstr "Petrolio"
 
 #: templates/tool.html:465
 msgid "Geothermal"
-msgstr ""
+msgstr "Geotermia"
 
 #: templates/tool.html:472
 msgid "Waste"
-msgstr ""
+msgstr "Rifiuti"
 
 #: templates/tool.html:484
 msgid "Adjust the number of passengers"
-msgstr ""
+msgstr "Modifica il numero di passeggeri"
 
 #: templates/tool.html:494
 msgid "Adjust the cargo mass"
-msgstr ""
+msgstr "Modifica la massa della merce"
 
 #: templates/tool.html:501
 msgid "Adjust the total mileage"
-msgstr ""
+msgstr "Aggiusta il chilometraggio totale"
 
 #: templates/tool.html:507
 msgid "Adjust the yearly mileage"
-msgstr ""
+msgstr "Aggiusta il chilometraggio annuale"
 
 #: templates/tool.html:534
 msgid "CALCULATION SETTINGS"
-msgstr ""
+msgstr "IMPOSTAZIONI DI CALCOLO"
 
 #: templates/tool.html:545
 msgid "Linking algorithm"
-msgstr ""
+msgstr "Algoritmo di calcolo"
 
 #: templates/tool.html:547
 msgid "Functional unit"
-msgstr ""
+msgstr "Unità funzionale"
 
 #: templates/tool.html:548
 msgid "Calculation mode"
-msgstr ""
+msgstr "Modo di calcolo"
 
 #: templates/tool.html:556
 msgid ""
@@ -567,14 +561,16 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto the realization of the functional unit "
 "specified, departing from a steady-state system."
 msgstr ""
+"Un algoritmo di collegamento denominato 'attributivo'” rispecchierà gli impatti medi associati al ciclo di vita del veicolo, in proporzione all’unità funzionale specificata. "
+ "Un algoritmo di collegamento denominato 'consequenziale' rispecchierà invece gli impatti marginali associati alla realizzazione dell’unità funzionale specificata, partendo da un sistema stazionario."
 
 #: templates/tool.html:566
 msgid "Attributional"
-msgstr ""
+msgstr "Attributivo"
 
 #: templates/tool.html:572
 msgid "Consequential"
-msgstr ""
+msgstr "Consequenziale"
 
 #: templates/tool.html:578
 msgid ""
@@ -585,22 +581,25 @@ msgid ""
 "\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto define a fleet composition over time."
 msgstr ""
+"Sono disponibili tre tipi di unità funzionale. "
+"L’utente può innanzitutto optare per un confronto normalizzato per chilometro di guida. "
+ "In alternativa, può scegliere una specifica distanza di guida. Infine, è anche possibile definire una composizione della flotta nel corso del tempo."
 
 #: templates/tool.html:586
 msgid "Unit, per km"
-msgstr ""
+msgstr "Unità, per km"
 
 #: templates/tool.html:592
 msgid "Driven distance"
-msgstr ""
+msgstr "Distanza di guida"
 
 #: templates/tool.html:601
 msgid "Fleet"
-msgstr ""
+msgstr "Flotta"
 
 #: templates/tool.html:607
 msgid "Specify fleet composition"
-msgstr ""
+msgstr "Specifica la composizione della flotta"
 
 #: templates/tool.html:614
 msgid ""
@@ -614,45 +613,14 @@ msgid ""
 "This leads to the generation of results\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
 msgstr ""
+"Un calcolo semplificato adopererà i valori 'più probabili' come input e output del modello. "
+"Ciò conduce al risultato puntuale 'più probabile'. Il calcolo di propagazione dell’errore con approccio Monte Carlo, invece, considererà l’incertezza associata ai valori di input e output del modello. "
+"Ciò comporta la generazione di risultati rappresentati da intervalli di probabilità"
 
 #: templates/tool.html:624
 msgid "Simple calculation"
-msgstr ""
+msgstr "Calcolo semplificato"
 
 #: templates/tool.html:630
 msgid "Error propagation (Monte Carlo)"
-msgstr ""
-
-#~ msgid ""
-#~ "has been developed in the context "
-#~ "of the SCCER project financed bz "
-#~ "XXX. Additionally, we are receiving "
-#~ "support form XXX and XXX."
-#~ msgstr ""
-#~ "è stato sviluppato nel quadro del "
-#~ "progetto SCCER, finanziato da XXX. "
-#~ "Inoltre, stiamo ricevendo supporto da "
-#~ "XXX e YYY."
-
-#~ msgid ""
-#~ "Electricity mixes will determine the "
-#~ "carbon intensity of the electricity "
-#~ "necessary\n"
-#~ "\t\t\t\t\t\t\t\t\t\tthe operate teh car "
-#~ "during its Use phase. This may "
-#~ "concern, for example, the electricity to"
-#~ " charge teh battery fo an electric"
-#~ " vehicle,\n"
-#~ "\t\t\t\t\t\t\t\t\t\tbut also teh electricity"
-#~ " needed to operate the electrolysis "
-#~ "process to produce hydrogen\n"
-#~ "\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "has been developed in the context "
-#~ "of the SCCER Mobility project financed"
-#~ " by InnoSuisse.\n"
-#~ "\t\t\t\t\t\t\t\t\tAdditionally, we are receiving support from  and XXX."
-#~ msgstr ""
-
+msgstr "Propagazione dell’errore (Monte Carlo)"
