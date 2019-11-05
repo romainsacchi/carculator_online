@@ -165,6 +165,7 @@
         rendererName: "Stacked Bar Chart",
         renderers: $.extend(
             $.pivotUtilities.renderers,
+            $.pivotUtilities.export_renderers,
           $.pivotUtilities.plotly_renderers
         ),
         rendererOptions: {plotly: { yaxis: { title: list_unit['climate change']},
@@ -176,7 +177,7 @@
       });
 
 
-	$("#output").on('plotly_afterplot', refresh_graph(imp));
+	$("#output").on('plotly_afterplot', alert('afterplot'));
   function refresh_graph(imp){
   	var update = {
 				title: imp, // updates the title
