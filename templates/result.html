@@ -178,6 +178,8 @@
 
 
 	$("#output").on('plotly_afterplot', alert('afterplot'));
+	$("#output").on('plotly_restyle', alert('restyle'));
+	$("#output").on('plotly_relayout', alert('relayout'));
   function refresh_graph(imp){
   	var update = {
 				title: imp, // updates the title
