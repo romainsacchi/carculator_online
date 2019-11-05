@@ -171,15 +171,17 @@
 
         onRefresh: function(config){
         	var imp = config['inclusions']['impact category'][0]
-        	var new_config = config
-        	new_config['rendererOptions']['plotly']['yaxis']['title'] = list_unit[imp]
-        	var update = {
+        	refresh_graph(imp);
+            }
+      });
+
+  function refresh_graph(imp){
+  	var update = {
 				title: imp, // updates the title
 				'yaxis.title': list_unit[imp]     // updates the end of the yaxis range
 			};
-        	Plotly.relayout($("#output"), update)
-            }
-      });
+  	Plotly.relayout($("#output"), update)
+  };
 
 
 
