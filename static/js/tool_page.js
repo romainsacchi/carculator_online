@@ -1715,9 +1715,7 @@ slider_cargo.noUiSlider.on('update', function (values, handle) {
     $('#cargo-value').text(values + " kg");
 });
 
-function get_results(){
-
-
+function collect_configuration(){
     // If vehicle type selected
     if (!$('#vehicle_type input:radio:checked').length > 0) {
         $.notify({
@@ -1892,8 +1890,13 @@ function get_results(){
             });
         };
     });
-    console.log(data);
 
+    return data;
+    send_request(data);
+}
+
+function get_results(){
+    var data = collect_configuration();
     var opts = {
       method: 'POST',
       headers: {
@@ -1931,14 +1934,20 @@ function get_results(){
                     }
                     })
          }, 3000);
-
-
-
-
-
     });
+};
 
+function set_mix_to_zero(){
+    $.each($('#electricity_mix_table input'), function() {
+        $(this).val(0);
+        });
+};
 
+function save_configuration(){
 
-}
+    var data = collect_configuration();
+    
+
+};
+
 
