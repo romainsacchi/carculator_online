@@ -120,6 +120,7 @@ d_pt = {
 
 d_rev_pt = {v:k for k, v, in d_pt.items()}
 
+
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
     array = arr.interp(year=d[('Functional unit',)]['year'],  kwargs={'fill_value': 'extrapolate'})
