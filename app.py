@@ -128,7 +128,7 @@ def process_results(d):
     cm.set_all()
     ic = InventoryCalculation(cm.array)
 
-    results = ic.calculate_impacts(d[('Functional unit',)], d[('Background',)])
+    results = ic.calculate_impacts(d[('Functional unit',)]])
     data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = [d_rev_pt[pt] for pt in results.coords['powertrain'].values.tolist()]
