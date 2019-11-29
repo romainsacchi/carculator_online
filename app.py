@@ -124,7 +124,6 @@ def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
     array = arr.interp(year=d[('Functional unit',)]['year'],  kwargs={'fill_value': 'extrapolate'})
     #modify_xarray_from_custom_parameters(d, array)
-
     cm = CarModel(array, cycle=d[('Driving cycle', )])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
