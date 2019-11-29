@@ -698,6 +698,41 @@ function power_list_update(){
         else{return;};
     };
 
+    // Update teh electricity mix table
+
+    var table_mix = $('#electricity_mix_table')
+
+    var number_col = document.getElementById('electricity_mix_table').rows[0].cells.length -1
+
+    // Remove previous columns
+    for (var item = 0; item < number_col; item++){
+        $("#electricity_mix_table th:last-child, #electricity_mix_table td:last-child").remove();
+    }
+
+    for (var item = 0; item < listYears.length; item++){
+
+            [...document.querySelectorAll('#electricity_mix_table tr')].forEach((row, i) => {
+                if (i==0){
+                    let cell = document.createElement(i ? "td" : "th")
+                    cell.innerHTML = listYears[item].innerHTML
+                    row.appendChild(cell)
+                }
+                else {
+                    let input = document.createElement("input")
+                    input.setAttribute('type', 'number')
+                    input.setAttribute('min', '0')
+                    input.setAttribute('max', '100')
+                    input.setAttribute('step', '1')
+                    input.setAttribute('style', 'color:white')
+                    input.setAttribute('style', 'background:none')
+                    let cell = document.createElement(i ? "td" : "th")
+                    cell.appendChild(input)
+                    row.appendChild(cell)
+                }
+            });
+
+        };
+
 
     var row = document.getElementById('powertrain_row')
     row.innerHTML="";
@@ -994,7 +1029,7 @@ function power_list_update(){
             header_h2_tech.innerHTML = 'Hydrogen manufacture';
 
             var select_h2_tech = document.createElement('select');
-            select_h2_tech.id = "background_Fuel_cell_hydrogen_technology";
+            select_h2_tech.id = "hydrogen technology";
             select_h2_tech.className = "form-control";
             select_h2_tech.setAttribute('style', 'width:30%;margin: 0 auto;');
 
@@ -1004,9 +1039,21 @@ function power_list_update(){
             var option_h2_tech_2 = document.createElement('option');
             option_h2_tech_2.value = "2";
             option_h2_tech_2.innerHTML = "Electrolysis";
+            var option_h2_tech_3 = document.createElement('option');
+            option_h2_tech_3.value = "3";
+            option_h2_tech_3.innerHTML = "Electrolysis - solar";
+            var option_h2_tech_4 = document.createElement('option');
+            option_h2_tech_4.value = "4";
+            option_h2_tech_4.innerHTML = "Electrolysis - hydro";
+            var option_h2_tech_5 = document.createElement('option');
+            option_h2_tech_5.value = "5";
+            option_h2_tech_5.innerHTML = "Electrolysis - nuclear";
+
             select_h2_tech.appendChild(option_h2_tech_1);
             select_h2_tech.appendChild(option_h2_tech_2);
-
+            select_h2_tech.appendChild(option_h2_tech_3);
+            select_h2_tech.appendChild(option_h2_tech_4);
+            select_h2_tech.appendChild(option_h2_tech_5);
 
             // Fuel cell cost
             var header_fuel_cell_cost = document.createElement('h4');
@@ -1015,14 +1062,14 @@ function power_list_update(){
 
 
             var slider_fuel_cell_cost = document.createElement('div');
-            slider_fuel_cell_cost.id = "fuel_cell_cost";
+            slider_fuel_cell_cost.id = "Fuel cell cost";
             slider_fuel_cell_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
 
             if (listYears.length>1){
                 var start_val = [60, 160];
                 var tooltip =  [wNumb({
                     decimals: 0,
-                    prefix: '2040: '
+                    prefix: '2050: '
 
                 }), wNumb({
                     decimals: 0,
@@ -1042,7 +1089,7 @@ function power_list_update(){
                         var start_val = [60];
                         var tooltip =  [wNumb({
                             decimals: 0,
-                            prefix: '2040: '
+                            prefix: '2050: '
 
                         })];
                     };
@@ -1066,14 +1113,14 @@ function power_list_update(){
 
 
             var slider_h2_cost = document.createElement('div');
-            slider_h2_cost.id = "Fuel_cell_hydrogen_cost";
+            slider_h2_cost.id = "Hydrogen cost";
             slider_h2_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
 
             if (listYears.length>1){
                 var start_val = [.17, .24];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2040: '
+                    prefix: '2050: '
 
                 }), wNumb({
                     decimals: 2,
@@ -1093,7 +1140,7 @@ function power_list_update(){
                         var start_val = [.17];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2040: '
+                            prefix: '2050: '
 
                         })];
                     };
@@ -1141,7 +1188,7 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2040: '
+                    prefix: '2050: '
 
                 })]}else{
 
@@ -1157,7 +1204,7 @@ function power_list_update(){
                         var start_val = [.87];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2040: '
+                            prefix: '2050: '
 
                         })];
                     };
@@ -1191,7 +1238,7 @@ function power_list_update(){
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2040: '
+                    prefix: '2050: '
 
                 })]}else{
 
@@ -1207,7 +1254,7 @@ function power_list_update(){
                         var start_val = [.32];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2040: '
+                            prefix: '2050: '
 
                         })];
                     };
@@ -1238,7 +1285,7 @@ function power_list_update(){
                 var start_val = [.9,1];
                 var tooltip =  [wNumb({
                     decimals: 2,
-                    prefix: '2040: '
+                    prefix: '2050: '
 
                 }), wNumb({
                     decimals: 2,
@@ -1258,7 +1305,7 @@ function power_list_update(){
                         var start_val = [.9];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2040: '
+                            prefix: '2050: '
 
                         })];
                     };
@@ -1285,34 +1332,34 @@ function power_list_update(){
             slider_fuel_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
 
             if (['Petrol', 'Hybrid-petrol', '(Plugin) Hybrid-petrol'].includes(item_labels[pt])){
-                var val_fuel_2017 = [0.1, 0.16, 0.2];
-                var val_fuel_2040 = [0.1, 0.18, 0.2];
+                var val_fuel_2018 = [0.1, 0.16, 0.2];
+                var val_fuel_2050 = [0.1, 0.18, 0.2];
             };
             if (item_labels[pt]=="Diesel"){
-                var val_fuel_2017 = [0.1, 0.12, 0.2];
-                var val_fuel_2040 = [0.1, 0.14, 0.2];
+                var val_fuel_2018 = [0.1, 0.12, 0.2];
+                var val_fuel_2050 = [0.1, 0.14, 0.2];
             };
             if (item_labels[pt]=="Natural gas"){
-                var val_fuel_2017 = [0, 0.07, 0.2];
-                var val_fuel_2040 = [0, 0.11, 0.2];
+                var val_fuel_2018 = [0, 0.07, 0.2];
+                var val_fuel_2050 = [0, 0.11, 0.2];
             };
 
 
             if (listYears.length>1){
 
-                var start_val = [val_fuel_2017[1], val_fuel_2040[1]];
+                var start_val = [val_fuel_2018[1], val_fuel_2050[1]];
                 var tooltip =  [wNumb({
                     decimals: 2,
                     prefix: '2018: '
 
                 }), wNumb({
                     decimals: 2,
-                    prefix: '2040: '
+                    prefix: '2050: '
 
                 })]}else{
 
                     if (listYears[0].innerHTML == "2018"){
-                        var start_val = val_fuel_2017[1];
+                        var start_val = val_fuel_2018[1];
                         var tooltip =  [wNumb({
                             decimals: 2,
                             prefix: '2018: '
@@ -1320,10 +1367,10 @@ function power_list_update(){
                         })]
                     }
                     else {
-                        var start_val = val_fuel_2040[1];
+                        var start_val = val_fuel_2050[1];
                         var tooltip =  [wNumb({
                             decimals: 2,
-                            prefix: '2040: '
+                            prefix: '2050: '
 
                         })];
                     };
@@ -1333,8 +1380,8 @@ function power_list_update(){
                  start: start_val,
                  tooltips:tooltip,
                 range: {
-                    'min': val_fuel_2017[0],
-                    'max': val_fuel_2017[2]
+                    'min': val_fuel_2018[0],
+                    'max': val_fuel_2018[2]
                 },
                 step: .01,
 
@@ -1573,31 +1620,30 @@ function getSelectedCountries() {
 }
 
 function get_electricity_mix(ISO){
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var list_year = [];
+    for (var item = 0; item < listYears.length; item++){
+        list_year.push(listYears[item].innerHTML);
+    };
+
     var opts = {
       method: 'GET',
       headers: {}
     };
-    fetch('/get_electricity_mix/'+ISO, opts).then(function (response) {
+    fetch('/get_electricity_mix/'+ISO+'/'+list_year, opts).then(function (response) {
       return response.json();
     })
     .then(function (body) {
-        var total_2017 = 0;
-        var total_2040 = 0;
-        for (var row in body['data'][0]){
-           total_2017 += body['data'][0][row];
-           total_2040 += body['data'][1][row];
-        }
 
-        var list_input_ids_2017 = ["background_hydro_2017", "background_nuclear_2017", "background_gas_2017",
-                                    "background_solar_2017", "background_wind_2017", "background_biomass_2017",
-                                    "background_coal_2017", "background_oil_2017", "background_geo_2017", "background_waste_2017"]
-        var list_input_ids_2040 = ["background_hydro_2040", "background_nuclear_2040", "background_gas_2040",
-                                    "background_solar_2040", "background_wind_2040", "background_biomass_2040",
-                                    "background_coal_2040", "background_oil_2040", "background_geo_2040", "background_waste_2040"]
-
-        for (var row in body['data'][0]){
-            document.getElementById(list_input_ids_2017[row]).value = ((body['data'][0][row]/total_2017)*100).toFixed(2);
-            document.getElementById(list_input_ids_2040[row]).value = ((body['data'][1][row]/total_2040)*100).toFixed(2);
+        // Concatenate mix values
+        var mix_val = []
+        for (var year = 0; year < list_year.length; year++){
+            var i = 0;
+            var sum_mix = body['data'][year].reduce(function(a, b) { return a + b; }, 0);
+            $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
+                this.value = Math.round((body['data'][year][i])*100)/100
+                i++
+            })
         }
 
         $.notify({
@@ -1800,25 +1846,23 @@ function collect_configuration(){
     };
 
     // If electricity equals 100%
-    var cumul_pct_2017 = 0;
-    var cumul_pct_2040 = 0;
-
-    var list_input_ids_2017 = ["background_hydro_2017", "background_nuclear_2017", "background_gas_2017",
-                                    "background_solar_2017", "background_wind_2017", "background_biomass_2017",
-                                    "background_coal_2017", "background_oil_2017", "background_geo_2017", "background_waste_2017"]
-    var list_input_ids_2040 = ["background_hydro_2040", "background_nuclear_2040", "background_gas_2040",
-                                    "background_solar_2040", "background_wind_2040", "background_biomass_2040",
-                                    "background_coal_2040", "background_oil_2040", "background_geo_2040", "background_waste_2040"]
-
-    for (var row in list_input_ids_2017){
-        cumul_pct_2017 += Number($("#"+list_input_ids_2017[row]).val());
-        cumul_pct_2040 += Number($("#"+list_input_ids_2040[row]).val());
-    }
-
-    if (cumul_pct_2017 != 100 | cumul_pct_2040 != 100){
-       $.notify({
+     // Concatenate mix values
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var list_year = [];
+    for (var item = 0; item < listYears.length; item++){
+        list_year.push(listYears[item].innerHTML);
+    };
+    var mix_val = []
+    for (var year = 0; year < list_year.length; year++){
+        var i = 0;
+        var sum_mix = 0;
+        $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
+            sum_mix += Number(this.value)
+        })
+        if (sum_mix <.99 | sum_mix > 1.01){
+            $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the electricity mixes specified are not equal to 100%."},
+            message: "It seems that the electricity mix for "+String(list_year[year])+" is not equal to 100%."},
             {
                 animate: {
                     enter: 'animated bounceInDown',
@@ -1827,8 +1871,9 @@ function collect_configuration(){
                 type:'warning'
             }
             );
-        return;
-    };
+            return;
+        };
+    }
 
     // Retrieve all necessary data and gather it into a dictionary
     // Initiate dictionary
@@ -1876,12 +1921,19 @@ function collect_configuration(){
 
     data.push({key: 'background_country', value: country})
 
-    // Retrieve electricity mix
+    // Retrieve electricity mixes
+    var mix_2018 = []
+    var mix_2050 = []
     $.each($('#electricity_mix_table input'), function() {
-            data.push({key: this.id, value:this.value
-        });
+            if (this.id.includes('2018')){
+                mix_2018.push(this.value)}
+            if (this.id.includes('2050')){
+                mix_2050.push(this.value)}
     });
 
+    data.push({
+                key: 'custom electricity mix', value:[mix_2018,mix_2050]
+              });
 
     // Retrieve passengers, cargo
     $.each($('#table_use div'), function() {
@@ -1946,7 +1998,7 @@ function set_mix_to_zero(){
 function save_configuration(){
 
     var data = collect_configuration();
-    
+
 
 };
 
