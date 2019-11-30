@@ -8,9 +8,9 @@ from logging.handlers import SMTPHandler
 from carculator import *
 import csv
 import secrets
-#from rq import Queue
-#from rq.job import Job
-#from worker import conn
+from rq import Queue
+from rq.job import Job
+from worker import conn
 
 
 # Instantiate Flask app
@@ -21,7 +21,7 @@ app.config["SECRET_KEY"] = session_token
 app.config.from_pyfile('config.py')
 
 # Create a connection to the Redis server
-#q = Queue(connection=conn)
+q = Queue(connection=conn)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
