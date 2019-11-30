@@ -8,9 +8,9 @@ from logging.handlers import SMTPHandler
 from carculator import *
 import csv
 import secrets
-from rq import Queue
-from rq.job import Job
-from worker import conn
+#from rq import Queue
+#from rq.job import Job
+#from worker import conn
 
 
 # Instantiate Flask app
@@ -21,7 +21,7 @@ app.config["SECRET_KEY"] = session_token
 app.config.from_pyfile('config.py')
 
 # Create a connection to the Redis server
-q = Queue(connection=conn)
+#q = Queue(connection=conn)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -150,23 +150,32 @@ def process_results(d):
 
 def format_dictionary(raw_dict):
     """ Format the dictionary sent by the user so that it can be understood by `carculator` """
+    dictionary = {}
+    for x in request.get_json():
+        dictionary[x['key']] = x['value']
+
+    f_d={}
+    for x in dictionary['foreground params']:
+        k = x['key']
+        v = x['value']
+        f_d[k] = v
+    dictionary['foreground params'] = f_d
+
+    b_d={}
+    for x in dictionary['background params']:
+        k = x['key']
+        v = x['value']
+        b_d[k] = v
+    dictionary['background params'] = b_d
 
     new_dict = {}
-    new_dict[('Functional unit',)] = {'powertrain':
-                                          [raw_dict[k]['value'] for k in range(0, len(raw_dict))
-                                                   if raw_dict[k]['key'] == 'type'][0],
-                                       'year':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
-                                               if raw_dict[k]['key'] == 'year'][0],
-                                       'size':[raw_dict[k]['value'] for k in range(0, len(raw_dict))
-                                               if raw_dict[k]['key'] == 'size'][0]}
+    new_dict[('Functional unit',)] = {'powertrain': [d_pt[x] for x in dictionary['type']],
+                                       'year': [int(x) for x in dictionary['year']],
+                                       'size':dictionary['size']}
 
-    new_dict[('Functional unit',)]['powertrain'] = [d_pt[pt] for pt in new_dict[('Functional unit',)]['powertrain']]
-    new_dict[('Functional unit',)]['year'] = [int(y) for y in new_dict[('Functional unit',)]['year']]
-    new_dict[('Driving cycle',)] = [raw_dict[k]['value'] for k in range(0, len(raw_dict))
-                                    if raw_dict[k]['key'] == 'driving_cycle'][0]
+    new_dict[('Driving cycle',)] = dictionary['foreground params']['driving_cycle']
 
-    new_dict[('Background',)] = {raw_dict[k]['key']:raw_dict[k]['value'] for k in range(0, len(raw_dict))
-                                    if raw_dict[k]['key'] == 'background params'}
+    new_dict[('Background',)] = dictionary['background params']
 
 
     map_dict = {
@@ -262,6 +271,7 @@ def format_dictionary(raw_dict):
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
+
     d = format_dictionary(request.get_json())
     print(d)
     job = q.enqueue_call(
