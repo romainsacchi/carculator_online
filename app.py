@@ -166,7 +166,7 @@ def format_dictionary(raw_dict):
                                     if raw_dict[k]['key'] == 'driving_cycle'][0]
 
     new_dict[('Background',)] = {raw_dict[k]['key']:raw_dict[k]['value'] for k in range(0, len(raw_dict))
-                                    if raw_dict[k]['key'].startswith('background')}
+                                    if raw_dict[k]['key'] == 'background params'}
 
 
     map_dict = {
@@ -265,7 +265,7 @@ def get_results():
     d = format_dictionary(request.get_json())
     print(d)
     job = q.enqueue_call(
-        func=process_results, args=(d,), result_ttl=5000
+        func=process_results, args=(d,), result_ttl=500
     )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res

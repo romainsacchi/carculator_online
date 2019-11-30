@@ -1877,49 +1877,50 @@ function collect_configuration(){
 
     // Retrieve all necessary data and gather it into a dictionary
     // Initiate dictionary
-    var data = [];
+    var params = [];
+    var background_params=[];
+    var foreground_params = [];
+
 
     // Retrieve year, vehicle type and class size
     var list_year = [];
     for (var item = 0; item < listYears.length; item++){
         list_year.push(listYears[item].innerHTML);
     };
-    data.push({key:'year', value: list_year});
+    params.push({key:'year', value: list_year});
 
     var list_type = [];
     for (var item = 0; item < listItems.length; item++){
         list_type.push(listItems[item].innerHTML);
     };
-    data.push({key: 'type', value: list_type});
+    params.push({key: 'type', value: list_type});
 
     var list_size = [];
     for (var item = 0; item < listSizes.length; item++){
         list_size.push(listSizes[item].innerHTML);
     };
-    data.push({key: 'size', value: list_size})
+    params.push({key: 'size', value: list_size})
 
     // Retrieve car parameters
     $.each($('#table_inputs select'), function() {
-
-            data.push({key: this.id, value:this.value
+            foreground_params.push({key: this.id, value:this.value
         });
     });
 
     $.each($('#table_inputs div'), function() {
         if (this.className == "noUi-target noUi-ltr noUi-horizontal"){
-            data.push({key: this.id,value: this.noUiSlider.get()
+            foreground_params.push({key: this.id,value: this.noUiSlider.get()
             });
         };
     });
 
-
     // Retrieve driving cycle
-    data.push({key:'driving_cycle', value: $('#driving_cycle_selected').text()});
+    foreground_params.push({key:'driving_cycle', value: $('#driving_cycle_selected').text()});
 
     // Retrieve country selected
     var country = $("#country-selected").text()
 
-    data.push({key: 'background_country', value: country})
+    background_params.push({key: 'country', value: country})
 
     // Retrieve electricity mixes
     var mix_arr = []
@@ -1931,20 +1932,23 @@ function collect_configuration(){
         mix_arr.push(mix)
     }
 
-    data.push({
+    background_params.push({
                 key: 'custom electricity mix', value:mix_arr
               });
 
     // Retrieve passengers, cargo
     $.each($('#table_use div'), function() {
         if (this.className == "noUi-target noUi-ltr noUi-horizontal"){
-            data.push({key: this.id,value: this.noUiSlider.get()
+            foreground_params.push({key: this.id,value: this.noUiSlider.get()
             });
         };
     });
 
-    return data;
-    send_request(data);
+    params.push({key:'foreground params',value:foreground_params});
+    params.push({key:'background params',value:background_params});
+    console.log(params);
+    return params;
+    send_request(params);
 }
 
 function get_results(){
