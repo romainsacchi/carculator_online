@@ -126,14 +126,14 @@ def process_results(d):
     print('interp array')
     array = arr.interp(year=d[('Functional unit',)]['year'],  kwargs={'fill_value': 'extrapolate'})
     #modify_xarray_from_custom_parameters(d, array)
-    cm = CarModel(array, cycle=d[('Driving cycle', )], background_configuration = d[('Background',)])
+    cm = CarModel(array, cycle=d[('Driving cycle', )])
     print('cm')
     cm.set_all()
     print('cm.set_all')
     ic = InventoryCalculation(cm.array)
     print('ic')
 
-    results = ic.calculate_impacts(d[('Functional unit',)])
+    results = ic.calculate_impacts(scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     print('ic.calculate_impacts')
     data = results.values
     year = results.coords['year'].values.tolist()
@@ -277,9 +277,7 @@ def format_dictionary(raw_dict):
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
-
     d = format_dictionary(request.get_json())
-    print(d)
     job = q.enqueue_call(
         func=process_results, args=(d,), result_ttl=500
     )
