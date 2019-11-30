@@ -1922,17 +1922,17 @@ function collect_configuration(){
     data.push({key: 'background_country', value: country})
 
     // Retrieve electricity mixes
-    var mix_2018 = []
-    var mix_2050 = []
-    $.each($('#electricity_mix_table input'), function() {
-            if (this.id.includes('2018')){
-                mix_2018.push(this.value)}
-            if (this.id.includes('2050')){
-                mix_2050.push(this.value)}
-    });
+    var mix_arr = []
+    for (var year = 0; year < list_year.length; year++){
+        var mix = [];
+        $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
+            mix.push(Number(this.value))
+        })
+        mix_arr.push(mix)
+    }
 
     data.push({
-                key: 'custom electricity mix', value:[mix_2018,mix_2050]
+                key: 'custom electricity mix', value:mix_arr
               });
 
     // Retrieve passengers, cargo
