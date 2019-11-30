@@ -123,13 +123,18 @@ d_rev_pt = {v:k for k, v, in d_pt.items()}
 
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
+    print('interp array')
     array = arr.interp(year=d[('Functional unit',)]['year'],  kwargs={'fill_value': 'extrapolate'})
     #modify_xarray_from_custom_parameters(d, array)
-    cm = CarModel(array, cycle=d[('Driving cycle', )])
+    cm = CarModel(array, cycle=d[('Driving cycle', )], background_configuration = d[('Background',)])
+    print('cm')
     cm.set_all()
+    print('cm.set_all')
     ic = InventoryCalculation(cm.array)
+    print('ic')
 
     results = ic.calculate_impacts(d[('Functional unit',)])
+    print('ic.calculate_impacts')
     data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = [d_rev_pt[pt] for pt in results.coords['powertrain'].values.tolist()]
@@ -145,6 +150,7 @@ def process_results(d):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
+    print('filling')
 
     return json.dumps(list_res)
 
