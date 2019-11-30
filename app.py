@@ -152,6 +152,7 @@ def process_results(d):
                                          data[imp, s, pt, y, cat, 0]])
     print('filling')
 
+
     return json.dumps(list_res)
 
 def format_dictionary(raw_dict):
