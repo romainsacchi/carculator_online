@@ -1,0 +1,170 @@
+Low	aerodynamic drag coefficient	Coefficient of resistance due to aerodynamics of the car	0-1	Hirschberg et al. (2016), Grunditz, Thiringer (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	aerodynamic drag coefficient	Coefficient of resistance due to aerodynamics of the car	0-1	Hirschberg et al. (2016), Grunditz, Thiringer (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small, Lower medium, Medium, Large
+Low	aerodynamic drag coefficient	Coefficient of resistance due to aerodynamics of the car	0-1	Hirschberg et al. (2016), Grunditz, Thiringer (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Van
+Low	aerodynamic drag coefficient	Coefficient of resistance due to aerodynamics of the car	0-1	Hirschberg et al. (2016), Grunditz, Thiringer (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	SUV
+Low	auxilliary power base demand	Average power demand for non-engine services (i.e., for combustion cars, electricity is mechanically produced)	W	Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	auxilliary power base demand	Average power demand for non-engine services (i.e., for electric cars, electricity is provided by the battery)	W	Hirschberg et al. (2016), Own assumption	BEV, PHEV-c, PHEV-e, FCEV, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	average passenger mass	Average mass of a passenger	kg	Typical values	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell energy density	Power density per kg of battery cell for electric cars	kWh/kg	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c)	BEV, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell mass share	Share of battery total mass allocated to cells	0-1	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c), Own assumption	BEV, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell mass share	Share of battery total mass allocated to cells	0-1	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c), Own assumption	HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell mass share	Share of battery total mass allocated to cells	0-1	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c), Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell power density	Power density per kg of battery cell for combustion cars	kW/kg	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c), Dai (2018),Own assumption	ICEV-p, ICEV-d, ICEV-g, HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell production energy	Energy required per kg of battery cell manufactured	kWh/kg	Dai et al (2017), Ellingsen et al (2014), Ellingesen et al (2016), Ellingsen et al (2017), Peters et al (2017)	BEV, PHEV-e, PHEV-c, HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell production energy	Energy required per kg of battery cell manufactured	kWh/kg	Ellingsen et al (2014), Ellingesen et al (2016), Dai et al (2017), Ellingsen et al (2017), Peters et al (2017)	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell production energy electricity share	Share of energy required to manufacture one kg of battery cell for electric cars as electricity (the rest being thermal energy)	0-1	Dai et al (2017), Peters et al (2017),  Own assumption	BEV, PHEV-e, PHEV-c, HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery cell production energy electricity share	Share of energy required to manufacture one kg of battery cell for combustion cars as electricity (the rest being thermal energy)	0-1	Dai et al (2017), Peters et al (2017),  Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery charge efficiency	Efficiency of charge for the battery of an electric car (i.e., ratio between the amount of electricity used during charge and the amount effectively available after charge)	0-1	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Ottaviano (2012), Calibration result	BEV, PHEV-e, PHEV-c, HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery charge efficiency	Efficiency of charge for the battery of a combustion car (i.e., ratio between the amount of electricity used during charge and the amount effectively available after charge)	0-1	Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	battery discharge efficiency	Efficiency of discharge for the battery of an electric car (i.e., ratio between the amount of electricity discharged by the battery and the amount effectively provided to then engine)	0-1	Ottaviano (2012)	BEV, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery DoD	Depth of discharge of battery for electric car	0-1	Own assumption	BEV, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery lifetime kilometers	Lifetime of the battery of an electric car	kg/kWh	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c), Own assumption	BEV, PHEV-e, PHEV-c, HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery lifetime kilometers	Lifetime of the battery of an electric car	kg/kWh	Konecky, Anderman (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), DOE (2013), DOE (2017c), Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	battery onboard charging infrastructure cost	Cost of onboard electronics for battery charging	Euro / car	Own assumption	BEV, PHEV-e, PHEV-c	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	cargo mass	Mass of cargo (i.e., excluding passenger mass)	kg	Typical values	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	charger mass	Mass of charger for the battery of an electric car	kg	Del Duce et al (2016)	BEV, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	CNG tank mass intercept	Fixed base mass of a compressed natural gas tank	kg	Hirschberg et al. (2016), Own assumption	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	CNG tank mass slope	Mass of a compressed natural gas tank per unit of energy content	kg/kWh	Hirschberg et al. (2016), Own assumption	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	CO2 per kg fuel	Carbon dioxide content per unit of mass for compressed natural gas	kg / kg fuel	EMEP/ EEA (2016)	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	CO2 per kg fuel	Carbon dioxide content per unit of mass for diesel	kg / kg fuel	EMEP/ EEA (2016)	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	CO2 per kg fuel	Carbon dioxide content per unit of mass for petrol	kg / kg fuel	EMEP/ EEA (2016)	ICEV-p, HEV-p, PHEV-c	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion exhaust treatment cost	Cost for filtering and treating exhaust emissions	Euro / car	Hirschberg et al. (2016), Own assumption	PHEV-e, PHEV-c, HEV-p, ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion fixed mass	Fixed mass of combustion engine	kg	Simons (2013), Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-g, HEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion fixed mass	Fixed mass of combustion engine	kg	Simons (2013), Hirschberg et al. (2016), Own assumption	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion mass per power	Mass increase of combustion engine per unit of engine power	kg/kW	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-g, HEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion mass per power	Mass increase of combustion engine per unit of engine power	kg/kW	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion power share	Share of the total power provided by a combustion engine (i.e., hybrid cars)	0-1	Own assumption, Calibration result	HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion power share	Share of the total power provided by a combustion engine (i.e., hybrid cars)	0-1	Own assumption, Calibration result	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion power share	Share of the total power provided by a combustion engine (i.e., hybrid cars)	0-1	Own assumption, Calibration result	PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion powertrain cost per kW	Cost of powertrain per unit of engine power	Euro / kW	Hirschberg et al. (2016), Calibration result	ICEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion powertrain cost per kW	Cost of powertrain per unit of engine power	Euro / kW	Hirschberg et al. (2016), Calibration result	PHEV-e, PHEV-c, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion powertrain cost per kW	Cost of powertrain per unit of engine power	Euro / kW	Hirschberg et al. (2016), Calibration result	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	combustion powertrain cost per kW	Cost of powertrain per unit of engine power	Euro / kW	Hirschberg et al. (2016), Calibration result	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	converter mass	Mass of the DC/AC converter for electric cars	kg	Del Duce et al (2016)	BEV, PHEV-c, PHEV-e, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	cooling energy consumption	Mechanical load per thermal load for cooling (i.e., share of the power mechanically-produced for A/C)	W/W	Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Lower medium
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Medium
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Van
+Low	cooling thermal demand	Annual average A/C demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	SUV
+High	drivetrain efficiency	Efficiency of the drivetrain (i.e., ratio between the energy provided by the engine and the energy effectively transmitted to the ground)	0-1	Hirschberg et al. (2016), Calibration result	BEV, FCEV, PHEV-e, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	drivetrain efficiency	Efficiency of the drivetrain (i.e., ratio between the energy provided by the engine and the energy effectively transmitted to the ground)	0-1	Hirschberg et al. (2016), Calibration result	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	drivetrain efficiency	Efficiency of the drivetrain (i.e., ratio between the energy provided by the engine and the energy effectively transmitted to the ground)	0-1	Hirschberg et al. (2016), Calibration result	PHEV-c	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric fixed mass	Fixed mass of electric engine	kg	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	BEV, PHEV-c, PHEV-e, FCEV, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric fixed mass	Fixed mass of electric engine	kg	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric mass per power	Mass increase of electric engine per unit of engine power	kg/kW	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric mass per power	Mass increase of electric engine per unit of engine power	kg/kW	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	BEV, PHEV-e, PHEV-c, HEV-p, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric powertrain cost per kW	Cost of powertrain of electric car per unit of engine power	Euro / kW	Hirschberg et al. (2016), Own assumption	BEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric powertrain cost per kW	Cost of powertrain of electric car per unit of engine power	Euro / kW	Hirschberg et al. (2016), Own assumption	FCEV, PHEV-e, PHEV-c, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	electric powertrain cost per kW	Cost of powertrain of electric car per unit of engine power	Euro / kW	Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	energy battery cost per kWh	Cost of battery for electric cars per unit of energy capacity	Euro / kWh	Nyquist 2015, Berckmans 2017, calibration result, Hirschberg et al. (2016), Own assumption	BEV, PHEV-e, PHEV-c	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	BEV	Mini
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	BEV	Small
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	BEV	Lower medium
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	BEV	Medium
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	BEV	Large
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	BEV	Van, SUV
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	PHEV-c, PHEV-e	Mini
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	PHEV-c, PHEV-e	Small
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	PHEV-c, PHEV-e	Lower medium
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	PHEV-c, PHEV-e	Medium
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	PHEV-c, PHEV-e	Large
+Low	energy battery mass	Mass of battery for electric engine	kg	Konecky, Anderman (2016), Calibration result	PHEV-c, PHEV-e	Van, SUV
+Low	energy cost per kWh	Cost of electricity distributed at user, per unit of energy	Euro / kWh	Bauer (2017), European Commission (2018a)	BEV, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	energy cost per kWh	Cost of hydrogen distributed at user, per unit of energy	Euro / kWh	DOE (2015), European Commission (2018a)	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	energy cost per kWh	Cost of petrol distributed at user, per unit of energy	Euro / kWh	European Commission (2018c)	PHEV-c, HEV-p, ICEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	energy cost per kWh	Cost of diesel distributed at user, per unit of energy	Euro / kWh	European Commission (2018c)	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	energy cost per kWh	Cost of compressed natural gas distributed at user, per unit of energy	Euro / kWh	www.cngeurope.com	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	engine efficiency	Efficiency of the engine (i.e., ratio between the energy provided as fuel and the energy output of the engine)	0-1	Hirschberg et al. (2016), Calibration result	BEV, FCEV, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	engine efficiency	Efficiency of the engine (i.e., ratio between the energy provided as fuel and the energy output of the engine)	0-1	Hirschberg et al. (2016), Calibration result	ICEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	engine efficiency	Efficiency of the engine (i.e., ratio between the energy provided as fuel and the energy output of the engine)	0-1	Hirschberg et al. (2016), Calibration result, Personal Communication with Christian Bach, EMPA (2018)	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	engine efficiency	Efficiency of the engine (i.e., ratio between the energy provided as fuel and the energy output of the engine)	0-1	Hirschberg et al. (2016), Calibration result	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	engine efficiency	Efficiency of the engine (i.e., ratio between the energy provided as fuel and the energy output of the engine)	0-1	Hirschberg et al. (2016), Calibration result	HEV-p, PHEV-c	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Lower medium
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Medium
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Van
+Low	frontal area	Area of the front of the car	m2	Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	SUV
+Low	fuel cell ancillary BoP mass per power	Mass increase of ancillary balance of plant of fuel cell stack per unit of power	kg/kW	Hirschberg et al. (2016), Miotti et al (2015), Simons and Bauer (2015), DOE (2017a), DOE (2017b), Calibration result	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel cell cost per kW	Cost of fuel cell per unit of power	Euro / kW	James (2017), Hirschberg et al. (2016), Own assumption	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel cell essential BoP mass per power	Mass increase of essential balance of plant of fuel cell stack per unit of power	kg/kW	Hirschberg et al. (2016), Miotti et al (2015), Simons and Bauer (2015), DOE (2017a), DOE (2017b), Calibration result	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel cell lifetime kilometers	Expected lifetime of fuel cell stack	kg/kWh	Hirschberg et al. (2016) ,Miotti et al (2015), Simons and Bauer (2015), DOE (2017a), DOE (2017b),  Own assumption	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	fuel cell own consumption	Fuel cell stack own electricity consumption	0-1	Hirschberg et al. (2016), Miotti et al (2015), Simons and Bauer (2015), DOE (2017a), DOE (2017b), Calibration result	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel cell power area density	Power per unit of fuel cell area	mW/cm2	Hirschberg et al. (2016), Miotti et al (2015), Simons and Bauer (2015), DOE (2017a), DOE (2017b), Calibration result	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel cell power share	Share of total vehicle power provided by fuel cell (versus battery)	0-1	Simons (2013), Hirschberg et al. (2016), Own assumption	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+High	fuel cell stack efficiency	Overall efficiency of the fuel cell stack	0-1	Hirschberg et al. (2016), Miotti et al (2015), Simons and Bauer (2015), DOE (2017a), DOE (2017b), Calibration result	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-p	Mini, Small
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-p	Lower medium, Medium
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-p	Large, Van, SUV
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-d	Mini, Small
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-d	Lower medium, Medium
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-d	Large, Van, SUV
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-g	Mini, Small
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-g	Lower medium, Medium
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	ICEV-g	Large, Van, SUV
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	HEV-p, PHEV-c, PHEV-e	Mini, Small
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	HEV-p, PHEV-c, PHEV-e	Lower medium, Medium
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	HEV-p, PHEV-c, PHEV-e	Large, Van, SUV
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	FCEV	Mini, Small
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	FCEV	Lower medium, Medium
+Low	fuel mass	Mass of the fuel in a full tank	kg	Own assumption, Calibration result	FCEV	Large, Van, SUV
+Low	fuel tank cost per kg	Cost of the hydrogen tank per kg	Euro / kg capacity	DOE (2017d), Own assumption	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel tank cost per kg	Cost of the petrol tank per kg	Euro / kg capacity	Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, PHEV-e, PHEV-c, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel tank cost per kg	Cost of the compressend natural gas tank per kg	Euro / kg capacity	Hirschberg et al. (2016), Own assumption	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	fuel tank mass per energy	Mass of the fuel tank per unit of fuel energy	kg/kWh	Own assumption	ICEV-p, ICEV-d, HEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Medium
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Van
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	SUV
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small
+Medium	glider base mass	Base mass of the glider	kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Lower medium
+Low	glider cost intercept	Fixed cost of the glider	Euro / car	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	glider cost slope	Variable cost of the glider per unit of mass	Euro/ kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini, Small, Lower medium, Van
+Low	glider cost slope	Variable cost of the glider per unit of mass	Euro / kg	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Medium, SUV, Large
+Low	glider lightweighting cost per kg	Avoided cost per kg of glider reduced	Euro/ kg saved	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	H2 tank mass per energy	Mass of hydrogen tank per unit of fuel energy	kg/kWh	DOE (2017d), Own assumption	FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	heat pump cost	Cost of heat pump	Euro / car	Hirschberg et al. (2016), Own assumption	BEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	heating energy consumption	Mechanical load per thermal load for combustion cars (i.e., for combustion cars, heat is usually provided by the engine without additional energy load)	W/W	Own assumption	ICEV-p, ICEV-d, ICEV-g, FCEV, HEV-p, PHEV-c	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	heating energy consumption	Mechanical load per thermal load for electric cars (i.e., for electric cars, heat is usually provided with an additional load in energy consumption)	W/W	Own assumption	BEV, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Lower medium
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Medium
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Van
+Low	heating thermal demand	Annual average heat demand	W	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	SUV
+Low	interest rate	Interet rate for amotization of the car	0-1	Typical values	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	inverter mass	Mass of DC/AC inverter	kg	Del Duce et al (2016)	BEV, FCEV, HEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	kilometers per year	Amount of kilometers driven per year	km	Biedermann et al. (2015)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Medium	LHV fuel MJ per kg	Lower heating value for diesel	MJ/kg	https://www.engineeringtoolbox.com/fuels-higher-calorific-values-d_169.html	ICEV-d	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Medium	LHV fuel MJ per kg	Lower heating value for petrol	MJ/kg	https://www.engineeringtoolbox.com/fuels-higher-calorific-values-d_169.html	ICEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Medium	LHV fuel MJ per kg	Lower heating value for compressed natural gas	MJ/kg	https://www.engineeringtoolbox.com/fuels-higher-calorific-values-d_169.html	ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Medium	lifetime kilometers	Amount of kilometers driven in total	km	Weymar et al. (2016), Biedermann et al (2017)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	lightweighting	Rate of glider mass lightweighting	0-1	Geyer (2017), Hirschberg et al. (2016)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	lightweighting	Rate of glider mass lightweighting	0-1	Geyer (2017), Hirschberg et al. (2016)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small, Lower medium, Medium, Large, Van, SUV
+Low	maintenance cost per glider cost	Maintenance cost as share of glider cost	% of glider cost	Hirschberg et al. (2016), Own assumption	BEV, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	maintenance cost per glider cost	Maintenance cost as share of glider cost	% of glider cost	Hirschberg et al. (2016), Own assumption	PHEV-e, PHEV-c, HEV-p, ICEV-p, ICEV-d, ICEV-g	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	markup factor	Markup factor on costs for retail price	0-1	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	markup factor	Markup factor on costs for retail price	0-1	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small, Van
+Low	markup factor	Markup factor on costs for retail price	0-1	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Lower medium, Medium, SUV
+Low	markup factor	Markup factor on costs for retail price	0-1	Hirschberg et al. (2016), Calibration result	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large
+Low	power battery cost per kW	Cost per unit of battery power for combustion cars	Euro / kW	Hirschberg et al. (2016), Own assumption	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	power distribution unit mass	Mass of unit for power distribution	kg 	Del Duce et al (2016)	BEV, PHEV-c, PHEV-e, FCEV, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	power to mass ratio	Initial engine power to car mass ratio	W/kg	Hirschberg et al. (2016), Grunditz, Thiringer (2016), VCS (2018)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Mini
+Low	power to mass ratio	Initial engine power to car mass ratio	W/kg	Hirschberg et al. (2016), Grunditz, Thiringer (2016), VCS (2018)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Small
+Low	power to mass ratio	Initial engine power to car mass ratio	W/kg	Hirschberg et al. (2016), Grunditz, Thiringer (2016), VCS (2018)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Lower medium
+Low	power to mass ratio	Initial engine power to car mass ratio	W/kg	Hirschberg et al. (2016), Grunditz, Thiringer (2016), VCS (2018)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Medium, Large
+Low	power to mass ratio	Initial engine power to car mass ratio	W/kg	Hirschberg et al. (2016), Grunditz, Thiringer (2016), VCS (2018)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Van
+Low	power to mass ratio	Initial engine power to car mass ratio	W/kg	Hirschberg et al. (2016), Grunditz, Thiringer (2016), VCS (2018)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	SUV
+Low	powertrain fixed mass	Fixed mass of the powertrain	kg	Simons (2013), Hirschberg et al. (2016), Own assumption	BEV, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	powertrain fixed mass	Fixed mass of the powertrain	kg	Simons (2013), Hirschberg et al. (2016), Own assumption	PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	powertrain fixed mass	Fixed mass of the powertrain	kg	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, ICEV-g, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	powertrain mass per power	Variable mass of the powertrain per unit of engine power	kg/kW	Del Duce et al (2016), Grunditz, Thiringer (2016), Hirschberg et al. (2016), Own assumption	BEV, FCEV	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	powertrain mass per power	Variable mass of the powertrain per unit of engine power	kg/kW	Simons (2013), Hirschberg et al. (2016), Own assumption	ICEV-p, ICEV-d, ICEV-g, HEV-p	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	powertrain mass per power	Variable mass of the powertrain per unit of engine power	kg/kW	Simons (2013), Hirschberg et al. (2016), Own assumption	PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van
+Low	rolling resistance coefficient	Coefficient for rolling resistance	0-1	Transportation research board (2006)	BEV, FCEV, HEV-p, ICEV-d, ICEV-g, ICEV-p, PHEV-c, PHEV-e	Large, Lower medium, Medium, Mini, SUV, Small, Van

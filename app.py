@@ -8,6 +8,7 @@ from logging.handlers import SMTPHandler
 from carculator import *
 import csv
 import secrets
+import numpy as np
 from rq import Queue
 from rq.job import Job
 from worker import conn
@@ -45,12 +46,32 @@ def load_map_file():
         data = [tuple(line) for line in csv.reader(f, delimiter=';')]
     return data
 
+def load_params_file():
+    with open('data/parameters definition.txt', 'r') as f:
+        data = [line for line in csv.reader(f, delimiter='\t')]
+    return data
+
 # Pre-load stuff
 car_to_class_map = load_map_file()
+params = load_params_file()
 electricity_mix = BackgroundSystemModel().electricity_mix
 cip = CarInputParameters()
 cip.static()
 dcts, arr = fill_xarray_from_input_parameters(cip)
+
+d_pt = {
+        'Petrol':'ICEV-p',
+        'Diesel':'ICEV-d',
+        'Natural gas':'ICEV-g',
+        'Electric':'BEV',
+        'Fuel cell':'FCEV',
+        'Hybrid-petrol':'HEV-p',
+        '(Plugin) Hybrid-petrol':'PHEV',
+        '(Plugin) Hybrid-petrol - combustion':'PHEV-c',
+        '(Plugin) Hybrid-petrol - electric':'PHEV-e',
+    }
+
+d_rev_pt = {v:k for k, v, in d_pt.items()}
 
 @app.route('/')
 def index():
@@ -73,6 +94,25 @@ def search_car_model(search_item):
     """ Return a list of cars if cars contain `search item`"""
     cars = [car for car in car_to_class_map if any(search_item.lower() in x.lower() for x in car)]
     return jsonify(cars[:5])
+
+@app.route('/search_params/<param_item>/<powertrain_filter>/<size_filter>')
+def search_params(param_item, powertrain_filter, size_filter):
+    """ Return a list of params if param contain `search?item`"""
+    parameters = [param for param in load_params_file() if any(param_item.lower() in x.lower() for x in param)]
+    powertrain_filter = powertrain_filter.split(',')
+    size_filter = size_filter.split(',')
+    response = []
+    for a in parameters:
+        if isinstance(a[4], str):
+            a[4] = [p.strip() for p in a[4].split(',')]
+        if isinstance(a[5], str):
+            a[5] = [d_rev_pt[p.strip()] for p in a[5].split(',')]
+        if isinstance(a[6], str):
+            a[6] = [s.strip() for s in a[6].split(',')]
+        if (list(set(a[5]).intersection(powertrain_filter)) and list(set(a[6]).intersection(size_filter))):
+            response.append(a)
+
+    return jsonify(response[:7])
 
 @app.route('/get_driving_cycle/<driving_cycle>')
 def get_driving_cycle(driving_cycle):
@@ -104,37 +144,22 @@ def send_email():
 def get_electricity_mix(ISO, years):
     """ Return the electricity mix for the ISO country code and the year(s) given """
     years = [int(y) for y in years.split(',')]
-    response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=years).round(2)/\
-        electricity_mix.loc[dict(country=ISO, value=0)].interp(year=years).sum(axis=1)
-    return jsonify(response.to_dict())
+    response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=years).values
+    response = np.round(response, 2)
+    response[np.isnan(response)] = 0
+    return jsonify(response.round(2).tolist())
 
-d_pt = {
-        'Petrol':'ICEV-p',
-        'Diesel':'ICEV-d',
-        'Natural gas':'ICEV-g',
-        'Electric':'BEV',
-        'Fuel cell':'FCEV',
-        'Hybrid-petrol':'HEV-p',
-        '(Plugin) Hybrid-petrol':'PHEV'
-    }
 
-d_rev_pt = {v:k for k, v, in d_pt.items()}
 
 
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
-    print('interp array')
     array = arr.interp(year=d[('Functional unit',)]['year'],  kwargs={'fill_value': 'extrapolate'})
     #modify_xarray_from_custom_parameters(d, array)
     cm = CarModel(array, cycle=d[('Driving cycle', )])
-    print('cm')
     cm.set_all()
-    print('cm.set_all')
     ic = InventoryCalculation(cm.array)
-    print('ic')
-
     results = ic.calculate_impacts(scope = d[('Functional unit',)], background_configuration = d[('Background',)])
-    print('ic.calculate_impacts')
     data = results.values
     year = results.coords['year'].values.tolist()
     powertrain = [d_rev_pt[pt] for pt in results.coords['powertrain'].values.tolist()]

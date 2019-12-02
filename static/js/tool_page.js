@@ -582,7 +582,7 @@
 
             //prevent default to allow the action
             e.preventDefault();
-            power_list_update();
+            size_list_update();
         }
 
         //if we have any selected items
@@ -669,9 +669,10 @@ $('#vehicle_type label').click(function() {
 });
 
 // Detect when powertrains are added
-function power_list_update(){
+function size_list_update(){
     var listItems = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
     var item_labels = [];
 
     if (listYears.length == 0){
@@ -690,15 +691,15 @@ function power_list_update(){
        return;
     }
     else{
-        if (listItems.length>0){
-            $("#manufacture_section").attr('style', 'display:block;');
+        if (listItems.length>0 & listSizes.length>0){
+            $("#manufacture_section").attr('style', 'display:block;margin:30px;');
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
             generate_driving_cycle_graph('WLTC');}
         else{return;};
     };
 
-    // Update teh electricity mix table
+    // Update the electricity mix table
 
     var table_mix = $('#electricity_mix_table')
 
@@ -710,7 +711,6 @@ function power_list_update(){
     }
 
     for (var item = 0; item < listYears.length; item++){
-
             [...document.querySelectorAll('#electricity_mix_table tr')].forEach((row, i) => {
                 if (i==0){
                     let cell = document.createElement(i ? "td" : "th")
@@ -734,7 +734,7 @@ function power_list_update(){
         };
 
 
-    var row = document.getElementById('powertrain_row')
+    var row = document.getElementById('powertrain_row');
     row.innerHTML="";
 
     for (var item = 0; item < listItems.length; item++){
@@ -756,651 +756,9 @@ function power_list_update(){
         th.setAttribute('scope', 'col');
         th.innerHTML = '<h2 style="color:white;">'+item_labels[pt]+' car</h2>';
         th.setAttribute('style', 'text-align:center;vertical-align: top;');
-        var td_body = document.createElement('td');
-        if (item_labels[pt]=="Electric"){
-            // Battery chemistry
-            var header_chemistry = document.createElement('h4');
-            header_chemistry.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_chemistry.innerHTML = 'Battery type';
-
-
-            var select_chemistry = document.createElement('select');
-            select_chemistry.className = "form-control";
-            select_chemistry.setAttribute('style', 'width:30%;margin: 0 auto;');
-            select_chemistry.id = "background_Electric_chemistry";
-
-            var option_chemistry_1 = document.createElement('option');
-            option_chemistry_1.value = "1";
-            option_chemistry_1.innerHTML = "Lithium Iron Phosphate (LFP)";
-            var option_chemistry_2 = document.createElement('option');
-            option_chemistry_2.value = "2";
-            option_chemistry_2.innerHTML = "Lithium Nickel Manganese Cobalt (NCM)";
-            var option_chemistry_3 = document.createElement('option');
-            option_chemistry_3.value = "3";
-            option_chemistry_3.innerHTML = "Lithium Nickel Cobalt Aluminum oxide (NCA)";
-            select_chemistry.appendChild(option_chemistry_1);
-            select_chemistry.appendChild(option_chemistry_2);
-            select_chemistry.appendChild(option_chemistry_3);
-
-            // Battery geography
-            var header_batt_geography = document.createElement('h4');
-            header_batt_geography.setAttribute('style', 'color:white;text-align:center;margin:20px;');
-            header_batt_geography.innerHTML = 'Battery origin';
-
-            var select_batt_geography = document.createElement('select');
-            select_batt_geography.id = "background_Electric_battery_geography";
-            select_batt_geography.className = "form-control";
-            select_batt_geography.setAttribute('style', 'width:30%;margin: 0 auto;');
-
-            var option_batt_geo_1 = document.createElement('option');
-            option_batt_geo_1.value = "1";
-            option_batt_geo_1.innerHTML = "Asia";
-            var option_batt_geo_2 = document.createElement('option');
-            option_batt_geo_2.value = "2";
-            option_batt_geo_2.innerHTML = "Europe";
-            var option_batt_geo_3 = document.createElement('option');
-            option_batt_geo_3.value = "3";
-            option_batt_geo_3.innerHTML = "United States";
-            select_batt_geography.appendChild(option_batt_geo_1);
-            select_batt_geography.appendChild(option_batt_geo_2);
-            select_batt_geography.appendChild(option_batt_geo_3);
-
-            // Battery cell energy density
-            var header_cell_density = document.createElement('h4');
-            header_cell_density.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_cell_density.innerHTML = 'Cell energy density [kWh/kg]';
-
-
-            var slider_energy_cell = document.createElement('div');
-            slider_energy_cell.id = "electric_cell_density"
-            slider_energy_cell.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [.2, .4];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2040: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [.2];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [.4];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2040: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_energy_cell, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [0.05],
-                    'max': [0.5]
-                },
-                step: 0.05,
-
-            });
-
-            // Battery energy cost
-            var header_batt_cost = document.createElement('h4');
-            header_batt_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_batt_cost.innerHTML = 'Battery cost [Euro/kWh]';
-
-
-            var slider_battery_cost = document.createElement('div');
-            slider_battery_cost.id = "electric_battery_cost";
-            slider_battery_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [90, 225];
-                var tooltip =  [wNumb({
-                    decimals: 0,
-                    prefix: '2040: '
-
-                }), wNumb({
-                    decimals: 0,
-                    prefix: '2018: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [225];
-                        var tooltip =  [wNumb({
-                            decimals: 0,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [90];
-                        var tooltip =  [wNumb({
-                            decimals: 0,
-                            prefix: '2040: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_battery_cost, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [60],
-                    'max': [270]
-                },
-                step: 5,
-
-            });
-
-            // Energy cost
-            var header_energy_cost = document.createElement('h4');
-            header_energy_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_energy_cost.innerHTML = 'Electricity cost [€/kWh]';
-
-            var slider_energy_cost = document.createElement('div');
-            slider_energy_cost.id = "Electric_energy_cost";
-            slider_energy_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [.16, .22];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2040: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [.22];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [.16];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2040: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_energy_cost, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [.1],
-                    'max': [.4]
-                },
-                step: .01,
-
-            });
-
-            td_body.appendChild(header_chemistry);
-            td_body.appendChild(select_chemistry);
-            td_body.appendChild(header_batt_geography);
-            td_body.appendChild(select_batt_geography);
-            td_body.appendChild(header_cell_density);
-            td_body.appendChild(slider_energy_cell);
-            td_body.appendChild(header_batt_cost);
-            td_body.appendChild(slider_battery_cost);
-            td_body.appendChild(header_energy_cost);
-            td_body.appendChild(slider_energy_cost);
-
-        };
-
-        if (item_labels[pt] =="Fuel cell"){
-
-            // Fuel cell stack type
-            var header_stack_tech = document.createElement('h4');
-            header_stack_tech.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_stack_tech.innerHTML = 'Fuel cell stack type';
-
-
-            var select_stack_tech = document.createElement('select');
-            select_stack_tech.id = "background_Fuel_cell_type";
-            select_stack_tech.className = "form-control";
-            select_stack_tech.setAttribute('style', 'width:30%;margin: 0 auto;')
-
-            var option_stack_tech_1 = document.createElement('option');
-            option_stack_tech_1.value = "1";
-            option_stack_tech_1.innerHTML = "Proton Exchange Membrane (PEM) (Simons and Bauer, 2015)";
-            var option_stack_tech_2 = document.createElement('option');
-            option_stack_tech_2.value = "2";
-            option_stack_tech_2.innerHTML = "Proton Exchange Membrane (PEM) (Miotti et al., 2017)";
-            var option_stack_tech_3 = document.createElement('option');
-            option_stack_tech_3.value = "3";
-            option_stack_tech_3.innerHTML = "Proton Exchange Membrane (PEM) (Notter et al., 2015)";
-            var option_stack_tech_4 = document.createElement('option');
-            option_stack_tech_4.value = "4";
-            option_stack_tech_4.innerHTML = "Proton Exchange Membrane (PEM) (Manufacturer data)";
-            select_stack_tech.appendChild(option_stack_tech_1);
-            select_stack_tech.appendChild(option_stack_tech_2);
-            select_stack_tech.appendChild(option_stack_tech_3);
-            select_stack_tech.appendChild(option_stack_tech_4);
-
-            // Fuel cell stack geography
-            var header_stack_origin = document.createElement('h4');
-            header_stack_origin.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_stack_origin.innerHTML = 'Fuel cell stack origin';
-
-            var select_stack_geography = document.createElement('select');
-            select_stack_geography.id = "background_Fuel_cell_geography";
-            select_stack_geography.className = "form-control";
-            select_stack_geography.setAttribute('style', 'width:30%;margin: 0 auto;')
-
-            var option_stack_geo_1 = document.createElement('option');
-            option_stack_geo_1.value = "1";
-            option_stack_geo_1.innerHTML = "Asia";
-            var option_stack_geo_2 = document.createElement('option');
-            option_stack_geo_2.value = "2";
-            option_stack_geo_2.innerHTML = "Europe";
-            var option_stack_geo_3 = document.createElement('option');
-            option_stack_geo_3.value = "3";
-            option_stack_geo_3.innerHTML = "United States";
-            select_stack_geography.appendChild(option_stack_geo_1);
-            select_stack_geography.appendChild(option_stack_geo_2);
-            select_stack_geography.appendChild(option_stack_geo_3);
-
-            // Hydrogen manufacture
-            var header_h2_tech = document.createElement('h4');
-            header_h2_tech.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_h2_tech.innerHTML = 'Hydrogen manufacture';
-
-            var select_h2_tech = document.createElement('select');
-            select_h2_tech.id = "hydrogen technology";
-            select_h2_tech.className = "form-control";
-            select_h2_tech.setAttribute('style', 'width:30%;margin: 0 auto;');
-
-            var option_h2_tech_1 = document.createElement('option');
-            option_h2_tech_1.value = "1";
-            option_h2_tech_1.innerHTML = "Steam Reforming of natural gas (SMR)";
-            var option_h2_tech_2 = document.createElement('option');
-            option_h2_tech_2.value = "2";
-            option_h2_tech_2.innerHTML = "Electrolysis";
-            var option_h2_tech_3 = document.createElement('option');
-            option_h2_tech_3.value = "3";
-            option_h2_tech_3.innerHTML = "Electrolysis - solar";
-            var option_h2_tech_4 = document.createElement('option');
-            option_h2_tech_4.value = "4";
-            option_h2_tech_4.innerHTML = "Electrolysis - hydro";
-            var option_h2_tech_5 = document.createElement('option');
-            option_h2_tech_5.value = "5";
-            option_h2_tech_5.innerHTML = "Electrolysis - nuclear";
-
-            select_h2_tech.appendChild(option_h2_tech_1);
-            select_h2_tech.appendChild(option_h2_tech_2);
-            select_h2_tech.appendChild(option_h2_tech_3);
-            select_h2_tech.appendChild(option_h2_tech_4);
-            select_h2_tech.appendChild(option_h2_tech_5);
-
-            // Fuel cell cost
-            var header_fuel_cell_cost = document.createElement('h4');
-            header_fuel_cell_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_fuel_cell_cost.innerHTML = 'Fuel cell cost [Euro/kW]';
-
-
-            var slider_fuel_cell_cost = document.createElement('div');
-            slider_fuel_cell_cost.id = "Fuel cell cost";
-            slider_fuel_cell_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [60, 160];
-                var tooltip =  [wNumb({
-                    decimals: 0,
-                    prefix: '2050: '
-
-                }), wNumb({
-                    decimals: 0,
-                    prefix: '2018: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [160];
-                        var tooltip =  [wNumb({
-                            decimals: 0,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [60];
-                        var tooltip =  [wNumb({
-                            decimals: 0,
-                            prefix: '2050: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_fuel_cell_cost, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [40],
-                    'max': [200]
-                },
-                step: 10,
-
-            });
-
-            // Hydrogen cost
-            var header_h2_cost = document.createElement('h4');
-            header_h2_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_h2_cost.innerHTML = 'Hydrogen cost [€/kWh]';
-
-
-            var slider_h2_cost = document.createElement('div');
-            slider_h2_cost.id = "Hydrogen cost";
-            slider_h2_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [.17, .24];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2050: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [.24];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [.17];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2050: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_h2_cost, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [.1],
-                    'max': [.4]
-                },
-                step: .01,
-
-            });
-
-            td_body.appendChild(header_stack_tech);
-            td_body.appendChild(select_stack_tech);
-            td_body.appendChild(header_stack_origin);
-            td_body.appendChild(select_stack_geography);
-            td_body.appendChild(header_h2_tech);
-            td_body.appendChild(select_h2_tech);
-            td_body.appendChild(header_fuel_cell_cost);
-            td_body.appendChild(slider_fuel_cell_cost);
-            td_body.appendChild(header_h2_cost);
-            td_body.appendChild(slider_h2_cost);
-
-        };
-
-        if (['Petrol', 'Diesel', 'Natural gas', 'Hybrid-petrol', '(Plugin) Hybrid-petrol'].includes(item_labels[pt])){
-            // Drivetrain efficiency
-            var header_drive_eff = document.createElement('h4');
-            header_drive_eff.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_drive_eff.innerHTML = 'Drivetrain efficiency';
-
-            var slider_drive_eff = document.createElement('div');
-            slider_drive_eff.id = item_labels[pt] + "_drivetrain_eff"
-            slider_drive_eff.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [.85,.87];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2050: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [.85];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [.87];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2050: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_drive_eff, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [0.8],
-                    'max': [0.95]
-                },
-                step: 0.01,
-
-            });
-
-            // Engine efficiency
-            var header_engine_eff = document.createElement('h4');
-            header_engine_eff.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_engine_eff.innerHTML = 'Engine efficiency';
-
-            var slider_engine_eff = document.createElement('div');
-            slider_engine_eff.id = item_labels[pt] + "_engine_eff"
-            slider_engine_eff.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [.25,.32];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2050: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [.25];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [.32];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2050: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_engine_eff, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [0.15],
-                    'max': [0.35]
-                },
-                step: 0.01,
-            });
-
-            // Combustion share
-
-            var header_combust_share = document.createElement('h4');
-            header_combust_share.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_combust_share.innerHTML = 'Share of combustion power';
-
-
-            var slider_combust_share = document.createElement('div');
-            slider_combust_share.id = item_labels[pt] + "_combustion_share";
-            slider_combust_share.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (listYears.length>1){
-                var start_val = [.9,1];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2050: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = [1];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = [.9];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2050: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_combust_share, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': [.5],
-                    'max': [1]
-                },
-                step: 0.05,
-            });
-
-            // Fuel cost
-            var header_fuel_cost = document.createElement('h4');
-            header_fuel_cost.setAttribute('style', 'color:white;text-align:center;margin:20px;')
-            header_fuel_cost.innerHTML = 'Fuel cost [€/kWh]';
-
-
-            var slider_fuel_cost = document.createElement('div');
-            slider_fuel_cost.id = item_labels[pt] + "_fuel_cost";
-            slider_fuel_cost.setAttribute('style', 'margin: 0 auto;width:50%;margin-top:50px;');
-
-            if (['Petrol', 'Hybrid-petrol', '(Plugin) Hybrid-petrol'].includes(item_labels[pt])){
-                var val_fuel_2018 = [0.1, 0.16, 0.2];
-                var val_fuel_2050 = [0.1, 0.18, 0.2];
-            };
-            if (item_labels[pt]=="Diesel"){
-                var val_fuel_2018 = [0.1, 0.12, 0.2];
-                var val_fuel_2050 = [0.1, 0.14, 0.2];
-            };
-            if (item_labels[pt]=="Natural gas"){
-                var val_fuel_2018 = [0, 0.07, 0.2];
-                var val_fuel_2050 = [0, 0.11, 0.2];
-            };
-
-
-            if (listYears.length>1){
-
-                var start_val = [val_fuel_2018[1], val_fuel_2050[1]];
-                var tooltip =  [wNumb({
-                    decimals: 2,
-                    prefix: '2018: '
-
-                }), wNumb({
-                    decimals: 2,
-                    prefix: '2050: '
-
-                })]}else{
-
-                    if (listYears[0].innerHTML == "2018"){
-                        var start_val = val_fuel_2018[1];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2018: '
-
-                        })]
-                    }
-                    else {
-                        var start_val = val_fuel_2050[1];
-                        var tooltip =  [wNumb({
-                            decimals: 2,
-                            prefix: '2050: '
-
-                        })];
-                    };
-                };
-
-            noUiSlider.create(slider_fuel_cost, {
-                 start: start_val,
-                 tooltips:tooltip,
-                range: {
-                    'min': val_fuel_2018[0],
-                    'max': val_fuel_2018[2]
-                },
-                step: .01,
-
-            });
-
-            td_body.appendChild(header_drive_eff);
-            td_body.appendChild(slider_drive_eff);
-            td_body.appendChild(header_engine_eff);
-            td_body.appendChild(slider_engine_eff);
-            td_body.appendChild(header_combust_share);
-            td_body.appendChild(slider_combust_share);
-            td_body.appendChild(header_fuel_cost);
-            td_body.appendChild(slider_fuel_cost);
-        };
-
         tr.appendChild(th);
-        tr_body.appendChild(td_body);
+        };
 
-    }
     thead.appendChild(tr);
     tbody.appendChild(tr_body);
     table.appendChild(thead);
@@ -1633,15 +991,15 @@ function get_electricity_mix(ISO){
     fetch('/get_electricity_mix/'+ISO+'/'+list_year, opts).then(function (response) {
       return response.json();
     })
-    .then(function (body) {
+    .then(function (mix) {
 
         // Concatenate mix values
         var mix_val = []
         for (var year = 0; year < list_year.length; year++){
             var i = 0;
-            var sum_mix = body['data'][year].reduce(function(a, b) { return a + b; }, 0);
+            var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
             $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
-                this.value = Math.round((body['data'][year][i])*100)/100
+                this.value = parseInt(Number(mix[year][i]*100))
                 i++
             })
         }
@@ -1856,8 +1214,9 @@ function collect_configuration(){
     for (var year = 0; year < list_year.length; year++){
         var i = 0;
         var sum_mix = 0;
+        var is_missing = false;
         $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
-            sum_mix += Number(this.value)
+            sum_mix += Number(this.value)/100
         })
         if (sum_mix <.99 | sum_mix > 1.01){
             $.notify({
@@ -1871,9 +1230,15 @@ function collect_configuration(){
                 type:'warning'
             }
             );
-            return;
+            is_missing = true;
         };
+
     }
+
+    if (is_missing == true){
+        console.log('missing')
+        return;
+    };
 
     // Retrieve all necessary data and gather it into a dictionary
     // Initiate dictionary
@@ -1927,7 +1292,7 @@ function collect_configuration(){
     for (var year = 0; year < list_year.length; year++){
         var mix = [];
         $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
-            mix.push(Number(this.value))
+            mix.push(Number(this.value)/100)
         })
         mix_arr.push(mix)
     }
@@ -1946,13 +1311,16 @@ function collect_configuration(){
 
     params.push({key:'foreground params',value:foreground_params});
     params.push({key:'background params',value:background_params});
-    console.log(params);
     return params;
-    send_request(params);
+
 }
 
 function get_results(){
     var data = collect_configuration();
+    if (data == null){
+        return;
+    };
+
     var opts = {
       method: 'POST',
       headers: {
@@ -2000,10 +1368,88 @@ function set_mix_to_zero(){
 };
 
 function save_configuration(){
-
     var data = collect_configuration();
-
-
 };
+
+$("#InputParameters").on("keyup", function() {
+    var listItems = document.querySelectorAll( '#powertrain_list > li' );
+    var list_pt = []
+    for (var item = 0; item < listItems.length; item++){
+        list_pt.push(listItems[item].innerHTML);
+    };
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+    var list_s = []
+    for (var item = 0; item < listSizes.length; item++){
+        list_s.push(listSizes[item].innerHTML);
+    };
+
+    var value = $(this).val().toLowerCase();
+    if (value == ''){
+        $("#TableParameters tr").remove();
+        return;
+        }
+            $.when($.ajax({
+                url: "/search_params/"+value+"/"+list_pt+"/"+list_s,
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).then(function(json){
+
+            $("#TableParameters tr").remove();
+
+                for (var row in json){
+                    var tr = document.createElement('tr');
+                    tr.setAttribute('style', 'font-size:12px;');
+                    for (var item in json[row]){
+                        if (item == 4 | item == 5 | item == 6){
+
+                            var content = ''
+                            for (var x in json[row][item]){
+                                content += '<li style="font-size:12px;">'+json[row][item][x]+'</li>'
+                            }
+                            tr.innerHTML += '<td><ul>' + content + '</ul></td>'
+
+                        }
+                        else{
+                            tr.innerHTML += '<td>' + json[row][item] + '</td>'
+                        }
+
+                    };
+                    tr.innerHTML += '<td> <button class="online-button" id='+row+' onClick="add_param(this.id)" style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:150px;">Add</button> </td>'
+                    $("#TableParameters").append(tr);
+                };
+
+            }
+     );
+  });
+
+  function add_param(clicked_id){
+    var name = document.getElementById("TableParameters").rows[clicked_id].cells[1].innerHTML;
+    var unit = document.getElementById("TableParameters").rows[clicked_id].cells[3].innerHTML;
+    var scope_pt = document.getElementById("TableParameters").rows[clicked_id].cells[5];
+    var p_elements = scope_pt.childNodes[0].childNodes;
+    var powertrains = [];
+    for (var p =0; p < p_elements.length; p++){
+        powertrains.push(p_elements[p].innerHTML)
+    };
+
+    var scope_size = document.getElementById("TableParameters").rows[clicked_id].cells[6];
+    var s_elements = scope_size.childNodes[0].childNodes;
+    var sizes = [];
+    for (var s =0; s < s_elements.length; s++){
+        sizes.push(s_elements[s].innerHTML)
+    };
+
+    console.log(powertrains, sizes)
+    document.getElementById("TableParameters").rows[clicked_id].remove();
+
+
+
+
+  };
 
 

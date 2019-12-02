@@ -175,8 +175,14 @@
 												  	<tr>
 														<td colspan="2">
 															<img class="image" src="static/images/icons/drag_icon.png"
-												  style="width:90px; padding:15px;margin:0 auto;"
-												 alt="image">
+															  style="width:90px; padding:15px;margin:0 auto;"
+															 alt="image">
+														</td>
+
+													</tr>
+												  <tr>
+														<td colspan="2">
+															<p style="width:200px;">{{_('Drag and drop the years for which to perform the analysis.')}}</p>
 														</td>
 
 													</tr>
@@ -209,6 +215,12 @@
 														</td>
 
 													</tr>
+												  <tr>
+														<td colspan="2">
+															<p style="width:200px;">{{_('Drag and drop the powertrain types for which to perform the analysis.')}}</p>
+														</td>
+
+													</tr>
 												  </tbody>
 												</table>
 
@@ -236,6 +248,12 @@
 															<img class="image" src="static/images/icons/drag_icon.png"
 												  style="width:90px; padding:15px;margin:0 auto;"
 												 alt="image">
+														</td>
+
+													</tr>
+												  <tr>
+														<td colspan="2">
+															<p style="width:200px;">{{_('Drag and drop the size categories for which to perform the analysis.')}}</p>
 														</td>
 
 													</tr>
@@ -288,10 +306,33 @@
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">{{_('MANUFACTURE')}}</span></h2></div>
-						<div class="mu-about-area" style="padding-top:50px;" >
+						<div class="mu-about-area" style="padding-top:20px;" >
 							<!-- Start About Us Content -->
-							<div class="mu-about-content" style="display:none;" id="manufacture_section">
+							<div class="mu-about-content" style="display:none;margin:30px;" id="manufacture_section"
+							>
+								<p style="color:white;">Add any parameter you would like to modify.</p>
+
+								<input class="form-control" id="InputParameters" type="text" placeholder="Search...">
+									  <br>
+									  <table class="table" style="color:white;font-size:12px;">
+										<thead>
+										  <tr>
+											<th>Importance</th>
+											<th>Name</th>
+											<th>Description</th>
+											  <th>Unit</th>
+											  <th>Source</th>
+											  <th>Applies to powertrain</th>
+											  <th>Applies to size</th>
+											  <th>Add?</th>
+										  </tr>
+										</thead>
+										<tbody id="TableParameters">
+
+										</tbody>
+									  </table>
 								<div class="container" style="width:100%;">
+
 									<div class="row" id="powertrain_row" style="width:100%;">
 									</div>
 								</div>
@@ -658,6 +699,9 @@
   	<!-- Tool page js -->
 	<!--<script type="text/javascript" src="static/js/custom.js"></script>-->
 	<script type="text/javascript" src="static/js/tool_page.js"></script>
+
+
+
 
 
   </body>
