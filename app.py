@@ -9,9 +9,9 @@ from carculator import *
 import csv
 import secrets
 import numpy as np
-from rq import Queue
-from rq.job import Job
-from worker import conn
+#from rq import Queue
+#from rq.job import Job
+#from worker import conn
 
 
 # Instantiate Flask app
@@ -22,7 +22,7 @@ app.config["SECRET_KEY"] = session_token
 app.config.from_pyfile('config.py')
 
 # Create a connection to the Redis server
-q = Queue(connection=conn)
+#q = Queue(connection=conn)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -95,6 +95,16 @@ def search_car_model(search_item):
     cars = [car for car in car_to_class_map if any(search_item.lower() in x.lower() for x in car)]
     return jsonify(cars[:5])
 
+@app.route('/interpolate_array/<years>')
+def interpolate_array(years):
+
+    years = years.split(',')
+    years = [int(y) for y in years]
+    global arr
+    arr = arr.interp(year=years,  kwargs={'fill_value': 'extrapolate'})
+    response = jsonify({"array interpolation": 'OK'})
+    return make_response(response, 200)
+
 @app.route('/search_params/<param_item>/<powertrain_filter>/<size_filter>')
 def search_params(param_item, powertrain_filter, size_filter):
     """ Return a list of params if param contain `search?item`"""
@@ -113,6 +123,18 @@ def search_params(param_item, powertrain_filter, size_filter):
             response.append(a)
 
     return jsonify(response[:7])
+
+@app.route('/get_param_value/<name>/<pt>/<s>/<y>')
+def get_param_value(name, pt, s, y):
+    global arr
+    pt = pt.split(',')
+    pt = [d_pt[p] for p in pt]
+    s = s.split(',')
+    y = y.split(',')
+    y = [int(a) for a in y]
+    print(y)
+    val = arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0).values.round(2).tolist()
+    return jsonify(val)
 
 @app.route('/get_driving_cycle/<driving_cycle>')
 def get_driving_cycle(driving_cycle):
@@ -154,9 +176,9 @@ def get_electricity_mix(ISO, years):
 
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
-    array = arr.interp(year=d[('Functional unit',)]['year'],  kwargs={'fill_value': 'extrapolate'})
+    global arr
     #modify_xarray_from_custom_parameters(d, array)
-    cm = CarModel(array, cycle=d[('Driving cycle', )])
+    cm = CarModel(arr, cycle=d[('Driving cycle', )])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts(scope = d[('Functional unit',)], background_configuration = d[('Background',)])

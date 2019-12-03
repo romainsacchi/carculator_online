@@ -710,7 +710,9 @@ function size_list_update(){
         $("#electricity_mix_table th:last-child, #electricity_mix_table td:last-child").remove();
     }
 
+    var list_years = [];
     for (var item = 0; item < listYears.length; item++){
+        list_years.push(listYears[item].innerHTML);
             [...document.querySelectorAll('#electricity_mix_table tr')].forEach((row, i) => {
                 if (i==0){
                     let cell = document.createElement(i ? "td" : "th")
@@ -747,24 +749,28 @@ function size_list_update(){
     table.id = "table_inputs"
     var thead = document.createElement('thead');
     var tr = document.createElement('tr');
-    var tr_body = document.createElement('tr');
     var tbody = document.createElement('tbody');
-
-    var existing_labels = []
-    for (var pt in item_labels){
-        var th = document.createElement('th');
-        th.setAttribute('scope', 'col');
-        th.innerHTML = '<h2 style="color:white;">'+item_labels[pt]+' car</h2>';
-        th.setAttribute('style', 'text-align:center;vertical-align: top;');
-        tr.appendChild(th);
+    var row_content = '<th><h3 style="color:white;">Name</h3></th><th><h3 style="color:white;">Powertrain</h3></th>';
+    row_content += '<th><h3 style="color:white;">Size</h3></th><th><h3 style="color:white;">Unit</h3></th>';
+     for (var item = 0; item < listYears.length; item++){
+        row_content += '<th><h3 style="color:white;">'+listYears[item].innerHTML+'</h3></th>'
         };
-
+    tr.innerHTML = row_content;
     thead.appendChild(tr);
-    tbody.appendChild(tr_body);
     table.appendChild(thead);
     table.appendChild(tbody);
     row.appendChild(table);
 
+    // Update array server-side
+    $.when($.ajax({
+                url: "/interpolate_array/"+list_years,
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            )
 };
 
 // Populate table with search results as the search field is updated.
@@ -1267,18 +1273,25 @@ function collect_configuration(){
     params.push({key: 'size', value: list_size})
 
     // Retrieve car parameters
-    $.each($('#table_inputs select'), function() {
-            foreground_params.push({key: this.id, value:this.value
-        });
-    });
+    dic_inputs = [];
 
-    $.each($('#table_inputs div'), function() {
-        if (this.className == "noUi-target noUi-ltr noUi-horizontal"){
-            foreground_params.push({key: this.id,value: this.noUiSlider.get()
-            });
-        };
-    });
+        $("#table_inputs tbody tr").each(function () {
+            var name = this.childNodes[0].innerHTML
+            var pt = this.childNodes[1].innerHTML
+            var size = this.childNodes[2].innerHTML
 
+            console.log(this.childNodes)
+            vals=[]
+            $(this).find(':input').each(function(){
+                vals.push(this.value)
+            })
+            dic_inputs.push([{key:'parameter name', value:name},
+                            {key:'powertrain', value:pt},
+                            {key:'size', value:size},
+                            {key:'values', value:vals}])
+        })
+
+    foreground_params.push({key:'parameters', value: dic_inputs});
     // Retrieve driving cycle
     foreground_params.push({key:'driving_cycle', value: $('#driving_cycle_selected').text()});
 
@@ -1311,6 +1324,7 @@ function collect_configuration(){
 
     params.push({key:'foreground params',value:foreground_params});
     params.push({key:'background params',value:background_params});
+    console.log(params)
     return params;
 
 }
@@ -1428,6 +1442,8 @@ $("#InputParameters").on("keyup", function() {
   });
 
   function add_param(clicked_id){
+
+    // Collect name, unit, powertrains and sizes of parameter to add
     var name = document.getElementById("TableParameters").rows[clicked_id].cells[1].innerHTML;
     var unit = document.getElementById("TableParameters").rows[clicked_id].cells[3].innerHTML;
     var scope_pt = document.getElementById("TableParameters").rows[clicked_id].cells[5];
@@ -1444,12 +1460,70 @@ $("#InputParameters").on("keyup", function() {
         sizes.push(s_elements[s].innerHTML)
     };
 
-    console.log(powertrains, sizes)
-    document.getElementById("TableParameters").rows[clicked_id].remove();
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var years = [];
+    for (i=0;i<listYears.length;i++){years.push(listYears[i].innerHTML)};
+    var listSizes = document.querySelectorAll( '#size_list > li' );
 
+    var l_pt = []
+    var l_s = []
 
+    for (i=0;i<listPowertrains.length;i++){
+        var pt = listPowertrains[i].innerHTML;
 
+        if (powertrains.includes(pt)){
+            l_pt.push(pt);
 
-  };
+        }
+    }
 
+     for (j=0;j<listSizes.length;j++){
+        var s = listSizes[j].innerHTML;
 
+        if (sizes.includes(s)){
+            l_s.push(s);
+        }
+     }
+
+    var arr_request = [name, l_pt, l_s, unit, years]
+
+        $.when(
+            $.ajax({
+                url: "/get_param_value/"+arr_request[0]+"/"+arr_request[1]+"/"+arr_request[2]+"/"+arr_request[4],
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+
+                var tableRef = document.getElementById('table_inputs').getElementsByTagName('tbody')[0];
+
+                for (pt=0;pt<arr_request[1].length;pt++){
+                    for (s=0;s<arr_request[2].length;s++){
+                    var newRow = tableRef.insertRow();
+                    var row_content = '<td align="left" style="color:white">'+arr_request[0]+'</td><td align="left" style="color:white">'+arr_request[1][pt]+'</td>'
+                    row_content += '<td align="left" style="color:white">'+arr_request[2][s]+'</td><td align="left" style="color:white">'+arr_request[3]+'</td>'
+                    var param_content ='';
+                    for (y=0;y<arr_request[4].length;y++){
+
+                        if (arr_request[3]=='0-1'){
+                                param_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" max="1" value="'+json[0][0][y]+'"></td>'
+                           }
+                           else {
+                                param_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" value="'+json[0][0][y]+'"></td>'
+                           };
+                    }
+                    row_content += param_content;
+                    newRow.innerHTML = row_content;
+                    row_content='';
+                    param_content='';
+                    }
+                }
+            });
+        $("#TableParameters tr").remove();
+        $("#InputParameters").val('');
+    }
