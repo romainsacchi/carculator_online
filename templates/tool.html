@@ -537,27 +537,128 @@
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">{{_('FUEL PATHWAYS')}}</span></h2></div>
-						<div class="mu-about-area" style="padding-top:50px;">
+						<div class="mu-about-area" style="padding-top:0px;padding-bottom:50px;">
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="fuel_section">
 								<div class="container" style="width:100%;">
-									<div class="row" style="width:100%;color:white;">
-										<table style="width:100%;text-align:center;">
+									<div class="row" id = "row_fuel" style="width:100%;color:white;">
+										<table class="table" id="fuel_pathway_table">
 											<thead>
 												<tr>
-
-													<th style="text-align:center;margin:20px;">
-														<h2>{{_('Linking algorithm')}}</h2>
-														</th>
-													<th style="text-align:center;margin:20px;"><h2>{{_('Functional unit')}}</h2></th>
-													<th style="text-align:center;margin:20px;"><h2>{{_('Calculation mode')}}</h2></th>
+													<th><h3>Petrol</h3></th>
+													<th><h3>Diesel</h3></th>
+													<th><h3>Natural gas</h3></th>
+													<th><h3>Hydrogen</h3></th>
 												</tr>
 											</thead>
 											<tbody>
+												<tr>
+													<td align="left">
+														<div class="form-group">
+														<div class="form-check">
+															  <input class="form-check-input" type="radio" name="petrol technnology" id="conventional_petrol" value="petrol" checked>
+															  <label class="form-check-label" for="conventional_petrol">
+																Conventional petrol
+															  </label>
+														</div>
+														<div class="form-check">
+															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_forest" value="bioethanol - forest residues">
+															  <label class="form-check-label" for="bioethanol_forest">
+																Bio-ethanol from forest residues
+															  </label>
+														</div>
+														<div class="form-check">
+															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_wheat" value="bioethanol - wheat straw">
+															  <label class="form-check-label" for="bioethanol_wheat">
+																Bio-ethanol from wheat straw
+															  </label>
+														</div>
+														<div class="form-check">
+															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_maize" value="biotehanol - maize starch">
+															  <label class="form-check-label" for="bioethanol_maize">
+																Bio-ethanol from maize starch
+															  </label>
+														</div>
+														<div class="form-check">
+															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_beet" value="bioethanol - sugarbeet">
+															  <label class="form-check-label" for="bioethanol_beet">
+																Bio-ethanol from sugar beet residue
+															  </label>
+														</div>
+														</div>
+													</td>
+													<td align="left">
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="diesel technology" id="conventional_diesel" value="diesel" checked>
+														  <label class="form-check-label" for="conventional_diesel">
+															Conventional diesel
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="diesel technology" id="biodiesel_algae" value="biodiesel - algae">
+														  <label class="form-check-label" for="biodiesel_algae">
+															Bio-diesel from algae
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="diesel technology" id="biodiesel_cooking_oil" value="biodiesel - cooking oil">
+														  <label class="form-check-label" for="biodiesel_cooking_oil">
+															Bio-diesel from used cooking oil
+														  </label>
+														</div>
+													</td>
+													<td align="left">
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="cng technology" id="conventional_nat_gas" value="cng" checked>
+														  <label class="form-check-label" for="conventional_nat_gas">
+															Conventional natural gas (compressed)
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="cng technology" id="biogas" value="biogas">
+														  <label class="form-check-label" for="biogas">
+															Bio-gas from manure
+														  </label>
+														</div>
+													</td>
+													<td align="left">
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis" value="Electrolysis" checked>
+														  <label class="form-check-label" for="electrolysis">
+															Via electrolysis using the electricity mix specified above
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_solar" value="Electrolysis - solar">
+														  <label class="form-check-label" for="electrolysis_solar">
+															Via electrolysis using photovoltaic power
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_hydro" value="Electrolysis - hydro">
+														  <label class="form-check-label" for="electrolysis_hydro">
+															Via electrolysis using hydro power
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_nuclear" value="Electrolysis - nuclear">
+														  <label class="form-check-label" for="electrolysis_nuclear">
+															Via electrolysis using nuclear power
+														  </label>
+														</div>
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="hydrogen technology" id="SMR" value="SMR">
+														  <label class="form-check-label" for="SMR">
+															Via Steam Methane Reforming
+														  </label>
+														</div>
+													</td>
 
+												</tr>
 											</tbody>
 
 										</table>
+
 									</div>
 								</div>
 						</div>
@@ -580,7 +681,7 @@
 						<span style="color:white;">{{_('CALCULATION SETTINGS')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:50px;">
 							<!-- Start About Us Content -->
-							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="calculation_section">
+							<div class="mu-about-content" style="display:none;padding-top:0px;padding-top:0px;padding-bottom:50px;left:0;right:0;" id="calculation_section">
 								<div class="container" style="width:100%;">
 									<div class="row" style="width:100%;color:white;">
 										<table style="width:100%;text-align:center;">

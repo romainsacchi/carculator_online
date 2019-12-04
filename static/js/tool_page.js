@@ -695,7 +695,7 @@ function size_list_update(){
             $("#manufacture_section").attr('style', 'display:block;margin:30px;');
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
-            $("#calculation_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
+            $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
             generate_driving_cycle_graph('WLTC');}
         else{return;};
     };
@@ -760,7 +760,7 @@ function size_list_update(){
     table.appendChild(tbody);
     row.appendChild(table);
 
-    //
+
 };
 
 // Populate table with search results as the search field is updated.
@@ -1313,6 +1313,11 @@ function collect_configuration(){
         };
     });
 
+    // Retrieve fuel pathway
+    document.querySelectorAll('#fuel_pathway_table input:checked').forEach((check_box, i) => {
+                background_params.push({key:check_box.name, value:check_box.value})
+            });
+
     params.push({key:'foreground params',value:foreground_params});
     params.push({key:'background params',value:background_params});
     console.log(params)
@@ -1411,13 +1416,11 @@ $("#InputParameters").on("keyup", function() {
                     tr.setAttribute('style', 'font-size:12px;');
                     for (var item in json[row]){
                         if (item == 4 | item == 5 | item == 6){
-
                             var content = ''
                             for (var x in json[row][item]){
                                 content += '<li style="font-size:12px;">'+json[row][item][x]+'</li>'
                             }
                             tr.innerHTML += '<td><ul>' + content + '</ul></td>'
-
                         }
                         else{
                             if (item==0){
@@ -1430,20 +1433,15 @@ $("#InputParameters").on("keyup", function() {
                                 if (json[row][item] == 'Low'){
                                     tr.innerHTML += '<td style="color:yellow">' + json[row][item] + '</td>'
                                 }
-
                             }
                             else{
                                 tr.innerHTML += '<td>' + json[row][item] + '</td>'
                             }
-
                         }
-
-
                     };
                     tr.innerHTML += '<td> <button class="online-button" id='+row+' onClick="add_param(this.id)" style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:150px;">Add</button> </td>'
                     $("#TableParameters").append(tr);
                 };
-
             }
      );
   });
@@ -1481,7 +1479,6 @@ $("#InputParameters").on("keyup", function() {
 
         if (powertrains.includes(pt)){
             l_pt.push(pt);
-
         }
     }
 
