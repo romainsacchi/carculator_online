@@ -1419,22 +1419,25 @@ $("#InputParameters").on("keyup", function() {
                             tr.innerHTML += '<td><ul>' + content + '</ul></td>'
 
                         }
-                        if (item==0){
-                            console.log()
-                            if (json[row][item] == 'High'){
-                                tr.innerHTML += '<td style="color:red">' + json[row][item] + '</td>'
+                        else{
+                            if (item==0){
+                                if (json[row][item] == 'High'){
+                                    tr.innerHTML += '<td style="color:red">' + json[row][item] + '</td>'
+                                }
+                                if (json[row][item] == 'Medium'){
+                                    tr.innerHTML += '<td style="color:orange">' + json[row][item] + '</td>'
+                                }
+                                if (json[row][item] == 'Low'){
+                                    tr.innerHTML += '<td style="color:yellow">' + json[row][item] + '</td>'
+                                }
+
                             }
-                            if (json[row][item] == 'Medium'){
-                                tr.innerHTML += '<td style="color:orange">' + json[row][item] + '</td>'
-                            }
-                            if (json[row][item] == 'Low'){
-                                tr.innerHTML += '<td style="color:yellow">' + json[row][item] + '</td>'
+                            else{
+                                tr.innerHTML += '<td>' + json[row][item] + '</td>'
                             }
 
                         }
-                        else{
-                            tr.innerHTML += '<td>' + json[row][item] + '</td>'
-                        }
+
 
                     };
                     tr.innerHTML += '<td> <button class="online-button" id='+row+' onClick="add_param(this.id)" style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:150px;">Add</button> </td>'
@@ -1491,7 +1494,6 @@ $("#InputParameters").on("keyup", function() {
      }
 
     var arr_request = [name, l_pt, l_s, unit, years]
-    console.log(arr_request)
 
         $.when(
             $.ajax({
