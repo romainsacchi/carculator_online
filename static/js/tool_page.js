@@ -1340,7 +1340,7 @@ function get_results(){
     };
     $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take a few seconds."},
+        message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take up to one minute. Do not close this tab."},
         {
             animate: {
                 enter: 'animated bounceInDown',
@@ -1355,8 +1355,6 @@ function get_results(){
         var job_id = response['job id'];
         // Check task status every 3 seconds
         const interval = setInterval(function() {
-
-
             fetch('/check_status/'+job_id).then(function (status) {
                 return status.json();
                 }).then(function (status) {
