@@ -227,14 +227,14 @@ def format_dictionary(raw_dict):
                 powertrain = [d_pt[a['value']] for a in y if a['key'] == 'powertrain'][0]
                 size = [a['value'] for a in y if a['key'] == 'size'][0]
                 vals = [a['value'] for a in y if a['key'] == 'values'][0]
-                d_val = {(k,'loc'):v for k,v in list(zip(new_dict[('Functional unit',)]['year'], vals))}
+                d_val = {(k,'loc'):float(v) for k,v in list(zip(new_dict[('Functional unit',)]['year'], vals))}
                 f_d[(cat, powertrain, size, name, 'none')] = d_val
 
         if x['key'] in d_sliders:
             k = d_sliders[x['key']]
             cat = d_categories[k]
-            v = float(x['value'].replace(' ',''))
-            f_d[(cat, 'all', 'all', k, 'none')] = v
+            d_val = {(k,'loc'):float(v.replace(' ','')) for k,v in list(zip(new_dict[('Functional unit',)]['year'], x['value']))}
+            f_d[(cat, 'all', 'all', k, 'none')] = d_val
 
         if x['key'] == 'driving_cycle':
             new_dict[('Driving cycle',)] = x['value']
