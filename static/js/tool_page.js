@@ -1318,6 +1318,7 @@ function collect_configuration(){
                 background_params.push({key:check_box.name, value:check_box.value})
             });
 
+
     params.push({key:'foreground params',value:foreground_params});
     params.push({key:'background params',value:background_params});
     console.log(params)
