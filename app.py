@@ -233,8 +233,7 @@ def format_dictionary(raw_dict):
         if x['key'] in d_sliders:
             k = d_sliders[x['key']]
             cat = d_categories[k]
-            val = x['value'].replace(' ','')
-            val = float(val)
+            val = [float(x['value'].replace(' ',''))]
             d_val = {(k,'loc'):v for k,v in list(zip(new_dict[('Functional unit',)]['year'], val))}
             f_d[(cat, 'all', 'all', k, 'none')] = d_val
 
