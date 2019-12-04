@@ -1369,7 +1369,6 @@ function get_results(){
     });
 };
 
-
 function set_mix_to_zero(){
     $.each($('#electricity_mix_table input'), function() {
         $(this).val(0);
