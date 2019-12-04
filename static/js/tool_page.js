@@ -1491,6 +1491,7 @@ $("#InputParameters").on("keyup", function() {
      }
 
     var arr_request = [name, l_pt, l_s, unit, years]
+    console.log(arr_request)
 
         $.when(
             $.ajax({
