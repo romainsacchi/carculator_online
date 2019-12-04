@@ -233,7 +233,9 @@ def format_dictionary(raw_dict):
         if x['key'] in d_sliders:
             k = d_sliders[x['key']]
             cat = d_categories[k]
-            d_val = {(k,'loc'):float(v.replace(' ','')) for k,v in list(zip(new_dict[('Functional unit',)]['year'], x['value']))}
+            val = x['value'].replace(' ','')
+            val = float(val)
+            d_val = {(k,'loc'):v for k,v in list(zip(new_dict[('Functional unit',)]['year'], val))}
             f_d[(cat, 'all', 'all', k, 'none')] = d_val
 
         if x['key'] == 'driving_cycle':
