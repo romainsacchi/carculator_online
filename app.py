@@ -71,7 +71,6 @@ d_pt = {
         '(Plugin) Hybrid-petrol - combustion':'PHEV-c',
         '(Plugin) Hybrid-petrol - electric':'PHEV-e',
     }
-
 d_rev_pt = {v:k for k, v, in d_pt.items()}
 
 @app.route('/')
