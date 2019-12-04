@@ -174,7 +174,7 @@ def get_electricity_mix(ISO, years):
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
     arr = interpolate_array(d[('Functional unit',)]['year'])
-    #modify_xarray_from_custom_parameters(d, array)
+    modify_xarray_from_custom_parameters(d[('Foreground',)], arr)
     cm = CarModel(arr, cycle=d[('Driving cycle', )])
     cm.set_all()
     ic = InventoryCalculation(cm.array)
