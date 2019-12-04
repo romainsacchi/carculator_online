@@ -694,15 +694,14 @@ function size_list_update(){
         if (listItems.length>0 & listSizes.length>0){
             $("#manufacture_section").attr('style', 'display:block;margin:30px;');
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
+            $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
             generate_driving_cycle_graph('WLTC');}
         else{return;};
     };
 
     // Update the electricity mix table
-
     var table_mix = $('#electricity_mix_table')
-
     var number_col = document.getElementById('electricity_mix_table').rows[0].cells.length -1
 
     // Remove previous columns
@@ -761,16 +760,7 @@ function size_list_update(){
     table.appendChild(tbody);
     row.appendChild(table);
 
-    // Update array server-side
-    $.when($.ajax({
-                url: "/interpolate_array/"+list_years,
-                dataType: 'json',
-                type: 'GET',
-                success : function(data) {
-                   var json = data
-                    },
-                error: function(xhr, status, error){console.log(error)}})
-            )
+    //
 };
 
 // Populate table with search results as the search field is updated.
@@ -1001,11 +991,12 @@ function get_electricity_mix(ISO){
 
         // Concatenate mix values
         var mix_val = []
+        console.log(mix)
         for (var year = 0; year < list_year.length; year++){
             var i = 0;
             var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
             $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
-                this.value = parseInt(Number(mix[year][i]*100))
+                this.value = parseInt(Math.ceil(Number(mix[year][i]*100)))
                 i++
             })
         }
@@ -1426,6 +1417,19 @@ $("#InputParameters").on("keyup", function() {
                                 content += '<li style="font-size:12px;">'+json[row][item][x]+'</li>'
                             }
                             tr.innerHTML += '<td><ul>' + content + '</ul></td>'
+
+                        }
+                        if (item==0){
+                            console.log()
+                            if (json[row][item] == 'High'){
+                                tr.innerHTML += '<td style="color:red">' + json[row][item] + '</td>'
+                            }
+                            if (json[row][item] == 'Medium'){
+                                tr.innerHTML += '<td style="color:orange">' + json[row][item] + '</td>'
+                            }
+                            if (json[row][item] == 'Low'){
+                                tr.innerHTML += '<td style="color:yellow">' + json[row][item] + '</td>'
+                            }
 
                         }
                         else{

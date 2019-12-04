@@ -9,9 +9,9 @@ from carculator import *
 import csv
 import secrets
 import numpy as np
-#from rq import Queue
-#from rq.job import Job
-#from worker import conn
+from rq import Queue
+from rq.job import Job
+from worker import conn
 
 
 # Instantiate Flask app
@@ -22,7 +22,7 @@ app.config["SECRET_KEY"] = session_token
 app.config.from_pyfile('config.py')
 
 # Create a connection to the Redis server
-#q = Queue(connection=conn)
+q = Queue(connection=conn)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -96,15 +96,9 @@ def search_car_model(search_item):
     cars = [car for car in car_to_class_map if any(search_item.lower() in x.lower() for x in car)]
     return jsonify(cars[:5])
 
-@app.route('/interpolate_array/<years>')
 def interpolate_array(years):
-
-    years = years.split(',')
-    years = [int(y) for y in years]
     global arr
-    arr = arr.interp(year=years,  kwargs={'fill_value': 'extrapolate'})
-    response = jsonify({"array interpolation": 'OK'})
-    return make_response(response, 200)
+    return arr.interp(year=years,  kwargs={'fill_value': 'extrapolate'})
 
 @app.route('/search_params/<param_item>/<powertrain_filter>/<size_filter>')
 def search_params(param_item, powertrain_filter, size_filter):
@@ -127,13 +121,13 @@ def search_params(param_item, powertrain_filter, size_filter):
 
 @app.route('/get_param_value/<name>/<pt>/<s>/<y>')
 def get_param_value(name, pt, s, y):
-    global arr
+
     pt = pt.split(',')
     pt = [d_pt[p] for p in pt]
     s = s.split(',')
     y = y.split(',')
     y = [int(a) for a in y]
-    print(y)
+    arr = interpolate_array(y)
     val = arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0).values.round(2).tolist()
     return jsonify(val)
 
@@ -168,16 +162,18 @@ def get_electricity_mix(ISO, years):
     """ Return the electricity mix for the ISO country code and the year(s) given """
     years = [int(y) for y in years.split(',')]
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=years).values
+
+    response = np.true_divide(response.T, response.sum(axis=1)).T
     response = np.round(response, 2)
-    response[np.isnan(response)] = 0
-    return jsonify(response.round(2).tolist())
+    print(response)
 
 
-
+    #response[np.isnan(response)] = 0
+    return jsonify(response.tolist())
 
 def process_results(d):
     """ Calculate LCIA and store results in an array of arrays """
-    global arr
+    arr = interpolate_array(d[('Functional unit',)]['year'])
     #modify_xarray_from_custom_parameters(d, array)
     cm = CarModel(arr, cycle=d[('Driving cycle', )])
     cm.set_all()
@@ -251,9 +247,6 @@ def format_dictionary(raw_dict):
     dictionary['background params'] = b_d
 
     new_dict[('Background',)] = dictionary['background params']
-
-    print(new_dict)
-
     return new_dict
 
 

@@ -122,7 +122,13 @@
 							<div class="mu-about-content" style="display:none" id="powertrain_section">
 
 								<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
-								<p style="text-align:center;">{{_('Select the powertrain types and size classes you wish to conduct an assessment of. You may do so by moving elements from one frame to the other.')}}</p>
+								<center>
+								<p style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; width:700px;margin: 0 auto<">
+									{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. You may do so <b>by dragging elements with your mouse from the left frame into the frame to the right</b>.')}}<br>
+								</center>
+								</p>
+
+								<p style="text-align:center;"></p>
 
 
 								<div class="row">
@@ -305,12 +311,20 @@
 												  style="height:65px; width:80px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('MANUFACTURE')}}</span></h2></div>
+						<span style="color:white;">{{_('CAR PARAMETERS')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:20px;" >
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;margin:30px;" id="manufacture_section"
 							>
-
+								<p style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white">
+									Each car is defined by up to 200 input parameters.<br>
+								The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.
+									<br><u>You are however welcome to override the default value for any of these parameters if you have a specific case in mind</u>. <br>
+								The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results.<br>
+								The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results. <br>
+								That is, a parameter with a <b>high</b> sensitivity is a parameter for which a change in its value of 1% leads to a change in environmental impacts by 0.5 to 1%, against
+									0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and from 0 to 0.3% for a parameter with <b>low</b> sensitivity.
+								</p>
 								<p style="color:white;">Add any parameter you would like to modify.</p>
 
 								<input class="form-control" id="InputParameters" type="text" placeholder="Search...">
@@ -334,18 +348,14 @@
 										  </tr>
 										</thead>
 										<tbody id="TableParameters">
-
 										</tbody>
 									  </table>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 		<!-- End MANUFACTURE -->
-
-
 
 		<!-- Start USE -->
 		<section id="mu-testimonials">
@@ -358,7 +368,7 @@
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">{{_('USE')}}</span></h2></div>
-						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;left:0;right:0;">
+						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;padding-bottom:50px;left:0;right:0;">
 							<div class="mu-testimonials-content" style="display:none;" id="use_section">
 								<table class="table" id="table_use">
 							  <thead>
@@ -515,6 +525,47 @@
 			</div>
 		</section>
 		<!-- End Publications -->
+
+		<!-- Start FUEL PATHWAYS -->
+		<section id="mu-about" style="background-color:#626567;">
+			<div class="container" style="width:90%;">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row" >
+							<h2><img class="image" src="static/images/icons/fuel_icon.png"
+												  style="height:85px; width:70px; border-right:3px solid white;
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:white;">{{_('FUEL PATHWAYS')}}</span></h2></div>
+						<div class="mu-about-area" style="padding-top:50px;">
+							<!-- Start About Us Content -->
+							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="fuel_section">
+								<div class="container" style="width:100%;">
+									<div class="row" style="width:100%;color:white;">
+										<table style="width:100%;text-align:center;">
+											<thead>
+												<tr>
+
+													<th style="text-align:center;margin:20px;">
+														<h2>{{_('Linking algorithm')}}</h2>
+														</th>
+													<th style="text-align:center;margin:20px;"><h2>{{_('Functional unit')}}</h2></th>
+													<th style="text-align:center;margin:20px;"><h2>{{_('Calculation mode')}}</h2></th>
+												</tr>
+											</thead>
+											<tbody>
+
+											</tbody>
+
+										</table>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End FUEL PATHWAYS -->
 
 		<!-- Start CALCULATIONS -->
 		<section id="mu-about" style="background-color:grey;">
