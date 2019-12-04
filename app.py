@@ -57,6 +57,7 @@ params = load_params_file()
 electricity_mix = BackgroundSystemModel().electricity_mix
 cip = CarInputParameters()
 cip.static()
+d_categories = {cip.metadata[a]['name']:cip.metadata[a]['category'] for a in cip.metadata}
 dcts, arr = fill_xarray_from_input_parameters(cip)
 
 d_pt = {
@@ -204,17 +205,44 @@ def process_results(d):
 
 def format_dictionary(raw_dict):
     """ Format the dictionary sent by the user so that it can be understood by `carculator` """
+
     dictionary = {}
     for x in request.get_json():
         dictionary[x['key']] = x['value']
 
+    d_sliders =  {
+        'mileage-slider':'kilometers per year',
+        'lifetime-slider':'lifetime kilometers',
+        'passenger-slider':'average passengers',
+        'cargo-slider':'cargo mass'
+    }
+
+    new_dict = {}
+    new_dict[('Functional unit',)] = {'powertrain': [d_pt[x] for x in dictionary['type']],
+                                      'year': [int(x) for x in dictionary['year']],
+                                      'size': dictionary['size']}
+
     f_d={}
     for x in dictionary['foreground params']:
-        k = x['key']
-        v = x['value']
-        f_d[k] = v
-    dictionary['foreground params'] = f_d
+        if x['key'] == 'parameters':
+            for y in x['value']:
+                name = [a['value'] for a in y if a['key'] == 'parameter name'][0]
+                cat = d_categories[name]
+                powertrain = [d_pt[a['value']] for a in y if a['key'] == 'powertrain'][0]
+                size = [a['value'] for a in y if a['key'] == 'size'][0]
+                vals = [a['value'] for a in y if a['key'] == 'values'][0]
+                d_val = {(k,'loc'):v for k,v in list(zip(new_dict[('Functional unit',)]['year'], vals))}
+                f_d[(cat, powertrain, size, name, 'none')] = d_val
 
+        if x['key'] in d_sliders:
+            k = d_sliders[x['key']]
+            cat = d_categories[k]
+            v = float(x['value'].replace(' ',''))
+            f_d[(cat, 'all', 'all', k, 'none')] = v
+
+        if x['key'] == 'driving_cycle':
+            new_dict[('Driving cycle',)] = x['value']
+    new_dict[('Foreground',)] = f_d
     b_d={}
     for x in dictionary['background params']:
         k = x['key']
@@ -222,103 +250,10 @@ def format_dictionary(raw_dict):
         b_d[k] = v
     dictionary['background params'] = b_d
 
-    new_dict = {}
-    new_dict[('Functional unit',)] = {'powertrain': [d_pt[x] for x in dictionary['type']],
-                                       'year': [int(x) for x in dictionary['year']],
-                                       'size':dictionary['size']}
-
-    new_dict[('Driving cycle',)] = dictionary['foreground params']['driving_cycle']
-
     new_dict[('Background',)] = dictionary['background params']
 
+    print(new_dict)
 
-    map_dict = {
-        'electric_cell_density':
-            {('Energy Storage', 'BEV', 'all', 'battery cell energy density', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'electric_battery_cost':
-            {('Costs', 'BEV', 'all', 'energy battery cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Electric_energy_cost':
-            {('Costs', 'BEV', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'fuel_cell_cost':
-            {('Costs', 'FCEV', 'all', 'fuel cell cost per kW', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Fuel_cell_hydrogen_cost':
-            {('Costs', 'FCEV', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Petrol_drivetrain_eff':
-            {('Powertrain', 'ICEV-p', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Petrol_engine_eff': {
-            ('Powertrain', 'ICEV-p', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Petrol_combustion_share': {
-            ('Powertrain', 'ICEV-p', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Petrol_fuel_cost': {
-            ('Costs', 'ICEV-p', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Diesel_drivetrain_eff': {
-            ('Powertrain', 'ICEV-d', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Diesel_engine_eff': {
-            ('Powertrain', 'ICEV-d', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Diesel_combustion_share': {
-            ('Powertrain', 'ICEV-d', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Diesel_fuel_cost': {
-            ('Costs', 'ICEV-d', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Natural gas_drivetrain_eff': {
-            ('Powertrain', 'ICEV-g', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Natural gas_engine_eff': {
-            ('Powertrain', 'ICEV-g',  'all','engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Natural gas_combustion_share': {
-            ('Powertrain', 'ICEV-g', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Natural gas_fuel_cost': {
-            ('Costs', 'ICEV-g', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Hybrid-petrol_drivetrain_eff': {
-            ('Powertrain', 'HEV-p', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Hybrid-petrol_engine_eff': {
-            ('Powertrain', 'HEV-p', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Hybrid-petrol_combustion_share': {
-            ('Powertrain', 'HEV-p', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        'Hybrid-petrol_fuel_cost': {
-            ('Costs', 'HEV-p',  'all','energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        '(Plugin) Hybrid-petrol_drivetrain_eff': {
-            ('Powertrain', 'PHEV-e',  'all','drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Powertrain', 'PHEV-c', 'all', 'drivetrain efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        '(Plugin) Hybrid-petrol_engine_eff': {
-            ('Powertrain', 'PHEV-e', 'all', 'engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Powertrain', 'PHEV-c',  'all','engine efficiency', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        '(Plugin) Hybrid-petrol_combustion_share': {
-            ('Powertrain', 'PHEV-e', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Powertrain', 'PHEV-c', 'all', 'combustion power share', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-        '(Plugin) Hybrid-petrol_fuel_cost': {
-            ('Costs', 'PHEV-e', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0},
-            ('Costs', 'PHEV-c', 'all', 'energy cost per kWh', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-
-        'mileage-slider': {
-            ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-            'lifetime-slider': {
-                ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-                'cargo-slider': {
-                    ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-                    'passenger-slider': {
-                        ('Glider', 'all', 'all', 'average passengers', 'none'): {(2017, 'loc'): 0, (2040, 'loc'): 0}},
-                    }
-
-    for i in range(0, len(raw_dict)):
-        if raw_dict[i]['key'] in map_dict:
-            k = list(map_dict[raw_dict[i]['key']].keys())[0]
-            key = raw_dict[i]['key']
-            vals = raw_dict[i]['value']
-            if isinstance(vals, list):
-                if key in ('fuel_cell_cost', 'Fuel_cell_hydrogen_cost', 'electric_battery_cost', 'Electric_energy_cost',
-                           'Petrol_combustion_share', 'Diesel_combustion_share', 'Natural gas_combustion_share',
-                           'Hybrid-petrol_combustion_share', '(Plugin) Hybrid-petrol_combustion_share'):
-                    v = {
-                        (2017,'loc'): float(vals[1]),
-                        (2040, 'loc'): float(vals[0])
-                         }
-                else:
-                    v = {
-                        (2017, 'loc'): float(vals[0]),
-                        (2040, 'loc'): float(vals[1])
-                    }
-            else:
-                v = {(int(new_dict[('Functional unit',)]['year'][0]),'loc'): float(vals.replace(' ', ''))}
-            new_dict[k] = v
     return new_dict
 
 
