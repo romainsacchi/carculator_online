@@ -35,6 +35,7 @@ mail_handler = SMTPHandler(
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
 
+
 # Setup flask-mail
 mail = Mail(app)
 
