@@ -156,7 +156,7 @@
     console.log(data);
     var imp;
     $("#output").pivotUI(
-      data[0], {
+      data, {
         rows: ["impact category", "category"],
         cols: ["year", "powertrain", 'size'],
         vals: ["value"],
@@ -175,8 +175,6 @@
         onRefresh: function(config){
         	imp = config['inclusions']['impact category'][0]
             }
-
-
       });
 
   function refresh_graph(imp){

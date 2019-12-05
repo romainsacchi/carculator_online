@@ -178,7 +178,7 @@ def process_results(d):
     powertrain = [d_rev_pt[pt] for pt in cost.coords['powertrain'].values.tolist()]
     size = cost.coords['size'].values.tolist()
     cost_category = cost.coords['cost_type'].values.tolist()
-    list_res_costs = ['value', 'size', 'powertrain', 'year', 'cost category']
+    list_res_costs = [['value', 'size', 'powertrain', 'year', 'cost category']]
 
     for s in range(0, len(size)):
         for pt in range(0, len(powertrain)):
@@ -191,7 +191,7 @@ def process_results(d):
     data = results.values
     impact = results.coords['impact'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
-    list_res = ['impact category', 'size', 'powertrain', 'year', 'category', 'value']
+    list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
     for imp in range(0, len(impact_category)):
         for s in range(0, len(size)):
             for pt in range(0, len(powertrain)):
