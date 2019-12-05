@@ -218,6 +218,7 @@ def format_dictionary(raw_dict):
         'cargo-slider':'cargo mass'
     }
 
+
     new_dict = {}
     new_dict[('Functional unit',)] = {'powertrain': [d_pt[x] for x in dictionary['type']],
                                       'year': [int(x) for x in dictionary['year']],
