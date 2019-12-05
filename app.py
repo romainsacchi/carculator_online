@@ -186,7 +186,6 @@ def process_results(d):
                 for cat in range(0, len(cost_category)):
                     list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
 
-
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts(scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     data = results.values
