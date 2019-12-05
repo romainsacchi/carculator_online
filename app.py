@@ -208,7 +208,7 @@ def format_dictionary(raw_dict):
     """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
     dictionary = {}
-    for x in request.get_json():
+    for x in raw_dict:
         dictionary[x['key']] = x['value']
 
     d_sliders =  {
@@ -274,7 +274,6 @@ def display_result(job_key):
     if job.is_finished:
         return render_template('result.html', data = job.result)
 
-    
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
     """ Check the status of the job for the given `job_id` """
