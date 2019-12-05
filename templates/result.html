@@ -75,7 +75,9 @@
 		      <a class="navbar-brand" href="#"><img src="/static/images/carculator logo.png" style="height:30px;"></a>
 		    </div>
 				<button class="online-button"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export inventories</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export Brightway2-compatible inventories</button>
+			  <button class="online-button"
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export Simapro-compatible inventories</button>
 				 <button class="online-button"
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share results</button>
 
@@ -92,15 +94,19 @@
 			<div class="container" style="width:90%;">
 				<div class="row"  style="padding-top:80px;">
 					<h2><img class="image" src="/static/images/co2_icon.png"
-												  style="height:70px; width:80px; border-right:3px solid rgba(0,0,0,0.6);
+												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">{{_('LIFE CYCLE IMPACT ASSESSMENT')}}</span></h2></div>
-						<div class="mu-about-area" style="padding-top:50px;">
-					<div class="col-md-12">
-                        <div id="output" style="margin:20px auto;"></div>
-                    </div>
-                </div>
+						<span style="color:grey;">{{_('LIFE CYCLE IMPACT AND COST ASSESSMENT')}}</span></h2>
+				</div>
+						<div class="mu-about-area" style="padding-top:20px;">
+							<div class="col-md-6">
+								<div id="output" style="margin:20px auto;height:500px;"></div>
+							</div>
+							<div class="col-md-6">
+								<div id="output_costs" style="margin:20px auto;height:500px;"></div>
+							</div>
+                		</div>
             </div>
         </section>
 		<!-- Start SCOPE -->
@@ -111,12 +117,14 @@
 												  style="height:70px; width:80px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('LIFE CYCLE COST ASSESSMENT')}}</span></h2></div>
-					<div class="col-md-12">
-                        <div id="output_costs" style="margin:20px auto;"></div>
-                    </div>
-                </div>
-            </div>
+						<span style="color:white;">{{_('OTHER INDICATORS')}}</span></h2>
+				</div>
+					<div class="mu-about-area" style="padding-top:20px;">
+						<div class="col-md-12">
+							
+						</div>
+                	</div>
+			</div>
         </section>
 
 
