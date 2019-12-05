@@ -123,8 +123,9 @@
 
 								<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
 								<center>
-								<p style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; width:700px;margin: 0 auto<">
-									{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. You may do so <b>by dragging elements with your mouse from the left frame into the frame to the right</b>.')}}<br>
+								<p align="left" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 0 auto<">
+									{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
+									If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below..')}}<br>
 								</center>
 								</p>
 
@@ -301,7 +302,7 @@
 		</section>
 		<!-- End SCOPE -->
 
-		<!-- Start MANUFACTURE -->
+		<!-- Start CAR PARAMETERS -->
 		<section id="mu-about" style="background-color:grey;">
 			<div class="container" style="width:90%;">
 				<div class="row">
@@ -323,7 +324,7 @@
 								The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results.<br>
 								The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results. <br>
 								That is, a parameter with a <b>high</b> sensitivity is a parameter for which a change in its value of 1% leads to a change in environmental impacts by 0.5 to 1%, against
-									0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and from 0 to 0.3% for a parameter with <b>low</b> sensitivity.
+									0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and 0 to 0.3% for a parameter with <b>low</b> sensitivity.
 								</p>
 								<p style="color:white;">Add any parameter you would like to modify.</p>
 
@@ -355,7 +356,7 @@
 				</div>
 			</div>
 		</section>
-		<!-- End MANUFACTURE -->
+		<!-- End CAR PARAMETERS -->
 
 		<!-- Start USE -->
 		<section id="mu-testimonials">
@@ -370,6 +371,18 @@
 						<span style="color:white;">{{_('USE')}}</span></h2></div>
 						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;padding-bottom:50px;left:0;right:0;">
 							<div class="mu-testimonials-content" style="display:none;" id="use_section">
+								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+									This section defines parameters concerned with the use phase of the vehicles.<br>
+									The model needs to know the driving cycle of the vehicles (i.e., the speed level per
+									second of driving, to derive the needs for acceleration and braking) as well as a
+									few other things such as the number of passengers, the country the vehicles are operated in, etc.<br>
+									Projected electricity mixes for are based on <b>Business-as-usual scenarios</b> from
+									<b>Intergrated Assessment models (IAMs)</b>.
+									For European country, the projections originate the <a style="color:white;" target="_blank" href="https://www.psi.ch/en/eem/projects/european-swiss-times-electricity-model"><u>EUSTEM</u></a> model,
+									developed by the Energy Economics group of PSI. For African countries, projections originate the
+									<a style="color:white;" target="_blank" href="https://ec.europa.eu/jrc/en/publication/energy-projections-african-countries"><u>TEMBA</u></a> model.
+									For other countries, projections are based on the IEA'S <a style="color:white;" target="_blank" href="https://iea-etsap.org/index.php/etsap-tools/model-generators/markal"><u>MARKAL</u></a> model.
+								</p>
 								<table class="table" id="table_use">
 							  <thead>
 								<tr>
@@ -441,7 +454,7 @@
 								  </td>
 
 								<td width="400px">
-								  <p style="color:white;">{{_('Our projection models suggest the following electricity mixes in 2018 and 2040 for the selected country.
+								  <p style="color:white;">{{_('Projection models suggest the following electricity mixes for the years selected for the selected country.
 									You may modify them.')}}</p>
 
 									<table class="table" style="background:none;color:white;text-align:left;margin:0 auto;"
@@ -540,6 +553,16 @@
 						<div class="mu-about-area" style="padding-top:0px;padding-bottom:50px;">
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="fuel_section">
+								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+									In this section, we define the pathway used to supply fuel for the vehicles.<br>
+									The use can select conventional pathways to represent the supply and use of common fuels such as diesel
+									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-gas.<br>
+									The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
+									This means that they do not compete with crops production with the purpose of food supply.<br>
+									Additionaly, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
+									Hydrogen can either be produced by electrolysis, which is a process that requires electricity, or via a process called
+									"Steam Methane Reforming" which uses steam and methane to produce hydrogen (and carbon monoxide).
+								</p>
 								<div class="container" style="width:100%;">
 									<div class="row" id = "row_fuel" style="width:100%;color:white;">
 										<table class="table" id="fuel_pathway_table">

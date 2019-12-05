@@ -9,9 +9,9 @@ from carculator import *
 import csv
 import secrets
 import numpy as np
-from rq import Queue
-from rq.job import Job
-from worker import conn
+#from rq import Queue
+#from rq.job import Job
+#from worker import conn
 
 
 # Instantiate Flask app
@@ -22,7 +22,7 @@ app.config["SECRET_KEY"] = session_token
 app.config.from_pyfile('config.py')
 
 # Create a connection to the Redis server
-q = Queue(connection=conn)
+#q = Queue(connection=conn)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -161,13 +161,8 @@ def get_electricity_mix(ISO, years):
     """ Return the electricity mix for the ISO country code and the year(s) given """
     years = [int(y) for y in years.split(',')]
     response = electricity_mix.loc[dict(country=ISO, value=0)].interp(year=years).values
-
     response = np.true_divide(response.T, response.sum(axis=1)).T
     response = np.round(response, 2)
-    print(response)
-
-
-    #response[np.isnan(response)] = 0
     return jsonify(response.tolist())
 
 def process_results(d):
@@ -193,8 +188,6 @@ def process_results(d):
                     for cat in range(0, len(impact)):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
-    print('filling')
-
 
     return json.dumps(list_res)
 
@@ -247,7 +240,6 @@ def format_dictionary(raw_dict):
     dictionary['background params'] = b_d
 
     new_dict[('Background',)] = dictionary['background params']
-    print(new_dict)
     return new_dict
 
 
