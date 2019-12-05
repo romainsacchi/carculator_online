@@ -177,7 +177,7 @@ def process_results(d):
     year = cost.coords['year'].values.tolist()
     powertrain = [d_rev_pt[pt] for pt in cost.coords['powertrain'].values.tolist()]
     size = cost.coords['size'].values.tolist()
-    cost_category = cost.coords['impact_category'].values.tolist()
+    cost_category = cost.coords['cost_type'].values.tolist()
     list_res_costs = ['value', 'size', 'powertrain', 'year', 'cost category']
 
     for s in range(0, len(size)):
