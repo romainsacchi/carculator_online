@@ -171,13 +171,27 @@ def process_results(d):
     modify_xarray_from_custom_parameters(d[('Foreground',)], arr)
     cm = CarModel(arr, cycle=d[('Driving cycle', )])
     cm.set_all()
+    cost = cm.calculate_cost_impacts(scope = d[('Functional unit',)])
+
+    data_cost = cost.values
+    year = cost.coords['year'].values.tolist()
+    powertrain = [d_rev_pt[pt] for pt in cost.coords['powertrain'].values.tolist()]
+    size = cost.coords['size'].values.tolist()
+    cost_category = cost.coords['impact_category'].values.tolist()
+    list_res_costs = []
+    list_res_costs.append(['value', 'size', 'powertrain', 'year', 'cost category'])
+
+    for s in range(0, len(size)):
+        for pt in range(0, len(powertrain)):
+            for y in range(0, len(year)):
+                for cat in range(0, len(cost_category)):
+                    list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
+
+
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts(scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     data = results.values
-    year = results.coords['year'].values.tolist()
-    powertrain = [d_rev_pt[pt] for pt in results.coords['powertrain'].values.tolist()]
     impact = results.coords['impact'].values.tolist()
-    size = results.coords['size'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
     list_res = []
     list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
@@ -189,7 +203,7 @@ def process_results(d):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
 
-    return json.dumps(list_res)
+    return json.dumps([list_res, list_res_costs])
 
 def format_dictionary(raw_dict):
     """ Format the dictionary sent by the user so that it can be understood by `carculator` """

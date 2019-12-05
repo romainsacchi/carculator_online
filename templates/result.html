@@ -155,7 +155,7 @@
     var data = {{data|safe}};
     var imp;
     $("#output").pivotUI(
-      data, {
+      data[0], {
         rows: ["impact category", "category"],
         cols: ["year", "powertrain", 'size'],
         vals: ["value"],
@@ -185,6 +185,8 @@
 			};
   	//Plotly.relayout($("#output"), update)
   };
+
+  console.log(data[1]);
 
 
 
