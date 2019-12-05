@@ -200,6 +200,7 @@ def process_results(d):
                         list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          data[imp, s, pt, y, cat, 0]])
 
+
     return json.dumps([list_res, list_res_costs])
 
 def format_dictionary(raw_dict):
