@@ -97,6 +97,16 @@
                 </div>
             </div>
         </section>
+		<!-- Start SCOPE -->
+		<section id="mu-about">
+			<div class="container" style="width:90%;">
+				<div class="row">
+					<div class="col-md-12">
+                        <div id="output_costs" style="margin:100px auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
@@ -153,10 +163,9 @@
         };
 
     var data = {{data|safe}};
-    console.log(data);
     var imp;
     $("#output").pivotUI(
-      data[1], {
+      data[0], {
         rows: ["impact category", "category"],
         cols: ["year", "powertrain", 'size'],
         vals: ["value"],
@@ -177,16 +186,23 @@
             }
       });
 
-  function refresh_graph(imp){
-  	var update = {
-				title: imp, // updates the title
-				'yaxis.title': list_unit[imp]     // updates the end of the yaxis range
-			};
-  	//Plotly.relayout($("#output"), update)
-  };
-
-  console.log(data[1]);
-
+      $("#output_costs").pivotUI(
+      data[1], {
+        rows: ["cost category"],
+        cols: ["year", "powertrain", 'size'],
+        vals: ["value"],
+        exclusions: {'cost category':["total"]},
+        "colOrder": "value_a_to_z",
+        aggregatorName: "Sum",
+        rendererName: "Stacked Bar Chart",
+        renderers: $.extend(
+            $.pivotUtilities.renderers,
+            $.pivotUtilities.export_renderers,
+          $.pivotUtilities.plotly_renderers
+        ),
+        rendererOptions: {plotly: { yaxis: { title: € per vkm},
+        							title: {text: 'Ownership cost over life cycle, per vehicle-kilometer'}}},
+      });
 
 
 	</script>
