@@ -1412,6 +1412,21 @@ function get_results(){
                         clearInterval(interval);
                         return;
                     }
+                    if (status['job status'] == 'job not found'){
+                        $.notify({
+                            icon: '	glyphicon glyphicon-warning',
+                            message: "It seems your job has been lost. We suggest you start teh calculation again."},
+                            {
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                },
+                                type:'error'
+                            });
+
+                        return;
+                    }
+
                     })
          }, 3000);
     });

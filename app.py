@@ -10,7 +10,7 @@ import csv
 import secrets
 import numpy as np
 from rq import Queue
-from rq.job import Job
+from rq.job import Job, NoSuchJobError
 from worker import conn
 
 
@@ -178,8 +178,7 @@ def process_results(d):
     powertrain = [d_rev_pt[pt] for pt in cost.coords['powertrain'].values.tolist()]
     size = cost.coords['size'].values.tolist()
     cost_category = cost.coords['impact_category'].values.tolist()
-    list_res_costs = []
-    list_res_costs.append(['value', 'size', 'powertrain', 'year', 'cost category'])
+    list_res_costs = ['value', 'size', 'powertrain', 'year', 'cost category']
 
     for s in range(0, len(size)):
         for pt in range(0, len(powertrain)):
@@ -192,8 +191,7 @@ def process_results(d):
     data = results.values
     impact = results.coords['impact'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
-    list_res = []
-    list_res.append(['impact category', 'size', 'powertrain', 'year', 'category', 'value'])
+    list_res = ['impact category', 'size', 'powertrain', 'year', 'category', 'value']
     for imp in range(0, len(impact_category)):
         for s in range(0, len(size)):
             for pt in range(0, len(powertrain)):
@@ -277,7 +275,13 @@ def display_result(job_key):
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
     """ Check the status of the job for the given `job_id` """
-    job = Job.fetch(job_key, connection=conn)
+    try:
+        job = Job.fetch(job_key, connection=conn)
+    except NoSuchJobError:
+        response = jsonify({"job status": 'job not found'})
+        return make_response(response, 404)
+
+
     response = jsonify({"job status": job.get_status()})
     return make_response(response, 200)
 
