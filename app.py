@@ -171,8 +171,7 @@ def process_results(d):
     modify_xarray_from_custom_parameters(d[('Foreground',)], arr)
     cm = CarModel(arr, cycle=d[('Driving cycle', )])
     cm.set_all()
-    cost = cm.calculate_cost_impacts(scope = d[('Functional unit',)])
-
+    cost = cm.calculate_cost_impacts(scope=d[('Functional unit',)])
     data_cost = cost.values
     year = cost.coords['year'].values.tolist()
     powertrain = [d_rev_pt[pt] for pt in cost.coords['powertrain'].values.tolist()]
