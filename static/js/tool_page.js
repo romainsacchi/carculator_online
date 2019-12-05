@@ -1426,7 +1426,6 @@ function get_results(){
 
                         return;
                     }
-
                     })
          }, 3000);
     });
