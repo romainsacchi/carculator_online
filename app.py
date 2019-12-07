@@ -261,7 +261,7 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = format_dictionary(request.get_json())
     job = q.enqueue_call(
-        func=process_results, args=(d,), result_ttl=500
+        func=process_results, args=(d,), result_ttl=2500000
     )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
