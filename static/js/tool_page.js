@@ -652,14 +652,22 @@ $('#vehicle_type label').click(function() {
         $("#powertrain_section").attr('style', 'display:block;');
     }else{
         $.notify({
-        icon: 'glyphicon glyphicon-warning-sign',
-        message: "{{_('Sorry, this category of vehicle is not available yet.')}}"},
+            icon: 'glyphicon glyphicon-warning-sign',
+            message: "Sorry, this category of vehicle is not available yet."
+        },
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'warning'
+        },
         {
             animate: {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-            type:'warning'
+
         }
         );
 
@@ -678,13 +686,21 @@ function size_list_update(){
     if (listYears.length == 0){
        $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "A time horizon must be selected first."},
+        message: "A time horizon must be selected first."
+        },
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'warning'
+        },
         {
             animate: {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-            type:'warning'
+
         }
         );
 
@@ -693,8 +709,8 @@ function size_list_update(){
     else{
         if (listItems.length>0 & listSizes.length>0){
             $("#manufacture_section").attr('style', 'display:block;margin:30px;');
-            $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
-            $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;');
+            $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
+            $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
             generate_driving_cycle_graph('WLTC');}
         else{return;};
@@ -1004,13 +1020,22 @@ function getSelectedCountries() {
     var existing_selection = $("#country-selected")
     $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "Currently, only one country can be selected.."},
+        message: "Currently, only one country can be selected.."
+        }
+        ,
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'warning'
+        },
         {
             animate: {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-            type:'warning'
+
         }
         );
        get_electricity_mix(selected.slice(0,1));
@@ -1051,13 +1076,22 @@ function get_electricity_mix(ISO){
 
         $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "You have set all the required parameters. Whenever ready, hit the 'Calculate' button."},
+        message: "You have set all the required parameters. Whenever ready, hit the 'Calculate' button."
+        }
+        ,
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'success'
+        },
         {
             animate: {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-            type:'success'
+
         });
 
     });
@@ -1169,13 +1203,22 @@ function collect_configuration(){
     if (!$('#vehicle_type input:radio:checked').length > 0) {
         $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "It seems that the type of vehicle to analyze is missing."},
+        message: "It seems that the type of vehicle to analyze is missing."
+        }
+        ,
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'warning'
+        },
         {
             animate: {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-            type:'warning'
+
         }
         );
         return;
@@ -1186,13 +1229,22 @@ function collect_configuration(){
     if (listYears.length == 0) {
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the year for which to conduct the analysis is missing."},
+            message: "It seems that the year for which to conduct the analysis is missing."
+            }
+            ,
+            {
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                type:'warning'
+            },
             {
                 animate: {
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-                type:'warning'
+
             }
             );
         return;
@@ -1203,13 +1255,22 @@ function collect_configuration(){
     if (listItems.length == 0) {
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the powertrain type for which to conduct the analysis is missing."},
+            message: "It seems that the powertrain type for which to conduct the analysis is missing."
+            }
+            ,
+            {
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                type:'warning'
+            },
             {
                 animate: {
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-                type:'warning'
+
             }
             );
         return;
@@ -1220,13 +1281,22 @@ function collect_configuration(){
     if (listSizes.length == 0) {
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the size class for which to conduct the analysis is missing."},
+            message: "It seems that the size class for which to conduct the analysis is missing."
+            }
+            ,
+            {
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                type:'warning'
+            },
             {
                 animate: {
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-                type:'warning'
+
             }
             );
         return;
@@ -1236,13 +1306,22 @@ function collect_configuration(){
     if ($("#country-selected").text() == "" | $("#country-selected").text() == "[]") {
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the country for which to conduct the analysis is missing."},
+            message: "It seems that the country for which to conduct the analysis is missing."
+            }
+            ,
+            {
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                type:'warning'
+            },
             {
                 animate: {
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-                type:'warning'
+
             }
             );
         return;
@@ -1266,13 +1345,22 @@ function collect_configuration(){
         if (sum_mix <.99 | sum_mix > 1.01){
             $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the electricity mix for "+String(list_year[year])+" is not equal to 100%."},
+            message: "It seems that the electricity mix for "+String(list_year[year])+" is not equal to 100%."
+            }
+            ,
+            {
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                type:'warning'
+            },
             {
                 animate: {
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-                type:'warning'
+
             }
             );
             is_missing = true;
@@ -1388,13 +1476,22 @@ function get_results(){
     };
     $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take up to one minute. Do not close this tab."},
+        message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take up to one minute. Do not close this tab."
+        }
+        ,
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'success'
+        },
         {
             animate: {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-            type:'success'
+
         });
 
     fetch('/get_results/', opts).then(function (response) {
@@ -1415,13 +1512,21 @@ function get_results(){
                     if (status['job status'] == 'job not found'){
                         $.notify({
                             icon: '	glyphicon glyphicon-warning',
-                            message: "It seems your job has been lost. We suggest you start teh calculation again."},
+                            message: "It seems your job has been lost. We suggest you start teh calculation again."
+                            },
+                            {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type:'danger'
+                            },
                             {
                                 animate: {
                                     enter: 'animated bounceInDown',
                                     exit: 'animated bounceOutUp'
                                 },
-                                type:'error'
+
                             });
 
                         return;
@@ -1486,13 +1591,13 @@ $("#InputParameters").on("keyup", function() {
                         else{
                             if (item==0){
                                 if (json[row][item] == 'High'){
-                                    tr.innerHTML += '<td style="color:red">' + json[row][item] + '</td>'
+                                    tr.innerHTML += '<td style="color:red"><h6>' + json[row][item] + '</h6></td>'
                                 }
                                 if (json[row][item] == 'Medium'){
-                                    tr.innerHTML += '<td style="color:orange">' + json[row][item] + '</td>'
+                                    tr.innerHTML += '<td style="color:orange"><h6>' + json[row][item] + '</h6></td>'
                                 }
                                 if (json[row][item] == 'Low'){
-                                    tr.innerHTML += '<td style="color:yellow">' + json[row][item] + '</td>'
+                                    tr.innerHTML += '<td style="color:yellow"><h6>' + json[row][item] + '</h6></td>'
                                 }
                             }
                             else{

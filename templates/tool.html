@@ -125,7 +125,7 @@
 								<center>
 								<p align="left" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 0 auto<">
 									{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
-									If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below..')}}<br>
+									If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below.')}}<br>
 								</center>
 								</p>
 
@@ -321,8 +321,8 @@
 									Each car is defined by up to 200 input parameters.<br>
 								The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.
 									<br><u>You are however welcome to override the default value for any of these parameters if you have a specific case in mind</u>. <br>
-								The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results.<br>
-								The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results. <br>
+								The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.<br>
+								The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table. <br>
 								That is, a parameter with a <b>high</b> sensitivity is a parameter for which a change in its value of 1% leads to a change in environmental impacts by 0.5 to 1%, against
 									0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and 0 to 0.3% for a parameter with <b>low</b> sensitivity.
 								</p>
@@ -549,19 +549,22 @@
 												  style="height:85px; width:70px; border-right:3px solid white;
 														padding:20px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('FUEL PATHWAYS')}}</span></h2></div>
+						<span style="color:white;">{{_('ENERGY STORAGE AND FUEL PATHWAYS')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:0px;padding-bottom:50px;">
 							<!-- Start About Us Content -->
-							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;" id="fuel_section">
+							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;margin-top:0px;" id="fuel_section">
 								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
-									In this section, we define the pathway used to supply fuel for the vehicles.<br>
-									The use can select conventional pathways to represent the supply and use of common fuels such as diesel
+									In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
+									The user can select conventional pathways to represent the supply and use of common fuels such as diesel
 									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-gas.<br>
 									The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
 									This means that they do not compete with crops production with the purpose of food supply.<br>
 									Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
 									Hydrogen can either be produced by electrolysis, which is a process that requires electricity, or via a process called
-									"Steam Methane Reforming" which uses steam and methane to produce hydrogen (and carbon monoxide).
+									"Steam Methane Reforming" which uses steam and methane to produce hydrogen (and carbon monoxide).<br>
+
+									Regarding energy storage technologies for battery electric vehicles, the user can choose between several types of lithium-ion-based chemistry
+									but also between different origins of manufacture. The origin of battery manufacture will determine the electricity mix used to produce the battery cells.
 								</p>
 								<div class="container" style="width:100%;">
 									<div class="row" id = "row_fuel" style="width:100%;color:white;">
@@ -572,9 +575,25 @@
 													<th><h3>Diesel</h3></th>
 													<th><h3>Natural gas</h3></th>
 													<th><h3>Hydrogen</h3></th>
+													<th><h3>Electric</h3></th>
 												</tr>
 											</thead>
 											<tbody>
+												<tr>
+													<tr>
+														<td align="left" colspan="5">
+															<div class="row" >
+																<h6>
+																	<img class="image" src="static/images/icons/well_to_pump_icon.png"
+																					  style="height:70px;padding:20px;display:inline-block;"
+																					 alt="image">
+																	<span style="color:white;">{{_('FUEL PATHWAYS')}}</span>
+																</h6>
+															</div>
+														</td>
+
+													</tr>
+												</tr>
 												<tr>
 													<td align="left">
 														<div class="form-group">
@@ -634,7 +653,7 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="cng technology" id="conventional_nat_gas" value="cng" checked>
 														  <label class="form-check-label" for="conventional_nat_gas">
-															Conventional natural gas (compressed)
+															Compressed natural gas
 														  </label>
 														</div>
 														<div class="form-check">
@@ -676,8 +695,122 @@
 														  </label>
 														</div>
 													</td>
+													<td align="left">
+														<div class="form-check">
+														  <input class="form-check-input" type="radio" name="none" id="none" value="none" checked>
+														  <label class="form-check-label" for="none">
+															Electricity mix specified above
+														  </label>
+														</div>
+													</td>
 
 												</tr>
+												<tr>
+
+													<td align="left" colspan="5">
+														<div class="row" >
+																<h6>
+																	<img class="image" src="static/images/icons/car_battery_icon.png"
+																					  style="height:70px;padding:20px;display:inline-block;"
+																					 alt="image">
+																	<span style="color:white;">{{_('ENERGY STORAGE')}}</span>
+																</h6>
+														</div>
+													</td>
+
+												</tr>
+												<tr>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td align="left">
+														<span align="left"><h6>Fuel cell technology</h6></span>
+														<div class="form-group">
+															<div class="form-check">
+																  <input class="form-check-input" type="radio" name="fuel cell stack technnology" id="PEM" value="PEM" checked>
+																  <label class="form-check-label" for="PEM">
+																	Proton exchange membrane
+																  </label>
+															</div>
+														</div>
+													</td>
+													<td align="left">
+														<table>
+															<tr>
+																<td align="left">
+																	<span align="left"><h6>Battery chemistry</h6></span>
+																	<div class="form-group">
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery technnology" id="NMC" value="NMC" checked>
+																			  <label class="form-check-label" for="NMC">
+																				Lithium nickel manganese cobalt oxide (NMC)
+																			  </label>
+																		</div>
+
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery technnology" id="LFP" value="LFP">
+																			  <label class="form-check-label" for="LFP">
+																				Lithium iron phosphate (LFP)
+																			  </label>
+																		</div>
+
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery technnology" id="NCA" value="NCA" >
+																			  <label class="form-check-label" for="NCA">
+																				Lithium nickel cobalt aluminum oxide (NCA)
+																			  </label>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td align="left">
+																	<span align="left"><h6>Origin of manufacture</h6></span>
+																	<div class="form-group">
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery origin" id="China" value="CN" checked>
+																			  <label class="form-check-label" for="China">
+																				China
+																			  </label>
+																		</div>
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery origin" id="Japan" value="JP">
+																			  <label class="form-check-label" for="Japan">
+																				Japan
+																			  </label>
+																		</div>
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery origin" id="India" value="IN">
+																			  <label class="form-check-label" for="India">
+																				India
+																			  </label>
+																		</div>
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery origin" id="Europe" value="RER" >
+																			  <label class="form-check-label" for="Europe">
+																				Europe
+																			  </label>
+																		</div>
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery origin" id="US" value="US" >
+																			  <label class="form-check-label" for="US">
+																				United States
+																			  </label>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+														</table>
+
+
 											</tbody>
 
 										</table>

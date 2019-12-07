@@ -1616,7 +1616,7 @@ button:focus {
     font-size: 14px;
     line-height: 26px;
     cursor: default;
-    z-index: 9999;
+    z-index: 1;
 }
 
 .help-tip:before{
