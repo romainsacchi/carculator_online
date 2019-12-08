@@ -77,8 +77,8 @@
 		    </div>
 
 			  <button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onClick="get_results()">{{_('Calculate')}}</button>
-				 <button class="online-button" onClick="save_configuration()"
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onclick="get_results()">{{_('Calculate')}}</button>
+				 <button class="online-button" onclick="save_configuration()"
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Share configuration')}}</button>
 
 		  </div><!-- /.container-fluid -->
@@ -123,11 +123,12 @@
 
 								<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
 								<center>
-								<p align="left" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 0 auto<">
-									{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
-									If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below.')}}<br>
+									<p align="left" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 0 auto<">
+										{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
+										If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below.')}}<br>
+
+									</p>
 								</center>
-								</p>
 
 								<p style="text-align:center;"></p>
 
@@ -355,6 +356,7 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		</section>
 		<!-- End CAR PARAMETERS -->
 
@@ -449,7 +451,7 @@
 										</div>
 								  </td>
 								  <td>
-									  <p style="color:white;">{{_('Select the country where the vehicles should be operated:')}} <span id="country-selected""></span></p>
+									  <p style="color:white;">{{_('Select the country where the vehicles should be operated:')}} <span id="country-selected"></span></p>
 									  <div id="chartdiv" style="width:500px;"></div>
 								  </td>
 
@@ -490,11 +492,12 @@
 										  <td>{{_('Waste')}}</td>
 										</tr>
 									  </tbody>
-										<button class="online-button" onClick="set_mix_to_zero()"
+
+									</table>
+									<button class="online-button" onclick="set_mix_to_zero()"
 					  							style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:150px;">
 												{{_('Set to zero')}}
 											</button>
-									</table>
 
 								</td>
 								  <td>
@@ -570,30 +573,55 @@
 									<div class="row" id = "row_fuel" style="width:100%;color:white;">
 										<table class="table" id="fuel_pathway_table">
 											<thead>
-												<tr>
-													<th><h3>Petrol</h3></th>
-													<th><h3>Diesel</h3></th>
-													<th><h3>Natural gas</h3></th>
-													<th><h3>Hydrogen</h3></th>
-													<th><h3>Electric</h3></th>
-												</tr>
+											<tr>
+
+													<td align="left" colspan="5">
+														<div class="row" >
+															<h6>
+																<img class="image" src="static/images/icons/well_to_pump_icon.png"
+																				  style="height:70px;padding:20px;display:inline-block;"
+																				 alt="image">
+																<span style="color:white;">{{_('FUEL PATHWAYS')}}</span>
+															</h6>
+														</div>
+													</td>
+
+
+											</tr>
+
 											</thead>
 											<tbody>
 												<tr>
-													<tr>
-														<td align="left" colspan="5">
-															<div class="row" >
-																<h6>
-																	<img class="image" src="static/images/icons/well_to_pump_icon.png"
-																					  style="height:70px;padding:20px;display:inline-block;"
-																					 alt="image">
-																	<span style="color:white;">{{_('FUEL PATHWAYS')}}</span>
-																</h6>
+														<th>
+															<h3>Petrol</h3>
+															<div class="help-tip" style="position:relative;bottom:35px;right:60px;">
+																		<p>{{_('Source for conventional petrol inventory: ecoinvent 3.6')}}<br>
+																			{{_('Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul Scherrer Institut')}}
+																		</p>
 															</div>
-														</td>
+														</th>
+														<th>
+															<h3>Diesel</h3>
+															<div class="help-tip" style="position:relative;bottom:35px;right:50px;">
+																		<p>{{_('Source for conventional diesel inventory: ecoinvent 3.6')}}<br>
+																			{{_('Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer Institut')}}
+																		</p>
+														</th>
+														<th><h3>Natural gas</h3>
+														<div class="help-tip" style="position:relative;bottom:35px;right:-60px;">
+																		<p>{{_('Source for conventional compressed natural gas inventory: ecoinvent 3.6')}}<br>
+																			{{_('Source for bio-gas inventory: Karin Treyer, 2019, Paul Scherrer Institut')}}
+																		</p>
+															</th>
+														<th><h3>Hydrogen</h3>
+														<div class="help-tip" style="position:relative;bottom:35px;right:100px;">
+																		<p>{{_('Source for hydrogen fuel inventory: ELEGANCY project')}}<br>
 
-													</tr>
+																		</p>
+															</th>
+														<th><h3>Electric</h3></th>
 												</tr>
+
 												<tr>
 													<td align="left">
 														<div class="form-group">
@@ -602,7 +630,10 @@
 															  <label class="form-check-label" for="conventional_petrol">
 																Conventional petrol
 															  </label>
+
 														</div>
+
+
 														<div class="form-check">
 															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_forest" value="bioethanol - forest residues">
 															  <label class="form-check-label" for="bioethanol_forest">
@@ -626,6 +657,7 @@
 															  <label class="form-check-label" for="bioethanol_beet">
 																Bio-ethanol from sugar beet residue
 															  </label>
+
 														</div>
 														</div>
 													</td>
@@ -720,25 +752,41 @@
 
 												</tr>
 												<tr>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th align="left">
+														<span align="left"><h6>Fuel cell technology</h6></span>
+														<div class="help-tip" style="position:relative;bottom:30px;right:40px;">
+																		<p>{{_('Main type of fuel cell developed for transport applications.')}}<br>
+																			{{_('Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, issue C, 884-896.')}}
+																		</p>
+													</th>
+													<th align="left">
+																	<span align="left"><h6>Battery chemistry</h6></span>
+																	<div class="help-tip" style="position:relative;bottom:30px;right:20px;">
+																		<p>{{_('Three different types of lithium-ion-based batteries are presented, all used for transport applications.')}}<br>
+																			{{_('Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, 3379-3390.')}}
+																		</p>
+													</th>
+
+												</tr>
+												<tr>
 													<td></td>
 													<td></td>
 													<td></td>
 													<td align="left">
-														<span align="left"><h6>Fuel cell technology</h6></span>
 														<div class="form-group">
 															<div class="form-check">
 																  <input class="form-check-input" type="radio" name="fuel cell stack technnology" id="PEM" value="PEM" checked>
-																  <label class="form-check-label" for="PEM">
-																	Proton exchange membrane
-																  </label>
+																  <label class="form-check-label" for="PEM">Proton exchange membrane</label>
 															</div>
 														</div>
 													</td>
 													<td align="left">
 														<table>
 															<tr>
-																<td align="left">
-																	<span align="left"><h6>Battery chemistry</h6></span>
+																	</div>
 																	<div class="form-group">
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
@@ -764,11 +812,15 @@
 																			  </label>
 																		</div>
 																	</div>
-																</td>
+
 															</tr>
 															<tr>
 																<td align="left">
 																	<span align="left"><h6>Origin of manufacture</h6></span>
+																	<div class="help-tip" style="position:relative;bottom:30px;right:-130px;">
+																		<p>{{_('Modifies the electricity mix used along the manufacture of the battery cells.')}}
+																		</p>
+																	</div>
 																	<div class="form-group">
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
@@ -810,6 +862,10 @@
 															</tr>
 														</table>
 
+													</td>
+
+
+												</tr>
 
 											</tbody>
 
@@ -820,6 +876,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</section>
 		<!-- End FUEL PATHWAYS -->
@@ -947,6 +1004,7 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		</section>
 		<!-- End CALCULATIONS -->
 
@@ -998,13 +1056,15 @@
 		  crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Bootstrap -->
-
+	<script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.js"></script>
 
 	<!-- Bootstrap notify.js -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
+
+
 
   	<!-- Tool page js -->
 	<!--<script type="text/javascript" src="static/js/custom.js"></script>-->

@@ -75,9 +75,9 @@
 		      <!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="/static/images/carculator logo.png" style="height:30px;"></a>
 		    </div>
-				<button class="online-button"
+				<button class="online-button" onclick="export_bw2_inventories()"
 						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export Brightway2-compatible inventories</button>
-			  <button class="online-button"
+			  <button class="online-button" onclick="export_simapro_inventories()"
 						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export Simapro-compatible inventories</button>
 				 <button class="online-button" onclick="share_results()"
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share results</button>
@@ -161,11 +161,12 @@
 								</tbody>
 
 							</table>
-							<thead>
-									<tr>
-										<th><h3>Noise emissions along driving cycle</h3></th>
-										<th><h3>GHG emissions vs. ownership costs</h3></th>
-									</tr>
+							<table class="table" style="width:100%;color:white;">
+								<thead>
+										<th>
+											<th><h3>Noise emissions along driving cycle</h3></th>
+											<th><h3>GHG emissions vs. ownership costs</h3></th>
+										</th>
 								</thead>
 								<tbody>
 										<tr>
@@ -293,7 +294,53 @@
  function share_results(){
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
-        message: "Your results are saved for one month. To share them, simply share the link of this page.."
+        message: "Your results are saved for one month. To share them, simply copy the url of this page."
+    },
+    {
+        placement: {
+            from: "top",
+            align: "center"
+        },
+        type:"success"
+    },
+    {
+        animate: {
+            enter: "animated bounceInDown",
+            exit: "animated bounceOutUp"
+        },
+
+    }
+    );
+
+ };
+
+ function export_bw2_inventories(){
+    $.notify({
+        icon: "glyphicon glyphicon-warning-sign",
+        message: "The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff."
+    },
+    {
+        placement: {
+            from: "top",
+            align: "center"
+        },
+        type:"success"
+    },
+    {
+        animate: {
+            enter: "animated bounceInDown",
+            exit: "animated bounceOutUp"
+        },
+
+    }
+    );
+
+ };
+
+ function export_simapro_inventories(){
+    $.notify({
+        icon: "glyphicon glyphicon-warning-sign",
+        message: "The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff."
     },
     {
         placement: {

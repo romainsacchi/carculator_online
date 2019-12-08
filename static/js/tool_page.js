@@ -728,7 +728,7 @@ function size_list_update(){
     var list_years = [];
     for (var item = 0; item < listYears.length; item++){
         list_years.push(listYears[item].innerHTML);
-            [...document.querySelectorAll('#electricity_mix_table tr')].forEach((row, i) => {
+            $.each($('#electricity_mix_table tr'), function(i, row) {
                 if (i==0){
                     let cell = document.createElement(i ? "td" : "th")
                     cell.innerHTML = listYears[item].innerHTML
@@ -1057,14 +1057,22 @@ function get_electricity_mix(ISO){
       method: 'GET',
       headers: {}
     };
-    fetch('/get_electricity_mix/'+ISO+'/'+list_year, opts).then(function (response) {
-      return response.json();
-    })
-    .then(function (mix) {
+
+    // Fix
+
+    $.when($.ajax({
+                url: "/get_electricity_mix/"+ISO+"/"+list_year,
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var mix = data
+                    return mix
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).then(function (mix) {
 
         // Concatenate mix values
         var mix_val = []
-        console.log(mix)
         for (var year = 0; year < list_year.length; year++){
             var i = 0;
             var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
@@ -1368,11 +1376,6 @@ function collect_configuration(){
 
     }
 
-    if (is_missing == true){
-        console.log('missing')
-        return;
-    };
-
     // Retrieve all necessary data and gather it into a dictionary
     // Initiate dictionary
     var params = [];
@@ -1407,7 +1410,6 @@ function collect_configuration(){
             var pt = this.childNodes[1].innerHTML
             var size = this.childNodes[2].innerHTML
 
-            console.log(this.childNodes)
             vals=[]
             $(this).find(':input').each(function(){
                 vals.push(this.value)
@@ -1450,13 +1452,12 @@ function collect_configuration(){
     });
 
     // Retrieve fuel pathway
-    document.querySelectorAll('#fuel_pathway_table input:checked').forEach((check_box, i) => {
-                background_params.push({key:check_box.name, value:check_box.value})
+    $.each($('#fuel_pathway_table input:checked'), function() {
+                background_params.push({key:this.name, value:this.value})
             });
 
     params.push({key:'foreground params',value:foreground_params});
     params.push({key:'background params',value:background_params});
-    console.log(params)
     return params;
 
 }
@@ -1467,13 +1468,6 @@ function get_results(){
         return;
     };
 
-    var opts = {
-      method: 'POST',
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
-    };
     $.notify({
         icon: '	glyphicon glyphicon-time',
         message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take up to one minute. Do not close this tab."
@@ -1494,13 +1488,25 @@ function get_results(){
 
         });
 
-    fetch('/get_results/', opts).then(function (response) {
-      return response.json();
-    }).then(function (response) {
+    // Fix
+    $.when($.ajax({
+                url: "/get_results/",
+                dataType: 'json',
+                type: 'POST',
+                data:JSON.stringify(data),
+                success : function(data) {
+                   var response = data
+                    return response
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).then(function (response) {
         var job_id = response['job id'];
         // Check task status every 3 seconds
         const interval = setInterval(function() {
-            fetch('/check_status/'+job_id).then(function (status) {
+
+            // Fix
+
+            $.ajax('/check_status/'+job_id).then(function (status) {
                 return status.json();
                 }).then(function (status) {
                     if (status['job status'] == 'finished'){
@@ -1643,7 +1649,7 @@ $("#InputParameters").on("keyup", function() {
     for (i=0;i<listPowertrains.length;i++){
         var pt = listPowertrains[i].innerHTML;
 
-        if (powertrains.includes(pt)){
+        if (powertrains.indexOf(pt) >=0 ){
             l_pt.push(pt);
         }
     }
@@ -1651,7 +1657,7 @@ $("#InputParameters").on("keyup", function() {
      for (j=0;j<listSizes.length;j++){
         var s = listSizes[j].innerHTML;
 
-        if (sizes.includes(s)){
+        if (sizes.indexOf(s) >=0 ){
             l_s.push(s);
         }
      }
@@ -1697,3 +1703,6 @@ $("#InputParameters").on("keyup", function() {
         $("#TableParameters tr").remove();
         $("#InputParameters").val('');
     }
+
+$('.tooltip-test').tooltip();
+
