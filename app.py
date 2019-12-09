@@ -60,7 +60,7 @@ cip = CarInputParameters()
 cip.static()
 d_categories = {cip.metadata[a]['name']:cip.metadata[a]['category'] for a in cip.metadata}
 dcts, arr = fill_xarray_from_input_parameters(cip)
-ic = 0
+ic = InventoryCalculation(arr)
 
 d_pt = {
         'Petrol':'ICEV-p',
