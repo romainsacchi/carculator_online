@@ -259,7 +259,9 @@ def format_dictionary(raw_dict):
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
+    print(request.get_json())
     d = format_dictionary(request.get_json())
+    print(d)
     job = q.enqueue_call(
         func=process_results, args=(d,), result_ttl=2500000
     )
