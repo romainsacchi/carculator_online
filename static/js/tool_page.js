@@ -1378,9 +1378,9 @@ function collect_configuration(){
 
     // Retrieve all necessary data and gather it into a dictionary
     // Initiate dictionary
-    var params = [];
-    var background_params=[];
-    var foreground_params = [];
+    var params = {};
+    var background_params={};
+    var foreground_params = {};
 
 
     // Retrieve year, vehicle type and class size
@@ -1388,22 +1388,25 @@ function collect_configuration(){
     for (var item = 0; item < listYears.length; item++){
         list_year.push(listYears[item].innerHTML);
     };
-    params.push({key:'year', value: list_year});
+
+    params['year'] = list_year;
+
 
     var list_type = [];
     for (var item = 0; item < listItems.length; item++){
         list_type.push(listItems[item].innerHTML);
     };
-    params.push({key: 'type', value: list_type});
+    params['type'] = list_type;
 
     var list_size = [];
     for (var item = 0; item < listSizes.length; item++){
         list_size.push(listSizes[item].innerHTML);
     };
-    params.push({key: 'size', value: list_size})
+    params['size'] = list_size;
+
 
     // Retrieve car parameters
-    dic_inputs = [];
+    dic_inputs = {};
 
         $("#table_inputs tbody tr").each(function () {
             var name = this.childNodes[0].innerHTML
@@ -1414,20 +1417,14 @@ function collect_configuration(){
             $(this).find(':input').each(function(){
                 vals.push(this.value)
             })
-            dic_inputs.push([{key:'parameter name', value:name},
-                            {key:'powertrain', value:pt},
-                            {key:'size', value:size},
-                            {key:'values', value:vals}])
-        })
+            foreground_params[String([name, pt, size])] = vals;
+        });
 
-    foreground_params.push({key:'parameters', value: dic_inputs});
     // Retrieve driving cycle
-    foreground_params.push({key:'driving_cycle', value: $('#driving_cycle_selected').text()});
+    params['driving_cycle']= $('#driving_cycle_selected').text();
 
     // Retrieve country selected
-    var country = $("#country-selected").text()
-
-    background_params.push({key: 'country', value: country})
+    background_params['country']= $("#country-selected").text();
 
     // Retrieve electricity mixes
     var mix_arr = []
@@ -1439,25 +1436,22 @@ function collect_configuration(){
         mix_arr.push(mix)
     }
 
-    background_params.push({
-                key: 'custom electricity mix', value:mix_arr
-              });
+    background_params['custom electricity mix'] = mix_arr;
 
     // Retrieve passengers, cargo
     $.each($('#table_use div'), function() {
         if (this.className == "noUi-target noUi-ltr noUi-horizontal"){
-            foreground_params.push({key: this.id,value: this.noUiSlider.get()
-            });
+            foreground_params[this.id] = this.noUiSlider.get();
         };
     });
 
     // Retrieve fuel pathway
     $.each($('#fuel_pathway_table input:checked'), function() {
-                background_params.push({key:this.name, value:this.value})
+                background_params[this.name] = this.value;
             });
 
-    params.push({key:'foreground params',value:foreground_params});
-    params.push({key:'background params',value:background_params});
+    params['foreground params'] = foreground_params;
+    params['background params'] = background_params;
     return params;
 
 }
@@ -1488,11 +1482,10 @@ function get_results(){
 
         });
 
-    console.log(JSON.stringify(data));
     $.when($.ajax({
                 url: "/get_results/",
                 type: 'POST',
-                data:JSON.stringify({"data":data}),
+                data:JSON.stringify(data),
                 contentType: "application/json",
                 dataType: 'json',
                 success : function(json) {

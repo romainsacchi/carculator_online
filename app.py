@@ -206,63 +206,48 @@ def process_results(d):
 def format_dictionary(raw_dict):
     """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
-    dictionary = {}
-    for x in raw_dict:
-        dictionary[x['key']] = x['value']
-
     d_sliders =  {
         'mileage-slider':'kilometers per year',
         'lifetime-slider':'lifetime kilometers',
         'passenger-slider':'average passengers',
         'cargo-slider':'cargo mass'
     }
-
-
     new_dict = {}
-    new_dict[('Functional unit',)] = {'powertrain': [d_pt[x] for x in dictionary['type']],
-                                      'year': [int(x) for x in dictionary['year']],
-                                      'size': dictionary['size']}
+    new_dict[('Functional unit',)] = {'powertrain': [d_pt[x] for x in raw_dict['type']],
+                                      'year': [int(x) for x in raw_dict['year']],
+                                      'size': raw_dict['size']}
+    f_d = {}
+    new_dict[('Driving cycle',)] = raw_dict['driving_cycle']
+    new_dict[('Background',)] = {k: v for k, v in raw_dict['background params'].items()}
 
-    f_d={}
-    for x in dictionary['foreground params']:
-        if x['key'] == 'parameters':
-            for y in x['value']:
-                name = [a['value'] for a in y if a['key'] == 'parameter name'][0]
-                cat = d_categories[name]
-                powertrain = [d_pt[a['value']] for a in y if a['key'] == 'powertrain'][0]
-                size = [a['value'] for a in y if a['key'] == 'size'][0]
-                vals = [a['value'] for a in y if a['key'] == 'values'][0]
-                d_val = {(k,'loc'):float(v) for k,v in list(zip(new_dict[('Functional unit',)]['year'], vals))}
-                f_d[(cat, powertrain, size, name, 'none')] = d_val
+    for k, v in raw_dict['foreground params'].items():
+        if k in d_sliders:
+            name = d_sliders[k]
+            cat = d_categories[name]
+            powertrain = 'all'
+            size = 'all'
+            val = [float(v.replace(' ',''))]
+        else:
+            k = tuple(k.split(","))
+            name = k[0]
+            cat = d_categories[name]
+            powertrain = d_pt[k[1]]
+            size = k[2]
+            val = v
 
-        if x['key'] in d_sliders:
-            k = d_sliders[x['key']]
-            cat = d_categories[k]
-            val = [float(x['value'].replace(' ',''))]
-            d_val = {(k,'loc'):v for k,v in list(zip(new_dict[('Functional unit',)]['year'], val))}
-            f_d[(cat, 'all', 'all', k, 'none')] = d_val
+        d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
+        f_d[(cat, powertrain, size, name, 'none')] = d_val
 
-        if x['key'] == 'driving_cycle':
-            new_dict[('Driving cycle',)] = x['value']
     new_dict[('Foreground',)] = f_d
-    b_d={}
-    for x in dictionary['background params']:
-        k = x['key']
-        v = x['value']
-        b_d[k] = v
-    dictionary['background params'] = b_d
 
-    new_dict[('Background',)] = dictionary['background params']
     return new_dict
 
 
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
-    print(request.form['data'])
-    print(request.get_json())
     d = format_dictionary(request.get_json())
-    print(d)
+
     job = q.enqueue_call(
         func=process_results, args=(d,), result_ttl=2500000
     )
