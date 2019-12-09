@@ -60,6 +60,7 @@ cip = CarInputParameters()
 cip.static()
 d_categories = {cip.metadata[a]['name']:cip.metadata[a]['category'] for a in cip.metadata}
 dcts, arr = fill_xarray_from_input_parameters(cip)
+ic = 0
 
 d_pt = {
         'Petrol':'ICEV-p',
@@ -185,7 +186,7 @@ def process_results(d):
             for y in range(0, len(year)):
                 for cat in range(0, len(cost_category)):
                     list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
-
+    global ic
     ic = InventoryCalculation(cm.array)
     results = ic.calculate_impacts(scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     data = results.values
@@ -299,7 +300,7 @@ def set_language(language=None):
     session['language'] = language
     return redirect(url_for('index'))
 
-@app.route("/get_inventory_csv")
+@app.route("/get_inventory_excel")
 def get_inventory_excel():
     global ic
     exp = ExportInventory(ic.A, ic.rev_inputs)
