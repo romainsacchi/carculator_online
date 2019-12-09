@@ -1492,7 +1492,7 @@ function get_results(){
     $.when($.ajax({
                 url: "/get_results/",
                 type: 'POST',
-                data:JSON.stringify(data),
+                data:JSON.stringify({"data":data}),
                 contentType: "application/json",
                 dataType: 'json',
                 success : function(json) {
