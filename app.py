@@ -1,6 +1,6 @@
 """Flask App Project."""
 
-from flask import Flask, render_template, request, jsonify, make_response, json, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, make_response, json, session, redirect, url_for, Response
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
 import logging
@@ -298,3 +298,12 @@ def inject_conf_var():
 def set_language(language=None):
     session['language'] = language
     return redirect(url_for('index'))
+
+@app.route("/get_inventory_csv")
+def get_inventory_excel():
+    global ic
+    exp = ExportInventory(ic.A, ic.rev_inputs)
+    fp = exp.write_lci_to_excel()
+
+    response = jsonify({"filepath": fp})
+    return make_response(response, 200)
