@@ -233,7 +233,7 @@ def format_dictionary(raw_dict):
             cat = d_categories[name]
             powertrain = d_pt[k[1]]
             size = k[2]
-            val = v
+            val = [float(n) for n in v]
 
         d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
         f_d[(cat, powertrain, size, name, 'none')] = d_val
