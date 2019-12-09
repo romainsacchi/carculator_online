@@ -1493,6 +1493,8 @@ function get_results(){
                 url: "/get_results/",
                 type: 'POST',
                 data:JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',
                 success : function(json) {
                    var response = json
                     return response
