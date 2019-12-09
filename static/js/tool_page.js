@@ -974,6 +974,7 @@ var map = AmCharts.makeChart("chartdiv", {
         {"id":"UG"},
         {"id":"ZM"},
         {"id":"ZW"},
+        {"id":"NO"},
 
     ]
   },

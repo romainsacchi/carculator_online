@@ -559,7 +559,7 @@
 								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
 									In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
 									The user can select conventional pathways to represent the supply and use of common fuels such as diesel
-									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-gas.<br>
+									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-methane.<br>
 									The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
 									This means that they do not compete with crops production with the purpose of food supply.<br>
 									Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
@@ -610,12 +610,14 @@
 														<th><h3>Natural gas</h3>
 														<div class="help-tip" style="position:relative;bottom:35px;right:-60px;">
 																		<p>{{_('Source for conventional compressed natural gas inventory: ecoinvent 3.6')}}<br>
-																			{{_('Source for bio-gas inventory: Karin Treyer, 2019, Paul Scherrer Institut')}}
+																			{{_('Source for bio-methane inventory: Xiaojin Zhang, 2019, Paul Scherrer Institut')}}
 																		</p>
 															</th>
 														<th><h3>Hydrogen</h3>
 														<div class="help-tip" style="position:relative;bottom:35px;right:100px;">
-																		<p>{{_('Source for hydrogen fuel inventory: ELEGANCY project')}}<br>
+																		<p>{{_('Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020')}}<br>
+																			{{_('Source for hydrogen by steam methane reforming fuel inventory: Zhang et al. 2017,
+																			Applied Energy, Volume 190, 15 March 2017, Pages 326-338 ')}}
 
 																		</p>
 															</th>
@@ -691,7 +693,7 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="cng technology" id="biogas" value="biogas">
 														  <label class="form-check-label" for="biogas">
-															Bio-gas from manure
+															Bio-methane from manure
 														  </label>
 														</div>
 													</td>
@@ -855,6 +857,13 @@
 																					 name="battery origin" id="US" value="US" >
 																			  <label class="form-check-label" for="US">
 																				United States
+																			  </label>
+																		</div>
+																		<div class="form-check">
+																			  <input class="form-check-input" type="radio"
+																					 name="battery origin" id="NO" value="NO" >
+																			  <label class="form-check-label" for="NO">
+																				Norway
 																			  </label>
 																		</div>
 																	</div>
