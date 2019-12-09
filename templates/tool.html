@@ -120,17 +120,26 @@
 
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none" id="powertrain_section">
+								<div class="row" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 30px;">
+									<div class="col-md-6">
+										<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
+										<center>
+											<p align="left" >
+												{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
+												If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below.')}}<br>
 
-								<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
-								<center>
-									<p align="left" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 0 auto<">
-										{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
-										If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below.')}}<br>
+											</p>
+										</center>
 
-									</p>
-								</center>
+									</div>
 
-								<p style="text-align:center;"></p>
+									<div class="col-md-6">
+										<img class="image" src="static/images/select_vehicle_tutorial.gif" alt="image">
+
+
+									</div>
+								</div>
+
 
 
 								<div class="row">
@@ -316,17 +325,53 @@
 						<span style="color:white;">{{_('CAR PARAMETERS')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:20px;" >
 							<!-- Start About Us Content -->
-							<div class="mu-about-content" style="display:none;margin:30px;" id="manufacture_section"
-							>
-								<p style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white">
-									Each car is defined by up to 200 input parameters.<br>
-								The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.
-									<br><u>You are however welcome to override the default value for any of these parameters if you have a specific case in mind</u>. <br>
-								The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.<br>
-								The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table. <br>
-								That is, a parameter with a <b>high</b> sensitivity is a parameter for which a change in its value of 1% leads to a change in environmental impacts by 0.5 to 1%, against
-									0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and 0 to 0.3% for a parameter with <b>low</b> sensitivity.
-								</p>
+							<div class="mu-about-content" style="display:none;margin:30px;" id="manufacture_section">
+								<div class="row" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white">
+									<div class="col-md-5">
+										<p >
+										Each car is defined by up to 200 input parameters.<br>
+									The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.
+										<br><u>You are however welcome to override the default value for any of these parameters if you have a specific case in mind</u>. <br>
+									The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.<br>
+									The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table. <br>
+									That is, a parameter with a <b>high</b> sensitivity is a parameter for which a change in its value of 1% leads to a change in environmental impacts by 0.5 to 1%, against
+										0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and 0 to 0.3% for a parameter with <b>low</b> sensitivity.
+									</p>
+									<button class="online-button" onclick="window.open('/get_param_table','_blank');"
+													style="margin:3px;background-color:transparent;color:white;border:1px solid white;width:250px;">
+													{{_('See full parameters list')}}
+									</button>
+
+									</div>
+									<div class="col-md-7" >
+										<div class="row">
+											<div class="col-md-2">
+												<h6>Frequently asked questions</h6>
+												<ul>
+													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">How to change the mass of the battery of an electric vehicle?</a></li>
+													<li><a onclick="change_tutorial_video('engine_eff')" href="javascript:;" style="color:white;">How to change the efficiency of the engine?</a></li>
+													<li><a onclick="change_tutorial_video('passenger_mass')" href="javascript:;" style="color:white;">How to change the weight of the passengers?</a></li>
+													<li><a onclick="change_tutorial_video('hybrid_level')" href="javascript:;" style="color:white;">How to change hybridization level of future diesel vehicles?</a></li>
+													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">How to change the lifetime of a battery?</a></li>
+												</ul>
+
+											</div>
+											<div class="col-md-10">
+												<h6 id="tutorial_title">Change the mass of the battery on a electric vehicle</h6>
+												<img class="image" src="static/images/battery_mass_tutorial.gif" alt="image" id="tutorial_video">
+
+											</div>
+
+										</div>
+
+									</div>
+
+
+
+								</div>
+
+
+
 								<p style="color:white;">Add any parameter you would like to modify.</p>
 
 								<input class="form-control" id="InputParameters" type="text" placeholder="Search...">
@@ -377,13 +422,13 @@
 									This section defines parameters concerned with the use phase of the vehicles.<br>
 									The model needs to know the driving cycle of the vehicles (i.e., the speed level per
 									second of driving, to derive the needs for acceleration and braking) as well as a
-									few other things such as the number of passengers, the country the vehicles are operated in, etc.<br>
+									few other things, such as the number of passengers, the country the vehicles are operated in, etc.<br>
 									Projected electricity mixes for are based on <b>Business-as-usual scenarios</b> from
-									<b>Intergrated Assessment models (IAMs)</b>.
-									For European country, the projections originate the <a style="color:white;" target="_blank" href="https://www.psi.ch/en/eem/projects/european-swiss-times-electricity-model"><u>EUSTEM</u></a> model,
-									developed by the Energy Economics group of PSI. For African countries, projections originate the
+									<b>energy models</b>.
+									For European country, the projections originate the <a style="color:white;" target="_blank" href="https://ec.europa.eu/energy/en/data-analysis/energy-modelling/eu-reference-scenario-2016"><u>EU Reference Scenario 2016</u></a> report,
+									from the European Commission. For African countries, projections originate the
 									<a style="color:white;" target="_blank" href="https://ec.europa.eu/jrc/en/publication/energy-projections-african-countries"><u>TEMBA</u></a> model.
-									For other countries, projections are based on the IEA'S <a style="color:white;" target="_blank" href="https://iea-etsap.org/index.php/etsap-tools/model-generators/markal"><u>MARKAL</u></a> model.
+									For other countries, projections are based on the IEA'S <a style="color:white;" target="_blank" href="https://www.iea.org/reports/world-energy-outlook-2017"><u>World Energy Outlook 2017</u></a> report.
 								</p>
 								<table class="table" id="table_use">
 							  <thead>
