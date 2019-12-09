@@ -1501,6 +1501,7 @@ function get_results(){
             // Fix
 
             $.ajax('/check_status/'+job_id).then(function (status) {
+                console.log(status);
                 return status.json();
                 }).then(function (status) {
                     if (status['job status'] == 'finished'){
