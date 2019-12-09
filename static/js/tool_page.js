@@ -1501,8 +1501,7 @@ function get_results(){
             // Fix
 
             $.ajax('/check_status/'+job_id).then(function (status) {
-                console.log(status);
-                return status.json();
+                return status;
                 }).then(function (status) {
                     if (status['job status'] == 'finished'){
                         var redirectWindow = window.open('/display_result/'+job_id, '_blank');
