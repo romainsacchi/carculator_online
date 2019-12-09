@@ -1698,6 +1698,3 @@ $("#InputParameters").on("keyup", function() {
         $("#TableParameters tr").remove();
         $("#InputParameters").val('');
     }
-
-$('.tooltip-test').tooltip();
-
