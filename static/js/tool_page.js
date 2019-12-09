@@ -1491,11 +1491,11 @@ function get_results(){
     console.log(data);
     $.when($.ajax({
                 url: "/get_results/",
-                dataType: 'json',
+                dataType: 'text',
                 type: 'POST',
                 data: data,
-                success : function(data) {
-                   var response = data
+                success : function(json) {
+                   var response = json
                     return response
                     },
                 error: function(xhr, status, error){console.log(error)}})
