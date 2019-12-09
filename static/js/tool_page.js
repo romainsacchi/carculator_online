@@ -1488,14 +1488,14 @@ function get_results(){
 
         });
 
-    console.log(data);
+
     $.when($.ajax({
                 url: "/get_results/",
-                dataType: 'text',
+                contentType: 'application/json;charset=UTF-8',
                 type: 'POST',
-                data: data,
-                success : function(json) {
-                   var response = json
+                data:JSON.stringify(data),
+                success : function(data) {
+                   var response = data
                     return response
                     },
                 error: function(xhr, status, error){console.log(error)}})
