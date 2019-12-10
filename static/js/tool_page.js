@@ -1700,32 +1700,66 @@ function change_tutorial_video(type){
     if (type == "mass_battery"){
         $("#tutorial_title").html("Change the mass of the battery on a electric vehicle");
         var str = `The mass of the battery of an electric vehicle can be changed by modifying
-										the value of the parameter <b>energy battery mass</b>. The mass of the battery is further split into
+										the value of the <b>energy battery mass</b> parameter. The mass of the battery is further split into
 										<b>Balance Of Plant (BoP) components mass</b> and <b>battery cells mass</b>.
 										Hence, increasing the mass of the battery will also increase the mass of the battery cells
 										and eventually the energy capacity of the battery. However, increasing the mass
 										of the battery will also increase the driving mass of the vehicle and the energy required
-										to move it over 1 km.`
+										to move it over 1 km.`;
         $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/battery_mass_tutorial.gif");
     };
+    if (type == "capacity_battery"){
+        $("#tutorial_title").html("Change the capacity of the battery on a electric vehicle");
+        var str = `<p>The model considers an initial battery mass from which the mass of the battery cells is derived. Then, once the mass of the battery cells is known,
+        an energy density factor per kg of battery cell is applied. Therefore, to change the capacity of the battery, one can either change the mass
+        of the battery for a same energy density factor, or leave the mass unchanged but adjust the energy density factor of the cells.</p>
+
+        <p>To change the energy density factor of the cells, one can simply modify the value of the <b>battery cell energy density</b> parameter,
+        which represents the energy available per kg of battery cell. To know the capacity of the battery, one may consider the following relation:
+        <br>
+        battery cell mass share * energy battery mass = mass of battery cells
+        <br>
+        mass of battery cell * battery cell energy density = energy stored in the battery</p>`;
+        $("#tutorial_text").html(str);
+        $("#tutorial_video").attr("src","static/images/battery_cell_tutorial.gif");
+    };
     if (type == "engine_eff"){
         $("#tutorial_title").html("Change the engine efficiency of a vehicle");
-        var str = "blabla lkj"
+        var str = "The efficiency of the engine of any vehicle can simply be adjusted by modifying the <b>engine efficiency</b> parameter.";
         $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/engine_eff_tutorial.gif");
     };
     if (type == "passenger_mass"){
         $("#tutorial_title").html("Change the average mass of a passenger");
+        var str = "The average mass of a passenger can simply be adjusted by modifying the <b>average passenger mass</b> parameter.";
+        $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/passenger_mass_tutorial.gif");
     };
     if (type == "hybrid_level"){
         $("#tutorial_title").html("Change the power contribution of the combustion engine");
+        var str = `By default, future vehicles are assumed to have a certain level of hybridization, where a share of the power originate an electric engine.
+                    To change the contribution of the combustion engine, one can simply adjust the <b>combustion power share</b> parameter.
+                    Setting such parameter to 1 indicates that all the power originate the combustion engine. Setting it to 0.5 indicates that
+                    half of the vehicle power is provided by an electric engine`;
+        $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/hybrid_tutorial.gif");
     };
     if (type == "battery_lifetime"){
         $("#tutorial_title").html("Change the expected lifetime of the battery");
+        var str = `The lifetime of the battery is currently expressed as a number of kilometers the battery can provided energy for.
+                    This number can be adjusted by modifying the value of the <b>battery lifetime kilometers</b> parameter.
+                    If this number is lower than the technical lifetime of the vehicle, a fraction of a replacement battery will be considered to
+                    complete the use phase of the vehicle.`;
+        $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/battery_lifetime_tutorial.gif");
+    };
+    if (type == "fc_eff"){
+        $("#tutorial_title").html("Change the efficiency of a fuel cell stack");
+        var str = `The efficiency of the fuel cell stack of a hydrogen-powered vehicle can simply be adjusted
+        by modifying the <b>fuel cell stack efficiency</b> parameter.`;
+        $("#tutorial_text").html(str);
+        $("#tutorial_video").attr("src","static/images/fc_cell_tutorial.gif");
     };
 
 }

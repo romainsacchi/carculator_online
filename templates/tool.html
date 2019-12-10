@@ -343,15 +343,17 @@
 									</button>
 
 									</div>
-									<div class="col-md-2" >
+									<div class="col-md-3" >
 
-												<h6>Frequently asked questions</h6>
+												<h6>Frequently asked questions (click to watch a tutorial video)</h6>
 												<ul>
 													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">How to change the mass of the battery of an electric vehicle?</a></li>
+													<li><a onclick="change_tutorial_video('capacity_battery')" href="javascript:;" style="color:white;">How to change the capacity of the battery of an electric vehicle?</a></li>
 													<li><a onclick="change_tutorial_video('engine_eff')" href="javascript:;" style="color:white;">How to change the efficiency of the engine?</a></li>
 													<li><a onclick="change_tutorial_video('passenger_mass')" href="javascript:;" style="color:white;">How to change the weight of the passengers?</a></li>
 													<li><a onclick="change_tutorial_video('hybrid_level')" href="javascript:;" style="color:white;">How to change hybridization level of future diesel vehicles?</a></li>
 													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">How to change the lifetime of a battery?</a></li>
+													<li><a onclick="change_tutorial_video('fc_eff')" href="javascript:;" style="color:white;">How to change the efficiency of a fuel cell stack?</a></li>
 												</ul>
 
 
@@ -360,10 +362,10 @@
 
 
 									</div>
-									<div class="col-md-5">
+									<div class="col-md-4">
 										<h6 id="tutorial_title">Change the mass of the battery on a electric vehicle</h6>
-										<p id+="tutorial_text">The mass of the battery of an electric vehicle can be changed by modifying
-										the value of the parameter <b>energy battery mass</b>. The mass of the battery is further split into
+										<p id="tutorial_text">The mass of the battery of an electric vehicle can be changed by modifying
+										the value of the <b>energy battery mass</b> parameter. The mass of the battery is further split into
 										<b>Balance Of Plant (BoP) components mass</b> and <b>battery cells mass</b>.
 										Hence, increasing the mass of the battery will also increase the mass of the battery cells
 										and eventually the energy capacity of the battery. However, increasing the mass

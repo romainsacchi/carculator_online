@@ -199,7 +199,7 @@
 
     var messenger = new Messenger($('#messenger'));
 
-   
+
 
    $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
