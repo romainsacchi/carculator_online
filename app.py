@@ -308,3 +308,10 @@ def get_inventory_excel():
 
     response = jsonify({"filepath": fp})
     return make_response(response, 200)
+
+@app.route("/get_param_table")
+def get_param_table():
+    params = load_params_file()
+    print(params)
+    return render_template('param_table.html', params=params)
+

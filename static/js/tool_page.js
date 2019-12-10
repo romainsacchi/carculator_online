@@ -1699,5 +1699,26 @@ $("#InputParameters").on("keyup", function() {
         $("#InputParameters").val('');
     }
 
-$('.tooltip-test').tooltip();
+function change_tutorial_video(type){
+    if (type == "mass_battery"){
+        $("#tutorial_title").html("Change the mass of the battery on a electric vehicle");
+        $("#tutorial_video").attr("src","static/images/battery_mass_tutorial.gif");
+    };
+    if (type == "engine_eff"){
+        $("#tutorial_title").html("Change the engine efficiency of a vehicle");
+        $("#tutorial_video").attr("src","static/images/engine_eff_tutorial.gif");
+    };
+    if (type == "passenger_mass"){
+        $("#tutorial_title").html("Change the average mass of a passenger");
+        $("#tutorial_video").attr("src","static/images/passenger_mass_tutorial.gif");
+    };
+    if (type == "hybrid_level"){
+        $("#tutorial_title").html("Change the power contribution of the combustion engine");
+        $("#tutorial_video").attr("src","static/images/hybrid_tutorial.gif");
+    };
+    if (type == "battery_lifetime"){
+        $("#tutorial_title").html("Change the expected lifetime of the battery");
+        $("#tutorial_video").attr("src","static/images/battery_lifetime_tutorial.gif");
+    };
 
+}
