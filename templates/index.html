@@ -1112,8 +1112,8 @@
 
 		<!-- Start Google Map -->
 		<section id="mu-google-map">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10774.003087845414!2d8.2297192!3d47.5385816!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1e969b64228e0333!2sInstitut%20Paul%20Scherrer!5e0!3m2!1sfr!2sch!4v1571211333980!5m2!1sfr!2sch"
-					width=100% height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+			<iframe sandbox="allow-scripts" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10774.003087845414!2d8.2297192!3d47.5385816!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1e969b64228e0333!2sInstitut%20Paul%20Scherrer!5e0!3m2!1sfr!2sch!4v1571211333980!5m2!1sfr!2sch"
+					 alt="" width=100% height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 		</section>
 
 
@@ -1155,7 +1155,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
     <!-- Bootstrap -->
-    <script src="static/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- Counter js -->
     <script type="text/javascript" src="static/js/counter.js"></script>
     <!-- Ajax contact form  -->
@@ -1166,51 +1166,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.2.10/jquery.mb.YTPlayer.min.js"></script>
 	<!-- Anime.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-    <!-- Custom js -->
 
-	<script type="text/javascript" src="static/js/custom.js"></script>
   <!-- Bootstrap notify.js -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
+  <!-- Animate.css -->
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+
+      <!-- Custom js -->
+
+	<script type="text/javascript" src="static/js/custom.js"></script>
 
 
     
   </body>
 </html>
-
-<script>
-
-(function() {
-
-function deleteCookies() {
-    var theCookies = document.cookie.split(';');
-    for (var i = 0 ; i < theCookies.length; i++) {
-        document.cookie = theCookies[i].split('=')[0] + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-}
-
-deleteCookies();
-
-   $.notify({
-            icon: 'glyphicon glyphicon-warning-sign',
-            message: "This website does not use cookies, nor does it collect any user-related information."
-        },
-        {
-            placement: {
-                from: "top",
-                align: "center"
-            },
-            type:'success'
-        },
-        {
-            animate: {
-                enter: 'animated bounceInDown',
-                exit: 'animated bounceOutUp'
-            },
-
-        }
-        );
-
-})();
-
-
-</script>
