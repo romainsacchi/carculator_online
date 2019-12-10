@@ -36,7 +36,7 @@ html {
 }
 
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Fira Sans', sans-serif;
 	font-size: 15px;
 	letter-spacing: 0.5px;
 	line-height: 1.5;
@@ -71,7 +71,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Neuton', serif;
 	font-weight: 700;
 	margin-top: 0;
 }
@@ -268,7 +268,7 @@ button:focus {
 .navbar-default .navbar-brand:focus {
 	color: #fff;
 	font-size: 35px;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Neuton', serif;
 	margin-top: -5px;
 }
 
@@ -505,7 +505,7 @@ button:focus {
 	float: left;
 	position: relative;
 	width: 100%;
-	background: linear-gradient(to right, #4568DC, #B06AB3);
+	background: linear-gradient(to right,  #b8b8b8, #e1e1e2);
 
 }
 
@@ -552,7 +552,7 @@ button:focus {
 }
 
 .mu-counter-area .pip-span {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Fira Sans', sans-serif;
     font-size:20px;
     background-color: rgba(0,0,0,.15);
     padding:8px;
@@ -650,6 +650,7 @@ button:focus {
 
 .mu-counter-name {
 	color: #ecf0f1;
+	font-family: 'Fira Sans', sans-serif;
 }
 
 
@@ -887,7 +888,7 @@ button:focus {
 }
 
 .mu-team-content-single {
-	background-color: #ecf0f1;
+	background-color: #e1e1e2;
 	display: inline;
 	float: left;
 	text-align: left;
@@ -904,7 +905,7 @@ button:focus {
 }
 
 .mu-team-content-single:hover .mu-team-info {
-	color: #fff;
+	color: #b8b8b8;
 }
 
 .mu-team-profile {
@@ -996,7 +997,7 @@ button:focus {
 }
 
 #mu-testimonials::before {
-	background: rgba(0,0,0,0.9);
+	background:  #b8b8b8;
 	bottom: 0;
 	content: '';
 	left: 0;
@@ -1594,7 +1595,7 @@ button:focus {
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 40px;
   white-space: nowrap;
   text-shadow: 0 2px 2px rgba(#000, 0.9);
