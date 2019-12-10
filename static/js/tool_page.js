@@ -1498,9 +1498,6 @@ function get_results(){
         var job_id = response['job id'];
         // Check task status every 3 seconds
         const interval = setInterval(function() {
-
-            // Fix
-
             $.ajax('/check_status/'+job_id).then(function (status) {
                 return status;
                 }).then(function (status) {

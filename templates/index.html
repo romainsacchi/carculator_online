@@ -1169,6 +1169,8 @@
     <!-- Custom js -->
 
 	<script type="text/javascript" src="static/js/custom.js"></script>
+  <!-- Bootstrap notify.js -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
 
 
     
@@ -1176,16 +1178,28 @@
 </html>
 
 <script>
-	$.notify({
+
+(function() {
+
+function deleteCookies() {
+    var theCookies = document.cookie.split(';');
+    for (var i = 0 ; i < theCookies.length; i++) {
+        document.cookie = theCookies[i].split('=')[0] + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+}
+
+deleteCookies();
+
+   $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "Sorry, this category of vehicle is not available yet."
+            message: "This website does not use cookies, nor does it collect any user-related information."
         },
         {
             placement: {
                 from: "top",
                 align: "center"
             },
-            type:'warning'
+            type:'success'
         },
         {
             animate: {
@@ -1195,4 +1209,8 @@
 
         }
         );
+
+})();
+
+
 </script>
