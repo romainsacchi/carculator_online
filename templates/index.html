@@ -911,3 +911,25 @@
     
   </body>
 </html>
+
+<script>
+	$.notify({
+            icon: 'glyphicon glyphicon-warning-sign',
+            message: "Sorry, this category of vehicle is not available yet."
+        },
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'warning'
+        },
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+
+        }
+        );
+</script>
