@@ -199,47 +199,19 @@
 
     var messenger = new Messenger($('#messenger'));
 
-    function listCookies() {
-    var theCookies = document.cookie.split(';');
-    var aString = '';
-    for (var i = 1 ; i <= theCookies.length; i++) {
-        aString += i + ' ' + theCookies[i-1] + "\n";
-    }
-    return aString;
-}
-
-var cookies = listCookies();
-console.log(cookies);
-
-
-function deleteCookies() {
-    var theCookies = document.cookie.split(';');
-    for (var i = 0 ; i < theCookies.length; i++) {
-        document.cookie = theCookies[i].split('=')[0] + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-}
-
-deleteCookies();
-
-var after_cookies = listCookies()
-console.log(after_cookies);
-
-var x = document.cookie;
-
-console.log(x);
-
-
+   
 
    $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "This website does not set any third-party cookies, nor does it collect any user-related information prior to its consent."
+            message: "We use cookies to support the user-friendliness of our pages. By closing this notice or continuing to explore our pages, you accept the use of cookies."
         },
         {
             placement: {
                 from: "top",
                 align: "right"
             },
-            type:'success'
+            type:'warning',
+            delay:15000
         },
         {
             animate: {
