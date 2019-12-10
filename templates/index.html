@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Carculator : Home</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/icon" href="static/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/icon" href="static/images/logo_icon.ico"/>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <!-- Line icon -->
@@ -55,8 +55,8 @@
   <body>
 
   	<!-- Start Header -->
-	<header id="mu-header" class="" role="banner" style="background-color:#4d4d4d">
-		<img src="static/images/PSI-Logo_narrow_30k_neg.png" style="height:40px;position:absolute;vertical-align:middle;margin-left:25px;"></a>
+	<header id="mu-header" class="" role="banner" style="background-color:white;">
+		<img src="static/images/PSI-Logo_narrow_30k.png" style="height:40px;position:absolute;vertical-align:middle;margin-left:25px;"></a>
 
 		<div class="container" style="width:1300px;">
 
@@ -79,13 +79,13 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      	<ul class="nav navbar-nav mu-menu navbar-right" style="width:85%;margin: auto;">
-			        <li><a href="#">{{_('HOME')}}</a></li>
-			        <li><a href="#mu-about">{{_('ABOUT')}}</a></li>
-					<li><a href="#mu-counter">{{_('FACTS')}}</a></li>
-					<li><a href="#mu-team">{{_('TEAM')}}</a></li>
-					<li><a href="#mu-clients">{{_('PARTNERS')}}</a></li>
-		            <li><a href="#mu-testimonials">{{_('PUBLICATIONS')}}</a></li>
-		            <li><a href="#mu-contact">{{_('CONTACT US')}}</a></li>
+			        <li><a href="#" style="color:grey;">{{_('Home')}}</a></li>
+			        <li><a href="#mu-about" style="color:grey;">{{_('About')}}</a></li>
+					<li><a href="#mu-counter" style="color:grey;">{{_('Facts')}}</a></li>
+					<li><a href="#mu-team" style="color:grey;">{{_('Team')}}</a></li>
+					<li><a href="#mu-clients" style="color:grey;">{{_('Partners')}}</a></li>
+		            <li><a href="#mu-testimonials" style="color:grey;">{{_('Publications')}}</a></li>
+		            <li><a href="#mu-contact" style="color:grey;">{{_('Contact us')}}</a></li>
 					<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
 					<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
 					<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
@@ -685,7 +685,7 @@
 						<div class="mu-team-area">
 
 							<div class="mu-team-header">
-								<h2 class="mu-heading-title"><span>{{_('OUR TEAM')}}</span></h2>
+								<h2 class="mu-heading-title"><span style="color:#32769e;">{{_('OUR TEAM')}}</span></h2>
 								<span class="mu-header-dot"></span>
 								<p>{{_('The team behind the development of')}} <i>carculator</i> {{_('sits at the Paul Scherrer Institute, in the ')}}
 									<a target="_blank" href="https://www.psi.ch/en/ta"><u>Technology Assessment group</u></a>.</p>
@@ -851,7 +851,7 @@
 					<div class="col-md-12">
 						<div class="mu-clients-area">
 							<div class="mu-clients-header">
-								<h2 class="mu-heading-title"><span>{{_('OUR PARTNERS')}}</span></h2>
+								<h2 class="mu-heading-title"><span style="color:#32769e;">{{_('OUR PARTNERS')}}</span></h2>
 								<span class="mu-header-dot"></span>
 								<p>{{_('carculator was developed within the ')}} <a target='_blank' href="https://sccer-mobility.ch/"> <u>Swiss Competence Center for Energy Research (SCCER) Efficient Technologies
 									and Systems for Mobility</u></a> {{_('funded by innosuisse. We received additional
@@ -919,7 +919,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="mu-testimonials-area">
-							<h2 class="mu-heading-title">{{_('Publications on')}} <span>{{_('mobility')}}</span></h2>
+							<h2 class="mu-heading-title">{{_('Publications on')}} <span style="color:#32769e;">{{_('mobility')}}</span></h2>
 							<div class="table-responsive">
 								<table class="table table-dark">
 									<tbody>
@@ -1051,7 +1051,7 @@
 						<div class="mu-contact-area">
 
 							<div class="mu-contact-header">
-								<h2 class="mu-heading-title">{{_('CONTACT')}} <span>{{_('US')}}</span></h2>
+								<h2 class="mu-heading-title">{{_('CONTACT')}} <span style="color:#32769e;">{{_('US')}}</span></h2>
 								<span class="mu-header-dot"></span>
 								<p>{{_('We are always happy to hear from you.')}}</p>
 							</div>
@@ -1088,7 +1088,7 @@
 											<p>{{_('Write to us if you have any questions about the tool, methods or results.')}}</p>
 											<address>
 												<p><i class="icon-location-pin"></i>Paul Scherrer Institut, Villigen PSI, Switzerland</p>
-												<p><i class="icon-envelope"></i>carculator.email@gmail.com</p>
+												<p><i class="icon-envelope"></i>carculator@psi.ch</p>
 												<p><i class="icon-phone"></i>+415 63 10 21 11</p>
 											</address>
 											<div class="mu-social-media">

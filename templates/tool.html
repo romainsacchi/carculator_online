@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{{_('Carculator : Configuration')}}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/icon" href="static/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/icon" href="static/images/logo_icon.ico"/>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <!-- Line icon -->
@@ -343,9 +343,8 @@
 									</button>
 
 									</div>
-									<div class="col-md-7" >
-										<div class="row">
-											<div class="col-md-2">
+									<div class="col-md-2" >
+
 												<h6>Frequently asked questions</h6>
 												<ul>
 													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">How to change the mass of the battery of an electric vehicle?</a></li>
@@ -355,24 +354,40 @@
 													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">How to change the lifetime of a battery?</a></li>
 												</ul>
 
-											</div>
-											<div class="col-md-10">
-												<h6 id="tutorial_title">Change the mass of the battery on a electric vehicle</h6>
-												<img class="image" src="static/images/battery_mass_tutorial.gif" alt="image" id="tutorial_video">
 
-											</div>
 
-										</div>
+
+
+
+									</div>
+									<div class="col-md-5">
+										<h6 id="tutorial_title">Change the mass of the battery on a electric vehicle</h6>
+										<p id+="tutorial_text">The mass of the battery of an electric vehicle can be changed by modifying
+										the value of the parameter <b>energy battery mass</b>. The mass of the battery is further split into
+										<b>Balance Of Plant (BoP) components mass</b> and <b>battery cells mass</b>.
+										Hence, increasing the mass of the battery will also increase the mass of the battery cells
+										and eventually the energy capacity of the battery. However, increasing the mass
+										of the battery will also increase the driving mass of the vehicle and the energy required
+										to move it over 1 km.</p>
+
+
 
 									</div>
 
 
 
+								<div class="row">
+											<div class="col-md-12">
+												<img class="image" src="static/images/battery_mass_tutorial.gif" alt="image" id="tutorial_video"
+												style="height:300px;margin:20px;border:2px solid white;padding:5px;display: block;margin-left: auto;margin-right: auto;">
+											</div>
+								</div>
 								</div>
 
 
 
-								<p style="color:white;">Add any parameter you would like to modify.</p>
+
+								<p style="color:white;margin:20px;">Add any parameter you would like to modify.</p>
 
 								<input class="form-control" id="InputParameters" type="text" placeholder="Search...">
 									  <br>

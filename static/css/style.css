@@ -650,6 +650,7 @@ button:focus {
 
 .mu-counter-name {
 	color: #ecf0f1;
+	font-family: 'Fira Sans', sans-serif;
 }
 
 
@@ -887,7 +888,7 @@ button:focus {
 }
 
 .mu-team-content-single {
-	background-color: #b8b8b8;
+	background-color: #e1e1e2;
 	display: inline;
 	float: left;
 	text-align: left;

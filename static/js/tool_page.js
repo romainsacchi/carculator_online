@@ -1702,10 +1702,20 @@ $("#InputParameters").on("keyup", function() {
 function change_tutorial_video(type){
     if (type == "mass_battery"){
         $("#tutorial_title").html("Change the mass of the battery on a electric vehicle");
+        var str = `The mass of the battery of an electric vehicle can be changed by modifying
+										the value of the parameter <b>energy battery mass</b>. The mass of the battery is further split into
+										<b>Balance Of Plant (BoP) components mass</b> and <b>battery cells mass</b>.
+										Hence, increasing the mass of the battery will also increase the mass of the battery cells
+										and eventually the energy capacity of the battery. However, increasing the mass
+										of the battery will also increase the driving mass of the vehicle and the energy required
+										to move it over 1 km.`
+        $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/battery_mass_tutorial.gif");
     };
     if (type == "engine_eff"){
         $("#tutorial_title").html("Change the engine efficiency of a vehicle");
+        var str = "blabla lkj"
+        $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/engine_eff_tutorial.gif");
     };
     if (type == "passenger_mass"){
