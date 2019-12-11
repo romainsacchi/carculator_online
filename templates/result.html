@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Carculator : Results</title>
+    <title>{{_('Carculator : Results')}}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/icon" href="/static/images/logo_icon.ico"/>
     <!-- Font Awesome -->
@@ -76,11 +76,11 @@
 		      <a class="navbar-brand" href="#"><img src="/static/images/carculator logo.png" style="height:30px;"></a>
 		    </div>
 				<button class="online-button" onclick="export_bw2_inventories()"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export Brightway2-compatible inventories</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Export Brightway2-compatible inventories')}}</button>
 			  <button class="online-button" onclick="export_simapro_inventories()"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Export Simapro-compatible inventories</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Export Simapro-compatible inventories')}}</button>
 				 <button class="online-button" onclick="share_results()"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">Share results</button>
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Share results')}}</button>
 
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -102,7 +102,7 @@
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
-								<p>Any use of the results or inventories under any form should be referenced as following:</p>
+								<p>{{_('Any use of the results or inventories under any form should be referenced as following:')}}</p>
                                 <p>carculator, Paul Scherrer Institut, http://carculator.psi.ch</p>
 							</div>
                 		</div>
@@ -157,8 +157,8 @@
 							<table class="table" style="width:100%;color:white;">
 								<thead>
 									<tr>
-										<th><h3>Energy consumption along driving cycle</h3></th>
-										<th><h3>Pollutants emissions along driving cycle</h3></th>
+										<th><h3>{{_('Energy consumption along driving cycle')}}</h3></th>
+										<th><h3>{{_('Pollutants emissions along driving cycle')}}</h3></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -182,8 +182,8 @@
 							<table class="table" style="width:100%;color:white;">
 								<thead>
 										<th>
-											<th><h3>Noise emissions along driving cycle</h3></th>
-											<th><h3>GHG emissions vs. ownership costs</h3></th>
+											<th><h3>{{_('Noise emissions along driving cycle')}}</h3></th>
+											<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
 										</th>
 								</thead>
 								<tbody>
@@ -335,7 +335,7 @@
  function export_bw2_inventories(){
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
-        message: "The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff."
+        message: {{_('The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff.')}}
     },
     {
         placement: {
@@ -358,7 +358,7 @@
  function export_simapro_inventories(){
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
-        message: "The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff."
+        message: {{_('The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff.')}}
     },
     {
         placement: {

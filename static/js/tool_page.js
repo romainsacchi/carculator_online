@@ -1,5 +1,30 @@
 (function( $ ){
 
+
+
+
+    //  Load the JSON File
+    $.when($.ajax({
+                url: "/get_language",
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+                console.log(json);
+                i18n.translator.add(json);
+            });
+
+
+
+
+
+
+
+
 /* ----------------------------------------------------------- */
 	/*  2. FIXED MENU
 	/* ----------------------------------------------------------- */
@@ -651,9 +676,10 @@ $('#vehicle_type label').click(function() {
         $(this).addClass('selected').siblings().removeClass('selected');
         $("#powertrain_section").attr('style', 'display:block;');
     }else{
+    var str= i18n('category_not_available')
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "Sorry, this category of vehicle is not available yet."
+            message: str
         },
         {
             placement: {
@@ -684,9 +710,10 @@ function size_list_update(){
     var item_labels = [];
 
     if (listYears.length == 0){
+        var str = i18n("select_time_horizon")
        $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "A time horizon must be selected first."
+        message: str
         },
         {
             placement: {
@@ -765,8 +792,14 @@ function size_list_update(){
     var thead = document.createElement('thead');
     var tr = document.createElement('tr');
     var tbody = document.createElement('tbody');
-    var row_content = '<th><h3 style="color:white;">Name</h3></th><th><h3 style="color:white;">Powertrain</h3></th>';
-    row_content += '<th><h3 style="color:white;">Size</h3></th><th><h3 style="color:white;">Unit</h3></th>';
+
+    var str_name = i18n('name')
+    var str_pwt = i18n('powertrain')
+    var str_size = i18n('size')
+    var str_unit = i18n('unit')
+
+    var row_content = '<th><h3 style="color:white;">'+str_name+'</h3></th><th><h3 style="color:white;">'+str_pwt+'</h3></th>';
+    row_content += '<th><h3 style="color:white;">'+str_size+'</h3></th><th><h3 style="color:white;">'+str_size+'</h3></th>';
      for (var item = 0; item < listYears.length; item++){
         row_content += '<th><h3 style="color:white;">'+listYears[item].innerHTML+'</h3></th>'
         };
@@ -796,7 +829,13 @@ $('#search_input').keyup(function() {
             $("#table_search_results").find("tr:gt(0)").remove();
 
             var th = document.createElement('tr');
-            th.innerHTML = '<th>Brand</th><th>Model</th><th>Trim</th><th>Curb mass (kg)</th><th>Powertrain</th><th>Size class</th>'
+            var str_brand = i18n('brand')
+            var str_model  = i18n('model')
+            var str_trim  = i18n('trim')
+            var str_curb = i18n('curb_mass')
+            var str_pwt = i18n('powertrain')
+            var str_size = i18n('size')
+            th.innerHTML = '<th>'+str_brand+'</th><th>'+str_model+'</th><th>'+str_trim+'</th><th>'+str_curb+'</th><th>'+str_pwt+'</th><th>'+str_size+'</th>'
             $("#table_search_results").append(th);
                 for (var row in json){
                     var tr = document.createElement('tr');
@@ -1019,9 +1058,10 @@ function getSelectedCountries() {
   // At least two countries are selected
   if (selected.length>1){
     var existing_selection = $("#country-selected")
+    var str = i18n('only_one_country')
     $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "Currently, only one country can be selected.."
+        message: str
         }
         ,
         {
@@ -1082,10 +1122,10 @@ function get_electricity_mix(ISO){
                 i++
             })
         }
-
+        var str = i18n("all_params_set")
         $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "You have set all the required parameters. Whenever ready, hit the 'Calculate' button."
+        message: str
         }
         ,
         {
@@ -1210,6 +1250,7 @@ slider_cargo.noUiSlider.on('update', function (values, handle) {
 function collect_configuration(){
     // If vehicle type selected
     if (!$('#vehicle_type input:radio:checked').length > 0) {
+    var str = i18n("missing_type")
         $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
         message: "It seems that the type of vehicle to analyze is missing."
@@ -1236,9 +1277,10 @@ function collect_configuration(){
     // If year(s) selected
     var listYears = document.querySelectorAll( '#years_list > li' );
     if (listYears.length == 0) {
+    var str = i18n("missing_year")
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the year for which to conduct the analysis is missing."
+            message: str
             }
             ,
             {
@@ -1262,9 +1304,10 @@ function collect_configuration(){
     // If powertrain type(s) selected
     var listItems = document.querySelectorAll( '#powertrain_list > li' );
     if (listItems.length == 0) {
+        var str = i18n('missing_powertrain')
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the powertrain type for which to conduct the analysis is missing."
+            message: str
             }
             ,
             {
@@ -1288,9 +1331,10 @@ function collect_configuration(){
     // If size class(es) selected
     var listSizes = document.querySelectorAll( '#size_list > li' );
     if (listSizes.length == 0) {
+    var str = i18n('missing_size')
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the size class for which to conduct the analysis is missing."
+            message: str
             }
             ,
             {
@@ -1313,9 +1357,10 @@ function collect_configuration(){
 
     // If country selected
     if ($("#country-selected").text() == "" | $("#country-selected").text() == "[]") {
+        var str = i18n('missing_country')
         $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the country for which to conduct the analysis is missing."
+            message: str
             }
             ,
             {
@@ -1352,9 +1397,11 @@ function collect_configuration(){
             sum_mix += Number(this.value)/100
         })
         if (sum_mix <.99 | sum_mix > 1.01){
+            var str_1 = i18n('mix_1')
+            var str_2 = i18n('mix_2')
             $.notify({
             icon: 'glyphicon glyphicon-warning-sign',
-            message: "It seems that the electricity mix for "+String(list_year[year])+" is not equal to 100%."
+            message: str_1+String(list_year[year])+str_2
             }
             ,
             {
@@ -1462,10 +1509,10 @@ function get_results(){
     if (data == null){
         return;
     };
-
+    var str = i18n('job_queued')
     $.notify({
         icon: '	glyphicon glyphicon-time',
-        message: "Your job has been queued. Results will be displayed in a new tab whenever ready. This may take up to one minute. Do not close this tab."
+        message: str
         }
         ,
         {
@@ -1508,9 +1555,10 @@ function get_results(){
                         return;
                     }
                     if (status['job status'] == 'job not found'){
+                    var str = i18n('job_lost')
                         $.notify({
                             icon: '	glyphicon glyphicon-warning',
-                            message: "It seems your job has been lost. We suggest you start teh calculation again."
+                            message: str
                             },
                             {
                                 placement: {
@@ -1705,7 +1753,40 @@ function change_tutorial_video(type){
 										Hence, increasing the mass of the battery will also increase the mass of the battery cells
 										and eventually the energy capacity of the battery. However, increasing the mass
 										of the battery will also increase the driving mass of the vehicle and the energy required
-										to move it over 1 km.`;
+										to move it over 1 km.
+                                        <br>
+										<p>Consider the following relations:</p>
+										<p style='margin:20px;border:2px solid white;padding:5px;'>
+										energy battery mass [kg] &times; battery cell mass share [%] &equals; mass of battery cells [kg]
+                                        <br>
+                                        mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
+										</p>
+
+										but also:
+
+										<p  style='margin:20px;border:2px solid white;padding:5px;'>
+										curb mass &equals; battery cell mass &plus; battery BoP mass &plus; ...
+										<br>
+										driving mass &equals; curb mass &plus; cargo mass
+										<br>
+										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)
+
+										</p>`;
+		var str_relation = `Consider the following relations:<br>
+										energy battery mass [kg] &times; battery cell mass share [%] &equals; mass of battery cells [kg]
+                                        <br>
+                                        mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
+										<br>
+
+										but also:
+
+										<br>
+										curb mass &equals; battery cell mass &plus; battery BoP mass &plus; ...
+											<br>
+										driving mass &equals; curb mass &plus; cargo mass
+											<br>
+										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)`
+		$("#tutorial_relation").html(str_relation);
         $("#tutorial_text").html(str);
         $("#tutorial_video").attr("src","static/images/battery_mass_tutorial.gif");
     };
@@ -1713,27 +1794,31 @@ function change_tutorial_video(type){
         $("#tutorial_title").html("Change the capacity of the battery on a electric vehicle");
         var str = `<p>The model considers an initial battery mass from which the mass of the battery cells is derived. Then, once the mass of the battery cells is known,
         an energy density factor per kg of battery cell is applied. Therefore, to change the capacity of the battery, one can either change the mass
-        of the battery for a same energy density factor, or leave the mass unchanged but adjust the energy density factor of the cells.</p>
-
-        <p>To change the energy density factor of the cells, one can simply modify the value of the <b>battery cell energy density</b> parameter,
-        which represents the energy available per kg of battery cell. To know the capacity of the battery, one may consider the following relation:
+        of the battery for a same cell energy density factor, or leave the mass unchanged but adjust instead the energy density factor of the cells.</p>
         <br>
-        battery cell mass share * energy battery mass = mass of battery cells
-        <br>
-        mass of battery cell * battery cell energy density = energy stored in the battery</p>`;
+        To change the energy density factor of the cells, one can simply modify the value of the <b>battery cell energy density</b> parameter,
+        which represents the energy available per kg of battery cell.`;
         $("#tutorial_text").html(str);
+        var str_relation = `Consider the following relations:<br>
+										energy battery mass [kg] &times; battery cell mass share [%] &equals; mass of battery cells [kg]
+                                        <br>
+                                        mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
+										`;
+        $("#tutorial_relation").html(str_relation);
         $("#tutorial_video").attr("src","static/images/battery_cell_tutorial.gif");
     };
     if (type == "engine_eff"){
         $("#tutorial_title").html("Change the engine efficiency of a vehicle");
         var str = "The efficiency of the engine of any vehicle can simply be adjusted by modifying the <b>engine efficiency</b> parameter.";
         $("#tutorial_text").html(str);
+        $("#tutorial_relation").html('');
         $("#tutorial_video").attr("src","static/images/engine_eff_tutorial.gif");
     };
     if (type == "passenger_mass"){
         $("#tutorial_title").html("Change the average mass of a passenger");
         var str = "The average mass of a passenger can simply be adjusted by modifying the <b>average passenger mass</b> parameter.";
         $("#tutorial_text").html(str);
+        $("#tutorial_relation").html('');
         $("#tutorial_video").attr("src","static/images/passenger_mass_tutorial.gif");
     };
     if (type == "hybrid_level"){
@@ -1743,6 +1828,7 @@ function change_tutorial_video(type){
                     Setting such parameter to 1 indicates that all the power originate the combustion engine. Setting it to 0.5 indicates that
                     half of the vehicle power is provided by an electric engine`;
         $("#tutorial_text").html(str);
+        $("#tutorial_relation").html('');
         $("#tutorial_video").attr("src","static/images/hybrid_tutorial.gif");
     };
     if (type == "battery_lifetime"){
@@ -1752,6 +1838,7 @@ function change_tutorial_video(type){
                     If this number is lower than the technical lifetime of the vehicle, a fraction of a replacement battery will be considered to
                     complete the use phase of the vehicle.`;
         $("#tutorial_text").html(str);
+        $("#tutorial_relation").html('');
         $("#tutorial_video").attr("src","static/images/battery_lifetime_tutorial.gif");
     };
     if (type == "fc_eff"){
@@ -1759,6 +1846,7 @@ function change_tutorial_video(type){
         var str = `The efficiency of the fuel cell stack of a hydrogen-powered vehicle can simply be adjusted
         by modifying the <b>fuel cell stack efficiency</b> parameter.`;
         $("#tutorial_text").html(str);
+        $("#tutorial_relation").html('');
         $("#tutorial_video").attr("src","static/images/fc_cell_tutorial.gif");
     };
 

@@ -9,6 +9,7 @@ from carculator import *
 import csv
 import secrets
 import numpy as np
+import os
 #from rq import Queue
 #from rq.job import Job, NoSuchJobError
 #from worker import conn
@@ -41,6 +42,8 @@ mail = Mail(app)
 
 # Setup flask-babel
 babel = Babel(app)
+
+
 
 def load_map_file():
     with open('data/car_to_class_map.csv', 'r', encoding='ISO-8859-1') as f:
@@ -300,6 +303,29 @@ def set_language(language=None):
     session['language'] = language
     return redirect(url_for('index'))
 
+@app.route('/get_language')
+def get_language():
+    lang = get_locale()
+
+    if lang == "en":
+        json_url = os.path.join(app.root_path, "static/translation", "translation_en.json")
+
+    if lang == "de":
+        json_url = os.path.join(app.root_path, "static/translation", "translation_de.json")
+
+    if lang == "fr":
+        json_url = os.path.join(app.root_path, "static/translation", "translation_fr.json")
+
+    if lang == "it":
+        json_url = os.path.join(app.root_path, "static/translation", "translation_it.json")
+
+    with open(json_url, encoding='utf-8') as fh:
+        data = json.load(fh)
+
+    print(data)
+    return make_response(data, 200)
+
+
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
     global ic
@@ -314,4 +340,3 @@ def get_param_table():
     params = load_params_file()
     print(params)
     return render_template('param_table.html', params=params)
-

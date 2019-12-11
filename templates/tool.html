@@ -329,13 +329,13 @@
 								<div class="row" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white">
 									<div class="col-md-5">
 										<p >
-										Each car is defined by up to 200 input parameters.<br>
-									The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.
-										<br><u>You are however welcome to override the default value for any of these parameters if you have a specific case in mind</u>. <br>
-									The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.<br>
-									The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table. <br>
-									That is, a parameter with a <b>high</b> sensitivity is a parameter for which a change in its value of 1% leads to a change in environmental impacts by 0.5 to 1%, against
-										0.3 to 0.5% for a parameter with <b>medium</b> sensitivity, and 0 to 0.3% for a parameter with <b>low</b> sensitivity.
+										{{_('Each car is defined by up to 200 input parameters.')}}<br>
+									{{_('The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.')}}
+										<br><u>{{_('You are however welcome to override the default value for any of these parameters if you have a specific case in mind')}}</u>. <br>
+									{{_('The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.')}}<br>
+									{{_('The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table.')}} <br>
+									{{_('That is, a parameter with a high sensitivity is a parameter for which a change in its value of ')}}1% {{_('leads to a change in environmental impacts by 0.5 to')}} 1%, {{_('against
+										0.3 to')}} 0.5% {{_('for a parameter with medium sensitivity, and 0 to')}} 0.3% {{_('for a parameter with low sensitivity.')}}
 									</p>
 									<button class="online-button" onclick="window.open('/get_param_table','_blank');"
 													style="margin:3px;background-color:transparent;color:white;border:1px solid white;width:250px;">
@@ -345,32 +345,45 @@
 									</div>
 									<div class="col-md-3" >
 
-												<h6>Frequently asked questions (click to watch a tutorial video)</h6>
+												<h6>{{_('Frequently asked questions (click to see an answer)')}}</h6>
 												<ul>
-													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">How to change the mass of the battery of an electric vehicle?</a></li>
-													<li><a onclick="change_tutorial_video('capacity_battery')" href="javascript:;" style="color:white;">How to change the capacity of the battery of an electric vehicle?</a></li>
-													<li><a onclick="change_tutorial_video('engine_eff')" href="javascript:;" style="color:white;">How to change the efficiency of the engine?</a></li>
-													<li><a onclick="change_tutorial_video('passenger_mass')" href="javascript:;" style="color:white;">How to change the weight of the passengers?</a></li>
-													<li><a onclick="change_tutorial_video('hybrid_level')" href="javascript:;" style="color:white;">How to change hybridization level of future diesel vehicles?</a></li>
-													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">How to change the lifetime of a battery?</a></li>
-													<li><a onclick="change_tutorial_video('fc_eff')" href="javascript:;" style="color:white;">How to change the efficiency of a fuel cell stack?</a></li>
+													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">{{_('How to change the mass of the battery of an electric vehicle?')}}</a></li>
+													<li><a onclick="change_tutorial_video('capacity_battery')" href="javascript:;" style="color:white;">{{_('How to change the capacity of the battery of an electric vehicle?')}}</a></li>
+													<li><a onclick="change_tutorial_video('engine_eff')" href="javascript:;" style="color:white;">{{_('How to change the efficiency of the engine?')}}</a></li>
+													<li><a onclick="change_tutorial_video('passenger_mass')" href="javascript:;" style="color:white;">{{_('How to change the weight of the passengers?')}}</a></li>
+													<li><a onclick="change_tutorial_video('hybrid_level')" href="javascript:;" style="color:white;">{{_('How to change hybridization level of future diesel vehicles?')}}</a></li>
+													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">{{_('How to change the lifetime of a battery?')}}</a></li>
+													<li><a onclick="change_tutorial_video('fc_eff')" href="javascript:;" style="color:white;">{{_('How to change the efficiency of a fuel cell stack?')}}</a></li>
 												</ul>
-
-
-
-
-
 
 									</div>
 									<div class="col-md-4">
-										<h6 id="tutorial_title">Change the mass of the battery on a electric vehicle</h6>
-										<p id="tutorial_text">The mass of the battery of an electric vehicle can be changed by modifying
-										the value of the <b>energy battery mass</b> parameter. The mass of the battery is further split into
-										<b>Balance Of Plant (BoP) components mass</b> and <b>battery cells mass</b>.
+										<h6 id="tutorial_title">{{_('Change the mass of the battery on a electric vehicle')}}</h6>
+										<p id="tutorial_text">{{_('The mass of the battery of an electric vehicle can be changed by modifying
+										the value of the energy battery mass parameter. The mass of the battery is further split into
+										Balance Of Plant (BoP) components mass and battery cells mass.
 										Hence, increasing the mass of the battery will also increase the mass of the battery cells
 										and eventually the energy capacity of the battery. However, increasing the mass
 										of the battery will also increase the driving mass of the vehicle and the energy required
-										to move it over 1 km.</p>
+										to move it over 1 km.')}}</p>
+
+										<p id = "tutorial_relation" style='margin:20px;border:2px solid white;padding:5px;'>
+										{{_('Consider the following relations:')}}<br>
+										energy battery mass [kg] &times; battery cell mass share [%] &equals; mass of battery cells [kg]
+                                        <br>
+                                        mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
+										<br>
+
+										{{_('but also:')}}
+
+										<br>
+										curb mass &equals; battery cell mass &plus; battery BoP mass &plus; ...
+											<br>
+										driving mass &equals; curb mass &plus; cargo mass
+											<br>
+										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)
+										</p>
+
 
 
 
@@ -389,7 +402,7 @@
 
 
 
-								<p style="color:white;margin:20px;">Add any parameter you would like to modify.</p>
+								<p style="color:white;margin:20px;">{{_('Add any parameter you would like to modify.')}}</p>
 
 								<input class="form-control" id="InputParameters" type="text" placeholder="Search...">
 									  <br>
@@ -401,14 +414,14 @@
 									  <table class="table" style="color:white;font-size:12px;">
 										<thead>
 										  <tr>
-											<th>Importance</th>
-											<th>Name</th>
-											<th>Description</th>
-											  <th>Unit</th>
-											  <th>Source</th>
-											  <th>Applies to powertrain</th>
-											  <th>Applies to size</th>
-											  <th>Add?</th>
+											<th>{{_('Importance')}}</th>
+											<th>{{_('Name')}}</th>
+											<th>{{_('Description')}}</th>
+											  <th>{{_('Unit')}}</th>
+											  <th>{{_('Source')}}</th>
+											  <th>{{_('Applies to powertrain')}}</th>
+											  <th>{{_('Applies to size')}}</th>
+											  <th>{{_('Add?')}}</th>
 										  </tr>
 										</thead>
 										<tbody id="TableParameters">
@@ -436,16 +449,15 @@
 						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;padding-bottom:50px;left:0;right:0;">
 							<div class="mu-testimonials-content" style="display:none;" id="use_section">
 								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
-									This section defines parameters concerned with the use phase of the vehicles.<br>
-									The model needs to know the driving cycle of the vehicles (i.e., the speed level per
+									{{_('This section defines parameters concerned with the use phase of the vehicles.')}}<br>
+									{{_('The model needs to know the driving cycle of the vehicles (i.e., the speed level per
 									second of driving, to derive the needs for acceleration and braking) as well as a
 									few other things, such as the number of passengers, the country the vehicles are operated in, etc.<br>
-									Projected electricity mixes for are based on <b>Business-as-usual scenarios</b> from
-									<b>energy models</b>.
-									For European country, the projections originate the <a style="color:white;" target="_blank" href="https://ec.europa.eu/energy/en/data-analysis/energy-modelling/eu-reference-scenario-2016"><u>EU Reference Scenario 2016</u></a> report,
-									from the European Commission. For African countries, projections originate the
-									<a style="color:white;" target="_blank" href="https://ec.europa.eu/jrc/en/publication/energy-projections-african-countries"><u>TEMBA</u></a> model.
-									For other countries, projections are based on the IEA'S <a style="color:white;" target="_blank" href="https://www.iea.org/reports/world-energy-outlook-2017"><u>World Energy Outlook 2017</u></a> report.
+									Projected electricity mixes for are based on Business-as-usual scenarios from energy models.')}}
+									{{_(' For European country, the projections originate the')}} <a style="color:white;" target="_blank" href="https://ec.europa.eu/energy/en/data-analysis/energy-modelling/eu-reference-scenario-2016"><u>EU Reference Scenario 2016</u></a> report,
+									{{_('from the European Commission. For African countries, projections originate the model')}}
+									<a style="color:white;" target="_blank" href="https://ec.europa.eu/jrc/en/publication/energy-projections-african-countries"><u>TEMBA</u></a>.
+									{{_('For other countries, projections are based on the IEA report')}} <a style="color:white;" target="_blank" href="https://www.iea.org/reports/world-energy-outlook-2017"><u>World Energy Outlook 2017</u></a>.
 								</p>
 								<table class="table" id="table_use">
 							  <thead>
@@ -526,8 +538,6 @@
 										<thead>
 											<tr>
 												<td>in %</td>
-												<!--<th>2018</th>
-												<th>2050</th>-->
 											</tr>
 										</thead>
 									  <tbody>
@@ -619,17 +629,17 @@
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;margin-top:0px;" id="fuel_section">
 								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
-									In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
+									{{_('In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
 									The user can select conventional pathways to represent the supply and use of common fuels such as diesel
-									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-methane.<br>
-									The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
-									This means that they do not compete with crops production with the purpose of food supply.<br>
-									Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
+									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-methane.')}}<br>
+									{{_('The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
+									This means that they do not compete with crops production with the purpose of food supply.')}}<br>
+									{{_('Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
 									Hydrogen can either be produced by electrolysis, which is a process that requires electricity, or via a process called
-									"Steam Methane Reforming" which uses steam and methane to produce hydrogen (and carbon monoxide).<br>
+									"Steam Methane Reforming" which uses steam and methane to produce hydrogen (and carbon monoxide).')}}<br>
 
-									Regarding energy storage technologies for battery electric vehicles, the user can choose between several types of lithium-ion-based chemistry
-									but also between different origins of manufacture. The origin of battery manufacture will determine the electricity mix used to produce the battery cells.
+									{{_('Regarding energy storage technologies for battery electric vehicles, the user can choose between several types of lithium-ion-based chemistry
+									but also between different origins of manufacture. The origin of battery manufacture will determine the electricity mix used to produce the battery cells.')}}
 								</p>
 								<div class="container" style="width:100%;">
 									<div class="row" id = "row_fuel" style="width:100%;color:white;">
@@ -655,7 +665,7 @@
 											<tbody>
 												<tr>
 														<th>
-															<h3>Petrol</h3>
+															<h3>{{_('Petrol')}}</h3>
 															<div class="help-tip" style="position:relative;bottom:35px;right:60px;">
 																		<p>{{_('Source for conventional petrol inventory: ecoinvent 3.6')}}<br>
 																			{{_('Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul Scherrer Institut')}}
@@ -663,19 +673,19 @@
 															</div>
 														</th>
 														<th>
-															<h3>Diesel</h3>
+															<h3>{{_('Diesel')}}</h3>
 															<div class="help-tip" style="position:relative;bottom:35px;right:50px;">
 																		<p>{{_('Source for conventional diesel inventory: ecoinvent 3.6')}}<br>
 																			{{_('Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer Institut')}}
 																		</p>
 														</th>
-														<th><h3>Natural gas</h3>
+														<th><h3>{{_('Natural gas')}}</h3>
 														<div class="help-tip" style="position:relative;bottom:35px;right:-60px;">
 																		<p>{{_('Source for conventional compressed natural gas inventory: ecoinvent 3.6')}}<br>
 																			{{_('Source for bio-methane inventory: Xiaojin Zhang, 2019, Paul Scherrer Institut')}}
 																		</p>
 															</th>
-														<th><h3>Hydrogen</h3>
+														<th><h3>{{_('Hydrogen')}}</h3>
 														<div class="help-tip" style="position:relative;bottom:35px;right:100px;">
 																		<p>{{_('Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020')}}<br>
 																			{{_('Source for hydrogen by steam methane reforming fuel inventory: Zhang et al. 2017,
@@ -683,7 +693,7 @@
 
 																		</p>
 															</th>
-														<th><h3>Electric</h3></th>
+														<th><h3>{{_('Electric')}}</h3></th>
 												</tr>
 
 												<tr>
@@ -692,7 +702,7 @@
 														<div class="form-check">
 															  <input class="form-check-input" type="radio" name="petrol technnology" id="conventional_petrol" value="petrol" checked>
 															  <label class="form-check-label" for="conventional_petrol">
-																Conventional petrol
+																{{_('Conventional petrol')}}
 															  </label>
 
 														</div>
@@ -701,25 +711,25 @@
 														<div class="form-check">
 															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_forest" value="bioethanol - forest residues">
 															  <label class="form-check-label" for="bioethanol_forest">
-																Bio-ethanol from forest residues
+																{{_('Bio-ethanol from forest residues')}}
 															  </label>
 														</div>
 														<div class="form-check">
 															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_wheat" value="bioethanol - wheat straw">
 															  <label class="form-check-label" for="bioethanol_wheat">
-																Bio-ethanol from wheat straw
+																{{_('Bio-ethanol from wheat straw')}}
 															  </label>
 														</div>
 														<div class="form-check">
 															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_maize" value="biotehanol - maize starch">
 															  <label class="form-check-label" for="bioethanol_maize">
-																Bio-ethanol from maize starch
+																{{_('Bio-ethanol from maize starch')}}
 															  </label>
 														</div>
 														<div class="form-check">
 															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_beet" value="bioethanol - sugarbeet">
 															  <label class="form-check-label" for="bioethanol_beet">
-																Bio-ethanol from sugar beet residue
+																{{_('Bio-ethanol from sugar beet residue')}}
 															  </label>
 
 														</div>
@@ -729,19 +739,19 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="diesel technology" id="conventional_diesel" value="diesel" checked>
 														  <label class="form-check-label" for="conventional_diesel">
-															Conventional diesel
+															{{_('Conventional diesel')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="diesel technology" id="biodiesel_algae" value="biodiesel - algae">
 														  <label class="form-check-label" for="biodiesel_algae">
-															Bio-diesel from algae
+															{{_('Bio-diesel from algae')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="diesel technology" id="biodiesel_cooking_oil" value="biodiesel - cooking oil">
 														  <label class="form-check-label" for="biodiesel_cooking_oil">
-															Bio-diesel from used cooking oil
+															{{_('Bio-diesel from used cooking oil')}}
 														  </label>
 														</div>
 													</td>
@@ -749,13 +759,13 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="cng technology" id="conventional_nat_gas" value="cng" checked>
 														  <label class="form-check-label" for="conventional_nat_gas">
-															Compressed natural gas
+															{{_('Compressed natural gas')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="cng technology" id="biogas" value="biogas">
 														  <label class="form-check-label" for="biogas">
-															Bio-methane from manure
+															{{_('Bio-methane from manure')}}
 														  </label>
 														</div>
 													</td>
@@ -763,31 +773,31 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis" value="Electrolysis" checked>
 														  <label class="form-check-label" for="electrolysis">
-															Via electrolysis using the electricity mix specified above
+															{{_('Via electrolysis using the electricity mix specified above')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_solar" value="Electrolysis - solar">
 														  <label class="form-check-label" for="electrolysis_solar">
-															Via electrolysis using photovoltaic power
+															{{_('Via electrolysis using photovoltaic power')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_hydro" value="Electrolysis - hydro">
 														  <label class="form-check-label" for="electrolysis_hydro">
-															Via electrolysis using hydro power
+															{{_('Via electrolysis using hydro power')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_nuclear" value="Electrolysis - nuclear">
 														  <label class="form-check-label" for="electrolysis_nuclear">
-															Via electrolysis using nuclear power
+															{{_('Via electrolysis using nuclear power')}}
 														  </label>
 														</div>
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="hydrogen technology" id="SMR" value="SMR">
 														  <label class="form-check-label" for="SMR">
-															Via Steam Methane Reforming
+															{{_('Via Steam Methane Reforming')}}
 														  </label>
 														</div>
 													</td>
@@ -795,7 +805,7 @@
 														<div class="form-check">
 														  <input class="form-check-input" type="radio" name="none" id="none" value="none" checked>
 														  <label class="form-check-label" for="none">
-															Electricity mix specified above
+															{{_('Electricity mix specified above')}}
 														  </label>
 														</div>
 													</td>
@@ -820,14 +830,14 @@
 													<th></th>
 													<th></th>
 													<th align="left">
-														<span align="left"><h6>Fuel cell technology</h6></span>
+														<span align="left"><h6>{{_('Fuel cell technology')}}</h6></span>
 														<div class="help-tip" style="position:relative;bottom:30px;right:40px;">
 																		<p>{{_('Main type of fuel cell developed for transport applications.')}}<br>
 																			{{_('Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, issue C, 884-896.')}}
 																		</p>
 													</th>
 													<th align="left">
-																	<span align="left"><h6>Battery chemistry</h6></span>
+																	<span align="left"><h6>{{_('Battery chemistry')}}</h6></span>
 																	<div class="help-tip" style="position:relative;bottom:30px;right:20px;">
 																		<p>{{_('Three different types of lithium-ion-based batteries are presented, all used for transport applications.')}}<br>
 																			{{_('Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, 3379-3390.')}}
@@ -843,7 +853,7 @@
 														<div class="form-group">
 															<div class="form-check">
 																  <input class="form-check-input" type="radio" name="fuel cell stack technnology" id="PEM" value="PEM" checked>
-																  <label class="form-check-label" for="PEM">Proton exchange membrane</label>
+																  <label class="form-check-label" for="PEM">{{_('Proton exchange membrane')}}</label>
 															</div>
 														</div>
 													</td>
@@ -856,7 +866,7 @@
 																			  <input class="form-check-input" type="radio"
 																					 name="battery technnology" id="NMC" value="NMC" checked>
 																			  <label class="form-check-label" for="NMC">
-																				Lithium nickel manganese cobalt oxide (NMC)
+																				{{_('Lithium nickel manganese cobalt oxide (NMC)')}}
 																			  </label>
 																		</div>
 
@@ -864,7 +874,7 @@
 																			  <input class="form-check-input" type="radio"
 																					 name="battery technnology" id="LFP" value="LFP">
 																			  <label class="form-check-label" for="LFP">
-																				Lithium iron phosphate (LFP)
+																				{{_('Lithium iron phosphate (LFP)')}}
 																			  </label>
 																		</div>
 
@@ -872,7 +882,7 @@
 																			  <input class="form-check-input" type="radio"
 																					 name="battery technnology" id="NCA" value="NCA" >
 																			  <label class="form-check-label" for="NCA">
-																				Lithium nickel cobalt aluminum oxide (NCA)
+																				{{_('Lithium nickel cobalt aluminum oxide (NCA)')}}
 																			  </label>
 																		</div>
 																	</div>
@@ -880,7 +890,8 @@
 															</tr>
 															<tr>
 																<td align="left">
-																	<span align="left"><h6>Origin of manufacture</h6></span>
+																	<span align="left"><h6>{{_('Origin of manufacture')}}</h6></span>
+																	<span align="left"><h6>{{_('Origin of manufacture')}}</h6></span>
 																	<div class="help-tip" style="position:relative;bottom:30px;right:-130px;">
 																		<p>{{_('Modifies the electricity mix used along the manufacture of the battery cells.')}}
 																		</p>
@@ -890,42 +901,42 @@
 																			  <input class="form-check-input" type="radio"
 																					 name="battery origin" id="China" value="CN" checked>
 																			  <label class="form-check-label" for="China">
-																				China
+																				{{_('China')}}
 																			  </label>
 																		</div>
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
 																					 name="battery origin" id="Japan" value="JP">
 																			  <label class="form-check-label" for="Japan">
-																				Japan
+																				{{_('Japan')}}
 																			  </label>
 																		</div>
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
 																					 name="battery origin" id="India" value="IN">
 																			  <label class="form-check-label" for="India">
-																				India
+																				{{_('India')}}
 																			  </label>
 																		</div>
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
 																					 name="battery origin" id="Europe" value="RER" >
 																			  <label class="form-check-label" for="Europe">
-																				Europe
+																				{{_('Europe')}}
 																			  </label>
 																		</div>
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
 																					 name="battery origin" id="US" value="US" >
 																			  <label class="form-check-label" for="US">
-																				United States
+																				{{_('United States')}}
 																			  </label>
 																		</div>
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
 																					 name="battery origin" id="NO" value="NO" >
 																			  <label class="form-check-label" for="NO">
-																				Norway
+																				{{_('Norway')}}
 																			  </label>
 																		</div>
 																	</div>
@@ -1105,6 +1116,7 @@
 
 	</footer>
 
+	<meta id="session_language" data-name="{{ session['language'] }}">
 
 	<!-- End footer -->
 
@@ -1140,6 +1152,8 @@
   	<!-- Tool page js -->
 	<!--<script type="text/javascript" src="static/js/custom.js"></script>-->
 	<script type="text/javascript" src="static/js/tool_page.js"></script>
+  <script type="text/javascript" src="static/js/i18n.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.5/jquery.i18n.js"></script>
 
   </body>
 </html>
