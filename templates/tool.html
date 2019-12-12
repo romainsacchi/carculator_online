@@ -80,6 +80,7 @@
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onclick="get_results()">{{_('Calculate')}}</button>
 				 <button class="online-button" onclick="save_configuration()"
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Share configuration')}}</button>
+			  <div id="holder"><p align="center" style="color:white;margin:auto">{{_("Drop configuration file")}}</p></div>
 
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -283,7 +284,7 @@
 											<p >{{_('If you are unsure about the definitions of powertrains and sizes carculator uses, you may look up a familiar car model below.')}}</p>
 										  	<form class="form-inline" style="margin: 0 auto;">
 											  <input class="form-control mr-sm-2" type="search"
-													 placeholder="Search for car models"
+													 placeholder="{{_('Search for car models')}}"
 													 aria-label="Search"
 													 id="search_input"
 													 style="width:400px;">
@@ -700,7 +701,7 @@
 													<td align="left">
 														<div class="form-group">
 														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technnology" id="conventional_petrol" value="petrol" checked>
+															  <input class="form-check-input" type="radio" name="petrol technology" id="conventional_petrol" value="petrol" checked>
 															  <label class="form-check-label" for="conventional_petrol">
 																{{_('Conventional petrol')}}
 															  </label>
@@ -709,25 +710,25 @@
 
 
 														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_forest" value="bioethanol - forest residues">
+															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_forest" value="bioethanol - forest residues">
 															  <label class="form-check-label" for="bioethanol_forest">
 																{{_('Bio-ethanol from forest residues')}}
 															  </label>
 														</div>
 														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_wheat" value="bioethanol - wheat straw">
+															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_wheat" value="bioethanol - wheat straw">
 															  <label class="form-check-label" for="bioethanol_wheat">
 																{{_('Bio-ethanol from wheat straw')}}
 															  </label>
 														</div>
 														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_maize" value="biotehanol - maize starch">
+															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_maize" value="biotehanol - maize starch">
 															  <label class="form-check-label" for="bioethanol_maize">
 																{{_('Bio-ethanol from maize starch')}}
 															  </label>
 														</div>
 														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technnology" id="bioethanol_beet" value="bioethanol - sugarbeet">
+															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_beet" value="bioethanol - sugarbeet">
 															  <label class="form-check-label" for="bioethanol_beet">
 																{{_('Bio-ethanol from sugar beet residue')}}
 															  </label>
@@ -852,7 +853,7 @@
 													<td align="left">
 														<div class="form-group">
 															<div class="form-check">
-																  <input class="form-check-input" type="radio" name="fuel cell stack technnology" id="PEM" value="PEM" checked>
+																  <input class="form-check-input" type="radio" name="fuel cell stack technology" id="PEM" value="PEM" checked>
 																  <label class="form-check-label" for="PEM">{{_('Proton exchange membrane')}}</label>
 															</div>
 														</div>
@@ -860,11 +861,10 @@
 													<td align="left">
 														<table>
 															<tr>
-																	</div>
 																	<div class="form-group">
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
-																					 name="battery technnology" id="NMC" value="NMC" checked>
+																					 name="battery technology" id="NMC" value="NMC" checked>
 																			  <label class="form-check-label" for="NMC">
 																				{{_('Lithium nickel manganese cobalt oxide (NMC)')}}
 																			  </label>
@@ -872,7 +872,7 @@
 
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
-																					 name="battery technnology" id="LFP" value="LFP">
+																					 name="battery technology" id="LFP" value="LFP">
 																			  <label class="form-check-label" for="LFP">
 																				{{_('Lithium iron phosphate (LFP)')}}
 																			  </label>
@@ -880,7 +880,7 @@
 
 																		<div class="form-check">
 																			  <input class="form-check-input" type="radio"
-																					 name="battery technnology" id="NCA" value="NCA" >
+																					 name="battery technology" id="NCA" value="NCA" >
 																			  <label class="form-check-label" for="NCA">
 																				{{_('Lithium nickel cobalt aluminum oxide (NCA)')}}
 																			  </label>
@@ -890,7 +890,6 @@
 															</tr>
 															<tr>
 																<td align="left">
-																	<span align="left"><h6>{{_('Origin of manufacture')}}</h6></span>
 																	<span align="left"><h6>{{_('Origin of manufacture')}}</h6></span>
 																	<div class="help-tip" style="position:relative;bottom:30px;right:-130px;">
 																		<p>{{_('Modifies the electricity mix used along the manufacture of the battery cells.')}}
@@ -1034,7 +1033,7 @@
 															{{_('Driven distance')}}
 														  </label>
 															<div class="form-group">
-															  <input placeholder="in km" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto" disabled>
+															  <input placeholder="{{_('in km')}}" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto" disabled>
 															</div>
 														</div>
 														<div class="form-check">
@@ -1072,7 +1071,7 @@
 															{{_('Error propagation (Monte Carlo)')}}
 														  </label>
 															<div class="form-group">
-															  <input placeholder="number of iterations" type="text" class="form-control" style="width:200px;text-align:center;margin: 0 auto" disabled>
+															  <input placeholder="{{_('number of iterations')}}" type="text" class="form-control" style="width:200px;text-align:center;margin: 0 auto" disabled>
 															</div>
 														</div>
 														</td>
@@ -1153,7 +1152,7 @@
 	<!--<script type="text/javascript" src="static/js/custom.js"></script>-->
 	<script type="text/javascript" src="static/js/tool_page.js"></script>
   <script type="text/javascript" src="static/js/i18n.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.i18n/1.0.5/jquery.i18n.js"></script>
+  <script type="text/javascript" src="static/js/FileSaver.js"></script>
 
   </body>
 </html>

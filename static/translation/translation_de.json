@@ -1,0 +1,31 @@
+{
+  "values":{
+    "name":"Name",
+    "powertrain":"Antriebsart",
+      "size":"Grösse",
+      "unit":"Einheit",
+      "brand":"Marke",
+      "model":"Modelltrim",
+      "trim":"\nAuflage",
+      "curb_mass":"Bordsteinmasse",
+      "only_one_country":"Derzeit kann nur ein Land ausgewählt werden.",
+      "category_not_available":"Entschuldigung, diese Fahrzeugkategorie ist noch nicht verfügbar.",
+      "select_time_horizon":"Zuerst muss ein Zeithorizont ausgewählt werden.",
+      "all_params_set":"Sie haben alle erforderlichen Parameter eingestellt. Wenn Sie fertig sind, klicken Sie auf die Schaltfläche \"Berechnen\".",
+      "missing_type": "Es scheint, dass der zu analysierende Fahrzeugtyp fehlt.",
+      "missing_year": "Es scheint, dass das Jahr, für das die Analyse durchgeführt werden soll, fehlt.",
+      "missing_powertrain":"Es scheint, dass der Antriebsstrang-Typ, für den die Analyse durchgeführt werden soll, fehlt.",
+      "missing_size":"Es scheint, dass die Größenklasse, für die die Analyse durchgeführt werden soll, fehlt.",
+      "missing_country":"Es scheint, dass das Land, für das die Analyse durchgeführt werden soll, fehlt.",
+      "mix_1":"Es scheint, dass der Strommix für",
+      "mix_2":" ist nicht gleich 100 Prozent.",
+      "job_queued":"Ihr Job wurde in die Warteschlange gestellt. Die Ergebnisse werden in einer neuen Registerkarte angezeigt, sobald sie verfügbar sind. Dies kann bis zu einer Minute dauern. Schließen Sie diese Registerkarte nicht.",
+      "job_lost":"Es scheint, dass Ihr Job verloren gegangen ist. Wir empfehlen Ihnen, die Berechnung erneut zu starten.",
+      "cookie_disclaimer": "Wir verwenden Cookies, um die Benutzerfreundlichkeit unserer Seiten zu unterstützen. Wenn Sie diesen Hinweis schließen oder unsere Seiten weiter durchsuchen, stimmen Sie der Verwendung von Cookies zu.",
+      "welcome_message_0": "Sind Elektroautos wirklich besser als Dieselautos?",
+      "welcome_message_1": "Ist es Zeit, über Wasserstoff nachzudenken?",
+      "welcome_message_2": "Werden sich Benziner in Zukunft stark verbessern?",
+      "welcome_message_3": "Finden Sie es jetzt mit dem Carculator heraus.",
+      "share_config": "Der Download der Konfigurationsdatei startet in Kürze. Sie können es bei Ihrem nächsten Besuch in den Bereich auf der rechten Seite ziehen und dort ablegen."
+  }
+}

@@ -18,6 +18,42 @@
 
 (function( $ ){
 
+    //  Load the JSON File
+    $.when($.ajax({
+                url: "/get_language",
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+            console.log(json)
+                i18n.translator.add(json);
+                var str = i18n('cookie_disclaimer')
+    $.notify({
+            icon: 'glyphicon glyphicon-warning-sign',
+            message: str
+        },
+        {
+            placement: {
+                from: "top",
+                align: "right"
+            },
+            type:'warning',
+            delay:15000
+        },
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+
+        }
+        );
+            });
+
 
 	/* ----------------------------------------------------------- */
 	/*  2. FIXED MENU
@@ -106,123 +142,124 @@
 	new ClipboardJS('.btn');
 	$("#bgndVideo").YTPlayer();
 
-      var Messenger = function(el){
-      'use strict';
-      var m = this;
+	$.when($.ajax({
+                url: "/get_language",
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+                i18n.translator.add(json);
 
-      m.init = function(){
-        m.codeletters = "&#*+%?£@§$";
-        m.message = 0;
-        m.current_length = 0;
-        m.fadeBuffer = false;
-        m.messages = [
-          'Are electric cars really better than diesel cars?',
-          'Is it time to consider hydrogen?',
-          'Will petrol cars improve much in the future?',
-          'Find it out now with carculator.'
-        ];
+                var Messenger = function(el){
+                      'use strict';
+                      var m = this;
 
-        setTimeout(m.animateIn, 100);
-      };
+                      m.init = function(){
+                        m.codeletters = "&#*+%?£@§$";
+                        m.message = 0;
+                        m.current_length = 0;
+                        m.fadeBuffer = false;
+                        m.messages = [];
+                        m.messages.push(i18n('welcome_message_0'));
+                        m.messages.push(i18n('welcome_message_1'));
+                        m.messages.push(i18n('welcome_message_2'));
+                        m.messages.push(i18n('welcome_message_3'));
+                        m.messages.push(i18n('welcome_message_3'));
 
-      m.generateRandomString = function(length){
-        var random_text = '';
-        while(random_text.length < length){
-          random_text += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
-        }
+                        setTimeout(m.animateIn, 100);
+                      };
 
-        return random_text;
-      };
+                      m.generateRandomString = function(length){
+                        var random_text = '';
+                        while(random_text.length < length){
+                          random_text += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+                        }
 
-      m.animateIn = function(){
-        if(m.current_length < m.messages[m.message].length){
-          m.current_length = m.current_length + 2;
-          if(m.current_length > m.messages[m.message].length) {
-            m.current_length = m.messages[m.message].length;
-          }
+                        return random_text;
+                      };
 
-          var message = m.generateRandomString(m.current_length);
-          $(el).html(message);
+                      m.animateIn = function(){
+                        if(m.current_length < m.messages[m.message].length){
+                          m.current_length = m.current_length + 2;
+                          if(m.current_length > m.messages[m.message].length) {
+                            m.current_length = m.messages[m.message].length;
+                          }
 
-          setTimeout(m.animateIn, 20);
-        } else {
-          setTimeout(m.animateFadeBuffer, 140);
-        }
-      };
+                          var message = m.generateRandomString(m.current_length);
+                          $(el).html(message);
 
-      m.animateFadeBuffer = function(){
-        if(m.fadeBuffer === false){
-          m.fadeBuffer = [];
-          for(var i = 0; i < m.messages[m.message].length; i++){
-            m.fadeBuffer.push({c: (Math.floor(Math.random()*12))+1, l: m.messages[m.message].charAt(i)});
-          }
-        }
+                          setTimeout(m.animateIn, 20);
+                        } else {
+                          setTimeout(m.animateFadeBuffer, 140);
+                        }
+                      };
 
-        var do_cycles = false;
-        var message = '';
+                      m.animateFadeBuffer = function(){
+                        if(m.fadeBuffer === false){
+                          m.fadeBuffer = [];
+                          for(var i = 0; i < m.messages[m.message].length; i++){
+                            m.fadeBuffer.push({c: (Math.floor(Math.random()*12))+1, l: m.messages[m.message].charAt(i)});
+                          }
+                        }
 
-        for(var i = 0; i < m.fadeBuffer.length; i++){
-          var fader = m.fadeBuffer[i];
-          if(fader.c > 0){
-            do_cycles = true;
-            fader.c--;
-            message += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
-          } else {
-            message += fader.l;
-          }
-        }
+                        var do_cycles = false;
+                        var message = '';
 
-        $(el).html(message);
+                        for(var i = 0; i < m.fadeBuffer.length; i++){
+                          var fader = m.fadeBuffer[i];
+                          if(fader.c > 0){
+                            do_cycles = true;
+                            fader.c--;
+                            message += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+                          } else {
+                            message += fader.l;
+                          }
+                        }
 
-        if(do_cycles === true){
-          setTimeout(m.animateFadeBuffer, 50);
-        } else {
-          setTimeout(m.cycleText, 5000);
-        }
-      };
+                        $(el).html(message);
 
-      m.cycleText = function(){
-        m.message = m.message + 1;
-        if(m.message >= m.messages.length){
-          m.message = m.messages.length;
-        }
+                        if(do_cycles === true){
+                          setTimeout(m.animateFadeBuffer, 50);
+                        } else {
+                          setTimeout(m.cycleText, 5000);
+                        }
+                      };
 
-        m.current_length = 0;
-        m.fadeBuffer = false;
-        $(el).html('');
+                      m.cycleText = function(){
+                        m.message = m.message + 1;
+                        if(m.message >= m.messages.length){
+                          m.message = m.messages.length;
+                        }
 
-        setTimeout(m.animateIn, 200);
-      };
+                        m.current_length = 0;
+                        m.fadeBuffer = false;
+                        $(el).html('');
 
-      m.init();
-    }
+                        setTimeout(m.animateIn, 200);
+                      };
 
-    var messenger = new Messenger($('#messenger'));
+                      m.init();
+                    }
+
+                var messenger = new Messenger($('#messenger'));
+
+            });
 
 
 
-   $.notify({
-            icon: 'glyphicon glyphicon-warning-sign',
-            message: "We use cookies to support the user-friendliness of our pages. By closing this notice or continuing to explore our pages, you accept the use of cookies."
-        },
-        {
-            placement: {
-                from: "top",
-                align: "right"
-            },
-            type:'warning',
-            delay:15000
-        },
-        {
-            animate: {
-                enter: 'animated bounceInDown',
-                exit: 'animated bounceOutUp'
-            },
 
-        }
-        );
+
 	
 })( jQuery );
+
+
+
+
+
 
 
   

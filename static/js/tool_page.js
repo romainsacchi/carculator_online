@@ -1,8 +1,5 @@
 (function( $ ){
 
-
-
-
     //  Load the JSON File
     $.when($.ajax({
                 url: "/get_language",
@@ -14,16 +11,8 @@
                     },
                 error: function(xhr, status, error){console.log(error)}})
             ).done(function(json){
-                console.log(json);
                 i18n.translator.add(json);
             });
-
-
-
-
-
-
-
 
 /* ----------------------------------------------------------- */
 	/*  2. FIXED MENU
@@ -799,7 +788,7 @@ function size_list_update(){
     var str_unit = i18n('unit')
 
     var row_content = '<th><h3 style="color:white;">'+str_name+'</h3></th><th><h3 style="color:white;">'+str_pwt+'</h3></th>';
-    row_content += '<th><h3 style="color:white;">'+str_size+'</h3></th><th><h3 style="color:white;">'+str_size+'</h3></th>';
+    row_content += '<th><h3 style="color:white;">'+str_size+'</h3></th><th><h3 style="color:white;">'+str_unit+'</h3></th>';
      for (var item = 0; item < listYears.length; item++){
         row_content += '<th><h3 style="color:white;">'+listYears[item].innerHTML+'</h3></th>'
         };
@@ -1253,7 +1242,7 @@ function collect_configuration(){
     var str = i18n("missing_type")
         $.notify({
         icon: 'glyphicon glyphicon-warning-sign',
-        message: "It seems that the type of vehicle to analyze is missing."
+        message: str
         }
         ,
         {
@@ -1388,11 +1377,12 @@ function collect_configuration(){
     for (var item = 0; item < listYears.length; item++){
         list_year.push(listYears[item].innerHTML);
     };
-    var mix_val = []
+    var mix_val = [];
+    var is_missing = false;
     for (var year = 0; year < list_year.length; year++){
         var i = 0;
         var sum_mix = 0;
-        var is_missing = false;
+
         $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
             sum_mix += Number(this.value)/100
         })
@@ -1422,6 +1412,10 @@ function collect_configuration(){
             is_missing = true;
         };
 
+    }
+
+    if (is_missing == true){
+        return null;
     }
 
     // Retrieve all necessary data and gather it into a dictionary
@@ -1457,15 +1451,16 @@ function collect_configuration(){
     dic_inputs = {};
 
         $("#table_inputs tbody tr").each(function () {
-            var name = this.childNodes[0].innerHTML
-            var pt = this.childNodes[1].innerHTML
-            var size = this.childNodes[2].innerHTML
+            var name = this.childNodes[0].innerHTML;
+            var pt = this.childNodes[1].innerHTML;
+            var size = this.childNodes[2].innerHTML;
+            var unit = this.childNodes[3].innerHTML;
 
             vals=[]
             $(this).find(':input').each(function(){
                 vals.push(this.value)
             })
-            foreground_params[String([name, pt, size])] = vals;
+            foreground_params[String([name, pt, size, unit])] = vals;
         });
 
     // Retrieve driving cycle
@@ -1507,6 +1502,7 @@ function collect_configuration(){
 function get_results(){
     var data = collect_configuration();
     if (data == null){
+        console.log('data null');
         return;
     };
     var str = i18n('job_queued')
@@ -1591,6 +1587,36 @@ function set_mix_to_zero(){
 
 function save_configuration(){
     var data = collect_configuration();
+    if (data == null){return;}
+    var content = "What's up , hello world";
+    // any kind of extension (.txt,.cpp,.cs,.bat)
+    var filename = "carculator_configuration_file.txt";
+    var blob = new Blob([JSON.stringify(data)], {
+     type: "text/plain;charset=utf-8"
+    });
+    saveAs(blob, filename);
+
+    var str = i18n('share_config')
+    $.notify({
+        icon: '	glyphicon glyphicon-warning',
+        message: str
+        },
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'success'
+        },
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+
+        });
+
+
 };
 
 $("#InputParameters").on("keyup", function() {
@@ -1851,3 +1877,140 @@ function change_tutorial_video(type){
     };
 
 }
+
+var holder = document.getElementById('holder');
+holder.ondragover = function() {
+    this.className = 'hover';
+    return false;
+};
+holder.ondragend = function() {
+    this.className = '';
+    return false;
+};
+holder.ondrop = function(e) {
+    this.className = '';
+    e.preventDefault();
+
+    var file = e.dataTransfer.files[0],
+        reader = new FileReader();
+    reader.onload = function(event) {
+        var data = JSON.parse(reader.result);
+
+
+        // Display first section
+        $('#label_car').trigger('click');
+
+        $("#years_list").empty();
+        for (y in data['year']){
+            $("#years_list").append('<li>'+data['year'][y]+'</li>');
+        };
+
+        $("#powertrain_list").empty();
+        for (y in data['type']){
+            $("#powertrain_list").append('<li>'+data['type'][y]+'</li>');
+        };
+
+        $("#size_list").empty();
+        for (y in data['size']){
+            $("#size_list").append('<li>'+data['size'][y]+'</li>');
+        };
+
+        size_list_update()
+
+        // Driving cycle
+        $('#driving_cycle_selected').text(data['driving_cycle']);
+        generate_driving_cycle_graph(data['driving_cycle']);
+
+        // Country
+        var country = data['background params']['country']
+        document.getElementById("country-selected").innerHTML = country
+        var area = map.getObjectById(country);
+        area.showAsSelected = true;
+
+        // Car parameters
+        for (p in data['foreground params']){
+            var arr = p.split(',');
+            if (arr.length == 4){
+                var param = arr[0];
+                var pwt = arr[1];
+                var size = arr[2];
+                var unit = arr[3];
+                var tableRef = document.getElementById('table_inputs').getElementsByTagName('tbody')[0];
+                var newRow = tableRef.insertRow();
+                var row_content = '<td align="left" style="color:white">'+param+'</td><td align="left" style="color:white">'+pwt+'</td>'
+                row_content += '<td align="left" style="color:white">'+size+'</td><td align="left" style="color:white">'+unit+'</td>';
+
+                for (v in data['foreground params'][p]){
+                    var val = parseFloat(data['foreground params'][p][v]);
+                    if (unit=='0-1'){
+                            row_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" max="1" value="'+val+'"></td>'
+                       }
+                       else {
+                            row_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" value="'+val+'"></td>'
+                       };
+                };
+                newRow.innerHTML = row_content;
+                row_content='';
+                param_content='';
+            };
+        };
+
+        // Electricity mix(es)
+        var mix = data['background params']['custom electricity mix']
+        for (var year = 0; year < data['year'].length; year++){
+            var i = 0;
+            var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
+            $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
+                this.value = parseInt(Math.ceil(Number(mix[year][i]*100)))
+                i++
+            })
+        }
+
+        // Number of passengers
+        var num_pass = parseFloat(data['foreground params']['passenger-slider'])
+        slider_passenger.noUiSlider.updateOptions({
+            start: [num_pass]
+        });
+        // Mass of cargo
+        var mass_cargo = parseFloat(data['foreground params']['cargo-slider'])
+        slider_cargo.noUiSlider.updateOptions({
+            start: [mass_cargo]
+        });
+        // Vehicle lifetime
+        var lifetime = parseFloat(data['foreground params']['lifetime-slider'].replace(' ',''))
+        slider_lifetime.noUiSlider.updateOptions({
+            start: [lifetime]
+        });
+        // Annual km
+        var mileage = parseFloat(data['foreground params']['mileage-slider'].replace(' ',''))
+        slider_mileage.noUiSlider.updateOptions({
+            start: [mileage]
+        });
+
+        // Fuel pathways
+        // Petrol technology
+        var id = data['background params']['petrol technology']
+        $(":radio[value='"+id+"']").attr("checked", true);
+        // Diesel technology
+        var id = data['background params']['diesel technology']
+        $(":radio[value='"+id+"']").attr("checked", true);
+        // Gas technology
+        var id = data['background params']['cng technology']
+        $(":radio[value='"+id+"']").attr("checked", true);
+        // Hydrogen technology
+        var id = data['background params']['hydrogen technology']
+        $(":radio[value='"+id+"']").attr("checked", true);
+        // Energy storage
+        // Battery chemistry
+        var id = data['background params']['battery technology']
+        $(":radio[value='"+id+"']").attr("checked", true);
+        // Battery origin
+        var id = data['background params']['battery origin']
+        $(":radio[value='"+id+"']").attr("checked", true);
+    };
+
+    reader.readAsText(file);
+
+    return false;
+};
+

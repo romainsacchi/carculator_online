@@ -10,9 +10,9 @@ import csv
 import secrets
 import numpy as np
 import os
-#from rq import Queue
-#from rq.job import Job, NoSuchJobError
-#from worker import conn
+from rq import Queue
+from rq.job import Job, NoSuchJobError
+from worker import conn
 
 
 # Instantiate Flask app
@@ -23,7 +23,7 @@ app.config["SECRET_KEY"] = session_token
 app.config.from_pyfile('config.py')
 
 # Create a connection to the Redis server
-#q = Queue(connection=conn)
+q = Queue(connection=conn)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -309,20 +309,15 @@ def get_language():
 
     if lang == "en":
         json_url = os.path.join(app.root_path, "static/translation", "translation_en.json")
-
     if lang == "de":
         json_url = os.path.join(app.root_path, "static/translation", "translation_de.json")
-
     if lang == "fr":
         json_url = os.path.join(app.root_path, "static/translation", "translation_fr.json")
-
     if lang == "it":
         json_url = os.path.join(app.root_path, "static/translation", "translation_it.json")
 
     with open(json_url, encoding='utf-8') as fh:
         data = json.load(fh)
-
-    print(data)
     return make_response(data, 200)
 
 

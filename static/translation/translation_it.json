@@ -1,0 +1,31 @@
+{
+  "values":{
+    "name":"Nome",
+    "powertrain":"Powertrain",
+      "size":"Dimensione",
+      "unit":"Unità",
+      "brand":"Marca",
+      "model":"Modello",
+      "trim":"Versione",
+      "curb_mass":"Massa in ordine di marcia",
+      "only_one_country":"Attualmente è possibile selezionare solo un paese.",
+      "category_not_available":"Spiacenti, questa categoria di veicoli non è ancora disponibile.",
+      "select_time_horizon":"Un orizzonte temporale deve essere selezionato per primo.",
+      "all_params_set":"Hai impostato tutti i parametri richiesti. Quando è pronto, premi il pulsante Calcolare.",
+      "missing_type": "Sembra che manchi il tipo di veicolo da analizzare.",
+      "missing_year": "Sembra che manchi l'anno per cui condurre l'analisi.",
+      "missing_powertrain":"Sembra che manchi il tipo di propulsore per cui condurre l'analisi.",
+      "missing_size":"Sembra che manchi la classe di dimensioni per cui condurre l'analisi.",
+      "missing_country":"Sembra che manchi il paese per cui condurre l'analisi.",
+      "mix_1":"Sembra che l'elettricità si mescoli per",
+      "mix_2":"non è uguale al 100 percento.",
+      "job_queued":"Il tuo lavoro è stato messo in coda. I risultati verranno visualizzati in una nuova scheda quando pronti. Questo può richiedere fino a un minuto. Non chiudere questa scheda.",
+      "job_lost":"Sembra che il tuo lavoro sia andato perso. Ti consigliamo di ricominciare il calcolo.",
+      "cookie_disclaimer": "Utilizziamo i cookie per supportare la facilità d'uso delle nostre pagine. Chiudendo questo avviso o continuando a esplorare le nostre pagine, accetti l'uso dei cookie.",
+      "welcome_message_0": "Le auto elettriche sono davvero migliori delle auto diesel?",
+      "welcome_message_1": "È tempo di considerare l'idrogeno?",
+      "welcome_message_2": "Le auto a benzina miglioreranno molto in futuro?",
+      "welcome_message_3": "Scoprilo ora con carculator.",
+      "share_config": "Il download del file di configurazione inizierà a breve. Puoi trascinarlo e rilasciarlo alla tua prossima visita sull'area a destra."
+  }
+}

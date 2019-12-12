@@ -20,7 +20,12 @@
       "mix_1":"It seems that the electricity mix for ",
       "mix_2":" is not equal to 100 percent.",
       "job_queued":"Your job has been queued. Results will be displayed in a new tab whenever ready. This may take up to one minute. Do not close this tab.",
-      "job_lost":"It seems your job has been lost. We suggest you start the calculation again."
-      
+      "job_lost":"It seems your job has been lost. We suggest you start the calculation again.",
+      "cookie_disclaimer": "We use cookies to support the user-friendliness of our pages. By closing this notice or continuing to explore our pages, you accept the use of cookies.",
+      "welcome_message_0": "Are electric cars really better than diesel cars in terms of CO2 emissions?",
+      "welcome_message_1": "Is it time to consider hydrogen-powered vehicles?",
+      "welcome_message_2": "Will petrol cars improve their emissions and energy efficiency in the future?",
+      "welcome_message_3": "Find it out now with carculator.",
+      "share_config": "The configuration file download will start shortly. You may drag and drop it at your next visit onto the area on the right."
   }
 }
