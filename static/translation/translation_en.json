@@ -26,6 +26,8 @@
       "welcome_message_1": "Is it time to consider hydrogen-powered vehicles?",
       "welcome_message_2": "Will petrol cars improve their emissions and energy efficiency in the future?",
       "welcome_message_3": "Find it out now with carculator.",
-      "share_config": "The configuration file download will start shortly. You may drag and drop it at your next visit onto the area on the right."
+      "share_config": "The configuration file download will start shortly. You may drag and drop it at your next visit onto the area on the right.",
+      "inventory_download": "The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff.",
+      "save_results": "Your results are saved for one month. To share them, simply copy the url of this page."
   }
 }

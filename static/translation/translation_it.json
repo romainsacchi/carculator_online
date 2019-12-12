@@ -26,6 +26,8 @@
       "welcome_message_1": "È tempo di considerare l'idrogeno?",
       "welcome_message_2": "Le auto a benzina miglioreranno molto in futuro?",
       "welcome_message_3": "Scoprilo ora con carculator.",
-      "share_config": "Il download del file di configurazione inizierà a breve. Puoi trascinarlo e rilasciarlo alla tua prossima visita sull'area a destra."
+      "share_config": "Il download del file di configurazione inizierà a breve. Puoi trascinarlo e rilasciarlo alla tua prossima visita sull'area a destra.",
+      "inventory_download": "Il download del file di inventario inizierà a breve. Richiede il cutoff di ecoinvent v.3.6.",
+      "save_results": "I risultati vengono salvati per un mese. Per condividerli, copia semplicemente l'URL di questa pagina."
   }
 }

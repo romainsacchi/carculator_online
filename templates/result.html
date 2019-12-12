@@ -241,6 +241,7 @@
 		  crossorigin="anonymous"></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
+		<script type="text/javascript" src="static/js/i18n.js"></script>
 
 		<script>
 
@@ -308,11 +309,26 @@
                                     title: {text: "Ownership cost over life cycle, per vehicle-kilometer"}}},
       });
 
+//  Load the JSON File
+    $.when($.ajax({
+                url: "/get_language",
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+                i18n.translator.add(json);
+            });
+
 
  function share_results(){
+ 	var str = i18n('save_results')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
-        message: "Your results are saved for one month. To share them, simply copy the url of this page."
+        message: str
     },
     {
         placement: {
@@ -333,9 +349,10 @@
  };
 
  function export_bw2_inventories(){
+ 	var str = i18n('inventory_download')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
-        message: {{_('The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff.')}}
+        message: str
     },
     {
         placement: {
@@ -356,9 +373,10 @@
  };
 
  function export_simapro_inventories(){
+ 	var str = i18n('inventory_download')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
-        message: {{_('The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff.')}}
+        message: str
     },
     {
         placement: {
