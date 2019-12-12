@@ -31,7 +31,7 @@ secure = ()
 mail_handler = SMTPHandler(
     mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
     fromaddr='no-reply@' + app.config['ADMINS'],
-    toaddrs=app.config['ADMINS'], subject='Error on carculator_online',
+    toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
     credentials=auth, secure=secure)
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
@@ -156,7 +156,7 @@ def send_email():
 
     msg = Message(subject="",
                   sender=app.config['ADMINS'],
-                  recipients=[app.config['ADMINS']],  # replace with your email for testing
+                  recipients=[app.config['RECIPIENT']],  # replace with your email for testing
                   body=message + " email: {}, name: {}".format(email, name))
     mail.send(msg)
     return _("Email sent!")
