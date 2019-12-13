@@ -288,7 +288,8 @@ def get_locale():
         language = None
     if language is not None:
         return language
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
+    return session['language']
 
 @app.context_processor
 def inject_conf_var():
