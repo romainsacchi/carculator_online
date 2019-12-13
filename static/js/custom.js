@@ -18,42 +18,6 @@
 
 (function( $ ){
 
-    //  Load the JSON File
-    $.when($.ajax({
-                url: "/get_language",
-                dataType: 'json',
-                type: 'GET',
-                success : function(data) {
-                   var json = data
-                    return json
-                    },
-                error: function(xhr, status, error){console.log(error)}})
-            ).done(function(json){
-            console.log(json)
-                i18n.translator.add(json);
-                var str = i18n('cookie_disclaimer')
-    $.notify({
-            icon: 'glyphicon glyphicon-warning-sign',
-            message: str
-        },
-        {
-            placement: {
-                from: "top",
-                align: "right"
-            },
-            type:'warning',
-            delay:15000
-        },
-        {
-            animate: {
-                enter: 'animated bounceInDown',
-                exit: 'animated bounceOutUp'
-            },
-
-        }
-        );
-            });
-
 
 	/* ----------------------------------------------------------- */
 	/*  2. FIXED MENU
@@ -153,6 +117,29 @@
                 error: function(xhr, status, error){console.log(error)}})
             ).done(function(json){
                 i18n.translator.add(json);
+
+                var str = i18n('cookie_disclaimer')
+            $.notify({
+                icon: 'glyphicon glyphicon-warning-sign',
+                message: str
+            },
+            {
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                type:'warning',
+                delay:15000
+            },
+            {
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                },
+
+            }
+            );
+
 
                 var Messenger = function(el){
                       'use strict';
