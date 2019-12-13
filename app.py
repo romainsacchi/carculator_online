@@ -17,7 +17,8 @@ from worker import conn
 
 # Instantiate Flask app
 app = Flask(__name__)
-session_token = secrets.token_urlsafe(16)
+#session_token = secrets.token_urlsafe(16)
+session_token = "123456798"
 app.config["SECRET_KEY"] = session_token
 # Attach configuration file located in "/instance"
 app.config.from_pyfile('config.py')
