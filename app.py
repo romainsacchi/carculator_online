@@ -43,6 +43,8 @@ mail = Mail(app)
 # Setup flask-babel
 babel = Babel(app)
 
+session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 
 def load_map_file():
