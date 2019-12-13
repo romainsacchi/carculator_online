@@ -307,6 +307,8 @@ def set_language(language=None):
 def get_language():
     lang = get_locale()
 
+    print(lang)
+
     if lang == "en":
         json_url = os.path.join(app.root_path, "static/translation", "translation_en.json")
     if lang == "de":
