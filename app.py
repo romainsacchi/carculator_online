@@ -300,6 +300,7 @@ def inject_conf_var():
 @app.route('/language/<language>')
 def set_language(language=None):
     session['language'] = language
+    print(session)
     return redirect(url_for('index'))
 
 @app.route('/get_language')
