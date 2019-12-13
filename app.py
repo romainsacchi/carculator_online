@@ -306,7 +306,7 @@ def set_language(language=None):
 @app.route('/get_language')
 def get_language():
     print(session)
-    lang = session.get('language', request.accept_languages.best_match(app.config['LANGUAGES']))
+    lang = get_locale()
 
     print(lang)
 
