@@ -305,17 +305,17 @@ def set_language(language=None):
 
 @app.route('/get_language')
 def get_language():
-    lang = get_locale()
+    lang = session.get('language', request.accept_languages.best_match(app.config['LANGUAGES']))
 
     print(lang)
 
-    if session['language'] == "en":
+    if lang == "en":
         json_url = os.path.join(app.root_path, "static/translation", "translation_en.json")
-    if session['language'] == "de":
+    if lang == "de":
         json_url = os.path.join(app.root_path, "static/translation", "translation_de.json")
-    if session['language'] == "fr":
+    if lang == "fr":
         json_url = os.path.join(app.root_path, "static/translation", "translation_fr.json")
-    if session['language'] == "it":
+    if lang == "it":
         json_url = os.path.join(app.root_path, "static/translation", "translation_it.json")
 
     with open(json_url, encoding='utf-8') as fh:
