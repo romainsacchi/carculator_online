@@ -309,13 +309,13 @@ def get_language():
 
     print(lang)
 
-    if lang == "en":
+    if session['language'] == "en":
         json_url = os.path.join(app.root_path, "static/translation", "translation_en.json")
-    if lang == "de":
+    if session['language'] == "de":
         json_url = os.path.join(app.root_path, "static/translation", "translation_de.json")
-    if lang == "fr":
+    if session['language'] == "fr":
         json_url = os.path.join(app.root_path, "static/translation", "translation_fr.json")
-    if lang == "it":
+    if session['language'] == "it":
         json_url = os.path.join(app.root_path, "static/translation", "translation_it.json")
 
     with open(json_url, encoding='utf-8') as fh:
