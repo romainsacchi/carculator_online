@@ -1576,7 +1576,65 @@ function get_results(){
 
                     })
          }, 3000);
+
+        const interval = setInterval(function() {
+            $.ajax('/check_status/'+job_id).then(function (status) {
+                return status;
+                }).then(function (status) {
+                    if (status['job status'] == 'finished'){
+                        var redirectWindow = window.open('/display_result/'+job_id, '_blank');
+                        redirectWindow.location;
+                        clearInterval(interval);
+                        return;
+                    }
+                    if (status['job status'] == 'job not found'){
+                    var str = i18n('job_lost')
+                        $.notify({
+                            icon: '	glyphicon glyphicon-warning',
+                            message: str
+                            },
+                            {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type:'danger'
+                            },
+                            {
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                },
+
+                            });
+
+                        return;
+                    }
+
+                    })
+         }, 3000);
     });
+
+    var str = i18n('popup_blocker')
+    $.notify({
+        icon: '	glyphicon glyphicon-time',
+        message: str
+        }
+        ,
+        {
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            type:'warning'
+        },
+        {
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+
+        });
 };
 
 function set_mix_to_zero(){
