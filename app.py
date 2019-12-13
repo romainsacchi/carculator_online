@@ -43,10 +43,6 @@ mail = Mail(app)
 # Setup flask-babel
 babel = Babel(app)
 
-session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-
 def load_map_file():
     with open('data/car_to_class_map.csv', 'r', encoding='ISO-8859-1') as f:
         data = [tuple(line) for line in csv.reader(f, delimiter=';')]
