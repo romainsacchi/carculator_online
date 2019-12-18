@@ -36,23 +36,23 @@ msgstr ""
 
 #: templates/index.html:74
 msgid "Facts"
-msgstr ""
+msgstr "I fatti"
 
 #: templates/index.html:75
 msgid "Team"
-msgstr ""
+msgstr "Squadra"
 
 #: templates/index.html:76
-msgid "Partners"
+msgid "Partner"
 msgstr ""
 
 #: templates/index.html:77
 msgid "Publications"
-msgstr ""
+msgstr "Pubblicazioni"
 
 #: templates/index.html:78
 msgid "Contact us"
-msgstr ""
+msgstr "Contattaci"
 
 #: templates/index.html:139
 msgid "Online"
@@ -194,7 +194,7 @@ msgstr "Il team che si è occupato dello sviluppo del"
 
 #: templates/index.html:424
 msgid "sits at the Paul Scherrer Institute, in the "
-msgstr ""
+msgstr "siede al Paul Scherrer Institute, nel "
 
 #: templates/index.html:449
 msgid "Pilot"
@@ -206,15 +206,15 @@ msgstr "Manager del pit-stop"
 
 #: templates/index.html:492
 msgid "Car designer (now at INFRAS)"
-msgstr ""
+msgstr "Designer automobilistico (INFRAS)"
 
 #: templates/index.html:518
 msgid "Engine specialist"
-msgstr ""
+msgstr "Specialista di motori"
 
 #: templates/index.html:542
 msgid "Chief Aerodynamicist"
-msgstr ""
+msgstr "Capo aerodinamico"
 
 #: templates/index.html:563
 msgid "Mechanic"
@@ -274,7 +274,7 @@ msgstr "Domande su carculator"
 
 #: templates/index.html:822
 msgid "Write to us if you have any questions about the tool, methods or results."
-msgstr ""
+msgstr "Scrivici se hai domande sullo strumento, sui metodi o sui risultati."
 
 #: templates/index.html:870 templates/result.html:222 templates/tool.html:1104
 msgid "Copyright"
@@ -290,57 +290,57 @@ msgstr "Tutti i diritti sono riservati"
 
 #: templates/result.html:8
 msgid "Carculator : Results"
-msgstr ""
+msgstr "Carculator: risultati"
 
 #: templates/result.html:79
 msgid "Export Brightway2-compatible inventories"
-msgstr ""
+msgstr "Esporta inventari compatibili con Brightway2"
 
 #: templates/result.html:81
 msgid "Export Simapro-compatible inventories"
-msgstr ""
+msgstr "Esporta inventari compatibili con Simapro"
 
 #: templates/result.html:83
 msgid "Share results"
-msgstr ""
+msgstr "Condividi i risultati"
 
 #: templates/result.html:101
 msgid "REFERENCE"
-msgstr ""
+msgstr "RIFERIMENTO"
 
 #: templates/result.html:105
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
-msgstr ""
+msgstr "Qualsiasi utilizzo dei risultati o degli inventari in qualsiasi forma deve essere indicato come segue: "
 
 #: templates/result.html:119
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
-msgstr ""
+msgstr "VALUTAZIONE DELL'IMPATTO SUL CICLO DI VITA"
 
 #: templates/result.html:136
 msgid "LIFE CYCLE COST ASSESSMENT"
-msgstr ""
+msgstr "VALUTAZIONE DEI COSTI DEL CICLO DI VITA"
 
 #: templates/result.html:153
 msgid "OTHER INDICATORS"
-msgstr ""
+msgstr "ALTRI INDICATORI"
 
 #: templates/result.html:160
 msgid "Energy consumption along driving cycle"
-msgstr ""
+msgstr "Consumo di energia lungo il ciclo di guida"
 
 #: templates/result.html:161
 msgid "Pollutants emissions along driving cycle"
-msgstr ""
+msgstr "Emissioni di inquinanti lungo il ciclo di guida"
 
 #: templates/result.html:185
 msgid "Noise emissions along driving cycle"
-msgstr ""
+msgstr "Emissioni di rumore lungo il ciclo di guida"
 
 #: templates/result.html:186
 msgid "GHG emissions vs. ownership costs"
-msgstr ""
+msgstr "Emissioni di GHG rispetto ai costi di utilizzo"
 
 #: templates/result.html:338 templates/result.html:361
 msgid ""
@@ -362,7 +362,7 @@ msgstr "Condividi la configurazione"
 
 #: templates/tool.html:83
 msgid "Drop configuration file"
-msgstr ""
+msgstr "Rilascia il file di configurazione"
 
 #: templates/tool.html:105
 msgid "SCOPE"
@@ -433,15 +433,15 @@ msgstr "Selezione"
 
 #: templates/tool.html:203
 msgid "Drag and drop the years for which to perform the analysis."
-msgstr ""
+msgstr "Trasferisci gli anni per i quali eseguire l'analisi."
 
 #: templates/tool.html:238
 msgid "Drag and drop the powertrain types for which to perform the analysis."
-msgstr ""
+msgstr "Trasferire i tipi di propulsori per i quali eseguire l'analisi."
 
 #: templates/tool.html:274
 msgid "Drag and drop the size categories for which to perform the analysis."
-msgstr ""
+msgstr "Trasferisci le categorie di dimensioni per le quali eseguire l'analisi."
 
 #: templates/tool.html:283
 msgid "What is what?"
@@ -458,27 +458,31 @@ msgstr ""
 
 #: templates/tool.html:287
 msgid "Search for car models"
-msgstr ""
+msgstr "Cerca modelli di auto"
 
 #: templates/tool.html:326
 msgid "CAR PARAMETERS"
-msgstr ""
+msgstr "PARAMETRI DEI VEICOLI"
 
 #: templates/tool.html:333
 msgid "Each car is defined by up to 200 input parameters."
-msgstr ""
+msgstr "Ogni auto è definita da un massimo di 200 parametri di input."
 
 #: templates/tool.html:334
 msgid ""
 "The default values for these parameters are so-called \"most likely\" "
 "values, calibrated against a large number of car manufacturers data."
 msgstr ""
+"I valori predefiniti per questi parametri sono i cosiddetti valori più probabili, "
+"calibrati su un gran numero di dati delle case automobilistiche."
+
 
 #: templates/tool.html:335
 msgid ""
 "You are however welcome to override the default value for any of these "
 "parameters if you have a specific case in mind"
 msgstr ""
+"È comunque possibile sostituire il valore predefinito per uno di questi parametri se si ha in mente un caso specifico."
 
 #: templates/tool.html:336
 msgid ""
@@ -486,6 +490,8 @@ msgid ""
 "add it by using the \"Add\" button in the right column of the search "
 "results table."
 msgstr ""
+"La barra di ricerca in basso ti consente di farlo. "
+"Cerca un parametro e aggiungilo utilizzando il pulsante "Aggiungi" nella colonna di destra della tabella dei risultati della ricerca."
 
 #: templates/tool.html:337
 msgid ""
@@ -493,42 +499,45 @@ msgid ""
 "environmental impacts is indicated in the left column of the search "
 "results table."
 msgstr ""
+"L'importanza o la sensibilità di un determinato parametro rispetto agli impatti ambientali è indicata nella colonna di "
+"sinistra della tabella dei risultati della ricerca."
+
 
 #: templates/tool.html:338
 msgid ""
 "That is, a parameter with a high sensitivity is a parameter for which a "
 "change in its value of "
-msgstr ""
+msgstr "Cioè, un parametro con un'alta sensibilità è un parametro per il quale un cambiamento nel suo valore di "
 
 #: templates/tool.html:338
 msgid "leads to a change in environmental impacts by 0.5 to"
-msgstr ""
+msgstr "porta a un cambiamento negli impatti ambientali di 0,5 a"
 
 #: templates/tool.html:338
 msgid ""
 "against\n"
 "\t\t\t\t\t\t\t\t\t\t0.3 to"
-msgstr ""
+msgstr "contro 0,3 a"
 
 #: templates/tool.html:339
 msgid "for a parameter with medium sensitivity, and 0 to"
-msgstr ""
+msgstr "per un parametro con sensibilità media e da 0 a"
 
 #: templates/tool.html:339
 msgid "for a parameter with low sensitivity."
-msgstr ""
+msgstr "per un parametro con bassa sensibilità."
 
 #: templates/tool.html:343
 msgid "See full parameters list"
-msgstr ""
+msgstr "Vedi l'elenco completo dei parametri"
 
 #: templates/tool.html:349
 msgid "Frequently asked questions (click to see an answer)"
-msgstr ""
+msgstr "Domande frequenti (clicca per vedere una risposta)"
 
 #: templates/tool.html:351
 msgid "How to change the mass of the battery of an electric vehicle?"
-msgstr ""
+msgstr "Come modificare la capacità della batteria di un veicolo elettrico?"
 
 #: templates/tool.html:352
 msgid "How to change the capacity of the battery of an electric vehicle?"
@@ -536,27 +545,27 @@ msgstr ""
 
 #: templates/tool.html:353
 msgid "How to change the efficiency of the engine?"
-msgstr ""
+msgstr "Come modificare l'efficienza del motore?"
 
 #: templates/tool.html:354
 msgid "How to change the weight of the passengers?"
-msgstr ""
+msgstr "Come modificare il peso dei passeggeri?"
 
 #: templates/tool.html:355
 msgid "How to change hybridization level of future diesel vehicles?"
-msgstr ""
+msgstr "Come modificare il livello di ibridazione dei futuri veicoli diesel?"
 
 #: templates/tool.html:356
 msgid "How to change the lifetime of a battery?"
-msgstr ""
+msgstr "Come cambiare la durata di una batteria?"
 
 #: templates/tool.html:357
 msgid "How to change the efficiency of a fuel cell stack?"
-msgstr ""
+msgstr "Come modificare l'efficienza di una pila di celle a combustibile?"
 
 #: templates/tool.html:362
 msgid "Change the mass of the battery on a electric vehicle"
-msgstr ""
+msgstr "Cambia la massa della batteria su un veicolo elettrico"
 
 #: templates/tool.html:363
 msgid ""
@@ -574,50 +583,55 @@ msgid ""
 " the vehicle and the energy required\n"
 "\t\t\t\t\t\t\t\t\t\tto move it over 1 km."
 msgstr ""
+"La massa della batteria di un veicolo elettrico può essere modificata modificando il valore del parametro di massa "
+"della batteria di energia. La massa della batteria viene ulteriormente suddivisa in massa dei componenti di Balance Of "
+"Plant (BoP) e massa delle celle della batteria. Quindi, aumentando la massa della batteria aumenterà anche la massa "
+"delle celle della batteria e, infine, la capacità energetica della batteria. Tuttavia, aumentando la massa della batteria "
+"aumenterà anche la massa motrice del veicolo e l'energia necessaria per spostarla su 1 km."
 
 #: templates/tool.html:372
 msgid "Consider the following relations:"
-msgstr ""
+msgstr "Considera le seguenti relazioni:"
 
 #: templates/tool.html:378
 msgid "but also:"
-msgstr ""
+msgstr "ma anche:"
 
 #: templates/tool.html:406
 msgid "Add any parameter you would like to modify."
-msgstr ""
+msgstr "Aggiungi qualsiasi parametro che desideri modificare."
 
 #: templates/tool.html:418
 msgid "Importance"
-msgstr ""
+msgstr "Importanza"
 
 #: templates/tool.html:419
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: templates/tool.html:420
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: templates/tool.html:421
 msgid "Unit"
-msgstr ""
+msgstr "Unità"
 
 #: templates/tool.html:422
 msgid "Source"
-msgstr ""
+msgstr "Riferimento"
 
 #: templates/tool.html:423
 msgid "Applies to powertrain"
-msgstr ""
+msgstr "Si applica al gruppo propulsore"
 
 #: templates/tool.html:424
 msgid "Applies to size"
-msgstr ""
+msgstr "Si applica alle dimensioni"
 
 #: templates/tool.html:425
 msgid "Add?"
-msgstr ""
+msgstr "Aggiungi?"
 
 #: templates/tool.html:449
 msgid "USE"
@@ -628,6 +642,7 @@ msgid ""
 "This section defines parameters concerned with the use phase of the "
 "vehicles."
 msgstr ""
+"Questa sezione definisce i parametri relativi alla fase di utilizzo dei veicoli."
 
 #: templates/tool.html:454
 msgid ""
@@ -640,20 +655,26 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tProjected electricity mixes for are based on Business-"
 "as-usual scenarios from energy models."
 msgstr ""
+"Il modello deve conoscere il ciclo di guida dei veicoli (ovvero il livello di velocità al secondo della guida, "
+"per ricavare i bisogni di accelerazione e frenata) nonché alcune altre cose, come il numero di passeggeri, "
+"il paese in cui si trovano i veicoli sono gestiti in, ecc. Le miscele di elettricità previste sono basate su "
+"scenari normali come da modelli energetici."
 
 #: templates/tool.html:458
 msgid " For European country, the projections originate the"
-msgstr ""
+msgstr " Per i paesi europei, le proiezioni originano il"
 
 #: templates/tool.html:459
 msgid ""
 "from the European Commission. For African countries, projections "
 "originate the model"
 msgstr ""
+"dalla Commissione europea. "
+"Per i paesi africani, proiezioni origina il modello"
 
 #: templates/tool.html:461
 msgid "For other countries, projections are based on the IEA report"
-msgstr ""
+msgstr "Per altri paesi, le proiezioni si basano sul rapporto dell'AIE"
 
 #: templates/tool.html:466
 msgid "Driving cycle"
@@ -730,6 +751,8 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
 "passenger mass, the cargo mass and the curb mass of the vehicle."
 msgstr ""
+"Ogni passeggero ha una massa corporea di 75 chilogrammi. Il numero medio di passeggeri per auto in Europa è 1,5. "
+"La massa motrice totale è la somma della massa totale del passeggero, la massa del carico e la massa del marciapiede del veicolo."
 
 #: templates/tool.html:500
 msgid "Lifetime"
@@ -763,6 +786,8 @@ msgid ""
 "selected for the selected country.\n"
 "\t\t\t\t\t\t\t\t\tYou may modify them."
 msgstr ""
+"I modelli di proiezione suggeriscono le seguenti miscele di elettricità per gli anni selezionati per il paese selezionato. "
+"Puoi modificarli."
 
 #: templates/tool.html:546
 msgid "Hydro"
@@ -806,7 +831,7 @@ msgstr "Rifiuti"
 
 #: templates/tool.html:572
 msgid "Set to zero"
-msgstr ""
+msgstr "Impostare su zero"
 
 #: templates/tool.html:578
 msgid "Adjust the number of passengers"
@@ -826,7 +851,7 @@ msgstr "Aggiusta il chilometraggio annuale"
 
 #: templates/tool.html:628
 msgid "ENERGY STORAGE AND FUEL PATHWAYS"
-msgstr ""
+msgstr "STOCCAGGIO ENERGETICO E TIPI DI COMBUSTIBILE"
 
 #: templates/tool.html:633
 msgid ""
@@ -838,6 +863,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural gas, but also "
 "alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
 msgstr ""
+"I carburanti alternativi qui presentati sono i cosiddetti carburanti di 'seconda generazione',"
+" poiché sono prodotti a partire da materiale residuo di origine vegetale. "
+"Ciò significa che non competono con la produzione di colture ai fini dell'approvvigionamento alimentare."
 
 #: templates/tool.html:636
 msgid ""
@@ -856,6 +884,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
 "methane to produce hydrogen (and carbon monoxide)."
 msgstr ""
+"Inoltre, vengono presentati diversi percorsi per la fornitura di idrogeno da utilizzare nelle automobili a celle a combustibile. "
+"L'idrogeno può essere prodotto mediante elettrolisi, che  è un processo che richiede elettricità o tramite un processo chiamato "
+"Riforma del metano a vapore che utilizza vapore e metano per produrre idrogeno."
 
 #: templates/tool.html:642
 msgid ""
@@ -865,24 +896,27 @@ msgid ""
 "origin of battery manufacture will determine the electricity mix used to "
 "produce the battery cells."
 msgstr ""
+"Per quanto riguarda le tecnologie di accumulo dell'energia per veicoli elettrici a batteria, il "
+"l'utente può scegliere tra diversi tipi di chimica a base di ioni di litio ma anche tra diverse origini di fabbricazione. "
+"Il l'origine della fabbricazione della batteria determinerà il mix di elettricità utilizzato per produrre le celle della batteria."
 
 #: templates/tool.html:657
 msgid "FUEL PATHWAYS"
-msgstr ""
+msgstr "TIPO DI CARBURANTE"
 
 #: templates/tool.html:669
 msgid "Petrol"
-msgstr ""
+msgstr "Benzina"
 
 #: templates/tool.html:671
 msgid "Source for conventional petrol inventory: ecoinvent 3.6"
-msgstr ""
+msgstr "Riferimento per l'inventario di benzina convenzionale: ecoinvent 3.6"
 
 #: templates/tool.html:672
 msgid ""
 "Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul "
 "Scherrer Institut"
-msgstr ""
+msgstr "Riferimento per l'inventario del bioetanolo: Francesco Cozzolino, 2018, Paul Scherrer Institut"
 
 #: templates/tool.html:677
 msgid "Diesel"
@@ -890,21 +924,21 @@ msgstr ""
 
 #: templates/tool.html:679
 msgid "Source for conventional diesel inventory: ecoinvent 3.6"
-msgstr ""
+msgstr "Riferimento per l'inventario del diesel convenzionale: ecoinvent 3.6"
 
 #: templates/tool.html:680
 msgid ""
 "Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer"
 " Institut"
-msgstr ""
+msgstr "Riferimento per l'inventario del biodiesel: Francesco Cozzolino, 2018, Paul Scherrer Institut"
 
 #: templates/tool.html:683
 msgid "Natural gas"
-msgstr ""
+msgstr "Gas naturale"
 
 #: templates/tool.html:685
 msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
-msgstr ""
+msgstr "Riferimento per l'inventario del gas naturale compresso: ecoinvent 3.6"
 
 #: templates/tool.html:686
 msgid ""
