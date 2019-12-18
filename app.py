@@ -298,6 +298,7 @@ def inject_conf_var():
                 AVAILABLE_LANGUAGES=app.config['LANGUAGES'],
                 CURRENT_LANGUAGE=session.get('language',request.accept_languages.best_match(app.config['LANGUAGES'].keys())))
 
+
 @app.route('/language/<language>')
 def set_language(language=None):
     session['language'] = language
