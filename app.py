@@ -138,7 +138,7 @@ def get_param_value(name, pt, s, y):
 def get_driving_cycle(driving_cycle):
     """ Return a driving cycle"""
     dc = get_standard_driving_cycle(driving_cycle)
-    return jsonify(dc.to_dict())
+    return jsonify(dc.tolist())
 
 if __name__ == '__main__':
     app.run(debug=True)
