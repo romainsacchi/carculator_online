@@ -385,6 +385,9 @@ msgid ""
 "its powertrain type or size class, you may look it up in the search field"
 " below."
 msgstr ""
+"Seleziona gli anni, i tipi di propulsori e le classi di dimensioni di cui desideri condurre una valutazione. "
+"Puoi farlo trascinando gli elementi con il mouse dal riquadro sinistro al riquadro destro. "
+"Se hai in mente un modello di auto ma non conosci il tipo di propulsione o la classe di dimensioni, puoi cercarlo nel campo di ricerca in basso."
 
 #: templates/tool.html:150
 msgid "Year"
@@ -541,7 +544,7 @@ msgstr "Come modificare la capacità della batteria di un veicolo elettrico?"
 
 #: templates/tool.html:352
 msgid "How to change the capacity of the battery of an electric vehicle?"
-msgstr ""
+msgstr "Come modificare la capacità della batteria di un veicolo elettrico?"
 
 #: templates/tool.html:353
 msgid "How to change the efficiency of the engine?"
