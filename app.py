@@ -13,7 +13,8 @@ import os
 from rq import Queue
 from rq.job import Job, NoSuchJobError
 from worker import conn
-
+from s3 import list_files, download_file, upload_file
+import xlsxwriter
 
 # Instantiate Flask app
 app = Flask(__name__)
@@ -43,6 +44,9 @@ mail = Mail(app)
 
 # Setup flask-babel
 babel = Babel(app)
+
+# S3 bucket
+BUCKET = "carculator-bucket"
 
 def load_map_file():
     with open('data/car_to_class_map.csv', 'r', encoding='ISO-8859-1') as f:
@@ -192,10 +196,13 @@ def process_results(d):
     global ic
     ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     results = ic.calculate_impacts()
-    global fp
-    fp = ic.export_lci_to_excel(directory="/app/tmp/")
 
-    print("fp: ", fp)
+    lci = ic.export_lci()
+    excel_lci = write_lci_to_excel(lci, "test")
+
+    s3 = boto3.resource('s3')
+    s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci)
+
     data = results.values
     impact = results.coords['impact'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
@@ -331,13 +338,109 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
-    #global fp
-    #print("fp: ",fp)
-    #response = jsonify({"filepath": fp})
-    #return make_response(response, 200)
-    return send_file("/app/tmp/lci-test.xlsx")
+    output = download()
+    return send_file(output, as_attachment=True)
 
 @app.route("/get_param_table")
 def get_param_table():
     params = load_params_file()
     return render_template('param_table.html', params=params)
+
+def upload(filename):
+    upload_file(f"app/tmp/{filename}", BUCKET)
+
+def download(filename):
+    output = download_file(filename, BUCKET)
+
+def write_lci_to_excel(lci, name):
+    """
+    Export an Excel file that can be consumed by Brightway2.
+
+    :returns: returns the file path of the exported inventory.
+    :rtype: str.
+    """
+
+    list_act = lci
+    data = []
+
+    data.extend((["Database", 'test'], ("format", "Excel spreadsheet")))
+    data.append([])
+
+    for k in list_act:
+        if k.get("exchanges"):
+            data.extend(
+                (
+                    ["Activity", k["name"]],
+                    ("location", k["location"]),
+                    ("production amount", float(k["production amount"])),
+                    ("reference product", k.get("reference product")),
+                    ("type", "process"),
+                    ("unit", k["unit"]),
+                    ("worksheet name", "None"),
+                    ["Exchanges"],
+                    [
+                        "name",
+                        "amount",
+                        "database",
+                        "location",
+                        "unit",
+                        "categories",
+                        "type",
+                        "reference product",
+                    ],
+                )
+            )
+
+            for e in k["exchanges"]:
+                data.append(
+                    [
+                        e["name"],
+                        float(e["amount"]),
+                        e["database"],
+                        e.get("location", "None"),
+                        e["unit"],
+                        "::".join(e.get("categories", ())),
+                        e["type"],
+                        e.get("reference product"),
+                    ]
+                )
+        else:
+            data.extend(
+                (
+                    ["Activity", k["name"]],
+                    ("type", "biosphere"),
+                    ("unit", k["unit"]),
+                    ("worksheet name", "None"),
+                )
+            )
+        data.append([])
+
+    filepath = "lci-" + name + ".xlsx"
+
+    workbook = xlsxwriter.Workbook(filepath)
+    bold = workbook.add_format({"bold": True})
+    bold.set_font_size(12)
+    highlighted = {
+        "Activity",
+        "Database",
+        "Exchanges",
+        "Parameters",
+        "Database parameters",
+        "Project parameters",
+    }
+    frmt = lambda x: bold if row[0] in highlighted else None
+
+    sheet = "Inventory"
+
+    for row_index, row in enumerate(data):
+        for col_index, value in enumerate(row):
+            if value is None:
+                continue
+            elif isinstance(value, float):
+                sheet.write_number(row_index, col_index, value, frmt(value))
+            else:
+                sheet.write_string(row_index, col_index, value, frmt(value))
+
+    workbook.close()
+
+    return workbook
