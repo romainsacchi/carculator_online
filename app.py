@@ -76,6 +76,7 @@ d_pt = {
         '(Plugin) Hybrid-petrol - electric':'PHEV-e',
     }
 d_rev_pt = {v:k for k, v, in d_pt.items()}
+fp=""
 
 @app.route('/')
 def index():
@@ -191,6 +192,8 @@ def process_results(d):
     global ic
     ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     results = ic.calculate_impacts()
+    global fp
+    fp = ic.export_lci_to_excel()
     data = results.values
     impact = results.coords['impact'].values.tolist()
     impact_category = results.coords['impact_category'].values.tolist()
@@ -326,8 +329,7 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
-    global ic
-    fp = ic.export_lci_to_excel()
+    global fp
     response = jsonify({"filepath": fp})
     return make_response(response, 200)
 
