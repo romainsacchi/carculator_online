@@ -199,7 +199,7 @@ def process_results(d):
 
     lci = ic.export_lci(presamples = False)
     global excel_lci
-    excel_lci = write_lci_to_excel(lci, "test")
+    excel_lci = write_lci_to_excel(lci, "test").read()
 
     #s3 = boto3.resource('s3')
     #s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci.read())
@@ -340,6 +340,7 @@ def get_language():
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
     global excel_lci
+    print(excel_lci)
     return send_file(excel_lci, attachment_filename="testing.xlsx", as_attachment=True)
 
 @app.route("/get_param_table")
