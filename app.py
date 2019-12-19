@@ -197,7 +197,7 @@ def process_results(d):
     ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     results = ic.calculate_impacts()
 
-    lci = ic.export_lci()
+    lci = ic.export_lci(presamples = False)
     excel_lci = write_lci_to_excel(lci, "test")
 
     s3 = boto3.resource('s3')
@@ -362,8 +362,6 @@ def write_lci_to_excel(lci, name):
 
     list_act = lci
     data = []
-
-    print(lci)
 
     data.extend((["Database", 'test'], ("format", "Excel spreadsheet")))
     data.append([])
