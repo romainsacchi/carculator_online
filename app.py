@@ -1,6 +1,6 @@
 """Flask App Project."""
 
-from flask import Flask, render_template, request, jsonify, make_response, json, session, redirect, url_for, Response
+from flask import Flask, render_template, request, jsonify, make_response, json, session, redirect, url_for, Response, send_file
 from flask_mail import Mail, Message
 from flask_babel import Babel, _
 import logging
@@ -331,8 +331,9 @@ def get_language():
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
     global fp
-    response = jsonify({"filepath": fp})
-    return make_response(response, 200)
+    #response = jsonify({"filepath": fp})
+    #return make_response(response, 200)
+    return send_file(fp)
 
 @app.route("/get_param_table")
 def get_param_table():
