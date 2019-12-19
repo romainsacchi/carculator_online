@@ -16,7 +16,7 @@ from worker import conn
 from s3 import list_files, download_file, upload_file
 import xlsxwriter
 import boto3
-import StringIO
+import io
 
 
 # Instantiate Flask app
@@ -417,7 +417,7 @@ def write_lci_to_excel(lci, name):
         data.append([])
 
     filepath = "lci-" + name + ".xlsx"
-    output = StringIO.StringIO()
+    output = io.StringIO.StringIO()
     workbook = xlsxwriter.Workbook(output, {'in_memory': True})
     bold = workbook.add_format({"bold": True})
     bold.set_font_size(12)
