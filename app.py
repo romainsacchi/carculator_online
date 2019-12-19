@@ -332,7 +332,7 @@ def get_language():
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
     global fp
-    print(fp)
+    print("fp: ",fp)
     #response = jsonify({"filepath": fp})
     #return make_response(response, 200)
     return send_file(fp)
