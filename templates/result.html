@@ -348,6 +348,20 @@
  };
 
  function export_bw2_inventories(){
+
+ 	$.when($.ajax({
+                url: "/get_inventory_excel",
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+                console.log(json);
+            });
+
  	var str = i18n('inventory_download')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
