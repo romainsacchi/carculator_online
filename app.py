@@ -80,7 +80,7 @@ d_pt = {
         '(Plugin) Hybrid-petrol - electric':'PHEV-e',
     }
 d_rev_pt = {v:k for k, v, in d_pt.items()}
-fp=""
+excel_lci = ""
 
 @app.route('/')
 def index():
@@ -198,10 +198,11 @@ def process_results(d):
     results = ic.calculate_impacts()
 
     lci = ic.export_lci(presamples = False)
+    global excel_lci
     excel_lci = write_lci_to_excel(lci, "test")
 
-    s3 = boto3.resource('s3')
-    s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci.read())
+    #s3 = boto3.resource('s3')
+    #s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci.read())
 
     data = results.values
     impact = results.coords['impact'].values.tolist()
@@ -338,8 +339,8 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
-    output = download()
-    return send_file(output, as_attachment=True)
+    global excel_lci
+    return send_file(excel_lci, attachment_filename="testing.xlsx", as_attachment=True)
 
 @app.route("/get_param_table")
 def get_param_table():
