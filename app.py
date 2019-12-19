@@ -416,7 +416,7 @@ def write_lci_to_excel(lci, name):
         data.append([])
 
     filepath = "lci-" + name + ".xlsx"
-    output = io.StringIO.StringIO()
+    output = io.StringIO()
     workbook = xlsxwriter.Workbook(output, {'in_memory': True})
     bold = workbook.add_format({"bold": True})
     bold.set_font_size(12)
