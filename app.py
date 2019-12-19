@@ -16,6 +16,8 @@ from worker import conn
 from s3 import list_files, download_file, upload_file
 import xlsxwriter
 import boto3
+import StringIO
+
 
 # Instantiate Flask app
 app = Flask(__name__)
@@ -46,8 +48,6 @@ mail = Mail(app)
 # Setup flask-babel
 babel = Babel(app)
 
-# S3 bucket
-BUCKET = "carculator-bucket"
 
 def load_map_file():
     with open('data/car_to_class_map.csv', 'r', encoding='ISO-8859-1') as f:
@@ -202,7 +202,7 @@ def process_results(d):
     excel_lci = write_lci_to_excel(lci, "test")
 
     s3 = boto3.resource('s3')
-    s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci)
+    s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci.read())
 
     data = results.values
     impact = results.coords['impact'].values.tolist()
@@ -417,8 +417,8 @@ def write_lci_to_excel(lci, name):
         data.append([])
 
     filepath = "lci-" + name + ".xlsx"
-
-    workbook = xlsxwriter.Workbook(filepath)
+    output = StringIO.StringIO()
+    workbook = xlsxwriter.Workbook(output, {'in_memory': True})
     bold = workbook.add_format({"bold": True})
     bold.set_font_size(12)
     highlighted = {
@@ -444,4 +444,4 @@ def write_lci_to_excel(lci, name):
 
     workbook.close()
 
-    return workbook
+    return output.seek(0)
