@@ -18,7 +18,6 @@ import xlsxwriter
 import boto3
 import io
 
-
 # Instantiate Flask app
 app = Flask(__name__)
 #session_token = secrets.token_urlsafe(16)
