@@ -442,5 +442,6 @@ def write_lci_to_excel(lci, name):
                 sheet.write_string(row_index, col_index, value, frmt(value))
 
     workbook.close()
+    output.seek(0)
 
-    return output.seek(0)
+    return output
