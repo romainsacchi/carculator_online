@@ -430,7 +430,7 @@ def write_lci_to_excel(lci, name):
     }
     frmt = lambda x: bold if row[0] in highlighted else None
 
-    sheet = "Inventory"
+    sheet = workbook.add_worksheet('test')
 
     for row_index, row in enumerate(data):
         for col_index, value in enumerate(row):
