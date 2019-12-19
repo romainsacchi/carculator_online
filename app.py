@@ -15,6 +15,7 @@ from rq.job import Job, NoSuchJobError
 from worker import conn
 from s3 import list_files, download_file, upload_file
 import xlsxwriter
+import boto3
 
 # Instantiate Flask app
 app = Flask(__name__)
