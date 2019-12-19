@@ -194,7 +194,7 @@ def process_results(d):
     results = ic.calculate_impacts()
     global fp
     fp = ic.export_lci_to_excel(directory="/app/tmp/")
-    
+
     print("fp: ", fp)
     data = results.values
     impact = results.coords['impact'].values.tolist()
@@ -332,6 +332,7 @@ def get_language():
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
     global fp
+    print(fp)
     #response = jsonify({"filepath": fp})
     #return make_response(response, 200)
     return send_file(fp)
