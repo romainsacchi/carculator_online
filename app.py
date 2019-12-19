@@ -194,6 +194,7 @@ def process_results(d):
     results = ic.calculate_impacts()
     global fp
     fp = ic.export_lci_to_excel(directory="/app/tmp/")
+    
     print("fp: ", fp)
     data = results.values
     impact = results.coords['impact'].values.tolist()
