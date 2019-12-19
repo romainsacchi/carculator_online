@@ -193,7 +193,7 @@ def process_results(d):
     ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
     results = ic.calculate_impacts()
     global fp
-    fp = ic.export_lci_to_excel()
+    fp = ic.export_lci_to_excel(directory="/app/tmp/")
     print("fp: ", fp)
     data = results.values
     impact = results.coords['impact'].values.tolist()
