@@ -331,11 +331,11 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
-    global fp
-    print("fp: ",fp)
+    #global fp
+    #print("fp: ",fp)
     #response = jsonify({"filepath": fp})
     #return make_response(response, 200)
-    return send_file(fp)
+    return send_file("/app/tmp/lci-test.xlsx")
 
 @app.route("/get_param_table")
 def get_param_table():
