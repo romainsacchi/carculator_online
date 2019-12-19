@@ -363,6 +363,8 @@ def write_lci_to_excel(lci, name):
     list_act = lci
     data = []
 
+    print(lci)
+
     data.extend((["Database", 'test'], ("format", "Excel spreadsheet")))
     data.append([])
 
