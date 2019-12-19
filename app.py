@@ -307,10 +307,8 @@ def set_language(language=None):
 
 @app.route('/get_language')
 def get_language():
-    print(session)
-    lang = get_locale()
 
-    print(lang)
+    lang = get_locale()
 
     if lang == "en":
         json_url = os.path.join(app.root_path, "static/translation", "translation_en.json")
@@ -329,8 +327,7 @@ def get_language():
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
     global ic
-    exp = ExportInventory(ic.A, ic.rev_inputs)
-    fp = exp.write_lci_to_excel()
+    fp = ic.export_lci_to_excel()
     response = jsonify({"filepath": fp})
     return make_response(response, 200)
 
