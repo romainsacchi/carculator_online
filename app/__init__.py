@@ -11,6 +11,8 @@ ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online");
 TEMPLATES_DIR = os.path.join(ROOT, "templates")
 STATIC_DIR = os.path.join(ROOT, "static")
 
+print(ROOT, TEMPLATES_DIR, STATIC_DIR)
+
 # Instantiate Flask app
 app = Flask(__name__, template_folder = TEMPLATES_DIR, static_folder= STATIC_DIR)
 
