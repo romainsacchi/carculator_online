@@ -78,4 +78,4 @@ def get_locale():
     return session['language']
 
 
-app.run()
+app.run(debug=False)
