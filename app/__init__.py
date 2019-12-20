@@ -53,10 +53,7 @@ mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
 
 
-# Setup flask-mail
-mail = Mail(app)
-from app import email_support
-from app import routes
+
 
 @babel.localeselector
 def get_locale():
@@ -70,10 +67,13 @@ def get_locale():
         language = None
     if language is not None:
         return language
-    print(app.config['LANGUAGES'])
     session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
-    print(request.accept_languages.best_match(app.config['LANGUAGES']))
     return session['language']
+
+# Setup flask-mail
+mail = Mail(app)
+from app import email_support
+from app import routes
 
 
 if __name__ == '__main__':
