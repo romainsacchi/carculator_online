@@ -8,7 +8,7 @@ import numpy as np
 import os
 from rq import Queue
 from rq.job import Job, NoSuchJobError
-from worker import conn
+from .worker import conn
 
 @app.route('/')
 def index():
