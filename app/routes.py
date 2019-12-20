@@ -105,7 +105,7 @@ def get_results():
     q = Queue(connection=conn)
 
     job = q.enqueue_call(
-        func=app.calc.process_results, args=(d,), result_ttl=2500000
+        func=app.calc.process_results, args=(d,), result_ttl=86400
     )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
 
@@ -116,8 +116,8 @@ def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
     job = Job.fetch(job_key, connection=conn)
 
-    lci = job.result[1]
-    print(lci)
+    app.lci = job.result[1]
+
     if job.is_finished:
         return render_template('result.html', data = job.result[0])
 
@@ -166,8 +166,7 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
-    print(app.calc.excel_lci)
-    return send_file(app.calc.excel_lci, attachment_filename="testing.xlsx", as_attachment=True)
+    return send_file(app.lci, attachment_filename="testing.xlsx", as_attachment=True)
 
 @app.route("/get_param_table")
 def get_param_table():
