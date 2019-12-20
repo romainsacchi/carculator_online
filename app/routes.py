@@ -98,6 +98,9 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json())
 
+    # Create a connection to the Redis server
+    q = Queue(connection=conn)
+
     job = q.enqueue_call(
         func=app.calc.process_results, args=(d,), result_ttl=2500000
     )
