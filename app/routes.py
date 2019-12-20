@@ -9,6 +9,10 @@ from rq import Queue
 from rq.job import Job, NoSuchJobError
 from .worker import conn
 
+from .calculation import Calculation
+
+app.calc = Calculation()
+
 @app.route('/')
 def index():
     """Return homepage."""

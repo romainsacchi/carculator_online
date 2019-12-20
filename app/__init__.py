@@ -58,8 +58,6 @@ from app import routes
 # Setup flask-babel
 babel = Babel(app)
 
-app.calc = Calculation()
-
 @babel.localeselector
 def get_locale():
     """
