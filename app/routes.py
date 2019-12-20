@@ -165,6 +165,7 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
+    print(app.calc.excel_lci)
     return send_file(app.calc.excel_lci, attachment_filename="testing.xlsx", as_attachment=True)
 
 @app.route("/get_param_table")
