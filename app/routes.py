@@ -116,10 +116,10 @@ def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
     job = Job.fetch(job_key, connection=conn)
 
-    lci = job.result[-1]
+    lci = job.result[1]
     print(lci)
     if job.is_finished:
-        return render_template('result.html', data = job.result[:-1])
+        return render_template('result.html', data = job.result[0])
 
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
