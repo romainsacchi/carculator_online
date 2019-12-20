@@ -88,7 +88,7 @@ class Calculation():
                                              data[imp, s, pt, y, cat, 0]])
 
 
-        return json.dumps([list_res, list_res_costs])
+        return json.dumps([list_res, list_res_costs, self.excel_lci])
 
     def format_dictionary(self, raw_dict):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
