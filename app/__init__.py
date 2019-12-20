@@ -16,6 +16,9 @@ app = Flask(__name__,
             template_folder = "../templates",
             static_folder= "../static")
 
+# Setup flask-babel
+babel = Babel(app)
+
 is_prod = os.environ.get('IS_HEROKU', None)
 
 if is_prod:
@@ -31,12 +34,12 @@ if is_prod:
                                 'en': 'English',
                                 'it': 'Italian',
                                 'fr': 'French',
-                                'de': 'German'
+                                'de': 'German',
                             }
 
 else:
     # Attach configuration file
-    app.config.from_pyfile('config.py')
+    app.config.from_pyfile('..\instance\config.py')
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -55,9 +58,6 @@ mail = Mail(app)
 from app import email_support
 from app import routes
 
-# Setup flask-babel
-babel = Babel(app)
-
 @babel.localeselector
 def get_locale():
     """
@@ -70,8 +70,11 @@ def get_locale():
         language = None
     if language is not None:
         return language
+    app.config['LANGUAGES']
     session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
+    print(request.accept_languages.best_match(app.config['LANGUAGES']))
     return session['language']
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
