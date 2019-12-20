@@ -5,21 +5,13 @@ from flask import render_template, jsonify, request, make_response, session, red
 from .email_support import email_out
 import numpy as np
 import os
-from flask_babel import Babel, _
-#from rq import Queue
-#from rq.job import Job, NoSuchJobError
-#from .worker import conn
-
+from rq import Queue
+from rq.job import Job, NoSuchJobError
+from .worker import conn
 from .calculation import Calculation
-from werkzeug.wsgi import FileWrapper
 
 app.calc = Calculation()
 app.lci_to_bw = ""
-
-
-
-
-
 
 @app.route('/')
 def index():
@@ -110,7 +102,7 @@ def get_results():
     d = app.calc.format_dictionary(request.get_json())
 
     # Create a connection to the Redis server
-    #q = Queue(connection=conn)
+    q = Queue(connection=conn)
 
     job = q.enqueue_call(
         func=app.calc.process_results, args=(d,), result_ttl=86400
@@ -174,7 +166,6 @@ def get_language():
 
 @app.route("/get_inventory_excel_for_bw")
 def get_inventory_excel_for_bw():
-    print(app.lci_to_bw)
     resp = make_response(app.lci_to_bw)
     resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
     resp.headers["Content-type"] = "text/csv"
