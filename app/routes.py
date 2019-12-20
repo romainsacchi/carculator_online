@@ -2,7 +2,7 @@
 
 from app import app
 from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json, send_file
-from .email import email_out
+from .email_support import email_out
 import numpy as np
 import os
 from rq import Queue
@@ -96,7 +96,7 @@ def get_electricity_mix(ISO, years):
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json())
-    print(d)
+
     # Create a connection to the Redis server
     q = Queue(connection=conn)
 
@@ -104,7 +104,7 @@ def get_results():
         func=app.calc.process_results, args=(d,), result_ttl=2500000
     )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
-    
+
     return res
 
 @app.route('/display_result/<job_key>', methods=['GET'])

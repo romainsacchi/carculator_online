@@ -11,8 +11,6 @@ ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online");
 TEMPLATES_DIR = os.path.join(ROOT, "templates")
 STATIC_DIR = os.path.join(ROOT, "static")
 
-print(ROOT, TEMPLATES_DIR, STATIC_DIR)
-
 # Instantiate Flask app
 app = Flask(__name__,
             template_folder = "../templates",
@@ -54,7 +52,7 @@ app.logger.addHandler(mail_handler)
 
 # Setup flask-mail
 mail = Mail(app)
-from app import email
+from app import email_support
 from app import routes
 
 # Setup flask-babel
