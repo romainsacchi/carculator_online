@@ -96,7 +96,7 @@ def get_electricity_mix(ISO, years):
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json())
-
+    print(d)
     # Create a connection to the Redis server
     q = Queue(connection=conn)
 
