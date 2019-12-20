@@ -19,10 +19,27 @@ app = Flask(__name__,
             static_folder= STATIC_DIR,
             instance_relative_config=True)
 
+is_prod = os.environ.get('IS_HEROKU', None)
 
+if is_prod:
+    app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', None)
+    app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', None))
+    app.config['MAIL_USE_TLS'] = int(os.environ.get('MAIL_USE_TLS', None))
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', None)
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', None)
+    app.config['ADMINS'] = os.environ.get('ADMINS', None)
+    app.config['RECIPIENT'] = os.environ.get('RECIPIENT', None)
+        'en': 'English',
+        'it': 'Italian',
+        'fr': 'French',
+        'de': 'German'
+    }
+    SECRET_KEY = "123qrwe4567qwert98"
+    DEBUG = False
 
-# Attach configuration file
-app.config.from_pyfile('config.py')
+else:
+    # Attach configuration file
+    app.config.from_pyfile('config.py')
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
