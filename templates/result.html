@@ -75,9 +75,11 @@
 		      <!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="\static\images\mediumsmall.png" style="height:30px;"></a>
 		    </div>
-				<button class="online-button" onclick="export_bw2_inventories()"
+			  <form action="/get_inventory_excel">
+				<button class="online-button"
 						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Export Brightway2-compatible inventories')}}</button>
-			  <button class="online-button" onclick="export_simapro_inventories()"
+			  </form>
+				  <button class="online-button" onclick="export_simapro_inventories()"
 						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Export Simapro-compatible inventories')}}</button>
 				 <button class="online-button" onclick="share_results()"
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Share results')}}</button>
@@ -348,19 +350,6 @@
  };
 
  function export_bw2_inventories(){
-
- 	$.when($.ajax({
-                url: "/get_inventory_excel",
-                dataType: 'json',
-                type: 'GET',
-                success : function(data) {
-                   var json = data
-                    return json
-                    },
-                error: function(xhr, status, error){console.log(error)}})
-            ).done(function(json){
-                console.log(json);
-            });
 
  	var str = i18n('inventory_download')
     $.notify({
