@@ -5,7 +5,7 @@ import logging
 from logging.handlers import SMTPHandler
 import os
 
-from .calculation import Calculation
+#from .calculation import Calculation
 
 ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online");
 TEMPLATES_DIR = os.path.join(ROOT, "templates")
