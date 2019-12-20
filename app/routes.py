@@ -13,7 +13,7 @@ from .calculation import Calculation
 from werkzeug.wsgi import FileWrapper
 
 app.calc = Calculation()
-app.lci= ""
+app.lci_to_bw = ""
 
 @app.route('/')
 def index():
@@ -118,7 +118,7 @@ def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
     job = Job.fetch(job_key, connection=conn)
 
-    app.lci = job.result[1]
+    app.lci_to_bw = job.result[1]
 
     if job.is_finished:
         return render_template('result.html', data = job.result[0])
@@ -166,9 +166,10 @@ def get_language():
     return make_response(data, 200)
 
 
-@app.route("/get_inventory_excel")
-def get_inventory_excel():
-    resp = make_response(app.lci)
+@app.route("/get_inventory_excel_for_bw")
+def get_inventory_excel_for_bw():
+    print(app.lci_to_bw)
+    resp = make_response(app.lci_to_bw)
     resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
     resp.headers["Content-type"] = "text/csv"
     return resp
