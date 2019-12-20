@@ -16,8 +16,7 @@ print(ROOT, TEMPLATES_DIR, STATIC_DIR)
 # Instantiate Flask app
 app = Flask(__name__,
             template_folder = TEMPLATES_DIR,
-            static_folder= STATIC_DIR,
-            instance_relative_config=True)
+            static_folder= STATIC_DIR)
 
 is_prod = os.environ.get('IS_HEROKU', None)
 
@@ -78,4 +77,4 @@ def get_locale():
     return session['language']
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
