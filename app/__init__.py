@@ -77,5 +77,5 @@ def get_locale():
     session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
     return session['language']
 
-
-app.run(debug=False)
+if __name__ == '__main__':
+    app.run(debug=False)
