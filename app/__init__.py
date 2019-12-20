@@ -15,7 +15,7 @@ print(ROOT, TEMPLATES_DIR, STATIC_DIR)
 
 # Instantiate Flask app
 app = Flask(__name__,
-            template_folder = TEMPLATES_DIR,
+            template_folder = "../templates",
             static_folder= STATIC_DIR)
 
 is_prod = os.environ.get('IS_HEROKU', None)
