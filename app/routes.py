@@ -1,7 +1,7 @@
 """Flask App Project."""
 
 from app import app
-from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json, send_file
+from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json, send_file, Response
 from .email_support import email_out
 import numpy as np
 import os
@@ -10,6 +10,7 @@ from rq.job import Job, NoSuchJobError
 from .worker import conn
 
 from .calculation import Calculation
+from werkzeug.wsgi import FileWrapper
 
 app.calc = Calculation()
 app.lci= ""
@@ -167,9 +168,9 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
-    print(app.lci)
-    print(type(app.lci))
-    return send_file(app.lci, attachment_filename="testing.xlsx", as_attachment=True)
+
+    w = FileWrapper(app.lci)
+    return Response(w, mimetype="text/plain", direct_passthrough=True)
 
 @app.route("/get_param_table")
 def get_param_table():
