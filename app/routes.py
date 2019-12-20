@@ -168,9 +168,11 @@ def get_language():
 
 @app.route("/get_inventory_excel")
 def get_inventory_excel():
+    resp = make_response(app.lci)
+    resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
+    resp.headers["Content-type"] = "text/csv"
+    return resp
 
-    w = FileWrapper(app.lci)
-    return Response(w, mimetype="text/plain", direct_passthrough=True)
 
 @app.route("/get_param_table")
 def get_param_table():
