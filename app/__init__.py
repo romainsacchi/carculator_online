@@ -14,7 +14,7 @@ STATIC_DIR = os.path.join(ROOT, "static")
 print(ROOT, TEMPLATES_DIR, STATIC_DIR)
 
 # Instantiate Flask app
-app = Flask(__name__, template_folder = TEMPLATES_DIR, static_folder= STATIC_DIR)
+app = Flask(__name__, template_folder = TEMPLATES_DIR, static_folder= STATIC_DIR, instance_relative_config=True)
 
 session_token = "123456798"
 app.config["SECRET_KEY"] = session_token
