@@ -29,13 +29,12 @@ if is_prod:
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', None)
     app.config['ADMINS'] = os.environ.get('ADMINS', None)
     app.config['RECIPIENT'] = os.environ.get('RECIPIENT', None)
-        'en': 'English',
-        'it': 'Italian',
-        'fr': 'French',
-        'de': 'German'
-    }
-    SECRET_KEY = "123qrwe4567qwert98"
-    DEBUG = False
+    app.config['LANGUAGES'] = {
+                                'en': 'English',
+                                'it': 'Italian',
+                                'fr': 'French',
+                                'de': 'German'
+                            }
 
 else:
     # Attach configuration file
