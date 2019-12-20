@@ -28,6 +28,7 @@ if is_prod:
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', None)
     app.config['ADMINS'] = os.environ.get('ADMINS', None)
     app.config['RECIPIENT'] = os.environ.get('RECIPIENT', None)
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', None)
     app.config['LANGUAGES'] = {
                                 'en': 'English',
                                 'it': 'Italian',
