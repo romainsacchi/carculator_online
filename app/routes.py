@@ -98,13 +98,13 @@ def get_results():
     d = app.calc.format_dictionary(request.get_json())
     print(d)
     # Create a connection to the Redis server
-    #q = Queue(connection=conn)
+    q = Queue(connection=conn)
 
-    #job = q.enqueue_call(
-    #    func=app.calc.process_results, args=(d,), result_ttl=2500000
-    #)
-    #res = make_response(jsonify({"job id": job.get_id()}), 200)
-    res = make_response(jsonify({"job id": 'yes'}), 200)
+    job = q.enqueue_call(
+        func=app.calc.process_results, args=(d,), result_ttl=2500000
+    )
+    res = make_response(jsonify({"job id": job.get_id()}), 200)
+    
     return res
 
 @app.route('/display_result/<job_key>', methods=['GET'])
