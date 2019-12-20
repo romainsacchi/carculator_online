@@ -12,6 +12,7 @@ from .worker import conn
 from .calculation import Calculation
 
 app.calc = Calculation()
+app.lci= ""
 
 @app.route('/')
 def index():
