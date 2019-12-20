@@ -2,7 +2,6 @@
 
 from app import app
 from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json, send_file
-from flask_babel import Babel, _
 from .email import email_out
 import numpy as np
 import os
