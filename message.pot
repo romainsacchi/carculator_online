@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-12-12 17:19+0100\n"
+"POT-Creation-Date: 2019-12-29 19:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app.py:162
+#: app/routes.py:24 templates/tool.html:670
+msgid "Petrol"
+msgstr ""
+
+#: app/routes.py:24 templates/tool.html:678
+msgid "Diesel"
+msgstr ""
+
+#: app/routes.py:24 templates/tool.html:684
+msgid "Natural gas"
+msgstr ""
+
+#: app/routes.py:24 templates/tool.html:698
+msgid "Electric"
+msgstr ""
+
+#: app/routes.py:24
+msgid "Fuel cell"
+msgstr ""
+
+#: app/routes.py:24
+msgid "Hybrid-petrol"
+msgstr ""
+
+#: app/routes.py:24
+msgid "(Plugin) Hybrid-petrol"
+msgstr ""
+
+#: app/routes.py:25
+msgid "Mini"
+msgstr ""
+
+#: app/routes.py:25
+msgid "Small"
+msgstr ""
+
+#: app/routes.py:25
+msgid "Lower medium"
+msgstr ""
+
+#: app/routes.py:25
+msgid "Medium"
+msgstr ""
+
+#: app/routes.py:25
+msgid "Large"
+msgstr ""
+
+#: app/routes.py:25
+msgid "SUV"
+msgstr ""
+
+#: app/routes.py:25
+msgid "Van"
+msgstr ""
+
+#: app/routes.py:87
 msgid "Email sent!"
+msgstr ""
+
+#: src/carculator/carculator/model.py:590
+msgid "battery discharge efficiency"
+msgstr ""
+
+#: src/carculator/carculator/model.py:591
+msgid "fuel cell system efficiency"
 msgstr ""
 
 #: templates/index.html:8
@@ -265,80 +329,109 @@ msgstr ""
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 
-#: templates/index.html:870 templates/result.html:222 templates/tool.html:1104
+#: templates/index.html:870 templates/param_table.html:126
+#: templates/result.html:223 templates/tool.html:1105
 msgid "Copyright"
 msgstr ""
 
-#: templates/index.html:870 templates/result.html:222 templates/tool.html:1104
+#: templates/index.html:870 templates/param_table.html:126
+#: templates/result.html:223 templates/tool.html:1105
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:871 templates/result.html:223 templates/tool.html:1105
+#: templates/index.html:871 templates/param_table.html:127
+#: templates/result.html:224 templates/tool.html:1106
 msgid "All rights reserved"
+msgstr ""
+
+#: templates/param_table.html:8 templates/tool.html:8
+msgid "Carculator : Configuration"
+msgstr ""
+
+#: templates/param_table.html:79
+msgid "PARAMETERS"
+msgstr ""
+
+#: templates/param_table.html:88 templates/tool.html:418
+msgid "Importance"
+msgstr ""
+
+#: templates/param_table.html:89 templates/tool.html:419
+msgid "Name"
+msgstr ""
+
+#: templates/param_table.html:90 templates/tool.html:420
+msgid "Description"
+msgstr ""
+
+#: templates/param_table.html:91 templates/tool.html:421
+msgid "Unit"
+msgstr ""
+
+#: templates/param_table.html:92 templates/tool.html:422
+msgid "Source"
+msgstr ""
+
+#: templates/param_table.html:93 templates/tool.html:423
+msgid "Applies to powertrain"
+msgstr ""
+
+#: templates/param_table.html:94 templates/tool.html:424
+msgid "Applies to size"
 msgstr ""
 
 #: templates/result.html:8
 msgid "Carculator : Results"
 msgstr ""
 
-#: templates/result.html:79
+#: templates/result.html:80
 msgid "Export Brightway2-compatible inventories"
 msgstr ""
 
-#: templates/result.html:81
+#: templates/result.html:83
 msgid "Export Simapro-compatible inventories"
 msgstr ""
 
-#: templates/result.html:83
+#: templates/result.html:85
 msgid "Share results"
 msgstr ""
 
-#: templates/result.html:101
+#: templates/result.html:103
 msgid "REFERENCE"
 msgstr ""
 
-#: templates/result.html:105
+#: templates/result.html:107
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
 msgstr ""
 
-#: templates/result.html:119
+#: templates/result.html:120
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
 msgstr ""
 
-#: templates/result.html:136
+#: templates/result.html:137
 msgid "LIFE CYCLE COST ASSESSMENT"
 msgstr ""
 
-#: templates/result.html:153
+#: templates/result.html:154
 msgid "OTHER INDICATORS"
 msgstr ""
 
-#: templates/result.html:160
+#: templates/result.html:161
 msgid "Energy consumption along driving cycle"
 msgstr ""
 
-#: templates/result.html:161
+#: templates/result.html:162
 msgid "Pollutants emissions along driving cycle"
 msgstr ""
 
-#: templates/result.html:185
+#: templates/result.html:186
 msgid "Noise emissions along driving cycle"
 msgstr ""
 
-#: templates/result.html:186
+#: templates/result.html:187
 msgid "GHG emissions vs. ownership costs"
-msgstr ""
-
-#: templates/result.html:338 templates/result.html:361
-msgid ""
-"The download of the inventory file will start shortly. Requires ecoinvent"
-" v.3.6 cutoff."
-msgstr ""
-
-#: templates/tool.html:8
-msgid "Carculator : Configuration"
 msgstr ""
 
 #: templates/tool.html:80
@@ -565,34 +658,6 @@ msgstr ""
 msgid "Add any parameter you would like to modify."
 msgstr ""
 
-#: templates/tool.html:418
-msgid "Importance"
-msgstr ""
-
-#: templates/tool.html:419
-msgid "Name"
-msgstr ""
-
-#: templates/tool.html:420
-msgid "Description"
-msgstr ""
-
-#: templates/tool.html:421
-msgid "Unit"
-msgstr ""
-
-#: templates/tool.html:422
-msgid "Source"
-msgstr ""
-
-#: templates/tool.html:423
-msgid "Applies to powertrain"
-msgstr ""
-
-#: templates/tool.html:424
-msgid "Applies to size"
-msgstr ""
-
 #: templates/tool.html:425
 msgid "Add?"
 msgstr ""
@@ -764,27 +829,27 @@ msgstr ""
 msgid "Set to zero"
 msgstr ""
 
-#: templates/tool.html:578
+#: templates/tool.html:579
 msgid "Adjust the number of passengers"
 msgstr ""
 
-#: templates/tool.html:588
+#: templates/tool.html:589
 msgid "Adjust the cargo mass"
 msgstr ""
 
-#: templates/tool.html:595
+#: templates/tool.html:596
 msgid "Adjust the total mileage"
 msgstr ""
 
-#: templates/tool.html:601
+#: templates/tool.html:602
 msgid "Adjust the yearly mileage"
 msgstr ""
 
-#: templates/tool.html:628
+#: templates/tool.html:629
 msgid "ENERGY STORAGE AND FUEL PATHWAYS"
 msgstr ""
 
-#: templates/tool.html:633
+#: templates/tool.html:634
 msgid ""
 "In this section, we define the pathway used to supply fuel for the "
 "vehicles as well as the technology used for on-board energy storage.<br>"
@@ -795,7 +860,7 @@ msgid ""
 "alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
 msgstr ""
 
-#: templates/tool.html:636
+#: templates/tool.html:637
 msgid ""
 "The alternative fuels presented here are so-called \"2nd generation\" "
 "fuels, as they are produced from residual plant-based material.\n"
@@ -803,7 +868,7 @@ msgid ""
 "production with the purpose of food supply."
 msgstr ""
 
-#: templates/tool.html:638
+#: templates/tool.html:639
 msgid ""
 "Additionally, several pathways are presented for the supply of hydrogen "
 "to be used in fuel cell cars.\n"
@@ -813,7 +878,7 @@ msgid ""
 "methane to produce hydrogen (and carbon monoxide)."
 msgstr ""
 
-#: templates/tool.html:642
+#: templates/tool.html:643
 msgid ""
 "Regarding energy storage technologies for battery electric vehicles, the "
 "user can choose between several types of lithium-ion-based chemistry\n"
@@ -822,61 +887,49 @@ msgid ""
 "produce the battery cells."
 msgstr ""
 
-#: templates/tool.html:657
+#: templates/tool.html:658
 msgid "FUEL PATHWAYS"
 msgstr ""
 
-#: templates/tool.html:669
-msgid "Petrol"
-msgstr ""
-
-#: templates/tool.html:671
+#: templates/tool.html:672
 msgid "Source for conventional petrol inventory: ecoinvent 3.6"
 msgstr ""
 
-#: templates/tool.html:672
+#: templates/tool.html:673
 msgid ""
 "Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul "
 "Scherrer Institut"
 msgstr ""
 
-#: templates/tool.html:677
-msgid "Diesel"
-msgstr ""
-
-#: templates/tool.html:679
+#: templates/tool.html:680
 msgid "Source for conventional diesel inventory: ecoinvent 3.6"
 msgstr ""
 
-#: templates/tool.html:680
+#: templates/tool.html:681
 msgid ""
 "Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer"
 " Institut"
 msgstr ""
 
-#: templates/tool.html:683
-msgid "Natural gas"
-msgstr ""
-
-#: templates/tool.html:685
+#: templates/tool.html:686
 msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
 msgstr ""
 
-#: templates/tool.html:686
+#: templates/tool.html:687
 msgid ""
 "Source for bio-methane inventory: Xiaojin Zhang, 2019, Paul Scherrer "
 "Institut"
 msgstr ""
 
-#: templates/tool.html:689
+#: templates/tool.html:690
 msgid "Hydrogen"
 msgstr ""
 
-#: templates/tool.html:691
+#: templates/tool.html:692
 msgid "Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020"
 msgstr ""
 
-#: templates/tool.html:692
+#: templates/tool.html:693
 msgid ""
 "Source for hydrogen by steam methane reforming fuel inventory: Zhang et "
 "al. 2017,\n"
@@ -884,175 +937,171 @@ msgid ""
 "March 2017, Pages 326-338 "
 msgstr ""
 
-#: templates/tool.html:697
-msgid "Electric"
-msgstr ""
-
-#: templates/tool.html:706
+#: templates/tool.html:707
 msgid "Conventional petrol"
 msgstr ""
 
-#: templates/tool.html:715
+#: templates/tool.html:716
 msgid "Bio-ethanol from forest residues"
 msgstr ""
 
-#: templates/tool.html:721
+#: templates/tool.html:722
 msgid "Bio-ethanol from wheat straw"
 msgstr ""
 
-#: templates/tool.html:727
+#: templates/tool.html:728
 msgid "Bio-ethanol from maize starch"
 msgstr ""
 
-#: templates/tool.html:733
+#: templates/tool.html:734
 msgid "Bio-ethanol from sugar beet residue"
 msgstr ""
 
-#: templates/tool.html:743
+#: templates/tool.html:744
 msgid "Conventional diesel"
 msgstr ""
 
-#: templates/tool.html:749
+#: templates/tool.html:750
 msgid "Bio-diesel from algae"
 msgstr ""
 
-#: templates/tool.html:755
+#: templates/tool.html:756
 msgid "Bio-diesel from used cooking oil"
 msgstr ""
 
-#: templates/tool.html:763
+#: templates/tool.html:764
 msgid "Compressed natural gas"
 msgstr ""
 
-#: templates/tool.html:769
+#: templates/tool.html:770
 msgid "Bio-methane from manure"
 msgstr ""
 
-#: templates/tool.html:777
+#: templates/tool.html:778
 msgid "Via electrolysis using the electricity mix specified above"
 msgstr ""
 
-#: templates/tool.html:783
+#: templates/tool.html:784
 msgid "Via electrolysis using photovoltaic power"
 msgstr ""
 
-#: templates/tool.html:789
+#: templates/tool.html:790
 msgid "Via electrolysis using hydro power"
 msgstr ""
 
-#: templates/tool.html:795
+#: templates/tool.html:796
 msgid "Via electrolysis using nuclear power"
 msgstr ""
 
-#: templates/tool.html:801
+#: templates/tool.html:802
 msgid "Via Steam Methane Reforming"
 msgstr ""
 
-#: templates/tool.html:809
+#: templates/tool.html:810
 msgid "Electricity mix specified above"
 msgstr ""
 
-#: templates/tool.html:823
+#: templates/tool.html:824
 msgid "ENERGY STORAGE"
 msgstr ""
 
-#: templates/tool.html:834
+#: templates/tool.html:835
 msgid "Fuel cell technology"
 msgstr ""
 
-#: templates/tool.html:836
+#: templates/tool.html:837
 msgid "Main type of fuel cell developed for transport applications."
 msgstr ""
 
-#: templates/tool.html:837
+#: templates/tool.html:838
 msgid ""
 "Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, "
 "issue C, 884-896."
 msgstr ""
 
-#: templates/tool.html:841
+#: templates/tool.html:842
 msgid "Battery chemistry"
 msgstr ""
 
-#: templates/tool.html:843
+#: templates/tool.html:844
 msgid ""
 "Three different types of lithium-ion-based batteries are presented, all "
 "used for transport applications."
 msgstr ""
 
-#: templates/tool.html:844
+#: templates/tool.html:845
 msgid ""
 "Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, "
 "3379-3390."
 msgstr ""
 
-#: templates/tool.html:857
+#: templates/tool.html:858
 msgid "Proton exchange membrane"
 msgstr ""
 
-#: templates/tool.html:869
+#: templates/tool.html:870
 msgid "Lithium nickel manganese cobalt oxide (NMC)"
 msgstr ""
 
-#: templates/tool.html:877
+#: templates/tool.html:878
 msgid "Lithium iron phosphate (LFP)"
 msgstr ""
 
-#: templates/tool.html:885
+#: templates/tool.html:886
 msgid "Lithium nickel cobalt aluminum oxide (NCA)"
 msgstr ""
 
-#: templates/tool.html:893
+#: templates/tool.html:894
 msgid "Origin of manufacture"
 msgstr ""
 
-#: templates/tool.html:895
+#: templates/tool.html:896
 msgid ""
 "Modifies the electricity mix used along the manufacture of the battery "
 "cells."
 msgstr ""
 
-#: templates/tool.html:903
+#: templates/tool.html:904
 msgid "China"
 msgstr ""
 
-#: templates/tool.html:910
+#: templates/tool.html:911
 msgid "Japan"
 msgstr ""
 
-#: templates/tool.html:917
+#: templates/tool.html:918
 msgid "India"
 msgstr ""
 
-#: templates/tool.html:924
+#: templates/tool.html:925
 msgid "Europe"
 msgstr ""
 
-#: templates/tool.html:931
+#: templates/tool.html:932
 msgid "United States"
 msgstr ""
 
-#: templates/tool.html:938
+#: templates/tool.html:939
 msgid "Norway"
 msgstr ""
 
-#: templates/tool.html:975
+#: templates/tool.html:976
 msgid "CALCULATION SETTINGS"
 msgstr ""
 
-#: templates/tool.html:986
+#: templates/tool.html:987
 msgid "Linking algorithm"
 msgstr ""
 
-#: templates/tool.html:988
+#: templates/tool.html:989
 msgid "Functional unit"
 msgstr ""
 
-#: templates/tool.html:989
+#: templates/tool.html:990
 msgid "Calculation mode"
 msgstr ""
 
-#: templates/tool.html:997
+#: templates/tool.html:998
 msgid ""
 "A so-called \"attributional\" linking\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t algorithm will reflect average impacts\n"
@@ -1064,15 +1113,15 @@ msgid ""
 "specified, departing from a steady-state system."
 msgstr ""
 
-#: templates/tool.html:1007
+#: templates/tool.html:1008
 msgid "Attributional"
 msgstr ""
 
-#: templates/tool.html:1013
+#: templates/tool.html:1014
 msgid "Consequential"
 msgstr ""
 
-#: templates/tool.html:1019
+#: templates/tool.html:1020
 msgid ""
 "Three types of functional unit are offered. The user can opt for a "
 "comparison normalized\n"
@@ -1082,27 +1131,27 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto define a fleet composition over time."
 msgstr ""
 
-#: templates/tool.html:1027
+#: templates/tool.html:1028
 msgid "Unit, per km"
 msgstr ""
 
-#: templates/tool.html:1033
+#: templates/tool.html:1034
 msgid "Driven distance"
 msgstr ""
 
-#: templates/tool.html:1036
+#: templates/tool.html:1037
 msgid "in km"
 msgstr ""
 
-#: templates/tool.html:1042
+#: templates/tool.html:1043
 msgid "Fleet"
 msgstr ""
 
-#: templates/tool.html:1048
+#: templates/tool.html:1049
 msgid "Specify fleet composition"
 msgstr ""
 
-#: templates/tool.html:1055
+#: templates/tool.html:1056
 msgid ""
 "A simple calculation will use \"most likely\" values as model inputs and "
 "outputs.\n"
@@ -1115,15 +1164,15 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
 msgstr ""
 
-#: templates/tool.html:1065
+#: templates/tool.html:1066
 msgid "Simple calculation"
 msgstr ""
 
-#: templates/tool.html:1071
+#: templates/tool.html:1072
 msgid "Error propagation (Monte Carlo)"
 msgstr ""
 
-#: templates/tool.html:1074
+#: templates/tool.html:1075
 msgid "number of iterations"
 msgstr ""
 

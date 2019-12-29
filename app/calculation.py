@@ -16,15 +16,34 @@ class Calculation():
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip)
         self.d_pt = {
                     'Petrol':'ICEV-p',
+                    'Essence' : 'ICEV-p',
                     'Diesel':'ICEV-d',
                     'Natural gas':'ICEV-g',
+                    'GPL' : 'ICEV-g',
                     'Electric':'BEV',
+                    'Electrique' : 'BEV',
                     'Fuel cell':'FCEV',
+                    'Pile à combustible': 'FCEV',
                     'Hybrid-petrol':'HEV-p',
+                    'Hybride': 'HEV-p',
                     '(Plugin) Hybrid-petrol':'PHEV',
+                    'Hybride rechargeable':'PHEV',
                     '(Plugin) Hybrid-petrol - combustion':'PHEV-c',
                     '(Plugin) Hybrid-petrol - electric':'PHEV-e',
                 }
+        self.d_size = {
+            'Mini':'Mini',
+            'Small':'Small',
+            'Petite':'Small',
+            'Lower medium':'Lower medium',
+            'Moyenne inférieure':'Lower medium',
+            'Medium':'Medium',
+            'Moyenne':'Medium',
+            'Large':'Large',
+            'Grande':'Large',
+            'SUV':'SUV',
+            'Van':'Van'
+        }
         self.d_rev_pt = {v:k for k, v, in self.d_pt.items()}
         self.excel_lci = ""
 
@@ -102,7 +121,7 @@ class Calculation():
         new_dict = {}
         new_dict[('Functional unit',)] = {'powertrain': [self.d_pt[x] for x in raw_dict['type']],
                                           'year': [int(x) for x in raw_dict['year']],
-                                          'size': raw_dict['size']}
+                                          'size': [self.d_size[s] for s in raw_dict['size']]}
         f_d = {}
         new_dict[('Driving cycle',)] = raw_dict['driving_cycle']
         new_dict[('Background',)] = {k: v for k, v in raw_dict['background params'].items()}

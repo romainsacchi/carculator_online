@@ -21,8 +21,8 @@ def index():
 @app.route('/tool')
 def tool_page():
     """Return tool page"""
-    powertrains = ["Petrol", 'Diesel', 'Natural gas', 'Electric', 'Fuel cell', 'Hybrid-petrol', '(Plugin) Hybrid-petrol']
-    sizes = app.calc.cip.sizes
+    powertrains = [_("Petrol"), _('Diesel'), _('Natural gas'), _('Electric'), _('Fuel cell'), _('Hybrid-petrol'), _('(Plugin) Hybrid-petrol')]
+    sizes = [_("Mini"), _("Small"), _("Lower medium"), _("Medium"), _("Large"), _("SUV"), _("Van")]
     years = [i for i in range(2015, 2051)]
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
                       'CADC Motorway 130','CADC','NEDC']
@@ -55,7 +55,6 @@ def search_params(param_item, powertrain_filter, size_filter):
 
 @app.route('/get_param_value/<name>/<pt>/<s>/<y>')
 def get_param_value(name, pt, s, y):
-
     pt = pt.split(',')
     pt = [app.calc.d_pt[p] for p in pt]
     s = s.split(',')
@@ -100,24 +99,19 @@ def get_electricity_mix(ISO, years):
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json())
-
     # Create a connection to the Redis server
     q = Queue(connection=conn)
-
     job = q.enqueue_call(
         func=app.calc.process_results, args=(d,), result_ttl=86400
     )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
-
     return res
 
 @app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
     job = Job.fetch(job_key, connection=conn)
-
     app.lci_to_bw = job.result[1]
-
     if job.is_finished:
         return render_template('result.html', data = job.result[0])
 
@@ -129,8 +123,6 @@ def get_job_status(job_key):
     except NoSuchJobError:
         response = jsonify({"job status": 'job not found'})
         return make_response(response, 404)
-
-
     response = jsonify({"job status": job.get_status()})
     return make_response(response, 200)
 
@@ -149,7 +141,6 @@ def set_language(language=None):
 def get_language():
 
     lang = session["language"]
-
     if lang == "en":
         json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
     if lang == "de":
@@ -158,11 +149,9 @@ def get_language():
         json_url = os.path.join(app.static_folder, "translation", "translation_fr.json")
     if lang == "it":
         json_url = os.path.join(app.static_folder, "translation", "translation_it.json")
-
     with open(json_url, encoding='utf-8') as fh:
         data = json.load(fh)
     return make_response(data, 200)
-
 
 @app.route("/get_inventory_excel_for_bw")
 def get_inventory_excel_for_bw():
@@ -170,7 +159,6 @@ def get_inventory_excel_for_bw():
     resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
     resp.headers["Content-type"] = "text/csv"
     return resp
-
 
 @app.route("/get_param_table")
 def get_param_table():
