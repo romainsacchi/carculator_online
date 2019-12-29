@@ -9,6 +9,8 @@ from rq import Queue
 from rq.job import Job, NoSuchJobError
 from .worker import conn
 from .calculation import Calculation
+from flask_babel import _
+
 
 app.calc = Calculation()
 app.lci_to_bw = ""
