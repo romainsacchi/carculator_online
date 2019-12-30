@@ -54,7 +54,8 @@ class Calculation():
             'Achat':'purchase',
             'Remplacement de composants':'component replacement',
             'Carburant':'energy',
-            'Maintenance':'maintenance'
+            'Maintenance':'maintenance',
+            'Total':'total'
         }
         self.d_rev_pt_en = {v:k for k, v, in self.d_pt_en.items()}
         self.d_rev_size_en = {v:k for k, v, in self.d_size_en.items()}
