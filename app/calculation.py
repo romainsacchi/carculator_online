@@ -138,7 +138,7 @@ class Calculation():
             'cargo-slider':'cargo mass'
         }
         new_dict = {}
-        new_dict[('Functional unit',)] = {'powertrain': [self.d_pt[x] for x in raw_dict['type']],
+        new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_en[x] for x in raw_dict['type']],
                                           'year': [int(x) for x in raw_dict['year']],
                                           'size': [self.d_size[s] for s in raw_dict['size']]}
         f_d = {}
@@ -156,7 +156,7 @@ class Calculation():
                 k = tuple(k.split(","))
                 name = k[0]
                 cat = self.d_categories[name]
-                powertrain = self.d_pt[k[1]]
+                powertrain = self.d_pt_en[k[1]]
                 size = k[2]
                 val = [float(n) for n in v]
 
