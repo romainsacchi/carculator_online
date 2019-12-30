@@ -129,7 +129,7 @@ class Calculation():
 
         return (json.dumps([list_res, list_res_costs]), self.excel_lci)
 
-    def format_dictionary(self, raw_dict):
+    def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
         d_sliders =  {
@@ -139,9 +139,16 @@ class Calculation():
             'cargo-slider':'cargo mass'
         }
         new_dict = {}
-        new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_en[x] for x in raw_dict['type']],
+
+        if lang == "en":
+            new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_en[x] for x in raw_dict['type']],
                                           'year': [int(x) for x in raw_dict['year']],
                                           'size': [self.d_size_en[s] for s in raw_dict['size']]}
+        if lang == "fr":
+            new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_fr[x] for x in raw_dict['type']],
+                                          'year': [int(x) for x in raw_dict['year']],
+                                          'size': [self.d_size_fr[s] for s in raw_dict['size']]}
+
         f_d = {}
         new_dict[('Driving cycle',)] = raw_dict['driving_cycle']
         new_dict[('Background',)] = {k: v for k, v in raw_dict['background params'].items()}
