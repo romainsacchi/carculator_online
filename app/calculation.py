@@ -140,7 +140,7 @@ class Calculation():
         new_dict = {}
         new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_en[x] for x in raw_dict['type']],
                                           'year': [int(x) for x in raw_dict['year']],
-                                          'size': [self.d_size[s] for s in raw_dict['size']]}
+                                          'size': [self.d_size_en[s] for s in raw_dict['size']]}
         f_d = {}
         new_dict[('Driving cycle',)] = raw_dict['driving_cycle']
         new_dict[('Background',)] = {k: v for k, v in raw_dict['background params'].items()}
