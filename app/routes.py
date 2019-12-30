@@ -104,7 +104,7 @@ def get_results():
     # Create a connection to the Redis server
     q = Queue(connection=conn)
     job = q.enqueue_call(
-        func=app.calc.process_results, args=(d,), result_ttl=86400
+        func=app.calc.process_results, args=(d, session['language']), result_ttl=86400
     )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res

@@ -14,38 +14,53 @@ class Calculation():
         self.cip.static()
         self.d_categories = {self.cip.metadata[a]['name']: self.cip.metadata[a]['category'] for a in self.cip.metadata}
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip)
-        self.d_pt = {
+        self.d_pt_en = {
                     'Petrol':'ICEV-p',
-                    'Essence' : 'ICEV-p',
                     'Diesel':'ICEV-d',
                     'Natural gas':'ICEV-g',
-                    'GPL' : 'ICEV-g',
                     'Electric':'BEV',
-                    'Electrique' : 'BEV',
                     'Fuel cell':'FCEV',
-                    'Pile à combustible': 'FCEV',
                     'Hybrid-petrol':'HEV-p',
-                    'Hybride-essence': 'HEV-p',
-                    '(Plugin) Hybrid-petrol':'PHEV',
-                    'Hybride-essence rechargeable':'PHEV',
-                    '(Plugin) Hybrid-petrol - combustion':'PHEV-c',
-                    '(Plugin) Hybrid-petrol - electric':'PHEV-e',
+                    '(Plugin) Hybrid-petrol':'PHEV'
                 }
-        self.d_size = {
+        self.d_pt_fr = {
+                    'Essence' : 'ICEV-p',
+                    'Diesel':'ICEV-d',
+                    'GPL' : 'ICEV-g',
+                    'Electrique' : 'BEV',
+                    'Pile à combustible': 'FCEV',
+                    'Hybride-essence': 'HEV-p',
+                    'Hybride-essence rechargeable':'PHEV',
+                }
+        self.d_size_en = {
             'Mini':'Mini',
-            'Mini-citadine': 'Mini',
             'Small':'Small',
-            'Citadine':'Small',
             'Lower medium':'Lower medium',
-            'Berline compacte':'Lower medium',
             'Medium':'Medium',
-            'Berline familiale':'Medium',
             'Large':'Large',
+            'SUV':'SUV',
+            'Van':'Van'
+        }
+        self.d_size_fr = {
+            'Mini-citadine': 'Mini',
+            'Citadine':'Small',
+            'Berline compacte':'Lower medium',
+            'Berline familiale':'Medium',
             'Grande routière':'Large',
             'SUV':'SUV',
             'Van':'Van'
         }
-        self.d_rev_pt = {v:k for k, v, in self.d_pt.items()}
+        self.d_cost_fr = {
+            'Achat':'purchase',
+            'Remplacement de composants':'component replacement',
+            'Carburant':'energy',
+            'Maintenance':'maintenance'
+        }
+        self.d_rev_pt_en = {v:k for k, v, in self.d_pt_en.items()}
+        self.d_rev_size_en = {v:k for k, v, in self.d_size_en.items()}
+        self.d_rev_pt_fr = {v:k for k, v, in self.d_pt_fr.items()}
+        self.d_rev_size_fr = {v:k for k, v, in self.d_size_fr.items()}
+        self.d_rev_cost_fr = {v:k for k, v, in self.d_cost_fr.items()}
         self.excel_lci = ""
 
     def load_map_file(self):
@@ -66,7 +81,7 @@ class Calculation():
         return get_standard_driving_cycle(dc)
 
 
-    def process_results(self, d):
+    def process_results(self, d, lang):
         """ Calculate LCIA and store results in an array of arrays """
         arr = self.interpolate_array(d[('Functional unit',)]['year'])
         modify_xarray_from_custom_parameters(d[('Foreground',)], arr)
@@ -75,9 +90,16 @@ class Calculation():
         cost = cm.calculate_cost_impacts(scope=d[('Functional unit',)])
         data_cost = cost.values
         year = cost.coords['year'].values.tolist()
-        powertrain = [self.d_rev_pt[pt] for pt in cost.coords['powertrain'].values.tolist()]
-        size = cost.coords['size'].values.tolist()
-        cost_category = cost.coords['cost_type'].values.tolist()
+
+        if lang == "en":
+            powertrain = [self.d_rev_pt_en[pt] for pt in cost.coords['powertrain'].values.tolist()]
+            size = cost.coords['size'].values.tolist()
+            cost_category = cost.coords['cost_type'].values.tolist()
+        if lang == "fr":
+            powertrain = [self.d_rev_pt_fr[pt] for pt in cost.coords['powertrain'].values.tolist()]
+            size = [self.d_rev_size_fr[s] for s in cost.coords['size'].values.tolist()]
+            cost_category = [self.d_rev_cost_fr[c] for c in cost.coords['cost_type'].values.tolist()]
+
         list_res_costs = [['value', 'size', 'powertrain', 'year', 'cost category']]
 
         for s in range(0, len(size)):
@@ -92,9 +114,6 @@ class Calculation():
         lci = self.ic.export_lci(presamples = False)
         self.excel_lci = self.write_lci_to_excel(lci, "test").read()
 
-        #s3 = boto3.resource('s3')
-        #s3.Bucket('carculator-bucket').put_object(Key='test.xlsx', Body=excel_lci.read())
-
         data = results.values
         impact = results.coords['impact'].values.tolist()
         impact_category = results.coords['impact_category'].values.tolist()
@@ -106,7 +125,6 @@ class Calculation():
                         for cat in range(0, len(impact)):
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])
-
 
         return (json.dumps([list_res, list_res_costs]), self.excel_lci)
 
