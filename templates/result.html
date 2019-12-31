@@ -112,7 +112,7 @@
         </section>
 
 		<section id="mu-about">
-			<div class="container" style="background-color:#D0D3D4;">
+			<div class="container" style="width:90%;background-color:#D0D3D4;">
 				<div class="row"  style="padding-top:80px;">
 					<h2><img class="image" src="/static/images/book_icon.png"
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
@@ -312,30 +312,26 @@
                 name_default_impact = i18n("climate_change");
 				chart_title = i18n("chart_title");
 
-				console.log(data);
-	console.log(name_default_impact);
-	console.log(chart_title);
+				$("#output").pivotUI(
+				  data[0], {
+					rows: ["impact category", "category"],
+					cols: ["year", "powertrain", "size"],
+					vals: ["value"],
+					inclusions: {"impact category":[name_default_impact]},
+					"colOrder": "value_a_to_z",
+					aggregatorName: "Sum",
+					rendererName: "Stacked Bar Chart",
+					renderers: $.extend(
+						$.pivotUtilities.renderers,
+						$.pivotUtilities.export_renderers,
+					  $.pivotUtilities.plotly_renderers
+					),
+					rendererOptions: {plotly: title: {text: chart_title}},
 
-	$("#output").pivotUI(
-      data[0], {
-        rows: ["impact category", "category"],
-        cols: ["year", "powertrain", "size"],
-        vals: ["value"],
-        inclusions: {"impact category":[name_default_impact]},
-        "colOrder": "value_a_to_z",
-        aggregatorName: "Sum",
-        rendererName: "Stacked Bar Chart",
-        renderers: $.extend(
-            $.pivotUtilities.renderers,
-            $.pivotUtilities.export_renderers,
-          $.pivotUtilities.plotly_renderers
-        ),
-        //rendererOptions: {plotly: title: {text: chart_title}},
-
-        onRefresh: function(config){
-            imp = config["inclusions"]["impact category"][0]
-            }
-      });
+					onRefresh: function(config){
+						imp = config["inclusions"]["impact category"][0]
+						}
+				  });
 
             });
 
