@@ -74,14 +74,14 @@ class Calculation():
 
         }
         self.d_cat_fr = {
-            'direct': 'Emissions directes',
-            'energy chain': 'Fabrication du carburant',
-            'energy storage':'Stockage du carburant',
-            'glider':'Chassis',
-            'maintenance':'Maintenance',
-            'other':'Autre',
-            'powertrain':'Motorisation',
-            'road':'Route'
+            'Emissions directes':'direct',
+            'Fabrication du carburant':'energy chain',
+            'Stockage du carburant':'energy storage',
+            'Chassis':'glider',
+            'Maintenance':'maintenance',
+            'Autre':'other',
+            'Motorisation':'powertrain',
+            'Route':'road'
         }
         self.d_cost_fr = {
             'Achat':'purchase',
