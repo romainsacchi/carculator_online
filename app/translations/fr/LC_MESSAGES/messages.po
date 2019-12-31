@@ -421,7 +421,7 @@ msgid ""
 " as following:"
 msgstr ""
 "Toute utilisation de ces résultats ou de l'inventaire ayant servi à les "
-"générer doivent être dûment référencé comme suit:"
+"générer doivent être dûment référencée comme suit:"
 
 #: templates/result.html:120
 msgid "LIFE CYCLE IMPACT ASSESSMENT"

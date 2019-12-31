@@ -30,7 +30,7 @@
       "inventory_download" : "Der Download der Inventardatei beginnt in Kürze. Benötigt ecoinvent v.3.6 cutoff.",
       "save_results" : "Ihre Ergebnisse werden für einen Woche gespeichert. Um sie zu teilen, kopieren Sie einfach die URL dieser Seite.",
       "popup_blocker" : "Popup-Blocker verhindern möglicherweise, dass die Ergebnisseite angezeigt wird.",
-      "climate_change": "Klimawandel [kg CO2-Äqu.]",
+      "climate_change": "Klimawandel [kg CO2-Eq.]",
       "chart_title": "Aufprall pro Fahrzeugkilometer",
     "chart_title_cost": "Betriebskosten über den gesamten Lebenszyklus, Euro pro Fahrzeugkilometer",
   }
