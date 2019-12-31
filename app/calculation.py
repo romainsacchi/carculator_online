@@ -73,7 +73,7 @@ class Calculation():
         self.d_rev_pt_fr = {v:k for k, v, in self.d_pt_fr.items()}
         self.d_rev_size_fr = {v:k for k, v, in self.d_size_fr.items()}
         self.d_rev_cost_fr = {v:k for k, v, in self.d_cost_fr.items()}
-        self.d_rev_impact_fr = {v:k for k, v, in self.d_impact_fr.items()}
+        self.d_rev_cat_fr = {v:k for k, v, in self.d_cat_fr.items()}
         self.excel_lci = ""
 
     def load_map_file(self):
@@ -134,7 +134,7 @@ class Calculation():
             impact_category = results.coords['impact_category'].values.tolist()
 
         if lang == "fr":
-            impact_category = [self.d_rev_impact_fr[f] for f in results.coords['impact_category'].values.tolist()]
+            impact_category = [self.d_rev_cat_fr[f] for f in results.coords['impact_category'].values.tolist()]
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
         for imp in range(0, len(impact_category)):
