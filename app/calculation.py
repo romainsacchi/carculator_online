@@ -51,6 +51,28 @@ class Calculation():
             'Van':'Van'
         }
 
+        self.d_impact_fr = {
+            "Occupation de terre arable [m2/an]":"agricultural land occupation",
+            "Changement climatique [kg CO2-eq.]":"climate change",
+            "Epuisement des ressources d'énergie fossile [kg pétrole-eq.]":"fossil depletion",
+            "Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]":"freshwater ecotoxicity",
+            "Eutrophisation des milieux aquatiques non-marins [kg P-eq.]":"freshwater eutrophication",
+            "Toxicité humaine [kg 1,4-DC-eq.]":"human toxicity",
+            "Rayonnement ionisant [kg U235-Eq]":"ionising radiation",
+            "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]":"marine ecotoxicity",
+            "Eutrophisation des milieux aquatiques non-marins [kg N-eq.]":"marine eutrophication",
+            "Epuisement des ressources en métaux [kg fer-eq.]":"metal depletion",
+            "Transformation de terre naturelle [m2]":"natural land transformation",
+            "Détérioration de la couche d'ozone [kg CFC-11-eq.]":"ozone depletion",
+            "Formation de particules fines [kg PM10-eq.]":"particulate matter formation",
+            "Formation de brouillard de pollution [kg NMVOC-eq.]":"photochemical oxidant formation",
+            "Acidification terrestre [kg SO2-Eq-eq.]":"terrestrial acidification",
+            "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]":"terrestrial ecotoxicity",
+            "Occupation de terre en milieu urbain [m2/an]":"urban land occupation",
+            "Epuisement des réserves d'eau douce [m3]":"water depletion",
+            "Emissions de bruit [Person-Pascal/seconde]":"human noise",
+
+        }
         self.d_cat_fr = {
             'direct': 'Emissions directes',
             'energy chain': 'Fabrication du carburant',
@@ -73,6 +95,7 @@ class Calculation():
         self.d_rev_pt_fr = {v:k for k, v, in self.d_pt_fr.items()}
         self.d_rev_size_fr = {v:k for k, v, in self.d_size_fr.items()}
         self.d_rev_cost_fr = {v:k for k, v, in self.d_cost_fr.items()}
+        self.d_rev_impact_fr = {v:k for k, v, in self.d_impact_fr.items()}
         self.d_rev_cat_fr = {v:k for k, v, in self.d_cat_fr.items()}
         self.excel_lci = ""
 
@@ -128,13 +151,14 @@ class Calculation():
         self.excel_lci = self.write_lci_to_excel(lci, "test").read()
 
         data = results.values
-        impact = results.coords['impact'].values.tolist()
+
 
         if lang == "en":
+            impact = results.coords['impact'].values.tolist()
             impact_category = results.coords['impact_category'].values.tolist()
-
         if lang == "fr":
-            impact_category = [self.d_rev_cat_fr[f] for f in results.coords['impact_category'].values.tolist()]
+            impact = [self.d_rev_cat_fr[f] for f in results.coords['impact'].values.tolist()]
+            impact_category = [self.d_rev_impact_fr[i] for i in results.coords['impact_category'].values.tolist()]
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
         for imp in range(0, len(impact_category)):
