@@ -307,10 +307,11 @@
                 error: function(xhr, status, error){console.log(error)}})
             ).done(function(json){
                 i18n.translator.add(json);
+                var name_default_impact = i18n("climate_change");
+				var chart_title = i18n("chart_title");
             });
 
-	var name_default_impact = i18n("climate_change");
-	var chart_title = i18n("chart_title");
+
 	console.log(data);
 	console.log(name_default_impact);
 	console.log(chart_title);
