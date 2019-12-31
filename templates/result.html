@@ -296,6 +296,8 @@
       });
 
 //  Load the JSON File
+	var name_default_impact;
+	var chart_title;
     $.when($.ajax({
                 url: "/get_language",
                 dataType: 'json',
@@ -307,8 +309,8 @@
                 error: function(xhr, status, error){console.log(error)}})
             ).done(function(json){
                 i18n.translator.add(json);
-                var name_default_impact = i18n("climate_change");
-				var chart_title = i18n("chart_title");
+                name_default_impact = i18n("climate_change");
+				chart_title = i18n("chart_title");
             });
 
 
