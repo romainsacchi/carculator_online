@@ -153,8 +153,6 @@ class Calculation():
         data = results.values
 
         if lang == "fr":
-            print(results.coords['impact'].values.tolist())
-            print(self.d_rev_cat_fr)
             impact = [self.d_rev_cat_fr[f] for f in results.coords['impact'].values.tolist()]
             impact_category = [self.d_rev_impact_fr[i] for i in results.coords['impact_category'].values.tolist()]
         else:
