@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log("check!")
+     console.log("check!")
      var progressSelector = $(".progress-wrap");
      progressSelector.each(function(){
      var getPercent = $(this).attr("data-progresspercent");
