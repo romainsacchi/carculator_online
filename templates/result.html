@@ -326,8 +326,7 @@
 						$.pivotUtilities.export_renderers,
 					  $.pivotUtilities.plotly_renderers
 					),
-					rendererOptions: {plotly: title: {text: "bla bla"}},
-
+					rendererOptions: {plotly: {title: {text: "bla bla"}}},
 					onRefresh: function(config){
 						imp = config["inclusions"]["impact category"][0]
 						}
@@ -359,7 +358,6 @@
  };
 
  function export_bw2_inventories(){
-
  	var str = i18n('inventory_download')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
@@ -377,7 +375,6 @@
             enter: "animated bounceInDown",
             exit: "animated bounceOutUp"
         },
-
     }
     );
  };
