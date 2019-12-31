@@ -15,7 +15,7 @@
       "missing_type": "Le ou les type(s) de véhicule à analyser est/sont manquant.",
       "missing_year": "Au moins une année doit être sélectionnée.",
       "missing_powertrain":"Le ou les type(s) de propulsion à analyser est/sont manquant.",
-      "missing_size":"Le ou les catégories de taille à analyser est/sont manquant.",
+      "missing_size":"La ou les catégories de taille à analyser est/sont manquantes.",
       "missing_country":"Le pays pour lequel conduire cette analyse est manquant.",
       "mix_1":"Il semblerait que le mix électrique pour ",
       "mix_2":" ne soit pas égale à 100%.",
@@ -32,6 +32,6 @@
       "popup_blocker": "Si votre navigateur possède un bloqueur de publicité, ce dernier peut empêcher la page des résultats de s'afficher.",
       "climate_change": "Changement climatique [kg CO2-eq.]",
       "chart_title": "Impact par véhicule-kilomètre",
-      "chart_title_cost": "Cout d'utilisation tout au long du cycle de vie, en Euro par véhicule-kilomètre",
-  },
+      "chart_title_cost": "Cout d'utilisation tout au long du cycle de vie, en Euro par véhicule-kilomètre"
+  }
 }
