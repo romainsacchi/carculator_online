@@ -275,27 +275,7 @@
 
     var data = {{data|safe}};
     var imp;
-    $("#output").pivotUI(
-      data[0], {
-        rows: ["impact category", "category"],
-        cols: ["year", "powertrain", "size"],
-        vals: ["value"],
-        // inclusions: {"impact category":["climate change"]},
-        "colOrder": "value_a_to_z",
-        aggregatorName: "Sum",
-        rendererName: "Stacked Bar Chart",
-        renderers: $.extend(
-            $.pivotUtilities.renderers,
-            $.pivotUtilities.export_renderers,
-          $.pivotUtilities.plotly_renderers
-        ),
-        //rendererOptions: {plotly: { yaxis: { title: list_unit["climate change"]},
-        //                            title: {text: "Climate change impacts, per vehicle-kilometer"}}},
 
-        onRefresh: function(config){
-            imp = config["inclusions"]["impact category"][0]
-            }
-      });
 
       $("#output_costs").pivotUI(
       data[1], {
@@ -329,6 +309,29 @@
                 i18n.translator.add(json);
             });
 
+	var name_default_impact = i18n("climate_change");
+	var chart_title = i18n("chart_title");
+
+	$("#output").pivotUI(
+      data[0], {
+        rows: ["impact category", "category"],
+        cols: ["year", "powertrain", "size"],
+        vals: ["value"],
+        inclusions: {"impact category":[name_default_impact]},
+        "colOrder": "value_a_to_z",
+        aggregatorName: "Sum",
+        rendererName: "Stacked Bar Chart",
+        renderers: $.extend(
+            $.pivotUtilities.renderers,
+            $.pivotUtilities.export_renderers,
+          $.pivotUtilities.plotly_renderers
+        ),
+        rendererOptions: {plotly: title: {text: chart_title}}},
+
+        onRefresh: function(config){
+            imp = config["inclusions"]["impact category"][0]
+            }
+      });
 
  function share_results(){
  	var str = i18n('save_results')

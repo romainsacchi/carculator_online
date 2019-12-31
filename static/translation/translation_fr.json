@@ -29,6 +29,8 @@
       "share_config": "Le téléchargement du fichier de configuration va commencer. Lors de votre prochaine visite, vous pouvez simplement le déposer dans la zone prévue à cet effet sur la droite.",
       "inventory_download": "Le téléchargement du fichier contenant l'inventaire va débuter. Son utilisation requiert ecoinvent v.3.6 cutoff.",
       "save_results": "Vos résultats sont enregistrés pendant une semaine. Pour les partager, copiez simplement l'url de cette page.",
-      "popup_blocker": "Si votre navigateur possède un bloqueur de publicité, ce dernier peut empêcher la page des résultats de s'afficher."
+      "popup_blocker": "Si votre navigateur possède un bloqueur de publicité, ce dernier peut empêcher la page des résultats de s'afficher.",
+      "climate_change": "Changement climatique [kg CO2-eq.]",
+      "chart_title": "Impact par véhicule-kilomètre"
   }
 }
