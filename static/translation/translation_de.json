@@ -28,7 +28,7 @@
       "welcome_message_3": "Finden Sie es jetzt mit dem Carculator heraus.",
       "share_config": "Der Download der Konfigurationsdatei startet in Kürze. Sie können es bei Ihrem nächsten Besuch in den Bereich auf der rechten Seite ziehen und dort ablegen.",
       "inventory_download" : "Der Download der Inventardatei beginnt in Kürze. Benötigt ecoinvent v.3.6 cutoff.",
-      "save_results" : "Ihre Ergebnisse werden für einen Monat gespeichert. Um sie zu teilen, kopieren Sie einfach die URL dieser Seite.",
+      "save_results" : "Ihre Ergebnisse werden für einen Woche gespeichert. Um sie zu teilen, kopieren Sie einfach die URL dieser Seite.",
       "popup_blocker" : "Popup-Blocker verhindern möglicherweise, dass die Ergebnisseite angezeigt wird."
   }
 }

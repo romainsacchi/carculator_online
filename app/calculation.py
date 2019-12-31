@@ -50,18 +50,30 @@ class Calculation():
             'SUV':'SUV',
             'Van':'Van'
         }
+
+        self.d_cat_fr = {
+            'direct': 'Emissions directes',
+            'energy chain': 'Fabrication du carburant',
+            'energy storage':'Stockage du carburant',
+            'glider':'Chassis',
+            'maintenance':'Maintenance',
+            'other':'Autre',
+            'powertrain':'Motorisation',
+            'road':'Route'
+        }
         self.d_cost_fr = {
             'Achat':'purchase',
             'Remplacement de composants':'component replacement',
             'Carburant':'energy',
             'Maintenance':'maintenance',
-            'Total':'total'
+            'total':'total'
         }
         self.d_rev_pt_en = {v:k for k, v, in self.d_pt_en.items()}
         self.d_rev_size_en = {v:k for k, v, in self.d_size_en.items()}
         self.d_rev_pt_fr = {v:k for k, v, in self.d_pt_fr.items()}
         self.d_rev_size_fr = {v:k for k, v, in self.d_size_fr.items()}
         self.d_rev_cost_fr = {v:k for k, v, in self.d_cost_fr.items()}
+        self.d_rev_impact_fr = {v:k for k, v, in self.d_impact_fr.items()}
         self.excel_lci = ""
 
     def load_map_file(self):
@@ -117,7 +129,13 @@ class Calculation():
 
         data = results.values
         impact = results.coords['impact'].values.tolist()
-        impact_category = results.coords['impact_category'].values.tolist()
+
+        if lang == "en":
+            impact_category = results.coords['impact_category'].values.tolist()
+
+        if lang == "fr":
+            impact_category = [self.d_rev_impact_fr[f] for f in results.coords['impact_category'].values.tolist()]
+
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
         for imp in range(0, len(impact_category)):
             for s in range(0, len(size)):

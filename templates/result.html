@@ -30,9 +30,9 @@
 	<!-- NoUISlider -->
 
 	<!-- Animate.css -->
-	  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+  	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 	    <!-- Tool page Style -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.css">
     <link rel="stylesheet" href="/static/css/result_style.css">
 
     <!-- Fonts -->
@@ -108,8 +108,33 @@
                                 <p>carculator, Paul Scherrer Institut, http://carculator.psi.ch</p>
 							</div>
                 		</div>
+            	</div>
+        </section>
+
+		<section id="mu-comparison">
+			<div class="container" style="background-color:#D0D3D4;">
+				<div class="row"  style="padding-top:80px;">
+					<h2><img class="image" src="/static/images/book_icon.png"
+												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:grey;">{{_('COMPARISON')}}</span></h2>
+				</div>
+						<div class="mu-about-area" style="padding-top:20px;">
+							<div class="col-md-12">
+								<div class="progress-wrap progress"
+								  data-progresspercent="25"
+								  data-height="10px"
+								  data-width="150px"
+								  data-speed="1500"
+								  data-color="3a9c23">
+								  <div class="progress-bar progress"></div>
+								</div>
+							</div>
+                		</div>
             </div>
         </section>
+
 		<section id="mu-about">
 			<div class="container" style="width:90%;">
 				<div class="row"  >
@@ -243,6 +268,7 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
 		<script type="text/javascript" src="/static/js/i18n.js"></script>
+		<link rel="stylesheet" href="/static/js/result_page.js">
 
 		<script>
 

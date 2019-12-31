@@ -5,3 +5,22 @@ body { font-family: Verdana;}
 .tick line {stroke: white;}
 .c3-axis path {stroke: grey;}
 .c3-circle { opacity: 1 !important; }
+
+.progress {
+  width:100px;
+  height: 100%;
+}
+.progress-wrap {
+  background: #dcdcdc;
+  margin: 20px 0;
+  overflow: hidden;
+  position: relative;
+
+}
+.progress-bar {
+    background:#249c23;
+    left: 0;
+    position: absolute;
+    top: 0;
+ width:0%;
+}
