@@ -112,7 +112,7 @@
         </section>
 
 		<section id="mu-about">
-			<div class="container" style="width:100%;background-color:#D0D3D4;">
+			<div class="container" style="width:90%;background-color:#D0D3D4;">
 				<div class="row"  style="padding-top:80px;">
 					<h2><img class="image" src="/static/images/book_icon.png"
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
@@ -124,8 +124,8 @@
 							<div class="col-md-12">
 								<div class="progress-wrap progress"
 								  data-progresspercent="25"
-								  data-height="10px"
-								  data-width="150px"
+								  data-height="20px"
+								  data-width="500px"
 								  data-speed="1500"
 								  data-color="3a9c23">
 								  <div class="progress-bar progress"></div>
@@ -274,6 +274,7 @@
 
 
     var data = {{data|safe}};
+    console.log(data);
     var imp;
 
 //  Load the JSON File
@@ -413,7 +414,7 @@ var progressSelector = $(".progress-wrap");
      $(this).css({"height":getHeight,"width":getWidth});
      $(this).find(".progress-bar").css({"background-color":"#"+getColor}).animate({ width:getPercent+'%' },getSpeed)
      });
-     
+
 		</script>
 		<link rel="stylesheet" href="/static/js/result_page.js">
 
