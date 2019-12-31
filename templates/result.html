@@ -311,10 +311,8 @@
                 i18n.translator.add(json);
                 name_default_impact = i18n("climate_change");
 				chart_title = i18n("chart_title");
-            });
 
-
-	console.log(data);
+				console.log(data);
 	console.log(name_default_impact);
 	console.log(chart_title);
 
@@ -323,7 +321,7 @@
         rows: ["impact category", "category"],
         cols: ["year", "powertrain", "size"],
         vals: ["value"],
-        inclusions: {"impact category":[0]},
+        inclusions: {"impact category":[name_default_impact]},
         "colOrder": "value_a_to_z",
         aggregatorName: "Sum",
         rendererName: "Stacked Bar Chart",
@@ -338,6 +336,11 @@
             imp = config["inclusions"]["impact category"][0]
             }
       });
+
+            });
+
+
+
 
  function share_results(){
  	var str = i18n('save_results')
