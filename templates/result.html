@@ -268,7 +268,7 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
 		<script type="text/javascript" src="/static/js/i18n.js"></script>
-		<link rel="stylesheet" href="/static/js/result_page.js">
+
 
 		<script>
 
@@ -276,28 +276,10 @@
     var data = {{data|safe}};
     var imp;
 
-
-      $("#output_costs").pivotUI(
-      data[1], {
-        rows: ["cost category"],
-        cols: ["year", "powertrain", "size"],
-        vals: ["value"],
-        exclusions: {"cost category":["total"]},
-        "colOrder": "value_a_to_z",
-        aggregatorName: "Sum",
-        rendererName: "Stacked Bar Chart",
-        renderers: $.extend(
-            $.pivotUtilities.renderers,
-            $.pivotUtilities.export_renderers,
-          $.pivotUtilities.plotly_renderers
-        ),
-        rendererOptions: {plotly: { yaxis: { title: "€ per vkm"},
-                                    title: {text: "Ownership cost over life cycle, per vehicle-kilometer"}}},
-      });
-
 //  Load the JSON File
 	var name_default_impact;
 	var chart_title;
+	var chart_title_cost;
     $.when($.ajax({
                 url: "/get_language",
                 dataType: 'json',
@@ -311,6 +293,7 @@
                 i18n.translator.add(json);
                 name_default_impact = i18n("climate_change");
 				chart_title = i18n("chart_title");
+				chart_title_cost = i18n("chart_title_cost)
 
 				$("#output").pivotUI(
 				  data[0], {
@@ -326,11 +309,28 @@
 						$.pivotUtilities.export_renderers,
 					  $.pivotUtilities.plotly_renderers
 					),
-					rendererOptions: {plotly: {title: {text: "bla bla"}}},
+					rendererOptions: {plotly: {title: {text: chart_title}}},
 					onRefresh: function(config){
 						imp = config["inclusions"]["impact category"][0]
 						}
 				  });
+
+				  $("#output_costs").pivotUI(
+					  data[1], {
+						rows: ["cost category"],
+						cols: ["year", "powertrain", "size"],
+						vals: ["value"],
+						exclusions: {"cost category":["total"]},
+						"colOrder": "value_a_to_z",
+						aggregatorName: "Sum",
+						rendererName: "Stacked Bar Chart",
+						renderers: $.extend(
+							$.pivotUtilities.renderers,
+							$.pivotUtilities.export_renderers,
+						  $.pivotUtilities.plotly_renderers
+						),
+						rendererOptions: {plotly: { title: {text: chart_title_cost}}},
+					  });
             });
 
  function share_results(){
@@ -404,6 +404,7 @@
  };
 
 		</script>
+		<link rel="stylesheet" href="/static/js/result_page.js">
 
 </body>
 </html>
