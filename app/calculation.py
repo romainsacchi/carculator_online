@@ -145,6 +145,7 @@ class Calculation():
                 for y in range(0, len(year)):
                     for cat in range(0, len(cost_category)):
                         if cost_category[cat] == "total":
+                            print("total")
                             arr_benchmark.append([size[s], powertrain[pt], year[y], 1 / data_cost[0, s, pt, y, cat]])
 
                         list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
@@ -173,9 +174,11 @@ class Calculation():
                 for pt in range(0, len(powertrain)):
                     for y in range(0, len(year)):
                         if impact_category[imp] == "climate change":
+                            print("climate")
                             arr_benchmark.append([size[s], powertrain[pt], year[y],
                                              1 / data[imp, s, pt, y, 0].sum()])
                         if impact_category[imp] == "fossil depletion":
+                            print(fossil)
                             arr_benchmark.append([size[s], powertrain[pt], year[y],
                                              1 / (data[imp, s, pt, y, 0].sum()/ 42000)])
                         for cat in range(0, len(impact)):
