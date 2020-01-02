@@ -180,7 +180,7 @@ class Calculation():
                         if imp == 7:
                             print("fossil")
                             arr_benchmark.append([size[s], powertrain[pt], year[y],
-                                             1 / (data[imp, s, pt, y, 0].sum()/ 42000)])
+                                             1 / (data[imp, s, pt, y, 0].sum())])
                         for cat in range(0, len(impact)):
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])
