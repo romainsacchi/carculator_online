@@ -136,12 +136,18 @@ class Calculation():
             size = [self.d_rev_size_fr[s] for s in cost.coords['size'].values.tolist()]
             cost_category = [self.d_rev_cost_fr[c] for c in cost.coords['cost_type'].values.tolist()]
 
+        arr_benchmark = []
+
         list_res_costs = [['value', 'size', 'powertrain', 'year', 'cost category']]
 
         for s in range(0, len(size)):
             for pt in range(0, len(powertrain)):
                 for y in range(0, len(year)):
+                    arr_benchmark.append([size[s], powertrain[pt], year[y], 1 / (cm.array.sel(parameter="TtW energy", size=s, powertrain=pt, year=y) / 42000)])
                     for cat in range(0, len(cost_category)):
+                        if cost_category[cat] == "total":
+                            arr_benchmark.append([size[s], powertrain[pt], year[y], 1 / data_cost[0, s, pt, y, cat]])
+
                         list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
 
         self.ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
@@ -160,15 +166,23 @@ class Calculation():
             impact_category = results.coords['impact_category'].values.tolist()
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
+
+
+
         for imp in range(0, len(impact_category)):
             for s in range(0, len(size)):
                 for pt in range(0, len(powertrain)):
                     for y in range(0, len(year)):
+                        if impact_category[imp] == "climate change":
+                            arr_benchmark.append([size[s], powertrain[pt], year[y],
+                                             1 / data[imp, s, pt, y, 0].sum()])
                         for cat in range(0, len(impact)):
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])
 
-        return (json.dumps([list_res, list_res_costs]), self.excel_lci)
+
+
+        return (json.dumps([list_res, list_res_costs, arr_benchmark]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
