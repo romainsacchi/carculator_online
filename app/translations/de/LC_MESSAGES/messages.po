@@ -20,7 +20,7 @@ msgstr ""
 
 #: app/routes.py:24 templates/tool.html:670
 msgid "Petrol"
-msgstr ""
+msgstr "Benzin"
 
 #: app/routes.py:24 templates/tool.html:678
 msgid "Diesel"
@@ -28,51 +28,51 @@ msgstr ""
 
 #: app/routes.py:24 templates/tool.html:684
 msgid "Natural gas"
-msgstr ""
+msgstr "Erdgas"
 
 #: app/routes.py:24 templates/tool.html:698
 msgid "Electric"
-msgstr ""
+msgstr "Elektrisch"
 
 #: app/routes.py:24
 msgid "Fuel cell"
-msgstr ""
+msgstr "Brennstoffzelle"
 
 #: app/routes.py:24
 msgid "Hybrid-petrol"
-msgstr ""
+msgstr "Hybrid-Benzin"
 
 #: app/routes.py:24
 msgid "(Plugin) Hybrid-petrol"
-msgstr ""
+msgstr "(Plugin) Hybrid-Benzin"
 
 #: app/routes.py:25
 msgid "Mini"
-msgstr ""
+msgstr "Kleinstwagen"
 
 #: app/routes.py:25
 msgid "Small"
-msgstr ""
+msgstr "Kleinwagen"
 
 #: app/routes.py:25
 msgid "Lower medium"
-msgstr ""
+msgstr "Kompaktklasse"
 
 #: app/routes.py:25
 msgid "Medium"
-msgstr ""
+msgstr "Mittelklasse"
 
 #: app/routes.py:25
 msgid "Large"
-msgstr ""
+msgstr "Oberklasse"
 
 #: app/routes.py:25
 msgid "SUV"
-msgstr ""
+msgstr "Geländewagen"
 
 #: app/routes.py:25
 msgid "Van"
-msgstr ""
+msgstr "Van"
 
 #: app/routes.py:87
 msgid "Email sent!"
@@ -88,35 +88,35 @@ msgstr ""
 
 #: templates/index.html:8
 msgid "Carculator : Home"
-msgstr ""
+msgstr "Carculator: Willkommen"
 
 #: templates/index.html:72
 msgid "Home"
-msgstr ""
+msgstr "Zuhause"
 
 #: templates/index.html:73
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: templates/index.html:74
 msgid "Facts"
-msgstr ""
+msgstr "Fakten"
 
 #: templates/index.html:75
 msgid "Team"
-msgstr ""
+msgstr "Mannschaft"
 
 #: templates/index.html:76
 msgid "Partners"
-msgstr ""
+msgstr "Partner"
 
 #: templates/index.html:77
 msgid "Publications"
-msgstr ""
+msgstr "Veröffentlichungen"
 
 #: templates/index.html:78
 msgid "Contact us"
-msgstr ""
+msgstr "Kontaktiere uns"
 
 #: templates/index.html:139
 msgid "Online"
@@ -257,7 +257,7 @@ msgstr "Das Team hinter der Entwicklung von"
 
 #: templates/index.html:424
 msgid "sits at the Paul Scherrer Institute, in the "
-msgstr ""
+msgstr "ist am Paul Scherrer Institut, im "
 
 #: templates/index.html:449
 msgid "Pilot"
@@ -269,15 +269,15 @@ msgstr "Boxenstopp Manager"
 
 #: templates/index.html:492
 msgid "Car designer (now at INFRAS)"
-msgstr ""
+msgstr "Autodesigner (jetzt bei INFRAS)"
 
 #: templates/index.html:518
 msgid "Engine specialist"
-msgstr ""
+msgstr "Motorspezialist"
 
 #: templates/index.html:542
 msgid "Chief Aerodynamicist"
-msgstr ""
+msgstr "Chefaerodynamiker"
 
 #: templates/index.html:563
 msgid "Mechanic"
@@ -356,15 +356,15 @@ msgstr "Alle Rechte vorbehalten"
 
 #: templates/param_table.html:8 templates/tool.html:8
 msgid "Carculator : Configuration"
-msgstr ""
+msgstr "Carculator: Konfiguration"
 
 #: templates/param_table.html:79
 msgid "PARAMETERS"
-msgstr ""
+msgstr "PARAMETER"
 
 #: templates/param_table.html:88 templates/tool.html:418
 msgid "Importance"
-msgstr ""
+msgstr "Bedeutung"
 
 #: templates/param_table.html:89 templates/tool.html:419
 msgid "Name"
@@ -372,77 +372,78 @@ msgstr ""
 
 #: templates/param_table.html:90 templates/tool.html:420
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: templates/param_table.html:91 templates/tool.html:421
 msgid "Unit"
-msgstr ""
+msgstr "Einheit"
 
 #: templates/param_table.html:92 templates/tool.html:422
 msgid "Source"
-msgstr ""
+msgstr "Referenz"
 
 #: templates/param_table.html:93 templates/tool.html:423
 msgid "Applies to powertrain"
-msgstr ""
+msgstr "Gilt für den Antriebsstrang"
 
 #: templates/param_table.html:94 templates/tool.html:424
 msgid "Applies to size"
-msgstr ""
+msgstr "Gilt für die Größenkategorie"
 
 #: templates/result.html:8
 msgid "Carculator : Results"
-msgstr ""
+msgstr "Carculator : Ergebnisse"
 
 #: templates/result.html:80
 msgid "Export Brightway2-compatible inventories"
-msgstr ""
+msgstr "Exportieren Sie Brightway2-kompatible Inventare"
 
 #: templates/result.html:83
 msgid "Export Simapro-compatible inventories"
-msgstr ""
+msgstr "Exportieren Sie Simapro-kompatible Inventare"
 
 #: templates/result.html:85
 msgid "Share results"
-msgstr ""
+msgstr "Ergebnisse teilen"
 
 #: templates/result.html:103
 msgid "REFERENCE"
-msgstr ""
+msgstr "REFERENZ"
 
 #: templates/result.html:107
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
 msgstr ""
+"Auf jede Verwendung der Ergebnisse oder Inventare in irgendeiner Form sollte wie folgt Bezug genommen werden: "
 
 #: templates/result.html:120
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
-msgstr ""
+msgstr "LEBENSZYKLUS-FOLGENABSCHÄTZUNG"
 
 #: templates/result.html:137
 msgid "LIFE CYCLE COST ASSESSMENT"
-msgstr ""
+msgstr "LEBENSZYKLUSKOSTENABSCHÄTZUNG"
 
 #: templates/result.html:154
 msgid "OTHER INDICATORS"
-msgstr ""
+msgstr "ANDERE INDIKATOREN"
 
 #: templates/result.html:161
 msgid "Energy consumption along driving cycle"
-msgstr ""
+msgstr "Energieverbrauch während des Fahrzyklus"
 
 #: templates/result.html:162
 msgid "Pollutants emissions along driving cycle"
-msgstr ""
+msgstr "Schadstoffemissionen im Fahrzyklus"
 
 #: templates/result.html:186
 msgid "Noise emissions along driving cycle"
-msgstr ""
+msgstr "Geräuschemission entlang des Fahrzyklus"
 
 #: templates/result.html:187
 msgid "GHG emissions vs. ownership costs"
-msgstr ""
+msgstr "THG-Emissionen im Verhältnis zu den Betriebskosten"
 
 #: templates/tool.html:80
 msgid "Calculate"
@@ -454,7 +455,7 @@ msgstr "Konfiguration teilen"
 
 #: templates/tool.html:83
 msgid "Drop configuration file"
-msgstr ""
+msgstr "Konfigurationsdatei löschen"
 
 #: templates/tool.html:105
 msgid "SCOPE"
@@ -546,21 +547,23 @@ msgstr ""
 
 #: templates/tool.html:287
 msgid "Search for car models"
-msgstr ""
+msgstr "Suche nach Automodellen"
 
 #: templates/tool.html:326
 msgid "CAR PARAMETERS"
-msgstr ""
+msgstr "AUTO PARAMETER"
 
 #: templates/tool.html:333
 msgid "Each car is defined by up to 200 input parameters."
-msgstr ""
+msgstr "Jedes Auto wird durch bis zu 200 Eingabeparameter definiert."
 
 #: templates/tool.html:334
 msgid ""
 "The default values for these parameters are so-called \"most likely\" "
 "values, calibrated against a large number of car manufacturers data."
 msgstr ""
+"Die Standardwerte für diese Parameter sind sogenannte \"wahrscheinlichste\" Werte, "
+"die anhand einer großen Anzahl von Daten der Automobilhersteller kalibriert wurden."
 
 #: templates/tool.html:335
 msgid ""
@@ -866,7 +869,7 @@ msgstr "Abfall"
 
 #: templates/tool.html:572
 msgid "Set to zero"
-msgstr ""
+msgstr "Auf Null setzen"
 
 #: templates/tool.html:579
 msgid "Adjust the number of passengers"
@@ -886,7 +889,7 @@ msgstr "Jährliche Fahrleistung"
 
 #: templates/tool.html:629
 msgid "ENERGY STORAGE AND FUEL PATHWAYS"
-msgstr ""
+msgstr "Energiespeicherung und Kraftstoffpfade"
 
 #: templates/tool.html:634
 msgid ""
@@ -898,6 +901,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural gas, but also "
 "alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
 msgstr ""
+"In diesem Abschnitt definieren wir den Weg zur Kraftstoffversorgung der Fahrzeuge sowie die Technologie für die Speicherung von Energie an Bord. "
+"Der Benutzer kann herkömmliche Wege wählen, um die Lieferung und Verwendung von üblichen Kraftstoffen wie Diesel oder bleifreiem Benzin oder komprimiertem Erdgas, "
+"aber auch alternativen Kraftstoffen wie Biodiesel, Bioethanol und Biomethan darzustellen."
+
 
 #: templates/tool.html:637
 msgid ""
@@ -906,6 +913,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tThis means that they do not compete with crops "
 "production with the purpose of food supply."
 msgstr ""
+"Bei den hier vorgestellten alternativen Kraftstoffen handelt es sich um sogenannte "2nd Generation" -Kraftstoffe, "
+"da sie aus pflanzlichen Reststoffen hergestellt werden. Dies bedeutet, dass sie nicht mit der Pflanzenproduktion im Sinne "
+"der Nahrungsmittelversorgung konkurrieren."
 
 #: templates/tool.html:639
 msgid ""
@@ -916,6 +926,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
 "methane to produce hydrogen (and carbon monoxide)."
 msgstr ""
+"Darüber hinaus werden verschiedene Wege für die Bereitstellung von Wasserstoff für Brennstoffzellenautos vorgestellt.
+"Wasserstoff kann entweder durch Elektrolyse erzeugt werden, was ein Prozess ist, der Elektrizität erfordert, "
+"oder durch einen Prozess, der als "Steam Methane Reforming" bezeichnet wird und Dampf und Methan verwendet, um Wasserstoff (und Kohlenmonoxid) zu erzeugen."
 
 #: templates/tool.html:643
 msgid ""
@@ -925,48 +938,51 @@ msgid ""
 "origin of battery manufacture will determine the electricity mix used to "
 "produce the battery cells."
 msgstr ""
+"In Bezug auf Energiespeichertechnologien für batteriebetriebene Elektrofahrzeuge kann der Benutzer zwischen verschiedenen "
+"Arten von Lithiumionen-basierter Chemie, aber auch zwischen verschiedenen Herstellungsherkünften wählen. Die "
+"Der Ursprung der Batterieherstellung bestimmt den Strommix, der zur Herstellung der Batteriezellen verwendet wird."
 
 #: templates/tool.html:658
 msgid "FUEL PATHWAYS"
-msgstr ""
+msgstr "KRAFTSTOFFWEGE"
 
 #: templates/tool.html:672
 msgid "Source for conventional petrol inventory: ecoinvent 3.6"
-msgstr ""
+msgstr "Referenz für konventionelles Benzininventar: ecoinvent 3.6"
 
 #: templates/tool.html:673
 msgid ""
 "Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul "
 "Scherrer Institut"
-msgstr ""
+msgstr "Referenz für Bioethanolinventar: Francesco Cozzolino, 2018, Paul Scherrer Institut"
 
 #: templates/tool.html:680
 msgid "Source for conventional diesel inventory: ecoinvent 3.6"
-msgstr ""
+msgstr "Referenz für konventionelles Dieselinventar: ecoinvent 3.6"
 
 #: templates/tool.html:681
 msgid ""
 "Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer"
 " Institut"
-msgstr ""
+msgstr "Referenz für das Biodieselinventar: Francesco Cozzolino, 2018, Paul Scherrer Institut"
 
 #: templates/tool.html:686
 msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
-msgstr ""
+msgstr "Referenz für konventionelles Erdgasinventar: ecoinvent 3.6"
 
 #: templates/tool.html:687
 msgid ""
 "Source for bio-methane inventory: Xiaojin Zhang, 2019, Paul Scherrer "
 "Institut"
-msgstr ""
+msgstr "Referenz für Bio-Methan-Inventar: Xiaojin Zhang, 2019, Paul Scherrer"
 
 #: templates/tool.html:690
 msgid "Hydrogen"
-msgstr ""
+msgstr "Wasserstoff"
 
 #: templates/tool.html:692
 msgid "Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020"
-msgstr ""
+msgstr "Referenz für Wasserstoff durch Elektrolyse Kraftstoffinventar: ELEGANCY project, 2020"
 
 #: templates/tool.html:693
 msgid ""
@@ -975,104 +991,110 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tApplied Energy, Volume 190, 15 "
 "March 2017, Pages 326-338 "
 msgstr ""
+"Referenz für die Bestandsaufnahme von Wasserstoff durch Dampfreformierung von Methan: "
+"Zhang et al. 2017, Applied Energy, Volume 190, 15, March 2017, Pages 326-338"
 
 #: templates/tool.html:707
 msgid "Conventional petrol"
-msgstr ""
+msgstr "Herkömmliches Benzin"
 
 #: templates/tool.html:716
 msgid "Bio-ethanol from forest residues"
-msgstr ""
+msgstr "Bioethanol aus Waldresten"
 
 #: templates/tool.html:722
 msgid "Bio-ethanol from wheat straw"
-msgstr ""
+msgstr "Bioethanol aus Weizenstroh"
 
 #: templates/tool.html:728
 msgid "Bio-ethanol from maize starch"
-msgstr ""
+msgstr "Bioethanol aus Maisstärke"
 
 #: templates/tool.html:734
 msgid "Bio-ethanol from sugar beet residue"
-msgstr ""
+msgstr "Bioethanol aus Zuckerrübenresten"
 
 #: templates/tool.html:744
 msgid "Conventional diesel"
-msgstr ""
+msgstr "Konventioneller Diesel"
 
 #: templates/tool.html:750
 msgid "Bio-diesel from algae"
-msgstr ""
+msgstr "Biodiesel aus Algen"
 
 #: templates/tool.html:756
 msgid "Bio-diesel from used cooking oil"
-msgstr ""
+msgstr "Biodiesel aus gebrauchtem Speiseöl"
 
 #: templates/tool.html:764
 msgid "Compressed natural gas"
-msgstr ""
+msgstr "Komprimiertes Erdgas"
 
 #: templates/tool.html:770
 msgid "Bio-methane from manure"
-msgstr ""
+msgstr "Biomethan aus Gülle"
 
 #: templates/tool.html:778
 msgid "Via electrolysis using the electricity mix specified above"
-msgstr ""
+msgstr "Durch Elektrolyse mit dem oben angegebenen Strommix"
 
 #: templates/tool.html:784
 msgid "Via electrolysis using photovoltaic power"
-msgstr ""
+msgstr "Durch Elektrolyse mit Photovoltaik"
 
 #: templates/tool.html:790
 msgid "Via electrolysis using hydro power"
-msgstr ""
+msgstr "Durch Elektrolyse mit Wasserkraft"
 
 #: templates/tool.html:796
 msgid "Via electrolysis using nuclear power"
-msgstr ""
+msgstr "Durch Elektrolyse mit Kernkraft"
 
 #: templates/tool.html:802
 msgid "Via Steam Methane Reforming"
-msgstr ""
+msgstr "Durch Steam Methane Reforming"
 
 #: templates/tool.html:810
 msgid "Electricity mix specified above"
-msgstr ""
+msgstr "Strommischung wie oben angegeben"
 
 #: templates/tool.html:824
 msgid "ENERGY STORAGE"
-msgstr ""
+msgstr "ENERGIESPEICHER"
 
 #: templates/tool.html:835
 msgid "Fuel cell technology"
-msgstr ""
+msgstr "Brennstoffzellentechnologie"
 
 #: templates/tool.html:837
 msgid "Main type of fuel cell developed for transport applications."
-msgstr ""
+msgstr "Haupttyp der für Transportanwendungen entwickelten Brennstoffzelle."
 
 #: templates/tool.html:838
 msgid ""
 "Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, "
 "issue C, 884-896."
 msgstr ""
+"Referenz:  Simons A. and Bauer C. Applied Energy, 2015, vol. 157, issue C, 884-896."
 
 #: templates/tool.html:842
 msgid "Battery chemistry"
-msgstr ""
+msgstr "Batteriechemie"
 
 #: templates/tool.html:844
 msgid ""
 "Three different types of lithium-ion-based batteries are presented, all "
 "used for transport applications."
 msgstr ""
+"Es werden drei verschiedene Arten von Lithium-Ionen-Batterien vorgestellt, "
+"die alle für Transportanwendungen verwendet werden."
 
 #: templates/tool.html:845
 msgid ""
 "Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, "
 "3379-3390."
 msgstr ""
+"Referenz: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, 3379-3390."
 
 #: templates/tool.html:858
 msgid "Proton exchange membrane"
@@ -1092,13 +1114,14 @@ msgstr ""
 
 #: templates/tool.html:894
 msgid "Origin of manufacture"
-msgstr ""
+msgstr "Herkunft der Herstellung"
 
 #: templates/tool.html:896
 msgid ""
 "Modifies the electricity mix used along the manufacture of the battery "
 "cells."
 msgstr ""
+"Ändert den Strommix, der bei der Herstellung der Batteriezellen verwendet wird."
 
 #: templates/tool.html:904
 msgid "China"
@@ -1110,19 +1133,19 @@ msgstr ""
 
 #: templates/tool.html:918
 msgid "India"
-msgstr ""
+msgstr "Indien"
 
 #: templates/tool.html:925
 msgid "Europe"
-msgstr ""
+msgstr "Europa"
 
 #: templates/tool.html:932
 msgid "United States"
-msgstr ""
+msgstr "Vereinigte Staaten"
 
 #: templates/tool.html:939
 msgid "Norway"
-msgstr ""
+msgstr "Norwegen"
 
 #: templates/tool.html:976
 msgid "CALCULATION SETTINGS"
@@ -1191,7 +1214,7 @@ msgstr "Flotte"
 
 #: templates/tool.html:1049
 msgid "Specify fleet composition"
-msgstr ""
+msgstr "Geben Sie die Flottenzusammensetzung an"
 
 #: templates/tool.html:1056
 msgid ""
@@ -1222,7 +1245,7 @@ msgstr "Fehlerfortpflanzung (Monte Carlo)"
 
 #: templates/tool.html:1075
 msgid "number of iterations"
-msgstr ""
+msgstr "Anzahl der Iterationen"
 
 #~ msgid "Sorry, this category of vehicle is not available yet."
 #~ msgstr "Tut uns leid, noch nicht verfügbar."

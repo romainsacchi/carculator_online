@@ -15,28 +15,46 @@ class Calculation():
         self.d_categories = {self.cip.metadata[a]['name']: self.cip.metadata[a]['category'] for a in self.cip.metadata}
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip)
         self.d_pt_en = {
-                    'Petrol':'ICEV-p',
-                    'Diesel':'ICEV-d',
-                    'Natural gas':'ICEV-g',
-                    'Electric':'BEV',
-                    'Fuel cell':'FCEV',
-                    'Hybrid-petrol':'HEV-p',
-                    '(Plugin) Hybrid-petrol':'PHEV'
-                }
+            'Petrol':'ICEV-p',
+            'Diesel':'ICEV-d',
+            'Natural gas':'ICEV-g',
+            'Electric':'BEV',
+            'Fuel cell':'FCEV',
+            'Hybrid-petrol':'HEV-p',
+            '(Plugin) Hybrid-petrol':'PHEV'
+            }
+        self.d_pt_it = {
+            'Benzina': 'ICEV-p',
+            'Diesel': 'ICEV-d',
+            "Gas naturale": "ICEV-g",
+            'Elettrica': 'BEV',
+            "Cella a combustibile": "FCEV",
+            'Hybrid-benzina': 'HEV-p',
+            '(Plugin) Hybrid-benzina': 'PHEV'
+        }
+        self.d_pt_de = {
+            "Benzin": "ICEV-p",
+            "Diesel": "ICEV-d",
+            "Erdgas": "ICEV-g",
+            'Elektrisch': 'BEV',
+            "Brennstoffzelle": "FCEV",
+            "Hybrid-Benzin": "HEV-p",
+            '(Plugin) Hybrid-Benzin': 'PHEV'
+        }
         self.d_pt_fr = {
-                    'Essence' : 'ICEV-p',
-                    'Diesel':'ICEV-d',
-                    'GPL' : 'ICEV-g',
-                    'Electrique' : 'BEV',
-                    'Pile à combustible': 'FCEV',
-                    'Hybride-essence': 'HEV-p',
-                    'Hybride-essence rechargeable':'PHEV',
-                }
+            'Essence' : 'ICEV-p',
+            'Diesel':'ICEV-d',
+            'GPL' : 'ICEV-g',
+            'Electrique' : 'BEV',
+            'Pile à combustible': 'FCEV',
+            'Hybride-essence': 'HEV-p',
+            'Hybride-essence rechargeable':'PHEV',
+        }
         self.d_size_en = {
-            'Mini':'Mini',
-            'Small':'Small',
-            'Lower medium':'Lower medium',
-            'Medium':'Medium',
+            'Minicompact':'Mini',
+            'Subcompact':'Small',
+            'Compact':'Lower medium',
+            'Mid-size':'Medium',
             'Large':'Large',
             'SUV':'SUV',
             'Van':'Van'
@@ -51,6 +69,70 @@ class Calculation():
             'Van':'Van'
         }
 
+        self.d_size_it = {
+            "Mini citycar": "Mini",
+            "Citycar": "Small",
+            "Berline compatte": "Lower medium",
+            "Berline medio-grandi": "Medium",
+            "Berline tre volumi": "Large",
+            "SUV": "SUV",
+            "Van": "Van"
+        }
+
+        self.d_size_de = {
+            "Kleinstwagen": "Mini",
+            "Kleinwagen": "Small",
+            "Kompaktklasse": "Lower medium",
+            "Mittelklasse": "Medium",
+            "Oberklasse": "Large",
+            "Geländewagen": "SUV",
+            "Van": "Van"
+        }
+
+        self.d_impact_en = {
+            "Occupation of arable land [m2/year]": "agricultural land occupation",
+            "Climate change [kg CO2-eq.]": "climate change",
+            "Depletion of fossil energy resources [kg oil-eq.]": "fossil depletion",
+            "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]": "freshwater ecotoxicity",
+            "Eutrophication of non-marine aquatic environments [kg P-eq.]": "freshwater eutrophication",
+            "Human toxicity [kg 1,4-DC-eq.]": "human toxicity",
+            "Ionizing radiation [kg U235-Eq]": "ionizing radiation",
+            "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]": "marine ecotoxicity",
+            "Eutrophication of non-marine aquatic environments [kg N-eq.]": "marine eutrophication",
+            "Depletion of metal resources [kg iron-eq.]": "metal depletion",
+            "Natural land transformation [m2]": "natural land transformation",
+            "Deterioration of the ozone layer [kg CFC-11-eq.]": "ozone depletion",
+            "Formation of fine particles [kg PM10-eq.]": "particulate matter formation",
+            "Smog formation [kg NMVOC-eq.]":"photochemical oxidant formation",
+            "Terrestrial acidification [kg SO2-Eq-eq.]": "terrestrial acidification",
+            "Terrestrial toxicity [kg 1,4-DC.-eq.]": "terrestrial ecotoxicity",
+            "Land occupation in an urban environment [m2 / year]": "urban land occupation",
+            "Depletion of fresh water reserves [m3]": "water depletion",
+            "Noise emissions [Person-Pascal/second]": "human noise",
+        }
+
+        self.d_impact_it = {
+            "Occupazione di seminativi [m2 / anno]": "agricultural land occupation",
+            "Cambiamenti climatici [kg CO2-eq.]": "climate change",
+            "Esaurimento delle risorse energetiche fossili [kg di petrolio eq.]": "fossil depletion",
+            "Tossicità per gli ambienti acquatici non marini [kg 1,4-DC-eq.]": "freshwater ecotoxicity",
+            "Eutrofizzazione di ambienti acquatici non marini [kg P-eq.]": "freshwater eutrophication",
+            "Tossicità per l'uomo [kg 1,4-DC-eq.]": "human toxicity",
+            "Radiazione ionizzante [kg U235-Eq]": "ionizing radiation",
+            "Tossicità per gli ambienti acquatici marini [kg 1,4-DC-eq.]": "marine ecotoxicity",
+            "Eutrofizzazione di ambienti acquatici non marini [kg N-eq.]": "marine eutrophication",
+            "Esaurimento delle risorse metalliche [kg ferro-eq.]": "metal depletion",
+            "Trasformazione del terreno naturale [m2]": "natural land transformation",
+            "Deterioramento dello strato di ozono [kg CFC-11-eq.]": "ozone depletion",
+            "Formazione di particelle fini [kg PM10-eq.]": "particulate matter formation",
+            "Formazione di smog [kg NMVOC-eq.]":"photochemical oxidant formation",
+            "Acidificazione terrestre [kg SO2-Eq-eq.]": "terrestrial acidification",
+            "Tossicità terrestre [kg 1,4-DC.-eq.]": "terrestrial ecotoxicity",
+            "Occupazione della terra in un ambiente urbano [m2/anno]": "urban land occupation",
+            "Esaurimento delle riserve di acqua dolce [m3]": "water depletion",
+            "Emissioni di rumore [Person-Pascal / second]": "human noise",
+        }
+
         self.d_impact_fr = {
             "Occupation de terre arable [m2/an]":"agricultural land occupation",
             "Changement climatique [kg CO2-eq.]":"climate change",
@@ -60,19 +142,63 @@ class Calculation():
             "Toxicité humaine [kg 1,4-DC-eq.]":"human toxicity",
             "Rayonnement ionisant [kg U235-Eq]":"ionising radiation",
             "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]":"marine ecotoxicity",
-            "Eutrophisation des milieux aquatiques non-marins [kg N-eq.]":"marine eutrophication",
+            "Eutrophisation des milieux aquatiques marins [kg N-eq.]":"marine eutrophication",
             "Epuisement des ressources en métaux [kg fer-eq.]":"metal depletion",
             "Transformation de terre naturelle [m2]":"natural land transformation",
             "Détérioration de la couche d'ozone [kg CFC-11-eq.]":"ozone depletion",
             "Formation de particules fines [kg PM10-eq.]":"particulate matter formation",
             "Formation de brouillard de pollution [kg NMVOC-eq.]":"photochemical oxidant formation",
-            "Acidification terrestre [kg SO2-Eq-eq.]":"terrestrial acidification",
+            "Acidification terrestre [kg SO2-eq.]":"terrestrial acidification",
             "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]":"terrestrial ecotoxicity",
             "Occupation de terre en milieu urbain [m2/an]":"urban land occupation",
             "Epuisement des réserves d'eau douce [m3]":"water depletion",
-            "Emissions de bruit [Person-Pascal/seconde]":"human noise",
-
+            "Emissions de bruit [Person-Pascal/seconde]":"human noise"
         }
+
+        self.d_impact_de = {
+            "Ackerlandnutzung [m2 / Jahr]":"agricultural land occupation",
+            "Klimawandel [kg CO2-Äqu.]":"climate change",
+            "Erschöpfung fossiler Energieressourcen [kg Öläquivalent]":"fossil depletion",
+            "Toxizität in Gewässern außerhalb des Meeres [kg 1,4-DC-Äq.]":"freshwater ecotoxicity",
+            "Eutrophierung von Gewässern außerhalb des Meeres [kg P-Äq.]":"freshwater eutrophication",
+            "Humantoxizität [kg 1,4-DC-Äq.]":"human toxicity",
+            "Ionisierende Strahlung [kg U235-Eq]":"ionising radiation",
+            "Toxizität in Gewässern des Meeres [kg 1,4-DC-Äq.]":"marine ecotoxicity",
+            "Eutrophierung von Gewässern im Meer [kg N-Äq.]":"marine eutrophication",
+            "Erschöpfung der Metallressourcen [kg Eisenäquivalent]":"metal depletion",
+            "Natürliche Erdumwandlung [m2]":"natural land transformation",
+            "Verschlechterung der Ozonschicht [kg FCKW-11-Äq.]":"ozone depletion",
+            "Bildung feiner Partikel [kg PM10-Äq.]":"particulate matter formation",
+            "Verschmutzungsnebelbildung [kg NMVOC-Äq.]":"photochemical oxidant formation",
+            "Terrestrische Versauerung [kg SO2-Äq.]":"terrestrial acidification",
+            "Terrestrische Toxizität [kg 1,4-DC.-Äq.]":"terrestrial ecotoxicity",
+            "Flächennutzung in städtischen Gebieten [m2/Jahr]":"urban land occupation",
+            "Erschöpfung der Süßwasservorräte [m3]":"water depletion",
+            "Geräuschemission [Person-Pascal / Sekunde]":"human noise"
+        }
+
+        self.d_cat_en = {
+            'Direct emissions':'direct',
+            'Fuel manufacture':'energy chain',
+            'Energy storage':'energy storage',
+            'Chassis':'glider',
+            'Maintenance':'maintenance',
+            'Other':'other',
+            'Powertrain':'powertrain',
+            'Road':'road'
+        }
+
+        self.d_cat_de = {
+            "Direkte Emissionen": "direct",
+            "Kraftstoffherstellung":"energy chain",
+            "Energiespeicher": "energy storage",
+            "Fahrwerk": "glider",
+            "Wartungsarbeiten":"maintenance",
+            "Andere":"other",
+            "Antriebsstrang":"powertrain",
+            'Straße':'road'
+        }
+
         self.d_cat_fr = {
             'Emissions directes':'direct',
             'Fabrication du carburant':'energy chain',
@@ -83,6 +209,16 @@ class Calculation():
             'Motorisation':'powertrain',
             'Route':'road'
         }
+        self.d_cat_it = {
+            'Emissioni dirette':'direct',
+            'Produzione di carburante':'energy chain',
+            'Accumulo di energia':'energy storage',
+            'Telaio':'glider',
+            'Manutenzione':'maintenance',
+            'Altro':'other',
+            'Motore':'powertrain',
+            'Strada':'road'
+        }
         self.d_cost_fr = {
             'Achat':'purchase',
             'Remplacement de composants':'component replacement',
@@ -90,13 +226,44 @@ class Calculation():
             'Maintenance':'maintenance',
             'total':'total'
         }
+
+        self.d_cost_de = {
+            "Kauf": "purchase",
+            "Komponententausch": "component replacement",
+            "Treibstoff": "energy",
+            "Wartung": "maintenance",
+            "total": "total"
+        }
+        self.d_cost_it = {
+            'Acquisto':'purchase',
+            'Rinnovo dei componenti':'component replacement',
+            'Carburante':'energy',
+            'Manutenzione':'maintenance',
+            'total':'total'
+        }
         self.d_rev_pt_en = {v:k for k, v, in self.d_pt_en.items()}
-        self.d_rev_size_en = {v:k for k, v, in self.d_size_en.items()}
         self.d_rev_pt_fr = {v:k for k, v, in self.d_pt_fr.items()}
+        self.d_rev_pt_it = {v:k for k, v, in self.d_pt_it.items()}
+        self.d_rev_pt_de = {v:k for k, v, in self.d_pt_de.items()}
+
+        self.d_rev_size_en = {v:k for k, v, in self.d_size_en.items()}
         self.d_rev_size_fr = {v:k for k, v, in self.d_size_fr.items()}
+        self.d_rev_size_it = {v:k for k, v, in self.d_size_it.items()}
+        self.d_rev_size_de = {v:k for k, v, in self.d_size_de.items()}
+
         self.d_rev_cost_fr = {v:k for k, v, in self.d_cost_fr.items()}
+        self.d_rev_cost_it = {v:k for k, v, in self.d_cost_it.items()}
+        self.d_rev_cost_de = {v:k for k, v, in self.d_cost_de.items()}
+
+        self.d_rev_impact_en = {v:k for k, v, in self.d_impact_en.items()}
         self.d_rev_impact_fr = {v:k for k, v, in self.d_impact_fr.items()}
+        self.d_rev_impact_it = {v:k for k, v, in self.d_impact_it.items()}
+        self.d_rev_impact_de = {v:k for k, v, in self.d_impact_de.items()}
+
+        self.d_rev_cat_en = {v:k for k, v, in self.d_cat_en.items()}
         self.d_rev_cat_fr = {v:k for k, v, in self.d_cat_fr.items()}
+        self.d_rev_cat_it = {v:k for k, v, in self.d_cat_it.items()}
+        self.d_rev_cat_de = {v:k for k, v, in self.d_cat_de.items()}
         self.excel_lci = ""
 
     def load_map_file(self):
@@ -129,12 +296,23 @@ class Calculation():
 
         if lang == "en":
             powertrain = [self.d_rev_pt_en[pt] for pt in cost.coords['powertrain'].values.tolist()]
-            size = cost.coords['size'].values.tolist()
+            size = [self.d_rev_size_en[s] for s in cost.coords['size'].values.tolist()]
             cost_category = cost.coords['cost_type'].values.tolist()
+
         if lang == "fr":
             powertrain = [self.d_rev_pt_fr[pt] for pt in cost.coords['powertrain'].values.tolist()]
             size = [self.d_rev_size_fr[s] for s in cost.coords['size'].values.tolist()]
             cost_category = [self.d_rev_cost_fr[c] for c in cost.coords['cost_type'].values.tolist()]
+
+        if lang == "it":
+            powertrain = [self.d_rev_pt_it[pt] for pt in cost.coords['powertrain'].values.tolist()]
+            size = [self.d_rev_size_it[s] for s in cost.coords['size'].values.tolist()]
+            cost_category = [self.d_rev_cost_it[c] for c in cost.coords['cost_type'].values.tolist()]
+
+        if lang == "de":
+            powertrain = [self.d_rev_pt_de[pt] for pt in cost.coords['powertrain'].values.tolist()]
+            size = [self.d_rev_size_de[s] for s in cost.coords['size'].values.tolist()]
+            cost_category = [self.d_rev_cost_de[c] for c in cost.coords['cost_type'].values.tolist()]
 
         arr_benchmark = []
 
@@ -160,7 +338,16 @@ class Calculation():
         if lang == "fr":
             impact = [self.d_rev_cat_fr[f] for f in results.coords['impact'].values.tolist()]
             impact_category = [self.d_rev_impact_fr[i] for i in results.coords['impact_category'].values.tolist()]
-        else:
+
+        if lang == "de":
+            impact = [self.d_rev_cat_de[f] for f in results.coords['impact'].values.tolist()]
+            impact_category = [self.d_rev_impact_de[i] for i in results.coords['impact_category'].values.tolist()]
+
+        if lang == "it":
+            impact = [self.d_rev_cat_it[f] for f in results.coords['impact'].values.tolist()]
+            impact_category = [self.d_rev_impact_it[i] for i in results.coords['impact_category'].values.tolist()]
+
+        if lang == "en":
             impact = results.coords['impact'].values.tolist()
             impact_category = results.coords['impact_category'].values.tolist()
 
@@ -205,6 +392,16 @@ class Calculation():
             new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_fr[x] for x in raw_dict['type']],
                                           'year': [int(x) for x in raw_dict['year']],
                                           'size': [self.d_size_fr[s] for s in raw_dict['size']]}
+
+        if lang == "it":
+            new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_it[x] for x in raw_dict['type']],
+                                          'year': [int(x) for x in raw_dict['year']],
+                                          'size': [self.d_size_it[s] for s in raw_dict['size']]}
+
+        if lang == "de":
+            new_dict[('Functional unit',)] = {'powertrain': [self.d_pt_de[x] for x in raw_dict['type']],
+                                          'year': [int(x) for x in raw_dict['year']],
+                                          'size': [self.d_size_de[s] for s in raw_dict['size']]}
 
         f_d = {}
         new_dict[('Driving cycle',)] = raw_dict['driving_cycle']

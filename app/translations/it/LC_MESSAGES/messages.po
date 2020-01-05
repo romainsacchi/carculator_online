@@ -32,39 +32,39 @@ msgstr "Gas naturale"
 
 #: app/routes.py:24 templates/tool.html:698
 msgid "Electric"
-msgstr "Elettrico"
+msgstr "Elettrica"
 
 #: app/routes.py:24
 msgid "Fuel cell"
-msgstr ""
+msgstr "Cella a combustibile"
 
 #: app/routes.py:24
 msgid "Hybrid-petrol"
-msgstr ""
+msgstr "Hybrid-benzina"
 
 #: app/routes.py:24
 msgid "(Plugin) Hybrid-petrol"
-msgstr ""
+msgstr "(Plugin) Hybrid-benzina"
 
 #: app/routes.py:25
 msgid "Mini"
-msgstr ""
+msgstr "Mini citycar"
 
 #: app/routes.py:25
 msgid "Small"
-msgstr ""
+msgstr "Citycar"
 
 #: app/routes.py:25
 msgid "Lower medium"
-msgstr ""
+msgstr "Berline compatte"
 
 #: app/routes.py:25
 msgid "Medium"
-msgstr ""
+msgstr "Berline medio-grandi"
 
 #: app/routes.py:25
 msgid "Large"
-msgstr ""
+msgstr "Berline tre volumi"
 
 #: app/routes.py:25
 msgid "SUV"
