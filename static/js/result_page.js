@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
 
  function generate_chart_impacts(data, title, default_cat){
     $("#chart_impacts").pivotUI(
@@ -143,5 +143,3 @@ $('.count').each(function () {
     });
 });
 
-
-});
