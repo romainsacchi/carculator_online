@@ -137,10 +137,10 @@ function generate_benchmark(data){
       div_bar_wrap.setAttribute("data-color", "3a9c23");
       var div_bar = document.createElement('div');
       div_bar.className = "progress-bar progress";
+      div_bar_wrap.appendChild(div_bar);
       td_bar.appendChild(div_bar_wrap);
-      td_bar.appendChild(div_bar);
       var td_km = document.createElement('td');
-      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + data[i][4] + "</span> km</h3>"
+      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + Number(data[i][4]).toFixed(1) + "</span> km</h3>"
       tr.appendChild(td_name);
       tr.appendChild(td_bar);
       tr.appendChild(td_km);

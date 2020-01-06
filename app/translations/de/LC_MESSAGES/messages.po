@@ -36,7 +36,7 @@ msgstr "Elektrisch"
 
 #: app/routes.py:24
 msgid "Fuel cell"
-msgstr "Brennstoffzelle"
+msgstr "H2 Brennstoffzelle"
 
 #: app/routes.py:24
 msgid "Hybrid-petrol"

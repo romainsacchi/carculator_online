@@ -19,7 +19,7 @@ class Calculation():
             'Diesel':'ICEV-d',
             'Natural gas':'ICEV-g',
             'Electric':'BEV',
-            'Fuel cell':'FCEV',
+            'H2 Fuel cell':'FCEV',
             'Hybrid-petrol':'HEV-p',
             '(Plugin) Hybrid-petrol':'PHEV'
             }
@@ -28,7 +28,7 @@ class Calculation():
             'Diesel': 'ICEV-d',
             "Gas naturale": "ICEV-g",
             'Elettrica': 'BEV',
-            "Cella a combustibile": "FCEV",
+            "H2 Cella a combustibile": "FCEV",
             'Hybrid-benzina': 'HEV-p',
             '(Plugin) Hybrid-benzina': 'PHEV'
         }
@@ -37,7 +37,7 @@ class Calculation():
             "Diesel": "ICEV-d",
             "Erdgas": "ICEV-g",
             'Elektrisch': 'BEV',
-            "Brennstoffzelle": "FCEV",
+            "H2 Brennstoffzelle": "FCEV",
             "Hybrid-Benzin": "HEV-p",
             '(Plugin) Hybrid-Benzin': 'PHEV'
         }
@@ -46,7 +46,7 @@ class Calculation():
             'Diesel':'ICEV-d',
             'GPL' : 'ICEV-g',
             'Electrique' : 'BEV',
-            'Pile à combustible': 'FCEV',
+            'H2 Pile à combustible': 'FCEV',
             'Hybride-essence': 'HEV-p',
             'Hybride-essence rechargeable':'PHEV',
         }
