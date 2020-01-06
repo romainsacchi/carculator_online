@@ -364,7 +364,7 @@ class Calculation():
                                              1 / data[imp, s, pt, y, :,0].sum()])
                         if imp == 7:
                             arr_benchmark.append(["Fossil depletion", size[s], powertrain[pt], year[y],
-                                             1 / (data[imp, s, pt, y, :, 0].sum())])
+                                             1 / (data[imp, s, pt, y, :, 0].sum() * 0.755)]) # 0.755 kg/L gasoline
                         for cat in range(0, len(impact)):
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])

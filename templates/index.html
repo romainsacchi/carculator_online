@@ -802,15 +802,15 @@
 											<form id="ajax-contact" method="POST"
 												  action="/send_email" class="mu-contact-form" >
 												<div class="form-group">
-													<input type="text" class="form-control" placeholder="Name" id="name"
+													<input type="text" class="form-control" placeholder="{{_('Name')}}" id="name"
 														   name="name_input" required>
 												</div>
 												<div class="form-group">
-													<input type="email" class="form-control" placeholder="Enter Email"
+													<input type="email" class="form-control" placeholder="{{_('Enter Email')}}"
 														   id="email" name="email_input" required>
 												</div>
 												<div class="form-group">
-													<textarea class="form-control" placeholder="Message" id="message"
+													<textarea class="form-control" placeholder="{{_('Message')}}" id="message"
 															  name="message_input" required></textarea>
 												</div>
 												<button type="submit" class="mu-send-msg-btn"><span>{{_('SUBMIT')}}</span></button>

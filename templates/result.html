@@ -121,7 +121,7 @@
 
 		<!-- Start SCOPE -->
         <section id="mu-about">
-			<div class="container" style="width:50%;">
+			<div class="container" style="width:90%;">
 				<div class="row">
 
 					<h2><img class="image" src="/static/images/book_icon.png"
@@ -132,7 +132,7 @@
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
-								<p>{{_('Any use of the results or inventories under any form should be referenced as following:')}}</p>
+								<p style="border:3px solid grey;">{{_('Any use of the results or inventories under any form should be referenced as following:')}}</p>
                                 <p>carculator, Paul Scherrer Institut, http://carculator.psi.ch</p>
 							</div>
                 		</div>
@@ -157,7 +157,7 @@
 									into categories: powertrain, maintenance, fuel manufacture, energy storage, etc.
 									The user can change the environmental indicator under the dropdown menu 'impact category'.
 									It is also possible to visualize the results as a table or other sorts of chart by using the
-									dropdown menu in the top-left corner.")}}</p>
+									dropdown menu located in the top-left corner of the chart area.")}}</p>
 								<div id="chart_impacts" style="margin:20px auto;"></div>
 							</div>
                 		</div>
@@ -167,11 +167,11 @@
 		<section id="mu-about" style="background-color:#f2f2f2;">
 			<div class="container" style="width:90%;">
 				<div class="row">
-					<h2><img class="image" src="/static/images/cost_icon_white.png"
-												  style="height:70px; width:80px; border-right:3px solid white;
+					<h2><img class="image" src="/static/images/cost_icon_grey.png"
+												  style="height:70px; width:80px; border-right:3px solid grey;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('LIFE CYCLE COST ASSESSMENT')}}</span></h2>
+						<span style="color:grey;">{{_('LIFE CYCLE COST ASSESSMENT')}}</span></h2>
 				</div>
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
@@ -188,19 +188,21 @@
 			<div class="container" style="width:90%;">
 				<div class="row">
 					<h2><img class="image" src="/static/images/scale_icon.png"
-												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
+												  style="height:70px; width:90px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
 						<span style="color:white;">{{_('BENCHMARK')}}</span></h2>
 				</div>
 				<div class="mu-about-area" style="padding-top:20px;">
 					<div class="col-md-12">
+						<p style="color:white;">{{_("This section compares the distance that can be driven by each vehicle
+							given a life cycle budget.")}}</p>
 						<h3 style="color:white;">{{_("How long can the vehicles drive on a budget of 1")}}
 							<select style="color:grey;">
 								<option value="co2">{{_("kg CO2-eq.")}}</option>
 								<option value="euro">{{_("Euro")}}</option>
 								<option value="petrol">{{_("liter of petrol-eq.")}}</option>
-							</select>?</h3>
+							</select> ?</h3>
 						<table class="table">
 							<tbody>
 							<tr>
