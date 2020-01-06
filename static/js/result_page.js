@@ -199,14 +199,14 @@ function generate_line_chart_TtW_energy(data){
     for (var x=0; x < data.length; x++){
         var arr_data = [];
         for (var i = 0; i < data[x].length; i++){
-            arr_data.push({"x":i, "y": data[x][i].toFixed(0)})
+            arr_data.push({"x":i, "y": Number(data[x][i]).toFixed(0)})
         }
         datum.push({values:arr_data, key:String(x), area:false})
     };
 
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
-                    .margin({left:30, bottom:80, right:30})  //Adjust chart margins to give the x-axis some breathing room.
+                    .margin({left:60, bottom:80, right:30})  //Adjust chart margins to give the x-axis some breathing room.
                     .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                     //.transitionDuration(350)  //how fast do you want the lines to transition?
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
@@ -223,10 +223,6 @@ function generate_line_chart_TtW_energy(data){
       chart.yAxis     //Chart y-axis settings
           .axisLabel('kj')
           .tickFormat(d3.format('.r'));
-
-      /* Done setting the chart up? Time to render it!*/
-        console.log(datum);
-
 
       d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
           .datum(datum)         //Populate the <svg> element with chart data...
