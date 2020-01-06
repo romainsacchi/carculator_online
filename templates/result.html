@@ -99,18 +99,30 @@
 
 		<!-- Start SCOPE -->
         <section id="mu-about">
-			<div class="container" style="width:90%;">
+			<div class="container" style="width:50%;">
 				<div class="row"  style="padding-top:80px;">
 
 					<div class="mu-about-header">
-						<h2 class="mu-heading-title">{{_('ABOUT')}}
+						<h2 class="mu-heading-title">{{_('RESULTS')}}
 							<span>
 								<img src="static\images\mediumsmall.png" style="height:50px;margin-bottom:5px;">
 							</span>
 						</h2>
-						<span class="mu-header-dot"></span>
-						<p><i>carculator</i> {{_('is an open-source, comprehensive and transparent life cycle assessment tool for passenger cars. It allows for an economic and environmental evaluation of different types of cars under several driving and energy supply scenarios.')}}</p>
+						<p>{{_("The different sections of this page present the results of your analysis, based on the
+							concept of life cycle assessment. Each relevant phase of the life cycle of the vehicle is considered
+							and characterized against environmental and economic indicators.")}}</p>
+						<p>{{_("This is a useful tool when comparing technologies that have environmental hotspots
+							at different phases of the life cycle of a vehicle.")}}</p>
 					</div>
+				</div>
+
+            	</div>
+        </section>
+
+		<!-- Start SCOPE -->
+        <section id="mu-about">
+			<div class="container" style="width:50%;">
+				<div class="row">
 
 					<h2><img class="image" src="/static/images/book_icon.png"
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
@@ -140,13 +152,19 @@
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
+								<p>{{_("By default, the chart below shows the environmental impacts in terms of
+									greenhouse gas emissions emitted for each vehicle, per km driven. The results are sub-divided
+									into categories: powertrain, maintenance, fuel manufacture, energy storage, etc.
+									The user can change the environmental indicator under the dropdown menu 'impact category'.
+									It is also possible to visualize the results as a table or other sorts of chart by using the
+									dropdown menu in the top-left corner.")}}</p>
 								<div id="chart_impacts" style="margin:20px auto;"></div>
 							</div>
                 		</div>
             </div>
         </section>
 		<!-- Start SCOPE -->
-		<section id="mu-about" style="background-color:#D0D3D4;">
+		<section id="mu-about" style="background-color:#f2f2f2;">
 			<div class="container" style="width:90%;">
 				<div class="row">
 					<h2><img class="image" src="/static/images/cost_icon_white.png"
@@ -157,16 +175,19 @@
 				</div>
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
+							<p>{{_("The chart below represents the cost of ownership per kilometer driven for each vehicle.
+								It considers future electricity and fuel prices, as well as the amortization of the
+								vehicle purchase over time.")}}</p>
 							<div id="chart_costs" style="margin:20px auto;"></div>
 						</div>
                 	</div>
 			</div>
         </section>
 
-		<section id="mu-about" style="background-color:#B3ADAC;">
+		<section id="mu-about" style="background-color:#cccccc;">
 			<div class="container" style="width:90%;">
-				<div class="row"  style="padding-top:80px;">
-					<h2><img class="image" src="/static/images/book_icon.png"
+				<div class="row">
+					<h2><img class="image" src="/static/images/scale_icon.png"
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
@@ -175,7 +196,7 @@
 				<div class="mu-about-area" style="padding-top:20px;">
 					<div class="col-md-12">
 						<h3 style="color:white;">{{_("How long can the vehicles drive on a budget of 1")}}
-							<select style="color:black;">
+							<select style="color:grey;">
 								<option value="co2">{{_("kg CO2-eq.")}}</option>
 								<option value="euro">{{_("Euro")}}</option>
 								<option value="petrol">{{_("liter of petrol-eq.")}}</option>
@@ -237,13 +258,28 @@
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
 							<table class="table" style="width:100%;color:white;">
-								<thead>
+								<tbody>
 									<tr>
 										<th><h3>{{_('Energy consumption along driving cycle')}}</h3></th>
 										<th><h3>{{_('Pollutants emissions along driving cycle')}}</h3></th>
 									</tr>
-								</thead>
-								<tbody>
+									<tr>
+										<td>
+											<div>
+
+											</div>
+										</td>
+										<td>
+											<div>
+
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<th><h3>{{_('Noise emissions along driving cycle')}}</h3></th>
+										<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
+									</tr>
 									<tr>
 										<td>
 											<div>
@@ -258,33 +294,11 @@
 
 									</tr>
 
+
 								</tbody>
 
 							</table>
-							<table class="table" style="width:100%;color:white;">
-								<thead>
-										<tr>
-											<th><h3>{{_('Noise emissions along driving cycle')}}</h3></th>
-											<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
-										</tr>
-								</thead>
-								<tbody>
-										<tr>
-											<td>
-												<div>
 
-												</div>
-											</td>
-											<td>
-												<div>
-
-												</div>
-											</td>
-
-										</tr>
-								</tbody>
-
-							</table>
 						</div>
                 	</div>
 			</div>
