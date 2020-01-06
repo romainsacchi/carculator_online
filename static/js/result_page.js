@@ -140,8 +140,8 @@ function generate_benchmark(data, cat){
 
     for (i = start; i < (start + length); i++) {
 
-        if (data[i] > max_val){
-            max_val = data[i];
+        if (data[i][4] > max_val){
+            max_val = data[i][4];
         }
 
     };
