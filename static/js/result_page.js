@@ -128,11 +128,11 @@ function generate_benchmark(data, cat){
         var start = 0;
     };
     if (cat == "climate change"){
-        var start = length + 1;
+        var start = length;
     };
 
     if (cat == "Fossil depletion"){
-        var start = (length * 2) + 1;
+        var start = (length * 2);
     };
 
     var i;
@@ -158,8 +158,8 @@ function generate_benchmark(data, cat){
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
       div_bar_wrap.setAttribute("data-progresspercent", String((data[i][4] / max_val).toFixed(0)));
-      div_bar_wrap.setAttribute("data-height", "75");
-      div_bar_wrap.setAttribute("data-width", "20px");
+      div_bar_wrap.setAttribute("data-height", "20px");
+      div_bar_wrap.setAttribute("data-width", "1500px");
       div_bar_wrap.setAttribute("data-speed", "4000");
       div_bar_wrap.setAttribute("data-color", "3a9c23");
       var div_bar = document.createElement('div');
