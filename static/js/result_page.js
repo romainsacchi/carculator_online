@@ -131,10 +131,10 @@ function generate_benchmark(data, cat){
     for (var i = 0; i < data.length; i++){
         if (data[i][0] == cat & start < 0){
             start = i;
+        }
 
-            if (data[i][4] > max_val){
-                max_val = data[i][4];
-            }
+        if (data[i][0] == cat & data[i][4] > max_val){
+            max_val = data[i][4];
         }
 
         if (data[i][0] != cat & start < 0) {
@@ -142,6 +142,9 @@ function generate_benchmark(data, cat){
         }
     }
 
+    console.log(start);
+    console.log(end);
+    console.log(max_val);
 
     for (i = start; i < end; i++) {
       var tr = document.createElement('tr');
