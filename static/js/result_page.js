@@ -138,7 +138,7 @@ function generate_benchmark(data, cat){
     var i;
     var max_val = 0;
 
-    for (i = start; i < length; i++) {
+    for (i = start; i < (start + length); i++) {
 
         if (data[i] > max_val){
             max_val = data[i];
