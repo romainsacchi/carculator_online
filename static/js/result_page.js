@@ -189,7 +189,7 @@ function generate_benchmark(data, cat){
             duration: 4000,
             easing: 'swing',
             step: function (now) {
-                $(this).text(now);
+                $(this).text(now.toFixed(1));
             }
         });
     });
