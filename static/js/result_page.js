@@ -137,7 +137,7 @@ function generate_benchmark(data, cat){
             max_val = data[i][4];
         }
 
-        if (data[i][0] != cat & start < 0) {
+        if (data[i][0] != cat & end < 0) {
             end = i;
         }
     }
