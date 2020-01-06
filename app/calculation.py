@@ -369,9 +369,19 @@ class Calculation():
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])
 
+        arr = cm.array.sel(powertrain = d[('Functional unit',)]['powertrain'],
+                           size = d[('Functional unit',)]['size'],
+                           year = d[('Functional unit',)]['year'])
+        TtW_energy = cm.ecm.motive_energy_per_km(
+            driving_mass=arr.sel(parameter="driving mass"),
+            rr_coef=arr.sel(parameter="rolling resistance coefficient"),
+            drag_coef=arr.sel(parameter="aerodynamic drag coefficient"),
+            frontal_area=arr.sel(parameter="frontal area"),
+            ttw_efficiency=arr.sel(parameter="TtW efficiency"),
+            recuperation_efficiency=arr.sel(parameter="recuperation efficiency"),
+            motor_power=arr.sel(parameter="electric power")).cumsum()
 
-
-        return (json.dumps([list_res, list_res_costs, arr_benchmark]), self.excel_lci)
+        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_energy]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """

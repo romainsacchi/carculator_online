@@ -153,7 +153,7 @@ function generate_benchmark(data, cat){
       div_bar_wrap.setAttribute("data-progresspercent", ((data[i][4] / max_val) * 100).toFixed(0));
       div_bar_wrap.setAttribute("data-height", "20px");
       div_bar_wrap.setAttribute("data-width", "1500px");
-      div_bar_wrap.setAttribute("data-speed", "2000");
+      div_bar_wrap.setAttribute("data-speed", "1000");
       div_bar_wrap.setAttribute("data-color", "3a9c23");
       var div_bar = document.createElement('div');
       div_bar.className = "progress-bar progress";
@@ -182,7 +182,7 @@ function generate_benchmark(data, cat){
         $(this).prop('Counter',0).animate({
             Counter: $(this).text()
         }, {
-            duration: 2000,
+            duration: 1000,
             easing: 'swing',
             step: function (now) {
                 $(this).text(now.toFixed(1));
