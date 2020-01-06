@@ -194,11 +194,14 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
-    var arr_data = [];
+
+    var datum = [];
     for (var x=0; x < data.length; x++){
+        var arr_data = {};
         for (var i = 0; i < data[x].length; i++){
             arr_data.push({"x":i, "y": data[x][i]})
         }
+        datum.push({values:arr_data, key:'kj'})
     };
 
     nv.addGraph(function() {
@@ -222,11 +225,11 @@ function generate_line_chart_TtW_energy(data){
           .tickFormat(d3.format('.r'));
 
       /* Done setting the chart up? Time to render it!*/
-        console.log(arr_data);
-      var datum = [{values:arr_data, key:'km/h', color: 'white', area:true}];
+        console.log(datum);
+
 
       d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
-          .datum(arr_data)         //Populate the <svg> element with chart data...
+          .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
       d3.select('#chart-ttw-energy').style('fill', "white");
