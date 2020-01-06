@@ -146,14 +146,8 @@ function generate_benchmark(data, cat){
 
     };
 
-    console.log(start);
-    console.log(max_val);
-    console.log(length);
 
     for (i = start; i < (start + length); i++) {
-        console.log(data[i]);
-        console.log(max_val);
-        console.log((data[i][4] / max_val).toFixed(0));
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + "</h3>"
@@ -195,7 +189,7 @@ function generate_benchmark(data, cat){
             duration: 4000,
             easing: 'swing',
             step: function (now) {
-                $(this).text(Math.ceil(now));
+                $(this).text(now);
             }
         });
     });
