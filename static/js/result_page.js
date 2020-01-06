@@ -146,6 +146,9 @@ function generate_benchmark(data, cat){
 
     };
 
+    console.log(start);
+    console.log(max_val);
+    console.log(length);
 
     for (i = start; i < start + length; i++) {
       var tr = document.createElement('tr');
