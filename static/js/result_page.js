@@ -222,7 +222,7 @@ function generate_line_chart_TtW_energy(data){
           .tickFormat(d3.format('.r'));
 
       /* Done setting the chart up? Time to render it!*/
-
+        console.log(arr_data);
       var datum = [{values:arr_data, key:'km/h', color: 'white', area:true}];
 
       d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
