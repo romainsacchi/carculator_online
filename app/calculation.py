@@ -372,6 +372,9 @@ class Calculation():
         arr = cm.array.sel(powertrain = d[('Functional unit',)]['powertrain'],
                            size = d[('Functional unit',)]['size'],
                            year = d[('Functional unit',)]['year'])
+
+        print(arr.sel(parameter="driving mass"))
+
         TtW_energy = cm.ecm.motive_energy_per_km(
             driving_mass=arr.sel(parameter="driving mass"),
             rr_coef=arr.sel(parameter="rolling resistance coefficient"),
@@ -381,7 +384,7 @@ class Calculation():
             recuperation_efficiency=arr.sel(parameter="recuperation efficiency"),
             motor_power=arr.sel(parameter="electric power")).cumsum(axis=3).reshape(len(powertrain)*len(size)*len(year),-1)
 
-        print(TtW_energy[0].sum())
+        print(TtW_energy.sum())
 
         return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_energy.tolist()]), self.excel_lci)
 
