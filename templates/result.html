@@ -124,7 +124,7 @@
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
-								<div id="output" style="margin:20px auto;"></div>
+								<div id="chart_impacts" style="margin:20px auto;"></div>
 							</div>
                 		</div>
             </div>
@@ -141,7 +141,7 @@
 				</div>
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
-							<div id="output_costs" style="margin:20px auto;"></div>
+							<div id="chart_costs" style="margin:20px auto;"></div>
 						</div>
                 	</div>
 			</div>
@@ -247,10 +247,10 @@
 							</table>
 							<table class="table" style="width:100%;color:white;">
 								<thead>
-										<th>
+										<tr>
 											<th><h3>{{_('Noise emissions along driving cycle')}}</h3></th>
 											<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
-										</th>
+										</tr>
 								</thead>
 								<tbody>
 										<tr>
@@ -274,7 +274,7 @@
 			</div>
         </section>
 
-
+	</main>
 
 	<!-- Start footer -->
 	<footer id="mu-footer" role="contentinfo">
@@ -295,22 +295,22 @@
 				</div>
 			</div>
 	</footer>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-		<script src="https://cdn.plot.ly/plotly-basic-latest.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.22.0/pivot.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.22.0/plotly_renderers.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.6.0/tips_data.min.js"></script>
-	  <script
-		  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-		  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-		  crossorigin="anonymous"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-basic-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.22.0/pivot.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.22.0/plotly_renderers.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.6.0/tips_data.min.js"></script>
+  	<script
+	  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	  crossorigin="anonymous"></script>
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
-		<script type="text/javascript" src="/static/js/i18n.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
+	<script type="text/javascript" src="/static/js/i18n.js"></script>
+	<script type="text/javascript" src="/static/js/result_page.js"></script>
 
-
-		<script>
+	<script>
 
 
     var data = {{data|safe}};
@@ -318,7 +318,7 @@
 
     var imp;
 
-//  Load the JSON File
+	//  Load the JSON File
 	var name_default_impact;
 	var chart_title;
 	var chart_title_cost;
@@ -333,143 +333,19 @@
                 error: function(xhr, status, error){console.log(error)}})
             ).done(function(json){
                 i18n.translator.add(json);
+
+                // Generate LCIA chart
                 name_default_impact = i18n("climate_change");
 				chart_title = i18n("chart_title");
+				generate_chart_impacts(data[0], chart_title, name_default_impact);
+
+				// Generate LCC chart
 				chart_title_cost = i18n("chart_title_cost");
+				generate_chart_costs(data[1], chart_title_cost);
 
-				$("#output").pivotUI(
-				  data[0], {
-					rows: ["impact category", "category"],
-					cols: ["year", "powertrain", "size"],
-					vals: ["value"],
-					inclusions: {"impact category":[name_default_impact]},
-					"colOrder": "value_a_to_z",
-					aggregatorName: "Sum",
-					rendererName: "Stacked Bar Chart",
-					renderers: $.extend(
-						$.pivotUtilities.renderers,
-						$.pivotUtilities.export_renderers,
-					  $.pivotUtilities.plotly_renderers
-					),
-					rendererOptions: {plotly: {title: {text: chart_title}}},
-					onRefresh: function(config){
-						imp = config["inclusions"]["impact category"][0]
-						}
-				  });
-
-				  $("#output_costs").pivotUI(
-					  data[1], {
-						rows: ["cost category"],
-						cols: ["year", "powertrain", "size"],
-						vals: ["value"],
-						exclusions: {"cost category":["total"]},
-						"colOrder": "value_a_to_z",
-						aggregatorName: "Sum",
-						rendererName: "Stacked Bar Chart",
-						renderers: $.extend(
-							$.pivotUtilities.renderers,
-							$.pivotUtilities.export_renderers,
-						  $.pivotUtilities.plotly_renderers
-						),
-						rendererOptions: {plotly: { title: {text: chart_title_cost}}},
-					  });
             });
+</script>
 
- function share_results(){
- 	var str = i18n('save_results')
-    $.notify({
-        icon: "glyphicon glyphicon-warning-sign",
-        message: str
-    },
-    {
-        placement: {
-            from: "top",
-            align: "center"
-        },
-        type:"success"
-    },
-    {
-        animate: {
-            enter: "animated bounceInDown",
-            exit: "animated bounceOutUp"
-        },
-
-    }
-    );
-
- };
-
- function export_bw2_inventories(){
- 	var str = i18n('inventory_download')
-    $.notify({
-        icon: "glyphicon glyphicon-warning-sign",
-        message: str
-    },
-    {
-        placement: {
-            from: "top",
-            align: "center"
-        },
-        type:"success"
-    },
-    {
-        animate: {
-            enter: "animated bounceInDown",
-            exit: "animated bounceOutUp"
-        },
-    }
-    );
- };
-
- function export_simapro_inventories(){
- 	var str = i18n('inventory_download')
-    $.notify({
-        icon: "glyphicon glyphicon-warning-sign",
-        message: str
-    },
-    {
-        placement: {
-            from: "top",
-            align: "center"
-        },
-        type:"success"
-    },
-    {
-        animate: {
-            enter: "animated bounceInDown",
-            exit: "animated bounceOutUp"
-        },
-
-    }
-    );
-
- };
-
-var progressSelector = $(".progress-wrap");
-     progressSelector.each(function(){
-     var getPercent = $(this).attr("data-progresspercent");
-     var getSpeed = parseInt($(this).attr("data-speed"));
-     var getColor = $(this).attr("data-color");
-     var getHeight = $(this).attr("data-height");
-     var getWidth = $(this).attr("data-width");
-     $(this).css({"height":getHeight,"width":getWidth});
-     $(this).find(".progress-bar").css({"background-color":"#"+getColor}).animate({ width:getPercent+'%' },getSpeed)
-     });
-
-     $('.count').each(function () {
-    $(this).prop('Counter',0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 4000,
-        easing: 'swing',
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
-
-		</script>
-		<script type="text/javascript" src="/static/js/result_page.js"></script>
 
 </body>
 </html>
