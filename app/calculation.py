@@ -381,7 +381,9 @@ class Calculation():
             recuperation_efficiency=arr.sel(parameter="recuperation efficiency"),
             motor_power=arr.sel(parameter="electric power")).cumsum()
 
-        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_energy]), self.excel_lci)
+        print(TtW_energy)
+
+        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_energy.tolist()]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
