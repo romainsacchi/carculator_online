@@ -153,6 +153,7 @@ function generate_benchmark(data, cat){
     for (i = start; i < (start + length); i++) {
         console.log(data[i]);
         console.log(max_val);
+        console.log((data[i][4] / max_val).toFixed(0));
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + "</h3>"
