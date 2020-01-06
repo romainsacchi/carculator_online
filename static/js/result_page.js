@@ -126,27 +126,18 @@ function generate_benchmark(data, cat){
 
     var length = data.length / 3;
 
-    if (cat == "cost"){
-        var start = 0;
-    };
-    if (cat == "climate change"){
-        var start = length;
-    };
-
-    if (cat == "fossil depletion"){
-        var start = (length * 2);
-    };
-
-    var i;
+    var start = -1;
     var max_val = 0;
 
-    for (i = start; i < (start + length); i++) {
+    for (var i = 0; i < data.length; i++){
+        if (data[i][0] == cat & start < 0){
+            start = i;
 
-        if (data[i][4] > max_val){
-            max_val = data[i][4];
+            if (data[i][4] > max_val){
+                max_val = data[i][4];
+            }
         }
-
-    };
+    }
 
 
     for (i = start; i < (start + length); i++) {
