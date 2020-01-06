@@ -35,7 +35,7 @@ msgid "Electric"
 msgstr "Electrique"
 
 #: app/routes.py:24
-msgid "Fuel cell"
+msgid "H2 Fuel cell"
 msgstr "H2 Pile à combustible"
 
 #: app/routes.py:24
@@ -1449,4 +1449,7 @@ msgstr "nombre d'itérations"
 #~ "Le télechargement de l'inventaire va "
 #~ "débuter. Son utilisation requiert une "
 #~ "license ecoinvent 3.6 cutoff."
+
+#~ msgid "Fuel cell"
+#~ msgstr "H2 Pile à combustible"
 

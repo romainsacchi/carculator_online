@@ -35,7 +35,7 @@ msgid "Electric"
 msgstr "Elektrisch"
 
 #: app/routes.py:24
-msgid "Fuel cell"
+msgid "H2 Fuel cell"
 msgstr "H2 Brennstoffzelle"
 
 #: app/routes.py:24
@@ -337,7 +337,9 @@ msgstr "Carculator Support"
 
 #: templates/index.html:822
 msgid "Write to us if you have any questions about the tool, methods or results."
-msgstr "Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten haben."
+msgstr ""
+"Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten "
+"haben."
 
 #: templates/index.html:870 templates/param_table.html:126
 #: templates/result.html:223 templates/tool.html:1105
@@ -415,7 +417,8 @@ msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
 msgstr ""
-"Auf jede Verwendung der Ergebnisse oder Inventare in irgendeiner Form sollte wie folgt Bezug genommen werden: "
+"Auf jede Verwendung der Ergebnisse oder Inventare in irgendeiner Form "
+"sollte wie folgt Bezug genommen werden: "
 
 #: templates/result.html:120
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
@@ -562,8 +565,9 @@ msgid ""
 "The default values for these parameters are so-called \"most likely\" "
 "values, calibrated against a large number of car manufacturers data."
 msgstr ""
-"Die Standardwerte für diese Parameter sind sogenannte \"wahrscheinlichste\" Werte, "
-"die anhand einer großen Anzahl von Daten der Automobilhersteller kalibriert wurden."
+"Die Standardwerte für diese Parameter sind sogenannte "
+"\"wahrscheinlichste\" Werte, die anhand einer großen Anzahl von Daten der"
+" Automobilhersteller kalibriert wurden."
 
 #: templates/tool.html:335
 msgid ""
@@ -901,10 +905,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural gas, but also "
 "alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
 msgstr ""
-"In diesem Abschnitt definieren wir den Weg zur Kraftstoffversorgung der Fahrzeuge sowie die Technologie für die Speicherung von Energie an Bord. "
-"Der Benutzer kann herkömmliche Wege wählen, um die Lieferung und Verwendung von üblichen Kraftstoffen wie Diesel oder bleifreiem Benzin oder komprimiertem Erdgas, "
-"aber auch alternativen Kraftstoffen wie Biodiesel, Bioethanol und Biomethan darzustellen."
-
+"In diesem Abschnitt definieren wir den Weg zur Kraftstoffversorgung der "
+"Fahrzeuge sowie die Technologie für die Speicherung von Energie an Bord. "
+"Der Benutzer kann herkömmliche Wege wählen, um die Lieferung und "
+"Verwendung von üblichen Kraftstoffen wie Diesel oder bleifreiem Benzin "
+"oder komprimiertem Erdgas, aber auch alternativen Kraftstoffen wie "
+"Biodiesel, Bioethanol und Biomethan darzustellen."
 
 #: templates/tool.html:637
 msgid ""
@@ -913,9 +919,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tThis means that they do not compete with crops "
 "production with the purpose of food supply."
 msgstr ""
-"Bei den hier vorgestellten alternativen Kraftstoffen handelt es sich um sogenannte "2nd Generation" -Kraftstoffe, "
-"da sie aus pflanzlichen Reststoffen hergestellt werden. Dies bedeutet, dass sie nicht mit der Pflanzenproduktion im Sinne "
-"der Nahrungsmittelversorgung konkurrieren."
+"Bei den hier vorgestellten alternativen Kraftstoffen handelt es sich um "
+"sogenannte \"2nd Generation\" -Kraftstoffe, da sie aus pflanzlichen "
+"Reststoffen hergestellt werden. Dies bedeutet, dass sie nicht mit der "
+"Pflanzenproduktion im Sinne der Nahrungsmittelversorgung konkurrieren."
 
 #: templates/tool.html:639
 msgid ""
@@ -926,9 +933,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
 "methane to produce hydrogen (and carbon monoxide)."
 msgstr ""
-"Darüber hinaus werden verschiedene Wege für die Bereitstellung von Wasserstoff für Brennstoffzellenautos vorgestellt.
-"Wasserstoff kann entweder durch Elektrolyse erzeugt werden, was ein Prozess ist, der Elektrizität erfordert, "
-"oder durch einen Prozess, der als "Steam Methane Reforming" bezeichnet wird und Dampf und Methan verwendet, um Wasserstoff (und Kohlenmonoxid) zu erzeugen."
+"Darüber hinaus werden verschiedene Wege für die Bereitstellung von "
+"Wasserstoff für Brennstoffzellenautos vorgestelltWasserstoff kann "
+"entweder durch Elektrolyse erzeugt werden, was ein Prozess ist, der "
+"Elektrizität erfordert, oder durch einen Prozess, der als \"Steam Methane"
+" Reforming\" bezeichnet wird und Dampf und Methan verwendet, um "
+"Wasserstoff (und Kohlenmonoxid) zu erzeugen."
 
 #: templates/tool.html:643
 msgid ""
@@ -938,9 +948,12 @@ msgid ""
 "origin of battery manufacture will determine the electricity mix used to "
 "produce the battery cells."
 msgstr ""
-"In Bezug auf Energiespeichertechnologien für batteriebetriebene Elektrofahrzeuge kann der Benutzer zwischen verschiedenen "
-"Arten von Lithiumionen-basierter Chemie, aber auch zwischen verschiedenen Herstellungsherkünften wählen. Die "
-"Der Ursprung der Batterieherstellung bestimmt den Strommix, der zur Herstellung der Batteriezellen verwendet wird."
+"In Bezug auf Energiespeichertechnologien für batteriebetriebene "
+"Elektrofahrzeuge kann der Benutzer zwischen verschiedenen Arten von "
+"Lithiumionen-basierter Chemie, aber auch zwischen verschiedenen "
+"Herstellungsherkünften wählen. Die Der Ursprung der Batterieherstellung "
+"bestimmt den Strommix, der zur Herstellung der Batteriezellen verwendet "
+"wird."
 
 #: templates/tool.html:658
 msgid "FUEL PATHWAYS"
@@ -954,7 +967,9 @@ msgstr "Referenz für konventionelles Benzininventar: ecoinvent 3.6"
 msgid ""
 "Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul "
 "Scherrer Institut"
-msgstr "Referenz für Bioethanolinventar: Francesco Cozzolino, 2018, Paul Scherrer Institut"
+msgstr ""
+"Referenz für Bioethanolinventar: Francesco Cozzolino, 2018, Paul Scherrer"
+" Institut"
 
 #: templates/tool.html:680
 msgid "Source for conventional diesel inventory: ecoinvent 3.6"
@@ -964,7 +979,9 @@ msgstr "Referenz für konventionelles Dieselinventar: ecoinvent 3.6"
 msgid ""
 "Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer"
 " Institut"
-msgstr "Referenz für das Biodieselinventar: Francesco Cozzolino, 2018, Paul Scherrer Institut"
+msgstr ""
+"Referenz für das Biodieselinventar: Francesco Cozzolino, 2018, Paul "
+"Scherrer Institut"
 
 #: templates/tool.html:686
 msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
@@ -982,7 +999,9 @@ msgstr "Wasserstoff"
 
 #: templates/tool.html:692
 msgid "Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020"
-msgstr "Referenz für Wasserstoff durch Elektrolyse Kraftstoffinventar: ELEGANCY project, 2020"
+msgstr ""
+"Referenz für Wasserstoff durch Elektrolyse Kraftstoffinventar: ELEGANCY "
+"project, 2020"
 
 #: templates/tool.html:693
 msgid ""
@@ -991,8 +1010,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tApplied Energy, Volume 190, 15 "
 "March 2017, Pages 326-338 "
 msgstr ""
-"Referenz für die Bestandsaufnahme von Wasserstoff durch Dampfreformierung von Methan: "
-"Zhang et al. 2017, Applied Energy, Volume 190, 15, March 2017, Pages 326-338"
+"Referenz für die Bestandsaufnahme von Wasserstoff durch Dampfreformierung"
+" von Methan: Zhang et al. 2017, Applied Energy, Volume 190, 15, March "
+"2017, Pages 326-338"
 
 #: templates/tool.html:707
 msgid "Conventional petrol"
@@ -1075,7 +1095,8 @@ msgid ""
 "Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, "
 "issue C, 884-896."
 msgstr ""
-"Referenz:  Simons A. and Bauer C. Applied Energy, 2015, vol. 157, issue C, 884-896."
+"Referenz:  Simons A. and Bauer C. Applied Energy, 2015, vol. 157, issue "
+"C, 884-896."
 
 #: templates/tool.html:842
 msgid "Battery chemistry"
@@ -1086,15 +1107,14 @@ msgid ""
 "Three different types of lithium-ion-based batteries are presented, all "
 "used for transport applications."
 msgstr ""
-"Es werden drei verschiedene Arten von Lithium-Ionen-Batterien vorgestellt, "
-"die alle für Transportanwendungen verwendet werden."
+"Es werden drei verschiedene Arten von Lithium-Ionen-Batterien "
+"vorgestellt, die alle für Transportanwendungen verwendet werden."
 
 #: templates/tool.html:845
 msgid ""
 "Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, "
 "3379-3390."
-msgstr ""
-"Referenz: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, 3379-3390."
+msgstr "Referenz: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, 3379-3390."
 
 #: templates/tool.html:858
 msgid "Proton exchange membrane"
@@ -1121,7 +1141,8 @@ msgid ""
 "Modifies the electricity mix used along the manufacture of the battery "
 "cells."
 msgstr ""
-"Ändert den Strommix, der bei der Herstellung der Batteriezellen verwendet wird."
+"Ändert den Strommix, der bei der Herstellung der Batteriezellen verwendet"
+" wird."
 
 #: templates/tool.html:904
 msgid "China"
@@ -1333,4 +1354,7 @@ msgstr "Anzahl der Iterationen"
 #~ "will start shortly. Requires ecoinvent "
 #~ "v.3.6 cutoff."
 #~ msgstr ""
+
+#~ msgid "Fuel cell"
+#~ msgstr "H2 Brennstoffzelle"
 
