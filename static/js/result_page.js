@@ -160,7 +160,7 @@ function generate_benchmark(data, cat){
       var td_bar = document.createElement('td');
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
-      div_bar_wrap.setAttribute("data-progresspercent", (data[i][4] / max_val).toFixed(0));
+      div_bar_wrap.setAttribute("data-progresspercent", ((data[i][4] / max_val) * 100).toFixed(0));
       div_bar_wrap.setAttribute("data-height", "20px");
       div_bar_wrap.setAttribute("data-width", "1500px");
       div_bar_wrap.setAttribute("data-speed", "4000");
