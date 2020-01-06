@@ -100,13 +100,12 @@
 		<!-- Start SCOPE -->
         <section id="mu-about">
 			<div class="container" style="width:50%;">
-				<div class="row"  style="padding-top:80px;">
+				<div class="row"  style="padding-top:140px;">
 
 					<div class="mu-about-header">
 						<h2 class="mu-heading-title">{{_('RESULTS')}}
-							<span>
-								<img src="static\images\mediumsmall.png" style="height:50px;margin-bottom:5px;">
-							</span>
+							<span class="mu-header-dot"></span>
+
 						</h2>
 						<p>{{_("The different sections of this page present the results of your analysis, based on the
 							concept of life cycle assessment. Each relevant phase of the life cycle of the vehicle is considered
@@ -132,8 +131,8 @@
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
-								<p style="border:3px solid grey;">{{_('Any use of the results or inventories under any form should be referenced as following:')}}</p>
-                                <p>carculator, Paul Scherrer Institut, http://carculator.psi.ch</p>
+								<p style="border:2px solid grey;padding:15px;width:800px;">{{_('Any use of the results or inventories under any form should be referenced as following:')}}
+                                carculator, Paul Scherrer Institut, http://carculator.psi.ch</p>
 							</div>
                 		</div>
             	</div>
@@ -197,13 +196,13 @@
 					<div class="col-md-12">
 						<p style="color:white;">{{_("This section compares the distance that can be driven by each vehicle
 							given a life cycle budget.")}}</p>
-						<h3 style="color:white;">{{_("How long can the vehicles drive on a budget of 1")}}
+						<h3 style="color:white;">{{_("How long can the vehicles drive on a life cycle budget of 1")}}
 							<select style="color:grey;">
 								<option value="co2">{{_("kg CO2-eq.")}}</option>
 								<option value="euro">{{_("Euro")}}</option>
 								<option value="petrol">{{_("liter of petrol-eq.")}}</option>
 							</select> ?</h3>
-						<table class="table">
+						<table class="table" id="table_benchmark">
 							<tbody>
 							<tr>
 								<td class="align-middle"><h3 style="color:white;">Essence, 2018</h3></td>
@@ -374,6 +373,9 @@
 				// Generate LCC chart
 				chart_title_cost = i18n("chart_title_cost");
 				generate_chart_costs(data[1], chart_title_cost);
+
+				// Generate benchmarks
+				generate_benchmark(data[2]);
 
             });
 </script>

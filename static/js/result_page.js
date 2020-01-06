@@ -120,6 +120,37 @@
     );
  };
 
+function generate_benchmark(data){
+
+    var i;
+    for (i = 0; i < data.length / 3; i++) {
+      var tr = document.createElement('tr');
+      var td_name = document.createElement('td');
+      td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + "</h3>"
+      var td_bar = document.createElement('td');
+      var div_bar_wrap = document.createElement('div');
+      div_bar_wrap.className = "progress-wrap progress";
+      div_bar_wrap.setAttribute("data-progresspercent", "75");
+      div_bar_wrap.setAttribute("data-height", "75");
+      div_bar_wrap.setAttribute("data-width", "20px");
+      div_bar_wrap.setAttribute("data-speed", "4000");
+      div_bar_wrap.setAttribute("data-color", "3a9c23");
+      var div_bar = document.createElement('div');
+      div_bar.className = "progress-bar progress";
+      td_bar.appendChild(div_bar_wrap);
+      td_bar.appendChild(div_bar);
+      var td_km = document.createElement('td');
+      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + data[i][4] + "</span> km</h3>"
+      tr.appendChild(td_name);
+      tr.appendChild(td_bar);
+      tr.appendChild(td_km);
+      $("#table_benchmark tbody").appendChild(tr);
+    }
+
+
+};
+
+
  var progressSelector = $(".progress-wrap");
  progressSelector.each(function(){
  var getPercent = $(this).attr("data-progresspercent");
@@ -142,4 +173,5 @@ $('.count').each(function () {
         }
     });
 });
+
 

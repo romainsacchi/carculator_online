@@ -337,7 +337,7 @@ msgstr "Carculator Support"
 
 #: templates/index.html:822
 msgid "Write to us if you have any questions about the tool, methods or results."
-msgstr ""
+msgstr "Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten haben."
 
 #: templates/index.html:870 templates/param_table.html:126
 #: templates/result.html:223 templates/tool.html:1105
