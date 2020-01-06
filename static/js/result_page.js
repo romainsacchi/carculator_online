@@ -132,24 +132,21 @@ function generate_benchmark(data, cat){
         if (data[i][0] == cat & start < 0){
             start = i;
         }
-
         if (data[i][0] == cat & data[i][4] > max_val){
             max_val = data[i][4];
         }
-
         if (data[i][0] != cat & start >= 0 & end < 0) {
             end = i;
         }
     }
 
-    console.log(start);
-    console.log(end);
-    console.log(max_val);
+    if (end == -1) {end = data.length};
+
 
     for (i = start; i < end; i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
-      td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + ", " + data[1][1] + "</h3>"
+      td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + ", " + data[i][1] + "</h3>"
       var td_bar = document.createElement('td');
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
