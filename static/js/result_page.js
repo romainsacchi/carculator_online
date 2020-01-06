@@ -192,6 +192,50 @@ function generate_benchmark(data, cat){
 
 };
 
+function generate_line_chart_TtW_energy(data){
+
+    var arr_data = [];
+    for (var x=0; x < data.length; x++){
+        for (var i = 0; i < data[x].length; i++){
+            arr_data.push({"x":i, "y": data[x][i]})
+        }
+    };
+
+    nv.addGraph(function() {
+      var chart = nv.models.lineChart()
+                    .margin({left: 60, bottom:80})  //Adjust chart margins to give the x-axis some breathing room.
+                    .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                    //.transitionDuration(350)  //how fast do you want the lines to transition?
+                    .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                    .showYAxis(true)        //Show the y-axis
+                    .showXAxis(true) ;       //Show the x-axis
+                    //.width(700).height(500);
+      ;
+
+      chart.xAxis     //Chart x-axis settings
+          .axisLabel('Time (s)')
+          .tickFormat(d3.format(',r'))
+          ;
+
+      chart.yAxis     //Chart y-axis settings
+          .axisLabel('Speed (km/h)')
+          .tickFormat(d3.format('.r'));
+
+      /* Done setting the chart up? Time to render it!*/
+
+      var datum = [{values:arr_data, key:'km/h', color: 'white', area:true}];
+
+      d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
+          .datum(arr_data)         //Populate the <svg> element with chart data...
+          .call(chart);          //Finally, render the chart!
+
+      d3.select('#chart-ttw-energy').style('fill', "white");
+
+      //Update the chart when window resizes.
+      nv.utils.windowResize(function() { chart.update() });
+      return chart;
+    });
+};
 
 
 
