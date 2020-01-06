@@ -120,17 +120,41 @@
     );
  };
 
-function generate_benchmark(data){
+function generate_benchmark(data, cat){
+
+    var length = data.length / 3;
+
+    if (cat == "cost"){
+        var start = 0;
+    };
+    if (cat == "climate change"){
+        var start = length + 1;
+    };
+
+    if (cat == "Fossil depletion"){
+        var start = (length * 2) + 1;
+    };
 
     var i;
-    for (i = 0; i < data.length / 3; i++) {
+    var max_val = 0;
+
+    for (i = start; i < length; i++) {
+
+        if (data[i] > max_val){
+            max_val = data[i];
+        }
+
+    };
+
+
+    for (i = start; i < data.length / 3; i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + "</h3>"
       var td_bar = document.createElement('td');
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
-      div_bar_wrap.setAttribute("data-progresspercent", "75");
+      div_bar_wrap.setAttribute("data-progresspercent", String((data[i][4] / max_val).toFixed(0)));
       div_bar_wrap.setAttribute("data-height", "75");
       div_bar_wrap.setAttribute("data-width", "20px");
       div_bar_wrap.setAttribute("data-speed", "4000");
@@ -147,31 +171,32 @@ function generate_benchmark(data){
       $("#table_benchmark tbody").append(tr);
     }
 
+    var progressSelector = $(".progress-wrap");
+     progressSelector.each(function(){
+     var getPercent = $(this).attr("data-progresspercent");
+     var getSpeed = parseInt($(this).attr("data-speed"));
+     var getColor = $(this).attr("data-color");
+     var getHeight = $(this).attr("data-height");
+     var getWidth = $(this).attr("data-width");
+     $(this).css({"height":getHeight,"width":getWidth});
+     $(this).find(".progress-bar").css({"background-color":"#"+getColor}).animate({ width:getPercent+'%' },getSpeed)
+     });
+
+    $('.count').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 4000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
 
 };
 
 
- var progressSelector = $(".progress-wrap");
- progressSelector.each(function(){
- var getPercent = $(this).attr("data-progresspercent");
- var getSpeed = parseInt($(this).attr("data-speed"));
- var getColor = $(this).attr("data-color");
- var getHeight = $(this).attr("data-height");
- var getWidth = $(this).attr("data-width");
- $(this).css({"height":getHeight,"width":getWidth});
- $(this).find(".progress-bar").css({"background-color":"#"+getColor}).animate({ width:getPercent+'%' },getSpeed)
- });
 
-$('.count').each(function () {
-    $(this).prop('Counter',0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 4000,
-        easing: 'swing',
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
 
 
