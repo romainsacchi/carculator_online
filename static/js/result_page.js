@@ -124,9 +124,8 @@ function generate_benchmark(data, cat){
 
     $("#table_benchmark tbody tr").remove();
 
-    var length = data.length / 3;
-
     var start = -1;
+    var end = -1;
     var max_val = 0;
 
     for (var i = 0; i < data.length; i++){
@@ -137,10 +136,14 @@ function generate_benchmark(data, cat){
                 max_val = data[i][4];
             }
         }
+
+        if (data[i][0] != cat & start < 0) {
+            end = i;
+        }
     }
 
 
-    for (i = start; i < (start + length); i++) {
+    for (i = start; i < end; i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + ", " + data[1][1] + "</h3>"
