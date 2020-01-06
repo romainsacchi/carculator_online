@@ -152,13 +152,14 @@ function generate_benchmark(data, cat){
 
     for (i = start; i < (start + length); i++) {
         console.log(data[i]);
+        console.log(max_val);
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + "</h3>"
       var td_bar = document.createElement('td');
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
-      div_bar_wrap.setAttribute("data-progresspercent", String((data[i][4] / max_val).toFixed(0)));
+      div_bar_wrap.setAttribute("data-progresspercent", (data[i][4] / max_val).toFixed(0));
       div_bar_wrap.setAttribute("data-height", "20px");
       div_bar_wrap.setAttribute("data-width", "1500px");
       div_bar_wrap.setAttribute("data-speed", "4000");
@@ -168,7 +169,7 @@ function generate_benchmark(data, cat){
       div_bar_wrap.appendChild(div_bar);
       td_bar.appendChild(div_bar_wrap);
       var td_km = document.createElement('td');
-      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + Number(data[i][4]).toFixed(1) + "</span> km</h3>"
+      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + data[i][4].toFixed(1) + "</span> km</h3>"
       tr.appendChild(td_name);
       tr.appendChild(td_bar);
       tr.appendChild(td_km);
