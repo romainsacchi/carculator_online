@@ -122,6 +122,8 @@
 
 function generate_benchmark(data, cat){
 
+    $("#table_benchmark tbody tr").remove();
+
     var length = data.length / 3;
 
     if (cat == "cost"){
@@ -150,7 +152,7 @@ function generate_benchmark(data, cat){
     for (i = start; i < (start + length); i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
-      td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + "</h3>"
+      td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + ", " + data[1] + "</h3>"
       var td_bar = document.createElement('td');
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
@@ -195,6 +197,7 @@ function generate_benchmark(data, cat){
     });
 
 };
+
 
 
 

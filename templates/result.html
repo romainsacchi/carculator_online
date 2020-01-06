@@ -197,47 +197,13 @@
 						<p style="color:white;">{{_("This section compares the distance that can be driven by each vehicle
 							given a life cycle budget.")}}</p>
 						<h3 style="color:white;">{{_("How long can the vehicles drive on a life cycle budget of 1")}}
-							<select style="color:grey;">
-								<option value="co2">{{_("kg CO2-eq.")}}</option>
-								<option value="euro">{{_("Euro")}}</option>
-								<option value="petrol">{{_("liter of petrol-eq.")}}</option>
+							<select id="select_benchmark" style="color:grey;">
+								<option value="climate change">{{_("kg CO2-eq.")}}</option>
+								<option value="cost">{{_("Euro")}}</option>
+								<option value="fossil depletion">{{_("liter of petrol-eq.")}}</option>
 							</select> ?</h3>
 						<table class="table" id="table_benchmark">
 							<tbody>
-							<!--<tr>
-								<td class="align-middle"><h3 style="color:white;">Essence, 2018</h3></td>
-								<td class="align-middle">
-									<div class="progress-wrap progress"
-									  data-progresspercent="75"
-									  data-height="20px"
-									  data-width="1500px"
-									  data-speed="4000"
-									  data-color="3a9c23">
-									  <div class="progress-bar progress"></div>
-									</div>
-
-								</td>
-								<td class="align-middle">
-									<h3 style="color:white;"><span class="count">300</span> km</h3>
-								</td>
-							</tr>
-							<tr>
-								<td class="align-middle"><h3 style="color:white;">Essence, 2018</h3></td>
-								<td class="align-middle">
-									<div class="progress-wrap progress"
-									  data-progresspercent="25"
-									  data-height="20px"
-									  data-width="1500px"
-									  data-speed="4000"
-									  data-color="3a9c23">
-									  <div class="progress-bar progress"></div>
-									</div>
-
-								</td>
-								<td class="align-middle">
-									<h3 style="color:white;"><span class="count">200</span> km</h3>
-								</td>
-							</tr>-->
 							</tbody>
 
 						</table>
@@ -378,6 +344,10 @@
 				generate_benchmark(data[2], "climate change");
 
             });
+    $('#select_benchmark').on('change', function() {
+	  generate_benchmark(data[2], this.value);
+	});
+
 </script>
 
 
