@@ -182,7 +182,7 @@ function generate_benchmark(data, cat){
         $(this).prop('Counter',0).animate({
             Counter: $(this).text()
         }, {
-            duration: 1000,
+            duration: 500,
             easing: 'swing',
             step: function (now) {
                 $(this).text(now.toFixed(1));
@@ -232,7 +232,7 @@ function generate_line_chart_TtW_energy(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      //d3.select('#chart-ttw-energy').style('fill', "white");
+      d3.select('#chart-ttw-energy').style('fill', "none");
 
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
