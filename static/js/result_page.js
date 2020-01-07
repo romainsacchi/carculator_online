@@ -231,8 +231,9 @@ function generate_line_chart_TtW_energy(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      d3.selectAll('.nv-y path').attr('opacity','0.1')
-      d3.selectAll('.nv-x path').attr('opacity','0.1')
+      //d3.selectAll('.nv-y path').attr('opacity','0.1')
+      //d3.selectAll('.nv-x path').attr('opacity','0.1')
+      d3.selectAll('.nv-axis .tick line').attr('display','none')
 
       d3.select('#chart-ttw-energy').style('fill', "white");
       //Update the chart when window resizes.
