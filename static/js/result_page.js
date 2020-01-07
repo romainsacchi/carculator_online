@@ -214,7 +214,7 @@ function generate_line_chart_TtW_energy(data){
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
                     .width(800).height(600)
-                    .forceY([0, 2000]);
+                    .forceY();
 
 
       chart.xAxis     //Chart x-axis settings
