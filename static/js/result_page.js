@@ -245,7 +245,7 @@ function generate_scatter_chart(data){
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
-            datum.push({values:[{"x": data[key][0], "y":data[key][1]}], key:key})
+            datum.push({values:[{"x": data[key][0], "y":data[key][1]}], key:key, size:10})
         }
     }
 
@@ -271,7 +271,7 @@ function generate_scatter_chart(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      d3.select('#chart-scatter').style('fill', "white");
+      //d3.select('#chart-scatter').style('fill', "white");
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
