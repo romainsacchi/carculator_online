@@ -259,7 +259,14 @@ function generate_scatter_chart(data){
                     .color(d3.scale.category10().range())
                     .forceY([0])
                     .forceX([0])
-                    .pointRange([45,50]);
+                    .pointRange([70,70]);
+
+      chart.tooltip.contentGenerator(function (d) {
+          var html = "<h2>"+d.series[0].key+"</h2> <ul>";
+          html += "<ul><li>Cost: "+ d.series[0].value +"</li><li>GWP: " + d.value + "</li></ul>"
+
+          return html;
+        })
 
       chart.xAxis     //Chart x-axis settings
               .axisLabel('GWP100 (kg CO2-eq./km)')
