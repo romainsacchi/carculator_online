@@ -245,7 +245,7 @@ function generate_scatter_chart(data){
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
-            datum.push({values:{"x": data[key][0], "y":data[key][1]}, key:key})
+            datum.push({values:[{"x": data[key][0], "y":data[key][1]}], key:key})
         }
     }
 
