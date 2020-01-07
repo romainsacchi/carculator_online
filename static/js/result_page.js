@@ -196,10 +196,15 @@ function generate_line_chart_TtW_energy(data){
 
 
     var datum = [];
+    var max_val = 0;
     for (var x=0; x < data.length; x++){
         var arr_data = [];
         for (var i = 0; i < data[x][1].length; i++){
             arr_data.push({"x":i, "y": Number(data[x][1][i]).toFixed(0)})
+
+            if (Number(data[x][1][i]) > max_val){
+                max_val = Number(data[x][1][i]);
+            };
         }
         var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
         datum.push({values:arr_data, key:name, area:false})
@@ -214,7 +219,7 @@ function generate_line_chart_TtW_energy(data){
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
                     .width(800).height(600)
-                    .forceY([0]);
+                    .forceY([0, max_val * 1.1]);
 
 
       chart.xAxis     //Chart x-axis settings
