@@ -230,7 +230,7 @@
 								<tbody>
 									<tr>
 										<th><h3>{{_('Energy consumption along driving cycle')}}</h3></th>
-										<th><h3>{{_('Pollutants emissions along driving cycle')}}</h3></th>
+										<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
 									</tr>
 									<tr>
 										<td>
@@ -242,6 +242,9 @@
 										</td>
 										<td>
 											<div>
+												<svg id="chart-scatter"
+											   		style="width:800px;height:600px; font-size:16px; color:grey;">
+												</svg>
 
 											</div>
 										</td>
@@ -249,7 +252,7 @@
 									</tr>
 									<tr>
 										<th><h3>{{_('Noise emissions along driving cycle')}}</h3></th>
-										<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
+										<th><h3>{{_('Pollutants emissions along driving cycle')}}</h3></th>
 									</tr>
 									<tr>
 										<td>
@@ -259,9 +262,7 @@
 										</td>
 										<td>
 											<div>
-												<svg id="chart-scatter"
-											   		style="width:800px;height:600px; font-size:16px; color:grey;">
-												</svg>
+
 
 											</div>
 										</td>

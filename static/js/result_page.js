@@ -249,6 +249,8 @@ function generate_scatter_chart(data){
         datum.push({values:arr_data, key:x})
     };
 
+    console.log(datum);
+
 
 
     nv.addGraph(function() {
