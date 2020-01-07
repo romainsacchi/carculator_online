@@ -388,9 +388,7 @@ class Calculation():
                       for y in arr.coords["year"].values.tolist()]
         TtW_list = list(zip(list_names, TtW_energy))
 
-        print(TtW_list)
-
-        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list.tolist()]), self.excel_lci)
+        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
