@@ -213,7 +213,8 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(800).height(800);
+                    .width(800).height(600)
+                    .forceY([0, 2000]);
 
 
       chart.xAxis     //Chart x-axis settings
