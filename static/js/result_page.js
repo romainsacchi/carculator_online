@@ -258,7 +258,8 @@ function generate_scatter_chart(data){
                     .showDistY(true)
                     .color(d3.scale.category10().range())
                     .forceY([0])
-                    .forceX([0]);
+                    .forceX([0])
+                    .pointRange([45,50]);
 
       chart.xAxis     //Chart x-axis settings
               .axisLabel('GWP100 (kg CO2-eq./km)')
