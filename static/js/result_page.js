@@ -241,13 +241,13 @@ function generate_line_chart_TtW_energy(data){
 function generate_scatter_chart(data){
 
     var datum = [];
-    for (var x=0; x < data.length; x++){
-        var arr_data = [];
-        for (var i = 0; i < data[x].length; i++){
-            arr_data.push({"x":data[x][0], "y": data[x][1]})
+
+    for (var key in data) {
+        // check if the property/key is defined in the object itself, not in parent
+        if (data.hasOwnProperty(key)) {
+            datum.push({values:{"x": data[key][0], "y":data[key][1]}, key:key})
         }
-        datum.push({values:arr_data, key:x})
-    };
+    }
 
     console.log(datum);
 
