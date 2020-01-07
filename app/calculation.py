@@ -389,9 +389,24 @@ class Calculation():
             motor_power=arr.sel(parameter="electric power")).reshape(len(powertrain)*len(size)*len(year),-1)
 
         TtW_energy = TtW_energy.cumsum(axis=1).tolist()
-        list_names = [[s, p, y] for s in arr.coords["size"].values.tolist()
-                      for p in arr.coords["powertrain"].values.tolist()
-                      for y in arr.coords["year"].values.tolist()]
+
+        if lang == "en":
+            list_names = [[s, self.d_rev_pt_en[p], y] for s in arr.coords["size"].values.tolist()
+                          for p in arr.coords["powertrain"].values.tolist()
+                          for y in arr.coords["year"].values.tolist()]
+        if lang == "it":
+            list_names = [[self.d_rev_size_it[s], self.d_rev_pt_it[p], y] for s in arr.coords["size"].values.tolist()
+                          for p in arr.coords["powertrain"].values.tolist()
+                          for y in arr.coords["year"].values.tolist()]
+        if lang == "de":
+            list_names = [[self.d_rev_size_de[s], self.d_rev_pt_de[p], y] for s in arr.coords["size"].values.tolist()
+                          for p in arr.coords["powertrain"].values.tolist()
+                          for y in arr.coords["year"].values.tolist()]
+        if lang == "fr":
+            list_names = [[self.d_rev_size_fr[s], self.d_rev_pt_fr[p], y] for s in arr.coords["size"].values.tolist()
+                          for p in arr.coords["powertrain"].values.tolist()
+                          for y in arr.coords["year"].values.tolist()]
+
         TtW_list = list(zip(list_names, TtW_energy))
 
         return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter]), self.excel_lci)
