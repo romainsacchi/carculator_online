@@ -193,8 +193,6 @@ function generate_benchmark(data, cat){
 };
 
 function generate_line_chart_TtW_energy(data){
-
-
     var datum = [];
     var max_val = 0;
     for (var x=0; x < data.length; x++){
@@ -221,7 +219,6 @@ function generate_line_chart_TtW_energy(data){
                     .width(800).height(600)
                     .forceY([0, max_val * 1.1]);
 
-
       chart.xAxis     //Chart x-axis settings
           .axisLabel('Time (s)')
           .tickFormat(d3.format(',r'))
@@ -235,12 +232,55 @@ function generate_line_chart_TtW_energy(data){
           .call(chart);          //Finally, render the chart!
 
       d3.select('#chart-ttw-energy').style('fill', "white");
-
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
     });
 };
+
+function generate_scatter_chart(data){
+
+    var datum = [];
+    for (var x=0; x < data.length; x++){
+        var arr_data = [];
+        for (var i = 0; i < data[x].length; i++){
+            arr_data.push({"x":data[x][0], "y": data[x][1]})
+        }
+        datum.push({values:arr_data, key:x})
+    };
+
+
+
+    nv.addGraph(function() {
+      var chart = nv.models.scatterChart()
+                    .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
+                    .showDistY(true)
+                    .color(d3.scale.category10().range());
+
+      chart.xAxis     //Chart x-axis settings
+              .axisLabel('GWP100 (kg CO2-eq./km)')
+              .tickFormat(d3.format('.02f'))
+              ;
+      chart.yAxis     //Chart y-axis settings
+          .axisLabel('Cost (Eur/km)')
+          .tickFormat(d3.format('.02f'));
+
+      d3.select('#chart-scatter')    //Select the <svg> element you want to render the chart in.
+          .datum(datum)         //Populate the <svg> element with chart data...
+          .call(chart);          //Finally, render the chart!
+
+      d3.select('#chart-scatter').style('fill', "white");
+      //Update the chart when window resizes.
+      nv.utils.windowResize(function() { chart.update() });
+      return chart;
+
+    };
+
+
+
+}
+
+
 
 
 
