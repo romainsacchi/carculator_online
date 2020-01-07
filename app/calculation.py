@@ -327,7 +327,7 @@ class Calculation():
                         if cost_category[cat] == "total":
                             arr_benchmark.append(["cost", size[s], powertrain[pt], year[y], 1 / data_cost[0, s, pt, y, cat]])
                             k = size[s] + ", " + powertrain[pt] + ", " + str(year[y])
-                            dict_scatter[k].append([data_cost[0, s, pt, y, cat]])
+                            dict_scatter[k].append(data_cost[0, s, pt, y, cat])
 
                         list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
 
