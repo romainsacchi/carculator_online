@@ -198,10 +198,11 @@ function generate_line_chart_TtW_energy(data){
     var datum = [];
     for (var x=0; x < data.length; x++){
         var arr_data = [];
-        for (var i = 0; i < data[x].length; i++){
+        for (var i = 0; i < data[x][1].length; i++){
             arr_data.push({"x":i, "y": Number(data[x][i]).toFixed(0)})
         }
-        datum.push({values:arr_data, key:String(x), area:false})
+        var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
+        datum.push({values:arr_data, key:name, area:false})
     };
 
     nv.addGraph(function() {
