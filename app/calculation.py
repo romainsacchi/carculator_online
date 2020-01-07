@@ -382,7 +382,7 @@ class Calculation():
             recuperation_efficiency=arr.sel(parameter="recuperation efficiency"),
             motor_power=arr.sel(parameter="electric power")).reshape(len(powertrain)*len(size)*len(year),-1)
 
-        TtW_energy = TtW_energy.cumsum(axis=1)
+        TtW_energy = TtW_energy.cumsum(axis=1).tolist()
         list_names = [[s, p, y] for s in arr.coords["size"].values.tolist()
                       for p in arr.coords["powertrain"].values.tolist()
                       for y in arr.coords["year"].values.tolist()]
