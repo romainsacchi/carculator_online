@@ -219,7 +219,6 @@ function generate_line_chart_TtW_energy(data){
           .axisLabel('Time (s)')
           .tickFormat(d3.format(',r'))
           ;
-
       chart.yAxis     //Chart y-axis settings
           .axisLabel('kj')
           .tickFormat(d3.format('.r'));
