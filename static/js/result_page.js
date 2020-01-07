@@ -245,7 +245,7 @@ function generate_scatter_chart(data){
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
-            datum.push({values:[{"x": data[key][0], "y":data[key][1], size:10}], key:key})
+            datum.push({values:[{"x": data[key][0], "y":data[key][1], size:10, shape:"circle"}], key:key})
         }
     }
 
@@ -255,6 +255,9 @@ function generate_scatter_chart(data){
 
     nv.addGraph(function() {
       var chart = nv.models.scatterChart()
+                    .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
+                    .showYAxis(true)        //Show the y-axis
+                    .showXAxis(true)        //Show the x-axis
                     .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                     .showDistY(true)
                     .color(d3.scale.category10().range());
@@ -271,7 +274,7 @@ function generate_scatter_chart(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      //d3.select('#chart-scatter').style('fill', "white");
+      d3.select('#chart-scatter').style('fill', "white");
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
