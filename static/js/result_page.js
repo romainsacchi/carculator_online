@@ -260,7 +260,9 @@ function generate_scatter_chart(data){
                     .showXAxis(true)        //Show the x-axis
                     .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                     .showDistY(true)
-                    .color(d3.scale.category10().range());
+                    .color(d3.scale.category10().range())
+                    .forceY([0])
+                    .forceX([0]);
       //Configure how the tooltip looks.
       chart.tooltipContent(function(key) {
           return '<h3>' + key + '</h3>';
