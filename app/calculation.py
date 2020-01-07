@@ -383,8 +383,14 @@ class Calculation():
             motor_power=arr.sel(parameter="electric power")).reshape(len(powertrain)*len(size)*len(year),-1)
 
         TtW_energy = TtW_energy.cumsum(axis=1)
+        list_names = [[s, p, y] for s in arr.coords["size"].tolist()
+                      for p in arr.coords["powertrain"].tolist()
+                      for y in arr.coords["year"].tolist()]
+        TtW_list = list(zip(list_names, TtW_energy))
 
-        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_energy.tolist()]), self.excel_lci)
+        print(TtW_energy)
+
+        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list.tolist()]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """

@@ -437,7 +437,7 @@ msgstr "AUTRES INDICATEURS"
 
 #: templates/result.html:161
 msgid "Energy consumption along driving cycle"
-msgstr "Consommation d'énergie lors du cycle de conduite"
+msgstr "Consommation cumulée d'énergie 'tank-to-wheel' lors du cycle de conduite"
 
 #: templates/result.html:162
 msgid "Pollutants emissions along driving cycle"
