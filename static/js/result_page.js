@@ -212,7 +212,7 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(800).height(600);
+       //             .width(800).height(600);
       ;
 
       chart.xAxis     //Chart x-axis settings
@@ -220,14 +220,14 @@ function generate_line_chart_TtW_energy(data){
           .tickFormat(d3.format(',r'))
           ;
       chart.yAxis     //Chart y-axis settings
-          .axisLabel('kj')
+          .axisLabel('kilojoule')
           .tickFormat(d3.format('.r'));
 
       d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      //d3.select('#chart-ttw-energy').style('fill', "none");
+      d3.select('#chart-ttw-energy').style('fill', "white");
 
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
