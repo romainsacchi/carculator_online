@@ -274,7 +274,7 @@ function generate_scatter_chart(data){
       nv.utils.windowResize(function() { chart.update() });
       return chart;
 
-    };
+    });
 
 
 
