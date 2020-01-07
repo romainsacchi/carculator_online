@@ -383,12 +383,12 @@ class Calculation():
             motor_power=arr.sel(parameter="electric power")).reshape(len(powertrain)*len(size)*len(year),-1)
 
         TtW_energy = TtW_energy.cumsum(axis=1)
-        list_names = [[s, p, y] for s in arr.coords["size"].tolist()
-                      for p in arr.coords["powertrain"].tolist()
-                      for y in arr.coords["year"].tolist()]
+        list_names = [[s, p, y] for s in arr.coords["size"].values.tolist()
+                      for p in arr.coords["powertrain"].values.tolist()
+                      for y in arr.coords["year"].values.tolist()]
         TtW_list = list(zip(list_names, TtW_energy))
 
-        print(TtW_energy)
+        print(TtW_list)
 
         return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list.tolist()]), self.excel_lci)
 
