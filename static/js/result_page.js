@@ -245,7 +245,7 @@ function generate_scatter_chart(data){
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
-            datum.push({values:[{"x": data[key][0], "y":data[key][1], "size":40, "shape":"circle"}], key:key})
+            datum.push({values:[{"x": data[key][0], "y":data[key][1], "size":400, "shape":"circle"}], key:key})
         }
     }
 
@@ -261,6 +261,10 @@ function generate_scatter_chart(data){
                     .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                     .showDistY(true)
                     .color(d3.scale.category10().range());
+      //Configure how the tooltip looks.
+      chart.tooltipContent(function(key) {
+          return '<h3>' + key + '</h3>';
+      });
 
       chart.xAxis     //Chart x-axis settings
               .axisLabel('GWP100 (kg CO2-eq./km)')
