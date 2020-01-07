@@ -265,8 +265,8 @@ function generate_scatter_chart(data){
                     .pointRange([70,70]);
 
       chart.tooltip.contentGenerator(function (d) {
-          var html = "<h2>"+d.series[0].key+"</h2> <ul>";
-          html += "<ul><li>"+ d.series[0].value.toFixed(2) +" €/km</li><li>" + d.value.toFixed(2) + " kg CO2-eq/km</li></ul>"
+          var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
+          html += "<ul><li style='margin-left:15px;'>"+ d.series[0].value.toFixed(2) +" €/km</li><li style='margin-left:15px;'>" + d.value.toFixed(2) + " kg CO2-eq/km</li></ul>"
 
           return html;
         })
@@ -274,6 +274,7 @@ function generate_scatter_chart(data){
       chart.xAxis     //Chart x-axis settings
               .axisLabel('GWP100 (kg CO2-eq./km)')
               .tickFormat(d3.format('.02f'))
+              .showMaxMin(false)
               ;
       chart.yAxis     //Chart y-axis settings
           .axisLabel('Cost (Eur/km)')
@@ -283,10 +284,10 @@ function generate_scatter_chart(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      d3.selectAll('.nv-y path').attr('opacity','0.9')
-      d3.selectAll('.nv-x path').attr('opacity','0.9')
 
       d3.select('#chart-scatter').style('fill', "white");
+      d3.selectAll('.nv-y path').attr('opacity','0.1')
+      d3.selectAll('.nv-x path').attr('opacity','0.1')
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
