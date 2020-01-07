@@ -235,6 +235,7 @@ function generate_line_chart_TtW_energy(data){
       //d3.selectAll('.nv-x path').attr('opacity','0.1')
       d3.selectAll('.nv-axis .tick line').attr('display','none')
       d3.selectAll('.nv-x path').attr('opacity','0.1')
+      d3.selectAll('.nv-y path').attr('color','white')
       d3.select('#chart-ttw-energy').style('fill', "white");
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
