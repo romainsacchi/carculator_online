@@ -231,6 +231,9 @@ function generate_line_chart_TtW_energy(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
+      d3.selectAll('.nv-y path').attr('opacity','0.1')
+      d3.selectAll('.nv-x path').attr('opacity','0.1')
+
       d3.select('#chart-ttw-energy').style('fill', "white");
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
@@ -263,7 +266,7 @@ function generate_scatter_chart(data){
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2>"+d.series[0].key+"</h2> <ul>";
-          html += "<ul><li>Cost: "+ d.series[0].value +"</li><li>GWP: " + d.value + "</li></ul>"
+          html += "<ul><li>"+ d.series[0].value.toFixed(2) +" €/km</li><li>" + d.value.toFixed(2) + " kg CO2-eq/km</li></ul>"
 
           return html;
         })
