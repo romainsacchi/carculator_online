@@ -249,10 +249,6 @@ function generate_scatter_chart(data){
         }
     }
 
-    console.log(datum);
-
-
-
     nv.addGraph(function() {
       var chart = nv.models.scatterChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
@@ -263,10 +259,6 @@ function generate_scatter_chart(data){
                     .color(d3.scale.category10().range())
                     .forceY([0])
                     .forceX([0]);
-      //Configure how the tooltip looks.
-      chart.tooltipContent(function(key) {
-          return '<h3>' + key + '</h3>';
-      });
 
       chart.xAxis     //Chart x-axis settings
               .axisLabel('GWP100 (kg CO2-eq./km)')
