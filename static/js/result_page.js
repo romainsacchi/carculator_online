@@ -241,9 +241,7 @@ function generate_line_chart_TtW_energy(data){
 };
 
 function generate_scatter_chart(data){
-
     var datum = [];
-
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
@@ -291,7 +289,7 @@ function generate_scatter_chart(data){
 };
 
 function generate_chart_accumulated_impacts(data, name_impact, impact){
-    console.log(name_impact);
+
     var datum = [];
     for (var x=0; x < data.length; x++){
         if (data[x][0] == name_impact){

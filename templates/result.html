@@ -402,7 +402,6 @@
 					// Generate LCIA chart
 					name_default_impact = i18n("climate change");
 					chart_title = i18n("chart_title");
-					console.log(name_default_impact);
 					generate_chart_impacts(data[1], chart_title, name_default_impact);
 
 					// Generate LCC chart
@@ -427,10 +426,10 @@
 
 
     $('#select_benchmark').on('change', function() {
-	  generate_benchmark(data[2], this.value);
+	  generate_benchmark(data[3], this.value);
 	});
 	$('#select_impact').on('change', function() {
-	  generate_chart_accumulated_impacts(data[5], i18n(this.value), this.value);
+	  generate_chart_accumulated_impacts(data[6], i18n(this.value), this.value);
 	});
 
 </script>
