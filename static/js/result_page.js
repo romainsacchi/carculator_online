@@ -305,7 +305,7 @@ function generate_chart_accumulated_impacts(data, impact){
                 arr_data.push({"x":i, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
             }
 
-            var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
+            var name = data[x][2] + ", " + data[x][3] + ", " + data[x][1]
             datum.push({values:arr_data, key:name, area:false})
 
         };
