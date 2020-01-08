@@ -297,7 +297,7 @@ function generate_chart_accumulated_impacts(data, impact){
         if (data[x][0] == impact){
             var arr_data = [];
             for (var i = 0; i < 100; i++){
-                arr_data.push({"x":i, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
+                arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
             }
             var name = data[x][2] + ", " + data[x][3] + ", " + data[x][1]
             datum.push({values:arr_data, key:name})
@@ -319,10 +319,11 @@ function generate_chart_accumulated_impacts(data, impact){
 
       chart.xAxis     //Chart x-axis settings
           .axisLabel('Use (km)')
-          .tickFormat(d3.format(',r'))
+          .tickFormat(d3.format('.02f'))
           ;
       chart.yAxis     //Chart y-axis settings
-          .tickFormat(d3.format('.r'))
+          .axisLabel(impact)
+          .tickFormat(d3.format('.02f'))
           .showMaxMin(false);
 
       d3.select('#chart-accumulated')    //Select the <svg> element you want to render the chart in.
