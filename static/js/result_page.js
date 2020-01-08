@@ -288,11 +288,11 @@ function generate_scatter_chart(data){
     });
 };
 
-function generate_chart_accumulated_impacts(data, impact){
+function generate_chart_accumulated_impacts(data, name_impact, impact){
     console.log(impact);
     var datum = [];
     for (var x=0; x < data.length; x++){
-        if (data[x][0] == impact){
+        if (data[x][0] == name_impact){
             var arr_data = [];
             for (var i = 0; i < 100; i++){
                 arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
@@ -319,10 +319,22 @@ function generate_chart_accumulated_impacts(data, impact){
           .axisLabel('Use (km)')
           .tickFormat(d3.format('.r'))
           ;
-      chart_acc.yAxis     //Chart y-axis settings
-          .axisLabel(impact)
-          .tickFormat(d3.format('.01f'))
+
+      if (impact == "ozone depletion" ){
+          chart_acc.yAxis     //Chart y-axis settings
+          .axisLabel(name_impact)
+          .tickFormat(d3.format('.0e'))
           .showMaxMin(false);
+
+      }else{
+
+           chart_acc.yAxis     //Chart y-axis settings
+          .axisLabel(name_impact)
+          .tickFormat(d3.format(',d'))
+          .showMaxMin(false);
+
+      };
+
 
       d3.select('#chart-accumulated')    //Select the <svg> element you want to render the chart in.
           .datum(datum)         //Populate the <svg> element with chart data...

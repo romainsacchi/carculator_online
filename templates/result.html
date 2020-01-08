@@ -378,14 +378,14 @@
 
 				// Generate chart accumulated impacts
 				$("#select_impact").val('climate change')
-				generate_chart_accumulated_impacts(chart[5], i18n("climate change"));
+				generate_chart_accumulated_impacts(chart[5], i18n("climate change"), "climate change");
 
             });
     $('#select_benchmark').on('change', function() {
 	  generate_benchmark(data[2], this.value);
 	});
 	$('#select_impact').on('change', function() {
-	  generate_chart_accumulated_impacts(data[5], i18n(this.value));
+	  generate_chart_accumulated_impacts(data[5], i18n(this.value), this.value);
 	});
 
 </script>
