@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 11:35+0100\n"
+"POT-Creation-Date: 2020-01-08 15:18+0100\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -347,17 +347,17 @@ msgstr ""
 "haben."
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:312 templates/tool.html:1113
+#: templates/result.html:325 templates/tool.html:1113
 msgid "Copyright"
 msgstr "Copyright"
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:312 templates/tool.html:1113
+#: templates/result.html:325 templates/tool.html:1113
 msgid "Paul Scherrer Institut"
 msgstr "Paul Scherrer Institut"
 
 #: templates/index.html:883 templates/param_table.html:127
-#: templates/result.html:313 templates/tool.html:1114
+#: templates/result.html:326 templates/tool.html:1114
 msgid "All rights reserved"
 msgstr "Alle Rechte vorbehalten"
 
@@ -395,23 +395,23 @@ msgstr "Gilt für die Größenkategorie"
 
 #: templates/result.html:17
 msgid "Carculator : Results"
-msgstr ""
+msgstr "Carculator : Ergebnisse"
 
 #: templates/result.html:96
 msgid "Export Brightway2-compatible inventories"
-msgstr ""
+msgstr "Brightway2-kompatible Bestände exportieren"
 
 #: templates/result.html:99
 msgid "Export Simapro-compatible inventories"
-msgstr ""
+msgstr "Simapro-kompatible Bestände exportieren"
 
 #: templates/result.html:101
 msgid "Share results"
-msgstr ""
+msgstr "Ergebnisse teilen"
 
 #: templates/result.html:117
 msgid "RESULTS"
-msgstr ""
+msgstr "ERGEBNISSE"
 
 #: templates/result.html:121
 msgid ""
@@ -422,6 +422,9 @@ msgid ""
 "\t\t\t\t\t\t\tand characterized against environmental and economic "
 "indicators."
 msgstr ""
+"In den verschiedenen Abschnitten dieser Seite werden die Ergebnisse Ihrer Analyse basierend auf dem Konzept "
+"der Ökobilanz dargestellt. Jede relevante Phase des Lebenszyklus des Fahrzeugs wird berücksichtigt und anhand von "
+"Umwelt- und Wirtschaftsindikatoren charakterisiert."
 
 #: templates/result.html:124
 msgid ""
@@ -429,20 +432,23 @@ msgid ""
 " hotspots\n"
 "\t\t\t\t\t\t\tat different phases of the life cycle of a vehicle."
 msgstr ""
+"Dies ist ein nützliches Hilfsmittel beim Vergleich von Technologien, die in verschiedenen Phasen des Lebenszyklus "
+"eines Fahrzeugs Umwelt-Hotspots aufweisen."
 
 #: templates/result.html:140
 msgid "REFERENCE"
-msgstr ""
+msgstr "REFERENZ"
 
 #: templates/result.html:144
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
 msgstr ""
+"Auf jede Verwendung der Ergebnisse oder Inventare in irgendeiner Form sollte wie folgt Bezug genommen werden:"
 
 #: templates/result.html:160
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
-msgstr ""
+msgstr "LEBENSZYKLUS-FOLGENABSCHÄTZUNG"
 
 #: templates/result.html:164
 msgid ""
@@ -458,10 +464,15 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tdropdown menu located in the top-left corner of the "
 "chart area."
 msgstr ""
+"Die folgende Tabelle zeigt standardmäßig die Umweltauswirkungen in Form der Treibhausgasemissionen, die für jedes "
+"Fahrzeug pro gefahrenen Kilometer ausgestoßen werden. Die Ergebnisse sind in Kategorien unterteilt: Antriebsstrang, "
+"Wartung, Kraftstoffherstellung, Energiespeicherung usw. Der Benutzer kann die Umgebungskennzahl unter ändern "
+"das Dropdown-Menü Auswirkungskategorie. Sie können die Ergebnisse auch als Tabelle oder als andere Art von Diagramm "
+"anzeigen, indem Sie das Dropdown-Menü in der oberen linken Ecke des Diagrammbereichs verwenden."
 
 #: templates/result.html:183
 msgid "LIFE CYCLE COST ASSESSMENT"
-msgstr ""
+msgstr "LEBENSZYKLUSKOSTENABSCHÄTZUNG"
 
 #: templates/result.html:187
 msgid ""
@@ -471,6 +482,8 @@ msgid ""
 "as the amortization of the\n"
 "\t\t\t\t\t\t\t\tvehicle purchase over time."
 msgstr ""
+"Die nachstehende Tabelle zeigt die Betriebskosten pro gefahrenem Kilometer für jedes Fahrzeug. Berücksichtigt werden "
+"künftige Strom- und Kraftstoffpreise sowie die Amortisation des Fahrzeugkaufs im Zeitverlauf."
 
 #: templates/result.html:203
 msgid "BENCHMARK"
@@ -481,14 +494,15 @@ msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
 msgstr ""
+"In diesem Abschnitt wird die Entfernung verglichen, die jedes Fahrzeug bei einem bestimmten Lebenszyklusbudget zurücklegen kann."
 
 #: templates/result.html:209
 msgid "How long can the vehicles drive on a life cycle budget of 1"
-msgstr ""
+msgstr "Wie lange können die Fahrzeuge mit einem Lebenszyklusbudget von 1 fahren"
 
 #: templates/result.html:211
 msgid "kg CO2-eq."
-msgstr ""
+msgstr "kg CO2-Äq."
 
 #: templates/result.html:212
 msgid "Euro"
@@ -496,103 +510,147 @@ msgstr ""
 
 #: templates/result.html:213
 msgid "liter of petrol-eq."
-msgstr ""
+msgstr "Liter Benzin-Äq."
 
 #: templates/result.html:233
 msgid "OTHER INDICATORS"
-msgstr ""
-
-#: templates/result.html:240
-msgid "Energy consumption along driving cycle"
-msgstr ""
+msgstr "ANDERE INDIKATOREN"
 
 #: templates/result.html:241
-msgid "GHG emissions vs. ownership costs"
-msgstr ""
+msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
+msgstr "Tank-to-Wheel kumuliert den Energieverbrauch während des Fahrzyklus"
 
 #: templates/result.html:242
-msgid "Accumulated impacts over lifetime"
+msgid ""
+"The graph below shows the accumulated Tank-to-wheel energy required to "
+"perform the driving cycle.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tThat is the energy required in the fuel tank of"
+" the vehicle to drive a given distance, including\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tenergy losses at different levels (due to "
+"engine efficiency, gearbox inefficiency, charge and discharge\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tefficiency of the battery, etc.).\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tNote that electric vehicles, such as battery "
+"electric vehicles or fuel cell vehicles, can partly recover\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy released during braking, which "
+"explains the downward sections of their slope."
 msgstr ""
+"Die Grafik unten zeigt die akkumulierte Tank-to-Wheel-Energie, die benötigt wird, um "
+"Fahrzyklus durchführen. Dies ist die Energie, die im Kraftstofftank des Fahrzeugs benötigt wird, um eine bestimmte "
+"Strecke zurückzulegen, einschließlich Energieverlusten auf verschiedenen Niveaus (aufgrund des Motorwirkungsgrades, "
+"der Ineffizienz des Getriebes, des Lade- und Entladewirkungsgrades der Batterie usw.). Es ist zu beachten, dass "
+"Elektrofahrzeuge, wie z. B. Batterie-Elektrofahrzeuge oder Brennstoffzellenfahrzeuge, die beim Bremsen freigesetzte "
+"Energie teilweise zurückgewinnen können, was die Abwärtsstrecken ihrer Steigung erklärt."
+
+#: templates/result.html:250
+msgid "GHG emissions vs. ownership costs"
+msgstr "THG-Emissionen im Verhältnis zu den Betriebskosten"
+
+#: templates/result.html:251
+msgid ""
+"The graph below illustrates trade-off between environmental performance "
+"(in terms of greenhouse gas\n"
+"\t\t\t\t\t\t\t\t\t\t\t\temissions) and cost of acquisition and use."
+msgstr ""
+"Die folgende Grafik zeigt den Kompromiss zwischen der Umweltleistung (in Bezug auf die Treibhausgasemissionen) "
+"und den Anschaffungs- und Nutzungskosten."
+
+#: templates/result.html:254
+msgid "Accumulated impacts over lifetime"
+msgstr "Kumulierte Auswirkungen über die Lebensdauer"
+
+#: templates/result.html:255
+msgid ""
+"The graph below illustrates the accumulated impacts of the vehicles along"
+" their use phase.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tThe intercept of the slope represents the impacts"
+" associated with the production of the vehicle, occurring\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tbefore the use phase, while the slope illustrates"
+" variable emissions associated with the preparation of the fuel\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t(or generation of the electricity) and direct "
+"exhaust and non-exhaust emissions. You may select an impact\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
+msgstr ""
+"Die folgende Grafik zeigt die Auswirkungen der Fahrzeuge während ihrer Nutzungsphase. Der Abschnitt der Steigung "
+"stellt die Auswirkungen dar, die mit der Produktion des Fahrzeugs vor der Nutzungsphase verbunden sind, während die "
+"Steigung variable Emissionen darstellt, die mit der Herstellung des Kraftstoffs (oder der Erzeugung des Stroms) "
+"und direkten Abgas- und Nichtabgasemissionen verbunden sind . Sie können aus dem Dropdown-Menü unten eine "
+"Auswirkungskategorie auswählen, die berücksichtigt werden soll."
+
+#: templates/result.html:261
+msgid "Occupation of arable land [m2/year]"
+msgstr "Ackerlandnutzung [m2 / Jahr]"
 
 #: templates/result.html:262
-msgid "Select an impact category"
-msgstr ""
+msgid "Climate change [kg CO2-eq.]"
+msgstr "Klimawandel [kg CO2-Äqu.]"
+
+#: templates/result.html:263
+msgid "Depletion of fossil energy resources [kg oil-eq.]"
+msgstr "Erschöpfung fossiler Energieressourcen [kg Öläquivalent]"
 
 #: templates/result.html:264
-msgid "Occupation of arable land [m2/year]"
-msgstr ""
+msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
+msgstr "Toxizität in Gewässern außerhalb des Meeres [kg 1,4-DC-Äq.]"
 
 #: templates/result.html:265
-msgid "Climate change [kg CO2-eq.]"
-msgstr ""
+msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
+msgstr "Eutrophierung von Gewässern außerhalb des Meeres [kg P-Äq.]"
 
 #: templates/result.html:266
-msgid "Depletion of fossil energy resources [kg oil-eq.]"
-msgstr ""
+msgid "Human toxicity [kg 1,4-DC-eq.]"
+msgstr "Humantoxizität [kg 1,4-DC-Äq.]"
 
 #: templates/result.html:267
-msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
-msgstr ""
+msgid "Ionizing radiation [kg U235-Eq]"
+msgstr "Ionisierende Strahlung [kg U235-Eq]"
 
 #: templates/result.html:268
-msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
-msgstr ""
+msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
+msgstr "Toxizität in Gewässern des Meeres [kg 1,4-DC-Äq.]"
 
 #: templates/result.html:269
-msgid "Human toxicity [kg 1,4-DC-eq.]"
-msgstr ""
+msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
+msgstr "Eutrophierung von Gewässern im Meer [kg N-Äq.]"
 
 #: templates/result.html:270
-msgid "Ionizing radiation [kg U235-Eq]"
-msgstr ""
+msgid "Depletion of metal resources [kg iron-eq.]"
+msgstr "Erschöpfung der Metallressourcen [kg Eisenäquivalent]"
 
 #: templates/result.html:271
-msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
-msgstr ""
+msgid "Natural land transformation [m2]"
+msgstr "Natürliche Erdumwandlung [m2]"
 
 #: templates/result.html:272
-msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
-msgstr ""
+msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
+msgstr "Verschlechterung der Ozonschicht [kg FCKW-11-Äq.]"
 
 #: templates/result.html:273
-msgid "Depletion of metal resources [kg iron-eq.]"
-msgstr ""
+msgid "Formation of fine particles [kg PM10-eq.]"
+msgstr "Bildung feiner Partikel [kg PM10-Äq.]"
 
 #: templates/result.html:274
-msgid "Natural land transformation [m2]"
-msgstr ""
+msgid "Smog formation [kg NMVOC-eq.]"
+msgstr "Verschmutzungsnebelbildung [kg NMVOC-Äq.]"
 
 #: templates/result.html:275
-msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
-msgstr ""
+msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
+msgstr "Terrestrische Versauerung [kg SO2-Äq.]"
 
 #: templates/result.html:276
-msgid "Formation of fine particles [kg PM10-eq.]"
-msgstr ""
+msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
+msgstr "Terrestrische Toxizität [kg 1,4-DC.-Äq.]"
 
 #: templates/result.html:277
-msgid "Smog formation [kg NMVOC-eq.]"
-msgstr ""
+msgid "Land occupation in an urban environment [m2 / year]"
+msgstr "Flächennutzung in städtischen Gebieten [m2/Jahr]"
 
 #: templates/result.html:278
-msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
-msgstr ""
+msgid "Depletion of fresh water reserves [m3]"
+msgstr "Erschöpfung der Süßwasservorräte [m3]"
 
 #: templates/result.html:279
-msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
-msgstr ""
-
-#: templates/result.html:280
-msgid "Land occupation in an urban environment [m2 / year]"
-msgstr ""
-
-#: templates/result.html:281
-msgid "Depletion of fresh water reserves [m3]"
-msgstr ""
-
-#: templates/result.html:282
 msgid "Noise emissions [Person-Pascal/second]"
-msgstr ""
+msgstr "Geräuschemission [Person-Pascal / Sekunde]"
 
 #: templates/tool.html:88
 msgid "Calculate"
@@ -627,6 +685,9 @@ msgid ""
 "its powertrain type or size class, you may look it up in the search field"
 " below."
 msgstr ""
+"Wählen Sie die Jahre, Antriebsstrangarten und Größenklassen aus, für die Sie eine Bewertung durchführen möchten. "
+"Sie können dies tun, indem Sie Elemente mit der Maus vom linken zum rechten Frame ziehen. Wenn Sie ein Fahrzeugmodell "
+"haben, dessen Antriebsstrangtyp oder Größenklasse jedoch nicht bekannt sind, können Sie es im Suchfeld unten nachschlagen."
 
 #: templates/tool.html:158
 msgid "Year"
@@ -672,15 +733,15 @@ msgstr "Auswahl"
 
 #: templates/tool.html:211
 msgid "Drag and drop the years for which to perform the analysis."
-msgstr ""
+msgstr "Ziehen Sie die Jahre, für die die Analyse durchgeführt werden soll, per Drag & Drop."
 
 #: templates/tool.html:246
 msgid "Drag and drop the powertrain types for which to perform the analysis."
-msgstr ""
+msgstr "Ziehen Sie die Antriebsstrangtypen, für die die Analyse durchgeführt werden soll, per Drag & Drop."
 
 #: templates/tool.html:282
 msgid "Drag and drop the size categories for which to perform the analysis."
-msgstr ""
+msgstr "Ziehen Sie die Größenkategorien, für die die Analyse durchgeführt werden soll, per Drag & Drop."
 
 #: templates/tool.html:291
 msgid "What is what?"
@@ -720,6 +781,7 @@ msgid ""
 "You are however welcome to override the default value for any of these "
 "parameters if you have a specific case in mind"
 msgstr ""
+"Sie können jedoch gerne den Standardwert für einen dieser Parameter überschreiben, wenn Sie einen bestimmten Fall berücksichtigen."
 
 #: templates/tool.html:344
 msgid ""
@@ -727,6 +789,8 @@ msgid ""
 "add it by using the \"Add\" button in the right column of the search "
 "results table."
 msgstr ""
+"Das Suchfeld unten ermöglicht es Ihnen, dies zu tun. Suchen Sie nach einem Parameter und fügen Sie ihn über die Schaltfläche "
+"'Hinzufügen' in der rechten Spalte der Suchergebnisliste hinzu."
 
 #: templates/tool.html:345
 msgid ""
@@ -734,70 +798,74 @@ msgid ""
 "environmental impacts is indicated in the left column of the search "
 "results table."
 msgstr ""
+"Die Wichtigkeit oder Empfindlichkeit eines bestimmten Parameters in Bezug auf Umweltauswirkungen wird in der "
+"linken Spalte der Suchergebnisliste angegeben."
 
 #: templates/tool.html:346
 msgid ""
 "That is, a parameter with a high sensitivity is a parameter for which a "
 "change in its value of "
 msgstr ""
+"Das heißt, ein Parameter mit einer hohen Empfindlichkeit ist ein Parameter, für den eine Änderung seines Werts von "
 
 #: templates/tool.html:346
 msgid "leads to a change in environmental impacts by 0.5 to"
-msgstr ""
+msgstr "führt zu einer Veränderung der Umweltbelastung um 0,5 to"
 
 #: templates/tool.html:346
 msgid ""
 "against\n"
 "\t\t\t\t\t\t\t\t\t\t0.3 to"
 msgstr ""
+"gegen 0,3 bis"
 
 #: templates/tool.html:347
 msgid "for a parameter with medium sensitivity, and 0 to"
-msgstr ""
+msgstr "für einen Parameter mit mittlerer Empfindlichkeit und 0 bis"
 
 #: templates/tool.html:347
 msgid "for a parameter with low sensitivity."
-msgstr ""
+msgstr "für einen Parameter mit geringer Empfindlichkeit."
 
 #: templates/tool.html:351
 msgid "See full parameters list"
-msgstr ""
+msgstr "Siehe vollständige Parameterliste"
 
 #: templates/tool.html:357
 msgid "Frequently asked questions (click to see an answer)"
-msgstr ""
+msgstr "Häufig gestellte Fragen (zum Anzeigen einer Antwort klicken)"
 
 #: templates/tool.html:359
 msgid "How to change the mass of the battery of an electric vehicle?"
-msgstr ""
+msgstr "Wie ändere ich die Masse der Batterie eines Elektrofahrzeugs?"
 
 #: templates/tool.html:360
 msgid "How to change the capacity of the battery of an electric vehicle?"
-msgstr ""
+msgstr "Wie kann man die Kapazität der Batterie eines Elektrofahrzeugs ändern?"
 
 #: templates/tool.html:361
 msgid "How to change the efficiency of the engine?"
-msgstr ""
+msgstr "Wie ändert man den Wirkungsgrad des Motors?"
 
 #: templates/tool.html:362
 msgid "How to change the weight of the passengers?"
-msgstr ""
+msgstr "Wie man das Gewicht der Passagiere ändert?"
 
 #: templates/tool.html:363
 msgid "How to change hybridization level of future diesel vehicles?"
-msgstr ""
+msgstr "Wie kann der Hybridisierungsgrad zukünftiger Dieselfahrzeuge geändert werden?"
 
 #: templates/tool.html:364
 msgid "How to change the lifetime of a battery?"
-msgstr ""
+msgstr "Wie ändere ich die Lebensdauer einer Batterie?"
 
 #: templates/tool.html:365
 msgid "How to change the efficiency of a fuel cell stack?"
-msgstr ""
+msgstr "Wie kann man die Effizienz eines Brennstoffzellenstapels ändern?"
 
 #: templates/tool.html:370
 msgid "Change the mass of the battery on a electric vehicle"
-msgstr ""
+msgstr "Ändern Sie die Masse der Batterie in einem Elektrofahrzeug"
 
 #: templates/tool.html:371
 msgid ""
@@ -815,22 +883,27 @@ msgid ""
 " the vehicle and the energy required\n"
 "\t\t\t\t\t\t\t\t\t\tto move it over 1 km."
 msgstr ""
+"Die Masse der Batterie eines Elektrofahrzeugs kann geändert werden, indem der Wert des Energiebatteriemassenparameters "
+"geändert wird. Die Masse der Batterie wird weiter in die Masse der Komponenten Balance Of Plant (BoP) und die Masse der "
+"Batteriezellen aufgeteilt. Daher erhöht ein Erhöhen der Masse der Batterie auch die Masse der Batteriezellen und "
+"schließlich die Energiekapazität der Batterie. Eine Erhöhung der Masse der Batterie erhöht jedoch auch die Antriebsmasse "
+"des Fahrzeugs und die Energie, die erforderlich ist, um es über 1 km zu bewegen."
 
 #: templates/tool.html:380
 msgid "Consider the following relations:"
-msgstr ""
+msgstr "Betrachten Sie die folgenden Beziehungen:"
 
 #: templates/tool.html:386
 msgid "but also:"
-msgstr ""
+msgstr "aber auch:"
 
 #: templates/tool.html:414
 msgid "Add any parameter you would like to modify."
-msgstr ""
+msgstr "Fügen Sie einen beliebigen Parameter hinzu, den Sie ändern möchten."
 
 #: templates/tool.html:433
 msgid "Add?"
-msgstr ""
+msgstr "Hinzufügen?"
 
 #: templates/tool.html:457
 msgid "USE"
@@ -841,6 +914,7 @@ msgid ""
 "This section defines parameters concerned with the use phase of the "
 "vehicles."
 msgstr ""
+"In diesem Abschnitt werden Parameter definiert, die sich auf die Nutzungsphase der Fahrzeuge beziehen."
 
 #: templates/tool.html:462
 msgid ""
@@ -856,17 +930,18 @@ msgstr ""
 
 #: templates/tool.html:466
 msgid " For European country, the projections originate the"
-msgstr ""
+msgstr " Für das europäische Land stammen die Projektionen aus dem"
 
 #: templates/tool.html:467
 msgid ""
 "from the European Commission. For African countries, projections "
 "originate the model"
 msgstr ""
+"von der Europäischen Kommission. Für afrikanische Länder stammen Projektionen aus dem Modell "
 
 #: templates/tool.html:469
 msgid "For other countries, projections are based on the IEA report"
-msgstr ""
+msgstr "Für andere Länder basieren die Projektionen auf dem IEA-Bericht"
 
 #: templates/tool.html:474
 msgid "Driving cycle"
@@ -1544,7 +1619,7 @@ msgstr "Anzahl der Iterationen"
 #~ msgstr "ANDERE INDIKATOREN"
 
 #~ msgid "Energy consumption along driving cycle"
-#~ msgstr "Energieverbrauch während des Fahrzyklus"
+#~ msgstr ""
 
 #~ msgid "Pollutants emissions along driving cycle"
 #~ msgstr "Schadstoffemissionen im Fahrzyklus"
@@ -1554,4 +1629,7 @@ msgstr "Anzahl der Iterationen"
 
 #~ msgid "GHG emissions vs. ownership costs"
 #~ msgstr "THG-Emissionen im Verhältnis zu den Betriebskosten"
+
+#~ msgid "Select an impact category"
+#~ msgstr ""
 

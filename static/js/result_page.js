@@ -224,8 +224,8 @@ function generate_line_chart_TtW_energy(data){
           .tickFormat(d3.format(',r'))
           ;
       chart.yAxis     //Chart y-axis settings
-          .axisLabel('kilojoule')
-          .tickFormat(d3.format('.r'))
+          .axisLabel('Kilojoule')
+          .tickFormat(d3.format(',d'))
           .showMaxMin(false);
 
       d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
@@ -289,7 +289,6 @@ function generate_scatter_chart(data){
 };
 
 function generate_chart_accumulated_impacts(data, name_impact, impact){
-    console.log(impact);
     var datum = [];
     for (var x=0; x < data.length; x++){
         if (data[x][0] == name_impact){
@@ -302,8 +301,6 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
         };
 
     };
-
-    console.log(datum);
 
     nv.addGraph(function() {
      var chart_acc = nv.models.lineChart()

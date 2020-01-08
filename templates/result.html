@@ -237,9 +237,26 @@
 							<table class="table" style="width:100%;color:white;">
 								<tbody>
 									<tr>
-										<th><h3>{{ _('Tank-to-Wheel cumulated energy consumption along driving cycle') }}</h3></th>
-										<th><h3>{{ _('GHG emissions vs. ownership costs') }}</h3></th>
+										<th>
+											<h3>{{ _('Tank-to-Wheel cumulated energy consumption along driving cycle') }}</h3>
+											<p>{{ _("The graph below shows the accumulated Tank-to-wheel energy required to perform the driving cycle.
+													That is the energy required in the fuel tank of the vehicle to drive a given distance, including
+													energy losses at different levels (due to engine efficiency, gearbox inefficiency, charge and discharge
+													efficiency of the battery, etc.).
+													Note that electric vehicles, such as battery electric vehicles or fuel cell vehicles, can partly recover
+													the energy released during braking, which explains the downward sections of their slope.") }}</p>
+										</th>
+										<th>
+											<h3>{{ _('GHG emissions vs. ownership costs') }}</h3>
+											<p>{{ _("The graph below illustrates trade-off between environmental performance (in terms of greenhouse gas
+												emissions) and cost of acquisition and use.") }}</p>
+										</th>
 										<th><h3>{{ _('Accumulated impacts over lifetime') }}</h3>
+											<p>{{ _("The graph below illustrates the accumulated impacts of the vehicles along their use phase.
+												The intercept of the slope represents the impacts associated with the production of the vehicle, occurring
+												before the use phase, while the slope illustrates variable emissions associated with the preparation of the fuel
+												(or generation of the electricity) and direct exhaust and non-exhaust emissions. You may select an impact
+												category to consider from the dropdown menu below.") }}</p>
 										<select id='select_impact' style='color:grey;'>
 														<option value='agricultural land occupation'>{{ _('Occupation of arable land [m2/year]') }}</option>
 														<option value='climate change'>{{ _('Climate change [kg CO2-eq.]') }}</option>
@@ -266,6 +283,7 @@
 									<tr>
 										<td>
 											<div>
+
 												<svg id="chart-ttw-energy"
 											   		style="width:600px;height:600px; font-size:16px; color:grey;">
 												</svg>

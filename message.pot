@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 11:35+0100\n"
+"POT-Creation-Date: 2020-01-08 15:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -335,17 +335,17 @@ msgid "Write to us if you have any questions about the tool, methods or results.
 msgstr ""
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:312 templates/tool.html:1113
+#: templates/result.html:325 templates/tool.html:1113
 msgid "Copyright"
 msgstr ""
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:312 templates/tool.html:1113
+#: templates/result.html:325 templates/tool.html:1113
 msgid "Paul Scherrer Institut"
 msgstr ""
 
 #: templates/index.html:883 templates/param_table.html:127
-#: templates/result.html:313 templates/tool.html:1114
+#: templates/result.html:326 templates/tool.html:1114
 msgid "All rights reserved"
 msgstr ""
 
@@ -490,95 +490,126 @@ msgstr ""
 msgid "OTHER INDICATORS"
 msgstr ""
 
-#: templates/result.html:240
-msgid "Energy consumption along driving cycle"
-msgstr ""
-
 #: templates/result.html:241
-msgid "GHG emissions vs. ownership costs"
+msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr ""
 
 #: templates/result.html:242
+msgid ""
+"The graph below shows the accumulated Tank-to-wheel energy required to "
+"perform the driving cycle.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tThat is the energy required in the fuel tank of"
+" the vehicle to drive a given distance, including\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tenergy losses at different levels (due to "
+"engine efficiency, gearbox inefficiency, charge and discharge\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tefficiency of the battery, etc.).\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tNote that electric vehicles, such as battery "
+"electric vehicles or fuel cell vehicles, can partly recover\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy released during braking, which "
+"explains the downward sections of their slope."
+msgstr ""
+
+#: templates/result.html:250
+msgid "GHG emissions vs. ownership costs"
+msgstr ""
+
+#: templates/result.html:251
+msgid ""
+"The graph below illustrates trade-off between environmental performance "
+"(in terms of greenhouse gas\n"
+"\t\t\t\t\t\t\t\t\t\t\t\temissions) and cost of acquisition and use."
+msgstr ""
+
+#: templates/result.html:254
 msgid "Accumulated impacts over lifetime"
 msgstr ""
 
-#: templates/result.html:262
-msgid "Select an impact category"
+#: templates/result.html:255
+msgid ""
+"The graph below illustrates the accumulated impacts of the vehicles along"
+" their use phase.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tThe intercept of the slope represents the impacts"
+" associated with the production of the vehicle, occurring\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tbefore the use phase, while the slope illustrates"
+" variable emissions associated with the preparation of the fuel\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t(or generation of the electricity) and direct "
+"exhaust and non-exhaust emissions. You may select an impact\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
 msgstr ""
 
-#: templates/result.html:264
+#: templates/result.html:261
 msgid "Occupation of arable land [m2/year]"
 msgstr ""
 
-#: templates/result.html:265
+#: templates/result.html:262
 msgid "Climate change [kg CO2-eq.]"
 msgstr ""
 
-#: templates/result.html:266
+#: templates/result.html:263
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr ""
 
-#: templates/result.html:267
+#: templates/result.html:264
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr ""
 
-#: templates/result.html:268
+#: templates/result.html:265
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr ""
 
-#: templates/result.html:269
+#: templates/result.html:266
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr ""
 
-#: templates/result.html:270
+#: templates/result.html:267
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr ""
 
-#: templates/result.html:271
+#: templates/result.html:268
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr ""
 
-#: templates/result.html:272
+#: templates/result.html:269
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr ""
 
-#: templates/result.html:273
+#: templates/result.html:270
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr ""
 
-#: templates/result.html:274
+#: templates/result.html:271
 msgid "Natural land transformation [m2]"
 msgstr ""
 
-#: templates/result.html:275
+#: templates/result.html:272
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr ""
 
-#: templates/result.html:276
+#: templates/result.html:273
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr ""
 
-#: templates/result.html:277
+#: templates/result.html:274
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr ""
 
-#: templates/result.html:278
+#: templates/result.html:275
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr ""
 
-#: templates/result.html:279
+#: templates/result.html:276
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr ""
 
-#: templates/result.html:280
+#: templates/result.html:277
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr ""
 
-#: templates/result.html:281
+#: templates/result.html:278
 msgid "Depletion of fresh water reserves [m3]"
 msgstr ""
 
-#: templates/result.html:282
+#: templates/result.html:279
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr ""
 

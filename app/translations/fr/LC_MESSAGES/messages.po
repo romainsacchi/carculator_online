@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 11:35+0100\n"
+"POT-Creation-Date: 2020-01-08 15:18+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -350,17 +350,17 @@ msgid "Write to us if you have any questions about the tool, methods or results.
 msgstr "Ecrivez-nous si vous avez des questions à propos de l'outil."
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:312 templates/tool.html:1113
+#: templates/result.html:325 templates/tool.html:1113
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:312 templates/tool.html:1113
+#: templates/result.html:325 templates/tool.html:1113
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
 #: templates/index.html:883 templates/param_table.html:127
-#: templates/result.html:313 templates/tool.html:1114
+#: templates/result.html:326 templates/tool.html:1114
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
 
@@ -402,7 +402,7 @@ msgstr "Carculator: Résultats"
 
 #: templates/result.html:96
 msgid "Export Brightway2-compatible inventories"
-msgstr "Exporter un inventaire comatible avec Brigthway2"
+msgstr "Exporter un inventaire compatible avec Brigthway2"
 
 #: templates/result.html:99
 msgid "Export Simapro-compatible inventories"
@@ -425,9 +425,11 @@ msgid ""
 "\t\t\t\t\t\t\tand characterized against environmental and economic "
 "indicators."
 msgstr ""
-"Les différentes sections de cette page présentent les résultats de votre analyse, "
-"sur la base du cycle de vie des véhicules. Chaque phase du cycle de vie des véhicules (production, aintenance, utilisation, etc.) est considérée "
-"et characterisée grâce à un nombre d*indicateurs environnementaux et économiques."
+"Les différentes sections de cette page présentent les résultats de votre "
+"analyse, sur la base du cycle de vie des véhicules. Chaque phase du cycle"
+" de vie des véhicules (production, aintenance, utilisation, etc.) est "
+"considérée et characterisée grâce à un nombre d'indicateurs "
+"environnementaux et économiques."
 
 #: templates/result.html:124
 msgid ""
@@ -435,8 +437,10 @@ msgid ""
 " hotspots\n"
 "\t\t\t\t\t\t\tat different phases of the life cycle of a vehicle."
 msgstr ""
-"Cet est un outil particulièrement apte à comparer différentes technologies, surtout lorsque celles-ci "
-"présentent un intérêt ou un problème d'ordre environnemental à différents moments de leur cycle de vie."
+"L'analyse du cycle de vie est un outil particulièrement apte à comparer "
+"différentes technologies, surtout lorsque celles-ci présentent un intérêt"
+" ou un problème d'ordre environnemental à différents moments de leur "
+"cycle de vie."
 
 #: templates/result.html:140
 msgid "REFERENCE"
@@ -446,7 +450,9 @@ msgstr ""
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
-msgstr "Toute utilisation des résultats présentés, ou des inventaires ayant servi à les produire, doit être dûement référencée comme suit:"
+msgstr ""
+"Toute utilisation des résultats présentés, ou des inventaires ayant servi"
+" à les produire, doit être dûement référencée comme suit:"
 
 #: templates/result.html:160
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
@@ -466,11 +472,14 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tdropdown menu located in the top-left corner of the "
 "chart area."
 msgstr ""
-"Par défaut, le graphique ci-dessous présentent les impacts environnmentaux en terme d'émissions de gaz à effet de serre "
-"émis par chaque véhicule, par kilomètre parcouru. Le total forme la somme de sous-catégories: production, maintenance, "
-"émissions directes, fabrication du fuel, etc. L'utilisateur peut changer l'indicateur environnemental en le choisissant "
-"depuis le menu déroulant 'impact category' à gauche. Il est aussi posisble de présenter le résultats sous forme de table "
-"depuis le menu déroulant situé dans le coin en haut à gauche."
+"Par défaut, le graphique ci-dessous présentent les impacts "
+"environnmentaux en terme d'émissions de gaz à effet de serre émis par "
+"chaque véhicule, par kilomètre parcouru. Le total forme la somme de sous-"
+"catégories: production, maintenance, émissions directes, fabrication du "
+"fuel, etc. L'utilisateur peut changer l'indicateur environnemental en le "
+"choisissant depuis le menu déroulant 'impact category' à gauche. Il est "
+"aussi possible de présenter le résultat sous forme de tableau depuis le "
+"menu déroulant 'Stacked Bar Chart' situé dans le coin en haut à gauche."
 
 #: templates/result.html:183
 msgid "LIFE CYCLE COST ASSESSMENT"
@@ -484,8 +493,9 @@ msgid ""
 "as the amortization of the\n"
 "\t\t\t\t\t\t\t\tvehicle purchase over time."
 msgstr ""
-"Le graphique ci-dessous présente les cûts d'utilisation tout au long du cycle de vie des véhicules. "
-"Les futurs coûts du carburant et de l'électricité sont également considérés dans cette analyse."
+"Le graphique ci-dessous présente les coûts d'utilisation tout au long du "
+"cycle de vie des véhicules. Les futurs coûts du carburant et de "
+"l'électricité sont également considérés dans cette analyse."
 
 #: templates/result.html:203
 msgid "BENCHMARK"
@@ -496,7 +506,8 @@ msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
 msgstr ""
-"Cette section compare la distance parcourue par chaque véhicule étant donné un budget choisi."
+"Cette section compare la distance parcourue par chaque véhicule étant "
+"donné un budget choisi."
 
 #: templates/result.html:209
 msgid "How long can the vehicles drive on a life cycle budget of 1"
@@ -518,95 +529,138 @@ msgstr "litre de pétrole-eq."
 msgid "OTHER INDICATORS"
 msgstr "AUTTRES INDICATEURS"
 
-#: templates/result.html:240
-msgid "Energy consumption along driving cycle"
-msgstr ""
-
 #: templates/result.html:241
+msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
+msgstr "Consommation d'énergie Tank-to-wheel le long du cycle de conduite"
+
+#: templates/result.html:242
+msgid ""
+"The graph below shows the accumulated Tank-to-wheel energy required to "
+"perform the driving cycle.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tThat is the energy required in the fuel tank of"
+" the vehicle to drive a given distance, including\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tenergy losses at different levels (due to "
+"engine efficiency, gearbox inefficiency, charge and discharge\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tefficiency of the battery, etc.).\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tNote that electric vehicles, such as battery "
+"electric vehicles or fuel cell vehicles, can partly recover\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy released during braking, which "
+"explains the downward sections of their slope."
+msgstr ""
+"Le graphique ci-dessous représente la consommation d'énergie 'Tank-to-wheel' nécéssaire "
+"à l'exécution du cycle de conduite spécifié. C'est-à-dire l'énergie requise pour comnpléter "
+"le cyclde de conduite en dépit des pertes entre le réservoir et les roues du véhicule (efficacité du moteur, "
+"efficiacité de la boîte à vitesse, efficacité de charge et décharge de la batterie, etc.). Remarquez que "
+"les véhicules électriques sont capables de récupérer partiellement l'énergie libérée lors du freinage. "
+"Ceci explique que les sections plongeantes de leur courbe."
+
+#: templates/result.html:250
 msgid "GHG emissions vs. ownership costs"
 msgstr "Emissions de gaz à effet de serre et coûts d'utilisation"
 
-#: templates/result.html:242
+#: templates/result.html:251
+msgid ""
+"The graph below illustrates trade-off between environmental performance "
+"(in terms of greenhouse gas\n"
+"\t\t\t\t\t\t\t\t\t\t\t\temissions) and cost of acquisition and use."
+msgstr ""
+"Le graphique ci-dessous illustre la performance des véhicules au regard de leur émissions "
+"de gaz à effet de serre et leur coût d'utilisation le long de leur cycle de vie."
+
+#: templates/result.html:254
 msgid "Accumulated impacts over lifetime"
 msgstr "Impacts cumulés lors du cycle de vie"
 
-#: templates/result.html:262
-msgid "Select an impact category"
-msgstr "Sélectionnez une catégorie d'impact environnmental"
+#: templates/result.html:255
+msgid ""
+"The graph below illustrates the accumulated impacts of the vehicles along"
+" their use phase.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tThe intercept of the slope represents the impacts"
+" associated with the production of the vehicle, occurring\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tbefore the use phase, while the slope illustrates"
+" variable emissions associated with the preparation of the fuel\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t(or generation of the electricity) and direct "
+"exhaust and non-exhaust emissions. You may select an impact\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
+msgstr ""
+"Le graphique ci-dessous représente les impacts cumulés le long du cycle de vie des véhicules. "
+"L'intercept de la courbe représente les impacts associés à la production du véhicule, alors que son "
+"coefficient directeur représente les impacts variables, associés à la préparation du carburant et "
+"aux émissions directes. Vous pouvez choisir la catégorie d'impact à considérer depuis le menu déroulant."
 
-#: templates/result.html:264
+#: templates/result.html:261
 msgid "Occupation of arable land [m2/year]"
 msgstr "Occupation de terre arable [m2/an]"
 
-#: templates/result.html:265
+#: templates/result.html:262
 msgid "Climate change [kg CO2-eq.]"
 msgstr "Changement climatique [kg CO2-eq.]"
 
-#: templates/result.html:266
+#: templates/result.html:263
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr "Epuisement des ressources d'énergie fossile [kg pétrole-eq.]"
 
-#: templates/result.html:267
+#: templates/result.html:264
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:268
+#: templates/result.html:265
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr "Eutrophisation des milieux aquatiques non-marins [kg P-eq.]"
 
-#: templates/result.html:269
+#: templates/result.html:266
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr "Toxicité humaine [kg 1,4-DC-eq.]"
 
-#: templates/result.html:270
+#: templates/result.html:267
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr "Rayonnement ionisant [kg U235-Eq]"
 
-#: templates/result.html:271
+#: templates/result.html:268
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:272
+#: templates/result.html:269
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr "Eutrophisation des milieux aquatiques marins [kg N-eq.]"
 
-#: templates/result.html:273
+#: templates/result.html:270
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr "Epuisement des ressources en métaux [kg fer-eq.]"
 
-#: templates/result.html:274
+#: templates/result.html:271
 msgid "Natural land transformation [m2]"
 msgstr "Transformation de terre naturelle [m2]"
 
-#: templates/result.html:275
+#: templates/result.html:272
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr "Détérioration de la couche d'ozone [kg CFC-11-eq.]"
 
-#: templates/result.html:276
+#: templates/result.html:273
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr "Formation de particules fines [kg PM10-eq.]"
 
-#: templates/result.html:277
+#: templates/result.html:274
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr "Formation de brouillard de pollution [kg NMVOC-eq.]"
 
-#: templates/result.html:278
+#: templates/result.html:275
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr "Acidification terrestre [kg SO2-eq.]"
 
-#: templates/result.html:279
+#: templates/result.html:276
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]"
 
-#: templates/result.html:280
+#: templates/result.html:277
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr "Occupation de terre en milieu urbain [m2/an]"
 
-#: templates/result.html:281
+#: templates/result.html:278
 msgid "Depletion of fresh water reserves [m3]"
 msgstr "Epuisement des réserves d'eau douce [m3]"
 
-#: templates/result.html:282
+#: templates/result.html:279
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr "Emissions de bruit [Person-Pascal/seconde]"
 
@@ -1479,192 +1533,5 @@ msgstr "Analyse d'incertitude (Monte Carlo)"
 msgid "number of iterations"
 msgstr "nombre d'itérations"
 
-#~ msgid ""
-#~ "Select the years, powertrain types and"
-#~ " size classes you wish to conduct "
-#~ "an assessment of. <br> You may do"
-#~ " so <b>by dragging elements with your"
-#~ " mouse from the left frame to "
-#~ "the right frame</b>.<br>\n"
-#~ "If you have a car model in "
-#~ "mind but do not know its "
-#~ "powertrain type or size class, you "
-#~ "may look it up in the search "
-#~ "field below."
-#~ msgstr ""
-#~ "Selectionnez les années, les types de"
-#~ " propulsion ainsi que les catégories "
-#~ "de taille pour lesquelles vous désirez"
-#~ " effectuer une analyse. Pour ce "
-#~ "faire, déplacez les éléments de la "
-#~ "liste de gauche vers la liste de"
-#~ " droite. Vous pouvez vous renseigner "
-#~ "sur la catégories de taille et le"
-#~ " type de propulsion d'un modèle de"
-#~ " voiture en entrant son nom de "
-#~ "modèle dans le champ de recherche "
-#~ "à droite."
 
-#~ msgid ""
-#~ "The mass of the battery of an "
-#~ "electric vehicle can be changed by "
-#~ "modifying\n"
-#~ "the value of the energy battery "
-#~ "mass parameter. The mass of the "
-#~ "battery is further split into\n"
-#~ "Balance Of Plant (BoP) components mass and battery cells mass.\n"
-#~ "Hence, increasing the mass of the "
-#~ "battery will also increase the mass "
-#~ "of the battery cells\n"
-#~ "tand eventually the energy capacity of"
-#~ " the battery. However, increasing the "
-#~ "mass\n"
-#~ "of the battery will also increase "
-#~ "the driving mass of the vehicle "
-#~ "and the energy required\n"
-#~ "to move it over 1 km."
-#~ msgstr ""
-#~ "La masse d'une batterie sur un "
-#~ "véhicule électrique peut être changée en"
-#~ " modifiant la valeur du paramètre "
-#~ "energy battery mass. La masse totale "
-#~ "de la batterie est ensuite divisée "
-#~ "entre la masse des cellules de la"
-#~ " batterie et la masse des autres "
-#~ "composants de la batterie. Donc, en "
-#~ "augmentant la masse totale de la "
-#~ "batterie, on augmente également la masse"
-#~ " des cellules de la batterie, ce "
-#~ "qui a pour conséquence d'en augmenter"
-#~ " sa capacité énergétique. Cependant, "
-#~ "augmenter la masse de la batterie "
-#~ "a aussi pour conséquence d'alourdir le"
-#~ " véhicule, augmentant ainsi le besoin "
-#~ "en énergie pour son déplacement."
-
-#~ msgid ""
-#~ "against\n"
-#~ "0.3 to"
-#~ msgstr "contre  0.3 à"
-
-#~ msgid ""
-#~ "The model needs to know the "
-#~ "driving cycle of the vehicles (i.e., "
-#~ "the speed level per\n"
-#~ "second of driving, to derive the "
-#~ "needs for acceleration and braking) as"
-#~ " well as a\n"
-#~ "few other things, such as the "
-#~ "number of passengers, the country the"
-#~ " vehicles are operated in, etc.<br>\n"
-#~ "Projected electricity mixes for are "
-#~ "based on Business-as-usual scenarios "
-#~ "from energy models."
-#~ msgstr ""
-#~ "Le modèle a besoin de connaître le"
-#~ " cycle de conduite du véchicule "
-#~ "(c'est-à-dire le niveau de vitesse à "
-#~ "chaque seconde du cycle de conduite, "
-#~ "afin d'obtenir les besoins en "
-#~ "accéleration et freinage), ainsi que "
-#~ "d'autres paranètres tels que le nombre"
-#~ " de passagers, le pays dans lequel"
-#~ " le véhicule est utilisé, etc.Les "
-#~ "projections en matière de mix électrique"
-#~ " pour le pays spécifié sont obtenues"
-#~ " à partir de modèles énergétiques."
-
-#~ msgid ""
-#~ "Source for hydrogen by steam methane "
-#~ "reforming fuel inventory: Zhang et al."
-#~ " 2017,\n"
-#~ "Applied Energy, Volume 190, 15 March 2017, Pages 326-338 "
-#~ msgstr ""
-#~ "Référence de l'inventaire pour l'hydrogène "
-#~ "par vaporeformage: Zhang et al. 2017,"
-#~ " Applied Energy, Volume 190, 15, "
-#~ "Pages 326-338"
-
-#~ msgid "Brand"
-#~ msgstr "Marque"
-
-#~ msgid "Model"
-#~ msgstr "Modèle"
-
-#~ msgid "Trim"
-#~ msgstr "Edition"
-
-#~ msgid "Curb mass"
-#~ msgstr "Masse à vide"
-
-#~ msgid "Currently, only one country can be selected."
-#~ msgstr "Seulement un pays peut être sélectionné."
-
-#~ msgid ""
-#~ "The download of the inventory file "
-#~ "will start shortly. Requires ecoinvent "
-#~ "v.3.6 cutoff."
-#~ msgstr ""
-#~ "Le télechargement de l'inventaire va "
-#~ "débuter. Son utilisation requiert une "
-#~ "license ecoinvent 3.6 cutoff."
-
-#~ msgid "Fuel cell"
-#~ msgstr "H2 Pile à combustible"
-
-#~ msgid "battery discharge efficiency"
-#~ msgstr ""
-
-#~ msgid "fuel cell system efficiency"
-#~ msgstr ""
-
-#~ msgid "Carculator : Results"
-#~ msgstr "Résultats"
-
-#~ msgid "Export Brightway2-compatible inventories"
-#~ msgstr "Exporter un inventaire compatible avec Brigthway2"
-
-#~ msgid "Export Simapro-compatible inventories"
-#~ msgstr "Exporter un inventaire compatible avec Simapro"
-
-#~ msgid "Share results"
-#~ msgstr "Partager les résultats"
-
-#~ msgid "REFERENCE"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Any use of the results or "
-#~ "inventories under any form should be "
-#~ "referenced as following:"
-#~ msgstr ""
-#~ "Toute utilisation de ces résultats ou"
-#~ " de l'inventaire ayant servi à les"
-#~ " générer doivent être dûment référencée "
-#~ "comme suit:"
-
-#~ msgid "LIFE CYCLE IMPACT ASSESSMENT"
-#~ msgstr "EVALUATION DES IMPACTS DU CYCLE DE VIE"
-
-#~ msgid "LIFE CYCLE COST ASSESSMENT"
-#~ msgstr "EVALUATION DES COÛTS DU CYCLE DE VIE"
-
-#~ msgid "OTHER INDICATORS"
-#~ msgstr "AUTRES INDICATEURS"
-
-#~ msgid "Energy consumption along driving cycle"
-#~ msgstr ""
-#~ "Consommation cumulée d'énergie 'tank-to-"
-#~ "wheel' lors du cycle de conduite"
-
-#~ msgid "Pollutants emissions along driving cycle"
-#~ msgstr "Emission de particules lors du cycle de conduite"
-
-#~ msgid "Noise emissions along driving cycle"
-#~ msgstr "Emission sonore lors du cycle de conduite"
-
-#~ msgid "GHG emissions vs. ownership costs"
-#~ msgstr ""
-#~ "Comparaison entre emission de gaz à "
-#~ "effet de serre et coûts d'utilisation"
 
