@@ -292,9 +292,12 @@ function generate_scatter_chart(data){
 
 function generate_chart_accumulated_impacts(data, impact){
 
+    console.log(impact);
+
     var datum = [];
     var max_val = 0;
     for (var x=0; x < data.length; x++){
+        console.log(data[x][0]);
         if (data[x][0] == impact){
 
             var arr_data = [];
