@@ -259,8 +259,6 @@ function generate_scatter_chart(data){
                     .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                     .showDistY(true)
                     .color(d3.scale.category10().range())
-                    .forceY([0])
-                    .forceX([0])
                     .pointRange([70,70]);
 
       chart.tooltip.contentGenerator(function (d) {
@@ -319,7 +317,7 @@ function generate_chart_accumulated_impacts(data, impact){
 
       chart.xAxis     //Chart x-axis settings
           .axisLabel('Use (km)')
-          .tickFormat(d3.format('.02f'))
+          .tickFormat(d3.format('.r'))
           ;
       chart.yAxis     //Chart y-axis settings
           .axisLabel(impact)

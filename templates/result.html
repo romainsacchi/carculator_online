@@ -239,28 +239,8 @@
 									<tr>
 										<th><h3>{{ _('Tank-to-Wheel cumulated energy consumption along driving cycle') }}</h3></th>
 										<th><h3>{{ _('GHG emissions vs. ownership costs') }}</h3></th>
-										<th><h3>{{ _('Accumulated impacts over lifetime') }}</h3></th>
-									</tr>
-									<tr>
-										<td>
-											<div>
-												<svg id="chart-ttw-energy"
-											   		style="width:600px;height:600px; font-size:16px; color:grey;">
-												</svg>
-											</div>
-										</td>
-										<td>
-											<div>
-												<svg id="chart-scatter"
-											   		style="width:600px;height:600px; font-size:16px; color:grey;">
-												</svg>
-
-											</div>
-										</td>
-										<td>
-											<div>
-												<h5 style="color:white;">{{ _('Select an impact category') }}
-													<select id='select_impact' style='color:grey;'>
+										<th><h3>{{ _('Accumulated impacts over lifetime') }}
+										<select id='select_impact' style='color:grey;'>
 														<option value='agricultural land occupation'>{{ _('Occupation of arable land [m2/year]') }}</option>
 														<option value='climate change'>{{ _('Climate change [kg CO2-eq.]') }}</option>
 														<option value='fossil depletion'>{{ _('Depletion of fossil energy resources [kg oil-eq.]') }}</option>
@@ -280,9 +260,29 @@
 														<option value='urban land occupation'>{{ _('Land occupation in an urban environment [m2 / year]') }}</option>
 														<option value='water depletion'>{{ _('Depletion of fresh water reserves [m3]') }}</option>
 														<option value='human noise'>{{ _('Noise emissions [Person-Pascal/second]') }}</option>
-													</select></h5>
+													</select>
+										</h3></th>
+									</tr>
+									<tr>
+										<td>
+											<div>
+												<svg id="chart-ttw-energy"
+											   		style="width:600px;height:600px; font-size:16px; color:grey;">
+												</svg>
+											</div>
+										</td>
+										<td>
+											<div>
+												<svg id="chart-scatter"
+											   		style="width:600px;height:600px; font-size:16px; color:grey;">
+												</svg>
+
+											</div>
+										</td>
+										<td>
+											<div>
 												<svg id="chart-accumulated"
-											   		style="width:600px;height:500px; font-size:16px; color:grey;">
+											   		style="width:600px;height:600px; font-size:16px; color:grey;">
 												</svg>
 											</div>
 										</td>
