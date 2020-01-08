@@ -377,8 +377,8 @@
 				generate_scatter_chart(data[4]);
 
 				// Generate chart accumulated impacts
-				var impact = $("#select_impact").val()
-				generate_chart_accumulated_impacts(chart[5], i18n(impact));
+				$("#select_impact").val('climate change')
+				generate_chart_accumulated_impacts(chart[5], i18n("climate change"));
 
             });
     $('#select_benchmark').on('change', function() {
