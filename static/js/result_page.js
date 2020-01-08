@@ -309,6 +309,8 @@ function generate_chart_accumulated_impacts(data, impact){
 
     };
 
+    console.log(datum);
+
     nv.addGraph(function() {
      var chart = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
