@@ -354,8 +354,8 @@ class Calculation():
             impact_category = [self.d_rev_impact_it[i] for i in results.coords['impact_category'].values.tolist()]
 
         if lang == "en":
-            impact = results.coords['impact'].values.tolist()
-            impact_category = results.coords['impact_category'].values.tolist()
+            impact = [self.d_rev_cat_en[f] for f in results.coords['impact'].values.tolist()]
+            impact_category = [self.d_rev_impact_en[i] for i in results.coords['impact_category'].values.tolist()]
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
         list_res_acc = []
