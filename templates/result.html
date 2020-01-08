@@ -259,7 +259,7 @@
 										</td>
 										<td>
 											<div>
-												<h3 style="color:white;">{{ _('Select an impact category') }}
+												<h5 style="color:white;">{{ _('Select an impact category') }}
 													<select id='select_impact' style='color:grey;'>
 														<option value='agricultural land occupation'>{{ _('Occupation of arable land [m2/year]') }}</option>
 														<option value='climate change'>{{ _('Climate change [kg CO2-eq.]') }}</option>
@@ -280,23 +280,18 @@
 														<option value='urban land occupation'>{{ _('Land occupation in an urban environment [m2 / year]') }}</option>
 														<option value='water depletion'>{{ _('Depletion of fresh water reserves [m3]') }}</option>
 														<option value='human noise'>{{ _('Noise emissions [Person-Pascal/second]') }}</option>
-													</select></h3>
+													</select></h5>
 												<svg id="chart-accumulated"
 											   		style="width:800px;height:600px; font-size:16px; color:grey;">
 												</svg>
-
 											</div>
 										</td>
-
 									</tr>
-
 								</tbody>
-
 							</table>
-
 						</div>
                 	</div>
-			</div>
+				</div>
         </section>
 	</main>
 
@@ -384,6 +379,8 @@
 				// Generate chart accumulated impacts
 				var impact = $("#select_impact").val()
 				impact = i18n(impact);
+
+				console.log(impact);
 				generate_chart_accumulated_impacts(chart[5], impact);
 
             });
@@ -391,6 +388,7 @@
 	  generate_benchmark(data[2], this.value);
 	});
 	$('#select_impact').on('change', function() {
+		console.log(this.value);
 	  generate_benchmark(data[5], this.value);
 	});
 
