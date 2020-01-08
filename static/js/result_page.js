@@ -289,8 +289,8 @@ function generate_scatter_chart(data){
 };
 
 function generate_chart_accumulated_impacts(data, impact){
+    console.log(impact);
     var datum = [];
-    var max_val = 0;
     for (var x=0; x < data.length; x++){
         if (data[x][0] == impact){
             var arr_data = [];
@@ -306,7 +306,7 @@ function generate_chart_accumulated_impacts(data, impact){
     console.log(datum);
 
     nv.addGraph(function() {
-     var chart = nv.models.lineChart()
+     var chart_acc = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
                     .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                     //.transitionDuration(350)  //how fast do you want the lines to transition?
@@ -315,24 +315,24 @@ function generate_chart_accumulated_impacts(data, impact){
                     .showXAxis(true)        //Show the x-axis
                     .width(600).height(600);
 
-      chart.xAxis     //Chart x-axis settings
+      chart_acc.xAxis     //Chart x-axis settings
           .axisLabel('Use (km)')
           .tickFormat(d3.format('.r'))
           ;
-      chart.yAxis     //Chart y-axis settings
+      chart_acc.yAxis     //Chart y-axis settings
           .axisLabel(impact)
           .tickFormat(d3.format('.01f'))
           .showMaxMin(false);
 
       d3.select('#chart-accumulated')    //Select the <svg> element you want to render the chart in.
           .datum(datum)         //Populate the <svg> element with chart data...
-          .call(chart);          //Finally, render the chart!
+          .call(chart_acc);          //Finally, render the chart!
 
       d3.selectAll('.nv-axis .tick line').attr('display','none')
       d3.select('#chart-accumulated').style('fill', "white");
       //Update the chart when window resizes.
-      nv.utils.windowResize(function() { chart.update() });
-      return chart;
+      nv.utils.windowResize(function() { chart_acc.update() });
+      return chart_acc;
     });
 
 };
