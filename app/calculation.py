@@ -377,8 +377,8 @@ class Calculation():
                         for cat in range(0, len(impact)):
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])
-                        intercept = data_acc[imp, s, pt, y, [2:], 0].sum()
-                        slope = data[imp, s, pt, y, [:2], 0].sum()
+                        intercept = data_acc[imp, s, pt, y, 2:, 0].sum()
+                        slope = data[imp, s, pt, y, :2, 0].sum()
                         list_res_acc.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          intercept, slope])
 
