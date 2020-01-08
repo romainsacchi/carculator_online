@@ -284,7 +284,6 @@ class Calculation():
     def get_dc(self, dc):
         return get_standard_driving_cycle(dc)
 
-
     def process_results(self, d, lang):
         """ Calculate LCIA and store results in an array of arrays """
         arr = self.interpolate_array(d[('Functional unit',)]['year'])
