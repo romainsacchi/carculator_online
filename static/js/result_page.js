@@ -259,7 +259,9 @@ function generate_scatter_chart(data){
                     .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                     .showDistY(true)
                     .color(d3.scale.category10().range())
-                    .pointRange([70,70]);
+                    .pointRange([70,70])
+                    .forceY([0,0.6])
+                    .forceX([0,0.6]);
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
