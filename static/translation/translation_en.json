@@ -30,7 +30,6 @@
       "inventory_download": "The download of the inventory file will start shortly. Requires ecoinvent v.3.6 cutoff.",
       "save_results": "Your results are saved for one week. To share them, simply copy the url of this page.",
       "popup_blocker": "Popup-blockers may prevent the result page from being displayed.",
-      "climate_change": "Climate change [kg CO2-eq.]",
       "chart_title": "Impact per vehicle-kilometer",
       "chart_title_cost": "Ownership cost over life cycle, Euro per vehicle-kilometer",
       "agricultural land occupation":"Occupation of arable land [m2/year]",

@@ -289,6 +289,7 @@ function generate_scatter_chart(data){
 };
 
 function generate_chart_accumulated_impacts(data, name_impact, impact){
+    console.log(name_impact);
     var datum = [];
     for (var x=0; x < data.length; x++){
         if (data[x][0] == name_impact){
