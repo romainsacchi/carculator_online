@@ -333,7 +333,7 @@ class Calculation():
 
         self.ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
         results = self.ic.calculate_impacts()
-        lifetime = cm.array.sel(parameter="lifetime kilometers").mean().values
+        lifetime = cm.array.sel(parameter="lifetime kilometers").mean().values[0]
         results_acc = results * lifetime
 
         lci = self.ic.export_lci(presamples = False)
