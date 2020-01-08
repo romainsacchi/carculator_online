@@ -322,7 +322,8 @@ function generate_chart_accumulated_impacts(data, impact){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(800).height(600);
+                    .width(800).height(600)
+                    .forceY([0]);
 
       chart.xAxis     //Chart x-axis settings
           .axisLabel('Time (s)')
