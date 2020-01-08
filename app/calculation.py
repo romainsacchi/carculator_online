@@ -333,11 +333,13 @@ class Calculation():
 
         self.ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
         results = self.ic.calculate_impacts()
+        results_acc = results * cm.array.sel(parameter="lifetime kilometers").mean()
 
         lci = self.ic.export_lci(presamples = False)
         self.excel_lci = self.write_lci_to_excel(lci, "test").read()
 
         data = results.values
+        data_acc = results_acc.values
 
         if lang == "fr":
             impact = [self.d_rev_cat_fr[f] for f in results.coords['impact'].values.tolist()]
@@ -356,6 +358,7 @@ class Calculation():
             impact_category = results.coords['impact_category'].values.tolist()
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
+        list_res_acc = [['impact category', 'size', 'powertrain', 'year', 'category', 'intercept', 'slope']]
 
 
 
@@ -374,6 +377,10 @@ class Calculation():
                         for cat in range(0, len(impact)):
                             list_res.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                              data[imp, s, pt, y, cat, 0]])
+                        intercept = data_acc[imp, s, pt, y, [2:], 0].sum()
+                        slope = data[imp, s, pt, y, [:2], 0].sum()
+                        list_res_acc.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
+                                         intercept, slope])
 
         arr = cm.array.sel(powertrain = d[('Functional unit',)]['powertrain'],
                            size = d[('Functional unit',)]['size'],
@@ -409,7 +416,10 @@ class Calculation():
 
         TtW_list = list(zip(list_names, TtW_energy))
 
-        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter]), self.excel_lci)
+        # Create functions for cumulated impacts
+        print(list_res_acc)
+
+        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter, list_res_acc]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
