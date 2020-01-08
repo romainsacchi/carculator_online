@@ -245,14 +245,14 @@
 										<td>
 											<div>
 												<svg id="chart-ttw-energy"
-											   		style="width:800px;height:600px; font-size:16px; color:grey;">
+											   		style="width:600px;height:600px; font-size:16px; color:grey;">
 												</svg>
 											</div>
 										</td>
 										<td>
 											<div>
 												<svg id="chart-scatter"
-											   		style="width:800px;height:600px; font-size:16px; color:grey;">
+											   		style="width:600px;height:600px; font-size:16px; color:grey;">
 												</svg>
 
 											</div>
@@ -282,7 +282,7 @@
 														<option value='human noise'>{{ _('Noise emissions [Person-Pascal/second]') }}</option>
 													</select></h5>
 												<svg id="chart-accumulated"
-											   		style="width:800px;height:600px; font-size:16px; color:grey;">
+											   		style="width:600px;height:500px; font-size:16px; color:grey;">
 												</svg>
 											</div>
 										</td>
@@ -378,17 +378,13 @@
 
 				// Generate chart accumulated impacts
 				var impact = $("#select_impact").val()
-				impact = i18n(impact);
-
-				console.log(impact);
-				generate_chart_accumulated_impacts(chart[5], impact);
+				generate_chart_accumulated_impacts(chart[5], i18n(impact));
 
             });
     $('#select_benchmark').on('change', function() {
 	  generate_benchmark(data[2], this.value);
 	});
 	$('#select_impact').on('change', function() {
-		console.log(this.value);
 	  generate_chart_accumulated_impacts(data[5], i18n(this.value));
 	});
 
