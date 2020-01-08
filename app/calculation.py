@@ -417,9 +417,6 @@ class Calculation():
 
         TtW_list = list(zip(list_names, TtW_energy))
 
-        # Create functions for cumulated impacts
-        print(list_res_acc)
-
         return (json.dumps([lang, list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter, list_res_acc]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):

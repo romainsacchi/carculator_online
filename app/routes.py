@@ -24,7 +24,7 @@ def index():
 def tool_page():
     """Return tool page"""
     powertrains = [_("Petrol"), _('Diesel'), _('Natural gas'), _('Electric'), _('H2 Fuel cell'), _('Hybrid-petrol'), _('(Plugin) Hybrid-petrol')]
-    sizes = [_("Mini"), _("Small"), _("Lower medium"), _("Medium"), _("Large"), _("SUV"), _("Van")]
+    sizes = [_("Minicompact"), _("Subcompact"), _("Compact"), _("Mid-size"), _("Large"), _("SUV"), _("Van")]
     years = [i for i in range(2015, 2051)]
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
                       'CADC Motorway 130','CADC','NEDC']

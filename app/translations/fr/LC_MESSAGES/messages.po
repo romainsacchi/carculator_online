@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 15:18+0100\n"
+"POT-Creation-Date: 2020-01-08 16:56+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -47,19 +47,19 @@ msgid "(Plugin) Hybrid-petrol"
 msgstr "Hybride-essence rechargeable"
 
 #: app/routes.py:27
-msgid "Mini"
+msgid "Minicompact"
 msgstr "Mini-citadine"
 
 #: app/routes.py:27
-msgid "Small"
+msgid "Subcompact"
 msgstr "Citadine"
 
 #: app/routes.py:27
-msgid "Lower medium"
+msgid "Compact"
 msgstr "Berline compacte"
 
 #: app/routes.py:27
-msgid "Medium"
+msgid "Mid-size"
 msgstr "Berline familiale"
 
 #: app/routes.py:27
@@ -350,17 +350,17 @@ msgid "Write to us if you have any questions about the tool, methods or results.
 msgstr "Ecrivez-nous si vous avez des questions à propos de l'outil."
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:325 templates/tool.html:1113
+#: templates/result.html:336 templates/tool.html:1113
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:325 templates/tool.html:1113
+#: templates/result.html:336 templates/tool.html:1113
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
 #: templates/index.html:883 templates/param_table.html:127
-#: templates/result.html:326 templates/tool.html:1114
+#: templates/result.html:337 templates/tool.html:1114
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
 
@@ -533,7 +533,15 @@ msgstr "AUTTRES INDICATEURS"
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr "Consommation d'énergie Tank-to-wheel le long du cycle de conduite"
 
-#: templates/result.html:242
+#: templates/result.html:245
+msgid "GHG emissions vs. ownership costs"
+msgstr "Emissions de gaz à effet de serre et coûts d'utilisation"
+
+#: templates/result.html:249
+msgid "Accumulated impacts over lifetime"
+msgstr "Impacts cumulés lors du cycle de vie"
+
+#: templates/result.html:254
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -547,31 +555,26 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy released during braking, which "
 "explains the downward sections of their slope."
 msgstr ""
-"Le graphique ci-dessous représente la consommation d'énergie 'Tank-to-wheel' nécéssaire "
-"à l'exécution du cycle de conduite spécifié. C'est-à-dire l'énergie requise pour comnpléter "
-"le cyclde de conduite en dépit des pertes entre le réservoir et les roues du véhicule (efficacité du moteur, "
-"efficiacité de la boîte à vitesse, efficacité de charge et décharge de la batterie, etc.). Remarquez que "
-"les véhicules électriques sont capables de récupérer partiellement l'énergie libérée lors du freinage. "
-"Ceci explique que les sections plongeantes de leur courbe."
+"Le graphique ci-dessous représente la consommation d'énergie 'Tank-to-"
+"wheel' nécéssaire à l'exécution du cycle de conduite spécifié. "
+"C'est-à-dire l'énergie requise pour comnpléter le cyclde de conduite en "
+"dépit des pertes entre le réservoir et les roues du véhicule (efficacité "
+"du moteur, efficiacité de la boîte à vitesse, efficacité de charge et "
+"décharge de la batterie, etc.). Remarquez que les véhicules électriques "
+"sont capables de récupérer partiellement l'énergie libérée lors du "
+"freinage. Ceci explique que les sections plongeantes de leur courbe."
 
-#: templates/result.html:250
-msgid "GHG emissions vs. ownership costs"
-msgstr "Emissions de gaz à effet de serre et coûts d'utilisation"
-
-#: templates/result.html:251
+#: templates/result.html:262
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
 "\t\t\t\t\t\t\t\t\t\t\t\temissions) and cost of acquisition and use."
 msgstr ""
-"Le graphique ci-dessous illustre la performance des véhicules au regard de leur émissions "
-"de gaz à effet de serre et leur coût d'utilisation le long de leur cycle de vie."
+"Le graphique ci-dessous illustre la performance des véhicules au regard "
+"de leur émissions de gaz à effet de serre et leur coût d'utilisation le "
+"long de leur cycle de vie."
 
-#: templates/result.html:254
-msgid "Accumulated impacts over lifetime"
-msgstr "Impacts cumulés lors du cycle de vie"
-
-#: templates/result.html:255
+#: templates/result.html:266
 msgid ""
 "The graph below illustrates the accumulated impacts of the vehicles along"
 " their use phase.\n"
@@ -583,84 +586,86 @@ msgid ""
 "exhaust and non-exhaust emissions. You may select an impact\n"
 "\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
 msgstr ""
-"Le graphique ci-dessous représente les impacts cumulés le long du cycle de vie des véhicules. "
-"L'intercept de la courbe représente les impacts associés à la production du véhicule, alors que son "
-"coefficient directeur représente les impacts variables, associés à la préparation du carburant et "
-"aux émissions directes. Vous pouvez choisir la catégorie d'impact à considérer depuis le menu déroulant."
+"Le graphique ci-dessous représente les impacts cumulés le long du cycle "
+"de vie des véhicules. L'intercept de la courbe représente les impacts "
+"associés à la production du véhicule, alors que son coefficient directeur"
+" représente les impacts variables, associés à la préparation du carburant"
+" et aux émissions directes. Vous pouvez choisir la catégorie d'impact à "
+"considérer depuis le menu déroulant."
 
-#: templates/result.html:261
+#: templates/result.html:272
 msgid "Occupation of arable land [m2/year]"
 msgstr "Occupation de terre arable [m2/an]"
 
-#: templates/result.html:262
+#: templates/result.html:273
 msgid "Climate change [kg CO2-eq.]"
 msgstr "Changement climatique [kg CO2-eq.]"
 
-#: templates/result.html:263
+#: templates/result.html:274
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr "Epuisement des ressources d'énergie fossile [kg pétrole-eq.]"
 
-#: templates/result.html:264
+#: templates/result.html:275
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:265
+#: templates/result.html:276
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr "Eutrophisation des milieux aquatiques non-marins [kg P-eq.]"
 
-#: templates/result.html:266
+#: templates/result.html:277
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr "Toxicité humaine [kg 1,4-DC-eq.]"
 
-#: templates/result.html:267
+#: templates/result.html:278
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr "Rayonnement ionisant [kg U235-Eq]"
 
-#: templates/result.html:268
+#: templates/result.html:279
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:269
+#: templates/result.html:280
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr "Eutrophisation des milieux aquatiques marins [kg N-eq.]"
 
-#: templates/result.html:270
+#: templates/result.html:281
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr "Epuisement des ressources en métaux [kg fer-eq.]"
 
-#: templates/result.html:271
+#: templates/result.html:282
 msgid "Natural land transformation [m2]"
 msgstr "Transformation de terre naturelle [m2]"
 
-#: templates/result.html:272
+#: templates/result.html:283
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr "Détérioration de la couche d'ozone [kg CFC-11-eq.]"
 
-#: templates/result.html:273
+#: templates/result.html:284
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr "Formation de particules fines [kg PM10-eq.]"
 
-#: templates/result.html:274
+#: templates/result.html:285
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr "Formation de brouillard de pollution [kg NMVOC-eq.]"
 
-#: templates/result.html:275
+#: templates/result.html:286
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr "Acidification terrestre [kg SO2-eq.]"
 
-#: templates/result.html:276
+#: templates/result.html:287
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]"
 
-#: templates/result.html:277
+#: templates/result.html:288
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr "Occupation de terre en milieu urbain [m2/an]"
 
-#: templates/result.html:278
+#: templates/result.html:289
 msgid "Depletion of fresh water reserves [m3]"
 msgstr "Epuisement des réserves d'eau douce [m3]"
 
-#: templates/result.html:279
+#: templates/result.html:290
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr "Emissions de bruit [Person-Pascal/seconde]"
 
@@ -1533,5 +1538,15 @@ msgstr "Analyse d'incertitude (Monte Carlo)"
 msgid "number of iterations"
 msgstr "nombre d'itérations"
 
+#~ msgid "Mini"
+#~ msgstr "Mini-citadine"
 
+#~ msgid "Small"
+#~ msgstr "Citadine"
+
+#~ msgid "Lower medium"
+#~ msgstr "Berline compacte"
+
+#~ msgid "Medium"
+#~ msgstr "Berline familiale"
 

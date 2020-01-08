@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-08 15:18+0100\n"
+"POT-Creation-Date: 2020-01-08 16:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,19 +46,19 @@ msgid "(Plugin) Hybrid-petrol"
 msgstr ""
 
 #: app/routes.py:27
-msgid "Mini"
+msgid "Minicompact"
 msgstr ""
 
 #: app/routes.py:27
-msgid "Small"
+msgid "Subcompact"
 msgstr ""
 
 #: app/routes.py:27
-msgid "Lower medium"
+msgid "Compact"
 msgstr ""
 
 #: app/routes.py:27
-msgid "Medium"
+msgid "Mid-size"
 msgstr ""
 
 #: app/routes.py:27
@@ -335,17 +335,17 @@ msgid "Write to us if you have any questions about the tool, methods or results.
 msgstr ""
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:325 templates/tool.html:1113
+#: templates/result.html:336 templates/tool.html:1113
 msgid "Copyright"
 msgstr ""
 
 #: templates/index.html:882 templates/param_table.html:126
-#: templates/result.html:325 templates/tool.html:1113
+#: templates/result.html:336 templates/tool.html:1113
 msgid "Paul Scherrer Institut"
 msgstr ""
 
 #: templates/index.html:883 templates/param_table.html:127
-#: templates/result.html:326 templates/tool.html:1114
+#: templates/result.html:337 templates/tool.html:1114
 msgid "All rights reserved"
 msgstr ""
 
@@ -494,7 +494,15 @@ msgstr ""
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr ""
 
-#: templates/result.html:242
+#: templates/result.html:245
+msgid "GHG emissions vs. ownership costs"
+msgstr ""
+
+#: templates/result.html:249
+msgid "Accumulated impacts over lifetime"
+msgstr ""
+
+#: templates/result.html:254
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -509,22 +517,14 @@ msgid ""
 "explains the downward sections of their slope."
 msgstr ""
 
-#: templates/result.html:250
-msgid "GHG emissions vs. ownership costs"
-msgstr ""
-
-#: templates/result.html:251
+#: templates/result.html:262
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
 "\t\t\t\t\t\t\t\t\t\t\t\temissions) and cost of acquisition and use."
 msgstr ""
 
-#: templates/result.html:254
-msgid "Accumulated impacts over lifetime"
-msgstr ""
-
-#: templates/result.html:255
+#: templates/result.html:266
 msgid ""
 "The graph below illustrates the accumulated impacts of the vehicles along"
 " their use phase.\n"
@@ -537,79 +537,79 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
 msgstr ""
 
-#: templates/result.html:261
+#: templates/result.html:272
 msgid "Occupation of arable land [m2/year]"
 msgstr ""
 
-#: templates/result.html:262
+#: templates/result.html:273
 msgid "Climate change [kg CO2-eq.]"
 msgstr ""
 
-#: templates/result.html:263
+#: templates/result.html:274
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr ""
 
-#: templates/result.html:264
+#: templates/result.html:275
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr ""
 
-#: templates/result.html:265
+#: templates/result.html:276
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr ""
 
-#: templates/result.html:266
+#: templates/result.html:277
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr ""
 
-#: templates/result.html:267
+#: templates/result.html:278
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr ""
 
-#: templates/result.html:268
+#: templates/result.html:279
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr ""
 
-#: templates/result.html:269
+#: templates/result.html:280
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr ""
 
-#: templates/result.html:270
+#: templates/result.html:281
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr ""
 
-#: templates/result.html:271
+#: templates/result.html:282
 msgid "Natural land transformation [m2]"
 msgstr ""
 
-#: templates/result.html:272
+#: templates/result.html:283
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr ""
 
-#: templates/result.html:273
+#: templates/result.html:284
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr ""
 
-#: templates/result.html:274
+#: templates/result.html:285
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr ""
 
-#: templates/result.html:275
+#: templates/result.html:286
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr ""
 
-#: templates/result.html:276
+#: templates/result.html:287
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr ""
 
-#: templates/result.html:277
+#: templates/result.html:288
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr ""
 
-#: templates/result.html:278
+#: templates/result.html:289
 msgid "Depletion of fresh water reserves [m3]"
 msgstr ""
 
-#: templates/result.html:279
+#: templates/result.html:290
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr ""
 
