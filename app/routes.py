@@ -142,7 +142,7 @@ def set_language(language=None):
 @app.route('/language_result_display/<language>')
 def set_language_for_result_display(language):
     session['language'] = language
-    return make_response('langugae changed', 200)
+    return make_response({'language changed'}, 200)
 
 @app.route('/get_language')
 def get_language():

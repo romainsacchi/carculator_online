@@ -371,7 +371,7 @@
 
     var lang_data = data[0]
 
-    $.ajax({
+    $.when($.ajax({
                 url: "/language_result_display/"+lang_data,
                 dataType: 'json',
                 type: 'GET',
@@ -380,46 +380,51 @@
                     return json
                     },
                 error: function(xhr, status, error){console.log(error) }})
+     ).done(function(json){
 
-	//  Load the JSON File
-	var name_default_impact;
-	var chart_title;
-	var chart_title_cost;
-    $.when($.ajax({
-                url: "/get_language",
-                dataType: 'json',
-                type: 'GET',
-                success : function(data) {
-                   var json = data
-                    return json
-                    },
-                error: function(xhr, status, error){console.log(error) }})
-            ).done(function(json){
-                i18n.translator.add(json);
+     	//  Load the JSON File
+		var name_default_impact;
+		var chart_title;
+		var chart_title_cost;
+		$.when($.ajax({
+					url: "/get_language",
+					dataType: 'json',
+					type: 'GET',
+					success : function(data) {
+					   var json = data
+						return json
+						},
+					error: function(xhr, status, error){console.log(error) }})
+				).done(function(json){
+					i18n.translator.add(json);
+					console.log(json);
 
-                // Generate LCIA chart
-                name_default_impact = i18n("climate_change");
-				chart_title = i18n("chart_title");
-				generate_chart_impacts(data[1], chart_title, name_default_impact);
+					// Generate LCIA chart
+					name_default_impact = i18n("climate_change");
+					chart_title = i18n("chart_title");
+					generate_chart_impacts(data[1], chart_title, name_default_impact);
 
-				// Generate LCC chart
-				chart_title_cost = i18n("chart_title_cost");
-				generate_chart_costs(data[2], chart_title_cost);
+					// Generate LCC chart
+					chart_title_cost = i18n("chart_title_cost");
+					generate_chart_costs(data[2], chart_title_cost);
 
-				// Generate benchmarks
-				generate_benchmark(data[3], "climate change");
+					// Generate benchmarks
+					generate_benchmark(data[3], "climate change");
 
-				// Generate line chart TtW energy
-				generate_line_chart_TtW_energy(data[4]);
+					// Generate line chart TtW energy
+					generate_line_chart_TtW_energy(data[4]);
 
-				// Generate scatter chart
-				generate_scatter_chart(data[5]);
+					// Generate scatter chart
+					generate_scatter_chart(data[5]);
 
-				// Generate chart accumulated impacts
-				$("#select_impact").val('climate change')
-				generate_chart_accumulated_impacts(data[6], i18n("climate change"), "climate change");
+					// Generate chart accumulated impacts
+					$("#select_impact").val('climate change')
+					generate_chart_accumulated_impacts(data[6], i18n("climate change"), "climate change");
 
+				});
             });
+
+
     $('#select_benchmark').on('change', function() {
 	  generate_benchmark(data[2], this.value);
 	});
