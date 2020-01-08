@@ -420,7 +420,7 @@ class Calculation():
         # Create functions for cumulated impacts
         print(list_res_acc)
 
-        return (json.dumps([list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter, list_res_acc]), self.excel_lci)
+        return (json.dumps([lang, list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter, list_res_acc]), self.excel_lci)
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """

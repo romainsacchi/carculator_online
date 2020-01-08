@@ -248,7 +248,6 @@
 										<th class="col-md-4">
 											<h3>{{ _('Accumulated impacts over lifetime') }}</h3>
 										</th>
-
 									</tr>
 									<tr>
 										<td>
@@ -258,12 +257,10 @@
 													efficiency of the battery, etc.).
 													Note that electric vehicles, such as battery electric vehicles or fuel cell vehicles, can partly recover
 													the energy released during braking, which explains the downward sections of their slope.") }}</p>
-
 										</td>
 										<td>
 											<p>{{ _("The graph below illustrates trade-off between environmental performance (in terms of greenhouse gas
 												emissions) and cost of acquisition and use.") }}</p>
-
 										</td>
 										<td>
 											<p>{{ _("The graph below illustrates the accumulated impacts of the vehicles along their use phase.
@@ -372,7 +369,17 @@
     var data = {{data|safe}};
     console.log(data);
 
-    var imp;
+    var lang_data = data[0]
+
+    $.ajax({
+                url: "/language_result_display/"+lang_data,
+                dataType: 'json',
+                type: 'GET',
+                success : function(data) {
+                   var json = data
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error) }})
 
 	//  Load the JSON File
 	var name_default_impact;
@@ -393,24 +400,24 @@
                 // Generate LCIA chart
                 name_default_impact = i18n("climate_change");
 				chart_title = i18n("chart_title");
-				generate_chart_impacts(data[0], chart_title, name_default_impact);
+				generate_chart_impacts(data[1], chart_title, name_default_impact);
 
 				// Generate LCC chart
 				chart_title_cost = i18n("chart_title_cost");
-				generate_chart_costs(data[1], chart_title_cost);
+				generate_chart_costs(data[2], chart_title_cost);
 
 				// Generate benchmarks
-				generate_benchmark(data[2], "climate change");
+				generate_benchmark(data[3], "climate change");
 
 				// Generate line chart TtW energy
-				generate_line_chart_TtW_energy(data[3]);
+				generate_line_chart_TtW_energy(data[4]);
 
 				// Generate scatter chart
-				generate_scatter_chart(data[4]);
+				generate_scatter_chart(data[5]);
 
 				// Generate chart accumulated impacts
 				$("#select_impact").val('climate change')
-				generate_chart_accumulated_impacts(data[5], i18n("climate change"), "climate change");
+				generate_chart_accumulated_impacts(data[6], i18n("climate change"), "climate change");
 
             });
     $('#select_benchmark').on('change', function() {

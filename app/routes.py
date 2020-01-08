@@ -139,9 +139,13 @@ def set_language(language=None):
     session['language'] = language
     return redirect(url_for('index'))
 
+@app.route('/language_result_display/<language>')
+def set_language_for_result_display(language):
+    session['language'] = language
+    return make_response('langugae changed', 200)
+
 @app.route('/get_language')
 def get_language():
-
     lang = session["language"]
     if lang == "en":
         json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
@@ -151,8 +155,10 @@ def get_language():
         json_url = os.path.join(app.static_folder, "translation", "translation_fr.json")
     if lang == "it":
         json_url = os.path.join(app.static_folder, "translation", "translation_it.json")
+
     with open(json_url, encoding='utf-8') as fh:
         data = json.load(fh)
+
     return make_response(data, 200)
 
 @app.route("/get_inventory_excel_for_bw")
