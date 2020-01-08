@@ -326,12 +326,25 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
           .tickFormat(d3.format('.0e'))
           .showMaxMin(false);
 
-      }else{
+      }
 
-           chart_acc.yAxis     //Chart y-axis settings
-          .axisLabel(name_impact)
-          .tickFormat(d3.format(',d'))
-          .showMaxMin(false);
+      else{
+
+            if (impact == "human noise"){
+              chart_acc.yAxis     //Chart y-axis settings
+              .axisLabel(name_impact)
+              .tickFormat(d3.format('s'))
+              .showMaxMin(false);
+
+            }else{
+              chart_acc.yAxis     //Chart y-axis settings
+              .axisLabel(name_impact)
+              .tickFormat(d3.format(',d'))
+              .showMaxMin(false);
+
+            };
+
+
 
       };
 
