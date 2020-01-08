@@ -359,7 +359,7 @@ class Calculation():
             impact_category = results.coords['impact_category'].values.tolist()
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
-        list_res_acc = [['impact category', 'size', 'powertrain', 'year', 'category', 'intercept', 'slope', 'lifetime']]
+        list_res_acc = []
 
 
 

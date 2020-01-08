@@ -32,6 +32,25 @@
       "popup_blocker" : "Popup-Blocker verhindern möglicherweise, dass die Ergebnisseite angezeigt wird.",
       "climate_change": "Klimawandel [kg CO2-Äqu.]",
       "chart_title": "Aufprall pro Fahrzeugkilometer",
-      "chart_title_cost": "Betriebskosten über den gesamten Lebenszyklus, Euro pro Fahrzeugkilometer"
-  }
+      "chart_title_cost": "Betriebskosten über den gesamten Lebenszyklus, Euro pro Fahrzeugkilometer",
+      "agricultural land occupation":"Ackerlandnutzung [m2 / Jahr]",
+      "climate change":"Klimawandel [kg CO2-Äqu.]",
+      "fossil depletion":"Erschöpfung fossiler Energieressourcen [kg Öläquivalent]",
+      "freshwater ecotoxicity":"Toxizität in Gewässern außerhalb des Meeres [kg 1,4-DC-Äq.]",
+      "freshwater eutrophication":"Eutrophierung von Gewässern außerhalb des Meeres [kg P-Äq.]",
+      "human toxicity":"Humantoxizität [kg 1,4-DC-Äq.]",
+      "ionizing radiation":"Ionisierende Strahlung [kg U235-Eq]",
+      "marine ecotoxicity":"Toxizität in Gewässern des Meeres [kg 1,4-DC-Äq.]",
+      "marine eutrophication":"Eutrophierung von Gewässern im Meer [kg N-Äq.]",
+      "metal depletion":"Erschöpfung der Metallressourcen [kg Eisenäquivalent]",
+      "natural land transformation":"Natürliche Erdumwandlung [m2]",
+      "ozone depletion":"Verschlechterung der Ozonschicht [kg FCKW-11-Äq.]",
+      "particulate matter formation":"Bildung feiner Partikel [kg PM10-Äq.]",
+      "photochemical oxidant formation":"Verschmutzungsnebelbildung [kg NMVOC-Äq.]",
+      "terrestrial acidification":"Terrestrische Versauerung [kg SO2-Äq.]",
+      "terrestrial ecotoxicity":"Terrestrische Toxizität [kg 1,4-DC.-Äq.]",
+      "urban land occupation":"Flächennutzung in städtischen Gebieten [m2/Jahr]",
+      "water depletion":"Erschöpfung der Süßwasservorräte [m3]",
+      "human noise":"Geräuschemission [Person-Pascal / Sekunde]"
+}
 }

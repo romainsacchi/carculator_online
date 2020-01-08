@@ -14,7 +14,7 @@
 	  gtag('config', 'UA-155758577-1');
 	</script>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{{_('Carculator : Results')}}</title>
+    <title>{{ _('Carculator : Results') }}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/icon" href="/static/images/logo_icon.ico"/>
     <!-- Font Awesome -->
@@ -93,12 +93,12 @@
 		    </div>
 			  <form action="/get_inventory_excel_for_bw">
 				<button class="online-button"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Export Brightway2-compatible inventories')}}</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
 			  </form>
 				  <button class="online-button" onclick="export_simapro_inventories()"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Export Simapro-compatible inventories')}}</button>
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Simapro-compatible inventories') }}</button>
 				 <button class="online-button" onclick="share_results()"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{_('Share results')}}</button>
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Share results') }}</button>
 
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -114,18 +114,17 @@
 				<div class="row"  style="padding-top:140px;">
 
 					<div class="mu-about-header">
-						<h2 class="mu-heading-title">{{_('RESULTS')}}</h2>
+						<h2 class="mu-heading-title">{{ _('RESULTS') }}</h2>
 							<span class="mu-header-dot"></span>
 
 
-						<p>{{_("The different sections of this page present the results of your analysis, based on the
+						<p>{{ _("The different sections of this page present the results of your analysis, based on the
 							concept of life cycle assessment. Each relevant phase of the life cycle of the vehicle is considered
-							and characterized against environmental and economic indicators.")}}</p>
-						<p>{{_("This is a useful tool when comparing technologies that have environmental hotspots
-							at different phases of the life cycle of a vehicle.")}}</p>
+							and characterized against environmental and economic indicators.") }}</p>
+						<p>{{ _("This is a useful tool when comparing technologies that have environmental hotspots
+							at different phases of the life cycle of a vehicle.") }}</p>
 					</div>
 				</div>
-
             	</div>
         </section>
 
@@ -138,11 +137,11 @@
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">{{_('REFERENCE')}}</span></h2>
+						<span style="color:grey;">{{ _('REFERENCE') }}</span></h2>
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
-								<p style="border:2px solid grey;padding:15px;width:800px;">{{_('Any use of the results or inventories under any form should be referenced as following:')}}
+								<p style="border:2px solid grey;padding:15px;width:800px;">{{ _('Any use of the results or inventories under any form should be referenced as following:') }}
                                 carculator, Paul Scherrer Institut, http://carculator.psi.ch</p>
 							</div>
                 		</div>
@@ -158,16 +157,16 @@
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">{{_('LIFE CYCLE IMPACT ASSESSMENT')}}</span></h2>
+						<span style="color:grey;">{{ _('LIFE CYCLE IMPACT ASSESSMENT') }}</span></h2>
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
-								<p>{{_("By default, the chart below shows the environmental impacts in terms of
+								<p>{{ _("By default, the chart below shows the environmental impacts in terms of
 									greenhouse gas emissions emitted for each vehicle, per km driven. The results are sub-divided
 									into categories: powertrain, maintenance, fuel manufacture, energy storage, etc.
-									The user can change the environmental indicator under the dropdown menu 'impact category'.
+									The user can change the environmental indicator under the dropdown menu impact category.
 									It is also possible to visualize the results as a table or other sorts of chart by using the
-									dropdown menu located in the top-left corner of the chart area.")}}</p>
+									dropdown menu located in the top-left corner of the chart area.") }}</p>
 								<div id="chart_impacts" style="margin:20px auto;"></div>
 							</div>
                 		</div>
@@ -181,13 +180,13 @@
 												  style="height:70px; width:80px; border-right:3px solid grey;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">{{_('LIFE CYCLE COST ASSESSMENT')}}</span></h2>
+						<span style="color:grey;">{{ _('LIFE CYCLE COST ASSESSMENT') }}</span></h2>
 				</div>
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
-							<p>{{_("The chart below represents the cost of ownership per kilometer driven for each vehicle.
+							<p>{{ _("The chart below represents the cost of ownership per kilometer driven for each vehicle.
 								It considers future electricity and fuel prices, as well as the amortization of the
-								vehicle purchase over time.")}}</p>
+								vehicle purchase over time.") }}</p>
 							<div id="chart_costs" style="margin:20px auto;"></div>
 						</div>
                 	</div>
@@ -201,17 +200,17 @@
 												  style="height:70px; width:90px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('BENCHMARK')}}</span></h2>
+						<span style="color:white;">{{ _('BENCHMARK') }}</span></h2>
 				</div>
 				<div class="mu-about-area" style="padding-top:20px;">
 					<div class="col-md-12">
-						<p style="color:white;">{{_("This section compares the distance that can be driven by each vehicle
-							given a life cycle budget.")}}</p>
-						<h3 style="color:white;">{{_("How long can the vehicles drive on a life cycle budget of 1")}}
+						<p style="color:white;">{{ _("This section compares the distance that can be driven by each vehicle
+							given a life cycle budget.") }}</p>
+						<h3 style="color:white;">{{ _("How long can the vehicles drive on a life cycle budget of 1") }}
 							<select id="select_benchmark" style="color:grey;">
-								<option value="climate change">{{_("kg CO2-eq.")}}</option>
-								<option value="cost">{{_("Euro")}}</option>
-								<option value="fossil depletion">{{_("liter of petrol-eq.")}}</option>
+								<option value="climate change">{{ _("kg CO2-eq.") }}</option>
+								<option value="cost">{{ _("Euro") }}</option>
+								<option value="fossil depletion">{{ _("liter of petrol-eq.") }}</option>
 							</select> ?</h3>
 						<table class="table" id="table_benchmark">
 							<tbody>
@@ -231,15 +230,16 @@
 												  style="height:70px; width:80px; border-right:3px solid white;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('OTHER INDICATORS')}}</span></h2>
+						<span style="color:white;">{{ _('OTHER INDICATORS') }}</span></h2>
 				</div>
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
 							<table class="table" style="width:100%;color:white;">
 								<tbody>
 									<tr>
-										<th><h3>{{_('Energy consumption along driving cycle')}}</h3></th>
-										<th><h3>{{_('GHG emissions vs. ownership costs')}}</h3></th>
+										<th><h3>{{ _('Tank-to-Wheel cumulated energy consumption along driving cycle') }}</h3></th>
+										<th><h3>{{ _('GHG emissions vs. ownership costs') }}</h3></th>
+										<th><h3>{{ _('Accumulated impacts over lifetime') }}</h3></th>
 									</tr>
 									<tr>
 										<td>
@@ -257,26 +257,39 @@
 
 											</div>
 										</td>
-
-									</tr>
-									<tr>
-										<th><h3>{{_('Noise emissions along driving cycle')}}</h3></th>
-										<th><h3>{{_('Pollutants emissions along driving cycle')}}</h3></th>
-									</tr>
-									<tr>
 										<td>
 											<div>
+												<h3 style="color:white;">{{ _('Select an impact category') }}
+													<select id='select_impact' style='color:grey;'>
+														<option value='agricultural land occupation'>{{ _('Occupation of arable land [m2/year]') }}</option>
+														<option value='climate change'>{{ _('Climate change [kg CO2-eq.]') }}</option>
+														<option value='fossil depletion'>{{ _('Depletion of fossil energy resources [kg oil-eq.]') }}</option>
+														<option value='freshwater ecotoxicity'>{{ _('Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]') }}</option>
+														<option value='freshwater eutrophication'>{{ _('Eutrophication of non-marine aquatic environments [kg P-eq.]') }}</option>
+														<option value='human toxicity'>{{ _('Human toxicity [kg 1,4-DC-eq.]') }}</option>
+														<option value='ionizing radiation'>{{ _('Ionizing radiation [kg U235-Eq]') }}</option>
+														<option value='marine ecotoxicity'>{{ _('Toxicity of marine aquatic environments [kg 1,4-DC-eq.]') }}</option>
+														<option value='marine eutrophication'>{{ _('Eutrophication of non-marine aquatic environments [kg N-eq.]') }}</option>
+														<option value='metal depletion'>{{ _('Depletion of metal resources [kg iron-eq.]') }}</option>
+														<option value='natural land transformation'>{{ _('Natural land transformation [m2]') }}</option>
+														<option value='ozone depletion'>{{ _('Deterioration of the ozone layer [kg CFC-11-eq.]') }}</option>
+														<option value='particulate matter formation'>{{ _('Formation of fine particles [kg PM10-eq.]') }}</option>
+														<option value='photochemical oxidant formation'>{{ _('Smog formation [kg NMVOC-eq.]') }}</option>
+														<option value='terrestrial acidification'>{{ _('Terrestrial acidification [kg SO2-Eq-eq.]') }}</option>
+														<option value='terrestrial ecotoxicity'>{{ _('Terrestrial toxicity [kg 1,4-DC.-eq.]') }}</option>
+														<option value='urban land occupation'>{{ _('Land occupation in an urban environment [m2 / year]') }}</option>
+														<option value='water depletion'>{{ _('Depletion of fresh water reserves [m3]') }}</option>
+														<option value='human noise'>{{ _('Noise emissions [Person-Pascal/second]') }}</option>
+													</select></h3>
+												<svg id="chart-accumulated"
+											   		style="width:800px;height:600px; font-size:16px; color:grey;">
+												</svg>
 
 											</div>
 										</td>
-										<td>
-											<div>
-
-
-											</div>
-										</td>
 
 									</tr>
+
 								</tbody>
 
 							</table>
@@ -296,8 +309,8 @@
 				  </div>
 				  <div class="column" style="width:33.33%;display: inline-block;">
 					  <div class="mu-footer-area">
-						  <p>&copy; {{_('Copyright')}} <a rel="nofollow" href="http://www.psi.ch">{{_('Paul Scherrer Institut')}}</a>.
-							  {{_('All rights reserved')}}.</p>
+						  <p>&copy; {{ _('Copyright') }} <a rel="nofollow" href="http://www.psi.ch">{{ _('Paul Scherrer Institut') }}</a>.
+							  {{ _('All rights reserved') }}.</p>
 					  </div>
 				  </div>
 				  <div class="column" style="width:33.33%;float: right;text-align:center;">
@@ -346,7 +359,7 @@
                    var json = data
                     return json
                     },
-                error: function(xhr, status, error){console.log(error)}})
+                error: function(xhr, status, error){console.log(error) }})
             ).done(function(json){
                 i18n.translator.add(json);
 
@@ -369,11 +382,16 @@
 				generate_scatter_chart(data[4]);
 
 				// Generate chart accumulated impacts
-				generate_chart_accumulated_impacts(chart[5]);
+				var impact = $("#select_impact").val()
+				impact = i18n(impact);
+				generate_chart_accumulated_impacts(chart[5], impact);
 
             });
     $('#select_benchmark').on('change', function() {
 	  generate_benchmark(data[2], this.value);
+	});
+	$('#select_impact').on('change', function() {
+	  generate_benchmark(data[5], this.value);
 	});
 
 </script>

@@ -32,6 +32,25 @@
       "popup_blocker": "Popup-blockers may prevent the result page from being displayed.",
       "climate_change": "Climate change [kg CO2-eq.]",
       "chart_title": "Impact per vehicle-kilometer",
-      "chart_title_cost": "Ownership cost over life cycle, Euro per vehicle-kilometer"
+      "chart_title_cost": "Ownership cost over life cycle, Euro per vehicle-kilometer",
+      "agricultural land occupation":"Occupation of arable land [m2/year]",
+      "climate change":"Climate change [kg CO2-eq.]",
+      "fossil depletion":"Depletion of fossil energy resources [kg oil-eq.]",
+      "freshwater ecotoxicity":"Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]",
+      "freshwater eutrophication":"Eutrophication of non-marine aquatic environments [kg P-eq.]",
+      "human toxicity":"Human toxicity [kg 1,4-DC-eq.]",
+      "ionizing radiation":"Ionizing radiation [kg U235-Eq]",
+      "marine ecotoxicity":"Toxicity of marine aquatic environments [kg 1,4-DC-eq.]",
+      "marine eutrophication":"Eutrophication of non-marine aquatic environments [kg N-eq.]",
+      "metal depletion":"Depletion of metal resources [kg iron-eq.]",
+      "natural land transformation":"Natural land transformation [m2]",
+      "ozone depletion":"Deterioration of the ozone layer [kg CFC-11-eq.]",
+      "particulate matter formation":"Formation of fine particles [kg PM10-eq.]",
+      "photochemical oxidant formation":"Smog formation [kg NMVOC-eq.]",
+      "terrestrial acidification":"Terrestrial acidification [kg SO2-Eq-eq.]",
+      "terrestrial ecotoxicity":"Terrestrial toxicity [kg 1,4-DC.-eq.]",
+      "urban land occupation":"Land occupation in an urban environment [m2 / year]",
+      "water depletion":"Depletion of fresh water reserves [m3]",
+      "human noise":"Noise emissions [Person-Pascal/second]"
   }
 }

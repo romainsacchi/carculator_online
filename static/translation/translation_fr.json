@@ -32,6 +32,25 @@
       "popup_blocker": "Si votre navigateur possède un bloqueur de publicité, ce dernier peut empêcher la page des résultats de s'afficher.",
       "climate_change": "Changement climatique [kg CO2-eq.]",
       "chart_title": "Impact par véhicule-kilomètre",
-      "chart_title_cost": "Cout d'utilisation tout au long du cycle de vie, en Euro par véhicule-kilomètre"
+      "chart_title_cost": "Cout d'utilisation tout au long du cycle de vie, en Euro par véhicule-kilomètre",
+      "agricultural land occupation":"Occupation de terre arable [m2/an]",
+      "climate change":"Changement climatique [kg CO2-eq.]",
+      "fossil depletion":"Epuisement des ressources d'énergie fossile [kg pétrole-eq.]",
+      "freshwater ecotoxicity":"Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]",
+      "freshwater eutrophication":"Eutrophisation des milieux aquatiques non-marins [kg P-eq.]",
+      "human toxicity":"Toxicité humaine [kg 1,4-DC-eq.]",
+      "ionizing radiation":"Rayonnement ionisant [kg U235-Eq]",
+      "marine ecotoxicity":"Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]",
+      "marine eutrophication":"Eutrophisation des milieux aquatiques marins [kg N-eq.]",
+      "metal depletion":"Epuisement des ressources en métaux [kg fer-eq.]",
+      "natural land transformation":"Transformation de terre naturelle [m2]",
+      "ozone depletion":"Détérioration de la couche d'ozone [kg CFC-11-eq.]",
+      "particulate matter formation":"Formation de particules fines [kg PM10-eq.]",
+      "photochemical oxidant formation":"Formation de brouillard de pollution [kg NMVOC-eq.]",
+      "terrestrial acidification":"Acidification terrestre [kg SO2-eq.]",
+      "terrestrial ecotoxicity":"Toxicité des milieux terrestres [kg 1,4-DC.-eq.]",
+      "urban land occupation":"Occupation de terre en milieu urbain [m2/an]",
+      "water depletion":"Epuisement des réserves d'eau douce [m3]",
+      "human noise":"Emissions de bruit [Person-Pascal/seconde]"
   }
 }

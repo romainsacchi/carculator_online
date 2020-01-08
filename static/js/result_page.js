@@ -290,22 +290,54 @@ function generate_scatter_chart(data){
     });
 };
 
-function generate_chart_accumulated_impacts(data){
+function generate_chart_accumulated_impacts(data, impact){
 
     var datum = [];
     var max_val = 0;
     for (var x=0; x < data.length; x++){
-        var arr_data = [];
-        for (var i = 0; i < data[x][1].length; i++){
-            arr_data.push({"x":i, "y": Number(data[x][1][i]).toFixed(0)})
+        if (data[x][0] == impact){
 
-            if (Number(data[x][1][i]) > max_val){
-                max_val = Number(data[x][1][i]);
-            };
-        }
-        var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
-        datum.push({values:arr_data, key:name, area:false})
+            var arr_data = [];
+            for (var i = 0; i < 100; i++){
+                arr_data.push({"x":i, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
+            }
+
+            var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
+            datum.push({values:arr_data, key:name, area:false})
+
+        };
+
     };
+
+    nv.addGraph(function() {
+     var chart = nv.models.lineChart()
+                    .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
+                    .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                    //.transitionDuration(350)  //how fast do you want the lines to transition?
+                    .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                    .showYAxis(true)        //Show the y-axis
+                    .showXAxis(true)        //Show the x-axis
+                    .width(800).height(600);
+
+      chart.xAxis     //Chart x-axis settings
+          .axisLabel('Time (s)')
+          .tickFormat(d3.format(',r'))
+          ;
+      chart.yAxis     //Chart y-axis settings
+          .axisLabel('kilojoule')
+          .tickFormat(d3.format('.r'))
+          .showMaxMin(false);
+
+      d3.select('#chart-accumulated')    //Select the <svg> element you want to render the chart in.
+          .datum(datum)         //Populate the <svg> element with chart data...
+          .call(chart);          //Finally, render the chart!
+
+      d3.selectAll('.nv-axis .tick line').attr('display','none')
+      d3.select('#chart-accumulated').style('fill', "white");
+      //Update the chart when window resizes.
+      nv.utils.windowResize(function() { chart.update() });
+      return chart;
+    });
 
 };
 
