@@ -333,7 +333,8 @@ class Calculation():
 
         self.ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
         results = self.ic.calculate_impacts()
-        results_acc = results * cm.array.sel(parameter="lifetime kilometers").mean()
+        lifetime = cm.array.sel(parameter="lifetime kilometers").mean()
+        results_acc = results * lifetime
 
         lci = self.ic.export_lci(presamples = False)
         self.excel_lci = self.write_lci_to_excel(lci, "test").read()
@@ -358,7 +359,7 @@ class Calculation():
             impact_category = results.coords['impact_category'].values.tolist()
 
         list_res = [['impact category', 'size', 'powertrain', 'year', 'category', 'value']]
-        list_res_acc = [['impact category', 'size', 'powertrain', 'year', 'category', 'intercept', 'slope']]
+        list_res_acc = [['impact category', 'size', 'powertrain', 'year', 'category', 'intercept', 'slope', 'lifetime']]
 
 
 
@@ -380,7 +381,7 @@ class Calculation():
                         intercept = data_acc[imp, s, pt, y, 2:, 0].sum()
                         slope = data[imp, s, pt, y, :2, 0].sum()
                         list_res_acc.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
-                                         intercept, slope])
+                                         intercept, slope, lifetime])
 
         arr = cm.array.sel(powertrain = d[('Functional unit',)]['powertrain'],
                            size = d[('Functional unit',)]['size'],
