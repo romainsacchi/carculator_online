@@ -220,7 +220,7 @@ function generate_line_chart_TtW_energy(data){
                     .forceY([0, max_val * 1.1]);
 
       chart.xAxis     //Chart x-axis settings
-          .axisLabel('Time (s)')
+          .axisLabel('Driving cycle time (s)')
           .tickFormat(d3.format(',r'))
           ;
       chart.yAxis     //Chart y-axis settings
@@ -313,7 +313,7 @@ function generate_chart_accumulated_impacts(data, impact){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(600).height(500);
+                    .width(600).height(600);
 
       chart.xAxis     //Chart x-axis settings
           .axisLabel('Use (km)')
@@ -321,7 +321,7 @@ function generate_chart_accumulated_impacts(data, impact){
           ;
       chart.yAxis     //Chart y-axis settings
           .axisLabel(impact)
-          .tickFormat(d3.format('.02f'))
+          .tickFormat(d3.format('.01f'))
           .showMaxMin(false);
 
       d3.select('#chart-accumulated')    //Select the <svg> element you want to render the chart in.
