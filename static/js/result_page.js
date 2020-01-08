@@ -216,7 +216,7 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(800).height(600)
+                    .width(600).height(600)
                     .forceY([0, max_val * 1.1]);
 
       chart.xAxis     //Chart x-axis settings
@@ -291,23 +291,16 @@ function generate_scatter_chart(data){
 };
 
 function generate_chart_accumulated_impacts(data, impact){
-
-    console.log(impact);
-
     var datum = [];
     var max_val = 0;
     for (var x=0; x < data.length; x++){
-        console.log(data[x][0]);
         if (data[x][0] == impact){
-
             var arr_data = [];
             for (var i = 0; i < 100; i++){
                 arr_data.push({"x":i, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
             }
-
             var name = data[x][2] + ", " + data[x][3] + ", " + data[x][1]
-            datum.push({values:arr_data, key:name, area:false})
-
+            datum.push({values:arr_data, key:name})
         };
 
     };
@@ -322,15 +315,13 @@ function generate_chart_accumulated_impacts(data, impact){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(800).height(600)
-                    .forceY([0]);
+                    .width(600).height(500);
 
       chart.xAxis     //Chart x-axis settings
-          .axisLabel('Time (s)')
+          .axisLabel('Use (km)')
           .tickFormat(d3.format(',r'))
           ;
       chart.yAxis     //Chart y-axis settings
-          .axisLabel('kilojoule')
           .tickFormat(d3.format('.r'))
           .showMaxMin(false);
 
