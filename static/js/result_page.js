@@ -282,18 +282,32 @@ function generate_scatter_chart(data){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-
       d3.select('#chart-scatter').style('fill', "white");
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
 
     });
+};
 
+function generate_chart_accumulated_impacts(data){
 
+    var datum = [];
+    var max_val = 0;
+    for (var x=0; x < data.length; x++){
+        var arr_data = [];
+        for (var i = 0; i < data[x][1].length; i++){
+            arr_data.push({"x":i, "y": Number(data[x][1][i]).toFixed(0)})
 
-}
+            if (Number(data[x][1][i]) > max_val){
+                max_val = Number(data[x][1][i]);
+            };
+        }
+        var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
+        datum.push({values:arr_data, key:name, area:false})
+    };
 
+};
 
 
 
