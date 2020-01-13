@@ -1316,9 +1316,13 @@ button:focus {
 
 
 #mu-footer{
+    position:fixed;
+    left:0px;
+    bottom:0px;
 	display: inline;
 	float: left;
 	width: 100%;
+	z-index: 100;
 }
 
 .mu-footer-area{

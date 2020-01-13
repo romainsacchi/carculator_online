@@ -902,7 +902,7 @@ function generate_driving_cycle_graph(driving_cycle){
 
         });
  };
- 
+
  /**
  * Create the map
  */
@@ -1500,6 +1500,7 @@ function collect_configuration(){
 
 function get_results(){
     var data = collect_configuration();
+    console.log(data);
     if (data == null){
         console.log('data null');
         return;
