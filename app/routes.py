@@ -25,14 +25,22 @@ def start():
     """Return start page."""
     return render_template('start.html')
 
-@app.route('/tool', methods=['GET', 'POST'])
-def tool_page():
+@app.route('/tool', defaults={'country': None})
+@app.route('/tool/<country>')
+def tool_page(country):
     """Return tool page"""
 
-    if request.method == "POST":
-        config = {"config":"true", "data":request.args.get("config")}
+    if country is None:
+        config = {"config": "false"}
     else:
-        config = {"config":"false"}
+        config = {"year":["2020","2035", "2050"],
+                  "type":[{{ _('Petrol') }}, {{ _('Diesel') }}, {{ _('Electric') }}],
+				  "size":[{{ _('Mid-size') }}], "driving_cycle":"WLTC",
+								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
+								"mileage-slider":"12 000"},
+								"background params": {"country":country, "petrol technology":"petrol", "diesel technology":"diesel",
+								"battery technology":"NMC", "battery origin":"CN"}};
+
 
     powertrains = [_("Petrol"), _('Diesel'), _('Natural gas'), _('Electric'), _('H2 Fuel cell'), _('Hybrid-petrol'), _('(Plugin) Hybrid-petrol')]
     sizes = [_("Minicompact"), _("Subcompact"), _("Compact"), _("Mid-size"), _("Large"), _("SUV"), _("Van")]
