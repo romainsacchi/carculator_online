@@ -915,7 +915,6 @@ var map = AmCharts.makeChart("chartdiv", {
     "zoomLevel": 2,
     "zoomLongitude": 7.87,
     "zoomLatitude": 46.96,
-
     "areas": [
       {"id":"AT"},
         {"id":"AU"},
