@@ -34,8 +34,8 @@ def tool_page(country):
         config = {"config": "false"}
     else:
         config = {"year":["2020","2035", "2050"],
-                  "type":[{{ _('Petrol') }}, {{ _('Diesel') }}, {{ _('Electric') }}],
-				  "size":[{{ _('Mid-size') }}], "driving_cycle":"WLTC",
+                  "type":[_('Petrol'), _('Diesel'), _('Electric')],
+				  "size":[_('Mid-size')], "driving_cycle":"WLTC",
 								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
 								"mileage-slider":"12 000"},
 								"background params": {"country":country, "petrol technology":"petrol", "diesel technology":"diesel",
