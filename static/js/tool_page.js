@@ -902,6 +902,7 @@ function generate_driving_cycle_graph(driving_cycle){
 
         });
  };
+ 
  /**
  * Create the map
  */
