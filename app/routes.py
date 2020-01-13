@@ -25,15 +25,21 @@ def start():
     """Return start page."""
     return render_template('start.html')
 
-@app.route('/tool')
+@app.route('/tool', methods=['GET', 'POST'])
 def tool_page():
     """Return tool page"""
+
+    if request.method == "POST":
+        config = {"config":"true", "data":request.args.get("config")}
+    else:
+        config = {"config":"false"}
+
     powertrains = [_("Petrol"), _('Diesel'), _('Natural gas'), _('Electric'), _('H2 Fuel cell'), _('Hybrid-petrol'), _('(Plugin) Hybrid-petrol')]
     sizes = [_("Minicompact"), _("Subcompact"), _("Compact"), _("Mid-size"), _("Large"), _("SUV"), _("Van")]
     years = [i for i in range(2015, 2051)]
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
                       'CADC Motorway 130','CADC','NEDC']
-    return render_template('tool.html', powertrains=powertrains, sizes=sizes, years=years, driving_cycles=driving_cycles)
+    return render_template('tool.html', powertrains=powertrains, sizes=sizes, years=years, driving_cycles=driving_cycles, config=config)
 
 @app.route('/search_car_model/<search_item>')
 def search_car_model(search_item):

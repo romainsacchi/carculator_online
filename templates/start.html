@@ -117,7 +117,7 @@
 									</td>
 									<td  style="border-top:0;">
 										<div style="text-align:center;">
-											<button class="online-button" onclick="window.open('/start', '_blank')">{{_("I'd like to see what's behind.")}}</button>
+											<button class="online-button" onclick="send_config_file()">{{_("I'd like to see what's behind.")}}</button>
 										</div>
 
 									</td>
@@ -309,6 +309,28 @@
 						},
 
 					});
+			};
+
+			function send_config_file(){
+
+				var country = $("#country").html();
+				var data = {"year":["2020","2035", "2050"], "type":[i18n('petrol'), i18n('diesel'), i18n('electric')],
+								"size":[i18n('medium')], "driving_cycle":"WLTC",
+								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
+								"mileage-slider":"12 000"},
+								"background params": {"country":country_code, "petrol technology":"petrol", "diesel technology":"diesel",
+								"battery technology":"NMC", "battery origin":"CN"}};
+
+				$.when($.ajax({
+                url: "/tool/",
+                type: 'POST',
+                data:JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json',,
+                error: function(xhr, status, error){console.log(error)}})
+            	)
+			
+
 			};
 		</script>
   </body>
