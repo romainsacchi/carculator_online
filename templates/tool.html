@@ -15,34 +15,34 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{{_('Carculator : Configuration')}}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/icon" href="static/images/logo_icon.ico"/>
+    <link rel="shortcut icon" type="image/icon" href="/static/images/logo_icon.ico"/>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <!-- Line icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
     <!-- Bootstrap -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <!-- Slick slider -->
-    <link href="static/css/slick.css" rel="stylesheet">
+    <link href="/static/css/slick.css" rel="stylesheet">
     <!-- Gallery Lightbox -->
-    <link href="static/css/magnific-popup.css" rel="stylesheet">
+    <link href="/static/css/magnific-popup.css" rel="stylesheet">
     <!-- Theme color -->
-    <link id="switcher" href="static/css/theme-color/default-theme.css" rel="stylesheet">
+    <link id="switcher" href="/static/css/theme-color/default-theme.css" rel="stylesheet">
 	  <!-- Source Code pro font -->
 	  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <!-- Main Style -->
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 
 	  <!-- NVD3 Style -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css" rel="stylesheet">
 	  <!-- World map Style -->
-    <link href="static/css/world_map_style.css" rel="stylesheet">
+    <link href="/static/css/world_map_style.css" rel="stylesheet">
 	<!-- NoUISlider -->
 	  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.css" rel="stylesheet">
 	<!-- Animate.css -->
 	  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 	    <!-- Tool page Style -->
-    <link href="static/css/tool_style.css" rel="stylesheet">
+    <link href="/static/css/tool_style.css" rel="stylesheet">
 
 
     <!-- Fonts -->
@@ -1159,13 +1159,13 @@
 
   	<!-- Tool page js -->
 	<!--<script type="text/javascript" src="static/js/custom.js"></script>-->
-	<script type="text/javascript" src="static/js/tool_page.js"></script>
-  <script type="text/javascript" src="static/js/i18n.js"></script>
-  <script type="text/javascript" src="static/js/FileSaver.js"></script>
+	<script type="text/javascript" src="/static/js/tool_page.js"></script>
+  <script type="text/javascript" src="/static/js/i18n.js"></script>
+  <script type="text/javascript" src="/static/js/FileSaver.js"></script>
 
   <script type="text/javascript">
 
-			var config = {{config|safe}};
+			var config = {{ config|safe }};
 			console.log(config);
 			if (config["config"] != "false){
 				fill_in_from_config_file(config)
