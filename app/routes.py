@@ -5,9 +5,9 @@ from flask import render_template, jsonify, request, make_response, session, red
 from .email_support import email_out
 import numpy as np
 import os
-#from rq import Queue
-#from rq.job import Job, NoSuchJobError
-#from .worker import conn
+from rq import Queue
+from rq.job import Job, NoSuchJobError
+from .worker import conn
 from .calculation import Calculation
 from flask_babel import _
 
@@ -107,10 +107,10 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json(), session['language'])
     # Create a connection to the Redis server
-    #q = Queue(connection=conn)
-    #job = q.enqueue_call(
-    #    func=app.calc.process_results, args=(d, session['language']), result_ttl=3600
-    #)
+    q = Queue(connection=conn)
+    job = q.enqueue_call(
+        func=app.calc.process_results, args=(d, session['language']), result_ttl=3600
+    )
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
