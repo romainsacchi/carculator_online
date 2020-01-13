@@ -47,7 +47,12 @@ def tool_page(country):
     years = [i for i in range(2015, 2051)]
     driving_cycles = ['WLTC','WLTC 3.1','WLTC 3.2','WLTC 3.3','WLTC 3.4','CADC Urban','CADC Road','CADC Motorway',
                       'CADC Motorway 130','CADC','NEDC']
-    return render_template('tool.html', powertrains=powertrains, sizes=sizes, years=years, driving_cycles=driving_cycles, config=config)
+    return render_template('tool.html',
+                           powertrains=powertrains,
+                           sizes=sizes,
+                           years=years,
+                           driving_cycles=driving_cycles,
+                           config=jsonify(config))
 
 @app.route('/search_car_model/<search_item>')
 def search_car_model(search_item):
