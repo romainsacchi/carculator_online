@@ -1500,7 +1500,6 @@ function collect_configuration(){
 
 function get_results(){
     var data = collect_configuration();
-    console.log(data);
     if (data == null){
         console.log('data null');
         return;
@@ -1908,17 +1907,10 @@ holder.ondragend = function() {
     this.className = '';
     return false;
 };
-holder.ondrop = function(e) {
-    this.className = '';
-    e.preventDefault();
 
-    var file = e.dataTransfer.files[0],
-        reader = new FileReader();
-    reader.onload = function(event) {
-        var data = JSON.parse(reader.result);
+function fill_in_from_config_file(data){
 
-
-        // Display first section
+    // Display first section
         $('#label_car').trigger('click');
 
         $("#years_list").empty();
@@ -2028,10 +2020,20 @@ holder.ondrop = function(e) {
         // Battery origin
         var id = data['background params']['battery origin']
         $(":radio[value='"+id+"']").attr("checked", true);
+
+};
+holder.ondrop = function(e) {
+    this.className = '';
+    e.preventDefault();
+
+    var file = e.dataTransfer.files[0],
+        reader = new FileReader();
+    reader.onload = function(event) {
+        var data = JSON.parse(reader.result);
+        fill_in_from_config_file(data);
     };
 
     reader.readAsText(file);
-
     return false;
 };
 
