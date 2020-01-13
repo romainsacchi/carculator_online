@@ -324,7 +324,7 @@
 				$.ajax({
                 url: "/tool",
                 type: 'POST',
-                data:JSON.stringify("test":"two"),
+                data:JSON.stringify({"test":"two"}),
                 contentType: "application/json",
                 dataType: 'json',
                 error: function(xhr, status, error){console.log(error)}})
