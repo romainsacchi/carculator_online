@@ -1323,6 +1323,7 @@ button:focus {
 	float: left;
 	width: 100%;
 	z-index: 100;
+	background-color:white;
 }
 
 .mu-footer-area{
