@@ -1,7 +1,7 @@
 """Flask App Project."""
 
 from app import app
-from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json, send_file, Response
+from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json
 from .email_support import email_out
 import numpy as np
 import os
