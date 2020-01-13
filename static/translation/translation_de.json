@@ -50,6 +50,20 @@
       "terrestrial ecotoxicity":"Terrestrische Toxizität [kg 1,4-DC.-Äq.]",
       "urban land occupation":"Flächennutzung in städtischen Gebieten [m2/Jahr]",
       "water depletion":"Erschöpfung der Süßwasservorräte [m3]",
-      "human noise":"Geräuschemission [Person-Pascal / Sekunde]"
+      "human noise":"Geräuschemission [Person-Pascal / Sekunde]",
+      "petrol": "Benzin",
+      "diesel": "Diesel",
+      "natural_gas": "Erdgas",
+      "electric": "Elektrisch",
+      "fuel_cell": "H2 Brennstoffzelle",
+      "hybrid_petrol": "Hybrid-Benzin",
+      "plugin_hybrid_petrol": "(Plugin) Hybrid-Benzin",
+      "mini": "Kleinstwagen",
+      "small": "Kleinwagen",
+      "lower_medium": "Kompaktklasse",
+      "medium": "Mittelklasse",
+      "large": "Oberklasse",
+      "SUV": "Geländewagen",
+      "Van": "Van"
 }
 }

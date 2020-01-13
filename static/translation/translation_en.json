@@ -50,6 +50,20 @@
       "terrestrial ecotoxicity":"Terrestrial toxicity [kg 1,4-DC.-eq.]",
       "urban land occupation":"Land occupation in an urban environment [m2 / year]",
       "water depletion":"Depletion of fresh water reserves [m3]",
-      "human noise":"Noise emissions [Person-Pascal/second]"
+      "human noise":"Noise emissions [Person-Pascal/second]",
+      "petrol": "Petrol",
+      "diesel": "Diesel",
+      "natural_gas": "Natural gas",
+      "electric": "Electric",
+      "fuel_cell": "H2 Fuel cell",
+      "hybrid_petrol": "Hybrid-petrol",
+      "plugin_hybrid_petrol": "(Plugin) Hybrid-petrol",
+      "mini": "Minicompact",
+      "small": "Subcompact",
+      "lower_medium": "Compact",
+      "medium": "Mid-size",
+      "large": "Large",
+      "SUV": "SUV",
+      "Van": "Van"
   }
 }

@@ -50,6 +50,20 @@
       "terrestrial ecotoxicity":"Toxicité des milieux terrestres [kg 1,4-DC.-eq.]",
       "urban land occupation":"Occupation de terre en milieu urbain [m2/an]",
       "water depletion":"Epuisement des réserves d'eau douce [m3]",
-      "human noise":"Emissions de bruit [Person-Pascal/seconde]"
+      "human noise":"Emissions de bruit [Person-Pascal/seconde]",
+      "petrol": "Essence",
+      "diesel": "Diesel",
+      "natural_gas": "GPL",
+      "electric": "Electrique",
+      "fuel_cell": "H2 Pile à combustible",
+      "hybrid_petrol": "Hybride-essence",
+      "plugin_hybrid_petrol": "Hybride-essence rechargeable",
+      "mini": "Mini-citadine",
+      "small": "Citadine",
+      "lower_medium": "Berline compacte",
+      "medium": "Berline familiale",
+      "large": "Grande routière",
+      "SUV": "SUV",
+      "Van": "Van"
   }
 }
