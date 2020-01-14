@@ -74,3 +74,5 @@ XlsxWriter==1.2.1
 gunicorn
 flask-mail
 flask-babel
+flask-sqlalchemy
+flask-migrate

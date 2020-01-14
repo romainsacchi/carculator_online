@@ -1,6 +1,8 @@
 from flask import Flask, session, request
 from flask_mail import Mail
 from flask_babel import Babel, _
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import logging
 from logging.handlers import SMTPHandler
 import os
@@ -19,6 +21,8 @@ app = Flask(__name__,
 # Setup flask-babel
 babel = Babel(app)
 
+
+
 is_prod = os.environ.get('IS_HEROKU', None)
 
 if is_prod:
@@ -36,10 +40,16 @@ if is_prod:
                                 'fr': 'French',
                                 'de': 'German',
                             }
+    app.config['MYSQL_DB'] = os.environ.get('CLEARDB_DATABASE_URL', None)
+
 
 else:
     # Attach configuration file
     app.config.from_pyfile('..\instance\config.py')
+
+# Initiate database
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
@@ -73,7 +83,7 @@ def get_locale():
 # Setup flask-mail
 mail = Mail(app)
 from app import email_support
-from app import routes
+from app import routes, models
 
 
 if __name__ == '__main__':
