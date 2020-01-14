@@ -53,7 +53,7 @@ def tool_page(country):
                            sizes=sizes,
                            years=years,
                            driving_cycles=driving_cycles,
-                           config=jsonify(config))
+                           config=config)
 
 @app.route('/search_car_model/<search_item>')
 def search_car_model(search_item):
