@@ -35,7 +35,7 @@ def tool_page(country):
     else:
         response = app.calc.electricity_mix.loc[dict(country=country, value=0)].interp(year=[2020, 2035, 2050]).values
         response = np.true_divide(response.T, response.sum(axis=1)).T
-        response = np.round(response, 2)
+        response = np.round(response, 2).tolist()
         config = {"year":["2020","2035", "2050"],
                   "type":[_('Petrol'), _('Diesel'), _('Electric')],
 				  "size":[_('Mid-size')], "driving_cycle":"WLTC",
