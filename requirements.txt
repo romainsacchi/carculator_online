@@ -76,3 +76,4 @@ flask-mail
 flask-babel
 flask-sqlalchemy
 flask-migrate
+mysqlclient
