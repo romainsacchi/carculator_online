@@ -3,6 +3,7 @@ from flask_mail import Mail
 from flask_babel import Babel, _
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 import logging
 from logging.handlers import SMTPHandler
 import os
@@ -22,6 +23,9 @@ app = Flask(__name__,
 # Setup flask-babel
 babel = Babel(app)
 
+# Instantiate flask-login
+login = LoginManager(app)
+login.login_view = 'login'
 
 
 is_prod = os.environ.get('IS_HEROKU', None)

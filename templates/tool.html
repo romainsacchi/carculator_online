@@ -83,6 +83,21 @@
 
 
 		    </div>
+			   <h1>Hi, {{ current_user.username }}!</h1>
+			  <div>
+			{% if current_user.is_anonymous %}
+				<button class="online-button"
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;"
+					 onclick="window.open(" + "{{ url_for('login') }}" + ", '_blank')">{{_('Calculate')}}</button>
+
+			{% else %}
+				<button class="online-button"
+					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;"
+					 onclick="window.open(" + "{{ url_for('logout') }}" + ", '_blank')">{{_('Calculate')}}</button>
+
+			{% endif %}
+
+		</div>
 
 			  <button class="online-button"
 					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;" onclick="get_results()">{{_('Calculate')}}</button>

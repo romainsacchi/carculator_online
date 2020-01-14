@@ -91,61 +91,39 @@
 					<div class="mu-counter-area">
 						<div class="row">
 
-							<table class="table table-border-0" style="margin: 0 auto !important;float:none;">
-								<thead>
-								<tr>
-									<td style="width:400px;border-top:0;text-align:center;">
-										<span class="mu-install-icon-box">
-										<i class="icon-globe" style="color:white;font-size:50px;margin: 0 auto !important;"></i>
-										</span>
-										<h2 class="mu-heading-title">{{_('Simple')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Directly see the results of a comparison between a gasoline, a diesel and
-											an electricity-run vehicle, for  ") }}</h4><h4 id="country" style="color:white;display:inline"></h4>
-
-									</td>
-									<td style="width:400px;border-top:0;text-align:center;">
-										<span class="mu-install-icon-box">
-										<i class="icon-globe" style="color:white;font-size:50px;"></i>
-										</span>
-										<h2 class="mu-heading-title">{{_('Intermediate')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Set the parameters for a comparison between a gasoline, a diesel and
-											an electricity-run vehicle, for  ") }}</h4><h4 id="country_2" style="color:white;display:inline"></h4>
-
-
-									</td>
-									<td  style="width:400px;border-top:0;text-align:center;">
-										<span class="mu-install-icon-box">
-										<i class="icon-globe" style="color:white;font-size:50px;"></i>
-										</span>
-										<h2 class="mu-heading-title">{{_('Advanced')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Build your own comparative scenario.") }}</h4>
-
-
-
-									</td>
-								</tr>
-								<tr>
-									<td  style="border-top:0;">
-										<div style="text-align:center;">
-											<button class="online-button" onclick="get_results()">{{_('Yes, keep it simple!')}}</button>
-										</div>
-
-									</td>
-									<td  style="border-top:0;">
-										<div style="text-align:center;">
-											<button class="online-button" onclick="window.open('/tool/' + country_code, '_blank')">{{_("I'd like to see what's behind.")}}</button>
-										</div>
-
-									</td>
-									<td  style="border-top:0;">
-										<div style="text-align:center;">
-											<button class="online-button" onclick="window.open('/tool', '_blank')">{{_("Let's build it from scratch.")}}</button>
-										</div>
-
-									</td>
-								</tr>
-								</thead>
-							</table>
+							<h1>Register</h1>
+								<form action="" method="post">
+									{{ form.hidden_tag() }}
+									<p>
+										{{ form.username.label }}<br>
+										{{ form.username(size=32) }}<br>
+										{% for error in form.username.errors %}
+										<span style="color: red;">[{{ error }}]</span>
+										{% endfor %}
+									</p>
+									<p>
+										{{ form.email.label }}<br>
+										{{ form.email(size=64) }}<br>
+										{% for error in form.email.errors %}
+										<span style="color: red;">[{{ error }}]</span>
+										{% endfor %}
+									</p>
+									<p>
+										{{ form.password.label }}<br>
+										{{ form.password(size=32) }}<br>
+										{% for error in form.password.errors %}
+										<span style="color: red;">[{{ error }}]</span>
+										{% endfor %}
+									</p>
+									<p>
+										{{ form.password2.label }}<br>
+										{{ form.password2(size=32) }}<br>
+										{% for error in form.password2.errors %}
+										<span style="color: red;">[{{ error }}]</span>
+										{% endfor %}
+									</p>
+									<p>{{ form.submit() }}</p>
+								</form>
 
 
 						</div>

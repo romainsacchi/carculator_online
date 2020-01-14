@@ -1,19 +1,60 @@
 """Flask App Project."""
 
 from app import app
-from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json
+from app import db
+from flask import render_template, jsonify, request, make_response, session, redirect, url_for, json, flash
 from .email_support import email_out
 import numpy as np
 import os
-#from rq import Queue
-#from rq.job import Job, NoSuchJobError
-#from .worker import conn
+from rq import Queue
+from rq.job import Job, NoSuchJobError
+from .worker import conn
 from .calculation import Calculation
 from flask_babel import _
+from flask_login import current_user, login_user, logout_user, login_required
+from app.models import User
+from app.forms import LoginForm, RegistrationForm
+
 
 
 app.calc = Calculation()
 app.lci_to_bw = ""
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+    return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
@@ -21,6 +62,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/start')
+
 def start():
     """Return start page."""
     return render_template('start.html')
@@ -133,7 +175,7 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json(), session['language'])
     # Create a connection to the Redis server
-    #q = Queue(connection=conn)
+    q = Queue(connection=conn)
     job = q.enqueue_call(
         func=app.calc.process_results, args=(d, session['language']), result_ttl=3600
     )
@@ -143,10 +185,10 @@ def get_results():
 @app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
-    #job = Job.fetch(job_key, connection=conn)
-    #app.lci_to_bw = job.result[1]
-    #if job.is_finished:
-    #    return render_template('result.html', data = job.result[0])
+    job = Job.fetch(job_key, connection=conn)
+    app.lci_to_bw = job.result[1]
+    if job.is_finished:
+        return render_template('result.html', data = job.result[0])
 
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):
@@ -193,6 +235,7 @@ def get_language():
     return make_response(data, 200)
 
 @app.route("/get_inventory_excel_for_bw")
+@login_required
 def get_inventory_excel_for_bw():
     resp = make_response(app.lci_to_bw)
     resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
