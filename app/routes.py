@@ -33,15 +33,22 @@ def tool_page(country):
     if country is None:
         config = {"config": "false"}
     else:
+        response = app.calc.electricity_mix.loc[dict(country=country, value=0)].interp(year=[2020, 2035, 2050]).values
+        response = np.true_divide(response.T, response.sum(axis=1)).T
+        response = np.round(response, 2)
         config = {"year":["2020","2035", "2050"],
                   "type":[_('Petrol'), _('Diesel'), _('Electric')],
 				  "size":[_('Mid-size')], "driving_cycle":"WLTC",
 								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
 								"mileage-slider":"12 000"},
-								"background params": {"country":country, "petrol technology":"petrol", "diesel technology":"diesel",
-								"battery technology":"NMC", "battery origin":"CN"}}
+								"background params": {"country":country,
+                                                      "petrol technology":"petrol",
+                                                      "diesel technology":"diesel",
+								                        "battery technology":"NMC",
+                                                      "battery origin":"CN",
+                                                      "custom electricity mix":response}
+                  }
 
-    print(config)
 
     powertrains = [_("Petrol"), _('Diesel'), _('Natural gas'), _('Electric'), _('H2 Fuel cell'), _('Hybrid-petrol'), _('(Plugin) Hybrid-petrol')]
     sizes = [_("Minicompact"), _("Subcompact"), _("Compact"), _("Mid-size"), _("Large"), _("SUV"), _("Van")]
