@@ -12,6 +12,7 @@ from .calculation import Calculation
 ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online");
 TEMPLATES_DIR = os.path.join(ROOT, "templates")
 STATIC_DIR = os.path.join(ROOT, "static")
+MIGRATION_DIR = os.path.join(ROOT, "app/migrations")
 
 # Instantiate Flask app
 app = Flask(__name__,
@@ -50,7 +51,8 @@ else:
 
 # Initiate database
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
+migrate = Migrate(app, db, directory = MIGRATION_DIR)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
