@@ -5,9 +5,9 @@ from flask import render_template, jsonify, request, make_response, session, red
 from .email_support import email_out
 import numpy as np
 import os
-from rq import Queue
-from rq.job import Job, NoSuchJobError
-from .worker import conn
+#from rq import Queue
+#from rq.job import Job, NoSuchJobError
+#from .worker import conn
 from .calculation import Calculation
 from flask_babel import _
 
@@ -133,7 +133,7 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json(), session['language'])
     # Create a connection to the Redis server
-    q = Queue(connection=conn)
+    #q = Queue(connection=conn)
     job = q.enqueue_call(
         func=app.calc.process_results, args=(d, session['language']), result_ttl=3600
     )
@@ -143,10 +143,10 @@ def get_results():
 @app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
-    job = Job.fetch(job_key, connection=conn)
-    app.lci_to_bw = job.result[1]
-    if job.is_finished:
-        return render_template('result.html', data = job.result[0])
+    #job = Job.fetch(job_key, connection=conn)
+    #app.lci_to_bw = job.result[1]
+    #if job.is_finished:
+    #    return render_template('result.html', data = job.result[0])
 
 @app.route('/check_status/<job_key>')
 def get_job_status(job_key):

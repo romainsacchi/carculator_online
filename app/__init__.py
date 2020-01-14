@@ -48,6 +48,8 @@ if is_prod:
 else:
     # Attach configuration file
     app.config.from_pyfile('..\instance\config.py')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bee698db94fa6e:02c34128@us-cdbr-iron-east-05.cleardb.net/heroku_9bb2a3349ea4243'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initiate database
 db = SQLAlchemy(app)
