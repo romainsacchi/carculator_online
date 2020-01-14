@@ -852,7 +852,7 @@ function generate_driving_cycle_graph(driving_cycle){
         type:'GET',
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
-        url: 'get_driving_cycle/'+driving_cycle,
+        url: '/get_driving_cycle/'+driving_cycle,
         error: function(xhr,errmsg,err){
             alert('error; '+ err);
             },
@@ -1197,17 +1197,17 @@ var slider_passenger = document.getElementById('passenger-slider');
 slider_passenger.noUiSlider.on('update', function (values, handle) {
     var val = parseFloat(values);
     var d = {
-        1.0 : "static/images/icons/one_passenger_icon.png",
-        1.5: "static/images/icons/one_half_passenger_icon.png",
-        2.0: "static/images/icons/two_passenger_icon.png",
-        2.5: "static/images/icons/two_half_passenger_icon.png",
-        3.0: "static/images/icons/three_passenger_icon.png",
-        3.5: "static/images/icons/three_half_passenger_icon.png",
-        4.0: "static/images/icons/four_passenger_icon.png",
-        4.5: "static/images/icons/four_half_passenger_icon.png",
-        5.0: "static/images/icons/five_passenger_icon.png",
-        5.5: "static/images/icons/five_half_passenger_icon.png",
-        6.0: "static/images/icons/six_passenger_icon.png"
+        1.0 : "/static/images/icons/one_passenger_icon.png",
+        1.5: "/static/images/icons/one_half_passenger_icon.png",
+        2.0: "/static/images/icons/two_passenger_icon.png",
+        2.5: "/static/images/icons/two_half_passenger_icon.png",
+        3.0: "/static/images/icons/three_passenger_icon.png",
+        3.5: "/static/images/icons/three_half_passenger_icon.png",
+        4.0: "/static/images/icons/four_passenger_icon.png",
+        4.5: "/static/images/icons/four_half_passenger_icon.png",
+        5.0: "/static/images/icons/five_passenger_icon.png",
+        5.5: "/static/images/icons/five_half_passenger_icon.png",
+        6.0: "/static/images/icons/six_passenger_icon.png"
 
     };
     $("#image_passenger").attr("src",d[val]);
