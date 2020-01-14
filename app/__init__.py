@@ -40,7 +40,8 @@ if is_prod:
                                 'fr': 'French',
                                 'de': 'German',
                             }
-    app.config['MYSQL_DB'] = os.environ.get('CLEARDB_DATABASE_URL', None)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 else:
