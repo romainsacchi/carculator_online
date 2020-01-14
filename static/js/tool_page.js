@@ -1974,7 +1974,7 @@ function fill_in_from_config_file(data){
             var i = 0;
             var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
             $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
-                this.value = parseInt(Math.ceil(Number(mix[year][i]*100)))
+                this.value = parseInt(Math.ceil(Number(mix[year][i] / sum_mix *100)))
                 i++
             })
         }
