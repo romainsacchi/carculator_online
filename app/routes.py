@@ -14,6 +14,7 @@ from flask_babel import _
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from app.forms import LoginForm, RegistrationForm
+from werkzeug.urls import url_parse
 
 
 
@@ -26,7 +27,7 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, organisation=form.organisation.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

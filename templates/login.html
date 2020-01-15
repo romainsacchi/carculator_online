@@ -60,22 +60,7 @@
 		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;"></a>
 
 		</div>
-		 <h1>Hi, {{ current_user.username }}!</h1>
 
-		<div>
-			{% if current_user.is_anonymous %}
-				<button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;"
-					 onclick="window.open(" + "{{ url_for('login') }}" + ", '_blank')">{{_('Calculate')}}</button>
-
-			{% else %}
-				<button class="online-button"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;"
-					 onclick="window.open(" + "{{ url_for('logout') }}" + ", '_blank')">{{_('Calculate')}}</button>
-
-			{% endif %}
-
-		</div>
 	</header>
 	<!-- End Header -->
 
@@ -125,7 +110,7 @@
 
 
 	<!-- Start footer -->
-	<footer id="mu-footer" role="contentinfo">
+	<footer id="mu-footer" role="contentinfo" style="position:fixed;">
 			<div class="container" style="width:100%;background-color:white;">
 				<div class="row" style="width:100%;margin-top:25px;">
 				  <div class="column" style="width:33.33%;float:left;text-align:center;">
@@ -160,137 +145,5 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-
-
-		<script>
-
-		//  Load the JSON File
-		var country_code = "";
-		$.when($.ajax({
-					url: "/get_language",
-					dataType: 'json',
-					type: 'GET',
-					success : function(data) {
-					   var json = data
-						return json
-						},
-					error: function(xhr, status, error){console.log(error)}})
-				).done(function(json){
-					i18n.translator.add(json);
-				});
-
-			$.get("https://api.ipdata.co/?api-key=test", function (response) {
-			var str = String(JSON.stringify(response["country_name"], null, 4));
-			str = str.replace(/^"|"$/g, '');
-				$("#country").html(str);
-				$("#country_2").html(str);
-				country_code = String(JSON.stringify(response["country_code"], null, 4))
-				country_code = country_code.replace(/^"|"$/g, '');
-			}, "jsonp");
-
-			function get_results(){
-				var country = $("#country").html();
-				var data = {"year":["2020","2035", "2050"], "type":[i18n('petrol'), i18n('diesel'), i18n('electric')],
-								"size":[i18n('medium')], "driving_cycle":"WLTC",
-								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
-								"mileage-slider":"12 000"},
-								"background params": {"country":country_code, "petrol technology":"petrol", "diesel technology":"diesel",
-								"battery technology":"NMC", "battery origin":"CN"}};
-
-				var str = i18n('job_queued')
-				$.notify({
-					icon: '	glyphicon glyphicon-time',
-					message: str
-					}
-					,
-					{
-						placement: {
-							from: "top",
-							align: "center"
-						},
-						type:'success'
-					},
-					{
-						animate: {
-							enter: 'animated bounceInDown',
-							exit: 'animated bounceOutUp'
-						},
-
-					});
-
-				$.when($.ajax({
-							url: "/get_results/",
-							type: 'POST',
-							data:JSON.stringify(data),
-							contentType: "application/json",
-							dataType: 'json',
-							success : function(json) {
-							   var response = json
-								return response
-								},
-							error: function(xhr, status, error){console.log(error)}})
-						).then(function (response) {
-					var job_id = response['job id'];
-					// Check task status every 3 seconds
-					const interval = setInterval(function() {
-						$.ajax('/check_status/'+job_id).then(function (status) {
-							return status;
-							}).then(function (status) {
-								if (status['job status'] == 'finished'){
-									var redirectWindow = window.open('/display_result/'+job_id, '_blank');
-									redirectWindow.location;
-									clearInterval(interval);
-									return;
-								}
-								if (status['job status'] == 'job not found'){
-								var str = i18n('job_lost')
-									$.notify({
-										icon: '	glyphicon glyphicon-warning',
-										message: str
-										},
-										{
-											placement: {
-												from: "top",
-												align: "center"
-											},
-											type:'danger'
-										},
-										{
-											animate: {
-												enter: 'animated bounceInDown',
-												exit: 'animated bounceOutUp'
-											},
-
-										});
-
-									return;
-								}
-
-								})
-					 }, 3000);
-				});
-
-				var str = i18n('popup_blocker')
-				$.notify({
-					icon: '	glyphicon glyphicon-time',
-					message: str
-					}
-					,
-					{
-						placement: {
-							from: "top",
-							align: "center"
-						},
-						type:'warning'
-					},
-					{
-						animate: {
-							enter: 'animated bounceInDown',
-							exit: 'animated bounceOutUp'
-						},
-
-					});
-			};
-		</script>
   </body>
 </html>
