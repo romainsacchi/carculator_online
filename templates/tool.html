@@ -71,13 +71,7 @@
 
 			  <div class="container" style="width:100%;text-align:center;">
 					<!-- Image Logo -->
-					  <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;float:left;"></a>
-
-					  <button class="online-button"
-						  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;" onclick="get_results()">{{_('Calculate')}}</button>
-					 <button class="online-button" onclick="save_configuration()"
-						  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{_('Share configuration')}}</button>
-				  		<div id="holder"><p align="center" style="color:white;margin:auto;display:inline-block;">{{_("Drop configuration file")}}</p></div>
+					  <a class="navbar-brand" href="#"><img src="/static/images/mediumsmall.png" style="height:40px;float:left;"></a>
 
 					{% if current_user.is_anonymous %}
 						<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
@@ -92,6 +86,14 @@
 					<h4 style="color:white;display:inline-block;float:right;margin-right:10px;"> {{ current_user.username }}</h4>
 					<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:5px;"></i>
 					{% endif %}
+
+					  <button class="online-button"
+						  style="float:right;margin-right:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;" onclick="get_results()">{{_('Calculate')}}</button>
+					 <button class="online-button" onclick="save_configuration()"
+						  style="float:right;margin-right:5px;:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{_('Share configuration')}}</button>
+				  		<div id="holder"><p align="center" style="color:white;margin:auto;display:inline-block;">{{_("Drop configuration file")}}</p></div>
+
+
 
 			</div>
 
