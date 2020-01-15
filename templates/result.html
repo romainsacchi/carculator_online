@@ -77,45 +77,37 @@
 	<header id="mu-header" class="" role="banner">
 		<div class="container" style="width:100%;">
 			<nav class="navbar navbar-default mu-navbar">
-		  <div class="container-fluid" >
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
 
-		      <!-- Image Logo -->
-		      <a class="navbar-brand" href="#"><img src="\static\images\mediumsmall.png" style="height:40px;"></a>
-		    </div>
-			   <h1>Hi, {{ current_user.username }}!</h1>
-			  <div>
+                <div class="container" style="width:100%;text-align:center;">
+					<!-- Image Logo -->
+					  <a class="navbar-brand" href="#"><img src="/static/images/mediumsmall.png" style="height:40px;float:left;"></a>
+
 					{% if current_user.is_anonymous %}
-				<form action="{{ url_for('login') }}">
-					<button class="online-button"
-							style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Login') }}</button>
-				  </form>
+						<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
+							<button class="online-button"
+									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;">{{ _('Login') }}</button>
+						  </form>
+					{% else %}
+						<form action="{{ url_for('logout') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
+						<button class="online-button"
+								style="margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;float:right;">{{ _('Logout') }}</button>
+					  </form>
+					<h4 style="color:white;display:inline-block;float:right;margin-right:10px;font-family:inherit;font-weight:500;line-height:1.1;"> {{ current_user.username }}</h4>
+					<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:5px;margin-left:10px;"></i>
+					{% endif %}
 
-			{% else %}
-				<form action="{{ url_for('logout') }}">
-				<button class="online-button"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Logout') }}</button>
-			  </form>
+					  <form action="/get_inventory_excel_for_bw">
+                        <button class="online-button"
+                                style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
+                      </form>
+                          <button class="online-button" onclick="export_simapro_inventories()"
+                                style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Export Simapro-compatible inventories') }}</button>
+                         <button class="online-button" onclick="share_results()"
+                              style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Share results') }}</button>
 
-			{% endif %}
+			</div>
 
-				</div>
-			  <form action="/get_inventory_excel_for_bw">
-				<button class="online-button"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
-			  </form>
-				  <button class="online-button" onclick="export_simapro_inventories()"
-						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Simapro-compatible inventories') }}</button>
-				 <button class="online-button" onclick="share_results()"
-					  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Share results') }}</button>
+
 
 		  </div><!-- /.container-fluid -->
 		</nav>
