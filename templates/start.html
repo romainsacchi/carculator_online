@@ -57,12 +57,14 @@
 	<header id="mu-header" class="" role="banner">
 		<div class="container" style="width:100%;">
 			<!-- Image Logo -->
-		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;"></a>
+		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;float:left;"></a>
 
-		</div>
-		 <h1>Hi, {{ current_user.username }}!</h1>
+			{% if not current_user.is_anonymous %}
+			<span class="mu-install-icon-box">
+			 	<i class="icon-user" style="color:white;font-size:20px;margin: 0 auto !important;"></i> <h4 style="color:white;"> {{ current_user.username }}!</h4>
+			</span>
+			{% endif %}
 
-		<div>
 			{% if current_user.is_anonymous %}
 				<form action="{{ url_for('login') }}">
 					<button class="online-button"
@@ -78,6 +80,8 @@
 			{% endif %}
 
 		</div>
+
+
 	</header>
 	<!-- End Header -->
 
