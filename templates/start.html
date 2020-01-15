@@ -55,13 +55,13 @@
 
   	<!-- Start Header -->
 	<header id="mu-header" class="" role="banner">
-		<div class="container" style="width:100%;">
+		<div class="container" style="width:100%;display:flex; flex-direction: row; justify-content: center; align-items: center">
 			<!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;float:left;"></a>
 
 			{% if not current_user.is_anonymous %}
 			<span class="mu-install-icon-box">
-			 	<i class="icon-user" style="color:white;font-size:20px;margin: 0 auto !important;"></i> <h4 style="color:white;"> {{ current_user.username }}!</h4>
+			 	<i class="icon-user" style="color:white;font-size:20px;margin: 0 auto !important;"></i> <h4 style="color:white;"> {{ current_user.username }}</h4>
 			</span>
 			{% endif %}
 
