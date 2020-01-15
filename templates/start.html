@@ -59,11 +59,7 @@
 			<!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;float:left;"></a>
 
-			{% if not current_user.is_anonymous %}
 
-			 	<i class="icon-user" style="color:white;font-size:20px;float:right;"></i> <h4 style="color:white;display:inline-block;float:right;"> {{ current_user.username }}</h4>
-
-			{% endif %}
 
 			{% if current_user.is_anonymous %}
 				<form action="{{ url_for('login') }}" style="display:inline-block;">
@@ -76,8 +72,10 @@
 				<button class="online-button"
 						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;">{{ _('Logout') }}</button>
 			  </form>
+			<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;"></i> <h4 style="color:white;display:inline-block;float:right;"> {{ current_user.username }}</h4>
 
 			{% endif %}
+
 
 		</div>
 
