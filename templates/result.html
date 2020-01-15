@@ -94,16 +94,18 @@
 			   <h1>Hi, {{ current_user.username }}!</h1>
 			  <div>
 					{% if current_user.is_anonymous %}
-						<button class="online-button"
-							  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;"
-							 onclick="window.open(" + "{{ url_for('login') }}" + ", '_blank')">{{_('Calculate')}}</button>
+				<form action="{{ url_for('login') }}">
+					<button class="online-button"
+							style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Login') }}</button>
+				  </form>
 
-					{% else %}
-						<button class="online-button"
-							  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;"
-							 onclick="window.open(" + "{{ url_for('logout') }}" + ", '_blank')">{{_('Calculate')}}</button>
+			{% else %}
+				<form action="{{ url_for('logout') }}">
+				<button class="online-button"
+						style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Logout') }}</button>
+			  </form>
 
-					{% endif %}
+			{% endif %}
 
 				</div>
 			  <form action="/get_inventory_excel_for_bw">
