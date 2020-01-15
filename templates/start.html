@@ -58,26 +58,19 @@
 		<div class="container" style="width:100%;text-align:center;">
 			<!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;float:left;"></a>
-
-
-
 			{% if current_user.is_anonymous %}
 				<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
 					<button class="online-button"
 							style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;">{{ _('Login') }}</button>
 				  </form>
-
 			{% else %}
 				<form action="{{ url_for('logout') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
 				<button class="online-button"
 						style="margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;float:right;">{{ _('Logout') }}</button>
 			  </form>
 			<h4 style="color:white;display:inline-block;float:right;margin-right:10px;"> {{ current_user.username }}</h4>
-			<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:10px;"></i>
-
-
+			<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:5px;"></i>
 			{% endif %}
-
 
 		</div>
 
