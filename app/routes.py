@@ -74,8 +74,10 @@ def start():
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
-        url = request.referrer
-        session["url"] = url
+        if country is None:
+            session["url"] = url_for("tool_page")
+        else:
+            session["url"] = url_for("tool_page") + "/" + country
 
     if country is None:
         config = {"config": "false"}
