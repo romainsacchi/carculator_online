@@ -74,7 +74,7 @@ def start():
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
-        session["url"] = url_for('tool')
+        session["url"] = url_for('tool_page')
 
     if country is None:
         config = {"config": "false"}
