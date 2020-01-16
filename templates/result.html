@@ -83,7 +83,7 @@
 					  <a class="navbar-brand" href="#"><img src="/static/images/mediumsmall.png" style="height:40px;float:left;"></a>
 
 					{% if current_user.is_anonymous %}
-						<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin-top:5px;">
+						<form action="{{ url_for('login') }} + '?next=get_results'" style="display:inline-block;float:right;margin-top:5px;">
 							<button class="online-button"
 									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;">{{ _('Login') }}</button>
 						  </form>

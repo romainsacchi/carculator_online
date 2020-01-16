@@ -48,7 +48,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = session["url"]
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
@@ -63,15 +63,18 @@ def index():
     return render_template('index.html')
 
 @app.route('/start')
-
 def start():
     """Return start page."""
+    if not current_user.is_authenticated:
+        session["url"] = url_for('start')
     return render_template('start.html')
 
 @app.route('/tool', defaults={'country': None})
 @app.route('/tool/<country>')
 def tool_page(country):
     """Return tool page"""
+    if not current_user.is_authenticated:
+        session["url"] = url_for('tool')
 
     if country is None:
         config = {"config": "false"}
@@ -186,6 +189,9 @@ def get_results():
 @app.route('/display_result/<job_key>', methods=['GET'])
 def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
+    if not current_user.is_authenticated:
+        url = request.referrer
+        session["url"] = url
     job = Job.fetch(job_key, connection=conn)
     app.lci_to_bw = job.result[1]
     if job.is_finished:
