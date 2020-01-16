@@ -193,8 +193,7 @@ def get_results():
 def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
     if not current_user.is_authenticated:
-        url = request.referrer
-        session["url"] = url
+        session["url"] = "/display_result/" + job_key
     job = Job.fetch(job_key, connection=conn)
     app.lci_to_bw = job.result[1]
     if job.is_finished:
