@@ -16,8 +16,6 @@ from app.models import User
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 
-
-
 app.calc = Calculation()
 app.lci_to_bw = ""
 
@@ -30,10 +28,10 @@ def register():
         user = User(username=form.username.data,
                     first_name = form.first_name.data,
                     last_name = form.last_name.data,
+                    country = form.country,
                     email=form.email.data,
                     organisation=form.organisation.data,
                     newsletter=form.newsletter.data)
-        print(User.newsletter)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

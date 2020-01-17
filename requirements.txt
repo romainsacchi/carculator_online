@@ -80,3 +80,4 @@ mysqlclient
 flask-login
 flask-wtf
 WTForms
+pycountry

@@ -116,6 +116,11 @@
 										{% endfor %}
 									</p>
 									<p>
+										{{ form.country.label }}<br>
+										{{ form.country }}
+
+									</p>
+									<p>
 										{{ form.password.label }}<br>
 										{{ form.password(size=32) }}<br>
 										{% for error in form.password.errors %}
@@ -130,16 +135,16 @@
 										{% endfor %}
 									</p>
                                     <p>
-										{{ form.newsletter.label }}
+										{{ form.newsletter.label }}<br>
                                         {{ form.newsletter }}
                                     </p>
 									<p>
-										{{ form.agree.label }}
+										{{ form.agree.label }}<br>
                                         {{ form.agree }}
                                     </p>
 									<p>{{ form.submit() }}</p>
 								</form>
-							
+
 						</div>
 					</div>
 
