@@ -48,10 +48,6 @@ if is_prod:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
-    #app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
-    #app.config['CONNECT_TIMEOUT'] = 1000
-    #app.config['NET_WRITE_TIMEOUT'] = 1000
-    #app.config['WAIT_TIMEOUT'] = 300
 
 
 
@@ -61,10 +57,6 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bee698db94fa6e:02c34128@us-cdbr-iron-east-05.cleardb.net/heroku_9bb2a3349ea4243'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
-    #app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
-    #app.config['CONNECT_TIMEOUT'] = 1000
-    #app.config['NET_WRITE_TIMEOUT'] = 1000
-    #app.config['WAIT_TIMEOUT'] = 300
 
 # Initiate database
 db = SQLAlchemy(app)
@@ -81,9 +73,6 @@ mail_handler = SMTPHandler(
     credentials=auth, secure=secure)
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
-
-
-
 
 @babel.localeselector
 def get_locale():
