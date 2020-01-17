@@ -15,6 +15,7 @@ class RegistrationForm(FlaskForm):
     first_name = StringField('First name', validators=[DataRequired()])
     last_name = StringField('Last name', validators=[DataRequired()])
     choices = [(p.alpha_2, p.name) for p in pc.countries]
+    choices.sort(key=lambda tup: tup[1])
     country = SelectField("Country", choices = choices, validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     organisation = StringField('Company/Institution', validators=[DataRequired()])
