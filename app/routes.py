@@ -28,7 +28,7 @@ def register():
         user = User(username=form.username.data,
                     first_name = form.first_name.data,
                     last_name = form.last_name.data,
-                    country = form.country,
+                    country = form.country.data,
                     email=form.email.data,
                     organisation=form.organisation.data,
                     newsletter=form.newsletter.data)
