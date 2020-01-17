@@ -33,7 +33,7 @@ def register():
                     email=form.email.data,
                     organisation=form.organisation.data,
                     newsletter=form.newsletter.data)
-        print(User)
+        print(User.newsletter)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
