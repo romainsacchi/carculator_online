@@ -16,6 +16,10 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     organisation = StringField('Company/Institution', validators=[DataRequired()])
     newsletter = BooleanField("Subscribe to the newsletter?")
+    str = "I allow the support team of carculator to collect and store the submitted data." \
+          "The submitted data will not be transmitted to any third party, but used to generate statistics on the tool's audience." \
+            "At any time, I can ask the support team of carculator to consult the submitted data and/or delete it."
+    agree = BooleanField(str, validators=[DataRequired(), ])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
