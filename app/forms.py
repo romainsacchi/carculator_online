@@ -20,9 +20,9 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     organisation = StringField('Company/Institution', validators=[DataRequired()])
     newsletter = BooleanField("Subscribe to the newsletter?")
-    str = "I allow the support team of carculator to collect and store the submitted data." \
-          "My submitted data will not be transmitted to any third party, but solely be used to generate statistics on the tool's audience." \
-            "At any time, I can ask the support team of carculator to consult the data I submitted and/or delete it."
+    str = "I allow the support team of carculator to collect and store the submitted data. " \
+          "My submitted data will not be transmitted to any third party, but solely be used to generate statistics on the tool's audience. " \
+            "At any time, I can ask the support team of carculator to consult the data I submitted and request its deletion."
     agree = BooleanField(str, validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
