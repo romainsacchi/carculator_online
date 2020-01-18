@@ -6,9 +6,9 @@ from flask import render_template, jsonify, request, make_response, session, red
 from .email_support import email_out
 import numpy as np
 import os
-from rq import Queue
-from rq.job import Job, NoSuchJobError
-from .worker import conn
+#from rq import Queue
+#from rq.job import Job, NoSuchJobError
+#from .worker import conn
 from .calculation import Calculation
 from flask_babel import _
 from flask_login import current_user, login_user, logout_user, login_required
