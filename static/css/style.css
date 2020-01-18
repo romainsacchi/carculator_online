@@ -1601,10 +1601,11 @@ button:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'Fira Sans', sans-serif;
-  font-size: 40px;
+  font-size: 8vw;
   white-space: nowrap;
   text-shadow: 0 2px 2px rgba(#000, 0.9);
   color:white;
+  width:50vw;
 }
 
 /*--------------------*/

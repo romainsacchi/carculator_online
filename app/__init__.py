@@ -57,6 +57,12 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bee698db94fa6e:02c34128@us-cdbr-iron-east-05.cleardb.net/heroku_9bb2a3349ea4243'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
+    app.config['LANGUAGES'] = {
+                                'en': 'English',
+                                'it': 'Italian',
+                                'fr': 'French',
+                                'de': 'German',
+                            }
 
 # Initiate database
 db = SQLAlchemy(app)
