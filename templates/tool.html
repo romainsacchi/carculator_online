@@ -93,13 +93,7 @@
 					 <button class="online-button" onclick="save_configuration()"
 						  style="float:right;margin-right:5px;:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{_('Share configuration')}}</button>
 				  		<div id="holder" style="margin-bottom:10px;margin-top:0;"><p align="center" style="color:white;display:inline-block;">{{_("Drop configuration file")}}</p></div>
-
-
-
 			</div>
-
-
-
 		</nav>
 		</div>
 	</header>
@@ -153,12 +147,8 @@
 
 									<div class="col-md-6">
 										<img class="image" src="/static/images/select_vehicle_tutorial.gif" alt="image">
-
-
 									</div>
 								</div>
-
-
 
 								<div class="row">
 									<table class="table-borderless" style="margin:0 auto;width:80%;">
@@ -417,9 +407,6 @@
 								</div>
 								</div>
 
-
-
-
 								<p style="color:white;margin:20px;">{{_('Add any parameter you would like to modify.')}}</p>
 
 								<input class="form-control" id="InputParameters" type="text" placeholder="Search...">
@@ -480,7 +467,7 @@
 								<table class="table" id="table_use">
 							  <thead>
 								<tr>
-									<th scope="col"><h2>{{_('Driving cycle')}}</h2>
+									<th scope="col" width="25%"><h2>{{_('Driving cycle')}}</h2>
 									<div class="help-tip">
 										<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
 											Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
@@ -491,14 +478,14 @@
 								  	</div>
 
 								  </th>
-									<th scope="col"><h2>{{_('Geographical conditions')}}</h2>
+									<th scope="col" width="30%"><h2>{{_('Geographical conditions')}}</h2>
 								  <div class="help-tip">
 									<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
 										For example, the electricity mix used to charge batteries of electric vehicles
 										 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
 								  </div>
 								  </th>
-									<th scope="col">
+									<th scope="col" width="25%">
 										<h2>{{_('Electricity mix')}}</h2>
 										<div class="help-tip">
 									<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
@@ -508,13 +495,13 @@
 								  </div>
 									</th>
 
-								  <th scope="col"><h2>{{_('Passengers')}}</h2>
+								  <th scope="col" width="10%"><h2>{{_('Passengers')}}</h2>
 									  <div class="help-tip">
 										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
 											The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
 									  </div>
 								  </th>
-								  <th scope="col"><h2>{{_('Lifetime')}}</h2>
+								  <th scope="col"  width="10%"><h2>{{_('Lifetime')}}</h2>
 								  <div class="help-tip">
 									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
 										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
@@ -525,7 +512,7 @@
 							  </thead>
 							  <tbody>
 								<tr>
-								  <td width="400px;">
+								  <td>
 									  <div>
 										<p  style="color:white;">{{_('Select a driving cycle')}}</p>
 										  <span id="driving_cycle_selected" style="color:white;margin:10px;">WLTC</span>
@@ -544,10 +531,10 @@
 								  </td>
 								  <td>
 									  <p style="color:white;">{{_('Select the country where the vehicles should be operated:')}} <span id="country-selected"></span></p>
-									  <div id="chartdiv" style="width:500px;"></div>
+									  <div id="chartdiv"></div>
 								  </td>
 
-								<td width="400px">
+								<td>
 								  <p style="color:white;">{{_('Projection models suggest the following electricity mixes for the years selected for the selected country.
 									You may modify them.')}}</p>
 
