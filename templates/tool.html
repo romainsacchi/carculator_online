@@ -391,14 +391,7 @@
 											<br>
 										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)
 										</p>
-
-
-
-
 									</div>
-
-
-
 								<div class="row">
 											<div class="col-md-12">
 												<img class="image" src="/static/images/battery_mass_tutorial.gif" alt="image" id="tutorial_video"
@@ -468,7 +461,7 @@
 									<table class="table" id="table_use">
 							  	<thead>
 								<tr>
-									<th scope="col" width="25%"><h2>{{_('Driving cycle')}}</h2>
+									<th scope="col"><h2>{{_('Driving cycle')}}</h2>
 									<div class="help-tip">
 										<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
 											Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
@@ -479,36 +472,14 @@
 								  	</div>
 
 								  </th>
-									<th scope="col" width="30%"><h2>{{_('Geographical conditions')}}</h2>
+									<th scope="col"><h2>{{_('Geographical conditions')}}</h2>
 								  <div class="help-tip">
 									<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
 										For example, the electricity mix used to charge batteries of electric vehicles
 										 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
 								  </div>
 								  </th>
-									<th scope="col" width="25%">
-										<h2>{{_('Electricity mix')}}</h2>
-										<div class="help-tip">
-									<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
-										to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery fo an electric vehicle,
-										but also the electricity needed to operate the electrolysis process to produce hydrogen
-										for a fuel cell-powered vehicle.')}}</p>
-								  </div>
-									</th>
 
-								  <th scope="col" width="10%"><h2>{{_('Passengers')}}</h2>
-									  <div class="help-tip">
-										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
-											The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
-									  </div>
-								  </th>
-								  <th scope="col"  width="10%"><h2>{{_('Lifetime')}}</h2>
-								  <div class="help-tip">
-									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
-										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
-										to calculate amortized costs of ownership.')}}</p>
-								  </div>
-								  </th>
 								</tr>
 							  </thead>
 							  <tbody>
@@ -535,7 +506,34 @@
 									  <div id="chartdiv"></div>
 								  </td>
 
-								<td>
+
+								</tr>
+							  <tr>
+								  <td scope="col">
+										<h2>{{_('Electricity mix')}}</h2>
+										<div class="help-tip">
+									<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
+										to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery fo an electric vehicle,
+										but also the electricity needed to operate the electrolysis process to produce hydrogen
+										for a fuel cell-powered vehicle.')}}</p>
+								  </div>
+									</td>
+								  <td scope="col"><h2>{{_('Passengers')}}</h2>
+									  <div class="help-tip">
+										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
+											The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
+									  </div>
+								  </td>
+								  <td scope="col"><h2>{{_('Lifetime')}}</h2>
+								  <div class="help-tip">
+									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
+										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
+										to calculate amortized costs of ownership.')}}</p>
+								  </div>
+								  </td>
+							  </tr>
+							  <tr>
+								  <td>
 								  <p style="color:white;">{{_('Projection models suggest the following electricity mixes for the years selected for the selected country.
 									You may modify them.')}}</p>
 
@@ -610,7 +608,8 @@
 									</div>
 
 								  </td>
-								</tr>
+
+							  </tr>
 							  </tbody>
 							</table>
 								</div>
@@ -949,10 +948,7 @@
 																</td>
 															</tr>
 														</table>
-
 													</td>
-
-
 												</tr>
 
 											</tbody>
