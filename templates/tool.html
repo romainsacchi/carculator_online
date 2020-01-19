@@ -133,7 +133,7 @@
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none" id="powertrain_section">
 								<div class="row" style="border:3px; border-style:solid; border-color:#ddd; padding: 1em; margin: 30px;">
-									<div class="col-md-6">
+									<div class="col-md-2">
 										<h2 class="mu-heading-title" style="text-align:center;">{{_('Year, size and powertrain selection')}}</h2>
 										<center>
 											<p align="left" >
@@ -145,8 +145,31 @@
 
 									</div>
 
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<img class="image" src="/static/images/select_vehicle_tutorial.gif" alt="image">
+									</div>
+									<div class="col-md-4">
+										<h2 class="mu-heading-title">{{_('What is what?')}}</h2>
+											<p >{{_('If you are unsure about the definitions of powertrains and sizes carculator uses, you may look up a familiar car model below.')}}</p>
+										  	<form class="form-inline" style="margin: 0 auto;">
+											  <input class="form-control mr-sm-2" type="search"
+													 placeholder="{{_('Search for car models')}}"
+													 aria-label="Search"
+													 id="search_input"
+													 style="width:400px;">
+											</form>
+											<div class="table-responsive">
+												<table class="table table-hover" id="table_search_results" style="font-size:12px;">
+													<thead>
+														<tr>
+														<tr>
+													</thead>
+													<tbody>
+													<tr>
+														<tr>
+												  	</tbody>
+												</table>
+											</div>
 									</div>
 								</div>
 
@@ -252,29 +275,7 @@
 										</tr>
 									  </tbody>
 									</table>
-									<div style="margin:0 auto;width:50%;">
-									<h2 class="mu-heading-title">{{_('What is what?')}}</h2>
-											<p >{{_('If you are unsure about the definitions of powertrains and sizes carculator uses, you may look up a familiar car model below.')}}</p>
-										  	<form class="form-inline" style="margin: 0 auto;">
-											  <input class="form-control mr-sm-2" type="search"
-													 placeholder="{{_('Search for car models')}}"
-													 aria-label="Search"
-													 id="search_input"
-													 style="width:400px;">
-											</form>
-											<div class="table-responsive">
-												<table class="table table-hover" id="table_search_results" style="font-size:12px;">
-													<thead>
-														<tr>
-														<tr>
-													</thead>
-													<tbody>
-													<tr>
-														<tr>
-												  	</tbody>
-												</table>
-											</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
