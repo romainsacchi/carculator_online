@@ -28,8 +28,6 @@
 	  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <!-- Main Style -->
     <link href="static/css/style.css" rel="stylesheet">
-	    <!-- Tool page Style -->
-    <link href="static/css/tool_style.css" rel="stylesheet">
 	  <!-- Bootstrap -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 	  <!-- Animate.css -->
@@ -42,8 +40,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
     <!-- Montserrat for Title -->
   	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,9 +55,7 @@
 		<div class="container" style="width:100%;">
 			<!-- Image Logo -->
 		      <a class="navbar-brand" href="#"><img src="static\images\mediumsmall.png" style="height:40px;"></a>
-
 		</div>
-
 	</header>
 	<!-- End Header -->
 
@@ -69,31 +63,31 @@
 	<!-- Start main content -->
 	<main role="main">
 		<!-- Start SCOPE -->
-		<section id="mu-install" style="height:100vh;">
+		<section id="mu-install" style="height:90vh;">
 			<div class="container">
 				<div class="row">
 					<div class="mu-counter-area">
-						<div class="row" style="margin-left:10%;">
+						<div class="row">
 
-							<h1>Sign In</h1>
-								<form action="" method="post" novalidate>
+							<h1 style="color:white;">Sign In</h1>
+								<form action="" method="post" novalidate style="margin: 0 auto !important;float:none;">
 									{{ form.hidden_tag() }}
-									<p>
+									<p  style="color:white;">
 										{{ form.username.label }}<br>
 										{{ form.username(size=32) }}<br>
 										{% for error in form.username.errors %}
 										<span style="color: red;">[{{ error }}]</span>
 										{% endfor %}
 									</p>
-									<p>
+									<p  style="color:white;">
 										{{ form.password.label }}<br>
 										{{ form.password(size=32) }}<br>
 										{% for error in form.password.errors %}
 										<span style="color: red;">[{{ error }}]</span>
 										{% endfor %}
 									</p>
-									<p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-									<p>{{ form.submit() }}</p>
+									<p  style="color:white;">{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+									<p  style="color:white;">{{ form.submit() }}</p>
 								</form>
 								<p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
 
