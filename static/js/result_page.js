@@ -219,7 +219,7 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(600).height(600)
+                    .width(500).height(500)
                     .forceY([0, max_val * 1.1]);
 
       chart.xAxis     //Chart x-axis settings
@@ -261,6 +261,7 @@ function generate_scatter_chart(data){
                     .showDistY(true)
                     .color(d3.scale.category10().range())
                     .pointRange([70,70])
+                    .width(500).height(500)
                     .forceY([0,0.6])
                     .forceX([0,0.6]);
 
@@ -314,7 +315,7 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(600).height(600);
+                    .width(500).height(500);
 
       chart_acc.xAxis     //Chart x-axis settings
           .axisLabel('Use (km)')
