@@ -1717,7 +1717,7 @@ button:focus {
     padding-top:80px;
 }
 
-@media (max-width: 768px){
+@media (max-width: 1024px){
 
 .top-row{
     padding-top:130px;
