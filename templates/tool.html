@@ -77,21 +77,21 @@
 					{% if current_user.is_anonymous %}
 						<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
 							<button class="online-button"
-									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;">{{ _('Login') }}</button>
+									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;margin-bottom:5px;">{{ _('Login') }}</button>
 						  </form>
 					{% else %}
 						<form action="{{ url_for('logout') }}" style="display:inline-block;float:right;margin: 0 auto !important;">
 						<button class="online-button"
-								style="margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;float:right;">{{ _('Logout') }}</button>
+								style="margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;margin: 0 auto !important;float:right;">{{ _('Logout') }}</button>
 					  </form>
 					<h4 style="color:white;display:inline-block;float:right;margin-right:10px;font-family:inherit;font-weight:500;line-height:1.1;"> {{ current_user.username }}</h4>
 					<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:5px;margin-left:10px;"></i>
 					{% endif %}
 
 					  <button class="online-button"
-						  style="float:right;margin-right:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;" onclick="get_results()">{{_('Calculate')}}</button>
+						  style="float:right;margin-right:5px;margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;" onclick="get_results()">{{_('Calculate')}}</button>
 					 <button class="online-button" onclick="save_configuration()"
-						  style="float:right;margin-right:5px;:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{_('Share configuration')}}</button>
+						  style="float:right;margin-right:5px;margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{_('Share configuration')}}</button>
 				  		<div id="holder" style="margin-bottom:10px;margin-top:0;"><p align="center" style="color:white;display:inline-block;">{{_("Drop configuration file")}}</p></div>
 			</div>
 		</nav>
