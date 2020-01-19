@@ -1717,18 +1717,18 @@ button:focus {
     padding-top:80px;
 }
 
-@media (max-width: 999px){
+@media (max-width: 740px){
+
+.top-row{
+    padding-top:120px;
+}
+
+}
+
+@media (max-width: 480px){
 
 .top-row{
     padding-top:160px;
-}
-
-}
-
-@media (max-width: 600px){
-
-.top-row{
-    padding-top:240px;
 }
 
 }
