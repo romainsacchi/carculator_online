@@ -80,12 +80,11 @@
 						<span style="color:white;">{{_('PARAMETERS')}}</span></h2></div>
 						<div class="mu-about-area" style="padding-top:20px;" >
 							<!-- Start About Us Content -->
-							<div class="mu-about-content" style="margin:30px;" id="manufacture_section"
-							>
+							<div class="mu-about-content" style="margin:5%;">
 
 									  <table class="table" style="color:white;font-size:12px;">
 										<thead>
-										  <tr>
+										  <tr class="d-flex">
 											<th>{{_('Importance')}}</th>
 											<th>{{_('Name')}}</th>
 											<th>{{_('Description')}}</th>
@@ -99,7 +98,7 @@
 										<tbody>
 										{% for p in params %}
 
-										<tr><td>{{ p[0] }}</td><td>{{ p[1] }}</td><td>{{ p[2] }}</td><td>{{ p[3] }}</td><td>{{ p[4] }}</td><td>{{ p[5] }}</td><td>{{ p[6] }}</td></tr>
+										<tr class="d-flex"><td>{{ p[0] }}</td><td>{{ p[1] }}</td><td>{{ p[2] }}</td><td>{{ p[3] }}</td><td>{{ p[4] }}</td><td>{{ p[5] }}</td><td>{{ p[6] }}</td></tr>
 
 										{% endfor %}
 										</tbody>
