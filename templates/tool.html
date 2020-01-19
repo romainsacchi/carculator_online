@@ -108,27 +108,29 @@
 			<div class="container" style="width:90%;">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="row" style="padding-top:80px;">
-							<h2><img class="image" src="/static/images/icons/scope_icon_grey.png"
-												  style="height:70px; width:80px; border-right:3px solid rgba(0,0,0,0.6);
-														padding:15px;margin-bottom:0px;display:inline-block;"
-												 alt="image">
-						<span style="color:grey;">{{_('SCOPE')}}</span></h2></div>
-						<div class="mu-about-area" style="padding-top:50px;">
+						<div class="row">
+							<div class="top-row">
+								<h2><img class="image" src="/static/images/icons/scope_icon_grey.png"
+													  style="height:70px; width:80px; border-right:3px solid rgba(0,0,0,0.6);
+															padding:15px;margin-bottom:0px;display:inline-block;"
+													 alt="image">
+								<span style="color:grey;">{{_('SCOPE')}}</span></h2></div>
+								<div class="mu-about-area" style="padding-top:50px;">
 
-							<div class="mu-about-header">
-								<h2 class="mu-heading-title">{{_('Selection of vehicle type')}}</h2>
+									<div class="mu-about-header">
+										<h2 class="mu-heading-title">{{_('Selection of vehicle type')}}</h2>
 
-								<div id="vehicle_type">
-									<input type="radio" name="site" id="motorbike" value="motorbike" /><label id ="label_motorbike" for="motorbike"><img src="/static/images/icons/motorbike_icon_grey.png" height="70px;" style="margin:15px;"/></label>
-									<input type="radio" name="site" id="car" value="car" /><label id ="label_car" for="car"><img src="/static/images/icons/car_icon_grey.png" height="70px;" style="margin:15px;"/></label>
-									<input type="radio" name="site" id="bus" value="bus" /><label id ="label_bus" for="bus"><img src="/static/images/icons/bus_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
-									<input type="radio" name="site" id="truck" value="truck" /><label id ="label_truck" for="train"><img src="/static/images/icons/truck_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
-									<input type="radio" name="site" id="train" value="train" /><label id ="label_train" for="train"><img src="/static/images/icons/tram_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
-									<input type="radio" name="site" id="plane" value="plane" /><label id ="label_plane" for="plane"><img src="/static/images/icons/plane_icon_grey.png"  height="70px;" style="margin:15px;"/></label>
-								</div>
+										<div id="vehicle_type">
+											<input type="radio" name="site" id="motorbike" value="motorbike" /><label id ="label_motorbike" for="motorbike"><img src="/static/images/icons/motorbike_icon_grey.png" height="70px;" style="margin:15px;"/></label>
+											<input type="radio" name="site" id="car" value="car" /><label id ="label_car" for="car"><img src="/static/images/icons/car_icon_grey.png" height="70px;" style="margin:15px;"/></label>
+											<input type="radio" name="site" id="bus" value="bus" /><label id ="label_bus" for="bus"><img src="/static/images/icons/bus_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
+											<input type="radio" name="site" id="truck" value="truck" /><label id ="label_truck" for="train"><img src="/static/images/icons/truck_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
+											<input type="radio" name="site" id="train" value="train" /><label id ="label_train" for="train"><img src="/static/images/icons/tram_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
+											<input type="radio" name="site" id="plane" value="plane" /><label id ="label_plane" for="plane"><img src="/static/images/icons/plane_icon_grey.png"  height="70px;" style="margin:15px;"/></label>
+										</div>
 
 							</div>
+								</div>
 
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none" id="powertrain_section">
@@ -139,10 +141,8 @@
 											<p align="left" >
 												{{_('Select the years, powertrain types and size classes you wish to conduct an assessment of. <br> You may do so <b>by dragging elements with your mouse from the left frame to the right frame</b>.<br>
 												If you have a car model in mind but do not know its powertrain type or size class, you may look it up in the search field below.')}}<br>
-
 											</p>
 										</center>
-
 									</div>
 
 									<div class="col-md-4">
@@ -161,10 +161,10 @@
 											<div class="table-responsive">
 												<table class="table table-hover" id="table_search_results" style="font-size:12px;">
 													<thead>
-
+													<tr></tr>
 													</thead>
 													<tbody>
-
+													<tr></tr>
 												  	</tbody>
 												</table>
 											</div>
@@ -240,8 +240,6 @@
 													  <td><ol data-draggable="target" id="powertrain_list">
 													</ol></td>
 													</tr>
-
-
 												  </tbody>
 												</table>
 

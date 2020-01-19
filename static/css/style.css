@@ -1629,9 +1629,7 @@ button:focus {
 
 
 
-@media (max-width: 320px){
-	
-}
+
 
 .moving-letters {
   position: absolute;
@@ -1713,3 +1711,25 @@ button:focus {
     top:-40px;
     left:0;
 }
+
+
+.top-row{
+    padding-top:80px;
+}
+
+@media (max-width: 999px){
+
+.top-row{
+    padding-top:160px;
+}
+
+}
+
+@media (max-width: 600px){
+
+.top-row{
+    padding-top:240px;
+}
+
+}
+
