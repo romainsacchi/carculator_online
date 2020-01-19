@@ -1720,7 +1720,7 @@ button:focus {
 @media (max-width: 768px){
 
 .top-row{
-    padding-top:150px;
+    padding-top:130px;
 }
 
 }
@@ -1728,7 +1728,7 @@ button:focus {
 @media (max-width: 600px){
 
 .top-row{
-    padding-top:190px;
+    padding-top:170px;
 }
 
 }
