@@ -128,8 +128,7 @@
 											<input type="radio" name="site" id="train" value="train" /><label id ="label_train" for="train"><img src="/static/images/icons/tram_icon_grey.png"  height="70px;"  style="margin:15px;"/></label>
 											<input type="radio" name="site" id="plane" value="plane" /><label id ="label_plane" for="plane"><img src="/static/images/icons/plane_icon_grey.png"  height="70px;" style="margin:15px;"/></label>
 										</div>
-
-							</div>
+									</div>
 								</div>
 
 							<!-- Start About Us Content -->
@@ -262,16 +261,12 @@
 													  <td><ol data-draggable="target" id="size_list">
 													</ol></td>
 													</tr>
-
 												  </tbody>
 												</table>
-
 										  </td>
-
 										</tr>
 									  </tbody>
 									</table>
-
 								</div>
 							</div>
 						</div>
@@ -420,159 +415,163 @@
 								</p>
 								<div style="overflow-x:auto;">
 									<table class="table" id="table_use">
-							  	<thead>
-								<tr>
-									<th scope="col"><h2>{{_('Driving cycle')}}</h2>
-									<div class="help-tip">
-										<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
-											Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
-											It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
-											associated to the urban air compartment.
-											All the vehicles are compared against the same driving cycle.')}}
-										</p>
-								  	</div>
-
-								  </th>
-									<th scope="col"><h2>{{_('Geographical conditions')}}</h2>
-								  <div class="help-tip">
-									<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
-										For example, the electricity mix used to charge batteries of electric vehicles
-										 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
-								  </div>
-								  </th>
-
-								</tr>
-							  </thead>
-							  <tbody>
-								<tr>
-								  <td>
-									  <div>
-										<p  style="color:white;">{{_('Select a driving cycle')}}</p>
-										  <span id="driving_cycle_selected" style="color:white;margin:10px;">WLTC</span>
-
-									  </div>
-										<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
-											id="table_driving_cycles">
-											{% for dc in driving_cycles %}
-											<li tabindex="1">{{ dc }}</li>
-											{% endfor %}
-										</ol>
-										<div class="col" style="background-color:none;">
-										  <svg id="chart-driving-cycle"
-											   style="width:100%;height:300px; font-size:16px; color:grey;"></svg>
-										</div>
-								  </td>
-								  <td>
-									  <p style="color:white;">{{_('Select the country where the vehicles should be operated:')}} <span id="country-selected"></span></p>
-									  <div id="chartdiv"></div>
-								  </td>
-
-
-								</tr>
-							  <tr>
-								  <td scope="col">
-										<h2>{{_('Electricity mix')}}</h2>
-										<div class="help-tip">
-									<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
-										to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery fo an electric vehicle,
-										but also the electricity needed to operate the electrolysis process to produce hydrogen
-										for a fuel cell-powered vehicle.')}}</p>
-								  </div>
-									</td>
-								  <td scope="col"><h2>{{_('Passengers')}}</h2>
-									  <div class="help-tip">
-										<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
-											The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
-									  </div>
-								  </td>
-								  <td scope="col"><h2>{{_('Lifetime')}}</h2>
-								  <div class="help-tip">
-									<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
-										The annual mileage is used to differentiate emissions and energy requirement over time, as well as
-										to calculate amortized costs of ownership.')}}</p>
-								  </div>
-								  </td>
-							  </tr>
-							  <tr>
-								  <td>
-								  <p style="color:white;">{{_('Projection models suggest the following electricity mixes for the years selected for the selected country.
-									You may modify them.')}}</p>
-
-									<table class="table" style="background:none;color:white;text-align:left;margin:0 auto;"
-										id="electricity_mix_table">
 										<thead>
-											<tr>
-												<td>in %</td>
-											</tr>
-										</thead>
-									  <tbody>
 										<tr>
-										  <td>{{_('Hydro')}}</td>
-										</tr>
-										<tr>
-										  <td>{{_('Nuclear')}}</td>
-										</tr><tr>
-										  <td>{{_('Gas')}}</td>
-										</tr><tr>
-										  <td>{{_('Solar')}}</td>
-										</tr><tr>
-										  <td>{{_('Wind')}}</td>
-										</tr><tr>
-										  <td>{{_('Biomass')}}</td>
-										</tr><tr>
-										  <td>{{_('Coal')}}</td>
-										</tr><tr>
-										  <td>{{_('Oil')}}</td>
-										</tr><tr>
-										  <td>{{_('Geothermal')}}</td>
-										</tr><tr>
-										  <td>{{_('Waste')}}</td>
-										</tr>
-									  </tbody>
-
-									</table>
-									<button class="online-button" onclick="set_mix_to_zero()"
-					  							style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:250px;">
-												{{_('Set to zero')}}
-											</button>
-
-
-								</td>
-								  <td>
-									  <img id = "image_passenger" src="/static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
-										<p style="color:white">{{_('Adjust the number of passengers')}}</p>
-										<div style="margin:30px;" id="passenger-slider"></div>
-
-
-										<div class="row" style="margin:30px;">
-											<div style="height:100px;position:relative;">
-												<img id="image_cargo" src="/static/images/icons/cargo_icon.png"
-													 style="height:50px;position:absolute; top:0;bottom:0;left:0;right:0;margin:auto;">
+											<th scope="col" width="30%"><h2>{{_('Driving cycle')}}</h2>
+											<div class="help-tip">
+												<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
+													Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
+													It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
+													associated to the urban air compartment.
+													All the vehicles are compared against the same driving cycle.')}}
+												</p>
 											</div>
 
-										<p style="color:white;">{{_('Adjust the cargo mass')}}</p>
-										<div style="margin-bottom:20px;" id="cargo-slider"></div>
-											<span id="cargo-value" style="color:white;font-size:30px;">150 kg</span>
-										</div>
-								  </td>
-								  <td>
-									  <img src="/static/images/icons/car_icon.png" style="height:50px;margin-top:10px;">
-										<p style="color:white;">{{_('Adjust the total mileage')}}</p>
-										<div style="margin-top:30px;" id="lifetime-slider"></div>
-										<span id="lifetime-value" style="color:white;font-size:30px;"></span>
+										  </th>
+											<th scope="col" width="70%"><h2>{{_('Geographical conditions')}}</h2>
+										  <div class="help-tip">
+											<p>{{_('The country of use will influence several important parameters in the life cycle assessment of vehicles.
+												For example, the electricity mix used to charge batteries of electric vehicles
+												 or to produce hydrogen through electrolysis will be selected accordingly.')}}</p>
+										  </div>
+										  </th>
 
-									<div class="row" style="margin:3px;">
-										<img src="/static/images/icons/odometer_icon.png" style="height:50px;margin-top:10px;">
-										<p style="color:white;margin-top:25px;">{{_('Adjust the yearly mileage')}}</p>
-										<div style="margin-bottom:20px;" id="mileage-slider"></div>
-										<span id="mileage-value" style="color:white;font-size:30px;"></span>
-									</div>
+										</tr>
+									  </thead>
+									  <tbody>
+										<tr>
+										  <td>
+											  <div>
+												<p  style="color:white;">{{_('Select a driving cycle')}}</p>
+												  <span id="driving_cycle_selected" style="color:white;margin:10px;">WLTC</span>
 
-								  </td>
+											  </div>
+												<ol class = "select-table" style="width:100%;height:100%;margin: 0 auto;"
+													id="table_driving_cycles">
+													{% for dc in driving_cycles %}
+													<li tabindex="1">{{ dc }}</li>
+													{% endfor %}
+												</ol>
+												<div class="col" style="background-color:none;">
+												  <svg id="chart-driving-cycle"
+													   style="width:100%;height:300px; font-size:16px; color:grey;"></svg>
+												</div>
+										  </td>
+										  <td>
+											  <p style="color:white;">{{_('Select the country where the vehicles should be operated:')}} <span id="country-selected"></span></p>
+											  <div id="chartdiv"></div>
+										  </td>
+										</tr>
+									  </tbody>
+									</table>
+									<table>
+										<thead>
+											<tr>
+										  <th scope="col" width="60%">
+												<h2>{{_('Electricity mix')}}</h2>
+												<div class="help-tip">
+											<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
+												to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery fo an electric vehicle,
+												but also the electricity needed to operate the electrolysis process to produce hydrogen
+												for a fuel cell-powered vehicle.')}}</p>
+										  </div>
+											</th>
+										  <td scope="col" width="20%"><h2>{{_('Passengers')}}</h2>
+											  <div class="help-tip">
+												<p>{{_('Each passenger has a body mass of 75 kilograms. The average number of passengers per car in Europe is 1.5.
+													The total driving mass is the sum of the total passenger mass, the cargo mass and the curb mass of the vehicle.')}}</p>
+											  </div>
+										  </td>
+										  <td scope="col" width="20%"><h2>{{_('Lifetime')}}</h2>
+										  <div class="help-tip">
+											<p>{{_('The total mileage of the car is used to normalize life cycle impacts per kilometer driven.
+												The annual mileage is used to differentiate emissions and energy requirement over time, as well as
+												to calculate amortized costs of ownership.')}}</p>
+										  </div>
+										  </td>
+									  </tr>
+										</thead>
+										<tbody>
+											<tr>
+										  <td>
+										  <p style="color:white;">{{_('Projection models suggest the following electricity mixes for the years selected for the selected country.
+											You may modify them.')}}</p>
 
-							  </tr>
-							  </tbody>
-							</table>
+											<table class="table" style="background:none;color:white;text-align:left;margin:0 auto;"
+												id="electricity_mix_table">
+												<thead>
+													<tr>
+														<td>in %</td>
+													</tr>
+												</thead>
+											  <tbody>
+												<tr>
+												  <td>{{_('Hydro')}}</td>
+												</tr>
+												<tr>
+												  <td>{{_('Nuclear')}}</td>
+												</tr><tr>
+												  <td>{{_('Gas')}}</td>
+												</tr><tr>
+												  <td>{{_('Solar')}}</td>
+												</tr><tr>
+												  <td>{{_('Wind')}}</td>
+												</tr><tr>
+												  <td>{{_('Biomass')}}</td>
+												</tr><tr>
+												  <td>{{_('Coal')}}</td>
+												</tr><tr>
+												  <td>{{_('Oil')}}</td>
+												</tr><tr>
+												  <td>{{_('Geothermal')}}</td>
+												</tr><tr>
+												  <td>{{_('Waste')}}</td>
+												</tr>
+											  </tbody>
+
+											</table>
+											<button class="online-button" onclick="set_mix_to_zero()"
+														style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:250px;">
+														{{_('Set to zero')}}
+													</button>
+
+
+										</td>
+										  <td>
+											  <img id = "image_passenger" src="/static/images/icons/one_passenger_icon.png" style="height:50px;margin-top:10px;">
+												<p style="color:white">{{_('Adjust the number of passengers')}}</p>
+												<div style="margin:30px;" id="passenger-slider"></div>
+
+
+												<div class="row" style="margin:30px;">
+													<div style="height:100px;position:relative;">
+														<img id="image_cargo" src="/static/images/icons/cargo_icon.png"
+															 style="height:50px;position:absolute; top:0;bottom:0;left:0;right:0;margin:auto;">
+													</div>
+
+												<p style="color:white;">{{_('Adjust the cargo mass')}}</p>
+												<div style="margin-bottom:20px;" id="cargo-slider"></div>
+													<span id="cargo-value" style="color:white;font-size:30px;">150 kg</span>
+												</div>
+										  </td>
+										  <td>
+											  <img src="/static/images/icons/car_icon.png" style="height:50px;margin-top:10px;">
+												<p style="color:white;">{{_('Adjust the total mileage')}}</p>
+												<div style="margin-top:30px;" id="lifetime-slider"></div>
+												<span id="lifetime-value" style="color:white;font-size:30px;"></span>
+
+											<div class="row" style="margin:3px;">
+												<img src="/static/images/icons/odometer_icon.png" style="height:50px;margin-top:10px;">
+												<p style="color:white;margin-top:25px;">{{_('Adjust the yearly mileage')}}</p>
+												<div style="margin-bottom:20px;" id="mileage-slider"></div>
+												<span id="mileage-value" style="color:white;font-size:30px;"></span>
+											</div>
+
+										  </td>
+
+									  </tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
