@@ -1717,10 +1717,18 @@ button:focus {
     padding-top:80px;
 }
 
+.top-row-result{
+    padding-top:80px;
+}
+
 @media (max-width: 1024px){
 
 .top-row{
     padding-top:130px;
+}
+
+.top-row-result{
+    padding-top:160px;
 }
 
 }
@@ -1729,6 +1737,9 @@ button:focus {
 
 .top-row{
     padding-top:170px;
+}
+.top-row-result{
+    padding-top:200px;
 }
 
 }
