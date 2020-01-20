@@ -61,41 +61,24 @@
 
 		<div class="container" style="width:100vw;">
 
-
 			<nav class="navbar navbar-default mu-navbar">
-		  <div class="container-fluid">
 
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-
-
-
-		    </div>
-
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      	<ul class="nav navbar-nav mu-menu navbar-right" style="margin-right: 25%;margin-left:5%;">
-			        <li><a href="#" style="color:grey;">{{_('Home')}}</a></li>
-			        <li><a href="#mu-about" style="color:grey;">{{_('About')}}</a></li>
-					<li><a href="#mu-counter" style="color:grey;">{{_('Facts')}}</a></li>
-					<li><a href="#mu-team" style="color:grey;">{{_('Team')}}</a></li>
-					<li><a href="#mu-clients" style="color:grey;">{{_('Partners')}}</a></li>
-		            <li><a href="#mu-testimonials" style="color:grey;">{{_('Publications')}}</a></li>
-		            <li><a href="#mu-contact" style="color:grey;">{{_('Contact us')}}</a></li>
-					<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
-					<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
-					<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
-					<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
-		      	</ul>
-
-
-		  </div>
-		</nav>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav mu-menu navbar-right" style="width:100%;margin: 0 auto;">
+						<li><a href="#" style="color:grey;">{{_('Home')}}</a></li>
+						<li><a href="#mu-about" style="color:grey;">{{_('About')}}</a></li>
+						<li><a href="#mu-counter" style="color:grey;">{{_('Facts')}}</a></li>
+						<li><a href="#mu-team" style="color:grey;">{{_('Team')}}</a></li>
+						<li><a href="#mu-clients" style="color:grey;">{{_('Partners')}}</a></li>
+						<li><a href="#mu-testimonials" style="color:grey;">{{_('Publications')}}</a></li>
+						<li><a href="#mu-contact" style="color:grey;">{{_('Contact us')}}</a></li>
+						<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
+						<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
+						<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
+						<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
 	</header>
 	<!-- End Header -->
@@ -129,7 +112,7 @@
 		</section>
 
 		<!-- Start Install -->
-		<div id="messenger" class="moving-letters" style="font-size:1.3vw;width:50%;margin: 0 auto;text-align:center;" ></div>
+		<div id="messenger" class="moving-letters" style="font-size:1.3vw;width:80%;margin: 0 auto;text-align:center;margin-top:50%;" ></div>
 
 		<section id="mu-install">
 
