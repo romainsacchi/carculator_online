@@ -57,27 +57,29 @@
 
   	<!-- Start Header -->
 	<header id="mu-header" class="" role="banner" style="background-color:white;">
-		<img src="static/images/PSI-Logo_narrow_30k.png" style="height:4vh;position:absolute;vertical-align:middle;margin-left:1vw;">
 
 		<div class="container" style="width:100vw;">
-
-			<nav class="navbar navbar-default mu-navbar">
-
-					<ul class="nav navbar-nav mu-menu navbar-right" style="width:100%;margin-left:25%;margin-right:25%;">
-						<li><a href="#" style="color:grey;">{{_('Home')}}</a></li>
-						<li><a href="#mu-about" style="color:grey;">{{_('About')}}</a></li>
-						<li><a href="#mu-counter" style="color:grey;">{{_('Facts')}}</a></li>
-						<li><a href="#mu-team" style="color:grey;">{{_('Team')}}</a></li>
-						<li><a href="#mu-clients" style="color:grey;">{{_('Partners')}}</a></li>
-						<li><a href="#mu-testimonials" style="color:grey;">{{_('Publications')}}</a></li>
-						<li><a href="#mu-contact" style="color:grey;">{{_('Contact us')}}</a></li>
-						<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
-						<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
-						<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
-						<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
-					</ul>
-
-			</nav>
+			<div class="row" style="width:100%;">
+				  <div class="column" style="width:20%;float:left;text-align:center;display:inline-block;">
+					<img src="static/images/PSI-Logo_narrow_30k.png" style="height:4vh;">
+				  </div>
+				<div class="column" style="width:80%;float:center;text-align:center;display:inline-block;">
+					<nav class="navbar navbar-default mu-navbar">
+						<ul class="nav navbar-nav mu-menu navbar-right">
+							<li><a href="#" style="color:grey;">{{_('Home')}}</a></li>
+							<li><a href="#mu-about" style="color:grey;">{{_('About')}}</a></li>
+							<li><a href="#mu-counter" style="color:grey;">{{_('Facts')}}</a></li>
+							<li><a href="#mu-team" style="color:grey;">{{_('Team')}}</a></li>
+							<li><a href="#mu-clients" style="color:grey;">{{_('Partners')}}</a></li>
+							<li><a href="#mu-testimonials" style="color:grey;">{{_('Publications')}}</a></li>
+							<li><a href="#mu-contact" style="color:grey;">{{_('Contact us')}}</a></li>
+							<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
+							<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
+							<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
+							<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
+						</ul>
+					</nav>
+				</div>
 		</div>
 	</header>
 	<!-- End Header -->
