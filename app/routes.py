@@ -145,7 +145,6 @@ def search_params(param_item, powertrain_filter, size_filter):
 
     response = []
     for a in parameters:
-        print(a)
         if isinstance(a[4], str):
             a[4] = [p.strip() for p in a[4].split(',')]
         if isinstance(a[5], str):
@@ -153,7 +152,25 @@ def search_params(param_item, powertrain_filter, size_filter):
         if isinstance(a[6], str):
             a[6] = [s.strip() for s in a[6].split(',')]
         if (list(set(a[5]).intersection(powertrain_filter)) and list(set(a[6]).intersection(size_filter))):
-            response.append(a)
+            if session["language"] == "en":
+                a[5] = [app.calc.d_rev_pt_en[pt] for pt in a[5]]
+                a[6] = [app.calc.d_rev_size_en[s] for s in a[6]]
+                response.append(a)
+
+            if session["language"] == "de":
+                a[5] = [app.calc.d_rev_pt_de[pt] for pt in a[5]]
+                a[6] = [app.calc.d_rev_size_de[s] for s in a[6]]
+                response.append(a)
+
+            if session["language"] == "fr":
+                a[5] = [app.calc.d_rev_pt_fr[pt] for pt in a[5]]
+                a[6] = [app.calc.d_rev_size_fr[s] for s in a[6]]
+                response.append(a)
+
+            if session["language"] == "it":
+                a[5] = [app.calc.d_rev_pt_it[pt] for pt in a[5]]
+                a[6] = [app.calc.d_rev_size_it[s] for s in a[6]]
+                response.append(a)
 
     return jsonify(response[:7])
 

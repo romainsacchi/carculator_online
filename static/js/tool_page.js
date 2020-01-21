@@ -1756,6 +1756,8 @@ $("#InputParameters").on("keyup", function() {
         }
      }
 
+     console.log(listSizes)
+
     var arr_request = [name, l_pt, l_s, unit, years]
     console.log(arr_request);
 
