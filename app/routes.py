@@ -145,10 +145,11 @@ def search_params(param_item, powertrain_filter, size_filter):
 
     response = []
     for a in parameters:
+        print(a)
         if isinstance(a[4], str):
             a[4] = [p.strip() for p in a[4].split(',')]
         if isinstance(a[5], str):
-            a[5] = [app.calc.d_rev_pt_en[p.strip()] for p in a[5].split(',')]
+            a[5] = [p.strip() for p in a[5].split(',')]
         if isinstance(a[6], str):
             a[6] = [s.strip() for s in a[6].split(',')]
         if (list(set(a[5]).intersection(powertrain_filter)) and list(set(a[6]).intersection(size_filter))):
