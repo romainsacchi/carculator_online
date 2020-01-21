@@ -123,15 +123,32 @@ def search_car_model(search_item):
 @app.route('/search_params/<param_item>/<powertrain_filter>/<size_filter>')
 def search_params(param_item, powertrain_filter, size_filter):
     """ Return a list of params if param contain `search?item`"""
+
     parameters = [param for param in app.calc.load_params_file() if any(param_item.lower() in x.lower() for x in param)]
-    powertrain_filter = powertrain_filter.split(',')
-    size_filter = size_filter.split(',')
+
+
+    if session["language"] == "en":
+        powertrain_filter = [app.calc.d_pt_en[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+
+    if session["language"] == "de":
+        powertrain_filter = [app.calc.d_pt_de[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+
+    if session["language"] == "fr":
+        powertrain_filter = [app.calc.d_pt_fr[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+
+    if session["language"] == "it":
+        powertrain_filter = [app.calc.d_pt_it[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+
     response = []
     for a in parameters:
         if isinstance(a[4], str):
             a[4] = [p.strip() for p in a[4].split(',')]
         if isinstance(a[5], str):
-            a[5] = [app.calc.d_rev_pt[p.strip()] for p in a[5].split(',')]
+            a[5] = [app.calc.d_rev_pt_en[p.strip()] for p in a[5].split(',')]
         if isinstance(a[6], str):
             a[6] = [s.strip() for s in a[6].split(',')]
         if (list(set(a[5]).intersection(powertrain_filter)) and list(set(a[6]).intersection(size_filter))):
