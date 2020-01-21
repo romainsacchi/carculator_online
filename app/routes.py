@@ -133,15 +133,15 @@ def search_params(param_item, powertrain_filter, size_filter):
 
     if session["language"] == "de":
         powertrain_filter = [app.calc.d_pt_de[pt] for pt in powertrain_filter.split(',')]
-        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+        size_filter = [app.calc.d_size_de[s] for s in size_filter.split(',')]
 
     if session["language"] == "fr":
         powertrain_filter = [app.calc.d_pt_fr[pt] for pt in powertrain_filter.split(',')]
-        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+        size_filter = [app.calc.d_size_fr[s] for s in size_filter.split(',')]
 
     if session["language"] == "it":
         powertrain_filter = [app.calc.d_pt_it[pt] for pt in powertrain_filter.split(',')]
-        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+        size_filter = [app.calc.d_size_it[s] for s in size_filter.split(',')]
 
     response = []
     for a in parameters:
