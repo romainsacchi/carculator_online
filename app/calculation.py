@@ -463,8 +463,18 @@ class Calculation():
                 k = tuple(k.split(","))
                 name = k[0]
                 cat = self.d_categories[name]
-                powertrain = self.d_pt_en[k[1]]
-                size = k[2]
+                if lang == "en":
+                    powertrain = self.d_pt_en[k[1]]
+                    size = self.d_size_en[k[2]]
+                if lang == "de":
+                    powertrain = self.d_pt_de[k[1]]
+                    ssize = self.d_size_de[k[2]]
+                if lang == "fr":
+                    powertrain = self.d_pt_fr[k[1]]
+                    size = self.d_size_fr[k[2]]
+                if lang == "it":
+                    powertrain = self.d_pt_it[k[1]]
+                    size = self.d_size_it[k[2]]
                 val = [float(n) for n in v]
 
             d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
