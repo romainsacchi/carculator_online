@@ -69,13 +69,12 @@ def index():
 @app.route('/start')
 def start():
     """Return start page."""
-    if not current_user.is_authenticated:
-        session["url"] = url_for('start')
+    #if not current_user.is_authenticated:
+    #    session["url"] = url_for('start')
     return render_template('start.html')
 
 @app.route('/tool', defaults={'country': None})
 @app.route('/tool/<country>')
-@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -249,7 +248,7 @@ def get_language():
     return make_response(data, 200)
 
 @app.route("/get_inventory_excel_for_bw")
-@login_required
+#@login_required
 def get_inventory_excel_for_bw():
     resp = make_response(app.lci_to_bw)
     resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
