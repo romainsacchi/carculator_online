@@ -1698,6 +1698,7 @@ $("#InputParameters").on("keyup", function() {
                         }
                     };
                     tr.innerHTML += '<td> <button class="online-button" id='+row+' onClick="add_param(this.id)" style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:150px;">Add</button> </td>'
+
                     $("#TableParameters").append(tr);
                 };
             }
@@ -1749,6 +1750,7 @@ $("#InputParameters").on("keyup", function() {
      }
 
     var arr_request = [name, l_pt, l_s, unit, years]
+    console.log(arr_request);
 
         $.when(
             $.ajax({
