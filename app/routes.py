@@ -176,9 +176,19 @@ def search_params(param_item, powertrain_filter, size_filter):
 
 @app.route('/get_param_value/<name>/<pt>/<s>/<y>')
 def get_param_value(name, pt, s, y):
-    pt = pt.split(',')
-    pt = [app.calc.d_pt[p] for p in pt]
-    s = s.split(',')
+    if session["language"] == "en":
+        pt = [app.calc.d_pt_en[p] for p in pt.split(',')]
+        s = [app.calc.d_size_en[x] for x in s.split(',')]
+    if session["language"] == "de":
+        pt = [app.calc.d_pt_de[p] for p in pt.split(',')]
+        s = [app.calc.d_size_de[x] for x in s.split(',')]
+    if session["language"] == "fr":
+        pt = [app.calc.d_pt_fr[p] for p in pt.split(',')]
+        s = [app.calc.d_size_fr[x] for x in s.split(',')]
+    if session["language"] == "it":
+        pt = [app.calc.d_pt_it[p] for p in pt.split(',')]
+        s = [app.calc.d_size_it[x] for x in s.split(',')]
+
     y = y.split(',')
     y = [int(a) for a in y]
     arr = app.calc.interpolate_array(y)
