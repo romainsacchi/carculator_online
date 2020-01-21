@@ -1713,14 +1713,12 @@ $("#InputParameters").on("keyup", function() {
     var scope_pt = document.getElementById("TableParameters").rows[clicked_id].cells[5];
     var p_elements = scope_pt.childNodes[0].childNodes;
 
-    console.log(name, unit, scope_pt);
 
     var powertrains = [];
     for (var p =0; p < p_elements.length; p++){
         powertrains.push(p_elements[p].innerHTML)
     };
 
-    console.log(powertrains);
 
     var scope_size = document.getElementById("TableParameters").rows[clicked_id].cells[6];
     var s_elements = scope_size.childNodes[0].childNodes;
@@ -1728,8 +1726,6 @@ $("#InputParameters").on("keyup", function() {
     for (var s =0; s < s_elements.length; s++){
         sizes.push(s_elements[s].innerHTML)
     };
-
-    console.log(sizes);
 
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
@@ -1756,10 +1752,8 @@ $("#InputParameters").on("keyup", function() {
         }
      }
 
-     console.log(listSizes)
 
     var arr_request = [name, l_pt, l_s, unit, years]
-    console.log(arr_request);
 
         $.when(
             $.ajax({
