@@ -251,7 +251,7 @@ def get_language():
 #@login_required
 def get_inventory_excel_for_bw():
     resp = make_response(app.lci_to_bw)
-    resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
+    resp.headers['Content-Disposition'] = 'attachment; filename=inventory.xlsx'
     resp.headers["Content-type"] = "text/csv"
     return resp
 

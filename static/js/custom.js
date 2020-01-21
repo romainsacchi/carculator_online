@@ -126,7 +126,7 @@
                     align: "right"
                 },
                 type:'warning',
-                delay:15000
+                delay:8000
             },
             {
                 animate: {
