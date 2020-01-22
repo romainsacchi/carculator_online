@@ -123,7 +123,7 @@
             {
                 placement: {
                     from: "top",
-                    align: "right"
+                    align: "center"
                 },
                 type:'warning',
                 delay:8000
