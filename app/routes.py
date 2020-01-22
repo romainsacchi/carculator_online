@@ -278,6 +278,7 @@ def set_language_for_result_display(language):
 @app.route('/get_language')
 def get_language():
     lang = session["language"]
+    json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
     if lang == "en":
         json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
     if lang == "de":

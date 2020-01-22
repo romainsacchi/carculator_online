@@ -1213,7 +1213,7 @@ msgstr ""
 "Les carburants alternatifs présentés ici sont dits de '2nde génération' "
 "car ils sont produits à partir de matériaux résiduels, pour la plupart "
 "d'origine végétale. Cela signifie que leur production n'entraîne pas une "
-"demande"
+"demande pour des céréales qui sont destinées à la consommation humaine."
 
 #: templates/tool.html:606
 msgid ""
