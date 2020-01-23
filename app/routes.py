@@ -69,13 +69,12 @@ def index():
 @app.route('/start')
 def start():
     """Return start page."""
-    if not current_user.is_authenticated:
-        session["url"] = url_for('start')
+    #if not current_user.is_authenticated:
+    #    session["url"] = url_for('start')
     return render_template('start.html')
 
 @app.route('/tool', defaults={'country': None})
 @app.route('/tool/<country>')
-@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -124,27 +123,72 @@ def search_car_model(search_item):
 @app.route('/search_params/<param_item>/<powertrain_filter>/<size_filter>')
 def search_params(param_item, powertrain_filter, size_filter):
     """ Return a list of params if param contain `search?item`"""
+
     parameters = [param for param in app.calc.load_params_file() if any(param_item.lower() in x.lower() for x in param)]
-    powertrain_filter = powertrain_filter.split(',')
-    size_filter = size_filter.split(',')
+
+
+    if session["language"] == "en":
+        powertrain_filter = [app.calc.d_pt_en[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_en[s] for s in size_filter.split(',')]
+
+    if session["language"] == "de":
+        powertrain_filter = [app.calc.d_pt_de[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_de[s] for s in size_filter.split(',')]
+
+    if session["language"] == "fr":
+        powertrain_filter = [app.calc.d_pt_fr[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_fr[s] for s in size_filter.split(',')]
+
+    if session["language"] == "it":
+        powertrain_filter = [app.calc.d_pt_it[pt] for pt in powertrain_filter.split(',')]
+        size_filter = [app.calc.d_size_it[s] for s in size_filter.split(',')]
+
     response = []
     for a in parameters:
         if isinstance(a[4], str):
             a[4] = [p.strip() for p in a[4].split(',')]
         if isinstance(a[5], str):
-            a[5] = [app.calc.d_rev_pt[p.strip()] for p in a[5].split(',')]
+            a[5] = [p.strip() for p in a[5].split(',')]
         if isinstance(a[6], str):
             a[6] = [s.strip() for s in a[6].split(',')]
         if (list(set(a[5]).intersection(powertrain_filter)) and list(set(a[6]).intersection(size_filter))):
-            response.append(a)
+            if session["language"] == "en":
+                a[5] = [app.calc.d_rev_pt_en[pt] for pt in a[5] if pt in app.calc.d_rev_pt_en]
+                a[6] = [app.calc.d_rev_size_en[s] for s in a[6] if s in app.calc.d_rev_size_en]
+                response.append(a)
+
+            if session["language"] == "de":
+                a[5] = [app.calc.d_rev_pt_de[pt] for pt in a[5] if pt in app.calc.d_rev_pt_de]
+                a[6] = [app.calc.d_rev_size_de[s] for s in a[6] if s in app.calc.d_rev_size_de]
+                response.append(a)
+
+            if session["language"] == "fr":
+                a[5] = [app.calc.d_rev_pt_fr[pt] for pt in a[5] if pt in app.calc.d_rev_pt_fr]
+                a[6] = [app.calc.d_rev_size_fr[s] for s in a[6] if s in app.calc.d_rev_size_fr]
+                response.append(a)
+
+            if session["language"] == "it":
+                a[5] = [app.calc.d_rev_pt_it[pt] for pt in a[5] if pt in app.calc.d_rev_pt_it]
+                a[6] = [app.calc.d_rev_size_it[s] for s in a[6] if s in app.calc.d_rev_size_it]
+                response.append(a)
 
     return jsonify(response[:7])
 
 @app.route('/get_param_value/<name>/<pt>/<s>/<y>')
 def get_param_value(name, pt, s, y):
-    pt = pt.split(',')
-    pt = [app.calc.d_pt[p] for p in pt]
-    s = s.split(',')
+    if session["language"] == "en":
+        pt = [app.calc.d_pt_en[p] for p in pt.split(',')]
+        s = [app.calc.d_size_en[x] for x in s.split(',')]
+    if session["language"] == "de":
+        pt = [app.calc.d_pt_de[p] for p in pt.split(',')]
+        s = [app.calc.d_size_de[x] for x in s.split(',')]
+    if session["language"] == "fr":
+        pt = [app.calc.d_pt_fr[p] for p in pt.split(',')]
+        s = [app.calc.d_size_fr[x] for x in s.split(',')]
+    if session["language"] == "it":
+        pt = [app.calc.d_pt_it[p] for p in pt.split(',')]
+        s = [app.calc.d_size_it[x] for x in s.split(',')]
+
     y = y.split(',')
     y = [int(a) for a in y]
     arr = app.calc.interpolate_array(y)
@@ -234,6 +278,7 @@ def set_language_for_result_display(language):
 @app.route('/get_language')
 def get_language():
     lang = session["language"]
+    json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
     if lang == "en":
         json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
     if lang == "de":
@@ -249,10 +294,10 @@ def get_language():
     return make_response(data, 200)
 
 @app.route("/get_inventory_excel_for_bw")
-@login_required
+#@login_required
 def get_inventory_excel_for_bw():
     resp = make_response(app.lci_to_bw)
-    resp.headers['Content-Disposition'] = 'attachment; filename=output.xlsx'
+    resp.headers['Content-Disposition'] = 'attachment; filename=inventory.xlsx'
     resp.headers["Content-type"] = "text/csv"
     return resp
 

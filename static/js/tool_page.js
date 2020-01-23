@@ -1698,6 +1698,7 @@ $("#InputParameters").on("keyup", function() {
                         }
                     };
                     tr.innerHTML += '<td> <button class="online-button" id='+row+' onClick="add_param(this.id)" style="margin:5px;background-color:transparent;color:white;border:1px solid white;width:150px;">Add</button> </td>'
+
                     $("#TableParameters").append(tr);
                 };
             }
@@ -1711,10 +1712,13 @@ $("#InputParameters").on("keyup", function() {
     var unit = document.getElementById("TableParameters").rows[clicked_id].cells[3].innerHTML;
     var scope_pt = document.getElementById("TableParameters").rows[clicked_id].cells[5];
     var p_elements = scope_pt.childNodes[0].childNodes;
+
+
     var powertrains = [];
     for (var p =0; p < p_elements.length; p++){
         powertrains.push(p_elements[p].innerHTML)
     };
+
 
     var scope_size = document.getElementById("TableParameters").rows[clicked_id].cells[6];
     var s_elements = scope_size.childNodes[0].childNodes;
@@ -1747,6 +1751,7 @@ $("#InputParameters").on("keyup", function() {
             l_s.push(s);
         }
      }
+
 
     var arr_request = [name, l_pt, l_s, unit, years]
 
@@ -1834,7 +1839,7 @@ function change_tutorial_video(type){
 										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)`
 		$("#tutorial_relation").html(str_relation);
         $("#tutorial_text").html(str);
-        $("#tutorial_video").attr("src","static/images/battery_mass_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/battery_mass_tutorial.gif");
     };
     if (type == "capacity_battery"){
         $("#tutorial_title").html("Change the capacity of the battery on a electric vehicle");
@@ -1851,21 +1856,21 @@ function change_tutorial_video(type){
                                         mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
 										`;
         $("#tutorial_relation").html(str_relation);
-        $("#tutorial_video").attr("src","static/images/battery_cell_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/battery_cell_tutorial.gif");
     };
     if (type == "engine_eff"){
         $("#tutorial_title").html("Change the engine efficiency of a vehicle");
         var str = "The efficiency of the engine of any vehicle can simply be adjusted by modifying the <b>engine efficiency</b> parameter.";
         $("#tutorial_text").html(str);
         $("#tutorial_relation").html('');
-        $("#tutorial_video").attr("src","static/images/engine_eff_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/engine_eff_tutorial.gif");
     };
     if (type == "passenger_mass"){
         $("#tutorial_title").html("Change the average mass of a passenger");
         var str = "The average mass of a passenger can simply be adjusted by modifying the <b>average passenger mass</b> parameter.";
         $("#tutorial_text").html(str);
         $("#tutorial_relation").html('');
-        $("#tutorial_video").attr("src","static/images/passenger_mass_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/passenger_mass_tutorial.gif");
     };
     if (type == "hybrid_level"){
         $("#tutorial_title").html("Change the power contribution of the combustion engine");
@@ -1875,7 +1880,7 @@ function change_tutorial_video(type){
                     half of the vehicle power is provided by an electric engine`;
         $("#tutorial_text").html(str);
         $("#tutorial_relation").html('');
-        $("#tutorial_video").attr("src","static/images/hybrid_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/hybrid_tutorial.gif");
     };
     if (type == "battery_lifetime"){
         $("#tutorial_title").html("Change the expected lifetime of the battery");
@@ -1885,7 +1890,7 @@ function change_tutorial_video(type){
                     complete the use phase of the vehicle.`;
         $("#tutorial_text").html(str);
         $("#tutorial_relation").html('');
-        $("#tutorial_video").attr("src","static/images/battery_lifetime_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/battery_lifetime_tutorial.gif");
     };
     if (type == "fc_eff"){
         $("#tutorial_title").html("Change the efficiency of a fuel cell stack");
@@ -1893,7 +1898,7 @@ function change_tutorial_video(type){
         by modifying the <b>fuel cell stack efficiency</b> parameter.`;
         $("#tutorial_text").html(str);
         $("#tutorial_relation").html('');
-        $("#tutorial_video").attr("src","static/images/fc_cell_tutorial.gif");
+        $("#tutorial_video").attr("src","/static/images/fc_cell_tutorial.gif");
     };
 
 }

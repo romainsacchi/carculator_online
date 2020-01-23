@@ -17,8 +17,8 @@ MIGRATION_DIR = os.path.join(ROOT, "migrations")
 
 # Instantiate Flask app
 app = Flask(__name__,
-            template_folder = "../templates",
-            static_folder= "../static")
+            template_folder="../templates",
+            static_folder="../static")
 
 # Setup flask-babel
 babel = Babel(app)
@@ -43,7 +43,7 @@ if is_prod:
                                 'en': 'English',
                                 'it': 'Italian',
                                 'fr': 'French',
-                                'de': 'German',
+
                             }
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -61,7 +61,7 @@ else:
                                 'en': 'English',
                                 'it': 'Italian',
                                 'fr': 'French',
-                                'de': 'German',
+
                             }
 
 # Initiate database
