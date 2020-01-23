@@ -65,7 +65,8 @@
 				  </div>
 				<div class="column" style="width:80%;float:center;text-align:center;display:inline-block;">
 					<nav class="navbar navbar-expand-lg mu-navbar">
-						<ul class="nav navbar-nav mu-menu navbar-right">
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="nav navbar-nav mu-menu navbar-right">
 							<li><a href="#" style="color:grey;">{{_('Home')}}</a></li>
 							<li><a href="#mu-about" style="color:grey;">{{_('About')}}</a></li>
 							<li><a href="#mu-counter" style="color:grey;">{{_('Facts')}}</a></li>
@@ -78,6 +79,7 @@
 							<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
 							<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
 						</ul>
+						</div>
 					</nav>
 				</div>
 		</div>
