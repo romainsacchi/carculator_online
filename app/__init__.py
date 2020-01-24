@@ -43,6 +43,7 @@ if is_prod:
                                 'en': 'English',
                                 'it': 'Italian',
                                 'fr': 'French',
+                                'de': 'German'
 
                             }
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
@@ -61,7 +62,7 @@ else:
                                 'en': 'English',
                                 'it': 'Italian',
                                 'fr': 'French',
-
+                                'de': 'German'
                             }
 
 # Initiate database
