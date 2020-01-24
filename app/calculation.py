@@ -477,7 +477,12 @@ class Calculation():
                     size = self.d_size_it[k[2]]
                 val = [float(n) for n in v]
 
-            d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
+            try:
+                d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
+            except:
+                print("error")
+                print(new_dict)
+
             f_d[(cat, powertrain, size, name, 'none')] = d_val
 
         new_dict[('Foreground',)] = f_d
