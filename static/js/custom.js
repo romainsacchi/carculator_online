@@ -116,26 +116,51 @@
                 i18n.translator.add(json);
 
                 var str = i18n('cookie_disclaimer')
-            $.notify({
-                icon: 'glyphicon glyphicon-warning-sign',
-                message: str
-            },
-            {
-                placement: {
-                    from: "top",
-                    align: "center"
+                $.notify({
+                    icon: 'glyphicon glyphicon-warning-sign',
+                    message: str
                 },
-                type:'warning',
-                delay:8000
-            },
-            {
-                animate: {
-                    enter: 'animated bounceInDown',
-                    exit: 'animated bounceOutUp'
+                {
+                    placement: {
+                        from: "top",
+                        align: "center"
+                    },
+                    type:'warning',
+                    delay:8000
                 },
+                {
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    },
 
-            }
-            );
+                }
+                );
+
+                if ($(window).width() < 724){
+                    var str = i18n('insufficient_width')
+                $.notify({
+                    icon: 'glyphicon glyphicon-warning-sign',
+                    message: str
+                },
+                {
+                    placement: {
+                        from: "top",
+                        align: "center"
+                    },
+                    type:'warning',
+                    delay:5000
+                },
+                {
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    },
+
+                }
+                );
+
+                };
 
 
                 var Messenger = function(el){
