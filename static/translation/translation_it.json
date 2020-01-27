@@ -64,6 +64,7 @@
       "medium": "Berline medio-grandi",
       "large": "Berline tre volumi",
       "SUV": "SUV",
-      "Van": "Van"
+      "Van": "Van",
+      "insufficient_width": "Il layout di questo sito Web non è ottimale per la larghezza dello schermo del dispositivo. Si consiglia di utilizzare un dispositivo con uno schermo più grande."
   }
 }

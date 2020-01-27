@@ -64,6 +64,7 @@
       "medium": "Berline familiale",
       "large": "Grande routière",
       "SUV": "SUV",
-      "Van": "Van"
+      "Van": "Van",
+      "insufficient_width": "La mise en page de ce site web n'a pas optimal pour la largeur d'écran de votre appareil. Nous recommandons d'utiliser un appareil avec un écran plus large."
   }
 }
