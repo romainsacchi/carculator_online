@@ -231,6 +231,8 @@ def get_electricity_mix(ISO, years):
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
+    print(session["language"])
+    print(request.get_json())
     d = app.calc.format_dictionary(request.get_json(), session['language'])
     # Create a connection to the Redis server
     q = Queue(connection=conn)
