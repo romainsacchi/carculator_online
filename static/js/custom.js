@@ -103,19 +103,18 @@
 	new ClipboardJS('.btn');
 	$("#bgndVideo").YTPlayer();
 
-	function elementInView(elem){
-      return $(window).scrollTop() < $(elem).offset().top + $(elem).height() ;
-    };
 
-    $(window).scroll(function(){
-      if (elementInView($('#bgndVideo_2')))
-      //fire at will!
-        alert('there it is, wooooohooooo!');
-    });
 
 	//$("#bgndVideo_2").attr("background", "none");
 	//$("#bgndVideo_2").attr("background-color", "initial");
 	$("#bgndVideo_2").YTPlayer();
+
+	$('#bgndVideo_2').on('appear',function(event, $all_appeared_elements) {
+	    alert("OK");
+    });
+
+
+
 	//$("#bgndVideo_2").attr("background", "none");
 	//$("#bgndVideo_2").attr("background-color", "initial");
 	//jQuery('#bgndVideo_2').YTPAddMask('/static/images/mediumsmall.png')
