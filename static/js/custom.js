@@ -105,7 +105,7 @@
 
 	$("#bgndVideo_2").YTPlayer();
 	$("#bgndVideo_2").attr("background", "none");
-	$("#bgndVideo_2").attr("background-color", "rgb(252,252,252)");
+	$("#bgndVideo_2").attr("background-color", "white");
 
 
 	$.when($.ajax({
