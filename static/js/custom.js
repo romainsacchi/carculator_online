@@ -103,8 +103,10 @@
 	new ClipboardJS('.btn');
 	$("#bgndVideo").YTPlayer();
 
+	//$("#bgndVideo_2").attr("background", "none");
+	$("#bgndVideo_2").attr("background-color", "white");
 	$("#bgndVideo_2").YTPlayer();
-	$("#bgndVideo_2").attr("background", "none");
+	//$("#bgndVideo_2").attr("background", "none");
 	$("#bgndVideo_2").attr("background-color", "white");
 
 
