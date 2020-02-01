@@ -103,6 +103,7 @@
 	new ClipboardJS('.btn');
 	$("#bgndVideo").YTPlayer();
 	$("#bgndVideo_2").YTPlayer();
+	$("#bgndVideo_2").attr("background", "none");
 
 	$.when($.ajax({
                 url: "/get_language",
