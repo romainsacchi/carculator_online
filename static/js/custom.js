@@ -109,8 +109,9 @@
 	//$("#bgndVideo_2").attr("background-color", "initial");
 	$("#bgndVideo_2").YTPlayer();
 
-	$('#bgndVideo_2').on('appear',function(event, $all_appeared_elements) {
+	$('#myVideoBanner_2').on('appear',function(event, $all_appeared_elements) {
 	    alert("OK");
+	    jQuery('#bgndVideo_2').YTPPlay()
     });
 
 
