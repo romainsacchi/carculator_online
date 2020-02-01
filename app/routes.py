@@ -52,7 +52,10 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = session["url"]
+            if "url" in session:
+                next_page = session["url"]
+            else:
+                next_page = url_for('start')
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
@@ -228,6 +231,8 @@ def get_electricity_mix(ISO, years):
 @app.route('/get_results/', methods = ['POST'])
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
+    print(session["language"])
+    print(request.get_json())
     d = app.calc.format_dictionary(request.get_json(), session['language'])
     # Create a connection to the Redis server
     q = Queue(connection=conn)

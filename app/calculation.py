@@ -451,7 +451,7 @@ class Calculation():
         f_d = {}
         new_dict[('Driving cycle',)] = raw_dict['driving_cycle']
         new_dict[('Background',)] = {k: v for k, v in raw_dict['background params'].items()}
-
+        print(new_dict)
         for k, v in raw_dict['foreground params'].items():
             if k in d_sliders:
                 name = d_sliders[k]
@@ -477,11 +477,9 @@ class Calculation():
                     size = self.d_size_it[k[2]]
                 val = [float(n) for n in v]
 
-            try:
-                d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
-            except:
-                print("error")
-                print(new_dict)
+
+            d_val = {(k,'loc'): v for k, v in list(zip(new_dict[('Functional unit',)]['year'], val))}
+
 
             f_d[(cat, powertrain, size, name, 'none')] = d_val
 
