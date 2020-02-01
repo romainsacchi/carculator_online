@@ -104,10 +104,11 @@
 	$("#bgndVideo").YTPlayer();
 
 	//$("#bgndVideo_2").attr("background", "none");
-	$("#bgndVideo_2").attr("background-color", "initial");
+	//$("#bgndVideo_2").attr("background-color", "initial");
 	$("#bgndVideo_2").YTPlayer();
 	//$("#bgndVideo_2").attr("background", "none");
-	$("#bgndVideo_2").attr("background-color", "initial");
+	//$("#bgndVideo_2").attr("background-color", "initial");
+	jQuery('#bgndVideo_2').YTPAddMask('/static/images/mediumsmall.png')
 
 
 	$.when($.ajax({
