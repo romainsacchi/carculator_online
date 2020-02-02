@@ -592,6 +592,22 @@ button:focus {
 	width: 230px;
 }
 
+.mu-about-area .online-button {
+	border-radius: 4px;
+	border: 1px solid #888;
+	background-color: transparent;
+	font-size: 20px;
+	font-weight: 600;
+	color:white;
+	letter-spacing: 1px;
+	text-align: center;
+	padding: 14px 24px;
+	margin-top: 10px;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	width: 230px;
+}
+
 @media (max-width: 1023px) {
 .mu-counter-area .online-button {
 	border-radius: 4px;
