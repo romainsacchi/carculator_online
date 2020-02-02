@@ -196,10 +196,11 @@
 									frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
 									style="display: block; margin: 0 auto;"></iframe>-->
 							<div id="myVideoBanner_2" class="myVideoBanner" style="height:427px;width:759px;background:none	!important;test-align:middle;margin:0 auto;background-color:none;position:relative;display:inline-block;">
-							<button class="online-button" onclick="$('#bgndVideo_2').YTPUnmute()">{{_('Unmute')}}</button>
+
 
 
 							</div>
+							<button class="online-button" onclick="$('#bgndVideo_2').YTPUnmute()">{{_('Unmute')}}</button>
 							<div id="bgndVideo_2" class="player"
 								 data-property="{videoURL:'https://youtu.be/2OVbAroGADc'
 								 ,containment:'#myVideoBanner_2',
@@ -207,7 +208,7 @@
 								 optimizeDisplay:false,
 								 autoPlay:false,
 								 ratio:'auto',
-								 mute:false, startAt:0, opacity:1,
+								 mute:true, startAt:0, opacity:1,
 								 videoWidth:true, showYTLogo: false,
 								 showControls:true}"
 								style="height:428px;width:760px;margin:0 auto;background-color:none;display:block-inline;">
