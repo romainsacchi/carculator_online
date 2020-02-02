@@ -106,8 +106,8 @@
 
 
 	$("#bgndVideo_2").YTPlayer();
-    $('#myVideoBanner_2').appear();
-	$('#myVideoBanner_2').on('appear',function(event, $all_appeared_elements) {
+    $('#unmute_button').appear();
+	$('#unmute_button').on('appear',function(event, $all_appeared_elements) {
 	    jQuery('#bgndVideo_2').YTPPlay()
     });
 

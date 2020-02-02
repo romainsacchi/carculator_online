@@ -201,13 +201,13 @@
 
 							</div>
 							<div style="margin:0 auto;">
-								<button class="online-button" onclick="$('#bgndVideo_2').YTPUnmute()" style="margin-left:10px;">{{_('Unmute')}}</button>
+								<button id="unmute_button" class="online-button" onclick="$('#bgndVideo_2').YTPUnmute()" style="margin-left:10px;">{{_('Unmute')}}</button>
 								<button class="online-button" onclick="$('#bgndVideo_2').YTPMute()">{{_('Mute')}}</button>
 							</div>
 							<div id="bgndVideo_2" class="player"
 								 data-property="{videoURL:'https://youtu.be/2OVbAroGADc'
 								 ,containment:'#myVideoBanner_2',
-								 loop:false,
+								 loop:true,
 								 optimizeDisplay:false,
 								 autoPlay:false,
 								 ratio:'auto',
