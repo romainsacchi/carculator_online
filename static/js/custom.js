@@ -276,9 +276,11 @@
     function mute_unmute(val){
         if (val == "Unmute"){
             $('#bgndVideo_2').YTPUnmute()
+            $("#unmute_button").text("Mute")
             $("#unmute_button").val("Mute")
         } else {
             $('#bgndVideo_2').YTPMute()
+            $("#unmute_button").text("Unmute")
             $("#unmute_button").val("Unmute")
         };
     };
