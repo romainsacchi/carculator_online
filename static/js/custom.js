@@ -105,19 +105,12 @@
 
 
 
-	//$("#bgndVideo_2").attr("background", "none");
-	//$("#bgndVideo_2").attr("background-color", "initial");
 	$("#bgndVideo_2").YTPlayer();
     $('#myVideoBanner_2').appear();
 	$('#myVideoBanner_2').on('appear',function(event, $all_appeared_elements) {
 	    jQuery('#bgndVideo_2').YTPPlay()
     });
 
-
-
-	//$("#bgndVideo_2").attr("background", "none");
-	//$("#bgndVideo_2").attr("background-color", "initial");
-	//jQuery('#bgndVideo_2').YTPAddMask('/static/images/mediumsmall.png')
 
 
 	$.when($.ajax({
