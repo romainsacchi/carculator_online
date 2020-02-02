@@ -110,6 +110,9 @@
 	$('#unmute_button').on('appear',function(event, $all_appeared_elements) {
 	    jQuery('#bgndVideo_2').YTPPlay()
     });
+    $('#unmute_button').on('disappear',function(event, $all_appeared_elements) {
+	    jQuery('#bgndVideo_2').YTPPause()
+    });
 
 
 
