@@ -111,23 +111,7 @@
 	    jQuery('#bgndVideo_2').YTPPlay()
     });
 
-    function mute_unmute(val){
 
-        if (val == "Unmute"){
-
-            $('#bgndVideo_2').YTPUnmute()
-            $("#unmute_button").val("Mute")
-
-
-        } else {
-
-            $('#bgndVideo_2').YTPMute()
-            $("#unmute_button").val("Unmute")
-
-
-        };
-
-    };
 
 	$.when($.ajax({
                 url: "/get_language",
@@ -288,6 +272,16 @@
 
 	
 })( jQuery );
+
+    function mute_unmute(val){
+        if (val == "Unmute"){
+            $('#bgndVideo_2').YTPUnmute()
+            $("#unmute_button").val("Mute")
+        } else {
+            $('#bgndVideo_2').YTPMute()
+            $("#unmute_button").val("Unmute")
+        };
+    };
 
 
 
