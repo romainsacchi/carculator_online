@@ -293,6 +293,7 @@ def get_language():
         json_url = os.path.join(app.static_folder, "translation", "translation_it.json")
 
     with open(json_url, encoding='utf-8') as fh:
+        print(lang)
         data = json.load(fh)
 
     return make_response(data, 200)
