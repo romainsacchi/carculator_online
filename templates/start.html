@@ -217,6 +217,7 @@
 			//str = str.replace(/^"|"$/g, '');
 				country_code = String(JSON.stringify(response["country_code"], null, 4))
 				country_code = country_code.replace(/^"|"$/g, '');
+				console.log(i18n(country_code));
 				$("#country").html(i18n(country_code));
 				$("#country_2").html(i18n(country_code));
 
