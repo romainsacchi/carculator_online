@@ -210,7 +210,7 @@
 					i18n.translator.add(json);
 				});
 
-			$.get("https://api.ipdata.co/?api-key=test", function (response) {
+			$.get("https://api.ipdata.co/?api-key=01375e31b3ec07200617162a1a5748bd15350081a7532f8cca649a6b", function (response) {
 			var str = String(JSON.stringify(response["country_name"], null, 4));
 			str = str.replace(/^"|"$/g, '');
 				$("#country").html(str);
