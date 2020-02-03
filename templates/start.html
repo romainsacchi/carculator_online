@@ -85,7 +85,7 @@
 					<div class="mu-counter-area">
 						<div class="row">
 
-							<h3 style="color:white;display:inline-block;margin:30 auto;">
+							<h3 style="color:white;display:inline-block;margin:30px auto;">
 								{{ _("We propose three level of analysis, depending on the level of details you wish to access.") }}
 							</h3>
 
@@ -155,7 +155,7 @@
 
 		</section>
 		<!-- End SCOPE -->
-
+	</main>
 
 	<!-- Start footer -->
 	<footer id="mu-footer" role="contentinfo">
@@ -213,12 +213,13 @@
 				});
 
 			$.get("https://api.ipdata.co/?api-key=01375e31b3ec07200617162a1a5748bd15350081a7532f8cca649a6b", function (response) {
-			var str = String(JSON.stringify(response["country_name"], null, 4));
-			str = str.replace(/^"|"$/g, '');
-				$("#country").html(str);
-				$("#country_2").html(str);
+			//var str = String(JSON.stringify(response["country_name"], null, 4));
+			//str = str.replace(/^"|"$/g, '');
 				country_code = String(JSON.stringify(response["country_code"], null, 4))
 				country_code = country_code.replace(/^"|"$/g, '');
+				$("#country").html(i18n(country_code));
+				$("#country_2").html(i18n(country_code));
+
 			}, "jsonp");
 
 			function get_results(){
