@@ -1481,7 +1481,7 @@ function collect_configuration(){
     background_params['custom electricity mix'] = mix_arr;
 
     // Retrieve passengers, cargo
-    $.each($('#table_use div'), function() {
+    $.each($('#table_use_passengers div'), function() {
         if (this.className == "noUi-target noUi-ltr noUi-horizontal"){
             foreground_params[this.id] = this.noUiSlider.get();
         };
