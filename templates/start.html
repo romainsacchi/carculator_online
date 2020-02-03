@@ -210,18 +210,21 @@
 					error: function(xhr, status, error){console.log(error)}})
 				).done(function(json){
 					i18n.translator.add(json);
+
+					$.get("https://api.ipdata.co/?api-key=01375e31b3ec07200617162a1a5748bd15350081a7532f8cca649a6b", function (response) {
+					//var str = String(JSON.stringify(response["country_name"], null, 4));
+					//str = str.replace(/^"|"$/g, '');
+						country_code = String(JSON.stringify(response["country_code"], null, 4))
+						country_code = country_code.replace(/^"|"$/g, '');
+						console.log(i18n(country_code));
+						$("#country").html(i18n(country_code));
+						$("#country_2").html(i18n(country_code));
+
+					}, "jsonp");
+
 				});
 
-			$.get("https://api.ipdata.co/?api-key=01375e31b3ec07200617162a1a5748bd15350081a7532f8cca649a6b", function (response) {
-			//var str = String(JSON.stringify(response["country_name"], null, 4));
-			//str = str.replace(/^"|"$/g, '');
-				country_code = String(JSON.stringify(response["country_code"], null, 4))
-				country_code = country_code.replace(/^"|"$/g, '');
-				console.log(i18n(country_code));
-				$("#country").html(i18n(country_code));
-				$("#country_2").html(i18n(country_code));
 
-			}, "jsonp");
 
 			function get_results(){
 				var country = $("#country").html();
