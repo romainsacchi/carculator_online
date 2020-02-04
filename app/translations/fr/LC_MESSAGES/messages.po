@@ -706,7 +706,7 @@ msgid ""
 "Set the parameters for a comparison between a gasoline, a diesel and\n"
 "\t\t\t\t\t\t\t\t\t\t\tan electricity-run vehicle, for  "
 msgstr ""
-"Voir les paramètres pour une analyse comparative entre un véhicule fonctionnant à l'essence, au diesel et à l'électricité."
+"Voir les paramètres pour une analyse comparative entre un véhicule fonctionnant à l'essence, au diesel et à l'électricité pour le/la "
 
 #: templates/start.html:105 templates/start.html:114
 msgid "(requires login)"
