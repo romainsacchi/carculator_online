@@ -151,6 +151,7 @@
       "UG": "Uganda",
       "ZM": "Zambia",
       "ZW": "Zimbabwe",
-      "NO": "Norway"
+      "NO": "Norway",
+      "completion_rate": "Calculation progress:"
   }
 }

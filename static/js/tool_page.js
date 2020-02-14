@@ -1550,6 +1550,28 @@ function get_results(){
                         clearInterval(interval);
                         return;
                     }
+
+                    var str = i18n('completion_rate')
+                        $.notify({
+                            icon: 'glyphicon glyphicon-time',
+                            message: str + " " + status["progress_status"] + "%"
+                            },
+                            {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type:'success'
+                            },
+                            {
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                },
+
+                            });
+
+
                     if (status['job status'] == 'job not found'){
                     var str = i18n('job_lost')
                         $.notify({
@@ -1580,7 +1602,7 @@ function get_results(){
 
     var str = i18n('popup_blocker')
     $.notify({
-        icon: '	glyphicon glyphicon-time',
+        icon: 'glyphicon glyphicon-time',
         message: str
         }
         ,
