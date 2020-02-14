@@ -1,9 +1,12 @@
+from app import app
 from carculator import *
 import json
 import io
 import xlsxwriter
 import csv
 from collections import defaultdict
+
+print(app.config["PROGRESS_STATUS"])
 
 
 class Calculation():
