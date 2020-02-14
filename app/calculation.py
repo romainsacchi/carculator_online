@@ -4,7 +4,7 @@ import io
 import xlsxwriter
 import csv
 from collections import defaultdict
-from app import app
+
 
 class Calculation():
 
