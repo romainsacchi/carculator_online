@@ -359,13 +359,6 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
 
     job_id = str(uuid.uuid1())
-    d = app.calc.format_dictionary(request.get_json(), session["language"], job_id)
-    # Create a connection to the Redis server
-    q = Queue(connection=conn)
-    job = q.enqueue_call(
-        func=app.calc.process_results, args=(d, session["language"], job_id), result_ttl=3600,
-        job_id = job_id
-    )
 
     # Add task to db
     task = Task(
@@ -374,6 +367,16 @@ def get_results():
     )
     db.session.add(task)
     db.session.commit()
+
+    d = app.calc.format_dictionary(request.get_json(), session["language"], job_id)
+    # Create a connection to the Redis server
+    q = Queue(connection=conn)
+    job = q.enqueue_call(
+        func=app.calc.process_results, args=(d, session["language"], job_id), result_ttl=3600,
+        job_id = job_id
+    )
+
+
 
 
     res = make_response(jsonify({"job id": job.get_id()}), 200)
