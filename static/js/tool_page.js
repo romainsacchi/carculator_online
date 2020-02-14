@@ -1543,6 +1543,7 @@ function get_results(){
             $.ajax('/check_status/'+job_id).then(function (status) {
                 return status;
                 }).then(function (status) {
+                    console.log(status);
                     if (status['job status'] == 'finished'){
                         var redirectWindow = window.open('/display_result/'+job_id, '_blank');
                         redirectWindow.location;

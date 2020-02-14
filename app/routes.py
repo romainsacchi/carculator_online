@@ -22,9 +22,10 @@ from .worker import conn
 from .calculation import Calculation
 from flask_babel import _
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Task
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+import uuid
 
 app.calc = Calculation()
 app.lci_to_bw = ""
@@ -358,10 +359,22 @@ def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json(), session["language"])
     # Create a connection to the Redis server
+    job_id = str(uuid)
     q = Queue(connection=conn)
     job = q.enqueue_call(
-        func=app.calc.process_results, args=(d, session["language"]), result_ttl=3600
+        func=app.calc.process_results, args=(d, session["language"], job_id), result_ttl=3600,
+        job_id = job_id
     )
+
+    # Add task to db
+    task = Task(
+        id=job_id,
+        progress=0,
+    )
+    db.session.add(task)
+    db.session.commit()
+
+
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
@@ -385,9 +398,12 @@ def get_job_status(job_key):
     except NoSuchJobError:
         response = jsonify({"job status": "job not found"})
         return make_response(response, 404)
-    response = jsonify({"job status": job.get_status()})
 
-    print("Current progress :", app.config["PROGRESS_STATUS"])
+    progress_status = Task.query.filter_by(id=job_key).first().progress
+
+    response = jsonify({"job status": job.get_status(), "progress_status": progress_status})
+
+
     return make_response(response, 200)
 
 
