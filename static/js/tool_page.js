@@ -1541,7 +1541,7 @@ function get_results(){
 
 
         // Check task status every 3 seconds
-        var progress = 0;
+
         const interval = setInterval(function() {
             $.ajax('/check_status/'+job_id).then(function (status) {
                 return status;
@@ -1554,7 +1554,9 @@ function get_results(){
                         return;
                     }
 
-                    if (status["progress_status"] != progress){
+                    var new_progress = status["progress_status"];
+
+                    if (new_progress != old_progress){
 
                         var str = i18n('completion_rate')
                         $.notify({
@@ -1574,8 +1576,7 @@ function get_results(){
                                     exit: 'animated bounceOutUp'
                                 },
                             });
-                            
-                        var progress = status["progress_status"];
+                        var old_progress = status["progress_status"];
                     };
 
 
