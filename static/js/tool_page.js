@@ -1538,12 +1538,15 @@ function get_results(){
                 error: function(xhr, status, error){console.log(error)}})
             ).then(function (response) {
         var job_id = response['job id'];
+
+
         // Check task status every 3 seconds
+        var progress = 0;
         const interval = setInterval(function() {
             $.ajax('/check_status/'+job_id).then(function (status) {
                 return status;
                 }).then(function (status) {
-                    console.log(status);
+
                     if (status['job status'] == 'finished'){
                         var redirectWindow = window.open('/display_result/'+job_id, '_blank');
                         redirectWindow.location;
@@ -1551,7 +1554,9 @@ function get_results(){
                         return;
                     }
 
-                    var str = i18n('completion_rate')
+                    if (status["progress_status"] != progress){
+
+                        var str = i18n('completion_rate')
                         $.notify({
                             icon: 'glyphicon glyphicon-time',
                             message: str + " " + status["progress_status"] + "%"
@@ -1568,8 +1573,13 @@ function get_results(){
                                     enter: 'animated bounceInDown',
                                     exit: 'animated bounceOutUp'
                                 },
-
                             });
+                            
+                        var progress = status["progress_status"];
+                    };
+
+
+
 
 
                     if (status['job status'] == 'job not found'){
