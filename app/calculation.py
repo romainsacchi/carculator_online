@@ -294,7 +294,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 30
+        task.progress = 50
         db.session.commit()
 
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
@@ -307,7 +307,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 40
+        task.progress = 70
         db.session.commit()
 
         if lang == "en":
@@ -383,7 +383,7 @@ class Calculation:
         )
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 50
+        task.progress = 80
         db.session.commit()
 
         results = self.ic.calculate_impacts()
@@ -395,7 +395,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 60
+        task.progress = 90
         db.session.commit()
 
         data = results.values
@@ -502,7 +502,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 70
+        task.progress = 95
         db.session.commit()
 
         TtW_energy = cm.ecm.motive_energy_per_km(
