@@ -500,9 +500,6 @@ class Calculation():
 
         new_dict[('Foreground',)] = f_d
 
-        self.progress = 20
-        print(self.progress)
-
         return new_dict
 
 
