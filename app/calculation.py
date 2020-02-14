@@ -294,7 +294,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 15
+        task.progress = 30
         db.session.commit()
 
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
@@ -307,7 +307,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 25
+        task.progress = 40
         db.session.commit()
 
         if lang == "en":
@@ -383,7 +383,7 @@ class Calculation:
         )
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 45
+        task.progress = 50
         db.session.commit()
 
         results = self.ic.calculate_impacts()
@@ -395,7 +395,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 55
+        task.progress = 60
         db.session.commit()
 
         data = results.values
@@ -502,7 +502,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 65
+        task.progress = 70
         db.session.commit()
 
         TtW_energy = cm.ecm.motive_energy_per_km(
@@ -519,7 +519,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 75
+        task.progress = 90
         db.session.commit()
 
         if lang == "en":
@@ -555,7 +555,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 95
+        task.progress = 100
         db.session.commit()
 
         return (
@@ -575,6 +575,11 @@ class Calculation:
 
     def format_dictionary(self, raw_dict, lang):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
+
+        # Update task progress to db
+        task = Task.query.filter_by(id=job_id).first()
+        task.progress = 10
+        db.session.commit()
 
         d_sliders = {
             "mileage-slider": "kilometers per year",
@@ -650,6 +655,11 @@ class Calculation:
             f_d[(cat, powertrain, size, name, "none")] = d_val
 
         new_dict[("Foreground",)] = f_d
+
+        # Update task progress to db
+        task = Task.query.filter_by(id=job_id).first()
+        task.progress = 20
+        db.session.commit()
 
         return new_dict
 
