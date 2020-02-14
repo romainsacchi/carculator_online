@@ -500,7 +500,8 @@ class Calculation():
 
         new_dict[('Foreground',)] = f_d
 
-        app.config["PROGRESS_STATUS"] = 20
+        self.progress = 20
+        print(self.progress)
 
         return new_dict
 
