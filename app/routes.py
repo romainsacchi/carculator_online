@@ -29,6 +29,8 @@ from werkzeug.urls import url_parse
 app.calc = Calculation()
 app.lci_to_bw = ""
 
+progress_status = 0
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -355,8 +357,6 @@ def get_electricity_mix(ISO, years):
 def get_results():
     """ Receive LCA calculation request and dispatch the job to the Redis server """
     d = app.calc.format_dictionary(request.get_json(), session["language"])
-    app.config["PROGRESS_STATUS"] = 10
-    print(app.config["PROGRESS_STATUS"])
     # Create a connection to the Redis server
     q = Queue(connection=conn)
     job = q.enqueue_call(
@@ -386,6 +386,8 @@ def get_job_status(job_key):
         response = jsonify({"job status": "job not found"})
         return make_response(response, 404)
     response = jsonify({"job status": job.get_status()})
+
+    print("Current progress :", app.calc.progress)
     return make_response(response, 200)
 
 
