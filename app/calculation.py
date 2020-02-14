@@ -292,8 +292,8 @@ class Calculation():
     def process_results(self, d, lang):
         """ Calculate LCIA and store results in an array of arrays """
 
-        self.progress = 30
-        print(self.progress)
+        app.config["PROGRESS_STATUS"] = 30
+        print(app.config["PROGRESS_STATUS"])
 
         arr = self.interpolate_array(d[('Functional unit',)]['year'])
         modify_xarray_from_custom_parameters(d[('Foreground',)], arr)
@@ -339,8 +339,8 @@ class Calculation():
 
                         list_res_costs.append([data_cost[0, s, pt, y, cat], size[s], powertrain[pt], year[y], cost_category[cat]])
 
-        self.progress = 60
-        print(self.progress)
+        app.config["PROGRESS_STATUS"] = 60
+        print(app.config["PROGRESS_STATUS"])
 
         self.ic = InventoryCalculation(cm.array, scope = d[('Functional unit',)], background_configuration = d[('Background',)])
         results = self.ic.calculate_impacts()
@@ -394,8 +394,8 @@ class Calculation():
                         list_res_acc.append([impact_category[imp], size[s], powertrain[pt], year[y], impact[cat],
                                          intercept, slope, lifetime])
 
-        self.progress = 80
-        print(self.progress)
+        app.config["PROGRESS_STATUS"] = 80
+        print(app.config["PROGRESS_STATUS"])
 
         arr = cm.array.sel(powertrain = d[('Functional unit',)]['powertrain'],
                            size = d[('Functional unit',)]['size'],
@@ -431,8 +431,8 @@ class Calculation():
 
         TtW_list = list(zip(list_names, TtW_energy))
 
-        self.progress = 100
-        print(self.progress)
+        app.config["PROGRESS_STATUS"] = 100
+        print(app.config["PROGRESS_STATUS"])
 
         return (json.dumps([lang, list_res, list_res_costs, arr_benchmark, TtW_list, dict_scatter, list_res_acc]), self.excel_lci)
 

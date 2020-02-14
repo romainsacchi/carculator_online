@@ -387,7 +387,7 @@ def get_job_status(job_key):
         return make_response(response, 404)
     response = jsonify({"job status": job.get_status()})
 
-    print("Current progress :", app.calc.progress)
+    print("Current progress :", app.config["PROGRESS_STATUS"])
     return make_response(response, 200)
 
 
