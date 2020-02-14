@@ -1,3 +1,4 @@
+from app import app.app
 from carculator import *
 import json
 import io
