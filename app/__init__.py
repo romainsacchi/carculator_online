@@ -49,6 +49,7 @@ if is_prod:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
+    app.config["PROGRESS_STATUS"] = 0
 
 
 
