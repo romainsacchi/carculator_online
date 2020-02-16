@@ -280,6 +280,33 @@
 									clearInterval(interval);
 									return;
 								}
+
+								var new_progress = status["progress_status"];
+								var str = i18n('completion_rate')
+
+								if (new_progress != old_progress){
+
+
+									$.notify({
+										icon: 'glyphicon glyphicon-time',
+										message: str + " " + status["progress_status"] + "%"
+										},
+										{
+											placement: {
+												from: "top",
+												align: "center"
+											},
+											type:'success'
+										},
+										{
+											animate: {
+												enter: 'animated bounceInDown',
+												exit: 'animated bounceOutUp'
+											},
+										});
+									var old_progress = status["progress_status"];
+								};
+
 								if (status['job status'] == 'job not found'){
 								var str = i18n('job_lost')
 									$.notify({

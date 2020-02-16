@@ -1555,10 +1555,11 @@ function get_results(){
                     }
 
                     var new_progress = status["progress_status"];
+                    var str = i18n('completion_rate')
 
                     if (new_progress != old_progress){
 
-                        var str = i18n('completion_rate')
+
                         $.notify({
                             icon: 'glyphicon glyphicon-time',
                             message: str + " " + status["progress_status"] + "%"
