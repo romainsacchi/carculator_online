@@ -392,6 +392,7 @@ class Calculation:
 
         lci = self.ic.export_lci(presamples=False)
         self.excel_lci = self.write_lci_to_excel(lci, "test").read()
+        print(self.excel_lci)
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -674,7 +675,7 @@ class Calculation:
         list_act = lci
         data = []
 
-        data.extend((["Database", "test"], ("format", "Excel spreadsheet")))
+        data.extend((["Database", name], ("format", "Excel spreadsheet")))
         data.append([])
 
         for k in list_act:
@@ -726,7 +727,6 @@ class Calculation:
                 )
             data.append([])
 
-        filepath = "lci-" + name + ".xlsx"
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {"in_memory": True})
         bold = workbook.add_format({"bold": True})
@@ -741,7 +741,7 @@ class Calculation:
         }
         frmt = lambda x: bold if row[0] in highlighted else None
 
-        sheet = workbook.add_worksheet("test")
+        sheet = workbook.add_worksheet(name)
 
         for row_index, row in enumerate(data):
             for col_index, value in enumerate(row):
