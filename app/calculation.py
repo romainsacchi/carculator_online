@@ -638,7 +638,7 @@ class Calculation:
                     size = self.d_size_en[k[2]]
                 if lang == "de":
                     powertrain = self.d_pt_de[k[1]]
-                    ssize = self.d_size_de[k[2]]
+                    size = self.d_size_de[k[2]]
                 if lang == "fr":
                     powertrain = self.d_pt_fr[k[1]]
                     size = self.d_size_fr[k[2]]
