@@ -7,6 +7,7 @@
       "brand":"Brand",
       "model":"Model",
       "trim":"Trim",
+      "add": "Add",
       "curb_mass":"Curb mass",
       "only_one_country":"Currently, only one country can be selected.",
       "category_not_available":"Sorry, this category of vehicle is not available yet.",

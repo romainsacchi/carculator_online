@@ -7,6 +7,7 @@
       "brand":"Marca",
       "model":"Modello",
       "trim":"Versione",
+      "add": "Inserisci",
       "curb_mass":"Massa in ordine di marcia",
       "only_one_country":"Attualmente è possibile selezionare solo un paese.",
       "category_not_available":"Spiacenti, questa categoria di veicoli non è ancora disponibile.",

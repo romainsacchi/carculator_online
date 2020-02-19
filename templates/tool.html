@@ -360,7 +360,7 @@
 
 								<p style="color:white;margin:20px;">{{_('Add any parameter you would like to modify.')}}</p>
 
-								<input class="form-control" id="InputParameters" type="text" placeholder="{{ _('Search for parameters to modify') }}">
+								<input class="form-control" id="InputParameters" type="text" placeholder="{{_('Search for parameters to modify')}}">
 									  <br>
 								<div class="container" style="width:100%;">
 									<div class="row" id="powertrain_row" style="width:100%;">
@@ -423,8 +423,6 @@
 											<div class="help-tip">
 												<p>{{_('Driving cycles are meant to represent real conditions of use of the vehicle.
 													Carculator uses the driving cycle to obtain the acceleration requirement of the vehicle over time.
-													It also uses speed intervals to locate emissions. For example, emissions that occurs below 50 km/h are
-													associated to the urban air compartment.
 													All the vehicles are compared against the same driving cycle.')}}
 												</p>
 											</div>
@@ -473,7 +471,7 @@
 												<h2>{{_('Electricity mix')}}</h2>
 												<div class="help-tip">
 											<p>{{_('Electricity mixes will determine the carbon intensity of the electricity necessary
-												to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery fo an electric vehicle,
+												to operate the car during its Use phase. This may concern, for example, the electricity to charge the battery of an electric vehicle,
 												but also the electricity needed to operate the electrolysis process to produce hydrogen
 												for a fuel cell-powered vehicle.')}}</p>
 										  </div>
@@ -605,7 +603,7 @@
 									This means that they do not compete with crops production with the purpose of food supply.')}}<br>
 									{{_('Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
 									Hydrogen can either be produced by electrolysis, which is a process that requires electricity, or via a process called
-									"Steam Methane Reforming" which uses steam and methane to produce hydrogen (and carbon monoxide).')}}<br>
+									"Steam Methane Reforming" which uses steam and methane to produce hydrogen.')}}<br>
 
 									{{_('Regarding energy storage technologies for battery electric vehicles, the user can choose between several types of lithium-ion-based chemistry
 									but also between different origins of manufacture. The origin of battery manufacture will determine the electricity mix used to produce the battery cells.')}}
@@ -626,10 +624,7 @@
 															</h6>
 														</div>
 													</td>
-
-
 											</tr>
-
 											</thead>
 											<tbody>
 												<tr>
@@ -637,7 +632,7 @@
 															<h3>{{_('Petrol')}}</h3>
 															<div class="help-tip" style="position:relative;float:left;">
 																		<p>{{_('Source for conventional petrol inventory: ecoinvent 3.6')}}<br>
-																			{{_('Source for bio-ethanol inventory: Francesco Cozzolino, 2018, Paul Scherrer Institut')}}
+																			{{_('Source for bio-ethanol inventory: Francesco Cozzolini, 2018, Paul Scherrer Institut')}}
 																		</p>
 															</div>
 														</th>
@@ -645,7 +640,7 @@
 															<h3>{{_('Diesel')}}</h3>
 															<div class="help-tip" style="position:relative;float:left;">
 																		<p>{{_('Source for conventional diesel inventory: ecoinvent 3.6')}}<br>
-																			{{_('Source for bio-diesel inventory: Francesco Cozzolino, 2018, Paul Scherrer Institut')}}
+																			{{_('Source for bio-diesel inventory: Francesco Cozzolini, 2018, Paul Scherrer Institut')}}
 																		</p>
 														</th>
 														<th><h3>{{_('Natural gas')}}</h3>
@@ -1010,7 +1005,7 @@
 															<button class="online-button"
 															  style="margin:5px;
 															  background-color:transparent;color:white;
-															  border:1px solid white;" disabled>{{_('Specify fleet composition')}}</button></div>
+															  border:1px solid white;width:auto;" disabled>{{_('Specify fleet composition')}}</button></div>
 
 
 														</div></td>

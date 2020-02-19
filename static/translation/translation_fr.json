@@ -7,6 +7,7 @@
       "brand":"Marque",
       "model":"Modèle",
       "trim":"Edition",
+      "add": "Ajouter",
       "curb_mass":"Masse à vide",
       "only_one_country":"Pour le moment, un seul pays peut être sélectionné."   ,
       "category_not_available":"Désolé, cette catégorie de véhicule n'est pas encore disponible.",
