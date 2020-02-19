@@ -153,6 +153,9 @@
       "ZM": "Zambie",
       "ZW": "Zimbabwe",
       "NO": "Norvège",
-      "completion_rate": "Calculs complétés à"
+      "completion_rate": "Calculs complétés à",
+      "cost": "Coût [Eur/km]",
+      "cc_per_km": "Changement climatique [kg CO2-eq./km]",
+     "driving_cycle": "Temps du cycle de conduite [secondes]"
   }
 }

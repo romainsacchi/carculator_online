@@ -222,8 +222,9 @@ function generate_line_chart_TtW_energy(data){
                     .width(500).height(500)
                     .forceY([0, max_val * 1.1]);
 
+      var dc_str = i18n("driving_cycle");
       chart.xAxis     //Chart x-axis settings
-          .axisLabel('Driving cycle time (s)')
+          .axisLabel(dc_str)
           .tickFormat(d3.format(',r'))
           ;
       chart.yAxis     //Chart y-axis settings
@@ -271,13 +272,14 @@ function generate_scatter_chart(data){
 
           return html;
         })
-
+      var gwp_str = i18n("cc_per_km");
       chart.xAxis     //Chart x-axis settings
-              .axisLabel('GWP100 (kg CO2-eq./km)')
+              .axisLabel(gwp_str)
               .tickFormat(d3.format('.02f'))
               ;
+      var cost_str = i18n("cost");
       chart.yAxis     //Chart y-axis settings
-          .axisLabel('Cost (Eur/km)')
+          .axisLabel(cost_str)
           .tickFormat(d3.format('.02f'));
 
       d3.select('#chart-scatter')    //Select the <svg> element you want to render the chart in.
