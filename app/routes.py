@@ -484,19 +484,19 @@ def get_param_table():
 
         print(d)
         if lang == "en":
-            d[5] = [app.calc.d_rev_pt_en[pt] for pt in d[5]]
+            d[5] = [app.calc.d_rev_pt_en.get(pt, pt) for pt in d[5]]
             d[6] = [app.calc.d_rev_size_en[pt] for pt in d[6]]
 
         if lang == "de":
-            d[5] = [app.calc.d_rev_pt_de[pt] for pt in d[5]]
+            d[5] = [app.calc.d_rev_pt_de.get(pt, pt) for pt in d[5]]
             d[6] = [app.calc.d_rev_size_de[pt] for pt in d[6]]
 
         if lang == "fr":
-            d[5] = [app.calc.d_rev_pt_fr[pt] for pt in d[5]]
+            d[5] = [app.calc.d_rev_pt_fr.get(pt, pt) for pt in d[5]]
             d[6] = [app.calc.d_rev_size_fr[pt] for pt in d[6]]
 
         if lang == "it":
-            d[5] = [app.calc.d_rev_pt_it[pt] for pt in d[5]]
+            d[5] = [app.calc.d_rev_pt_it.get(pt, pt) for pt in d[5]]
             d[6] = [app.calc.d_rev_size_it[pt] for pt in d[6]]
 
     return render_template("param_table.html", params=params)
