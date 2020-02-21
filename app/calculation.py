@@ -11,7 +11,7 @@ from app.models import Task
 class Calculation:
     def __init__(self):
 
-        self.car_to_class_map = self.load_map_file()
+        self.car_to_class_map = self.load_map_file("en")
         self.params = self.load_params_file()
         self.electricity_mix = BackgroundSystemModel().electricity_mix
         self.cip = CarInputParameters()
