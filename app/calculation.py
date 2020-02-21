@@ -277,7 +277,7 @@ class Calculation:
     def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
             if lang == "en":
-                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
+                data = [list(line) for line in csv.reader(f, delimiter=";")]
 
                 for d in data:
                     d[4] = self.d_rev_pt_en[d[4]]
