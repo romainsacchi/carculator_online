@@ -280,6 +280,7 @@ class Calculation:
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
 
                 for d in data:
+                    print(d)
                     d[5] = [self.d_rev_pt_en[pt] for pt in d[5]]
                     d[6] = [self.d_rev_pt_en[s] for s in d[6]]
 
