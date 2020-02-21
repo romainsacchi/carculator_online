@@ -473,7 +473,15 @@ def get_param_table():
     lang = session["language"]
     params = app.calc.load_params_file()
 
+
     for d in params:
+        if isinstance(d[4], str):
+            d[4] = [p.strip() for p in d[4].split(",")]
+        if isinstance(d[5], str):
+            d[5] = [p.strip() for p in d[5].split(",")]
+        if isinstance(d[6], str):
+            d[6] = [s.strip() for s in d[6].split(",")]
+
         print(d)
         if lang == "en":
             d[5] = [app.calc.d_rev_pt_en[pt] for pt in d[5]]
