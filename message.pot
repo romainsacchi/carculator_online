@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-19 11:40+0100\n"
+"POT-Creation-Date: 2020-02-21 18:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,71 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
+
+#: app/forms.py:9 app/forms.py:15
+msgid "Username"
+msgstr ""
+
+#: app/forms.py:10 app/forms.py:28
+msgid "Password"
+msgstr ""
+
+#: app/forms.py:11
+msgid "Remember Me"
+msgstr ""
+
+#: app/forms.py:12 templates/login.html:72
+msgid "Sign In"
+msgstr ""
+
+#: app/forms.py:16
+msgid "First name"
+msgstr ""
+
+#: app/forms.py:17
+msgid "Last name"
+msgstr ""
+
+#: app/forms.py:20
+msgid "Country"
+msgstr ""
+
+#: app/forms.py:21
+msgid "Email"
+msgstr ""
+
+#: app/forms.py:22
+msgid "Company/Institution"
+msgstr ""
+
+#: app/forms.py:23
+msgid "Subscribe to the newsletter?"
+msgstr ""
+
+#: app/forms.py:24
+msgid ""
+"I allow the support team of carculator to collect and store the submitted"
+" data. My submitted data will not be transmitted to any third party, but "
+"solely be used to generate statistics on the tool's audience. At any "
+"time, I can ask the support team of carculator to consult the data I "
+"submitted and request its deletion."
+msgstr ""
+
+#: app/forms.py:30
+msgid "Repeat Password"
+msgstr ""
+
+#: app/forms.py:31 templates/register.html:80
+msgid "Register"
+msgstr ""
+
+#: app/forms.py:36
+msgid "Please use a different username."
+msgstr ""
+
+#: app/forms.py:41
+msgid "Please use a different email address."
+msgstr ""
 
 #: app/routes.py:122 app/routes.py:142 templates/tool.html:632
 msgid "Petrol"
@@ -301,56 +366,56 @@ msgstr ""
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:823
+#: templates/index.html:834
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:823
+#: templates/index.html:834
 msgid "US"
 msgstr ""
 
-#: templates/index.html:825
+#: templates/index.html:836
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:838 templates/param_table.html:78
+#: templates/index.html:849 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:842
+#: templates/index.html:853
 msgid "Enter Email"
 msgstr ""
 
-#: templates/index.html:846
+#: templates/index.html:857
 msgid "Message"
 msgstr ""
 
-#: templates/index.html:849
+#: templates/index.html:860
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:856
+#: templates/index.html:867
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:857
+#: templates/index.html:868
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 
-#: templates/index.html:905 templates/login.html:114
+#: templates/index.html:916 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
 #: templates/result.html:346 templates/start.html:167 templates/tool.html:1064
 msgid "Copyright"
 msgstr ""
 
-#: templates/index.html:905 templates/login.html:114
+#: templates/index.html:916 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
 #: templates/result.html:346 templates/start.html:167 templates/tool.html:1064
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:906 templates/login.html:115
+#: templates/index.html:917 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
 #: templates/result.html:347 templates/start.html:168 templates/tool.html:1065
 msgid "All rights reserved"
@@ -358,10 +423,6 @@ msgstr ""
 
 #: templates/login.html:17 templates/register.html:17 templates/start.html:17
 msgid "Carculator : Start"
-msgstr ""
-
-#: templates/login.html:72
-msgid "Sign In"
 msgstr ""
 
 #: templates/login.html:92
@@ -402,10 +463,6 @@ msgstr ""
 
 #: templates/param_table.html:83 templates/tool.html:379
 msgid "Applies to size"
-msgstr ""
-
-#: templates/register.html:80
-msgid "Register"
 msgstr ""
 
 #: templates/result.html:18
@@ -935,8 +992,8 @@ msgid ""
 " and braking) as well as a\n"
 "\t\t\t\t\t\t\t\t\tfew other things, such as the number of passengers, the"
 " country the vehicles are operated in, etc.<br>\n"
-"\t\t\t\t\t\t\t\t\tProjected electricity mixes for are based on Business-"
-"as-usual scenarios from energy models."
+"\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
+"usual scenarios from energy models."
 msgstr ""
 
 #: templates/tool.html:413

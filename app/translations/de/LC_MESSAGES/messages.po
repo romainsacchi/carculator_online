@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-19 11:40+0100\n"
+"POT-Creation-Date: 2020-02-21 18:02+0100\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -17,6 +17,71 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
+
+#: app/forms.py:9 app/forms.py:15
+msgid "Username"
+msgstr ""
+
+#: app/forms.py:10 app/forms.py:28
+msgid "Password"
+msgstr ""
+
+#: app/forms.py:11
+msgid "Remember Me"
+msgstr ""
+
+#: app/forms.py:12 templates/login.html:72
+msgid "Sign In"
+msgstr "Einloggen"
+
+#: app/forms.py:16
+msgid "First name"
+msgstr ""
+
+#: app/forms.py:17
+msgid "Last name"
+msgstr ""
+
+#: app/forms.py:20
+msgid "Country"
+msgstr ""
+
+#: app/forms.py:21
+msgid "Email"
+msgstr ""
+
+#: app/forms.py:22
+msgid "Company/Institution"
+msgstr ""
+
+#: app/forms.py:23
+msgid "Subscribe to the newsletter?"
+msgstr ""
+
+#: app/forms.py:24
+msgid ""
+"I allow the support team of carculator to collect and store the submitted"
+" data. My submitted data will not be transmitted to any third party, but "
+"solely be used to generate statistics on the tool's audience. At any "
+"time, I can ask the support team of carculator to consult the data I "
+"submitted and request its deletion."
+msgstr ""
+
+#: app/forms.py:30
+msgid "Repeat Password"
+msgstr ""
+
+#: app/forms.py:31 templates/register.html:80
+msgid "Register"
+msgstr "Registrierung"
+
+#: app/forms.py:36
+msgid "Please use a different username."
+msgstr ""
+
+#: app/forms.py:41
+msgid "Please use a different email address."
+msgstr ""
 
 #: app/routes.py:122 app/routes.py:142 templates/tool.html:632
 msgid "Petrol"
@@ -313,58 +378,58 @@ msgstr "Publikationen zur"
 msgid "mobility"
 msgstr "mobilität"
 
-#: templates/index.html:823
+#: templates/index.html:834
 msgid "CONTACT"
 msgstr "KONTAKTIEREN SIE"
 
-#: templates/index.html:823
+#: templates/index.html:834
 msgid "US"
 msgstr "UNS"
 
-#: templates/index.html:825
+#: templates/index.html:836
 msgid "We are always happy to hear from you."
 msgstr "Wir freuen uns von Ihnen zu hören."
 
-#: templates/index.html:838 templates/param_table.html:78
+#: templates/index.html:849 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:842
+#: templates/index.html:853
 msgid "Enter Email"
 msgstr "Email"
 
-#: templates/index.html:846
+#: templates/index.html:857
 msgid "Message"
 msgstr "Nachricht"
 
-#: templates/index.html:849
+#: templates/index.html:860
 msgid "SUBMIT"
 msgstr "ABSENDEN"
 
-#: templates/index.html:856
+#: templates/index.html:867
 msgid "carculator support"
 msgstr "Carculator Support"
 
-#: templates/index.html:857
+#: templates/index.html:868
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 "Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten "
 "haben."
 
-#: templates/index.html:905 templates/login.html:114
+#: templates/index.html:916 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
 #: templates/result.html:346 templates/start.html:167 templates/tool.html:1064
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/index.html:905 templates/login.html:114
+#: templates/index.html:916 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
 #: templates/result.html:346 templates/start.html:167 templates/tool.html:1064
 msgid "Paul Scherrer Institut"
 msgstr "Paul Scherrer Institut"
 
-#: templates/index.html:906 templates/login.html:115
+#: templates/index.html:917 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
 #: templates/result.html:347 templates/start.html:168 templates/tool.html:1065
 msgid "All rights reserved"
@@ -373,10 +438,6 @@ msgstr "Alle Rechte vorbehalten"
 #: templates/login.html:17 templates/register.html:17 templates/start.html:17
 msgid "Carculator : Start"
 msgstr "Carculator: Startseite"
-
-#: templates/login.html:72
-msgid "Sign In"
-msgstr "Einloggen"
 
 #: templates/login.html:92
 msgid "New User?"
@@ -417,10 +478,6 @@ msgstr "Gilt für den Antriebsstrang"
 #: templates/param_table.html:83 templates/tool.html:379
 msgid "Applies to size"
 msgstr "Gilt für die Größenkategorie"
-
-#: templates/register.html:80
-msgid "Register"
-msgstr "Registrierung"
 
 #: templates/result.html:18
 msgid "Carculator : Results"
@@ -1033,14 +1090,9 @@ msgid ""
 " and braking) as well as a\n"
 "\t\t\t\t\t\t\t\t\tfew other things, such as the number of passengers, the"
 " country the vehicles are operated in, etc.<br>\n"
-"\t\t\t\t\t\t\t\t\tProjected electricity mixes for are based on Business-"
-"as-usual scenarios from energy models."
+"\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
+"usual scenarios from energy models."
 msgstr ""
-"Zuerst wird der Fahrzyklus (d.h. die Geschwindigkeit in jeder Sekunde des"
-" Fahrprofils, um die Energie zur Beschleunigung und aus dem Bremsen zu "
-"bestimmen) benötigt. Zusätzlich die Zahl der PAssagiere, das LAnd, in dem"
-" die Fahrzeuge betrieben werden, etc. Strommixe der Zukunft basieren auf "
-"\"Business-as-usual\"-Szenarien verschiedener Energiemodelle. "
 
 #: templates/tool.html:413
 msgid " For European country, the projections originate the"
@@ -1071,11 +1123,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
 "driving cycle."
 msgstr ""
-"Fahrzyklen repräsentieren Realbedingungen beim "
-"Fahren. carculator benutzt den Fahrzyklus "
-"um die Beschleunigung des Fahzeugs zu"
-" bestimmen.Alle Fahrzeuge werden mit dem"
-" gleichen Fahrzyklus verglichen."
+"Fahrzyklen repräsentieren Realbedingungen beim Fahren. carculator benutzt"
+" den Fahrzyklus um die Beschleunigung des Fahzeugs zu bestimmen.Alle "
+"Fahrzeuge werden mit dem gleichen Fahrzyklus verglichen."
 
 #: templates/tool.html:431
 msgid "Geographical conditions"
@@ -1118,13 +1168,10 @@ msgid ""
 "electrolysis process to produce hydrogen\n"
 "\t\t\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
 msgstr ""
-"Strommixe bestimmen den CO2-Gehalt des "
-"Stroms, der benötigt wird um das "
-"Fahrzeug zu betreiben. Dies betrifft "
-"z.B. den Strom zum Laden der "
-"Batterie eines Batterieautos, aber auch "
-"den Strom der zur Elektrolyse zur "
-"Wasserstoffproduktion benötigt wird. "
+"Strommixe bestimmen den CO2-Gehalt des Stroms, der benötigt wird um das "
+"Fahrzeug zu betreiben. Dies betrifft z.B. den Strom zum Laden der "
+"Batterie eines Batterieautos, aber auch den Strom der zur Elektrolyse zur"
+" Wasserstoffproduktion benötigt wird. "
 
 #: templates/tool.html:479
 msgid "Passengers"
@@ -1302,8 +1349,8 @@ msgid ""
 "Source for bio-ethanol inventory: Francesco Cozzolini, 2018, Paul "
 "Scherrer Institut"
 msgstr ""
-"Referenz für Bioethanolinventar: Francesco "
-"Cozzolini, 2018, Paul Scherrer Institut"
+"Referenz für Bioethanolinventar: Francesco Cozzolini, 2018, Paul Scherrer"
+" Institut"
 
 #: templates/tool.html:642
 msgid "Source for conventional diesel inventory: ecoinvent 3.6"
@@ -1313,9 +1360,7 @@ msgstr "Referenz für konventionellen Diesel: ecoinvent 3.6"
 msgid ""
 "Source for bio-diesel inventory: Francesco Cozzolini, 2018, Paul Scherrer"
 " Institut"
-msgstr ""
-"Referenz für Biodiesel: Francesco Cozzolini,"
-" 2018, Paul Scherrer Institut"
+msgstr "Referenz für Biodiesel: Francesco Cozzolini, 2018, Paul Scherrer Institut"
 
 #: templates/tool.html:648
 msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
@@ -1599,7 +1644,29 @@ msgstr "Fehlerfortpflanzung (Monte Carlo)"
 msgid "number of iterations"
 msgstr "Anzahl der Iterationen"
 
-
-
-
+#~ msgid ""
+#~ "The model needs to know the "
+#~ "driving cycle of the vehicles (i.e., "
+#~ "the speed level per\n"
+#~ "\t\t\t\t\t\t\t\t\tsecond of driving, to "
+#~ "derive the needs for acceleration and"
+#~ " braking) as well as a\n"
+#~ "\t\t\t\t\t\t\t\t\tfew other things, such "
+#~ "as the number of passengers, the "
+#~ "country the vehicles are operated in,"
+#~ " etc.<br>\n"
+#~ "\t\t\t\t\t\t\t\t\tProjected electricity mixes "
+#~ "for are based on Business-as-usual"
+#~ " scenarios from energy models."
+#~ msgstr ""
+#~ "Zuerst wird der Fahrzyklus (d.h. die "
+#~ "Geschwindigkeit in jeder Sekunde des "
+#~ "Fahrprofils, um die Energie zur "
+#~ "Beschleunigung und aus dem Bremsen zu"
+#~ " bestimmen) benötigt. Zusätzlich die Zahl"
+#~ " der PAssagiere, das LAnd, in dem "
+#~ "die Fahrzeuge betrieben werden, etc. "
+#~ "Strommixe der Zukunft basieren auf "
+#~ "\"Business-as-usual\"-Szenarien verschiedener "
+#~ "Energiemodelle. "
 

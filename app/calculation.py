@@ -35,9 +35,9 @@ class Calculation:
             "Diesel": "ICEV-d",
             "Gas naturale": "ICEV-g",
             "Elettrica": "BEV",
-            "H2 Cella a combustibile": "FCEV",
-            "Hybrid-benzina": "HEV-p",
-            "(Plugin) Hybrid-benzina": "PHEV",
+            "Cella a combustibile H2": "FCEV",
+            "Ibrido benzina": "HEV-p",
+            "Ibrido-benzina (Plugin)": "PHEV",
         }
         self.d_pt_de = {
             "Benzin": "ICEV-p",
@@ -79,9 +79,9 @@ class Calculation:
         self.d_size_it = {
             "Mini citycar": "Mini",
             "Citycar": "Small",
-            "Berline compatte": "Lower medium",
-            "Berline medio-grandi": "Medium",
-            "Berline tre volumi": "Large",
+            "Berlina compatta": "Lower medium",
+            "Berlina medio-grande": "Medium",
+            "Berlina tre volumi": "Large",
             "SUV": "SUV",
             "Van": "Van",
         }
@@ -119,25 +119,25 @@ class Calculation:
         }
 
         self.d_impact_it = {
-            "Occupazione di seminativi [m2 / anno]": "agricultural land occupation",
+            "Occupazione di terreni agricoli [m2 / anno]": "agricultural land occupation",
             "Cambiamenti climatici [kg CO2-eq.]": "climate change",
             "Esaurimento delle risorse energetiche fossili [kg di petrolio eq.]": "fossil depletion",
             "Tossicità per gli ambienti acquatici non marini [kg 1,4-DC-eq.]": "freshwater ecotoxicity",
             "Eutrofizzazione di ambienti acquatici non marini [kg P-eq.]": "freshwater eutrophication",
             "Tossicità per l'uomo [kg 1,4-DC-eq.]": "human toxicity",
-            "Radiazione ionizzante [kg U235-Eq]": "ionising radiation",
+            "Radiazione ionizzante [kg U235-eq.]": "ionising radiation",
             "Tossicità per gli ambienti acquatici marini [kg 1,4-DC-eq.]": "marine ecotoxicity",
             "Eutrofizzazione di ambienti acquatici non marini [kg N-eq.]": "marine eutrophication",
             "Esaurimento delle risorse metalliche [kg ferro-eq.]": "metal depletion",
             "Trasformazione del terreno naturale [m2]": "natural land transformation",
             "Deterioramento dello strato di ozono [kg CFC-11-eq.]": "ozone depletion",
-            "Formazione di particelle fini [kg PM10-eq.]": "particulate matter formation",
+            "Formazione di particolato [kg PM10-eq.]": "particulate matter formation",
             "Formazione di smog [kg NMVOC-eq.]": "photochemical oxidant formation",
             "Acidificazione terrestre [kg SO2-Eq-eq.]": "terrestrial acidification",
             "Tossicità terrestre [kg 1,4-DC.-eq.]": "terrestrial ecotoxicity",
-            "Occupazione della terra in un ambiente urbano [m2/anno]": "urban land occupation",
+            "Occupazione di terreno urbano [m2/anno]": "urban land occupation",
             "Esaurimento delle riserve di acqua dolce [m3]": "water depletion",
-            "Emissioni di rumore [Person-Pascal / second]": "human noise",
+            "Inquinamento acustico [Person-Pascal / secondo]": "human noise",
         }
 
         self.d_impact_fr = {
@@ -243,10 +243,10 @@ class Calculation:
         }
         self.d_cost_it = {
             "Acquisto": "purchase",
-            "Rinnovo dei componenti": "component replacement",
+            "Sostituzione dei componenti": "component replacement",
             "Carburante": "energy",
             "Manutenzione": "maintenance",
-            "total": "total",
+            "Totale": "total",
         }
         self.d_rev_pt_en = {v: k for k, v, in self.d_pt_en.items()}
         self.d_rev_pt_fr = {v: k for k, v, in self.d_pt_fr.items()}
@@ -273,9 +273,31 @@ class Calculation:
         self.d_rev_cat_de = {v: k for k, v, in self.d_cat_de.items()}
         self.excel_lci = ""
 
-    def load_map_file(self):
+    def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
-            data = [tuple(line) for line in csv.reader(f, delimiter=";")]
+            if lang == "en":
+                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
+
+                for d in data:
+                    d[5] = [self.d_rev_pt_en[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_pt_en[s] for s in d[6]]
+
+            if lang == "fr":
+                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
+                for d in data:
+                    d[5] = [self.d_rev_pt_fr[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_pt_fr[s] for s in d[6]]
+            if lang == "de":
+                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
+                for d in data:
+                    d[5] = [self.d_rev_pt_de[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_pt_de[s] for s in d[6]]
+            if lang == "it":
+                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
+                for d in data:
+                    d[5] = [self.d_rev_pt_it[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_pt_it[s] for s in d[6]]
+
         return data
 
     def load_params_file(self):
