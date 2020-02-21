@@ -280,25 +280,25 @@ class Calculation:
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
 
                 for d in data:
-                    print(d)
-                    d[5] = [self.d_rev_pt_en[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_pt_en[s] for s in d[6]]
+                    d[5] = self.d_rev_pt_en[d[5]]
+                    d[6] = self.d_rev_pt_en[d[6]]
+
 
             if lang == "fr":
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
-                    d[5] = [self.d_rev_pt_fr[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_pt_fr[s] for s in d[6]]
+                    d[5] = self.d_rev_pt_fr[d[5]]
+                    d[6] = self.d_rev_pt_fr[d[6]]
             if lang == "de":
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
-                    d[5] = [self.d_rev_pt_de[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_pt_de[s] for s in d[6]]
+                    d[5] = self.d_rev_pt_de[d[5]]
+                    d[6] = self.d_rev_pt_de[d[6]]
             if lang == "it":
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
-                    d[5] = [self.d_rev_pt_it[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_pt_it[s] for s in d[6]]
+                    d[5] = self.d_rev_pt_it[d[5]]
+                    d[6] = self.d_rev_pt_it[d[6]]
 
         return data
 
