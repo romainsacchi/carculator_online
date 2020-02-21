@@ -198,7 +198,7 @@ def search_params(param_item, powertrain_filter, size_filter):
     lang = session["language"]
     parameters = [
         param
-        for param in app.calc.load_params_file(lang)
+        for param in app.calc.load_params_file()
         if any(param_item.lower() in x.lower() for x in param)
     ]
 

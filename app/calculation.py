@@ -298,30 +298,9 @@ class Calculation:
 
         return data
 
-    def load_params_file(self, lang):
+    def load_params_file(self):
         with open("data/parameters definition.txt", "r") as f:
             data = [line for line in csv.reader(f, delimiter="\t")]
-
-            if lang == "en":
-                for d in data:
-                    d[5] = [self.d_rev_pt_en[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_size_en[s] for s in d[6]]
-
-            if lang == "fr":
-                for d in data:
-                    d[5] = [self.d_rev_pt_fr[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_size_fr[s] for s in d[6]]
-
-            if lang == "de":
-                for d in data:
-                    d[5] = [self.d_rev_pt_de[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_size_de[s] for s in d[6]]
-
-            if lang == "it":
-                for d in data:
-                    d[5] = [self.d_rev_pt_it[pt] for pt in d[5]]
-                    d[6] = [self.d_rev_size_it[s] for s in d[6]]
-
         return data
 
     def interpolate_array(self, years):
