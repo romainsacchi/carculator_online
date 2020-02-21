@@ -11,7 +11,7 @@ from app.models import Task
 class Calculation:
     def __init__(self):
 
-        self.car_to_class_map = self.load_map_file("en")
+
         self.params = self.load_params_file()
         self.electricity_mix = BackgroundSystemModel().electricity_mix
         self.cip = CarInputParameters()
@@ -272,6 +272,7 @@ class Calculation:
         self.d_rev_cat_it = {v: k for k, v, in self.d_cat_it.items()}
         self.d_rev_cat_de = {v: k for k, v, in self.d_cat_de.items()}
         self.excel_lci = ""
+        self.car_to_class_map = self.load_map_file("en")
 
     def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:

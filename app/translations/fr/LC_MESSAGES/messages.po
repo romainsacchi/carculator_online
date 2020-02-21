@@ -20,31 +20,31 @@ msgstr ""
 
 #: app/forms.py:9 app/forms.py:15
 msgid "Username"
-msgstr ""
+msgstr "Nom d'utilisateur"
 
 #: app/forms.py:10 app/forms.py:28
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: app/forms.py:11
 msgid "Remember Me"
-msgstr ""
+msgstr "Se souvenir de moi lors de ma prochaine visite"
 
 #: app/forms.py:12 templates/login.html:72
 msgid "Sign In"
-msgstr ""
+msgstr "Se connecter"
 
 #: app/forms.py:16
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 #: app/forms.py:17
 msgid "Last name"
-msgstr ""
+msgstr "Nom de famille"
 
 #: app/forms.py:20
 msgid "Country"
-msgstr ""
+msgstr "Pays"
 
 #: app/forms.py:21
 msgid "Email"
@@ -52,11 +52,11 @@ msgstr ""
 
 #: app/forms.py:22
 msgid "Company/Institution"
-msgstr ""
+msgstr "Entreprise/Institut"
 
 #: app/forms.py:23
 msgid "Subscribe to the newsletter?"
-msgstr ""
+msgstr "Souscrire à la newsletter"
 
 #: app/forms.py:24
 msgid ""
@@ -66,22 +66,26 @@ msgid ""
 "time, I can ask the support team of carculator to consult the data I "
 "submitted and request its deletion."
 msgstr ""
+"J'autorise l'équipe de développement de carculator à collecter et enregistrer mes données. "
+"Mes données ne seront transmises à aucune partie tierce, mais seulement utilisées dans le but "
+"d'établir des statistiques sur l'utilisation du site web. A tout moment je peux demander à consulter mes "
+"donnés et ordonner leur effacement."
 
 #: app/forms.py:30
 msgid "Repeat Password"
-msgstr ""
+msgstr "Répétez le mot de passe"
 
 #: app/forms.py:31 templates/register.html:80
 msgid "Register"
-msgstr ""
+msgstr "S'enregistrer"
 
 #: app/forms.py:36
 msgid "Please use a different username."
-msgstr ""
+msgstr "Utilisez un nom d'utilisateur différent."
 
 #: app/forms.py:41
 msgid "Please use a different email address."
-msgstr ""
+msgstr "Utilisez une adresse email différente."
 
 #: app/routes.py:122 app/routes.py:142 templates/tool.html:632
 msgid "Petrol"
@@ -223,7 +227,7 @@ msgstr ""
 
 #: templates/index.html:210
 msgid "Unmute"
-msgstr ""
+msgstr "Activer le son"
 
 #: templates/index.html:242
 msgid "Clean Code"
@@ -442,11 +446,11 @@ msgstr ""
 
 #: templates/login.html:92
 msgid "New User?"
-msgstr ""
+msgstr "Nouvel utilisateur?"
 
 #: templates/login.html:92
 msgid "Click to Register!"
-msgstr ""
+msgstr "Cliquez pour vous enregistrer!"
 
 #: templates/param_table.html:9
 msgid "Carculator : Parameters"
@@ -1104,7 +1108,7 @@ msgid ""
 "originate the model"
 msgstr ""
 "de la Commission Européenne. Pour les pays africains, les projections "
-"sont issues du moèle"
+"sont issues du modèle"
 
 #: templates/tool.html:416
 msgid "For other countries, projections are based on the IEA report"
