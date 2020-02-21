@@ -474,6 +474,7 @@ def get_param_table():
     params = app.calc.load_params_file()
 
     for d in params:
+        print(d)
         if lang == "en":
             d[5] = [app.calc.d_rev_pt_en[pt] for pt in d[5]]
             d[6] = [app.calc.d_rev_size_en[pt] for pt in d[6]]
