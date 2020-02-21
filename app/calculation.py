@@ -281,24 +281,24 @@ class Calculation:
 
                 for d in data:
                     d[5] = self.d_rev_pt_en[d[5]]
-                    d[6] = self.d_rev_pt_en[d[6]]
+                    d[6] = self.d_rev_size_en[d[6]]
 
 
             if lang == "fr":
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
                     d[5] = self.d_rev_pt_fr[d[5]]
-                    d[6] = self.d_rev_pt_fr[d[6]]
+                    d[6] = self.d_rev_size_fr[d[6]]
             if lang == "de":
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
                     d[5] = self.d_rev_pt_de[d[5]]
-                    d[6] = self.d_rev_pt_de[d[6]]
+                    d[6] = self.d_rev_size_de[d[6]]
             if lang == "it":
                 data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
                     d[5] = self.d_rev_pt_it[d[5]]
-                    d[6] = self.d_rev_pt_it[d[6]]
+                    d[6] = self.d_rev_size_it[d[6]]
 
         return data
 
