@@ -11,8 +11,6 @@ from app.models import Task
 class Calculation:
     def __init__(self):
 
-
-        self.params = self.load_params_file()
         self.electricity_mix = BackgroundSystemModel().electricity_mix
         self.cip = CarInputParameters()
         self.cip.static()
@@ -272,39 +270,58 @@ class Calculation:
         self.d_rev_cat_it = {v: k for k, v, in self.d_cat_it.items()}
         self.d_rev_cat_de = {v: k for k, v, in self.d_cat_de.items()}
         self.excel_lci = ""
-        self.car_to_class_map = self.load_map_file("en")
+
 
     def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
-            if lang == "en":
-                data = [list(line) for line in csv.reader(f, delimiter=";")]
+            data = [list(line) for line in csv.reader(f, delimiter=";")]
 
+            if lang == "en":
                 for d in data:
                     d[4] = self.d_rev_pt_en[d[4]]
                     d[5] = self.d_rev_size_en[d[5]]
 
-
             if lang == "fr":
-                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
                     d[4] = self.d_rev_pt_fr[d[4]]
                     d[5] = self.d_rev_size_fr[d[5]]
+
             if lang == "de":
-                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
                     d[4] = self.d_rev_pt_de[d[4]]
                     d[5] = self.d_rev_size_de[d[5]]
+
             if lang == "it":
-                data = [tuple(line) for line in csv.reader(f, delimiter=";")]
                 for d in data:
                     d[4] = self.d_rev_pt_it[d[4]]
                     d[5] = self.d_rev_size_it[d[5]]
 
         return data
 
-    def load_params_file(self):
+    def load_params_file(self, lang):
         with open("data/parameters definition.txt", "r") as f:
             data = [line for line in csv.reader(f, delimiter="\t")]
+
+            if lang == "en":
+                for d in data:
+                    d[5] = [self.d_rev_pt_en[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_size_en[s] for s in d[6]]
+
+            if lang == "fr":
+                for d in data:
+                    d[5] = [self.d_rev_pt_fr[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_size_fr[s] for s in d[6]]
+
+            if lang == "de":
+                for d in data:
+                    d[5] = [self.d_rev_pt_de[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_size_de[s] for s in d[6]]
+
+            if lang == "it":
+                for d in data:
+                    d[5] = [self.d_rev_pt_it[pt] for pt in d[5]]
+                    d[6] = [self.d_rev_size_it[s] for s in d[6]]
+
         return data
 
     def interpolate_array(self, years):

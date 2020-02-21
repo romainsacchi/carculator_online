@@ -183,9 +183,10 @@ def tool_page(country):
 @app.route("/search_car_model/<search_item>")
 def search_car_model(search_item):
     """ Return a list of cars if cars contain `search item`"""
+    lang = session["language"]
     cars = [
         car
-        for car in app.calc.car_to_class_map
+        for car in app.calc.load_map_file(lang)
         if any(search_item.lower() in x.lower() for x in car)
     ]
     return jsonify(cars[:5])
@@ -194,10 +195,10 @@ def search_car_model(search_item):
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):
     """ Return a list of params if param contain `search?item`"""
-
+    lang = session["language"]
     parameters = [
         param
-        for param in app.calc.load_params_file()
+        for param in app.calc.load_params_file(lang)
         if any(param_item.lower() in x.lower() for x in param)
     ]
 
