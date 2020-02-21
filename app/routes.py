@@ -471,5 +471,22 @@ def get_inventory_excel_for_bw():
 @app.route("/get_param_table")
 def get_param_table():
     lang = session["language"]
-    params = app.calc.load_params_file(lang)
-    return render_template("param_table.html", params=params)
+    d = app.calc.load_params_file()
+
+    if lang == "en":
+        d[5] = [app.calc.d_rev_pt_en[pt] for pt in d[5]]
+        d[6] = [app.calc.d_rev_size_en[pt] for pt in d[6]]
+
+    if lang == "de":
+        d[5] = [app.calc.d_rev_pt_de[pt] for pt in d[5]]
+        d[6] = [app.calc.d_rev_size_de[pt] for pt in d[6]]
+
+    if lang == "fr":
+        d[5] = [app.calc.d_rev_pt_fr[pt] for pt in d[5]]
+        d[6] = [app.calc.d_rev_size_fr[pt] for pt in d[6]]
+
+    if lang == "it":
+        d[5] = [app.calc.d_rev_pt_it[pt] for pt in d[5]]
+        d[6] = [app.calc.d_rev_size_it[pt] for pt in d[6]]
+
+    return render_template("param_table.html", params=d)
