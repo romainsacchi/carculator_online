@@ -1525,6 +1525,8 @@ function get_results(){
 
         });
 
+    var old_progress = 0;
+
     $.when($.ajax({
                 url: "/get_results/",
                 type: 'POST',
@@ -1548,17 +1550,17 @@ function get_results(){
                 }).then(function (status) {
 
                     if (status['job status'] == 'finished'){
+                        old_progress = 0;
                         var redirectWindow = window.open('/display_result/'+job_id, '_blank');
                         redirectWindow.location;
                         clearInterval(interval);
                         return;
                     }
 
-                    var new_progress = status["progress_status"];
+                    var new_progress = Number(status["progress_status"]);
                     var str = i18n('completion_rate')
 
-                    if (new_progress != old_progress){
-
+                    if (new_progress > old_progress){
 
                         $.notify({
                             icon: 'glyphicon glyphicon-time',
@@ -1577,7 +1579,7 @@ function get_results(){
                                     exit: 'animated bounceOutUp'
                                 },
                             });
-                        var old_progress = status["progress_status"];
+                        old_progress = Number(status["progress_status"]);
                     };
 
 

@@ -214,7 +214,6 @@
 					//str = str.replace(/^"|"$/g, '');
 						country_code = String(JSON.stringify(response["country_code"], null, 4))
 						country_code = country_code.replace(/^"|"$/g, '');
-						console.log(i18n(country_code));
 						$("#country").html(i18n(country_code));
 						$("#country_2").html(i18n(country_code));
 
@@ -276,6 +275,7 @@
 							}).then(function (status) {
 
 								if (status['job status'] == 'finished'){
+									old_progress = 0;
 									var redirectWindow = window.open('/display_result/'+job_id, '_blank');
 									redirectWindow.location;
 									clearInterval(interval);
@@ -283,8 +283,7 @@
 								}
 
 								var new_progress = Number(status["progress_status"]);
-								var str = i18n('completion_rate')
-								console.log(new_progress, old_progress);
+								var str = i18n('completion_rate');
 
 								if (new_progress > old_progress){
 									$.notify({
