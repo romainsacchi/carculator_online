@@ -244,7 +244,7 @@ class Calculation:
             "Sostituzione dei componenti": "component replacement",
             "Carburante": "energy",
             "Manutenzione": "maintenance",
-            "Totale": "total",
+            "total": "total",
         }
         self.d_rev_pt_en = {v: k for k, v, in self.d_pt_en.items()}
         self.d_rev_pt_fr = {v: k for k, v, in self.d_pt_fr.items()}
