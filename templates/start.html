@@ -279,12 +279,10 @@
 									return;
 								}
 
-								var new_progress = status["progress_status"];
+								var new_progress = Number(status["progress_status"]);
 								var str = i18n('completion_rate')
 
-								if (new_progress != old_progress){
-
-
+								if (new_progress > old_progress){
 									$.notify({
 										icon: 'glyphicon glyphicon-time',
 										message: str + " " + status["progress_status"] + "%"
@@ -302,7 +300,7 @@
 												exit: 'animated bounceOutUp'
 											},
 										});
-									var old_progress = status["progress_status"];
+									var old_progress = Number(status["progress_status"]);
 								};
 
 								if (status['job status'] == 'job not found'){
