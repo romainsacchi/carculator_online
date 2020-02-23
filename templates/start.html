@@ -273,6 +273,7 @@
 						$.ajax('/check_status/'+job_id).then(function (status) {
 							return status;
 							}).then(function (status) {
+
 								if (status['job status'] == 'finished'){
 									var redirectWindow = window.open('/display_result/'+job_id, '_blank');
 									redirectWindow.location;
@@ -283,6 +284,7 @@
 
 								var new_progress = Number(status["progress_status"]);
 								var str = i18n('completion_rate')
+								console.log(new_progress, old_progress);
 
 								if (new_progress > old_progress){
 									$.notify({
