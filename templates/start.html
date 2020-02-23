@@ -269,7 +269,7 @@
 					var job_id = response['job id'];
 					// Check task status every 3 seconds
 					var old_progress = 0;
-					const interval = setInterval(function() {
+					const interval = setInterval(function(old_progress) {
 						$.ajax('/check_status/'+job_id).then(function (status) {
 							return status;
 							}).then(function (status) {
@@ -280,7 +280,6 @@
 									clearInterval(interval);
 									return;
 								}
-
 
 								var new_progress = Number(status["progress_status"]);
 								var str = i18n('completion_rate')
@@ -304,7 +303,7 @@
 												exit: 'animated bounceOutUp'
 											},
 										});
-									var old_progress = Number(status["progress_status"]);
+									old_progress = Number(status["progress_status"]);
 								};
 
 								if (status['job status'] == 'job not found'){
