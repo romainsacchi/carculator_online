@@ -20,7 +20,7 @@ msgstr ""
 
 #: app/forms.py:9 app/forms.py:15
 msgid "Username"
-msgstr ""
+msgstr "Nome utente"
 
 #: app/forms.py:10 app/forms.py:28
 msgid "Password"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: app/forms.py:11
 msgid "Remember Me"
-msgstr ""
+msgstr "Ricorda di me"
 
 #: app/forms.py:12 templates/login.html:72
 msgid "Sign In"
@@ -589,7 +589,7 @@ msgstr ""
 
 #: templates/result.html:214
 msgid "BENCHMARK"
-msgstr ""
+msgstr "CONFRONTO"
 
 #: templates/result.html:218
 msgid ""
@@ -1313,6 +1313,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tThis means that they do not compete with crops "
 "production with the purpose of food supply."
 msgstr ""
+"I carburanti alternativi presentati qui sono i cosiddetti \"2a generazione \" "
+"carburanti, poiché sono prodotti a partire da materiale residuo vegetale. "
+"Questo significa che non competono con i raccolti "
+"produzione ai fini dell'approvvigionamento alimentare."
 
 #: templates/tool.html:604
 msgid ""
@@ -1323,6 +1327,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
 "methane to produce hydrogen."
 msgstr ""
+"Inoltre, vengono presentati diversi percorsi per la fornitura di idrogeno "
+"da utilizzare in auto a celle a combustibile. "
+"L'idrogeno può essere prodotto mediante elettrolisi, che "
+"è un processo che richiede elettricità o tramite un processo chiamato "
+"\" Steam Methane Reforming \" che utilizza il vapore e "
+"metano per produrre idrogeno."
 
 #: templates/tool.html:608
 msgid ""
@@ -1733,7 +1743,7 @@ msgstr "numero di iterazioni"
 #~ msgstr ""
 
 #~ msgid "Fuel cell"
-#~ msgstr "H2 Cella a combustibile"
+#~ msgstr "Cella a combustibile H2"
 
 #~ msgid "battery discharge efficiency"
 #~ msgstr ""
@@ -1775,7 +1785,7 @@ msgstr "numero di iterazioni"
 #~ msgstr "ALTRI INDICATORI"
 
 #~ msgid "Energy consumption along driving cycle"
-#~ msgstr ""
+#~ msgstr "Consumo di energia lungo il ciclo di guida"
 
 #~ msgid "Pollutants emissions along driving cycle"
 #~ msgstr "Emissioni di inquinanti lungo il ciclo di guida"
@@ -1787,7 +1797,7 @@ msgstr "numero di iterazioni"
 #~ msgstr "Emissioni di GHG rispetto ai costi di utilizzo"
 
 #~ msgid "Select an impact category"
-#~ msgstr ""
+#~ msgstr "Seleziona una categoria di impatto"
 
 #~ msgid "Mini"
 #~ msgstr "Mini citycar"
