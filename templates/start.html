@@ -223,6 +223,7 @@
 				});
 
 
+			var old_progress = 0;
 
 			function get_results(){
 				var country = $("#country").html();
@@ -268,8 +269,8 @@
 						).then(function (response) {
 					var job_id = response['job id'];
 					// Check task status every 3 seconds
-					var old_progress = 0;
-					const interval = setInterval(function(old_progress) {
+
+					const interval = setInterval(function() {
 						$.ajax('/check_status/'+job_id).then(function (status) {
 							return status;
 							}).then(function (status) {
