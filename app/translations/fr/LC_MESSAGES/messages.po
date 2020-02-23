@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-21 18:02+0100\n"
+"POT-Creation-Date: 2020-02-23 15:54+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -66,10 +66,11 @@ msgid ""
 "time, I can ask the support team of carculator to consult the data I "
 "submitted and request its deletion."
 msgstr ""
-"J'autorise l'équipe de développement de carculator à collecter et enregistrer mes données. "
-"Mes données ne seront transmises à aucune partie tierce, mais seulement utilisées dans le but "
-"d'établir des statistiques sur l'utilisation du site web. A tout moment je peux demander à consulter mes "
-"donnés et ordonner leur effacement."
+"J'autorise l'équipe de développement de carculator à collecter et "
+"enregistrer mes données. Mes données ne seront transmises à aucune partie"
+" tierce, mais seulement utilisées dans le but d'établir des statistiques "
+"sur l'utilisation du site web. A tout moment je peux demander à consulter"
+" mes donnés et ordonner leur effacement."
 
 #: app/forms.py:30
 msgid "Repeat Password"
@@ -143,9 +144,17 @@ msgstr ""
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:340
+#: app/routes.py:341
 msgid "Email sent!"
 msgstr "Email envoyé!"
+
+#: src/carculator/carculator/model.py:590
+msgid "battery discharge efficiency"
+msgstr ""
+
+#: src/carculator/carculator/model.py:591
+msgid "fuel cell system efficiency"
+msgstr ""
 
 #: templates/index.html:19
 msgid "Carculator : Home"
