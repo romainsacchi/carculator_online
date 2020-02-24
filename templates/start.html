@@ -214,7 +214,6 @@
 					//str = str.replace(/^"|"$/g, '');
 						country_code = String(JSON.stringify(response["country_code"], null, 4))
 						country_code = country_code.replace(/^"|"$/g, '');
-						console.log(i18n(country_code));
 						$("#country").html(i18n(country_code));
 						$("#country_2").html(i18n(country_code));
 
@@ -223,6 +222,7 @@
 				});
 
 
+			var old_progress = 0;
 
 			function get_results(){
 				var country = $("#country").html();
@@ -268,23 +268,24 @@
 						).then(function (response) {
 					var job_id = response['job id'];
 					// Check task status every 3 seconds
+
 					const interval = setInterval(function() {
 						$.ajax('/check_status/'+job_id).then(function (status) {
 							return status;
 							}).then(function (status) {
+
 								if (status['job status'] == 'finished'){
+									old_progress = 0;
 									var redirectWindow = window.open('/display_result/'+job_id, '_blank');
 									redirectWindow.location;
 									clearInterval(interval);
 									return;
 								}
 
-								var new_progress = status["progress_status"];
-								var str = i18n('completion_rate')
+								var new_progress = Number(status["progress_status"]);
+								var str = i18n('completion_rate');
 
-								if (new_progress != old_progress){
-
-
+								if (new_progress > old_progress){
 									$.notify({
 										icon: 'glyphicon glyphicon-time',
 										message: str + " " + status["progress_status"] + "%"
@@ -302,7 +303,7 @@
 												exit: 'animated bounceOutUp'
 											},
 										});
-									var old_progress = status["progress_status"];
+									old_progress = Number(status["progress_status"]);
 								};
 
 								if (status['job status'] == 'job not found'){

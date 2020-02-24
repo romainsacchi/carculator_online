@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-21 18:02+0100\n"
+"POT-Creation-Date: 2020-02-23 15:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,8 +138,16 @@ msgstr ""
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:340
+#: app/routes.py:341
 msgid "Email sent!"
+msgstr ""
+
+#: src/carculator/carculator/model.py:590
+msgid "battery discharge efficiency"
+msgstr ""
+
+#: src/carculator/carculator/model.py:591
+msgid "fuel cell system efficiency"
 msgstr ""
 
 #: templates/index.html:19
