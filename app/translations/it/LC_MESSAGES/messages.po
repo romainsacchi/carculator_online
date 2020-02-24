@@ -20,7 +20,7 @@ msgstr ""
 
 #: app/forms.py:9 app/forms.py:15
 msgid "Username"
-msgstr ""
+msgstr "Nome utente"
 
 #: app/forms.py:10 app/forms.py:28
 msgid "Password"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: app/forms.py:11
 msgid "Remember Me"
-msgstr ""
+msgstr "Ricorda di me"
 
 #: app/forms.py:12 templates/login.html:72
 msgid "Sign In"

@@ -51,7 +51,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash("Congratulations, you are now a registered user!")
+        flash(_("Congratulations, you are now a registered user!"))
         return redirect(url_for("login"))
     return render_template("register.html", title="Register", form=form)
 
@@ -64,7 +64,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash("Invalid username or password")
+            flash(_("Invalid username or password"))
             return redirect(url_for("login"))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get("next")
@@ -482,7 +482,6 @@ def get_param_table():
         if isinstance(d[6], str):
             d[6] = [s.strip() for s in d[6].split(",")]
 
-        print(d)
         if lang == "en":
             d[5] = [app.calc.d_rev_pt_en.get(pt, pt) for pt in d[5]]
             d[6] = [app.calc.d_rev_size_en[pt] for pt in d[6]]

@@ -412,7 +412,6 @@ class Calculation:
 
         lci = self.ic.export_lci(presamples=False)
         self.excel_lci = self.write_lci_to_excel(lci, "test").read()
-        print(self.excel_lci)
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -545,7 +544,7 @@ class Calculation:
 
         if lang == "en":
             list_names = [
-                [s, self.d_rev_pt_en[p], y]
+                [self.d_rev_size_en[s], self.d_rev_pt_en[p], y]
                 for s in arr.coords["size"].values.tolist()
                 for p in arr.coords["powertrain"].values.tolist()
                 for y in arr.coords["year"].values.tolist()
