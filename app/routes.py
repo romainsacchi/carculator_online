@@ -59,7 +59,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(session["url"])
+        return redirect(session.get("url", url_for("start")))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -70,7 +70,7 @@ def login():
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
             if "url" in session:
-                next_page = session["url"]
+                next_page = session.get("url", url_for("start"))
             else:
                 next_page = url_for("start")
         return redirect(next_page)
@@ -80,7 +80,7 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(session["url"])
+    return redirect(session.get("url", url_for("start")))
 
 
 @app.route("/")
