@@ -183,7 +183,7 @@ def tool_page(country):
 @app.route("/search_car_model/<search_item>")
 def search_car_model(search_item):
     """ Return a list of cars if cars contain `search item`"""
-    lang = session["language"]
+    lang = session.get("language", "en")
     cars = [
         car
         for car in app.calc.load_map_file(lang)
@@ -195,32 +195,32 @@ def search_car_model(search_item):
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):
     """ Return a list of params if param contain `search?item`"""
-    lang = session["language"]
+    lang = session.get("language", "en")
     parameters = [
         param
         for param in app.calc.load_params_file()
         if any(param_item.lower() in x.lower() for x in param)
     ]
 
-    if session["language"] == "en":
+    if lang == "en":
         powertrain_filter = [
             app.calc.d_pt_en[pt] for pt in powertrain_filter.split(",")
         ]
         size_filter = [app.calc.d_size_en[s] for s in size_filter.split(",")]
 
-    if session["language"] == "de":
+    if lang == "de":
         powertrain_filter = [
             app.calc.d_pt_de[pt] for pt in powertrain_filter.split(",")
         ]
         size_filter = [app.calc.d_size_de[s] for s in size_filter.split(",")]
 
-    if session["language"] == "fr":
+    if lang == "fr":
         powertrain_filter = [
             app.calc.d_pt_fr[pt] for pt in powertrain_filter.split(",")
         ]
         size_filter = [app.calc.d_size_fr[s] for s in size_filter.split(",")]
 
-    if session["language"] == "it":
+    if lang == "it":
         powertrain_filter = [
             app.calc.d_pt_it[pt] for pt in powertrain_filter.split(",")
         ]
@@ -237,7 +237,7 @@ def search_params(param_item, powertrain_filter, size_filter):
         if list(set(a[5]).intersection(powertrain_filter)) and list(
             set(a[6]).intersection(size_filter)
         ):
-            if session["language"] == "en":
+            if lang == "en":
                 a[5] = [
                     app.calc.d_rev_pt_en[pt]
                     for pt in a[5]
@@ -250,7 +250,7 @@ def search_params(param_item, powertrain_filter, size_filter):
                 ]
                 response.append(a)
 
-            if session["language"] == "de":
+            if lang == "de":
                 a[5] = [
                     app.calc.d_rev_pt_de[pt]
                     for pt in a[5]
@@ -263,7 +263,7 @@ def search_params(param_item, powertrain_filter, size_filter):
                 ]
                 response.append(a)
 
-            if session["language"] == "fr":
+            if lang == "fr":
                 a[5] = [
                     app.calc.d_rev_pt_fr[pt]
                     for pt in a[5]
@@ -276,7 +276,7 @@ def search_params(param_item, powertrain_filter, size_filter):
                 ]
                 response.append(a)
 
-            if session["language"] == "it":
+            if lang == "it":
                 a[5] = [
                     app.calc.d_rev_pt_it[pt]
                     for pt in a[5]
@@ -294,16 +294,17 @@ def search_params(param_item, powertrain_filter, size_filter):
 
 @app.route("/get_param_value/<name>/<pt>/<s>/<y>")
 def get_param_value(name, pt, s, y):
-    if session["language"] == "en":
+    lang = session.get("language", "en")
+    if lang == "en":
         pt = [app.calc.d_pt_en[p] for p in pt.split(",")]
         s = [app.calc.d_size_en[x] for x in s.split(",")]
-    if session["language"] == "de":
+    if lang == "de":
         pt = [app.calc.d_pt_de[p] for p in pt.split(",")]
         s = [app.calc.d_size_de[x] for x in s.split(",")]
-    if session["language"] == "fr":
+    if lang == "fr":
         pt = [app.calc.d_pt_fr[p] for p in pt.split(",")]
         s = [app.calc.d_size_fr[x] for x in s.split(",")]
-    if session["language"] == "it":
+    if lang == "it":
         pt = [app.calc.d_pt_it[p] for p in pt.split(",")]
         s = [app.calc.d_size_it[x] for x in s.split(",")]
 
@@ -369,11 +370,13 @@ def get_results():
     db.session.add(task)
     db.session.commit()
 
-    d = app.calc.format_dictionary(request.get_json(), session["language"], job_id)
+    lang = session.get("language", "en")
+
+    d = app.calc.format_dictionary(request.get_json(), lang, job_id)
     # Create a connection to the Redis server
     q = Queue(connection=conn)
     job = q.enqueue_call(
-        func=app.calc.process_results, args=(d, session["language"], job_id), result_ttl=3600,
+        func=app.calc.process_results, args=(d, lang, job_id), result_ttl=3600,
         job_id = job_id
     )
 
@@ -441,7 +444,7 @@ def set_language_for_result_display(language):
 
 @app.route("/get_language")
 def get_language():
-    lang = session["language"]
+    lang = session.get("language", "en")
     json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
     if lang == "en":
         json_url = os.path.join(app.static_folder, "translation", "translation_en.json")
@@ -470,7 +473,7 @@ def get_inventory_excel_for_bw():
 
 @app.route("/get_param_table")
 def get_param_table():
-    lang = session["language"]
+    lang = session.get("language", "en")
     params = app.calc.load_params_file()
 
 
