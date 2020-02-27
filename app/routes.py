@@ -408,13 +408,17 @@ def get_job_status(job_key):
         response = jsonify({"job status": "job not found"})
         return make_response(response, 404)
 
+
+
+
     progress_status = Task.query.filter_by(id=job_key).first().progress
 
+    print(progress_status)
+    
     response = jsonify(
         {"job status": job.get_status(), "progress_status": progress_status}
     )
 
-    print(response)
 
     return make_response(response, 200)
 
