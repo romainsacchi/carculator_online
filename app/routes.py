@@ -363,10 +363,7 @@ def get_results():
     job_id = str(uuid.uuid1())
 
     # Add task to db
-    task = Task(
-        id=job_id,
-        progress=0,
-    )
+    task = Task(id=job_id, progress=0,)
     db.session.add(task)
     db.session.commit()
 
@@ -376,16 +373,15 @@ def get_results():
     # Create a connection to the Redis server
     q = Queue(connection=conn)
     job = q.enqueue_call(
-        func=app.calc.process_results, args=(d, lang, job_id), result_ttl=3600,
-        job_id = job_id
+        func=app.calc.process_results,
+        args=(d, lang, job_id),
+        result_ttl=3600,
+        job_id=job_id,
     )
 
     task = Task.query.filter_by(id=job_id).first()
     task.progress = 30
     db.session.commit()
-
-
-
 
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
@@ -396,6 +392,7 @@ def display_result(job_key):
     """ If the job is finished, render `result.html` along with the results """
     if not current_user.is_authenticated:
         session["url"] = "/display_result/" + job_key
+
     job = Job.fetch(job_key, connection=conn)
     app.lci_to_bw = job.result[1]
     if job.is_finished:
@@ -413,8 +410,11 @@ def get_job_status(job_key):
 
     progress_status = Task.query.filter_by(id=job_key).first().progress
 
-    response = jsonify({"job status": job.get_status(), "progress_status": progress_status})
+    response = jsonify(
+        {"job status": job.get_status(), "progress_status": progress_status}
+    )
 
+    print(response)
 
     return make_response(response, 200)
 
@@ -428,6 +428,7 @@ def inject_conf_var():
             request.accept_languages.best_match(app.config["LANGUAGES"].keys()),
         ),
     )
+
 
 @app.route("/language/<language>")
 def set_language(language=None):
@@ -474,7 +475,6 @@ def get_inventory_excel_for_bw():
 def get_param_table():
     lang = session.get("language", "en")
     params = app.calc.load_params_file()
-
 
     for d in params:
         if isinstance(d[4], str):
