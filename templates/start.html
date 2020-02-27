@@ -269,7 +269,38 @@
 					var job_id = response['job id'];
 					// Check task status every 3 seconds
 
+					var iterations = 0;
 					const interval = setInterval(function() {
+						iterations++;
+						// Stop asking if it takes more than a minute
+						if (iterations >= 20){
+							clearInterval(interval);
+							var str = i18n('job_lost')
+									$.notify({
+										icon: '	glyphicon glyphicon-warning',
+										message: str
+										},
+										{
+											placement: {
+												from: "top",
+												align: "center"
+											},
+											type:'danger'
+										},
+										{
+											animate: {
+												enter: 'animated bounceInDown',
+												exit: 'animated bounceOutUp'
+											},
+
+										});
+
+									return;
+								}
+
+
+
+						};
 						$.ajax('/check_status/'+job_id).then(function (status) {
 							return status;
 							}).then(function (status) {

@@ -429,7 +429,6 @@ def inject_conf_var():
         ),
     )
 
-
 @app.route("/language/<language>")
 def set_language(language=None):
     session["language"] = language
