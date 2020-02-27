@@ -1571,12 +1571,7 @@ function get_results(){
                             });
 
                         return;
-                    }
-
-
-
-            };
-
+                    };
 
             $.ajax('/check_status/'+job_id).then(function (status) {
                 return status;
