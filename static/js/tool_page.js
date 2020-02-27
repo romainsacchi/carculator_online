@@ -1615,28 +1615,52 @@ function get_results(){
 
 
                     if (status['job status'] == 'job not found'){
-                    var str = i18n('job_lost')
-                        $.notify({
-                            icon: '	glyphicon glyphicon-warning',
-                            message: str
-                            },
-                            {
-                                placement: {
-                                    from: "top",
-                                    align: "center"
+                        var str = i18n('job_lost')
+                            $.notify({
+                                icon: '	glyphicon glyphicon-warning',
+                                message: str
                                 },
-                                type:'danger'
-                            },
-                            {
-                                animate: {
-                                    enter: 'animated bounceInDown',
-                                    exit: 'animated bounceOutUp'
+                                {
+                                    placement: {
+                                        from: "top",
+                                        align: "center"
+                                    },
+                                    type:'danger'
                                 },
+                                {
+                                    animate: {
+                                        enter: 'animated bounceInDown',
+                                        exit: 'animated bounceOutUp'
+                                    },
 
-                            });
+                                });
+                            clearInterval(interval);
+                            return;
+                    };
 
-                        return;
-                    }
+                    if (status['job status'] == 'failed'){
+                        var str = i18n('job_lost')
+                            $.notify({
+                                icon: '	glyphicon glyphicon-warning',
+                                message: str
+                                },
+                                {
+                                    placement: {
+                                        from: "top",
+                                        align: "center"
+                                    },
+                                    type:'danger'
+                                },
+                                {
+                                    animate: {
+                                        enter: 'animated bounceInDown',
+                                        exit: 'animated bounceOutUp'
+                                    },
+
+                                });
+                            clearInterval(interval);
+                            return;
+                    };
 
                     })
          }, 3000);
