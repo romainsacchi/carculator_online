@@ -156,6 +156,8 @@
      "completion_rate": "Berechnungsfortschritt:",
      "cost": "Kosten [Eur/km]",
      "cc_per_km": "Klimawandel [kg CO2-Äq./km]",
-     "driving_cycle": "Fahrzykluszeit [Sekunden]"
+     "driving_cycle": "Fahrzykluszeit [Sekunden]",
+     "mute": "Stumm",
+      "unmute": "Ton an"
   }
 }

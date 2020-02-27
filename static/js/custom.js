@@ -277,14 +277,16 @@
 })( jQuery );
 
     function mute_unmute(val){
-        if (val == "Unmute"){
+        if (val == "unmute"){
+            var str = i18n("mute");
             $('#bgndVideo_2').YTPUnmute()
-            $("#unmute_button").text("Mute")
-            $("#unmute_button").val("Mute")
+            $("#unmute_button").text(str)
+            $("#unmute_button").val("mute")
         } else {
+            var str = i18n("unmute");
             $('#bgndVideo_2').YTPMute()
-            $("#unmute_button").text("Unmute")
-            $("#unmute_button").val("Unmute")
+            $("#unmute_button").text(str)
+            $("#unmute_button").val("unmute")
         };
     };
 
