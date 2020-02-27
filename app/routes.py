@@ -86,7 +86,8 @@ def logout():
 @app.route("/")
 def index():
     """Return homepage."""
-    return render_template("index.html")
+    lang = session.get("language", "en")
+    return render_template("index.html", lang=lang)
 
 
 @app.route("/start")

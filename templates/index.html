@@ -211,7 +211,42 @@
 						</div>
 
 
-						<div id="bgndVideo_2" class="player"
+						{% if lang == 'en' %}
+							<div id="bgndVideo_2" class="player"
+								 data-property="{videoURL:'https://youtu.be/2OVbAroGADc'
+								 ,containment:'#myVideoBanner_2',
+								 loop:false,
+								 optimizeDisplay:false,
+								 autoPlay:false,
+								 ratio:'auto',
+								 mute:true, startAt:0, opacity:1,
+								 videoWidth:true, showYTLogo: false,
+								 showControls:false,
+								 hl:'en',
+								 cc_pref_lang:'en',
+								 cc_load_policy:true}"
+								style="height:28.125vw;width:50vw;margin:0 auto;background-color:none;display:block-inline;">
+							</div>
+						{% endif %}
+						{% if lang == 'de' %}
+							<div id="bgndVideo_2" class="player"
+								 data-property="{videoURL:'https://youtu.be/2OVbAroGADc'
+								 ,containment:'#myVideoBanner_2',
+								 loop:false,
+								 optimizeDisplay:false,
+								 autoPlay:false,
+								 ratio:'auto',
+								 mute:true, startAt:0, opacity:1,
+								 videoWidth:true, showYTLogo: false,
+								 showControls:false,
+								 hl:'en',
+								 cc_pref_lang:'de',
+								 cc_load_policy:true}"
+								style="height:28.125vw;width:50vw;margin:0 auto;background-color:none;display:block-inline;">
+							</div>
+						{% endif %}
+						{% if lang == 'fr' %}
+							<div id="bgndVideo_2" class="player"
 								 data-property="{videoURL:'https://youtu.be/2OVbAroGADc'
 								 ,containment:'#myVideoBanner_2',
 								 loop:false,
@@ -225,8 +260,27 @@
 								 cc_pref_lang:'fr',
 								 cc_load_policy:true}"
 								style="height:28.125vw;width:50vw;margin:0 auto;background-color:none;display:block-inline;">
-						</div>
+							</div>
+						{% endif %}
+						{% if lang == 'it' %}
+							<div id="bgndVideo_2" class="player"
+								 data-property="{videoURL:'https://youtu.be/2OVbAroGADc'
+								 ,containment:'#myVideoBanner_2',
+								 loop:false,
+								 optimizeDisplay:false,
+								 autoPlay:false,
+								 ratio:'auto',
+								 mute:true, startAt:0, opacity:1,
+								 videoWidth:true, showYTLogo: false,
+								 showControls:false,
+								 hl:'en',
+								 cc_pref_lang:'it',
+								 cc_load_policy:true}"
+								style="height:28.125vw;width:50vw;margin:0 auto;background-color:none;display:block-inline;">
+							</div>
+						{% endif %}
 
+						
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="margin-top:0;">
 								<div class="row">
