@@ -1579,9 +1579,9 @@ function get_results(){
 
                     if (status['job status'] == 'finished'){
                         old_progress = 0;
+                        clearInterval(interval);
                         var redirectWindow = window.open('/display_result/'+job_id, '_blank');
                         redirectWindow.location;
-                        clearInterval(interval);
                         return;
                     }
 
