@@ -26,7 +26,8 @@ class Calculation:
             "Electric": "BEV",
             "H2 Fuel cell": "FCEV",
             "Hybrid-petrol": "HEV-p",
-            "(Plugin) Hybrid-petrol": "PHEV",
+            "(Plugin) Hybrid-petrol": "PHEV-p",
+            "(Plugin) Hybrid-diesel": "PHEV-d",
         }
         self.d_pt_it = {
             "Benzina": "ICEV-p",
@@ -35,7 +36,8 @@ class Calculation:
             "Elettrica": "BEV",
             "Cella a combustibile H2": "FCEV",
             "Ibrido benzina": "HEV-p",
-            "Ibrido-benzina (Plugin)": "PHEV",
+            "Ibrido-benzina (Plugin)": "PHEV-p",
+            "Ibrido-diesel (Plugin)": "PHEV-d",
         }
         self.d_pt_de = {
             "Benzin": "ICEV-p",
@@ -44,7 +46,8 @@ class Calculation:
             "Elektrisch": "BEV",
             "H2 Brennstoffzelle": "FCEV",
             "Hybrid-Benzin": "HEV-p",
-            "(Plugin) Hybrid-Benzin": "PHEV",
+            "(Plugin) Hybrid-Benzin": "PHEV-p",
+            "(Plugin) Hybrid-Diesel": "PHEV-d",
         }
         self.d_pt_fr = {
             "Essence": "ICEV-p",
@@ -53,7 +56,8 @@ class Calculation:
             "Electrique": "BEV",
             "H2 Pile à combustible": "FCEV",
             "Hybride-essence": "HEV-p",
-            "Hybride-essence rechargeable": "PHEV",
+            "Hybride-essence rechargeable": "PHEV-p",
+            "Hybride-diesel rechargeable": "PHEV-d",
         }
         self.d_size_en = {
             "Minicompact": "Mini",

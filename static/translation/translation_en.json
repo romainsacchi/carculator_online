@@ -58,6 +58,7 @@
       "electric": "Electric",
       "fuel_cell": "H2 Fuel cell",
       "hybrid_petrol": "Hybrid-petrol",
+      "plugin_hybrid_diesel": "(Plugin) Hybrid-diesel",
       "plugin_hybrid_petrol": "(Plugin) Hybrid-petrol",
       "mini": "Minicompact",
       "small": "Subcompact",

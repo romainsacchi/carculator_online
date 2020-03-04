@@ -58,6 +58,7 @@
      "electric": "Elektrisch",
      "fuel_cell": "H2 Brennstoffzelle",
      "hybrid_petrol": "Hybrid-Benzin",
+     "plugin_hybrid_diesel": "(Plugin) Hybrid-Diesel",
      "plugin_hybrid_petrol": "(Plugin) Hybrid-Benzin",
      "mini": "Kleinstwagen",
      "small": "Kleinwagen",
