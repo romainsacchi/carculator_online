@@ -58,6 +58,7 @@
       "electric": "Electrique",
       "fuel_cell": "H2 Pile à combustible",
       "hybrid_petrol": "Hybride-essence",
+      "hybrid_diesel": "Hybrid-diesel",
       "plugin_hybrid_diesel": "Hybride-diesel rechargeable",
       "plugin_hybrid_petrol": "Hybride-essence rechargeable",
       "mini": "Mini-citadine",

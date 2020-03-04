@@ -26,6 +26,7 @@ class Calculation:
             "Electric": "BEV",
             "H2 Fuel cell": "FCEV",
             "Hybrid-petrol": "HEV-p",
+            "Hybrid-diesel": "HEV-d",
             "(Plugin) Hybrid-petrol": "PHEV-p",
             "(Plugin) Hybrid-diesel": "PHEV-d",
         }
@@ -36,6 +37,7 @@ class Calculation:
             "Elettrica": "BEV",
             "Cella a combustibile H2": "FCEV",
             "Ibrido benzina": "HEV-p",
+            "Ibrido diesel": "HEV-d",
             "Ibrido-benzina (Plugin)": "PHEV-p",
             "Ibrido-diesel (Plugin)": "PHEV-d",
         }
@@ -46,6 +48,7 @@ class Calculation:
             "Elektrisch": "BEV",
             "H2 Brennstoffzelle": "FCEV",
             "Hybrid-Benzin": "HEV-p",
+            "Hybrid-Diesel": "HEV-d",
             "(Plugin) Hybrid-Benzin": "PHEV-p",
             "(Plugin) Hybrid-Diesel": "PHEV-d",
         }
@@ -56,6 +59,7 @@ class Calculation:
             "Electrique": "BEV",
             "H2 Pile à combustible": "FCEV",
             "Hybride-essence": "HEV-p",
+            "Hybride-diesel": "HEV-d",
             "Hybride-essence rechargeable": "PHEV-p",
             "Hybride-diesel rechargeable": "PHEV-d",
         }

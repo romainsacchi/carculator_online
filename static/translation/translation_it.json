@@ -58,6 +58,7 @@
       "electric": "Elettrica",
       "fuel_cell": "Cella a combustibile H2",
       "hybrid_petrol": "Ibrido benzina",
+      "hybrid_diesel": "Ibrido diesel",
       "plugin_hybrid_petrol": "Ibrido-benzina (Plugin)",
       "plugin_hybrid_diesel": "Ibrido-diesel (Plugin)",
       "mini": "Mini citycar",
