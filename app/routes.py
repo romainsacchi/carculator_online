@@ -147,6 +147,7 @@ def tool_page(country):
         _("H2 Fuel cell"),
         _("Hybrid-petrol"),
         _("(Plugin) Hybrid-petrol"),
+        _("(Plugin) Hybrid-diesel")
     ]
     sizes = [
         _("Minicompact"),
