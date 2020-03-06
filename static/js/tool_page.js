@@ -1131,6 +1131,9 @@ function get_electricity_mix(ISO){
 
         });
 
+        // Change the background color of the "Calculate" button
+        document.getElementById("calculateButton").style.backgroundColor='lightgreen';
+
     });
 };
 
@@ -1695,7 +1698,6 @@ function set_mix_to_zero(){
 function save_configuration(){
     var data = collect_configuration();
     if (data == null){return;}
-    var content = "What's up , hello world";
     // any kind of extension (.txt,.cpp,.cs,.bat)
     var filename = "carculator_configuration_file.txt";
     var blob = new Blob([JSON.stringify(data)], {

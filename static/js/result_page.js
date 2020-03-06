@@ -277,7 +277,7 @@ function generate_scatter_chart(data){
           .axisLabel(gwp_str)
           .tickFormat(d3.format('.02f'))
           .ticks(10);
-          
+
       var cost_str = i18n("cost");
       chart.yAxis     //Chart y-axis settings
           .axisLabel(cost_str)
