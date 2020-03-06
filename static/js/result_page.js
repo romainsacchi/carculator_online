@@ -128,44 +128,30 @@ function generate_benchmark(data, cat){
     var end = -1;
     var max_val = 0;
 
-    for (var i = 0; i < data.length; i++){
-        if (data[i][0] == cat & start < 0){
-            start = i;
-        }
-        if (data[i][0] == cat & data[i][4] > max_val){
-            max_val = data[i][4];
-        }
-        if (data[i][0] != cat & start >= 0 & end < 0) {
-            end = i;
-        }
-    };
-
     var arr_data = [];
 
     for (var i = 0; i < data.length; i++){
         if (data[i][0] == cat){
-
             arr_data.push(data[i]);
-
         };
     };
 
+    for (var i = 0; i < arr_data.length; i++){
+        if (arr_data[i][4] > max_val){
+            max_val = arr_data[i][4];
+        }
+    };
 
-    console.log(arr_data);
-
-    if (end == -1) {end = data.length};
-
-
-    for (i = start; i < end; i++) {
+    for (i = 0; i < arr_data.length; i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.setAttribute("width", "30%");
-      td_name.innerHTML = "<h3 style='color:white;'>" + data[i][2] + ", " + data[i][3] + ", " + data[i][1] + "</h3>"
+      td_name.innerHTML = "<h3 style='color:white;'>" + arr_data[i][2] + ", " + arr_data[i][3] + ", " + arr_data[i][1] + "</h3>"
       var td_bar = document.createElement('td');
       td_bar.setAttribute("width", "60%");
       var div_bar_wrap = document.createElement('div');
       div_bar_wrap.className = "progress-wrap progress";
-      div_bar_wrap.setAttribute("data-progresspercent", ((data[i][4] / max_val) * 100).toFixed(0));
+      div_bar_wrap.setAttribute("data-progresspercent", ((arr_data[i][4] / max_val) * 100).toFixed(0));
       div_bar_wrap.setAttribute("data-height", "20px");
       div_bar_wrap.setAttribute("data-width", "100%");
       div_bar_wrap.setAttribute("data-speed", "1000");
@@ -176,7 +162,7 @@ function generate_benchmark(data, cat){
       td_bar.appendChild(div_bar_wrap);
       var td_km = document.createElement('td');
       td_km.setAttribute("width", "10%");
-      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + data[i][4].toFixed(1) + "</span> km</h3>"
+      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + arr_data[i][4].toFixed(1) + "</span> km</h3>"
       tr.appendChild(td_name);
       tr.appendChild(td_bar);
       tr.appendChild(td_km);
