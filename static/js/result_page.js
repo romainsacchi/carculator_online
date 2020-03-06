@@ -263,8 +263,10 @@ function generate_scatter_chart(data){
                     .showDistY(true)
                     .color(d3.scale.category10().range())
                     .pointRange([70,70])
-                    .forceY([0,0.6])
-                    .forceX([0,0.6]);
+                    .forceY([0])
+                    .forceX([0])
+                    .reduceXTicks(false)
+                    .reduceYTicks(false);
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
@@ -313,9 +315,9 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
      var chart_acc = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
                     .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-                    //.transitionDuration(350)  //how fast do you want the lines to transition?
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
+                    .forceY([0])
                     .showXAxis(true);        //Show the x-axis
 
       chart_acc.xAxis     //Chart x-axis settings
@@ -328,7 +330,6 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
           .axisLabel(name_impact)
           .tickFormat(d3.format('.0e'))
           .showMaxMin(false);
-
       }
 
       else{
@@ -346,9 +347,6 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
               .showMaxMin(false);
 
             };
-
-
-
       };
 
 
