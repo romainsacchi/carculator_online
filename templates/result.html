@@ -97,10 +97,6 @@
 							<button class="online-button"
 									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
                       	</form>
-						<!--<form action="/get_inventory_excel_for_simapro" style="display:inline-block;float:right;">
-                          <button class="online-button" onclick="export_simapro_inventories()"
-                                style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Export Simapro-compatible inventories') }}</button>
-						</form>-->
 					{% endif %}
                          <button class="online-button" onclick="share_results()"
                               style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Share results') }}</button>
@@ -247,17 +243,15 @@
 							<table class="table" style="color:white;">
 								<tbody>
 									<tr>
-										<th class="col-md-4">
+										<th class="col-md-6">
 											<h3>{{ _('Tank-to-Wheel cumulated energy consumption along driving cycle') }}</h3>
 
 										</th>
-										<th class="col-md-4">
+										<th class="col-md-6">
 											<h3>{{ _('GHG emissions vs. ownership costs') }}</h3>
 
 										</th>
-										<th class="col-md-4">
-											<h3>{{ _('Accumulated impacts over lifetime') }}</h3>
-										</th>
+
 									</tr>
 									<tr>
 										<td>
@@ -272,6 +266,33 @@
 											<p>{{ _("The graph below illustrates trade-off between environmental performance (in terms of greenhouse gas
 												emissions) and cost of acquisition and use.") }}</p>
 										</td>
+
+									</tr>
+									<tr>
+										<td>
+											<div>
+
+												<svg id="chart-ttw-energy"
+											   		style="width:40vw;height:40vw;font-size:16px;color:grey;margin-bottom:20px;">
+												</svg>
+											</div>
+										</td>
+										<td>
+											<div>
+												<svg id="chart-scatter"
+											   		style="width:40vw;height:40vw; font-size:16px; color:grey;margin-bottom:20px;">
+												</svg>
+
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<th class="col-md-6">
+											<h3>{{ _('Accumulated impacts over lifetime') }}</h3>
+										</th>
+									</tr>
+									<tr>
 										<td>
 											<p>{{ _("The graph below illustrates the accumulated impacts of the vehicles along their use phase.
 												The intercept of the slope represents the impacts associated with the production of the vehicle, occurring
@@ -304,24 +325,8 @@
 									<tr>
 										<td>
 											<div>
-
-												<svg id="chart-ttw-energy"
-											   		style="width:500px;height:500px;font-size:16px;color:grey;margin-bottom:20px;">
-												</svg>
-											</div>
-										</td>
-										<td>
-											<div>
-												<svg id="chart-scatter"
-											   		style="width:500px;height:500px; font-size:16px; color:grey;margin-bottom:20px;">
-												</svg>
-
-											</div>
-										</td>
-										<td>
-											<div>
 												<svg id="chart-accumulated"
-											   		style="width:500px;height:500px; font-size:16px; color:grey;margin-bottom:20px;">
+											   		style="width:40vw;height:40vw; font-size:16px; color:grey;margin-bottom:20px;">
 												</svg>
 											</div>
 										</td>
