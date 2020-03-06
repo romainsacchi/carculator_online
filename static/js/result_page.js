@@ -142,10 +142,12 @@ function generate_benchmark(data, cat){
         }
     };
 
-    arr_data.sort(function(a,b){
-        return Number(a[4]).toString().localeCompare(Number(b[4]).toString());
-        }
-    );
+    //arr_data.sort(function(a,b){
+    //    return Number(a[4]).toString().toFixed(1).localeCompare(Number(b[4]).toString().toFixed(1));
+    //    }
+    //);
+
+    arr_data.sort(function(x,y){return x[4] - y[4];});
     console.log(arr_data)
 
     for (i = 0; i < arr_data.length; i++) {
