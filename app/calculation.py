@@ -6,7 +6,7 @@ import xlsxwriter
 import csv
 from collections import defaultdict
 from app.models import Task
-
+import math
 
 class Calculation:
     def __init__(self):
@@ -649,6 +649,13 @@ class Calculation:
         new_dict[("Background",)] = {
             k: v for k, v in raw_dict["background params"].items()
         }
+
+        # Ensure that the electricity mix split equals 1
+        for el in new_dict[("Background",)]["custom electricity mix"]:
+            el /= math.fsum(el)
+
+
+        print(new_dict[("Background",)]["custom electricity mix"])
 
         for k, v in raw_dict["foreground params"].items():
             if k in d_sliders:
