@@ -142,11 +142,8 @@ function generate_benchmark(data, cat){
         }
     };
 
-
     arr_data.sort(function(a,b){
-        console.log(a);
-        console.log(b);
-        return a[4].toString().localeCompare(b[4]);
+        return a[4].toString().localeCompare(b[4].toString());
         }
     );
     console.log(arr_data)
