@@ -2007,11 +2007,12 @@ function fill_in_from_config_file(data){
             $("#years_list").append('<li>'+data['year'][y]+'</li>');
         };
         // Remove years from left frame
+        var ul = document.getElementById("years_list_choice");
+        var items = ul.getElementsByTagName("li");
         for (y in data['year']){
-            for (i = 0; i < $("#years_list_choice").length; i++) {
-                console.log($("#years_list_choice").textContent);
-                console.log(data["year"][y]);
-                if ($("#years_list_choice")[i].textContent == data["year"][y]){
+            for (var i = 0; i < items.length; ++i) {
+                console.log(items[i]);
+                if (items[i] == data["year"][y]){
                     $("#years_list_choice").removeChild($("#years_list_choice")[i]);
                 };
               };
