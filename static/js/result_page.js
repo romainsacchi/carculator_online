@@ -142,11 +142,6 @@ function generate_benchmark(data, cat){
         }
     };
 
-    //arr_data.sort(function(a,b){
-    //    return Number(a[4]).toString().toFixed(1).localeCompare(Number(b[4]).toString().toFixed(1));
-    //    }
-    //);
-
     arr_data.sort(function(x,y){return y[4] - x[4];});
     console.log(arr_data)
 
@@ -226,7 +221,6 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .width(500).height(500)
                     .forceY([0, max_val * 1.1]);
 
       var dc_str = i18n("driving_cycle");
@@ -269,7 +263,6 @@ function generate_scatter_chart(data){
                     .showDistY(true)
                     .color(d3.scale.category10().range())
                     .pointRange([70,70])
-                    .width(500).height(500)
                     .forceY([0,0.6])
                     .forceX([0,0.6]);
 
@@ -323,8 +316,7 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
                     //.transitionDuration(350)  //how fast do you want the lines to transition?
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
-                    .showXAxis(true)        //Show the x-axis
-                    .width(500).height(500);
+                    .showXAxis(true);        //Show the x-axis
 
       chart_acc.xAxis     //Chart x-axis settings
           .axisLabel('Use (km)')
