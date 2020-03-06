@@ -2023,9 +2023,34 @@ function fill_in_from_config_file(data){
             $("#powertrain_list").append('<li>'+data['type'][y]+'</li>');
         };
 
+        // Remove powertrains from left frame
+        var ul = document.getElementById("powertrain_list_choice");
+        var items = ul.getElementsByTagName("li");
+        for (y in data['type']){
+            for (var i = 0; i < items.length; ++i) {
+                console.log(items[i].innerHTML);
+                if (items[i].innerHTML == data["type"][y]){
+                    ul.removeChild(items[i]);
+                };
+              };
+        };
+
+
         $("#size_list").empty();
         for (y in data['size']){
             $("#size_list").append('<li>'+data['size'][y]+'</li>');
+        };
+
+        // Remove powertrains from left frame
+        var ul = document.getElementById("size_list_choice");
+        var items = ul.getElementsByTagName("li");
+        for (y in data['size']){
+            for (var i = 0; i < items.length; ++i) {
+                console.log(items[i].innerHTML);
+                if (items[i].innerHTML == data["size"][y]){
+                    ul.removeChild(items[i]);
+                };
+              };
         };
 
         size_list_update()
