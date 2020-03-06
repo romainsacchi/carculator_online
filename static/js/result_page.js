@@ -264,9 +264,7 @@ function generate_scatter_chart(data){
                     .color(d3.scale.category10().range())
                     .pointRange([70,70])
                     .forceY([0])
-                    .forceX([0])
-                    .reduceXTicks(false)
-                    .reduceYTicks(false);
+                    .forceX([0]);
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
