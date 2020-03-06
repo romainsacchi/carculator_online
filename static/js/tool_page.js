@@ -2010,6 +2010,7 @@ function fill_in_from_config_file(data){
         for (y in data['year']){
             for (i = 0; i < $("#years_list_choice").length; i++) {
                 console.log($("#years_list_choice")[i].textContent);
+                console.log(data["year"][y]);
                 if ($("#years_list_choice")[i].textContent == data["year"][y]){
                     $("#years_list_choice").removeChild($("#years_list_choice")[i]);
                 };
