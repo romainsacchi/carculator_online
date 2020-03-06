@@ -6,7 +6,7 @@ import xlsxwriter
 import csv
 from collections import defaultdict
 from app.models import Task
-import math
+import numpy as np
 
 class Calculation:
     def __init__(self):
@@ -652,7 +652,8 @@ class Calculation:
 
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
-            el /= math.fsum(el)
+            el = np.array(el)
+            el /= np.sum(el)
 
 
         print(new_dict[("Background",)]["custom electricity mix"])
