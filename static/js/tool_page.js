@@ -2011,8 +2011,8 @@ function fill_in_from_config_file(data){
         var items = ul.getElementsByTagName("li");
         for (y in data['year']){
             for (var i = 0; i < items.length; ++i) {
-                console.log(items[i]);
-                if (items[i] == data["year"][y]){
+                console.log(items[i].innerHTML);
+                if (items[i].innerHTML == data["year"][y]){
                     $("#years_list_choice").removeChild($("#years_list_choice")[i]);
                 };
               };
