@@ -622,8 +622,6 @@
 
     }, false);
 
-
-
     //keydown event to implement items being dropped into targets
     document.addEventListener('keydown', function(e)
     {
@@ -682,7 +680,6 @@ $('#vehicle_type label').click(function() {
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-
         }
         );
 
@@ -716,7 +713,6 @@ function size_list_update(){
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-
         }
         );
 
@@ -767,6 +763,9 @@ function size_list_update(){
         };
 
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    console.log(getSelectedCountries());
+
     var row = document.getElementById('powertrain_row');
     row.innerHTML="";
 
@@ -797,8 +796,6 @@ function size_list_update(){
     table.appendChild(thead);
     table.appendChild(tbody);
     row.appendChild(table);
-
-
 };
 
 // Populate table with search results as the search field is updated.
@@ -1406,12 +1403,10 @@ function collect_configuration(){
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-
             }
             );
             is_missing = true;
         };
-
     }
 
     if (is_missing == true){
@@ -2013,7 +2008,6 @@ function fill_in_from_config_file(data){
         var items = ul.getElementsByTagName("li");
         for (y in data['year']){
             for (var i = 0; i < items.length; ++i) {
-                console.log(items[i].innerHTML);
                 if (items[i].innerHTML == data["year"][y]){
                     ul.removeChild(items[i]);
                 };
@@ -2147,6 +2141,9 @@ function fill_in_from_config_file(data){
         // Battery origin
         var id = data['background params']['battery origin']
         $(":radio[value='"+id+"']").attr("checked", true);
+
+        // Change the background color of the "Calculate" button
+        document.getElementById("calculateButton").style.backgroundColor='lightgreen';
 
 };
 holder.ondrop = function(e) {
