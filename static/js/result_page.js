@@ -140,6 +140,8 @@ function generate_benchmark(data, cat){
         }
     }
 
+    console.log(data);
+
     if (end == -1) {end = data.length};
 
 
