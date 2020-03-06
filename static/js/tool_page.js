@@ -2013,7 +2013,7 @@ function fill_in_from_config_file(data){
             for (var i = 0; i < items.length; ++i) {
                 console.log(items[i].innerHTML);
                 if (items[i].innerHTML == data["year"][y]){
-                    $("#years_list_choice").removeChild(items[i]);
+                    ul.removeChild(items[i]);
                 };
               };
         };
