@@ -276,11 +276,20 @@ function generate_scatter_chart(data){
       chart.xAxis     //Chart x-axis settings
               .axisLabel(gwp_str)
               .tickFormat(d3.format('.02f'))
-              ;
+              .tickValues(function (d) {
+                return d[0].values.map(function (item) {
+                    return item.x;
+                });
+              });
       var cost_str = i18n("cost");
       chart.yAxis     //Chart y-axis settings
           .axisLabel(cost_str)
-          .tickFormat(d3.format('.02f'));
+          .tickFormat(d3.format('.02f'))
+          .tickValues(function (d) {
+                return d[0].values.map(function (item) {
+                    return item.y;
+                });
+              });
 
       d3.select('#chart-scatter')    //Select the <svg> element you want to render the chart in.
           .datum(datum)         //Populate the <svg> element with chart data...
