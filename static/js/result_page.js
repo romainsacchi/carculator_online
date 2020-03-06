@@ -138,9 +138,20 @@ function generate_benchmark(data, cat){
         if (data[i][0] != cat & start >= 0 & end < 0) {
             end = i;
         }
-    }
+    };
 
-    console.log(data);
+    var arr_data = [];
+
+    for (var i = 0; i < data.length; i++){
+        if (data[i][0] == cat){
+
+            arr_data.push(data[i]);
+
+        };
+    };
+
+
+    console.log(arr_data);
 
     if (end == -1) {end = data.length};
 

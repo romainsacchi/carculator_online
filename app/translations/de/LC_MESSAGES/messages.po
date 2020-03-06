@@ -165,7 +165,7 @@ msgstr "Carculator: Willkommen"
 
 #: templates/index.html:72
 msgid "Home"
-msgstr "Zuhause"
+msgstr ""
 
 #: templates/index.html:73
 msgid "About"
