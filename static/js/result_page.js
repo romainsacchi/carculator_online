@@ -142,6 +142,10 @@ function generate_benchmark(data, cat){
         }
     };
 
+
+    arr_data.sort(function(a,b){return a[4].localeCompare(b[4]);});
+    console.log(arr_data)
+
     for (i = 0; i < arr_data.length; i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
