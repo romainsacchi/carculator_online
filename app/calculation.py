@@ -652,11 +652,13 @@ class Calculation:
 
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
+            print("before ", el)
             el = np.array(el)
             el /= np.sum(el)
+            print("after ", el)
 
 
-        print(new_dict[("Background",)]["custom electricity mix"])
+
 
         for k, v in raw_dict["foreground params"].items():
             if k in d_sliders:
