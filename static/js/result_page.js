@@ -274,26 +274,18 @@ function generate_scatter_chart(data){
         })
       var gwp_str = i18n("cc_per_km");
       chart.xAxis     //Chart x-axis settings
-              .axisLabel(gwp_str)
-              .tickFormat(d3.format('.02f'))
-              .tickValues(function (d) {
-                return d[0].values.map(function (item) {
-                    return item.x;
-                });
-              });
+          .axisLabel(gwp_str)
+          .tickFormat(d3.format('.02f'));
       var cost_str = i18n("cost");
       chart.yAxis     //Chart y-axis settings
           .axisLabel(cost_str)
           .tickFormat(d3.format('.02f'))
-          .tickValues(function (d) {
-                return d[0].values.map(function (item) {
-                    return item.y;
-                });
-              });
+          .ticks(10);
 
       d3.select('#chart-scatter')    //Select the <svg> element you want to render the chart in.
           .datum(datum)         //Populate the <svg> element with chart data...
-          .call(chart);          //Finally, render the chart!
+          .call(chart)          //Finally, render the chart!
+          .ticks(10);
 
       d3.select('#chart-scatter').style('fill', "white");
       //Update the chart when window resizes.
