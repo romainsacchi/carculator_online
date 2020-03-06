@@ -143,7 +143,7 @@ function generate_benchmark(data, cat){
     };
 
     arr_data.sort(function(a,b){
-        return a[4].toString().localeCompare(b[4].toString());
+        return parseFloat(a[4]).toString().localeCompare(parseFloat(b[4]).toString());
         }
     );
     console.log(arr_data)
