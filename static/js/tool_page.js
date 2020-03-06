@@ -762,9 +762,7 @@ function size_list_update(){
 
         };
 
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    console.log(getSelectedCountries());
+    getSelectedCountries();
 
     var row = document.getElementById('powertrain_row');
     row.innerHTML="";
