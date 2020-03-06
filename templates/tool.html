@@ -211,7 +211,7 @@
 												  </thead>
 												  <tbody>
 													<tr  style="text-align:center;">
-													  <td><ol data-draggable="target">
+													  <td><ol data-draggable="target" id="years_list_choice">
 														{% for y in years %}
 														<li data-draggable="item">{{ y }}</li>
 														{% endfor %}
@@ -233,7 +233,7 @@
 												  </thead>
 												  <tbody>
 													<tr>
-													  <td><ol data-draggable="target">
+													  <td><ol data-draggable="target" id="powertrain_list_choice">
 														{% for pt in powertrains %}
 														<li data-draggable="item">{{ pt }}</li>
 														{% endfor %}
@@ -255,7 +255,7 @@
 												  </thead>
 												  <tbody>
 													<tr>
-													  <td><ol data-draggable="target">
+													  <td><ol data-draggable="target" id="size_list_choice">
 														{% for s in sizes %}
 														<li data-draggable="item">{{ s }}</li>
 														{% endfor %}

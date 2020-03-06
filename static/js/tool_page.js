@@ -1310,7 +1310,6 @@ function collect_configuration(){
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-
             }
             );
         return;
@@ -1337,7 +1336,6 @@ function collect_configuration(){
                     enter: 'animated bounceInDown',
                     exit: 'animated bounceOutUp'
                 },
-
             }
             );
         return;
@@ -1722,10 +1720,7 @@ function save_configuration(){
                 enter: 'animated bounceInDown',
                 exit: 'animated bounceOutUp'
             },
-
         });
-
-
 };
 
 $("#InputParameters").on("keyup", function() {
@@ -1844,7 +1839,6 @@ $("#InputParameters").on("keyup", function() {
 
 
     var arr_request = [name, l_pt, l_s, unit, years]
-
         $.when(
             $.ajax({
                 url: "/get_param_value/"+arr_request[0]+"/"+arr_request[1]+"/"+arr_request[2]+"/"+arr_request[4],
@@ -2004,13 +1998,21 @@ holder.ondragend = function() {
 };
 
 function fill_in_from_config_file(data){
-
     // Display first section
         $('#label_car').trigger('click');
 
+        // Add years to right frame
         $("#years_list").empty();
         for (y in data['year']){
             $("#years_list").append('<li>'+data['year'][y]+'</li>');
+        };
+        // Remove years from left frame
+        for (y in data['year']){
+            for (i = 0; i < $("#years_list_choice").length; i++) {
+                if ($("#years_list_choice")[i].textContent == data["year"][y]){
+                    $("#years_list_choice").removeChild($("#years_list_choice")[i]);
+                };
+              };
         };
 
         $("#powertrain_list").empty();
