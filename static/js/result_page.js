@@ -147,7 +147,7 @@ function generate_benchmark(data, cat){
     //    }
     //);
 
-    arr_data.sort(function(x,y){return x[4] - y[4];});
+    arr_data.sort(function(x,y){return y[4] - x[4];});
     console.log(arr_data)
 
     for (i = 0; i < arr_data.length; i++) {
