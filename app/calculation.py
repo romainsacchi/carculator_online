@@ -659,7 +659,7 @@ class Calculation:
                 .interp(year=years)
                 .values
             )
-            new_dict[("Background",)]["custom electricity mix"] = response.values
+            new_dict[("Background",)]["custom electricity mix"] = response
 
         print(new_dict[("Background",)]["custom electricity mix"])
         print(type(new_dict[("Background",)]["custom electricity mix"]))
