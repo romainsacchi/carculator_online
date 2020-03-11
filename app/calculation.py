@@ -659,8 +659,8 @@ class Calculation:
                 .interp(year=years)
                 .values
             )
-            new_dict[("Background",)] = response
-            
+            new_dict[("Background",)] = response.values
+
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
             el /= np.sum(np.array(el))
