@@ -650,6 +650,15 @@ class Calculation:
             k: v for k, v in raw_dict["background params"].items()
         }
 
+        # Ensure that the electricity mix is present
+        if "custom electricity mix" not in new_dict[("Background",)]:
+            years =  new_dict[("Functional unit",)]["year"]
+            country = new_dict[("Background",)]["country"]
+            response = (
+                app.calc.electricity_mix.loc[dict(country=country, value=0)]
+                .interp(year=years)
+                .values
+            )
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
             el /= np.sum(np.array(el))
