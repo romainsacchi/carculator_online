@@ -196,7 +196,7 @@ class Calculation:
             "Energy storage": "energy storage",
             "Chassis": "glider",
             "Maintenance": "maintenance",
-            "Other": "other",
+            "End of Life": "EoL",
             "Powertrain": "powertrain",
             "Road": "road",
         }
@@ -207,7 +207,7 @@ class Calculation:
             "Energiespeicher": "energy storage",
             "Fahrwerk": "glider",
             "Wartungsarbeiten": "maintenance",
-            "Andere": "other",
+            "Ende des Lebens": "EoL",
             "Antriebsstrang": "powertrain",
             "Straße": "road",
         }
@@ -218,7 +218,7 @@ class Calculation:
             "Stockage du carburant": "energy storage",
             "Chassis": "glider",
             "Maintenance": "maintenance",
-            "Autre": "other",
+            "Fin de vie": "EoL",
             "Motorisation": "powertrain",
             "Route": "road",
         }
@@ -228,7 +228,7 @@ class Calculation:
             "Accumulo di energia": "energy storage",
             "Telaio": "glider",
             "Manutenzione": "maintenance",
-            "Altro": "other",
+            "Fine della vita": "EoL",
             "Motore": "powertrain",
             "Strada": "road",
         }
