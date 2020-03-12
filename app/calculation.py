@@ -586,7 +586,9 @@ class Calculation:
         task.progress = 100
         db.session.commit()
 
-        list_res_acc = [float(x) for x in list_res_acc]
+        print(list_res_acc)
+
+        list_res_acc = [[str(x) for x in sublist ] for sublist in list_res_acc]
         return (
             json.dumps(
                 [
