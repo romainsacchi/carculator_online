@@ -35,7 +35,7 @@ pandas==0.25.1
 peewee==3.11.2
 pipenv==2018.11.26
 presamples==0.2.5
-psutil==5.6.3
+psutil==5.6.6
 Pygments==2.4.2
 pyparsing==2.4.2
 PyPrind==2.11.2
