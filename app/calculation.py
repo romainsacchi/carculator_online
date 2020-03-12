@@ -586,13 +586,14 @@ class Calculation:
         task.progress = 100
         db.session.commit()
 
-        print(list_res_acc)
 
         list_res = [[str(x) for x in sublist ] for sublist in list_res]
         list_res_costs = [[str(x) for x in sublist ] for sublist in list_res_costs]
         arr_benchmark = [[str(x) for x in sublist ] for sublist in arr_benchmark]
         TtW_list = [[str(x) for x in sublist ] for sublist in TtW_list]
         list_res_acc = [[str(x) for x in sublist ] for sublist in list_res_acc]
+
+        print(dict_scatter)
 
         json.dumps(list_res)
         json.dumps(list_res_costs)
@@ -601,14 +602,6 @@ class Calculation:
         json.dumps(list_res_acc)
         json.dumps(dict_scatter)
 
-
-        print(type(lang))
-        print(type(list_res))
-        print(type(list_res_costs))
-        print(type(arr_benchmark))
-        print(type(TtW_list))
-        print(type(dict_scatter))
-        print(type(list_res_acc))
         return (
             json.dumps(
                 [
