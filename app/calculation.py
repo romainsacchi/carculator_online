@@ -414,7 +414,7 @@ class Calculation:
         task.progress = 80
         db.session.commit()
 
-        results = self.ic.calculate_impacts()
+        results = np.float64(self.ic.calculate_impacts())
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
 
@@ -585,24 +585,6 @@ class Calculation:
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 100
         db.session.commit()
-
-
-        # Convert all floats to str, for json compatibility
-        list_res = [[str(x) for x in sublist ] for sublist in list_res]
-        list_res_costs = [[str(x) for x in sublist ] for sublist in list_res_costs]
-        arr_benchmark = [[str(x) for x in sublist ] for sublist in arr_benchmark]
-        TtW_list = [[str(x) for x in sublist ] for sublist in TtW_list]
-        list_res_acc = [[str(x) for x in sublist ] for sublist in list_res_acc]
-        for d in dict_scatter:
-            dict_scatter[d] = [str(x) for x in dict_scatter[d]]
-        print(dict_scatter)
-
-        json.dumps(list_res)
-        json.dumps(list_res_costs)
-        json.dumps(arr_benchmark)
-        json.dumps(TtW_list)
-        json.dumps(list_res_acc)
-        json.dumps(dict_scatter)
 
         return (
             json.dumps(
