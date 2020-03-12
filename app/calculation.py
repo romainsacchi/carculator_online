@@ -589,6 +589,14 @@ class Calculation:
         print(list_res_acc)
 
         list_res_acc = [[str(x) for x in sublist ] for sublist in list_res_acc]
+
+        print(type(lang))
+        print(type(list_res))
+        print(type(list_res_costs))
+        print(type(arr_benchmark))
+        print(type(TtW_list))
+        print(type(dict_scatter))
+        print(type(list_res_acc))
         return (
             json.dumps(
                 [
