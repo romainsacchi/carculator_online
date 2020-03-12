@@ -414,7 +414,7 @@ class Calculation:
         task.progress = 80
         db.session.commit()
 
-        results = np.float64(self.ic.calculate_impacts())
+        results = self.ic.calculate_impacts()
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
 
@@ -426,7 +426,7 @@ class Calculation:
         task.progress = 90
         db.session.commit()
 
-        data = results.values
+        data = float(results.values)
         data_acc = results_acc.values
 
         if lang == "fr":
