@@ -586,6 +586,7 @@ class Calculation:
         task.progress = 100
         db.session.commit()
 
+        list_res_acc = [float(x) for x in list_res_acc]
         return (
             json.dumps(
                 [
@@ -595,7 +596,7 @@ class Calculation:
                     arr_benchmark,
                     TtW_list,
                     dict_scatter,
-                    list_res_acc.astype(float),
+                    list_res_acc,
                 ]
             ),
             self.excel_lci,
