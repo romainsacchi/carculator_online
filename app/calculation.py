@@ -426,7 +426,7 @@ class Calculation:
         task.progress = 90
         db.session.commit()
 
-        data = float(results.values)
+        data = np.float64(results.values)
         data_acc = results_acc.values
 
         if lang == "fr":
