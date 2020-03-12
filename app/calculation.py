@@ -595,7 +595,7 @@ class Calculation:
                     arr_benchmark,
                     TtW_list,
                     dict_scatter,
-                    list_res_acc,
+                    list_res_acc.astype(float),
                 ]
             ),
             self.excel_lci,
