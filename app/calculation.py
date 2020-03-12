@@ -587,12 +587,14 @@ class Calculation:
         db.session.commit()
 
 
+        # Convert all floats to str, for json compatibility
         list_res = [[str(x) for x in sublist ] for sublist in list_res]
         list_res_costs = [[str(x) for x in sublist ] for sublist in list_res_costs]
         arr_benchmark = [[str(x) for x in sublist ] for sublist in arr_benchmark]
         TtW_list = [[str(x) for x in sublist ] for sublist in TtW_list]
         list_res_acc = [[str(x) for x in sublist ] for sublist in list_res_acc]
-
+        for d in dict_scatter:
+            dict_scatter[d] = [str(x) for x in dict_scatter[d]]
         print(dict_scatter)
 
         json.dumps(list_res)
