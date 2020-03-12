@@ -593,7 +593,14 @@ class Calculation:
         arr_benchmark = [[str(x) for x in sublist ] for sublist in arr_benchmark]
         TtW_list = [[str(x) for x in sublist ] for sublist in TtW_list]
         list_res_acc = [[str(x) for x in sublist ] for sublist in list_res_acc]
-        
+
+        json.dumps(list_res)
+        json.dumps(list_res_costs)
+        json.dumps(arr_benchmark)
+        json.dumps(TtW_list)
+        json.dumps(list_res_acc)
+        json.dumps(dict_scatter)
+
 
         print(type(lang))
         print(type(list_res))
