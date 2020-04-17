@@ -58,7 +58,7 @@ class Calculation:
         self.d_pt_fr = {
             "Essence": "ICEV-p",
             "Diesel": "ICEV-d",
-            "GPL": "ICEV-g",
+            "Gaz comprimé": "ICEV-g",
             "Electrique": "BEV",
             "H2 Pile à combustible": "FCEV",
             "Hybride-essence": "HEV-p",
