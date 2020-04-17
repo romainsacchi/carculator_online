@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-04 18:54+0100\n"
+"POT-Creation-Date: 2020-04-17 16:24+0200\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -90,79 +90,87 @@ msgstr "Utilisez une adresse email différente."
 
 #: app/routes.py:54
 msgid "Congratulations, you are now a registered user!"
-msgstr ""
+msgstr "Vous êtes maintenant enregistré en tant qu'utilisateur."
 
 #: app/routes.py:67
 msgid "Invalid username or password"
-msgstr ""
+msgstr "Nom d'utilisateur ou mot de passe invalide"
 
-#: app/routes.py:123 app/routes.py:143 templates/tool.html:632
+#: app/routes.py:140 app/routes.py:179
 msgid "Petrol"
 msgstr "Essence"
 
-#: app/routes.py:123 app/routes.py:144 templates/tool.html:640
+#: app/routes.py:140 app/routes.py:180
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:123 app/routes.py:146 templates/tool.html:660
+#: app/routes.py:140 app/routes.py:182
 msgid "Electric"
 msgstr "Electrique"
 
-#: app/routes.py:124 app/routes.py:157
+#: app/routes.py:141 app/routes.py:193
 msgid "Mid-size"
 msgstr "Berline familiale"
 
-#: app/routes.py:145 templates/tool.html:646
+#: app/routes.py:181
 msgid "Natural gas"
 msgstr "Gaz comprimé"
 
-#: app/routes.py:147
+#: app/routes.py:183
 msgid "H2 Fuel cell"
 msgstr "H2 Pile à combustible"
 
-#: app/routes.py:148
+#: app/routes.py:184
 msgid "Hybrid-petrol"
 msgstr "Hybride-essence"
 
-#: app/routes.py:149
+#: app/routes.py:185
 msgid "Hybrid-diesel"
 msgstr "Hybride-diesel"
 
-#: app/routes.py:150
+#: app/routes.py:186
 msgid "(Plugin) Hybrid-petrol"
 msgstr "Hybride-essence rechargeable"
 
-#: app/routes.py:151
+#: app/routes.py:187
 msgid "(Plugin) Hybrid-diesel"
 msgstr "Hybride-diesel rechargeable"
 
-#: app/routes.py:154
+#: app/routes.py:190
 msgid "Minicompact"
 msgstr "Mini-citadine"
 
-#: app/routes.py:155
+#: app/routes.py:191
 msgid "Subcompact"
 msgstr "Citadine"
 
-#: app/routes.py:156
+#: app/routes.py:192
 msgid "Compact"
 msgstr "Berline compacte"
 
-#: app/routes.py:158
+#: app/routes.py:194
 msgid "Large"
 msgstr "Grande routière"
 
-#: app/routes.py:159
+#: app/routes.py:195
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:160
+#: app/routes.py:196
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:345
+#: app/routes.py:381
 msgid "Email sent!"
 msgstr "Email envoyé!"
+
+#: src/carculator/carculator/model.py:702
+msgid "battery discharge efficiency"
+msgstr ""
+
+#: src/carculator/carculator/model.py:703
+msgid "fuel cell system efficiency"
+msgstr ""
 
 #: templates/index.html:19
 msgid "Carculator : Home"
@@ -441,19 +449,19 @@ msgstr "Ecrivez-nous si vous avez des questions à propos de l'outil."
 
 #: templates/index.html:968 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:346 templates/start.html:167 templates/tool.html:1064
+#: templates/result.html:351 templates/start.html:189 templates/tool.html:804
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
 #: templates/index.html:968 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:346 templates/start.html:167 templates/tool.html:1064
+#: templates/result.html:351 templates/start.html:189 templates/tool.html:804
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
 #: templates/index.html:969 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:347 templates/start.html:168 templates/tool.html:1065
+#: templates/result.html:352 templates/start.html:190 templates/tool.html:805
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
 
@@ -518,18 +526,14 @@ msgid "Export Brightway2-compatible inventories"
 msgstr "Exporter un inventaire compatible avec Brigthway2"
 
 #: templates/result.html:102
-msgid "Export Simapro-compatible inventories"
-msgstr "Exporter un inventaire compatible avec Simapro"
-
-#: templates/result.html:106
 msgid "Share results"
 msgstr "Partager les résultats"
 
-#: templates/result.html:121
+#: templates/result.html:117
 msgid "RESULTS"
 msgstr "RESULTATS"
 
-#: templates/result.html:124
+#: templates/result.html:120
 msgid ""
 "The different sections of this page present the results of your analysis,"
 " based on the\n"
@@ -544,7 +548,7 @@ msgstr ""
 "considérée et characterisée grâce à un nombre d'indicateurs "
 "environnementaux et économiques."
 
-#: templates/result.html:127
+#: templates/result.html:123
 msgid ""
 "This is a useful tool when comparing technologies that have environmental"
 " hotspots\n"
@@ -555,11 +559,11 @@ msgstr ""
 " ou un problème d'ordre environnemental à différents moments de leur "
 "cycle de vie."
 
-#: templates/result.html:144
+#: templates/result.html:140
 msgid "REFERENCE"
 msgstr ""
 
-#: templates/result.html:148
+#: templates/result.html:144
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
@@ -567,11 +571,11 @@ msgstr ""
 "Toute utilisation des résultats présentés, ou des inventaires ayant servi"
 " à les produire, doit être dûement référencée comme suit:"
 
-#: templates/result.html:171
+#: templates/result.html:167
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
 msgstr "EVALUATION DES IMPACTS DU CYCLE DE VIE"
 
-#: templates/result.html:175
+#: templates/result.html:171
 msgid ""
 "By default, the chart below shows the environmental impacts in terms of\n"
 "\t\t\t\t\t\t\t\t\tgreenhouse gas emissions emitted for each vehicle, per "
@@ -594,11 +598,11 @@ msgstr ""
 "aussi possible de présenter le résultat sous forme de tableau depuis le "
 "menu déroulant 'Stacked Bar Chart' situé dans le coin en haut à gauche."
 
-#: templates/result.html:194
+#: templates/result.html:190
 msgid "LIFE CYCLE COST ASSESSMENT"
 msgstr "EVALUATION DES COÛTS DU CYCLE DE VIE"
 
-#: templates/result.html:198
+#: templates/result.html:194
 msgid ""
 "The chart below represents the cost of ownership per kilometer driven for"
 " each vehicle.\n"
@@ -610,11 +614,11 @@ msgstr ""
 "cycle de vie des véhicules. Les futurs coûts du carburant et de "
 "l'électricité sont également considérés dans cette analyse."
 
-#: templates/result.html:214
+#: templates/result.html:210
 msgid "BENCHMARK"
 msgstr "COMPARAISON"
 
-#: templates/result.html:218
+#: templates/result.html:214
 msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
@@ -622,39 +626,35 @@ msgstr ""
 "Cette section compare la distance parcourue par chaque véhicule étant "
 "donné un budget choisi."
 
-#: templates/result.html:220
+#: templates/result.html:216
 msgid "How long can the vehicles drive on a life cycle budget of 1"
 msgstr "Quelle est la distance parcourue étant donné un budget d'un"
 
-#: templates/result.html:222
+#: templates/result.html:218
 msgid "kg CO2-eq."
 msgstr ""
 
-#: templates/result.html:223
+#: templates/result.html:219
 msgid "Euro"
 msgstr ""
 
-#: templates/result.html:224
+#: templates/result.html:220
 msgid "liter of petrol-eq."
 msgstr "litre de pétrole-eq."
 
-#: templates/result.html:243
+#: templates/result.html:239
 msgid "OTHER INDICATORS"
 msgstr "AUTTRES INDICATEURS"
 
-#: templates/result.html:251
+#: templates/result.html:247
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr "Consommation d'énergie Tank-to-wheel le long du cycle de conduite"
 
-#: templates/result.html:255
+#: templates/result.html:251
 msgid "GHG emissions vs. ownership costs"
 msgstr "Emissions de gaz à effet de serre et coûts d'utilisation"
 
-#: templates/result.html:259
-msgid "Accumulated impacts over lifetime"
-msgstr "Impacts cumulés lors du cycle de vie"
-
-#: templates/result.html:264
+#: templates/result.html:258
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -677,7 +677,7 @@ msgstr ""
 "sont capables de récupérer partiellement l'énergie libérée lors du "
 "freinage. Ceci explique que les sections plongeantes de leur courbe."
 
-#: templates/result.html:272
+#: templates/result.html:266
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
@@ -687,7 +687,11 @@ msgstr ""
 "de leur émissions de gaz à effet de serre et leur coût d'utilisation le "
 "long de leur cycle de vie."
 
-#: templates/result.html:276
+#: templates/result.html:292
+msgid "Accumulated impacts over lifetime"
+msgstr "Impacts cumulés lors du cycle de vie"
+
+#: templates/result.html:297
 msgid ""
 "The graph below illustrates the accumulated impacts of the vehicles along"
 " their use phase.\n"
@@ -706,79 +710,79 @@ msgstr ""
 " et aux émissions directes. Vous pouvez choisir la catégorie d'impact à "
 "considérer depuis le menu déroulant."
 
-#: templates/result.html:282
+#: templates/result.html:303
 msgid "Occupation of arable land [m2/year]"
 msgstr "Occupation de terre arable [m2/an]"
 
-#: templates/result.html:283
+#: templates/result.html:304
 msgid "Climate change [kg CO2-eq.]"
 msgstr "Changement climatique [kg CO2-eq.]"
 
-#: templates/result.html:284
+#: templates/result.html:305
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr "Epuisement des ressources d'énergie fossile [kg pétrole-eq.]"
 
-#: templates/result.html:285
+#: templates/result.html:306
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:286
+#: templates/result.html:307
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr "Eutrophisation des milieux aquatiques non-marins [kg P-eq.]"
 
-#: templates/result.html:287
+#: templates/result.html:308
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr "Toxicité humaine [kg 1,4-DC-eq.]"
 
-#: templates/result.html:288
+#: templates/result.html:309
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr "Rayonnement ionisant [kg U235-Eq]"
 
-#: templates/result.html:289
+#: templates/result.html:310
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:290
+#: templates/result.html:311
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr "Eutrophisation des milieux aquatiques marins [kg N-eq.]"
 
-#: templates/result.html:291
+#: templates/result.html:312
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr "Epuisement des ressources en métaux [kg fer-eq.]"
 
-#: templates/result.html:292
+#: templates/result.html:313
 msgid "Natural land transformation [m2]"
 msgstr "Transformation de terre naturelle [m2]"
 
-#: templates/result.html:293
+#: templates/result.html:314
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr "Détérioration de la couche d'ozone [kg CFC-11-eq.]"
 
-#: templates/result.html:294
+#: templates/result.html:315
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr "Formation de particules fines [kg PM10-eq.]"
 
-#: templates/result.html:295
+#: templates/result.html:316
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr "Formation de brouillard de pollution [kg NMVOC-eq.]"
 
-#: templates/result.html:296
+#: templates/result.html:317
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr "Acidification terrestre [kg SO2-eq.]"
 
-#: templates/result.html:297
+#: templates/result.html:318
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]"
 
-#: templates/result.html:298
+#: templates/result.html:319
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr "Occupation de terre en milieu urbain [m2/an]"
 
-#: templates/result.html:299
+#: templates/result.html:320
 msgid "Depletion of fresh water reserves [m3]"
 msgstr "Epuisement des réserves d'eau douce [m3]"
 
-#: templates/result.html:300
+#: templates/result.html:321
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr "Emissions de bruit [Person-Pascal/seconde]"
 
@@ -795,11 +799,11 @@ msgstr ""
 "Directemment accéder aux résultats de la comparaison entre un véhicule "
 "fonctionnant à l'essence, au diesel et à l'électricité pour le/la "
 
-#: templates/start.html:106
+#: templates/start.html:108
 msgid "Intermediate"
 msgstr "Intermédiaire"
 
-#: templates/start.html:107
+#: templates/start.html:109
 msgid ""
 "Set the parameters for a comparison between a gasoline, a diesel and\n"
 "\t\t\t\t\t\t\t\t\t\t\tan electricity-run vehicle, for  "
@@ -807,29 +811,58 @@ msgstr ""
 "Voir les paramètres pour une analyse comparative entre un véhicule "
 "fonctionnant à l'essence, au diesel et à l'électricité pour le/la "
 
-#: templates/start.html:108 templates/start.html:117
+#: templates/start.html:110 templates/start.html:119
 msgid "(requires login)"
 msgstr "(requiert la connexion de l'utilisateur)"
 
-#: templates/start.html:116
+#: templates/start.html:118
 msgid "Advanced"
 msgstr "Avancé"
 
-#: templates/start.html:117
+#: templates/start.html:119
 msgid "Build your own comparative scenario."
 msgstr "Faites votre propre analyse comparative"
 
-#: templates/start.html:126
+#: templates/start.html:129
 msgid "Yes, keep it simple!"
 msgstr "Oui, montrez-moi les résultats!"
 
-#: templates/start.html:132
+#: templates/start.html:135
 msgid "I'd like to see what's behind."
 msgstr "J'aimerai voir ce qu'il y a derrière."
 
-#: templates/start.html:138
+#: templates/start.html:141
 msgid "Let's build it from scratch."
 msgstr "Partons depuis le début."
+
+#: templates/start.html:149
+msgid ""
+"This 'Simple' access to the model gives the environmental impacts and "
+"life cycle costs of modern, mid-size diesel,\n"
+"\t\t\t\t\t\t\t\t\t\t\tgasoline and battery electric vehicles; for the "
+"country you are located in, for the year 2020, 2035 and 2050. The vehicle"
+" parameters correspond to the standard settings in our model."
+msgstr "Le mode d'accès 'Simple' mène l'utilisateur directemment aux résultats. "
+"Les résultats présentés sont les performances environnmentales d'un véhicule essence, diesel et électrique, "
+"en 2020, 2035 et 2050, pour le pays où vous vous trouvez."
+
+#: templates/start.html:156
+msgid ""
+"With this version, the same results as with the 'Simple' access are "
+"given, but you have access and can modify all the vehicle parameters.\n"
+"\t\t\t\t\t\t\t\t\t\t\tAdditionally, country-specific electricity mixes "
+"for charging the batteries of battery vehicles and producing hydrogen via"
+" electrolysis can be selected; the electricity mixes can also be\n"
+"\t\t\t\t\t\t\t\t\t\t\tdefined by the user."
+msgstr ""
+"Avec ce mode, les mêmes résultats que ceux présentés dans le mode "
+"'Simple' sont donnés. Cependant, l'utilisateur peut voir et modifier les "
+"paramètres des véhicules comparés. De plus, il est possible de définir le"
+" mix électrique pour charger le véhicule électrique, etc."
+
+#: templates/start.html:165
+msgid "This access offers the model full flexibility."
+msgstr "Ce mode d'accès offre à l'utilisaeur toute la flexibilité du modèle."
 
 #: templates/tool.html:17
 msgid "Carculator : Configuration"
@@ -995,7 +1028,7 @@ msgstr "mène à une variation des résultats finaux de 0.5 à "
 msgid ""
 "against\n"
 "\t\t\t\t\t\t\t\t\t\t0.3 to"
-msgstr ""
+msgstr "contre 0.3 à "
 
 #: templates/tool.html:304
 msgid "for a parameter with medium sensitivity, and 0 to"
@@ -1114,6 +1147,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
 "usual scenarios from energy models."
 msgstr ""
+"Carculator a besoin de connaître le cycle de conduite sur lequel comparer"
+" les véhicules, afin de claculer les besoins  en accélération et "
+"freinage. Aussi, pour une précision accrue, il est nécéssaire de préciser"
+" le pays dans lequel les véhicules sont utilisés."
 
 #: templates/tool.html:413
 msgid " For European country, the projections originate the"
@@ -1146,6 +1183,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
 "driving cycle."
 msgstr ""
+"Les cycles de conduite servent à représenter un trajet type sur lequel "
+"vont se baser les calculs. Depuis le cycle de conduite, carculator "
+"clacule le besoin en accéleration et freinage. Tous les véhicules sont "
+"comparés sur la base d'un même cycle de conduite."
 
 #: templates/tool.html:431
 msgid "Geographical conditions"
@@ -1318,6 +1359,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
 "methane to produce hydrogen."
 msgstr ""
+"De plus, différentes manières de produire l'hydrogène nécessaire aux "
+"véhicules à pile à combustible sont dispoibles. L'hydrogène peut être "
+"produite par reformage de vapeur à partir de gaz naturel, ou par "
+"électrolyse."
 
 #: templates/tool.html:608
 msgid ""
@@ -1333,235 +1378,56 @@ msgstr ""
 "de fabrication détermine le mix énergétique utilisé pour la conception "
 "des cellules de la batterie."
 
-#: templates/tool.html:623
+#: templates/tool.html:611
+msgid ""
+"The fuel blend shares presented by default originate different projection"
+" models. They can be modified at will. It is to note however that the "
+"shre of\n"
+"\t\t\t\t\t\t\t\t\talternative fuel in the fuel blend an engine can "
+"operate on, can be, in practice, limited for technical reasons."
+msgstr ""
+
+#: templates/tool.html:625
 msgid "FUEL PATHWAYS"
 msgstr "TYPE DE CARBURANT"
 
 #: templates/tool.html:634
-msgid "Source for conventional petrol inventory: ecoinvent 3.6"
-msgstr "Référence de l'inventaire pour l'essence conventionnelle: ecoinvent 3.6"
+msgid "Fuel blend for"
+msgstr "Mélange de carburant pour"
 
-#: templates/tool.html:635
-msgid ""
-"Source for bio-ethanol inventory: Francesco Cozzolini, 2018, Paul "
-"Scherrer Institut"
-msgstr ""
+#: templates/tool.html:637
+msgid "Primary fuel"
+msgstr "Carburant principal"
 
-#: templates/tool.html:642
-msgid "Source for conventional diesel inventory: ecoinvent 3.6"
-msgstr "Référence de l'inventaire pour le diesel conventionnel: ecoinvent 3.6"
+#: templates/tool.html:640
+msgid "Blend"
+msgstr "Mélange"
 
 #: templates/tool.html:643
-msgid ""
-"Source for bio-diesel inventory: Francesco Cozzolini, 2018, Paul Scherrer"
-" Institut"
-msgstr ""
+msgid "Secondary fuel"
+msgstr "Carburant secondaire"
 
-#: templates/tool.html:648
-msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
-msgstr "Référence de l'inventaire pour le gaz naturel conventionnel: ecoinvent 3.6"
+#: templates/tool.html:646
+msgid "Type of energy storage"
+msgstr "Type de stockage"
 
-#: templates/tool.html:649
-msgid ""
-"Source for bio-methane inventory: Xiaojin Zhang, 2019, Paul Scherrer "
-"Institut"
-msgstr ""
-"Référence de l'inventaire pour le bio-gas: Xiaojin Zhang, 2019, Paul "
-"Scherrer "
-
-#: templates/tool.html:652
-msgid "Hydrogen"
-msgstr "Hydrogène"
-
-#: templates/tool.html:654
-msgid "Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020"
-msgstr ""
-"Référence de l'inventaire pour l'hydrogène par électrolyse: ELEGANCY "
-"project, 2020"
-
-#: templates/tool.html:655
-msgid ""
-"Source for hydrogen by steam methane reforming fuel inventory: Zhang et "
-"al. 2017,\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tApplied Energy, Volume 190, 15 "
-"March 2017, Pages 326-338 "
-msgstr ""
-"Référence de l'inventaire pour l'hydrogène par vaporeformage: Zhang et "
-"al. 2017, Applied Energy, Volume 190, 15, Pages 326-338"
-
-#: templates/tool.html:669
-msgid "Conventional petrol"
-msgstr "Essence conventionelle"
-
-#: templates/tool.html:678
-msgid "Bio-ethanol from forest residues"
-msgstr "Bio-éthanol à partir de résidus forestiers"
-
-#: templates/tool.html:684
-msgid "Bio-ethanol from wheat straw"
-msgstr "Bio-éthanol à partir de paille de blé"
-
-#: templates/tool.html:690
-msgid "Bio-ethanol from maize starch"
-msgstr "Bio-éthanol à partir d'amidon de maïs"
-
-#: templates/tool.html:696
-msgid "Bio-ethanol from sugar beet residue"
-msgstr "Bio-éthanol à partir de betterave à sucre"
-
-#: templates/tool.html:706
-msgid "Conventional diesel"
-msgstr "Diesel conventionnel"
-
-#: templates/tool.html:712
-msgid "Bio-diesel from algae"
-msgstr "Bio-diesel à partir d'algues"
-
-#: templates/tool.html:718
-msgid "Bio-diesel from used cooking oil"
-msgstr "Bio-diesel à partir d'huile végétale usagée"
-
-#: templates/tool.html:726
-msgid "Compressed natural gas"
-msgstr "Gaz naturel comprimé"
-
-#: templates/tool.html:732
-msgid "Bio-methane from manure"
-msgstr "Bio-gas à partir de fumier"
-
-#: templates/tool.html:740
-msgid "Via electrolysis using the electricity mix specified above"
-msgstr "Par électrolyse en utilisant le mix électrique spécifié ci-dessus"
-
-#: templates/tool.html:746
-msgid "Via electrolysis using photovoltaic power"
-msgstr "Par électrolyse en utilisant uniquement l'énergie photovoltaïque"
-
-#: templates/tool.html:752
-msgid "Via electrolysis using hydro power"
-msgstr "Par électrolyse en utilisant uniquement l'énergie hydraulique"
-
-#: templates/tool.html:758
-msgid "Via electrolysis using nuclear power"
-msgstr "Par électrolyse en utilisant uniquement l'énergie nucléaire"
-
-#: templates/tool.html:764
-msgid "Via Steam Methane Reforming"
-msgstr "Par vaporeformage"
-
-#: templates/tool.html:772
-msgid "Electricity mix specified above"
-msgstr "Mix électrique spécifié au-dessus"
-
-#: templates/tool.html:786
-msgid "ENERGY STORAGE"
-msgstr "STOCKAGE D'ENERGIE"
-
-#: templates/tool.html:797
-msgid "Fuel cell technology"
-msgstr "Technologie de la pile à combustible"
-
-#: templates/tool.html:799
-msgid "Main type of fuel cell developed for transport applications."
-msgstr "Technologie principalement utilisée pour le transport"
-
-#: templates/tool.html:800
-msgid ""
-"Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, "
-"issue C, 884-896."
-msgstr ""
-"Référence de l'inventaire: Simons A. and Bauer C. Applied Energy, 2015, "
-"vol. 157, issue C, 884-896."
-
-#: templates/tool.html:804
-msgid "Battery chemistry"
-msgstr "Type de batterie"
-
-#: templates/tool.html:806
-msgid ""
-"Three different types of lithium-ion-based batteries are presented, all "
-"used for transport applications."
-msgstr ""
-"Différentes batteries au lithium sont présentées, toutes étant utilisées "
-"dans le domaine du transport."
-
-#: templates/tool.html:807
-msgid ""
-"Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, "
-"3379-3390."
-msgstr ""
-"Référence de l'inventaire: Schmidt et al., Environ. Sci. Technol. 2019, "
-"53, 7, 3379-3390."
-
-#: templates/tool.html:820
-msgid "Proton exchange membrane"
-msgstr "Membrane échangeuse de protons"
-
-#: templates/tool.html:832
-msgid "Lithium nickel manganese cobalt oxide (NMC)"
-msgstr ""
-
-#: templates/tool.html:840
-msgid "Lithium iron phosphate (LFP)"
-msgstr ""
-
-#: templates/tool.html:848
-msgid "Lithium nickel cobalt aluminum oxide (NCA)"
-msgstr ""
-
-#: templates/tool.html:856
-msgid "Origin of manufacture"
-msgstr "Origine de fabrication"
-
-#: templates/tool.html:858
-msgid ""
-"Modifies the electricity mix used along the manufacture of the battery "
-"cells."
-msgstr ""
-"Modifie le mix électrique utilisé lors de la fabrication des cellules de "
-"la batterie"
-
-#: templates/tool.html:866
-msgid "China"
-msgstr "Chine"
-
-#: templates/tool.html:873
-msgid "Japan"
-msgstr "Japon"
-
-#: templates/tool.html:880
-msgid "India"
-msgstr "Inde"
-
-#: templates/tool.html:887
-msgid "Europe"
-msgstr ""
-
-#: templates/tool.html:894
-msgid "United States"
-msgstr "Etats-Unis"
-
-#: templates/tool.html:901
-msgid "Norway"
-msgstr "Norvège"
-
-#: templates/tool.html:935
+#: templates/tool.html:675
 msgid "CALCULATION SETTINGS"
 msgstr "PARAMETRES DE CALCUL"
 
-#: templates/tool.html:946
+#: templates/tool.html:686
 msgid "Linking algorithm"
 msgstr "Algorithme de calcul"
 
-#: templates/tool.html:948
+#: templates/tool.html:688
 msgid "Functional unit"
 msgstr "Unité fonctionnelle"
 
-#: templates/tool.html:949
+#: templates/tool.html:689
 msgid "Calculation mode"
 msgstr "Mode de calcul"
 
-#: templates/tool.html:957
+#: templates/tool.html:697
 msgid ""
 "A so-called \"attributional\" linking\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t algorithm will reflect average impacts\n"
@@ -1579,15 +1445,15 @@ msgstr ""
 "environnmentaux associés à la réalisation marginale de l'unité "
 "fonctionelle."
 
-#: templates/tool.html:967
+#: templates/tool.html:707
 msgid "Attributional"
 msgstr "Attributionnel"
 
-#: templates/tool.html:973
+#: templates/tool.html:713
 msgid "Consequential"
 msgstr "Conséquentiel"
 
-#: templates/tool.html:979
+#: templates/tool.html:719
 msgid ""
 "Three types of functional unit are offered. The user can opt for a "
 "comparison normalized\n"
@@ -1601,27 +1467,27 @@ msgstr ""
 "kilomètre parcouru, pour un nombre de kilomètres défini ou pour une "
 "composition de flotte donnée."
 
-#: templates/tool.html:987
+#: templates/tool.html:727
 msgid "Unit, per km"
 msgstr "Unitaire, par véhicule-kilomètre parcouru"
 
-#: templates/tool.html:993
+#: templates/tool.html:733
 msgid "Driven distance"
 msgstr "Pour une distance donnée"
 
-#: templates/tool.html:996
+#: templates/tool.html:736
 msgid "in km"
 msgstr "en km"
 
-#: templates/tool.html:1002
+#: templates/tool.html:742
 msgid "Fleet"
 msgstr "Pour une composition de flotte spécifique"
 
-#: templates/tool.html:1008
+#: templates/tool.html:748
 msgid "Specify fleet composition"
 msgstr "Spécifiez la composition de la flotte"
 
-#: templates/tool.html:1015
+#: templates/tool.html:755
 msgid ""
 "A simple calculation will use \"most likely\" values as model inputs and "
 "outputs.\n"
@@ -1637,15 +1503,15 @@ msgstr ""
 "des valeurs moyennes, alors que le mode de calcul avec incertitude "
 "fournit au modèle des invertalles de probabilité."
 
-#: templates/tool.html:1025
+#: templates/tool.html:765
 msgid "Simple calculation"
 msgstr "Mode de calcul simple"
 
-#: templates/tool.html:1031
+#: templates/tool.html:771
 msgid "Error propagation (Monte Carlo)"
 msgstr "Analyse d'incertitude (Monte Carlo)"
 
-#: templates/tool.html:1034
+#: templates/tool.html:774
 msgid "number of iterations"
 msgstr "nombre d'itérations"
 
@@ -1761,4 +1627,259 @@ msgstr "nombre d'itérations"
 
 #~ msgid "fuel cell system efficiency"
 #~ msgstr ""
+
+#~ msgid "Export Simapro-compatible inventories"
+#~ msgstr "Exporter un inventaire compatible avec Simapro"
+
+#~ msgid "Source for conventional petrol inventory: ecoinvent 3.6"
+#~ msgstr "Référence de l'inventaire pour l'essence conventionnelle: ecoinvent 3.6"
+
+#~ msgid ""
+#~ "Source for bio-ethanol inventory: "
+#~ "Francesco Cozzolini, 2018, Paul Scherrer "
+#~ "Institut"
+#~ msgstr ""
+
+#~ msgid "Source for conventional diesel inventory: ecoinvent 3.6"
+#~ msgstr "Référence de l'inventaire pour le diesel conventionnel: ecoinvent 3.6"
+
+#~ msgid ""
+#~ "Source for bio-diesel inventory: "
+#~ "Francesco Cozzolini, 2018, Paul Scherrer "
+#~ "Institut"
+#~ msgstr ""
+
+#~ msgid "Source for conventional compressed natural gas inventory: ecoinvent 3.6"
+#~ msgstr ""
+#~ "Référence de l'inventaire pour le gaz"
+#~ " naturel conventionnel: ecoinvent 3.6"
+
+#~ msgid ""
+#~ "Source for bio-methane inventory: "
+#~ "Xiaojin Zhang, 2019, Paul Scherrer "
+#~ "Institut"
+#~ msgstr ""
+#~ "Référence de l'inventaire pour le "
+#~ "bio-gas: Xiaojin Zhang, 2019, Paul "
+#~ "Scherrer "
+
+#~ msgid "Hydrogen"
+#~ msgstr "Hydrogène"
+
+#~ msgid ""
+#~ "Source for hydrogen by electrolysis fuel"
+#~ " inventory: ELEGANCY project, 2020"
+#~ msgstr ""
+#~ "Référence de l'inventaire pour l'hydrogène "
+#~ "par électrolyse: ELEGANCY project, 2020"
+
+#~ msgid ""
+#~ "Source for hydrogen by steam methane "
+#~ "reforming fuel inventory: Zhang et al."
+#~ " 2017,\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tApplied Energy, "
+#~ "Volume 190, 15 March 2017, Pages "
+#~ "326-338 "
+#~ msgstr ""
+#~ "Référence de l'inventaire pour l'hydrogène "
+#~ "par vaporeformage: Zhang et al. 2017,"
+#~ " Applied Energy, Volume 190, 15, "
+#~ "Pages 326-338"
+
+#~ msgid "Conventional petrol"
+#~ msgstr "Essence conventionelle"
+
+#~ msgid "Bio-ethanol from forest residues"
+#~ msgstr "Bio-éthanol à partir de résidus forestiers"
+
+#~ msgid "Bio-ethanol from wheat straw"
+#~ msgstr "Bio-éthanol à partir de paille de blé"
+
+#~ msgid "Bio-ethanol from maize starch"
+#~ msgstr "Bio-éthanol à partir d'amidon de maïs"
+
+#~ msgid "Bio-ethanol from sugar beet residue"
+#~ msgstr "Bio-éthanol à partir de betterave à sucre"
+
+#~ msgid "Conventional diesel"
+#~ msgstr "Diesel conventionnel"
+
+#~ msgid "Bio-diesel from algae"
+#~ msgstr "Bio-diesel à partir d'algues"
+
+#~ msgid "Bio-diesel from used cooking oil"
+#~ msgstr "Bio-diesel à partir d'huile végétale usagée"
+
+#~ msgid "Compressed natural gas"
+#~ msgstr "Gaz naturel comprimé"
+
+#~ msgid "Bio-methane from manure"
+#~ msgstr "Bio-gas à partir de fumier"
+
+#~ msgid "Via electrolysis using the electricity mix specified above"
+#~ msgstr "Par électrolyse en utilisant le mix électrique spécifié ci-dessus"
+
+#~ msgid "Via electrolysis using photovoltaic power"
+#~ msgstr "Par électrolyse en utilisant uniquement l'énergie photovoltaïque"
+
+#~ msgid "Via electrolysis using hydro power"
+#~ msgstr "Par électrolyse en utilisant uniquement l'énergie hydraulique"
+
+#~ msgid "Via electrolysis using nuclear power"
+#~ msgstr "Par électrolyse en utilisant uniquement l'énergie nucléaire"
+
+#~ msgid "Via Steam Methane Reforming"
+#~ msgstr "Par vaporeformage"
+
+#~ msgid "Electricity mix specified above"
+#~ msgstr "Mix électrique spécifié au-dessus"
+
+#~ msgid "ENERGY STORAGE"
+#~ msgstr "STOCKAGE D'ENERGIE"
+
+#~ msgid "Fuel cell technology"
+#~ msgstr "Technologie de la pile à combustible"
+
+#~ msgid "Main type of fuel cell developed for transport applications."
+#~ msgstr "Technologie principalement utilisée pour le transport"
+
+#~ msgid ""
+#~ "Inventory source: Simons A. and Bauer"
+#~ " C. Applied Energy, 2015, vol. 157,"
+#~ " issue C, 884-896."
+#~ msgstr ""
+#~ "Référence de l'inventaire: Simons A. and"
+#~ " Bauer C. Applied Energy, 2015, vol."
+#~ " 157, issue C, 884-896."
+
+#~ msgid "Battery chemistry"
+#~ msgstr "Type de batterie"
+
+#~ msgid ""
+#~ "Three different types of lithium-ion-"
+#~ "based batteries are presented, all used"
+#~ " for transport applications."
+#~ msgstr ""
+#~ "Différentes batteries au lithium sont "
+#~ "présentées, toutes étant utilisées dans "
+#~ "le domaine du transport."
+
+#~ msgid ""
+#~ "Inventory source: Schmidt et al., "
+#~ "Environ. Sci. Technol. 2019, 53, 7, "
+#~ "3379-3390."
+#~ msgstr ""
+#~ "Référence de l'inventaire: Schmidt et "
+#~ "al., Environ. Sci. Technol. 2019, 53,"
+#~ " 7, 3379-3390."
+
+#~ msgid "Proton exchange membrane"
+#~ msgstr "Membrane échangeuse de protons"
+
+#~ msgid "Lithium nickel manganese cobalt oxide (NMC)"
+#~ msgstr ""
+
+#~ msgid "Lithium iron phosphate (LFP)"
+#~ msgstr ""
+
+#~ msgid "Lithium nickel cobalt aluminum oxide (NCA)"
+#~ msgstr ""
+
+#~ msgid "Origin of manufacture"
+#~ msgstr "Origine de fabrication"
+
+#~ msgid ""
+#~ "Modifies the electricity mix used along"
+#~ " the manufacture of the battery "
+#~ "cells."
+#~ msgstr ""
+#~ "Modifie le mix électrique utilisé lors"
+#~ " de la fabrication des cellules de"
+#~ " la batterie"
+
+#~ msgid "China"
+#~ msgstr "Chine"
+
+#~ msgid "Japan"
+#~ msgstr "Japon"
+
+#~ msgid "India"
+#~ msgstr "Inde"
+
+#~ msgid "Europe"
+#~ msgstr ""
+
+#~ msgid "United States"
+#~ msgstr "Etats-Unis"
+
+#~ msgid "Norway"
+#~ msgstr "Norvège"
+
+#~ msgid ""
+#~ "This version is used to calculate "
+#~ "the environmental impacts and life cycle"
+#~ " costs of modern, mid-size diesel,"
+#~ "\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tgasoline and battery "
+#~ "electric vehicles; for the country you"
+#~ " are in (via automatic recognition "
+#~ "via browser).\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tFor the years 2020, "
+#~ "2035 and 2050. The vehicle parameters"
+#~ " correspond to the standard settings "
+#~ "in our model. Environmental impacts and"
+#~ " costs for additional vehicle types "
+#~ "and fuels can be calculated with "
+#~ "the other two advanced versions. There"
+#~ " you can also select the country "
+#~ "of analysis.\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tVehicle parameters and "
+#~ "other relevant variables can also be "
+#~ "changed in these versions."
+#~ msgstr ""
+#~ "Cette version calcule les impacts "
+#~ "environnementaux et coûts d'un véhicule "
+#~ "diesel, essence et électrique, de taille"
+#~ " moyenne, en 2020, 2035 et 2050, "
+#~ "pour le pays "
+
+#~ msgid ""
+#~ "With this version, the environmental "
+#~ "impacts and life cycle costs of "
+#~ "all types of modern passenger cars "
+#~ "of different size classes with a\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tvariety of fuels can "
+#~ "be calculated. All vehicle parameters "
+#~ "can be adjusted.\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tCountry-specific electricity"
+#~ " mixes for charging the batteries of"
+#~ " battery vehicles and producing hydrogen"
+#~ " via electrolysis can be selected; "
+#~ "the electricity mixes can also be\n"
+#~ ""
+#~ "\t\t\t\t\t\t\t\t\t\t\tdefined by the user.\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tDifferent battery types "
+#~ "and production countries are available. "
+#~ "Furthermore, uncertainty analyses can be "
+#~ "performed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This version offers full flexibility and"
+#~ " even more possibilities for advanced "
+#~ "users."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This 'Simple' access to teh model "
+#~ "gives the environmental impacts and life"
+#~ " cycle costs of modern, mid-size "
+#~ "diesel,\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\tgasoline and battery "
+#~ "electric vehicles; for the country you"
+#~ " are located in, for the year "
+#~ "2020, 2035 and 2050. The vehicle "
+#~ "parameters correspond to the standard "
+#~ "settings in our model."
+#~ msgstr "Ce mode 'simple' donne directemment accès aux résultats"
 

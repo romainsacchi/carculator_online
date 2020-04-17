@@ -85,6 +85,8 @@
      "hydrogen_tank_carbon_fiber": "aus Kohlefaser",
       "hydrogen_tank_hdpe": "aus HDPE",
       "hydrogen_tank_aluminium": "aus Aluminium",
+     "tank_polyethylene": "Kraftstofftank aus Polyethylen",
+      "tank_fiberglass": "Fiberglas-Kraftstofftank",
      "electricity_mix_already_specified": "The electricity mix is already specified in the above section",
      "mini": "Kleinstwagen",
      "small": "Kleinwagen",

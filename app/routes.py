@@ -98,7 +98,7 @@ def start():
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-@login_required
+#@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -168,8 +168,9 @@ def tool_page(country):
                                          }
                                         }
                                 },
-                "battery technology": "NMC",
-                "battery origin": "CN",
+                "energy storage": {
+                    "electric": {"type":"NMC", "origin":"CN"}
+                },
                 "custom electricity mix": response,
             },
         }
@@ -408,7 +409,7 @@ def get_results():
     lang = session.get("language", "en")
 
     d = app.calc.format_dictionary(request.get_json(), lang, job_id)
-    print(d)
+
     # Create a connection to the Redis server
     q = Queue(connection=conn)
     job = q.enqueue_call(

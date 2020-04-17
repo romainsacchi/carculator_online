@@ -1106,7 +1106,7 @@ function getSelectedCountries() {
             },
         error: function(xhr, status, error){console.log(error)}})
     ).done(function(json){
-        console.log(json)
+
         // Lop through divs in fuel tables
         var divs = $("#fuel_pathway_table > tbody").find('div');
 
@@ -1551,7 +1551,6 @@ function collect_configuration(){
 
     // Retrieve fuel pathway
     var divs = $("#fuel_pathway_table > tbody").find('div');
-
     var fuel_blend = {};
 
     for (i=0; i<divs.length; i++){
@@ -1560,16 +1559,11 @@ function collect_configuration(){
             if (divs[i].id != ""){
 
                 var slider = $("[id='"+divs[i].id+"']")[0]
-
                 var fuel = divs[i].id.split('_')[0];
                 var year = divs[i].id.split('_')[1];
                 var value = parseFloat(slider.noUiSlider.get()) / 100
-
                 var primary_fuel_select = document.getElementById(fuel+" primary fuel");
-
                 var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
-
-
 
                 if (fuel in fuel_blend){
 
@@ -1589,18 +1583,25 @@ function collect_configuration(){
                     }
                 };
             }
-
         }
+    };
 
+    // Retrieve energy storage
+    var energy_storage = {};
+    var selects = $("#fuel_pathway_table > tbody").find('select');
+    var fuels = ['petrol', 'diesel', 'cng', 'hydrogen', 'electric']
+
+    for (f=0; f<fuels.length; f++){
+        if (document.getElementById(fuels[f]+"_storage")) {
+            var storage_type = document.getElementById(fuels[f]+"_storage").value;
+            energy_storage[fuels[f]] = {'type':storage_type};
+        };
     };
 
     background_params['fuel blend'] = fuel_blend;
-
-
-
+    background_params['energy storage'] = energy_storage;
     params['foreground params'] = foreground_params;
     params['background params'] = background_params;
-    console.log(params['background params']);
 
     return params;
 
@@ -2257,6 +2258,7 @@ function fill_in_from_config_file(data){
 function update_fuel_sliders(data){
     // Fuel pathways
     var fuel_blend = data['background params']['fuel blend']
+    var energy_storage = data['background params']['energy storage']
     var listYears = document.querySelectorAll( '#years_list > li' );
 
     for (var key in fuel_blend) {
@@ -2287,6 +2289,10 @@ function update_fuel_sliders(data){
         }
     };
 
+    for (var key in energy_storage){
+        var energy_storage_select = document.getElementById(key+"_storage");
+        energy_storage_select.value = energy_storage[key]['type']
+    }
 };
 
 holder.ondrop = function(e) {
@@ -2358,9 +2364,20 @@ function create_fuel_table() {
 
                     var newRow = tableRef.insertRow();
                     if (listPowertrains[pt].innerText == i18n('electric')){
-                        var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +'</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>' + '<td align="left" style="color:white"><select id="battery technology" style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
-                        + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
-                        + '<option value="LFP">Lithium iron phosphate (LFP)</option></td>'
+                        if (y==0){
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +
+                            '</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>'
+                            + '<td align="left" style="color:white"><select id="electric_storage" style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
+                            + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
+                            + '<option value="LFP">Lithium iron phosphate (LFP)</option></td>'
+
+                        }else{
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +
+                            '</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>'
+                            + '<td align="left" style="color:white"></td>'
+
+                        };
+
                     };
 
                     if (listPowertrains[pt].innerText == i18n('petrol')|listPowertrains[pt].innerText == i18n('hybrid_petrol')|listPowertrains[pt].innerText == i18n('fuel_plugin_hybrid_petrol')){
@@ -2385,14 +2402,14 @@ function create_fuel_table() {
                             + '</option><option value="bioethanol - sugarbeet">'+i18n("bioethanol_sugarbeet")+'</option>'
                             + '<option value="bioethanol - maize starch">'+i18n("bioethanol_maize_starch")+'</option>'
                             + '<option value="synthetic gasoline">'+i18n("synthetic_gasoline")+'</option></select></td>'
-                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                            + '<td align="left" style="color:white">'+i18n('tank_polyethylene')+'</td>'
                         }else{
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
                             + '</td><td align="left" style="color:white">'
                             + '</td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
                             + '<td align="left" style="color:white"></td>'
-                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                            + '<td align="left" style="color:white"></td>'
                         };
 
                     };
@@ -2414,7 +2431,7 @@ function create_fuel_table() {
                             +'</option><option value="biodiesel - algae">'+i18n("biodiesel_algae")
                             + '</option><option value="biodiesel - cooking oil">'+i18n("biodiesel_cooking_oil")
                             + '</option><option value="synthetic diesel">'+i18n("synthetic_diesel")+'</option></select></td>'
-                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                            + '<td align="left" style="color:white">'+i18n('tank_polyethylene')+'</td>'
 
                         }else{
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
@@ -2422,7 +2439,7 @@ function create_fuel_table() {
                             + '</td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
                             + '<td align="left" style="color:white"></td>'
-                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                            + '<td align="left" style="color:white"></td>'
                         };
                     };
 
@@ -2441,7 +2458,7 @@ function create_fuel_table() {
                             + '<td align="left" style="color:white"><select id="cng secondary fuel" style="color:grey">'
                             + '</option><option value="biogas">'+i18n("biogas")
                             + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
-                             + '<td align="left" style="color:white">Fiberglass-based fuel tank</td>'
+                             + '<td align="left" style="color:white">'+i18n('tank_fiberglass')+'</td>'
 
                         }else{
 
@@ -2450,7 +2467,7 @@ function create_fuel_table() {
                             + '</td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
                             + '<td align="left" style="color:white"></td>'
-                             + '<td align="left" style="color:white">Fiberglass-based fuel tank</td>'
+                             + '<td align="left" style="color:white"></td>'
 
                         };
 
@@ -2471,7 +2488,7 @@ function create_fuel_table() {
                             + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="electrolysis">'
                             + i18n("electrolysis")+'</option><option value="smr">'+i18n("smr")
                             +'</option></select></td>'
-                            + '<td align="left" style="color:white"><select id="hydrogen tank technology" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
+                            + '<td align="left" style="color:white"><select id="hydrogen_storage" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
                             + '<option value="hdpe">'+i18n("hydrogen_tank_hdpe")+'</option>'
                             + '<option value="aluminium">'+i18n("hydrogen_tank_aluminium")+'</option></td>'
                         }else{
@@ -2481,9 +2498,7 @@ function create_fuel_table() {
                             + '</td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
                             + '<td align="left" style="color:white"></td>'
-                            + '<td align="left" style="color:white"><select id="hydrogen tank technology" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
-                            + '<option value="hdpe">'+i18n("hydrogen_tank_hdpe")+'</option>'
-                            + '<option value="aluminium">'+i18n("hydrogen_tank_aluminium")+'</option></td>'
+                            + '<td align="left" style="color:white"></td>'
                         };
                     };
 
