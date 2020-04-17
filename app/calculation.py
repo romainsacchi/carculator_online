@@ -473,7 +473,7 @@ class Calculation:
             ["impact category", "size", "powertrain", "year", "category", "value"]
         ]
         list_res_acc = []
-
+        print(impact_category)
         for imp in range(0, len(impact_category)):
             for s in range(0, len(size)):
                 for pt in range(0, len(powertrain)):
