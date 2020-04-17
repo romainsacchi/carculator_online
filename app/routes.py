@@ -123,7 +123,7 @@ def tool_page(country):
                     "RegionCode"
                 ]
 
-        print(app.calc.biofuel.coords)
+
         share_biofuel = (
             app.calc.biofuel.sel(
                 region=region,
@@ -408,6 +408,7 @@ def get_results():
     lang = session.get("language", "en")
 
     d = app.calc.format_dictionary(request.get_json(), lang, job_id)
+    print(d)
     # Create a connection to the Redis server
     q = Queue(connection=conn)
     job = q.enqueue_call(
@@ -498,7 +499,7 @@ def get_language():
         json_url = os.path.join(app.static_folder, "translation", "translation_it.json")
 
     with open(json_url, encoding="utf-8") as fh:
-        print(lang)
+
         data = json.load(fh)
 
     return make_response(data, 200)
