@@ -407,8 +407,7 @@ class Calculation:
                                 cost_category[cat],
                             ]
                         )
-        print("BACKGROUND ", d[("Background",)])
-        print("SCOPE ", d[("Functional unit",)])
+
         self.ic = InventoryCalculation(
             cm.array,
             scope=d[("Functional unit",)],
@@ -479,7 +478,7 @@ class Calculation:
             for s in range(0, len(size)):
                 for pt in range(0, len(powertrain)):
                     for y in range(0, len(year)):
-                        if imp == 6:
+                        if imp == 2:
                             arr_benchmark.append(
                                 [
                                     "climate change",
@@ -491,7 +490,7 @@ class Calculation:
                             )
                             k = powertrain[pt] + ", " + str(year[y]) + ", " + size[s]
                             dict_scatter[k].append(data[imp, s, pt, y, :, 0].sum())
-                        if imp == 7:
+                        if imp == 3:
                             arr_benchmark.append(
                                 [
                                     "fossil depletion",
