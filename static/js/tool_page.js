@@ -1118,23 +1118,14 @@ function getSelectedCountries() {
                     slider.noUiSlider.updateOptions({
                         start: parseInt(json[div_year]['primary']*100)
                     });
-
                 }
-
                 }
             }
         })
-
-
-
     };
 
   return selected;
 }
-
-
-
-
 
 function get_electricity_mix(ISO){
     var listYears = document.querySelectorAll( '#years_list > li' );
