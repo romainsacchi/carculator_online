@@ -1117,7 +1117,6 @@ function getSelectedCountries() {
 
                     var div_year = divs[i].id.split('_')[1]
                     var slider = divs[i]
-                    console.log(slider)
                     slider.noUiSlider.updateOptions({
                         start: parseInt(json[div_year]['primary']*100)
                     });
@@ -2105,7 +2104,6 @@ holder.ondragend = function() {
 
 function fill_in_from_config_file(data){
     // Display first section
-    console.log(data);
         $('#label_car').trigger('click');
 
         // Add years to right frame
