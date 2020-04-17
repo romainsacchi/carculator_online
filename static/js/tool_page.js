@@ -860,8 +860,6 @@ $('#search_input').keyup(function() {
     generate_driving_cycle_graph(driving_cycle);
 });
 
-
-
 function generate_driving_cycle_graph(driving_cycle){
     $.when($.ajax({
         type:'GET',
