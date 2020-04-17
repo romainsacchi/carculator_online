@@ -724,7 +724,18 @@ function size_list_update(){
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
-            generate_driving_cycle_graph('WLTC');}
+            generate_driving_cycle_graph('WLTC');
+
+            // Create fuel table
+            var tableRef = document.getElementById('fuel_pathway_table');
+            var rowCount = tableRef.rows.length;
+            while (rowCount>2){
+                tableRef.deleteRow(2);
+                var rowCount = tableRef.rows.length;
+            }
+            create_fuel_table();
+
+            }
         else{return;};
     };
 
@@ -794,6 +805,15 @@ function size_list_update(){
     table.appendChild(thead);
     table.appendChild(tbody);
     row.appendChild(table);
+
+    // Create fuel table
+    var tableRef = document.getElementById('fuel_pathway_table');
+    var rowCount = tableRef.rows.length;
+    while (rowCount>2){
+        tableRef.deleteRow(2);
+        var rowCount = tableRef.rows.length;
+    }
+    create_fuel_table();
 };
 
 // Populate table with search results as the search field is updated.
@@ -1065,10 +1085,59 @@ function getSelectedCountries() {
        get_electricity_mix(selected.slice(0,1));
     return selected.slice(0,1)
   };
-  if (selected.length>0){get_electricity_mix(selected)};
+  // If country is selected, get electricity mixes
+  // Get also biofuel shares
+  if (selected.length>0){
+
+    get_electricity_mix(selected)
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var list_year = [];
+    for (var item = 0; item < listYears.length; item++){
+        list_year.push(listYears[item].innerHTML);
+    };
+
+    $.when($.ajax({
+        url: "/get_fuel_blend/"+selected+"/"+list_year,
+        dataType: 'json',
+        type: 'GET',
+        success : function(data) {
+           var json = data
+            return json
+            },
+        error: function(xhr, status, error){console.log(error)}})
+    ).done(function(json){
+        console.log(json)
+        // Lop through divs in fuel tables
+        var divs = $("#fuel_pathway_table > tbody").find('div');
+
+        for (i=0; i<divs.length; i++){
+
+            if (typeof divs[i].id !== 'undefined') {
+                if (divs[i].id != ""){
+
+                    var div_year = divs[i].id.split('_')[1]
+                    var slider = divs[i]
+                    console.log(slider)
+                    slider.noUiSlider.updateOptions({
+                        start: parseInt(json[div_year]['primary']*100)
+                    });
+
+                }
+
+                }
+            }
+        })
+
+
+
+    };
 
   return selected;
 }
+
+
+
+
 
 function get_electricity_mix(ISO){
     var listYears = document.querySelectorAll( '#years_list > li' );
@@ -1426,7 +1495,6 @@ function collect_configuration(){
 
     params['year'] = list_year;
 
-
     var list_type = [];
     for (var item = 0; item < listItems.length; item++){
         list_type.push(listItems[item].innerHTML);
@@ -1482,12 +1550,58 @@ function collect_configuration(){
     });
 
     // Retrieve fuel pathway
-    $.each($('#fuel_pathway_table input:checked'), function() {
-                background_params[this.name] = this.value;
-            });
+    var divs = $("#fuel_pathway_table > tbody").find('div');
+
+    var fuel_blend = {};
+
+    for (i=0; i<divs.length; i++){
+
+        if (typeof divs[i].id !== 'undefined') {
+            if (divs[i].id != ""){
+
+                var slider = $("[id='"+divs[i].id+"']")[0]
+
+                var fuel = divs[i].id.split('_')[0];
+                var year = divs[i].id.split('_')[1];
+                var value = parseFloat(slider.noUiSlider.get()) / 100
+
+                var primary_fuel_select = document.getElementById(fuel+" primary fuel");
+
+                var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
+
+
+
+                if (fuel in fuel_blend){
+
+                    fuel_blend[fuel]['primary fuel']['share'].push(value)
+                    fuel_blend[fuel]['secondary fuel']['share'].push(1-value)
+
+                } else {
+
+                    fuel_blend[fuel] = {'primary fuel': {
+                                            'type':primary_fuel_select.value,
+                                            'share':[value]
+                    },
+                                        'secondary fuel': {
+                                            'type':secondary_fuel_select.value,
+                                            'share':[1-value]
+                    }
+                    }
+                };
+            }
+
+        }
+
+    };
+
+    background_params['fuel blend'] = fuel_blend;
+
+
 
     params['foreground params'] = foreground_params;
     params['background params'] = background_params;
+    console.log(params['background params']);
+
     return params;
 
 }
@@ -1603,10 +1717,6 @@ function get_results(){
                             });
                         old_progress = Number(status["progress_status"]);
                     };
-
-
-
-
 
                     if (status['job status'] == 'job not found'){
                         var str = i18n('job_lost')
@@ -1994,6 +2104,7 @@ holder.ondragend = function() {
 
 function fill_in_from_config_file(data){
     // Display first section
+    console.log(data);
         $('#label_car').trigger('click');
 
         // Add years to right frame
@@ -2022,13 +2133,11 @@ function fill_in_from_config_file(data){
         var items = ul.getElementsByTagName("li");
         for (y in data['type']){
             for (var i = 0; i < items.length; ++i) {
-                console.log(items[i].innerHTML);
                 if (items[i].innerHTML == data["type"][y]){
                     ul.removeChild(items[i]);
                 };
               };
         };
-
 
         $("#size_list").empty();
         for (y in data['size']){
@@ -2040,7 +2149,6 @@ function fill_in_from_config_file(data){
         var items = ul.getElementsByTagName("li");
         for (y in data['size']){
             for (var i = 0; i < items.length; ++i) {
-                console.log(items[i].innerHTML);
                 if (items[i].innerHTML == data["size"][y]){
                     ul.removeChild(items[i]);
                 };
@@ -2119,31 +2227,68 @@ function fill_in_from_config_file(data){
             start: [mileage]
         });
 
-        // Fuel pathways
-        // Petrol technology
-        var id = data['background params']['petrol technology']
-        $(":radio[value='"+id+"']").attr("checked", true);
-        // Diesel technology
-        var id = data['background params']['diesel technology']
-        $(":radio[value='"+id+"']").attr("checked", true);
-        // Gas technology
-        var id = data['background params']['cng technology']
-        $(":radio[value='"+id+"']").attr("checked", true);
-        // Hydrogen technology
-        var id = data['background params']['hydrogen technology']
-        $(":radio[value='"+id+"']").attr("checked", true);
-        // Energy storage
-        // Battery chemistry
-        var id = data['background params']['battery technology']
-        $(":radio[value='"+id+"']").attr("checked", true);
-        // Battery origin
-        var id = data['background params']['battery origin']
-        $(":radio[value='"+id+"']").attr("checked", true);
-
         // Change the background color of the "Calculate" button
         document.getElementById("calculateButton").style.backgroundColor='lightgreen';
 
+        // Create fuel table
+        var tableRef = document.getElementById('fuel_pathway_table');
+        var rowCount = tableRef.rows.length;
+        while (rowCount>2){
+            tableRef.deleteRow(2);
+            var rowCount = tableRef.rows.length;
+        }
+        //  Load the JSON File
+        $.when($.ajax({
+                    url: "/get_language",
+                    dataType: 'json',
+                    type: 'GET',
+                    success : function(data) {
+                       var json = data
+                        return json
+                        },
+                    error: function(xhr, status, error){console.log(error)}})
+                ).done(function(json){
+                    i18n.translator.add(json);
+                    create_fuel_table();
+                    update_fuel_sliders(data);
+                });
 };
+
+function update_fuel_sliders(data){
+    // Fuel pathways
+    var fuel_blend = data['background params']['fuel blend']
+    var listYears = document.querySelectorAll( '#years_list > li' );
+
+    for (var key in fuel_blend) {
+        // check if the property/key is defined in the object itself, not in parent
+        if (fuel_blend.hasOwnProperty(key)) {
+
+            var fuel = key;
+            var primary_fuel = fuel_blend[key]['primary fuel']['type']
+            var primary_fuel_share = fuel_blend[key]['primary fuel']['share']
+            var secondary_fuel = fuel_blend[key]['secondary fuel']['type']
+            var secondary_fuel_share = fuel_blend[key]['secondary fuel']['share']
+
+            for (y=0; y<listYears.length; y++){
+                var year = listYears[y].innerText;
+                var slider_id = String(fuel+'_'+year)
+                var slider = $("[id='"+slider_id+"']")[0]
+                slider.noUiSlider.updateOptions({
+                    start: parseInt(primary_fuel_share[y]*100)
+                });
+
+                // Change selected options
+                var primary_fuel_select = document.getElementById(fuel+" primary fuel");
+                primary_fuel_select.value = primary_fuel;
+                var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
+                secondary_fuel_select.value = secondary_fuel;
+
+            }
+        }
+    };
+
+};
+
 holder.ondrop = function(e) {
     this.className = '';
     e.preventDefault();
@@ -2158,6 +2303,227 @@ holder.ondrop = function(e) {
     reader.readAsText(file);
     return false;
 };
+
+function create_fuel_table() {
+
+    var list_fuel = [];
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+
+    var tableRef = document.getElementById('fuel_pathway_table').getElementsByTagName('tbody')[0];
+
+    for (var pt = 0; pt < listPowertrains.length; pt++){
+
+        // Choose the appropriate fuel
+        if (listPowertrains[pt].innerText == i18n('petrol')){
+            var fuel = i18n('fuel_petrol');
+            var fuel_real_name = 'petrol';
+        };
+        if (listPowertrains[pt].innerText == i18n('diesel')){
+            var fuel = i18n('fuel_diesel');
+            var fuel_real_name = 'diesel';
+        };
+        if (listPowertrains[pt].innerText == i18n('natural_gas')){
+            var fuel = i18n('fuel_natural_gas');
+            var fuel_real_name = 'cng';
+        };
+        if (listPowertrains[pt].innerText == i18n('electric')){
+            var fuel = i18n('fuel_electric');
+            var fuel_real_name = 'electric';
+        };
+        if (listPowertrains[pt].innerText == i18n('fuel_cell')){
+            var fuel = i18n('fuel_fuel_cell');
+            var fuel_real_name = 'hydrogen';
+        };
+        if (listPowertrains[pt].innerText == i18n('hybrid_petrol')){
+            var fuel = i18n('fuel_hybrid_petrol');
+            var fuel_real_name = 'petrol';
+        };
+        if (listPowertrains[pt].innerText == i18n('hybrid_diesel')){
+            var fuel = i18n('fuel_hybrid_diesel');
+            var fuel_real_name = 'diesel';
+        };
+        if (listPowertrains[pt].innerText == i18n('plugin_hybrid_petrol')){
+            var fuel = i18n('fuel_plugin_hybrid_petrol');
+            var fuel_real_name = 'petrol';
+        };
+        if (listPowertrains[pt].innerText == i18n('plugin_hybrid_diesel')){
+            var fuel = i18n('fuel_plugin_hybrid_diesel');
+            var fuel_real_name = 'diesel';
+        };
+
+        if (!list_fuel.includes(fuel)){
+            for (var y = 0; y < listYears.length; y++){
+                var year = listYears[y].innerText;
+
+                    var newRow = tableRef.insertRow();
+                    if (listPowertrains[pt].innerText == i18n('electric')){
+                        var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +'</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>' + '<td align="left" style="color:white"><select id="battery technology" style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
+                        + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
+                        + '<option value="LFP">Lithium iron phosphate (LFP)</option></td>'
+                    };
+
+                    if (listPowertrains[pt].innerText == i18n('petrol')|listPowertrains[pt].innerText == i18n('hybrid_petrol')|listPowertrains[pt].innerText == i18n('fuel_plugin_hybrid_petrol')){
+
+                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+
+                        '_'+year+'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+
+                        fuel_real_name+'_'+year+'">85%</td></tr></table>'
+
+                        if (y==0){
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '<select id="petrol primary fuel" style="color:grey"><option value="petrol">'
+                            + i18n("fuel_petrol")+'</option><option value="bioethanol - wheat straw">'+i18n("bioethanol_wheat_straw")
+                            + '</option><option value="bioethanol - forest residues">'+i18n("bioethanol_forest_residues")
+                            + '</option><option value="bioethanol - sugarbeet">'+i18n("bioethanol_sugarbeet")+'</option>'
+                            + '<option value="bioethanol - maize starch">'+i18n("bioethanol_maize_starch")+'</option>'
+                            + '<option value="synthetic gasoline">'+i18n("synthetic_gasoline")+'</option></select></td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"><select id="petrol secondary fuel" style="color:grey">'
+                            +'</option><option value="bioethanol - wheat straw">'+i18n("bioethanol_wheat_straw")
+                            + '</option><option value="bioethanol - forest residues">'+i18n("bioethanol_forest_residues")
+                            + '</option><option value="bioethanol - sugarbeet">'+i18n("bioethanol_sugarbeet")+'</option>'
+                            + '<option value="bioethanol - maize starch">'+i18n("bioethanol_maize_starch")+'</option>'
+                            + '<option value="synthetic gasoline">'+i18n("synthetic_gasoline")+'</option></select></td>'
+                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                        }else{
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '</td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"></td>'
+                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                        };
+
+                    };
+
+                    if (listPowertrains[pt].innerText == i18n('diesel')|listPowertrains[pt].innerText == i18n('hybrid_diesel')|listPowertrains[pt].innerText == i18n('fuel_plugin_hybrid_diesel')){
+                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+'_'+year
+                        +'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+fuel_real_name+'_'+year
+                        +'">85%</td></tr></table>'
+
+                        if (y==0){
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '<select id="diesel primary fuel" style="color:grey"><option value="diesel">'
+                            + i18n("fuel_diesel")+'</option><option value="biodiesel - algae">'+i18n("biodiesel_algae")
+                            + '</option><option value="biodiesel - cooking oil">'+i18n("biodiesel_cooking_oil")
+                            + '</option><option value="synthetic diesel">'+i18n("synthetic_diesel")+'</option></select></td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"><select id="diesel secondary fuel" style="color:grey">'
+                            +'</option><option value="biodiesel - algae">'+i18n("biodiesel_algae")
+                            + '</option><option value="biodiesel - cooking oil">'+i18n("biodiesel_cooking_oil")
+                            + '</option><option value="synthetic diesel">'+i18n("synthetic_diesel")+'</option></select></td>'
+                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+
+                        }else{
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '</td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"></td>'
+                            + '<td align="left" style="color:white">Polyethylene-based fuel tank</td>'
+                        };
+                    };
+
+                    if (listPowertrains[pt].innerText == i18n('natural_gas')){
+                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+'_'+year
+                        +'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+fuel_real_name+'_'+year
+                        +'">85%</td></tr></table>'
+
+                        if (y==0){
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '<select id="cng primary fuel" style="color:grey"><option value="cng">'
+                            + i18n("fuel_natural_gas")+'</option><option value="biogas">'+i18n("biogas")
+                            + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"><select id="cng secondary fuel" style="color:grey">'
+                            + '</option><option value="biogas">'+i18n("biogas")
+                            + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
+                             + '<td align="left" style="color:white">Fiberglass-based fuel tank</td>'
+
+                        }else{
+
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '</td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"></td>'
+                             + '<td align="left" style="color:white">Fiberglass-based fuel tank</td>'
+
+                        };
+
+                    };
+
+                    if (listPowertrains[pt].innerText == i18n('fuel_cell')){
+                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+'_'+year
+                        +'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+fuel_real_name+'_'+year
+                        +'">85%</td></tr></table>'
+
+                        if (y==0){
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '<select id="hydrogen primary fuel" style="color:grey">'
+                            + '</option><option value="smr">'+i18n("smr") + '<option value="electrolysis">'+i18n("electrolysis")
+                            +'</option></select></td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="electrolysis">'
+                            + i18n("electrolysis")+'</option><option value="smr">'+i18n("smr")
+                            +'</option></select></td>'
+                            + '<td align="left" style="color:white"><select id="hydrogen tank technology" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
+                            + '<option value="hdpe">'+i18n("hydrogen_tank_hdpe")+'</option>'
+                            + '<option value="aluminium">'+i18n("hydrogen_tank_aluminium")+'</option></td>'
+                        }else{
+
+                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
+                            + '</td><td align="left" style="color:white">'
+                            + '</td>'
+                            + '<td align="left" style="color:white">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white"></td>'
+                            + '<td align="left" style="color:white"><select id="hydrogen tank technology" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
+                            + '<option value="hdpe">'+i18n("hydrogen_tank_hdpe")+'</option>'
+                            + '<option value="aluminium">'+i18n("hydrogen_tank_aluminium")+'</option></td>'
+                        };
+                    };
+
+
+                newRow.innerHTML = row_content;
+                row_content='';
+        };
+            list_fuel.push(fuel);
+        };
+    }
+    // Append table to div
+    tableRef.append(newRow);
+
+    var divs = $("#fuel_pathway_table > tbody").find('div');
+
+    for (var i=0; i<divs.length; i++){
+
+           var slider = noUiSlider.create(divs[i], {
+                start: 95,
+                connect: true,
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            });
+
+         slider.id = "_"+divs[i].id
+         slider.on('update', function(values, handle){
+            var primary_id = "primary"+this.id
+            var secondary_id = "secondary"+this.id
+            var div_primary = $("[id='"+primary_id+"']")
+            var div_secondary = $("[id='"+secondary_id+"']")
+            div_primary.text(parseInt(values[0]) + ' %')
+            div_primary.val(parseInt(values[0]))
+            div_secondary.text(parseInt(100-values[0]) + ' %')
+            div_secondary.val(parseInt(100-values[0]))
+         })
+    }
+};
+
 
 
 

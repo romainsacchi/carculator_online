@@ -114,7 +114,7 @@ msgstr "Berline familiale"
 
 #: app/routes.py:145 templates/tool.html:646
 msgid "Natural gas"
-msgstr "GPL"
+msgstr "Gaz comprimé"
 
 #: app/routes.py:147
 msgid "H2 Fuel cell"
@@ -1423,7 +1423,7 @@ msgstr "Bio-diesel à partir d'huile végétale usagée"
 
 #: templates/tool.html:726
 msgid "Compressed natural gas"
-msgstr "Gaz naturel compressé"
+msgstr "Gaz naturel comprimé"
 
 #: templates/tool.html:732
 msgid "Bio-methane from manure"

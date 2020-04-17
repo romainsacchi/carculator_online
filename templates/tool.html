@@ -613,7 +613,6 @@
 										<table class="table" id="fuel_pathway_table">
 											<thead>
 											<tr>
-
 													<td align="left" colspan="5">
 														<div class="row" >
 															<h6>
@@ -628,284 +627,21 @@
 											</thead>
 											<tbody>
 												<tr>
-														<th>
-															<h3>{{_('Petrol')}}</h3>
-															<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Source for conventional petrol inventory: ecoinvent 3.6')}}<br>
-																			{{_('Source for bio-ethanol inventory: Francesco Cozzolini, 2018, Paul Scherrer Institut')}}
-																		</p>
-															</div>
-														</th>
-														<th>
-															<h3>{{_('Diesel')}}</h3>
-															<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Source for conventional diesel inventory: ecoinvent 3.6')}}<br>
-																			{{_('Source for bio-diesel inventory: Francesco Cozzolini, 2018, Paul Scherrer Institut')}}
-																		</p>
-														</th>
-														<th><h3>{{_('Natural gas')}}</h3>
-														<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Source for conventional compressed natural gas inventory: ecoinvent 3.6')}}<br>
-																			{{_('Source for bio-methane inventory: Xiaojin Zhang, 2019, Paul Scherrer Institut')}}
-																		</p>
-															</th>
-														<th><h3>{{_('Hydrogen')}}</h3>
-														<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Source for hydrogen by electrolysis fuel inventory: ELEGANCY project, 2020')}}<br>
-																			{{_('Source for hydrogen by steam methane reforming fuel inventory: Zhang et al. 2017,
-																			Applied Energy, Volume 190, 15 March 2017, Pages 326-338 ')}}
-
-																		</p>
-															</th>
-														<th><h3>{{_('Electric')}}</h3></th>
-												</tr>
-
-												<tr>
-													<td align="left">
-														<div class="form-group">
-														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technology" id="conventional_petrol" value="bioethanol - forest residues" checked>
-															  <label class="form-check-label" for="conventional_petrol">
-																{{_('Conventional petrol')}}
-															  </label>
-
-														</div>
-
-
-														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_forest" value="bioethanol - forest residues">
-															  <label class="form-check-label" for="bioethanol_forest">
-																{{_('Bio-ethanol from forest residues')}}
-															  </label>
-														</div>
-														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_wheat" value="bioethanol - wheat straw">
-															  <label class="form-check-label" for="bioethanol_wheat">
-																{{_('Bio-ethanol from wheat straw')}}
-															  </label>
-														</div>
-														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_maize" value="bioethanol - maize starch">
-															  <label class="form-check-label" for="bioethanol_maize">
-																{{_('Bio-ethanol from maize starch')}}
-															  </label>
-														</div>
-														<div class="form-check">
-															  <input class="form-check-input" type="radio" name="petrol technology" id="bioethanol_beet" value="bioethanol - sugarbeet">
-															  <label class="form-check-label" for="bioethanol_beet">
-																{{_('Bio-ethanol from sugar beet residue')}}
-															  </label>
-
-														</div>
-														</div>
-													</td>
-													<td align="left">
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="diesel technology" id="conventional_diesel" value="biodiesel - algae" checked>
-														  <label class="form-check-label" for="conventional_diesel">
-															{{_('Conventional diesel')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="diesel technology" id="biodiesel_algae" value="biodiesel - algae">
-														  <label class="form-check-label" for="biodiesel_algae">
-															{{_('Bio-diesel from algae')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="diesel technology" id="biodiesel_cooking_oil" value="biodiesel - cooking oil">
-														  <label class="form-check-label" for="biodiesel_cooking_oil">
-															{{_('Bio-diesel from used cooking oil')}}
-														  </label>
-														</div>
-													</td>
-													<td align="left">
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="cng technology" id="conventional_nat_gas" value="biogas" checked>
-														  <label class="form-check-label" for="conventional_nat_gas">
-															{{_('Compressed natural gas')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="cng technology" id="biogas" value="biogas">
-														  <label class="form-check-label" for="biogas">
-															{{_('Bio-methane from manure')}}
-														  </label>
-														</div>
-													</td>
-													<td align="left">
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis" value="Electrolysis" checked>
-														  <label class="form-check-label" for="electrolysis">
-															{{_('Via electrolysis using the electricity mix specified above')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_solar" value="Electrolysis - solar">
-														  <label class="form-check-label" for="electrolysis_solar">
-															{{_('Via electrolysis using photovoltaic power')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_hydro" value="Electrolysis - hydro">
-														  <label class="form-check-label" for="electrolysis_hydro">
-															{{_('Via electrolysis using hydro power')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="hydrogen technology" id="electrolysis_nuclear" value="Electrolysis - nuclear">
-														  <label class="form-check-label" for="electrolysis_nuclear">
-															{{_('Via electrolysis using nuclear power')}}
-														  </label>
-														</div>
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="hydrogen technology" id="SMR" value="SMR">
-														  <label class="form-check-label" for="SMR">
-															{{_('Via Steam Methane Reforming')}}
-														  </label>
-														</div>
-													</td>
-													<td align="left">
-														<div class="form-check">
-														  <input class="form-check-input" type="radio" name="none" id="none" value="none" checked>
-														  <label class="form-check-label" for="none">
-															{{_('Electricity mix specified above')}}
-														  </label>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-
-													<td align="left" colspan="5">
-														<div class="row" >
-																<h6>
-																	<img class="image" src="/static/images/icons/car_battery_icon.png"
-																					  style="height:70px;padding:20px;display:inline-block;"
-																					 alt="image">
-																	<span style="color:white;">{{_('ENERGY STORAGE')}}</span>
-																</h6>
-														</div>
-													</td>
-
-												</tr>
-												<tr>
-													<th></th>
-													<th></th>
-													<th></th>
-													<th align="left">
-														<span align="left"><h6>{{_('Fuel cell technology')}}</h6></span>
-														<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Main type of fuel cell developed for transport applications.')}}<br>
-																			{{_('Inventory source: Simons A. and Bauer C. Applied Energy, 2015, vol. 157, issue C, 884-896.')}}
-																		</p>
+													<th>
+														<h3>{{_('Fuel blend for')}}</h3>
 													</th>
-													<th align="left">
-																	<span align="left"><h6>{{_('Battery chemistry')}}</h6></span>
-																	<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Three different types of lithium-ion-based batteries are presented, all used for transport applications.')}}<br>
-																			{{_('Inventory source: Schmidt et al., Environ. Sci. Technol. 2019, 53, 7, 3379-3390.')}}
-																		</p>
+													<th>
+														<h3>{{_('Primary fuel')}}</h3>
 													</th>
-
-												</tr>
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td align="left">
-														<div class="form-group">
-															<div class="form-check">
-																  <input class="form-check-input" type="radio" name="fuel cell stack technology" id="PEM" value="PEM" checked>
-																  <label class="form-check-label" for="PEM">{{_('Proton exchange membrane')}}</label>
-															</div>
-														</div>
-													</td>
-													<td align="left">
-														<table>
-															<tr>
-																	<div class="form-group">
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery technology" id="NMC" value="NMC" checked>
-																			  <label class="form-check-label" for="NMC">
-																				{{_('Lithium nickel manganese cobalt oxide (NMC)')}}
-																			  </label>
-																		</div>
-
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery technology" id="LFP" value="LFP">
-																			  <label class="form-check-label" for="LFP">
-																				{{_('Lithium iron phosphate (LFP)')}}
-																			  </label>
-																		</div>
-
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery technology" id="NCA" value="NCA" >
-																			  <label class="form-check-label" for="NCA">
-																				{{_('Lithium nickel cobalt aluminum oxide (NCA)')}}
-																			  </label>
-																		</div>
-																	</div>
-
-															</tr>
-															<tr>
-																<td align="left">
-																	<span align="left"><h6>{{_('Origin of manufacture')}}</h6></span>
-																	<div class="help-tip" style="position:relative;float:left;">
-																		<p>{{_('Modifies the electricity mix used along the manufacture of the battery cells.')}}
-																		</p>
-																	</div>
-																	<div class="form-group">
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery origin" id="China" value="CN" checked>
-																			  <label class="form-check-label" for="China">
-																				{{_('China')}}
-																			  </label>
-																		</div>
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery origin" id="Japan" value="JP">
-																			  <label class="form-check-label" for="Japan">
-																				{{_('Japan')}}
-																			  </label>
-																		</div>
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery origin" id="India" value="IN">
-																			  <label class="form-check-label" for="India">
-																				{{_('India')}}
-																			  </label>
-																		</div>
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery origin" id="Europe" value="RER" >
-																			  <label class="form-check-label" for="Europe">
-																				{{_('Europe')}}
-																			  </label>
-																		</div>
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery origin" id="US" value="US" >
-																			  <label class="form-check-label" for="US">
-																				{{_('United States')}}
-																			  </label>
-																		</div>
-																		<div class="form-check">
-																			  <input class="form-check-input" type="radio"
-																					 name="battery origin" id="NO" value="NO" >
-																			  <label class="form-check-label" for="NO">
-																				{{_('Norway')}}
-																			  </label>
-																		</div>
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
+													<th>
+														<h3>{{_('Blend')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Secondary fuel')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Type of energy storage')}}</h3>
+													</th>
 												</tr>
 
 											</tbody>
@@ -921,6 +657,7 @@
 			</div>
 		</section>
 		<!-- End FUEL PATHWAYS -->
+
 
 		<!-- Start CALCULATIONS -->
 		<section id="mu-about" style="background-color:grey;">

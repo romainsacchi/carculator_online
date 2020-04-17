@@ -118,6 +118,23 @@ def tool_page(country):
         response = np.round(
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()
+
+        region = app.calc.region_map[country][
+                    "RegionCode"
+                ]
+
+        print(app.calc.biofuel.coords)
+        share_biofuel = (
+            app.calc.biofuel.sel(
+                region=region,
+                value=0,
+                fuel_type='Biomass fuel',
+                scenario='SSP2-Base',
+            )
+            .interp(year=[2020, 2035, 2050])
+            .values
+        )
+
         config = {
             "year": ["2020", "2035", "2050"],
             "type": [_("Petrol"), _("Diesel"), _("Electric")],
@@ -131,8 +148,26 @@ def tool_page(country):
             },
             "background params": {
                 "country": country,
-                "petrol technology": "petrol",
-                "diesel technology": "diesel",
+                "fuel blend": {'petrol': {'primary fuel': {
+                                            'type':'petrol',
+                                            'share':np.round((1.0 - share_biofuel), 2).tolist()
+                                                            }
+                                        ,
+                                         'secondary fuel': {
+                                            'type':'bioethanol - wheat straw',
+                                             'share':np.round(share_biofuel, 2).tolist()
+                                         }}
+                                        ,
+                               'diesel': {'primary fuel': {
+                                            'type':'diesel',
+                                            'share':np.round((1.0 - share_biofuel), 2).tolist()
+                                        },
+                                         'secondary fuel': {
+                                             'type':'biodiesel - algae',
+                                             'share':np.round(share_biofuel, 2).tolist()
+                                         }
+                                        }
+                                },
                 "battery technology": "NMC",
                 "battery origin": "CN",
                 "custom electricity mix": response,
@@ -508,3 +543,25 @@ def get_param_table():
             d[6] = [app.calc.d_rev_size_it[pt] for pt in d[6]]
 
     return render_template("param_table.html", params=params)
+
+@app.route("/get_fuel_blend/<country>/<years>")
+def get_fuel_blend(country, years):
+    years = [int(y) for y in years.split(",")]
+    region = app.calc.region_map[country]["RegionCode"]
+
+    share_biofuel = (
+            app.calc.biofuel.sel(
+                region=region,
+                value=0,
+                fuel_type='Biomass fuel',
+                scenario='SSP2-Base',
+            )
+            .interp(year=years)
+            .values
+        )
+
+    response = {}
+    for y in years:
+        response[y]={'primary':np.round(1-share_biofuel, 2)[years.index(y)],
+                     'secondary':np.round(share_biofuel, 2)[years.index(y)]}
+    return jsonify(response)

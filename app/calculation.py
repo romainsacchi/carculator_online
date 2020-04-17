@@ -11,7 +11,10 @@ import numpy as np
 class Calculation:
     def __init__(self):
 
-        self.electricity_mix = BackgroundSystemModel().electricity_mix
+        bs = BackgroundSystemModel()
+        self.electricity_mix = bs.electricity_mix
+        self.biofuel = bs.biofuel
+        self.region_map = bs.region_map
         self.cip = CarInputParameters()
         self.cip.static()
         self.d_categories = {
@@ -660,9 +663,6 @@ class Calculation:
                 .values
             )
             new_dict[("Background",)]["custom electricity mix"] = response
-
-        print(new_dict[("Background",)]["custom electricity mix"])
-        print(type(new_dict[("Background",)]["custom electricity mix"]))
 
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
