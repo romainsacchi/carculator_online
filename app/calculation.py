@@ -329,6 +329,7 @@ class Calculation:
         db.session.commit()
 
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
+        print("FOREGROUND ", d[("Foreground",)])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
         cm = CarModel(arr, cycle=d[("Driving cycle",)])
         cm.set_all()
@@ -406,7 +407,7 @@ class Calculation:
                                 cost_category[cat],
                             ]
                         )
-
+        print("BACKGROUND ", d[("Background",)])
         self.ic = InventoryCalculation(
             cm.array,
             scope=d[("Functional unit",)],
