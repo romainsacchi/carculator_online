@@ -408,7 +408,7 @@ class Calculation:
                             ]
                         )
         print("BACKGROUND ", d[("Background",)])
-        print("SCOPE ", d[("Functional unit",)])
+        print("SCOPE ", d[("Functional unit",)]) 
         self.ic = InventoryCalculation(
             cm.array,
             scope=d[("Functional unit",)],
