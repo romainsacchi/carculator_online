@@ -2482,7 +2482,7 @@ function create_fuel_table() {
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
                             + '</td><td align="left" style="color:white">'
                             + '<select id="hydrogen primary fuel" style="color:grey">'
-                            + '</option><option value="smr">'+i18n("smr") + '<option value="electrolysis">'+i18n("electrolysis")
+                            + '</option><option value="hydrogen - smr">'+i18n("smr") + '<option value="hydrogen - electrolysis">'+i18n("electrolysis")
                             +'</option></select></td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
                             + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="electrolysis">'
