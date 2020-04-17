@@ -408,7 +408,7 @@ class Calculation:
                             ]
                         )
         print("BACKGROUND ", d[("Background",)])
-        print("SCOPE ", d[("Functional unit",)]) 
+        print("SCOPE ", d[("Functional unit",)])
         self.ic = InventoryCalculation(
             cm.array,
             scope=d[("Functional unit",)],
@@ -676,7 +676,7 @@ class Calculation:
                 cat = self.d_categories[name]
                 powertrain = "all"
                 size = "all"
-                val = [float(v.replace(" ", ""))]
+                val = [float(v.replace(" ", ""))] * len(new_dict[("Functional unit",)]["year"])
             else:
                 k = tuple(k.split(","))
                 name = k[0]
@@ -693,7 +693,7 @@ class Calculation:
                 if lang == "it":
                     powertrain = self.d_pt_it[k[1]]
                     size = self.d_size_it[k[2]]
-                val = [float(n) for n in v]
+                val = [float(n) for n in v] * len(new_dict[("Functional unit",)]["year"])
 
             d_val = {
                 (k, "loc"): v
