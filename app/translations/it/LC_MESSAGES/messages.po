@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-17 16:24+0200\n"
+"POT-Creation-Date: 2020-04-18 11:46+0200\n"
 "PO-Revision-Date: 2019-10-17 13:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: it\n"
@@ -249,141 +249,149 @@ msgstr ""
 "ambientale di tipi differenti di vetture in diversi scenari di guida e "
 "approvvigionamento energetico."
 
-#: templates/index.html:208
+#: templates/index.html:193
+msgid "Results partly rely on the background inventory data of the "
+msgstr "I risultati si basano in parte sui dati dell'inventario di base di "
+
+#: templates/index.html:193
+msgid " and the implementation of impact assessment methods therein."
+msgstr " e sull'implementazione dei metodi di valutazione dell'impatto."
+
+#: templates/index.html:209
 msgid "Unmute"
 msgstr "Attiva l'audio"
 
-#: templates/index.html:294
+#: templates/index.html:295
 msgid "Clean Code"
 msgstr ""
 
-#: templates/index.html:295
+#: templates/index.html:296
 msgid "The code is kept as clean and accessible as possible."
 msgstr "Il codice è tenuto il più “pulito” e accessibile possibile."
 
-#: templates/index.html:306
+#: templates/index.html:307
 msgid "Great Features"
 msgstr "Molte funzionalità"
 
-#: templates/index.html:307
+#: templates/index.html:308
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr "Analisi del ciclo di vita veloci e completamente parametrizzate."
 
-#: templates/index.html:318
+#: templates/index.html:319
 msgid "Fast Library"
 msgstr "Libreria efficiente"
 
-#: templates/index.html:319
+#: templates/index.html:320
 msgid "A Python library version allows for even more specific assessments."
 msgstr "Una libreria Python che offre valutazioni ancora più specifiche."
 
-#: templates/index.html:330
+#: templates/index.html:331
 msgid "Compatible"
 msgstr "Compatibile"
 
-#: templates/index.html:331
+#: templates/index.html:332
 msgid "Export inventories compatible with"
 msgstr "Consente di esportare inventari compatibili con "
 
-#: templates/index.html:344
+#: templates/index.html:345
 msgid "State-of-the-art"
 msgstr "Stato dell’arte"
 
-#: templates/index.html:345
+#: templates/index.html:346
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 "Si affida ad inventari recentemente pubblicati per modellare le catene "
 "energetiche."
 
-#: templates/index.html:356
+#: templates/index.html:357
 msgid "Well Documented"
 msgstr "Ben documentato "
 
-#: templates/index.html:357
+#: templates/index.html:358
 msgid "The library is fully tested, documented and hosted on"
 msgstr "La libreria è interamente testata, documentata e disponibile su"
 
-#: templates/index.html:382
+#: templates/index.html:383
 msgid "Some facts about"
 msgstr "Alcune informazioni riguardo"
 
-#: templates/index.html:397
+#: templates/index.html:398
 msgid "Powertrains"
 msgstr "Motopropulsori"
 
-#: templates/index.html:410
+#: templates/index.html:411
 msgid "Size classes"
 msgstr "Classi di dimensione"
 
-#: templates/index.html:423
+#: templates/index.html:424
 msgid "Driving cycles"
 msgstr "Cicli di guida"
 
-#: templates/index.html:436
+#: templates/index.html:437
 msgid "Parameters"
 msgstr "Parametri"
 
-#: templates/index.html:449
+#: templates/index.html:450
 msgid "Li-ion battery types"
 msgstr "Tipologie di batterie Li-ion"
 
-#: templates/index.html:462
+#: templates/index.html:463
 msgid "Electricity mixes for battery charging"
 msgstr "Miscele di elettricità per la ricarica della batteria"
 
-#: templates/index.html:474
+#: templates/index.html:475
 msgid "Time horizons"
 msgstr "Orizzonti temporali"
 
-#: templates/index.html:487
+#: templates/index.html:488
 msgid "Cars used for calibration"
 msgstr "Vetture usate per la calibrazione"
 
-#: templates/index.html:511
+#: templates/index.html:512
 msgid "OUR TEAM"
 msgstr "Il nostro team"
 
-#: templates/index.html:513
+#: templates/index.html:514
 msgid "The team behind the development of"
 msgstr "Il team che si è occupato dello sviluppo del"
 
-#: templates/index.html:513
+#: templates/index.html:514
 msgid "sits at the Paul Scherrer Institute, in the "
 msgstr "ha sede al Paul Scherrer Institute, presso il "
 
-#: templates/index.html:538
+#: templates/index.html:539
 msgid "Pilot"
 msgstr "Pilota"
 
-#: templates/index.html:563
+#: templates/index.html:564
 msgid "Pit-stop manager"
 msgstr "Manager del pit-stop"
 
-#: templates/index.html:581
+#: templates/index.html:582
 msgid "Designer (now at INFRAS)"
 msgstr "Designer (ora a INFRAS)"
 
-#: templates/index.html:607
+#: templates/index.html:608
 msgid "Engine specialist"
 msgstr "Specialista di motori"
 
-#: templates/index.html:631
+#: templates/index.html:632
 msgid "Chief Aerodynamicist"
 msgstr "Capo aerodinamico"
 
-#: templates/index.html:652
+#: templates/index.html:653
 msgid "Mechanic"
 msgstr "Meccanico"
 
-#: templates/index.html:677
+#: templates/index.html:678
 msgid "OUR PARTNERS"
 msgstr "I nostri partner"
 
-#: templates/index.html:679
+#: templates/index.html:680
 msgid "carculator was developed within the "
 msgstr "carculator è stato sviluppato all’interno del "
 
-#: templates/index.html:680
+#: templates/index.html:681
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
@@ -391,72 +399,72 @@ msgstr ""
 "fondato da innosuisse. Abbiamo ricevuto finanziamenti supplementari "
 "tramite i progetti di ricerca "
 
-#: templates/index.html:682 templates/index.html:684
+#: templates/index.html:683 templates/index.html:685
 msgid "and "
 msgstr "e "
 
-#: templates/index.html:683
+#: templates/index.html:684
 msgid "as well as "
 msgstr ", così come "
 
-#: templates/index.html:743
+#: templates/index.html:744
 msgid "Publications on"
 msgstr "Pubblicazioni sul tema della "
 
-#: templates/index.html:743
+#: templates/index.html:744
 msgid "mobility"
 msgstr "mobilità"
 
-#: templates/index.html:886
+#: templates/index.html:887
 msgid "CONTACT"
 msgstr "Contattaci"
 
-#: templates/index.html:886
+#: templates/index.html:887
 msgid "US"
 msgstr " "
 
-#: templates/index.html:888
+#: templates/index.html:889
 msgid "We are always happy to hear from you."
 msgstr "Siamo sempre felici di ricevere la vostra opinione"
 
-#: templates/index.html:901 templates/param_table.html:78
+#: templates/index.html:902 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr "Nome"
 
-#: templates/index.html:905
+#: templates/index.html:906
 msgid "Enter Email"
 msgstr "Inserisci email"
 
-#: templates/index.html:909
+#: templates/index.html:910
 msgid "Message"
 msgstr "Lascia il tuo messaggio"
 
-#: templates/index.html:912
+#: templates/index.html:913
 msgid "SUBMIT"
 msgstr "Inviare"
 
-#: templates/index.html:919
+#: templates/index.html:920
 msgid "carculator support"
 msgstr "Domande su carculator"
 
-#: templates/index.html:920
+#: templates/index.html:921
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr "Scrivici se hai domande sullo strumento, sui metodi usati o sui risultati."
 
-#: templates/index.html:968 templates/login.html:114
+#: templates/index.html:969 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
 #: templates/result.html:351 templates/start.html:189 templates/tool.html:804
 msgid "Copyright"
 msgstr "Diritti d’autore"
 
-#: templates/index.html:968 templates/login.html:114
+#: templates/index.html:969 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
 #: templates/result.html:351 templates/start.html:189 templates/tool.html:804
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:969 templates/login.html:115
+#: templates/index.html:970 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
 #: templates/result.html:352 templates/start.html:190 templates/tool.html:805
 msgid "All rights reserved"
