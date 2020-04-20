@@ -851,6 +851,9 @@ msgid ""
 "country you are located in, for the year 2020, 2035 and 2050. The vehicle"
 " parameters correspond to the standard settings in our model."
 msgstr ""
+"Dieser "einfache" Zugang zum Modell gibt die Umweltauswirkungen und Lebenszykluskosten moderner, mittelgroßer Diesel-, "
+"Benzin- und batterieelektrischer Fahrzeuge an; für das Land, in dem Sie sich befinden, für die Jahre 2020, 2035 und 2050. "
+"Die Fahrzeugparameter entsprechen den Standardeinstellungen in unserem Modell."
 
 #: templates/start.html:156
 msgid ""
@@ -861,10 +864,14 @@ msgid ""
 " electrolysis can be selected; the electricity mixes can also be\n"
 "\t\t\t\t\t\t\t\t\t\t\tdefined by the user."
 msgstr ""
+"Mit dieser Version werden die gleichen Ergebnisse wie mit dem 'einfachen' Zugang erzielt, aber Sie haben erweiterte "
+"Möglichkeiten und können alle Fahrzeugparameter ändern. Zusätzlich können länderspezifische Strommixe für das Laden der "
+"Batterien von Batteriefahrzeugen und die Herstellung von Wasserstoff durch Elektrolyse ausgewählt werden; "
+"die Strommixe können ebenfalls vom Benutzer definiert werden."
 
 #: templates/start.html:165
 msgid "This access offers the model full flexibility."
-msgstr ""
+msgstr "Dieser Zugang zum Modell bietet volle Flexibilität."
 
 #: templates/tool.html:17
 msgid "Carculator : Configuration"
@@ -1399,6 +1406,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\talternative fuel in the fuel blend an engine can "
 "operate on, can be, in practice, limited for technical reasons."
 msgstr ""
+"Die standardmässig eingestellten Kraftstoffmischungsanteile stammen aus unterschiedlichen Projektionsmodellen. "
+"Sie können nach Belieben modifiziert werden. Es ist jedoch zu beachten, dass der Anteil des alternativen Kraftstoffs an "
+"der Kraftstoffmischung, mit der ein Motor betrieben werden kann, in der Praxis aus technischen Gründen begrenzt sein kann."
 
 #: templates/tool.html:625
 msgid "FUEL PATHWAYS"
