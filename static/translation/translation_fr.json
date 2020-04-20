@@ -56,7 +56,7 @@
       "diesel": "Diesel",
       "natural_gas": "Gaz comprimé",
       "electric": "Electrique",
-      "fuel_cell": "Hydrogène",
+      "fuel_cell": "Pile à combustible",
       "hybrid_petrol": "Hybride-essence",
       "hybrid_diesel": "Hybrid-diesel",
       "plugin_hybrid_diesel": "Hybride-diesel rechargeable",

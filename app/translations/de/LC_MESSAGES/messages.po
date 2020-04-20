@@ -20,15 +20,15 @@ msgstr ""
 
 #: app/forms.py:9 app/forms.py:15
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: app/forms.py:10 app/forms.py:28
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: app/forms.py:11
 msgid "Remember Me"
-msgstr ""
+msgstr "Erinnern Sie sich an mich"
 
 #: app/forms.py:12 templates/login.html:72
 msgid "Sign In"
@@ -36,15 +36,15 @@ msgstr "Einloggen"
 
 #: app/forms.py:16
 msgid "First name"
-msgstr ""
+msgstr "Vorname"
 
 #: app/forms.py:17
 msgid "Last name"
-msgstr ""
+msgstr "Nachname"
 
 #: app/forms.py:20
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: app/forms.py:21
 msgid "Email"
@@ -52,11 +52,11 @@ msgstr ""
 
 #: app/forms.py:22
 msgid "Company/Institution"
-msgstr ""
+msgstr "Unternehmen/Institution"
 
 #: app/forms.py:23
 msgid "Subscribe to the newsletter?"
-msgstr ""
+msgstr "Abonnieren Sie den Newsletter?"
 
 #: app/forms.py:24
 msgid ""
@@ -66,10 +66,14 @@ msgid ""
 "time, I can ask the support team of carculator to consult the data I "
 "submitted and request its deletion."
 msgstr ""
+"Ich erlaube dem Unterstützungsteam von carculator, die eingereichten Daten zu sammeln und zu speichern. "
+"Meine eingereichten Daten werden nicht an Dritte weitergegeben, sondern ausschließlich zur Erstellung von Statistiken "
+"über das Publikum des Tools verwendet. Ich kann das Support-Team von carculator jederzeit bitten, die von mir "
+"eingereichten Daten einzusehen und ihre Löschung zu beantragen."
 
 #: app/forms.py:30
 msgid "Repeat Password"
-msgstr ""
+msgstr "Passwort wiederholen"
 
 #: app/forms.py:31 templates/register.html:80
 msgid "Register"
@@ -77,19 +81,19 @@ msgstr "Registrierung"
 
 #: app/forms.py:36
 msgid "Please use a different username."
-msgstr ""
+msgstr "Bitte verwenden Sie einen anderen Benutzernamen."
 
 #: app/forms.py:41
 msgid "Please use a different email address."
-msgstr ""
+msgstr "Bitte verwenden Sie eine andere E-Mail-Adresse."
 
 #: app/routes.py:54
 msgid "Congratulations, you are now a registered user!"
-msgstr ""
+msgstr "Sie sind jetzt ein registrierter Benutzer!"
 
 #: app/routes.py:67
 msgid "Invalid username or password"
-msgstr ""
+msgstr "Ungültiger Benutzername oder Passwort"
 
 #: app/routes.py:140 app/routes.py:179
 msgid "Petrol"
@@ -109,11 +113,11 @@ msgstr "Mittelklasse"
 
 #: app/routes.py:181
 msgid "Natural gas"
-msgstr "Erdgas"
+msgstr "Komprimiertes Gas"
 
 #: app/routes.py:183
 msgid "H2 Fuel cell"
-msgstr "H2 Brennstoffzelle"
+msgstr "Brennstoffzelle"
 
 #: app/routes.py:184
 msgid "Hybrid-petrol"
@@ -1631,7 +1635,7 @@ msgstr "Anzahl der Iterationen"
 #~ msgstr "Biodiesel aus gebrauchtem Speiseöl"
 
 #~ msgid "Compressed natural gas"
-#~ msgstr "Komprimiertes Erdgas"
+#~ msgstr "Komprimiertes Gas"
 
 #~ msgid "Bio-methane from manure"
 #~ msgstr "Biomethan aus Gülle"

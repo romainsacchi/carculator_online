@@ -115,11 +115,11 @@ msgstr "Berlina medio-grande"
 
 #: app/routes.py:181
 msgid "Natural gas"
-msgstr "Gas naturale"
+msgstr "Gas compresso"
 
 #: app/routes.py:183
-msgid "H2 Fuel cell"
-msgstr "Cella a combustibile H2"
+msgid "Fuel cell"
+msgstr "Cella a combustibile"
 
 #: app/routes.py:184
 msgid "Hybrid-petrol"

@@ -118,7 +118,7 @@ msgstr "Gaz comprimé"
 
 #: app/routes.py:183
 msgid "H2 Fuel cell"
-msgstr "H2 Pile à combustible"
+msgstr "Pile à combustible"
 
 #: app/routes.py:184
 msgid "Hybrid-petrol"
