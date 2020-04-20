@@ -56,7 +56,7 @@
       "diesel": "Diesel",
       "natural_gas": "Natural gas",
       "electric": "Electric",
-      "fuel_cell": "H2 Fuel cell",
+      "fuel_cell": "Hydrogen",
       "hybrid_petrol": "Hybrid-petrol",
       "hybrid_diesel": "Hybrid-diesel",
       "plugin_hybrid_diesel": "(Plugin) Hybrid-diesel",
