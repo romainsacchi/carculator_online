@@ -180,7 +180,7 @@ def tool_page(country):
         _("Diesel"),
         _("Natural gas"),
         _("Electric"),
-        _("H2 Fuel cell"),
+        _("Fuel cell"),
         _("Hybrid-petrol"),
         _("Hybrid-diesel"),
         _("(Plugin) Hybrid-petrol"),

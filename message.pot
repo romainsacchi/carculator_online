@@ -111,7 +111,7 @@ msgid "Natural gas"
 msgstr ""
 
 #: app/routes.py:183
-msgid "H2 Fuel cell"
+msgid "Fuel cell"
 msgstr ""
 
 #: app/routes.py:184

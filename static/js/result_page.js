@@ -268,8 +268,7 @@ function generate_scatter_chart(data){
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
-          html += "<ul><li style='margin-left:30px;'>"+ d.series[0].value.toFixed(2) +" €/km</li><li style='margin-left:30px;'>" + d.value.toFixed(2) + " kg CO2-eq/km</li></ul>"
-
+          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" €/km</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO2-eq/km</li></ul>"
           return html;
         })
       var gwp_str = i18n("cc_per_km");

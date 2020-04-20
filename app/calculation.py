@@ -27,7 +27,7 @@ class Calculation:
             "Diesel": "ICEV-d",
             "Natural gas": "ICEV-g",
             "Electric": "BEV",
-            "H2 Fuel cell": "FCEV",
+            "Fuel cell": "FCEV",
             "Hybrid-petrol": "HEV-p",
             "Hybrid-diesel": "HEV-d",
             "(Plugin) Hybrid-petrol": "PHEV-p",
