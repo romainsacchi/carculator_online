@@ -273,13 +273,13 @@ function generate_scatter_chart(data){
           return html;
         })
       var gwp_str = i18n("cc_per_km");
-      chart.xAxis     //Chart x-axis settings
+      chart.yAxis     //Chart y-axis settings
           .axisLabel(gwp_str)
           .tickFormat(d3.format('.02f'))
           .ticks(10);
 
       var cost_str = i18n("cost");
-      chart.yAxis     //Chart y-axis settings
+      chart.xAxis     //Chart x-axis settings
           .axisLabel(cost_str)
           .tickFormat(d3.format('.02f'))
           .ticks(10);
