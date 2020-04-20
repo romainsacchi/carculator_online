@@ -91,11 +91,11 @@ msgstr "Si prega di utilizzare un indirizzo e-mail diverso."
 
 #: app/routes.py:54
 msgid "Congratulations, you are now a registered user!"
-msgstr ""
+msgstr "Congratulazioni, ora sei un utente registrato!"
 
 #: app/routes.py:67
 msgid "Invalid username or password"
-msgstr ""
+msgstr "Nome utente o password non validi"
 
 #: app/routes.py:140 app/routes.py:179
 msgid "Petrol"
@@ -851,7 +851,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tgasoline and battery electric vehicles; for the "
 "country you are located in, for the year 2020, 2035 and 2050. The vehicle"
 " parameters correspond to the standard settings in our model."
-msgstr ""
+msgstr "Questo "semplice" accesso al modello fornisce gli impatti ambientali e i costi del ciclo di vita dei moderni "
+"veicoli moderni, diesel di medie dimensioni, a benzina e elettrici a batteria; per il paese in cui vi trovate, "
+"per l'anno 2020, 2035 e 2050. I parametri del veicolo corrispondono alle impostazioni standard del nostro modello."
 
 #: templates/start.html:156
 msgid ""
@@ -862,10 +864,14 @@ msgid ""
 " electrolysis can be selected; the electricity mixes can also be\n"
 "\t\t\t\t\t\t\t\t\t\t\tdefined by the user."
 msgstr ""
+"Con questa versione si ottengono gli stessi risultati dell'accesso 'Semplice', ma si ha accesso e si possono "
+"modificare tutti i parametri del veicolo. Inoltre, è possibile selezionare mix di elettricità specifici per ogni paese "
+"per caricare le batterie dei veicoli a batteria e produrre idrogeno tramite elettrolisi; "
+"i mix di elettricità possono anche essere definiti dall'utente."
 
 #: templates/start.html:165
 msgid "This access offers the model full flexibility."
-msgstr ""
+msgstr "Questo accesso offre la piena flessibilità del modello."
 
 #: templates/tool.html:17
 msgid "Carculator : Configuration"
@@ -1416,7 +1422,7 @@ msgstr "TIPO DI CARBURANTE"
 
 #: templates/tool.html:634
 msgid "Fuel blend for"
-msgstr ""
+msgstr "Miscela di carburante per"
 
 #: templates/tool.html:637
 msgid "Primary fuel"
@@ -1424,15 +1430,15 @@ msgstr ""
 
 #: templates/tool.html:640
 msgid "Blend"
-msgstr ""
+msgstr "Carburante primario"
 
 #: templates/tool.html:643
 msgid "Secondary fuel"
-msgstr ""
+msgstr "Carburante secondario"
 
 #: templates/tool.html:646
 msgid "Type of energy storage"
-msgstr ""
+msgstr "Tipo di accumulo di energia"
 
 #: templates/tool.html:675
 msgid "CALCULATION SETTINGS"

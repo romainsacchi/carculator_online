@@ -1211,6 +1211,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will"
 " be selected accordingly."
 msgstr ""
+"Le pays sélectionné influence plusieurs paramètres dans le cycle de vie du véhicule. "
+"Par exemple, le mix électrique utilisé pour recharger la batterie des véhicules électriques "
+" ou pour produire l'hydrogène nécéssaire aux véhicules à pile à combustible varie en fonction de "
+"l'année, mais aussi du pays sélectionné."
 
 #: templates/tool.html:445
 msgid "Select a driving cycle"
@@ -1247,6 +1251,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
 "passenger mass, the cargo mass and the curb mass of the vehicle."
 msgstr ""
+"Chaque passager a une masse corporelle de 75 kilogrammes. Ce chiffre peut être modifié dans la section 'Paramètres'. "
+"Le nombre moyen de passagers en Europe est de 1.5. Ce chiffre peut être également modifié. "
+"La masse du véhicule en charge inclut la masse du véhicule en ordre de marche, la masse des passagers "
+"ainsi que le masse des marchandises transportées."
 
 #: templates/tool.html:485
 msgid "Lifetime"
@@ -1260,6 +1268,10 @@ msgid ""
 "emissions and energy requirement over time, as well as\n"
 "\t\t\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
 msgstr ""
+"Le nombre de kilomètres total du véhicule est nécéssaire afin de normaliser les impacts par "
+"kilomètre parcouru."
+"Le nombre de kilomètres parcourus par an est nécéssaire afin de différentier les émissions "
+"sur le temps ainsi que pour calculer l'amortisation financière du véhicule."
 
 #: templates/tool.html:497
 msgid ""
@@ -1267,6 +1279,7 @@ msgid ""
 "selected for the selected country.\n"
 "\t\t\t\t\t\t\t\t\t\t\tYou may modify them."
 msgstr ""
+"Les modèles de projection utilisés par carculator suggèrent les mix électriques suivant, pour les années et le pays indiqués."
 
 #: templates/tool.html:509
 msgid "Hydro"

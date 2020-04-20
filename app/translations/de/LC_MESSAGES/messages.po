@@ -1398,27 +1398,27 @@ msgstr ""
 
 #: templates/tool.html:625
 msgid "FUEL PATHWAYS"
-msgstr "KRAFTSTOFFWEGE"
+msgstr "Treibstoffversorgung"
 
 #: templates/tool.html:634
 msgid "Fuel blend for"
-msgstr ""
+msgstr "Treibstoff-Mix für"
 
 #: templates/tool.html:637
 msgid "Primary fuel"
-msgstr ""
+msgstr "Treibstoff primär"
 
 #: templates/tool.html:640
 msgid "Blend"
-msgstr ""
+msgstr "Mischverhältnis"
 
 #: templates/tool.html:643
 msgid "Secondary fuel"
-msgstr ""
+msgstr "Treibstoff beigemischt"
 
 #: templates/tool.html:646
 msgid "Type of energy storage"
-msgstr ""
+msgstr "Treibstoffspeicher"
 
 #: templates/tool.html:675
 msgid "CALCULATION SETTINGS"
