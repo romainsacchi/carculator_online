@@ -111,7 +111,8 @@ def tool_page(country):
         config = {"config": "false"}
     else:
         response = (
-            app.calc.electricity_mix.loc[dict(country=country, value=0)]
+            app.calc.electricity_mix.loc[dict(country=country,
+            variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
             .interp(year=[2020, 2035, 2050])
             .values
         )
@@ -386,7 +387,8 @@ def get_electricity_mix(ISO, years):
     """ Return the electricity mix for the ISO country code and the year(s) given """
     years = [int(y) for y in years.split(",")]
     response = (
-        app.calc.electricity_mix.loc[dict(country=ISO, value=0)]
+        app.calc.electricity_mix.loc[dict(country=ISO,
+            variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
         .interp(year=years)
         .values
     )
