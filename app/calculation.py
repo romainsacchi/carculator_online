@@ -329,7 +329,6 @@ class Calculation:
         db.session.commit()
 
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
-        print("FOREGROUND ", d[("Foreground",)])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
         cm = CarModel(arr, cycle=d[("Driving cycle",)])
         cm.set_all()
@@ -473,7 +472,6 @@ class Calculation:
             ["impact category", "size", "powertrain", "year", "category", "value"]
         ]
         list_res_acc = []
-        print(impact_category)
         for imp in range(0, len(impact_category)):
             for s in range(0, len(size)):
                 for pt in range(0, len(powertrain)):
