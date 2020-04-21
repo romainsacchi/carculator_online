@@ -179,7 +179,7 @@ def tool_page(country):
     powertrains = [
         _("Petrol"),
         _("Diesel"),
-        _("Natural gas"),
+        _("CNG"),
         _("Electric"),
         _("Fuel cell"),
         _("Hybrid-petrol"),

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-18 11:46+0200\n"
+"POT-Creation-Date: 2020-04-21 18:46+0200\n"
 "PO-Revision-Date: 2019-10-17 13:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: it\n"
@@ -97,71 +97,71 @@ msgstr "Congratulazioni, ora sei un utente registrato!"
 msgid "Invalid username or password"
 msgstr "Nome utente o password non validi"
 
-#: app/routes.py:140 app/routes.py:179
+#: app/routes.py:141 app/routes.py:180
 msgid "Petrol"
 msgstr "Benzina"
 
-#: app/routes.py:140 app/routes.py:180
+#: app/routes.py:141 app/routes.py:181
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:140 app/routes.py:182
+#: app/routes.py:141 app/routes.py:183
 msgid "Electric"
 msgstr "Elettrica"
 
-#: app/routes.py:141 app/routes.py:193
+#: app/routes.py:142 app/routes.py:194
 msgid "Mid-size"
 msgstr "Berlina medio-grande"
 
-#: app/routes.py:181
-msgid "Natural gas"
+#: app/routes.py:182
+msgid "CNG"
 msgstr "Gas compresso"
 
-#: app/routes.py:183
+#: app/routes.py:184
 msgid "Fuel cell"
 msgstr "Cella a combustibile"
 
-#: app/routes.py:184
+#: app/routes.py:185
 msgid "Hybrid-petrol"
 msgstr "Ibrido benzina"
 
-#: app/routes.py:185
+#: app/routes.py:186
 msgid "Hybrid-diesel"
 msgstr "Ibrido diesel"
 
-#: app/routes.py:186
+#: app/routes.py:187
 msgid "(Plugin) Hybrid-petrol"
 msgstr "Ibrido-benzina (Plugin)"
 
-#: app/routes.py:187
+#: app/routes.py:188
 msgid "(Plugin) Hybrid-diesel"
 msgstr "Ibrido-diesel (Plugin)"
 
-#: app/routes.py:190
+#: app/routes.py:191
 msgid "Minicompact"
 msgstr "Mini citycar"
 
-#: app/routes.py:191
+#: app/routes.py:192
 msgid "Subcompact"
 msgstr "Citycar"
 
-#: app/routes.py:192
+#: app/routes.py:193
 msgid "Compact"
 msgstr "Berlina compatta"
 
-#: app/routes.py:194
+#: app/routes.py:195
 msgid "Large"
 msgstr "Berlina tre volumi"
 
-#: app/routes.py:195
+#: app/routes.py:196
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:196
+#: app/routes.py:197
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:381
+#: app/routes.py:382
 msgid "Email sent!"
 msgstr "Email inviata!"
 
@@ -209,7 +209,7 @@ msgstr "Contattaci"
 msgid "Online"
 msgstr ""
 
-#: templates/index.html:140
+#: templates/index.html:141
 msgid ""
 "Make fast comparisons between different cars, under different scenarios. "
 "Save and export your results. Import them in your model."
@@ -217,27 +217,27 @@ msgstr ""
 "Fornisce un rapido confronto tra veicoli diversi, con scenari differenti."
 " Salva ed esporta i tuoi risultati. Importali nel tuo modello."
 
-#: templates/index.html:141
+#: templates/index.html:142
 msgid "Try it out now!"
 msgstr "Provalo adesso!"
 
-#: templates/index.html:147
+#: templates/index.html:148
 msgid "or"
 msgstr "oppure"
 
-#: templates/index.html:155
+#: templates/index.html:156
 msgid "Install"
 msgstr "Installa"
 
-#: templates/index.html:167
+#: templates/index.html:168
 msgid "requires python >=3.6"
 msgstr "richiede python >=3.6"
 
-#: templates/index.html:186
+#: templates/index.html:187
 msgid "ABOUT"
 msgstr ""
 
-#: templates/index.html:192
+#: templates/index.html:193
 msgid ""
 "is an open-source, comprehensive and transparent life cycle assessment "
 "tool for passenger cars. It allows for an economic and environmental "
@@ -249,149 +249,149 @@ msgstr ""
 "ambientale di tipi differenti di vetture in diversi scenari di guida e "
 "approvvigionamento energetico."
 
-#: templates/index.html:193
+#: templates/index.html:194
 msgid "Results partly rely on the background inventory data of the "
 msgstr "I risultati si basano in parte sui dati dell'inventario di base di "
 
-#: templates/index.html:193
+#: templates/index.html:194
 msgid " and the implementation of impact assessment methods therein."
 msgstr " e sull'implementazione dei metodi di valutazione dell'impatto."
 
-#: templates/index.html:209
+#: templates/index.html:210
 msgid "Unmute"
 msgstr "Attiva l'audio"
 
-#: templates/index.html:295
+#: templates/index.html:296
 msgid "Clean Code"
 msgstr ""
 
-#: templates/index.html:296
+#: templates/index.html:297
 msgid "The code is kept as clean and accessible as possible."
 msgstr "Il codice è tenuto il più “pulito” e accessibile possibile."
 
-#: templates/index.html:307
+#: templates/index.html:308
 msgid "Great Features"
 msgstr "Molte funzionalità"
 
-#: templates/index.html:308
+#: templates/index.html:309
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr "Analisi del ciclo di vita veloci e completamente parametrizzate."
 
-#: templates/index.html:319
+#: templates/index.html:320
 msgid "Fast Library"
 msgstr "Libreria efficiente"
 
-#: templates/index.html:320
+#: templates/index.html:321
 msgid "A Python library version allows for even more specific assessments."
 msgstr "Una libreria Python che offre valutazioni ancora più specifiche."
 
-#: templates/index.html:331
+#: templates/index.html:332
 msgid "Compatible"
 msgstr "Compatibile"
 
-#: templates/index.html:332
+#: templates/index.html:333
 msgid "Export inventories compatible with"
 msgstr "Consente di esportare inventari compatibili con "
 
-#: templates/index.html:345
+#: templates/index.html:346
 msgid "State-of-the-art"
 msgstr "Stato dell’arte"
 
-#: templates/index.html:346
+#: templates/index.html:347
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 "Si affida ad inventari recentemente pubblicati per modellare le catene "
 "energetiche."
 
-#: templates/index.html:357
+#: templates/index.html:358
 msgid "Well Documented"
 msgstr "Ben documentato "
 
-#: templates/index.html:358
+#: templates/index.html:359
 msgid "The library is fully tested, documented and hosted on"
 msgstr "La libreria è interamente testata, documentata e disponibile su"
 
-#: templates/index.html:383
+#: templates/index.html:384
 msgid "Some facts about"
 msgstr "Alcune informazioni riguardo"
 
-#: templates/index.html:398
+#: templates/index.html:399
 msgid "Powertrains"
 msgstr "Motopropulsori"
 
-#: templates/index.html:411
+#: templates/index.html:412
 msgid "Size classes"
 msgstr "Classi di dimensione"
 
-#: templates/index.html:424
+#: templates/index.html:425
 msgid "Driving cycles"
 msgstr "Cicli di guida"
 
-#: templates/index.html:437
+#: templates/index.html:438
 msgid "Parameters"
 msgstr "Parametri"
 
-#: templates/index.html:450
+#: templates/index.html:451
 msgid "Li-ion battery types"
 msgstr "Tipologie di batterie Li-ion"
 
-#: templates/index.html:463
+#: templates/index.html:464
 msgid "Electricity mixes for battery charging"
 msgstr "Miscele di elettricità per la ricarica della batteria"
 
-#: templates/index.html:475
+#: templates/index.html:476
 msgid "Time horizons"
 msgstr "Orizzonti temporali"
 
-#: templates/index.html:488
+#: templates/index.html:489
 msgid "Cars used for calibration"
 msgstr "Vetture usate per la calibrazione"
 
-#: templates/index.html:512
+#: templates/index.html:513
 msgid "OUR TEAM"
 msgstr "Il nostro team"
 
-#: templates/index.html:514
+#: templates/index.html:515
 msgid "The team behind the development of"
 msgstr "Il team che si è occupato dello sviluppo del"
 
-#: templates/index.html:514
+#: templates/index.html:515
 msgid "sits at the Paul Scherrer Institute, in the "
 msgstr "ha sede al Paul Scherrer Institute, presso il "
 
-#: templates/index.html:539
+#: templates/index.html:540
 msgid "Pilot"
 msgstr "Pilota"
 
-#: templates/index.html:564
+#: templates/index.html:565
 msgid "Pit-stop manager"
 msgstr "Manager del pit-stop"
 
-#: templates/index.html:582
+#: templates/index.html:583
 msgid "Designer (now at INFRAS)"
 msgstr "Designer (ora a INFRAS)"
 
-#: templates/index.html:608
+#: templates/index.html:609
 msgid "Engine specialist"
 msgstr "Specialista di motori"
 
-#: templates/index.html:632
+#: templates/index.html:633
 msgid "Chief Aerodynamicist"
 msgstr "Capo aerodinamico"
 
-#: templates/index.html:653
+#: templates/index.html:654
 msgid "Mechanic"
 msgstr "Meccanico"
 
-#: templates/index.html:678
+#: templates/index.html:679
 msgid "OUR PARTNERS"
 msgstr "I nostri partner"
 
-#: templates/index.html:680
+#: templates/index.html:681
 msgid "carculator was developed within the "
 msgstr "carculator è stato sviluppato all’interno del "
 
-#: templates/index.html:681
+#: templates/index.html:682
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
@@ -399,74 +399,74 @@ msgstr ""
 "fondato da innosuisse. Abbiamo ricevuto finanziamenti supplementari "
 "tramite i progetti di ricerca "
 
-#: templates/index.html:683 templates/index.html:685
+#: templates/index.html:684 templates/index.html:686
 msgid "and "
 msgstr "e "
 
-#: templates/index.html:684
+#: templates/index.html:685
 msgid "as well as "
 msgstr ", così come "
 
-#: templates/index.html:744
+#: templates/index.html:745
 msgid "Publications on"
 msgstr "Pubblicazioni sul tema della "
 
-#: templates/index.html:744
+#: templates/index.html:745
 msgid "mobility"
 msgstr "mobilità"
 
-#: templates/index.html:887
+#: templates/index.html:888
 msgid "CONTACT"
 msgstr "Contattaci"
 
-#: templates/index.html:887
+#: templates/index.html:888
 msgid "US"
 msgstr " "
 
-#: templates/index.html:889
+#: templates/index.html:890
 msgid "We are always happy to hear from you."
 msgstr "Siamo sempre felici di ricevere la vostra opinione"
 
-#: templates/index.html:902 templates/param_table.html:78
+#: templates/index.html:903 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr "Nome"
 
-#: templates/index.html:906
+#: templates/index.html:907
 msgid "Enter Email"
 msgstr "Inserisci email"
 
-#: templates/index.html:910
+#: templates/index.html:911
 msgid "Message"
 msgstr "Lascia il tuo messaggio"
 
-#: templates/index.html:913
+#: templates/index.html:914
 msgid "SUBMIT"
 msgstr "Inviare"
 
-#: templates/index.html:920
+#: templates/index.html:921
 msgid "carculator support"
 msgstr "Domande su carculator"
 
-#: templates/index.html:921
+#: templates/index.html:922
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr "Scrivici se hai domande sullo strumento, sui metodi usati o sui risultati."
 
-#: templates/index.html:969 templates/login.html:114
+#: templates/index.html:970 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:351 templates/start.html:189 templates/tool.html:804
+#: templates/result.html:354 templates/start.html:189 templates/tool.html:804
 msgid "Copyright"
 msgstr "Diritti d’autore"
 
-#: templates/index.html:969 templates/login.html:114
+#: templates/index.html:970 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:351 templates/start.html:189 templates/tool.html:804
+#: templates/result.html:354 templates/start.html:189 templates/tool.html:804
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/index.html:970 templates/login.html:115
+#: templates/index.html:971 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:352 templates/start.html:190 templates/tool.html:805
+#: templates/result.html:355 templates/start.html:190 templates/tool.html:805
 msgid "All rights reserved"
 msgstr "Tutti i diritti sono riservati"
 
@@ -573,11 +573,11 @@ msgstr ""
 "Qualsiasi utilizzo dei risultati o degli inventari in qualsiasi forma "
 "deve essere indicato come segue:"
 
-#: templates/result.html:167
+#: templates/result.html:170
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
 msgstr "VALUTAZIONE DELL'IMPATTO SUL CICLO DI VITA"
 
-#: templates/result.html:171
+#: templates/result.html:174
 msgid ""
 "By default, the chart below shows the environmental impacts in terms of\n"
 "\t\t\t\t\t\t\t\t\tgreenhouse gas emissions emitted for each vehicle, per "
@@ -600,11 +600,11 @@ msgstr ""
 " risultati come una tabella o altri tipi di grafico utilizzando il menu a"
 " discesa situato nell'angolo in alto a sinistra dell'area del grafico."
 
-#: templates/result.html:190
+#: templates/result.html:193
 msgid "LIFE CYCLE COST ASSESSMENT"
 msgstr "VALUTAZIONE DEI COSTI DEL CICLO DI VITA"
 
-#: templates/result.html:194
+#: templates/result.html:197
 msgid ""
 "The chart below represents the cost of ownership per kilometer driven for"
 " each vehicle.\n"
@@ -617,11 +617,11 @@ msgstr ""
 " del carburante, nonché l'ammortamento dell'acquisto del veicolo nel "
 "tempo."
 
-#: templates/result.html:210
+#: templates/result.html:213
 msgid "BENCHMARK"
 msgstr "CONFRONTO"
 
-#: templates/result.html:214
+#: templates/result.html:217
 msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
@@ -629,37 +629,37 @@ msgstr ""
 "Questa sezione confronta la distanza che può essere percorsa da ciascun "
 "veicolo dato un budget del ciclo di vita."
 
-#: templates/result.html:216
+#: templates/result.html:219
 msgid "How long can the vehicles drive on a life cycle budget of 1"
 msgstr ""
 "Per quanto tempo i veicoli possono guidare con un budget del ciclo di "
 "vita di 1"
 
-#: templates/result.html:218
+#: templates/result.html:221
 msgid "kg CO2-eq."
 msgstr ""
 
-#: templates/result.html:219
+#: templates/result.html:222
 msgid "Euro"
 msgstr ""
 
-#: templates/result.html:220
+#: templates/result.html:223
 msgid "liter of petrol-eq."
 msgstr "litro di benzina-eq."
 
-#: templates/result.html:239
+#: templates/result.html:242
 msgid "OTHER INDICATORS"
 msgstr "ALTRI INDICATORI"
 
-#: templates/result.html:247
+#: templates/result.html:250
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr "Consumo di energia accumulato da serbatoio a ruota lungo il ciclo di guida"
 
-#: templates/result.html:251
+#: templates/result.html:254
 msgid "GHG emissions vs. ownership costs"
 msgstr "Emissioni di gas serra rispetto ai costi di proprietà"
 
-#: templates/result.html:258
+#: templates/result.html:261
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -684,7 +684,7 @@ msgstr ""
 "durante la frenata, il che spiega le sezioni verso il basso della loro "
 "pendenza."
 
-#: templates/result.html:266
+#: templates/result.html:269
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
@@ -694,11 +694,11 @@ msgstr ""
 " (in termini di emissioni di gas serra) e i costi di acquisizione e "
 "utilizzo."
 
-#: templates/result.html:292
+#: templates/result.html:295
 msgid "Accumulated impacts over lifetime"
 msgstr "Impatti accumulati nel corso della vita"
 
-#: templates/result.html:297
+#: templates/result.html:300
 msgid ""
 "The graph below illustrates the accumulated impacts of the vehicles along"
 " their use phase.\n"
@@ -719,79 +719,79 @@ msgstr ""
 "possibile selezionare una categoria di impatto da considerare dal menu a "
 "discesa in basso."
 
-#: templates/result.html:303
+#: templates/result.html:306
 msgid "Occupation of arable land [m2/year]"
 msgstr "Occupazione di terreni agricoli [m2 / anno]"
 
-#: templates/result.html:304
+#: templates/result.html:307
 msgid "Climate change [kg CO2-eq.]"
 msgstr "Cambiamenti climatici [kg CO2-eq.]"
 
-#: templates/result.html:305
+#: templates/result.html:308
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr "Esaurimento delle risorse energetiche fossili [kg di petrolio eq.]"
 
-#: templates/result.html:306
+#: templates/result.html:309
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Tossicità per gli ambienti acquatici non marini [kg 1,4-DC-eq.]"
 
-#: templates/result.html:307
+#: templates/result.html:310
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr "Eutrofizzazione di ambienti acquatici non marini [kg P-eq.]"
 
-#: templates/result.html:308
+#: templates/result.html:311
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr "Tossicità per l'uomo [kg 1,4-DC-eq.]"
 
-#: templates/result.html:309
+#: templates/result.html:312
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr "Radiazione ionizzante [kg U235-eq.]"
 
-#: templates/result.html:310
+#: templates/result.html:313
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Tossicità per gli ambienti acquatici marini [kg 1,4-DC-eq.]"
 
-#: templates/result.html:311
+#: templates/result.html:314
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr "Eutrofizzazione di ambienti acquatici non marini [kg N-eq.]"
 
-#: templates/result.html:312
+#: templates/result.html:315
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr "Esaurimento delle risorse metalliche [kg ferro-eq.]"
 
-#: templates/result.html:313
+#: templates/result.html:316
 msgid "Natural land transformation [m2]"
 msgstr "Trasformazione del terreno naturale [m2]"
 
-#: templates/result.html:314
+#: templates/result.html:317
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr "Deterioramento dello strato di ozono [kg CFC-11-eq.]"
 
-#: templates/result.html:315
+#: templates/result.html:318
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr "Formazione di particolato [kg PM10-eq.]"
 
-#: templates/result.html:316
+#: templates/result.html:319
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr "Formazione di smog [kg NMVOC-eq.]"
 
-#: templates/result.html:317
+#: templates/result.html:320
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr "Acidificazione terrestre [kg SO2-Eq-eq.]"
 
-#: templates/result.html:318
+#: templates/result.html:321
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr "Tossicità terrestre [kg 1,4-DC.-eq.]"
 
-#: templates/result.html:319
+#: templates/result.html:322
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr "Occupazione di terreno urbano [m2/anno]"
 
-#: templates/result.html:320
+#: templates/result.html:323
 msgid "Depletion of fresh water reserves [m3]"
 msgstr "Esaurimento delle riserve di acqua dolce [m3]"
 
-#: templates/result.html:321
+#: templates/result.html:324
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr "Inquinamento acustico [Person-Pascal / secondo]"
 
@@ -851,9 +851,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tgasoline and battery electric vehicles; for the "
 "country you are located in, for the year 2020, 2035 and 2050. The vehicle"
 " parameters correspond to the standard settings in our model."
-msgstr "Questo "semplice" accesso al modello fornisce gli impatti ambientali e i costi del ciclo di vita dei moderni "
-"veicoli moderni, diesel di medie dimensioni, a benzina e elettrici a batteria; per il paese in cui vi trovate, "
-"per l'anno 2020, 2035 e 2050. I parametri del veicolo corrispondono alle impostazioni standard del nostro modello."
+msgstr ""
+"Questo \"semplice\" accesso al modello fornisce gli impatti ambientali e "
+"i costi del ciclo di vita dei moderni veicoli moderni, diesel di medie "
+"dimensioni, a benzina e elettrici a batteria; per il paese in cui vi "
+"trovate, per l'anno 2020, 2035 e 2050. I parametri del veicolo "
+"corrispondono alle impostazioni standard del nostro modello."
 
 #: templates/start.html:156
 msgid ""
@@ -864,10 +867,12 @@ msgid ""
 " electrolysis can be selected; the electricity mixes can also be\n"
 "\t\t\t\t\t\t\t\t\t\t\tdefined by the user."
 msgstr ""
-"Con questa versione si ottengono gli stessi risultati dell'accesso 'Semplice', ma si ha accesso e si possono "
-"modificare tutti i parametri del veicolo. Inoltre, è possibile selezionare mix di elettricità specifici per ogni paese "
-"per caricare le batterie dei veicoli a batteria e produrre idrogeno tramite elettrolisi; "
-"i mix di elettricità possono anche essere definiti dall'utente."
+"Con questa versione si ottengono gli stessi risultati dell'accesso "
+"'Semplice', ma si ha accesso e si possono modificare tutti i parametri "
+"del veicolo. Inoltre, è possibile selezionare mix di elettricità "
+"specifici per ogni paese per caricare le batterie dei veicoli a batteria "
+"e produrre idrogeno tramite elettrolisi; i mix di elettricità possono "
+"anche essere definiti dall'utente."
 
 #: templates/start.html:165
 msgid "This access offers the model full flexibility."
@@ -2183,4 +2188,7 @@ msgstr "numero di iterazioni"
 #~ "parameters correspond to the standard "
 #~ "settings in our model."
 #~ msgstr ""
+
+#~ msgid "Natural gas"
+#~ msgstr "Gas compresso"
 

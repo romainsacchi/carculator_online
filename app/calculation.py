@@ -25,7 +25,7 @@ class Calculation:
         self.d_pt_en = {
             "Petrol": "ICEV-p",
             "Diesel": "ICEV-d",
-            "Natural gas": "ICEV-g",
+            "CNG": "ICEV-g",
             "Electric": "BEV",
             "Fuel cell": "FCEV",
             "Hybrid-petrol": "HEV-p",
