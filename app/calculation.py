@@ -659,7 +659,8 @@ class Calculation:
             years =  new_dict[("Functional unit",)]["year"]
             country = new_dict[("Background",)]["country"]
             response = (
-                self.electricity_mix.loc[dict(country=country, value=0)]
+                self.electricity_mix.loc[dict(country=country,
+            variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
                 .interp(year=years)
                 .values
             )
