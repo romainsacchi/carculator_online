@@ -195,7 +195,7 @@ def tool_page(country):
         _("SUV"),
         _("Van"),
     ]
-    years = [i for i in range(2015, 2051)]
+    years = [i for i in range(2010, 2051)]
     driving_cycles = [
         "WLTC",
         "WLTC 3.1",
