@@ -248,12 +248,11 @@
 
 			function get_results(){
 				var country = $("#country").html();
-				var data = {"year":["2020","2035", "2050"], "type":[i18n('petrol'), i18n('diesel'), i18n('electric')],
+				var data = {"year":["2010", "2020","2035", "2050"], "type":[i18n('petrol'), i18n('diesel'), i18n('electric')],
 								"size":[i18n('medium')], "driving_cycle":"WLTC",
 								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
 								"mileage-slider":"12 000"},
-								"background params": {"country":country_code,
-								"battery technology":"NMC", "battery origin":"CN"}
+								"background params": {"country":country_code}
 								};
 
 				var str = i18n('job_queued')

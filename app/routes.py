@@ -132,12 +132,12 @@ def tool_page(country):
                 fuel_type='Biomass fuel',
                 scenario='SSP2-Base',
             )
-            .interp(year=[2020, 2035, 2050])
+            .interp(year=[2010, 2020, 2035, 2050])
             .values
         )
 
         config = {
-            "year": ["2020", "2035", "2050"],
+            "year": ["2010", "2020", "2035", "2050"],
             "type": [_("Petrol"), _("Diesel"), _("Electric")],
             "size": [_("Mid-size")],
             "driving_cycle": "WLTC",
