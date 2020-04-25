@@ -418,6 +418,9 @@ class Calculation:
         db.session.commit()
 
         results = self.ic.calculate_impacts()
+
+        print("GLIDER results", results.sel(impact_category="climate change", size="Medium", impact="glider"))
+
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
 
