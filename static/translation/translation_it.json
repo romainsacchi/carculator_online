@@ -82,6 +82,7 @@
       "syngas": "Gas sintetico",
       "electrolysis": "Dall'elettrolisi",
       "smr": "Dal Steam Methane Reforming",
+      "smr_ccs": "Dal SMR con cattura e stoccaggio del carbonio",
       "hydrogen_tank_carbon_fiber": "da fibra di carbonio",
       "hydrogen_tank_hdpe": "da polietilene ad alta densità",
       "hydrogen_tank_aluminium": "da alluminio",

@@ -2469,12 +2469,12 @@ function create_fuel_table() {
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
                             + '</td><td align="left" style="color:white">'
                             + '<select id="hydrogen primary fuel" style="color:grey">'
-                            + '</option><option value="hydrogen - smr">'+i18n("smr") + '<option value="hydrogen - electrolysis">'+i18n("electrolysis")
-                            +'</option></select></td>'
+                            + '</option><option value="smr">'+i18n("smr") + '<option value="electrolysis">'+i18n("electrolysis")
+                            +'</option><option value="smr with CCS">'+i18n("smr_ccs")+'</select></td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="hydrogen - electrolysis">'
-                            + i18n("electrolysis")+'</option><option value="hydrogen - smr">'+i18n("smr")
-                            +'</option></select></td>'
+                            + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="electrolysis">'
+                            + i18n("electrolysis")+'</option><option value="smr">'+i18n("smr")
+                            +'</option><option value="smr with CCS">'+i18n("smr_ccs")+'</select></td>'
                             + '<td align="left" style="color:white"><select id="hydrogen_storage" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
                             + '<option value="hdpe">'+i18n("hydrogen_tank_hdpe")+'</option>'
                             + '<option value="aluminium">'+i18n("hydrogen_tank_aluminium")+'</option></td>'

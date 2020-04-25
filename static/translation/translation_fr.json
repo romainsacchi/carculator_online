@@ -82,6 +82,7 @@
       "syngas": "Gaz synthétique",
       "electrolysis": "par électrolyse",
       "smr": "par Steam Methane Reforming",
+      "smr_ccs": "par SMR avec séquestration de carbone",
       "hydrogen_tank_carbon_fiber": "à partir de fibre de carbone",
       "hydrogen_tank_hdpe": "à partir de polyéthylène haute densité",
       "hydrogen_tank_aluminium": "à partir d'aluminium",
