@@ -282,7 +282,6 @@ class Calculation:
         self.d_rev_cat_de = {v: k for k, v, in self.d_cat_de.items()}
         self.excel_lci = ""
 
-
     def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
             data = [list(line) for line in csv.reader(f, delimiter=";")]
@@ -418,8 +417,6 @@ class Calculation:
         db.session.commit()
 
         results = self.ic.calculate_impacts()
-
-
 
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
