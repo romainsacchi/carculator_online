@@ -619,6 +619,9 @@ class Calculation:
         }
         new_dict = {}
 
+        if lang not in ['en', 'fr', 'it', 'de']:
+            lang='en'
+
         if lang == "en":
             new_dict[("Functional unit",)] = {
                 "powertrain": [self.d_pt_en[x] for x in raw_dict["type"]],
@@ -645,6 +648,7 @@ class Calculation:
                 "year": [int(x) for x in raw_dict["year"]],
                 "size": [self.d_size_de[s] for s in raw_dict["size"]],
             }
+
 
         f_d = {}
         new_dict[("Driving cycle",)] = raw_dict["driving_cycle"]
