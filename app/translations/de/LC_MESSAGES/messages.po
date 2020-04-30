@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-21 18:46+0200\n"
+"POT-Creation-Date: 2020-04-30 19:04+0200\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -97,71 +97,71 @@ msgstr "Sie sind jetzt ein registrierter Benutzer!"
 msgid "Invalid username or password"
 msgstr "Ungültiger Benutzername oder Passwort"
 
-#: app/routes.py:141 app/routes.py:180
+#: app/routes.py:140 app/routes.py:179
 msgid "Petrol"
 msgstr "Benzin"
 
-#: app/routes.py:141 app/routes.py:181
+#: app/routes.py:140 app/routes.py:180
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:141 app/routes.py:183
+#: app/routes.py:140 app/routes.py:182
 msgid "Electric"
 msgstr "Elektrisch"
 
-#: app/routes.py:142 app/routes.py:194
+#: app/routes.py:141 app/routes.py:193
 msgid "Mid-size"
 msgstr "Mittelklasse"
 
-#: app/routes.py:182
+#: app/routes.py:181
 msgid "CNG"
 msgstr "Komprimiertes Gas"
 
-#: app/routes.py:184
+#: app/routes.py:183
 msgid "Fuel cell"
 msgstr "Brennstoffzelle"
 
-#: app/routes.py:185
+#: app/routes.py:184
 msgid "Hybrid-petrol"
 msgstr "Hybrid-Benzin"
 
-#: app/routes.py:186
+#: app/routes.py:185
 msgid "Hybrid-diesel"
 msgstr "Hybrid-Diesel"
 
-#: app/routes.py:187
+#: app/routes.py:186
 msgid "(Plugin) Hybrid-petrol"
 msgstr "(Plugin) Hybrid-Benzin"
 
-#: app/routes.py:188
+#: app/routes.py:187
 msgid "(Plugin) Hybrid-diesel"
 msgstr "(Plugin) Hybrid-Diesel"
 
-#: app/routes.py:191
+#: app/routes.py:190
 msgid "Minicompact"
 msgstr "Kleinstwagen"
 
-#: app/routes.py:192
+#: app/routes.py:191
 msgid "Subcompact"
 msgstr "Kleinwagen"
 
-#: app/routes.py:193
+#: app/routes.py:192
 msgid "Compact"
 msgstr "Kompaktklasse"
 
-#: app/routes.py:195
+#: app/routes.py:194
 msgid "Large"
 msgstr "Oberklasse"
 
-#: app/routes.py:196
+#: app/routes.py:195
 msgid "SUV"
 msgstr "Geländewagen"
 
-#: app/routes.py:197
+#: app/routes.py:196
 msgid "Van"
 msgstr "Van"
 
-#: app/routes.py:382
+#: app/routes.py:381
 msgid "Email sent!"
 msgstr "Email gesendet!"
 
@@ -172,6 +172,64 @@ msgstr ""
 #: src/carculator/carculator/model.py:703
 msgid "fuel cell system efficiency"
 msgstr ""
+
+#: templates/404.html:18 templates/result.html:18
+msgid "Carculator : Results"
+msgstr "Carculator : Ergebnisse"
+
+#: templates/404.html:86 templates/result.html:86 templates/start.html:63
+#: templates/tool.html:80
+msgid "Login"
+msgstr "Einloggen"
+
+#: templates/404.html:92 templates/result.html:92 templates/start.html:68
+#: templates/tool.html:85
+msgid "Logout"
+msgstr "Ausloggen"
+
+#: templates/404.html:112
+msgid "RESULTS NOT FOUND"
+msgstr "ERGEBNISSE NICHT GEFUNDEN"
+
+#: templates/404.html:115
+msgid ""
+"Sorry, it seems we cannot find the results you requested. The id "
+"specified ("
+msgstr ""
+"Entschuldigung, es scheint, dass wir die von Ihnen gewünschten Ergebnisse nicht finden können. Die angegebene ID ("
+
+#: templates/404.html:115
+msgid ""
+") may either be invalid, or the time for\n"
+"\t\t\t\t\t\t\twhich your results are saved in our database has expired."
+msgstr ""
+") kann entweder ungültig sein, oder die Zeit, für die Ihre Ergebnisse in unserer Datenbank gespeichert sind, ist abgelaufen."
+
+#: templates/404.html:117
+msgid "If the issue persists, please contact us at "
+msgstr "Wenn das Problem weiterhin besteht, kontaktieren Sie uns bitte unter folgender E-Mail-Adresse "
+
+#: templates/404.html:118
+msgid "You will be redirected to a page where you can perform a new calculation."
+msgstr "Sie werden zu einer Seite weitergeleitet, auf der Sie eine neue Berechnung durchführen können."
+
+#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/param_table.html:116 templates/register.html:170
+#: templates/result.html:354 templates/start.html:187 templates/tool.html:804
+msgid "Copyright"
+msgstr "Copyright"
+
+#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/param_table.html:116 templates/register.html:170
+#: templates/result.html:354 templates/start.html:187 templates/tool.html:804
+msgid "Paul Scherrer Institut"
+msgstr "Paul Scherrer Institut"
+
+#: templates/404.html:137 templates/index.html:973 templates/login.html:115
+#: templates/param_table.html:117 templates/register.html:171
+#: templates/result.html:355 templates/start.html:188 templates/tool.html:805
+msgid "All rights reserved"
+msgstr "Alle Rechte vorbehalten"
 
 #: templates/index.html:19
 msgid "Carculator : Home"
@@ -416,62 +474,44 @@ msgstr "Publikationen zur"
 msgid "mobility"
 msgstr "mobilität"
 
-#: templates/index.html:888
+#: templates/index.html:890
 msgid "CONTACT"
 msgstr "KONTAKTIEREN SIE"
 
-#: templates/index.html:888
+#: templates/index.html:890
 msgid "US"
 msgstr "UNS"
 
-#: templates/index.html:890
+#: templates/index.html:892
 msgid "We are always happy to hear from you."
 msgstr "Wir freuen uns von Ihnen zu hören."
 
-#: templates/index.html:903 templates/param_table.html:78
+#: templates/index.html:905 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:907
+#: templates/index.html:909
 msgid "Enter Email"
 msgstr "Email"
 
-#: templates/index.html:911
+#: templates/index.html:913
 msgid "Message"
 msgstr "Nachricht"
 
-#: templates/index.html:914
+#: templates/index.html:916
 msgid "SUBMIT"
 msgstr "ABSENDEN"
 
-#: templates/index.html:921
+#: templates/index.html:923
 msgid "carculator support"
 msgstr "Carculator Support"
 
-#: templates/index.html:922
+#: templates/index.html:924
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 "Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten "
 "haben."
-
-#: templates/index.html:970 templates/login.html:114
-#: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:354 templates/start.html:189 templates/tool.html:804
-msgid "Copyright"
-msgstr "Copyright"
-
-#: templates/index.html:970 templates/login.html:114
-#: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:354 templates/start.html:189 templates/tool.html:804
-msgid "Paul Scherrer Institut"
-msgstr "Paul Scherrer Institut"
-
-#: templates/index.html:971 templates/login.html:115
-#: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:355 templates/start.html:190 templates/tool.html:805
-msgid "All rights reserved"
-msgstr "Alle Rechte vorbehalten"
 
 #: templates/login.html:17 templates/register.html:17 templates/start.html:17
 msgid "Carculator : Start"
@@ -516,18 +556,6 @@ msgstr "Gilt für den Antriebsstrang"
 #: templates/param_table.html:83 templates/tool.html:379
 msgid "Applies to size"
 msgstr "Gilt für die Größenkategorie"
-
-#: templates/result.html:18
-msgid "Carculator : Results"
-msgstr "Carculator : Ergebnisse"
-
-#: templates/result.html:86 templates/start.html:63 templates/tool.html:80
-msgid "Login"
-msgstr "Einloggen"
-
-#: templates/result.html:92 templates/start.html:68 templates/tool.html:85
-msgid "Logout"
-msgstr "Ausloggen"
 
 #: templates/result.html:98
 msgid "Export Brightway2-compatible inventories"
@@ -833,19 +861,19 @@ msgstr "Fortgeschritten"
 msgid "Build your own comparative scenario."
 msgstr "Erstellen Sie Ihr eigenes Vergleichsszenario."
 
-#: templates/start.html:129
+#: templates/start.html:127
 msgid "Yes, keep it simple!"
 msgstr "Ja, halte es einfach!"
 
-#: templates/start.html:135
+#: templates/start.html:133
 msgid "I'd like to see what's behind."
 msgstr "Ich würde gerne sehen, was dahinter steckt."
 
-#: templates/start.html:141
+#: templates/start.html:139
 msgid "Let's build it from scratch."
 msgstr "Lassen Sie es uns von Grund auf neu bauen."
 
-#: templates/start.html:149
+#: templates/start.html:147
 msgid ""
 "This 'Simple' access to the model gives the environmental impacts and "
 "life cycle costs of modern, mid-size diesel,\n"
@@ -859,7 +887,7 @@ msgstr ""
 "befinden, für die Jahre 2020, 2035 und 2050. Die Fahrzeugparameter "
 "entsprechen den Standardeinstellungen in unserem Modell."
 
-#: templates/start.html:156
+#: templates/start.html:154
 msgid ""
 "With this version, the same results as with the 'Simple' access are "
 "given, but you have access and can modify all the vehicle parameters.\n"
@@ -875,7 +903,7 @@ msgstr ""
 "von Wasserstoff durch Elektrolyse ausgewählt werden; die Strommixe können"
 " ebenfalls vom Benutzer definiert werden."
 
-#: templates/start.html:165
+#: templates/start.html:163
 msgid "This access offers the model full flexibility."
 msgstr "Dieser Zugang zum Modell bietet volle Flexibilität."
 

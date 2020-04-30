@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-21 18:46+0200\n"
+"POT-Creation-Date: 2020-04-30 19:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,71 +90,71 @@ msgstr ""
 msgid "Invalid username or password"
 msgstr ""
 
-#: app/routes.py:141 app/routes.py:180
+#: app/routes.py:140 app/routes.py:179
 msgid "Petrol"
 msgstr ""
 
-#: app/routes.py:141 app/routes.py:181
+#: app/routes.py:140 app/routes.py:180
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:141 app/routes.py:183
+#: app/routes.py:140 app/routes.py:182
 msgid "Electric"
 msgstr ""
 
-#: app/routes.py:142 app/routes.py:194
+#: app/routes.py:141 app/routes.py:193
 msgid "Mid-size"
 msgstr ""
 
-#: app/routes.py:182
+#: app/routes.py:181
 msgid "CNG"
 msgstr ""
 
-#: app/routes.py:184
+#: app/routes.py:183
 msgid "Fuel cell"
 msgstr ""
 
-#: app/routes.py:185
+#: app/routes.py:184
 msgid "Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:186
+#: app/routes.py:185
 msgid "Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:187
+#: app/routes.py:186
 msgid "(Plugin) Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:188
+#: app/routes.py:187
 msgid "(Plugin) Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:191
+#: app/routes.py:190
 msgid "Minicompact"
 msgstr ""
 
-#: app/routes.py:192
+#: app/routes.py:191
 msgid "Subcompact"
 msgstr ""
 
-#: app/routes.py:193
+#: app/routes.py:192
 msgid "Compact"
 msgstr ""
 
-#: app/routes.py:195
+#: app/routes.py:194
 msgid "Large"
 msgstr ""
 
-#: app/routes.py:196
+#: app/routes.py:195
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:197
+#: app/routes.py:196
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:382
+#: app/routes.py:381
 msgid "Email sent!"
 msgstr ""
 
@@ -164,6 +164,62 @@ msgstr ""
 
 #: src/carculator/carculator/model.py:703
 msgid "fuel cell system efficiency"
+msgstr ""
+
+#: templates/404.html:18 templates/result.html:18
+msgid "Carculator : Results"
+msgstr ""
+
+#: templates/404.html:86 templates/result.html:86 templates/start.html:63
+#: templates/tool.html:80
+msgid "Login"
+msgstr ""
+
+#: templates/404.html:92 templates/result.html:92 templates/start.html:68
+#: templates/tool.html:85
+msgid "Logout"
+msgstr ""
+
+#: templates/404.html:112
+msgid "RESULTS NOT FOUND"
+msgstr ""
+
+#: templates/404.html:115
+msgid ""
+"Sorry, it seems we cannot find the results you requested. The id "
+"specified ("
+msgstr ""
+
+#: templates/404.html:115
+msgid ""
+") may either be invalid, or the time for\n"
+"\t\t\t\t\t\t\twhich your results are saved in our database has expired."
+msgstr ""
+
+#: templates/404.html:117
+msgid "If the issue persists, please contact us at "
+msgstr ""
+
+#: templates/404.html:118
+msgid "You will be redirected to a page where you can perform a new calculation."
+msgstr ""
+
+#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/param_table.html:116 templates/register.html:170
+#: templates/result.html:354 templates/start.html:187 templates/tool.html:804
+msgid "Copyright"
+msgstr ""
+
+#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/param_table.html:116 templates/register.html:170
+#: templates/result.html:354 templates/start.html:187 templates/tool.html:804
+msgid "Paul Scherrer Institut"
+msgstr ""
+
+#: templates/404.html:137 templates/index.html:973 templates/login.html:115
+#: templates/param_table.html:117 templates/register.html:171
+#: templates/result.html:355 templates/start.html:188 templates/tool.html:805
+msgid "All rights reserved"
 msgstr ""
 
 #: templates/index.html:19
@@ -398,59 +454,41 @@ msgstr ""
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:888
+#: templates/index.html:890
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:888
+#: templates/index.html:890
 msgid "US"
 msgstr ""
 
-#: templates/index.html:890
+#: templates/index.html:892
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:903 templates/param_table.html:78
+#: templates/index.html:905 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:907
+#: templates/index.html:909
 msgid "Enter Email"
 msgstr ""
 
-#: templates/index.html:911
+#: templates/index.html:913
 msgid "Message"
 msgstr ""
 
-#: templates/index.html:914
+#: templates/index.html:916
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:921
+#: templates/index.html:923
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:922
+#: templates/index.html:924
 msgid "Write to us if you have any questions about the tool, methods or results."
-msgstr ""
-
-#: templates/index.html:970 templates/login.html:114
-#: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:354 templates/start.html:189 templates/tool.html:804
-msgid "Copyright"
-msgstr ""
-
-#: templates/index.html:970 templates/login.html:114
-#: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:354 templates/start.html:189 templates/tool.html:804
-msgid "Paul Scherrer Institut"
-msgstr ""
-
-#: templates/index.html:971 templates/login.html:115
-#: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:355 templates/start.html:190 templates/tool.html:805
-msgid "All rights reserved"
 msgstr ""
 
 #: templates/login.html:17 templates/register.html:17 templates/start.html:17
@@ -495,18 +533,6 @@ msgstr ""
 
 #: templates/param_table.html:83 templates/tool.html:379
 msgid "Applies to size"
-msgstr ""
-
-#: templates/result.html:18
-msgid "Carculator : Results"
-msgstr ""
-
-#: templates/result.html:86 templates/start.html:63 templates/tool.html:80
-msgid "Login"
-msgstr ""
-
-#: templates/result.html:92 templates/start.html:68 templates/tool.html:85
-msgid "Logout"
 msgstr ""
 
 #: templates/result.html:98
@@ -766,19 +792,19 @@ msgstr ""
 msgid "Build your own comparative scenario."
 msgstr ""
 
-#: templates/start.html:129
+#: templates/start.html:127
 msgid "Yes, keep it simple!"
 msgstr ""
 
-#: templates/start.html:135
+#: templates/start.html:133
 msgid "I'd like to see what's behind."
 msgstr ""
 
-#: templates/start.html:141
+#: templates/start.html:139
 msgid "Let's build it from scratch."
 msgstr ""
 
-#: templates/start.html:149
+#: templates/start.html:147
 msgid ""
 "This 'Simple' access to the model gives the environmental impacts and "
 "life cycle costs of modern, mid-size diesel,\n"
@@ -787,7 +813,7 @@ msgid ""
 " parameters correspond to the standard settings in our model."
 msgstr ""
 
-#: templates/start.html:156
+#: templates/start.html:154
 msgid ""
 "With this version, the same results as with the 'Simple' access are "
 "given, but you have access and can modify all the vehicle parameters.\n"
@@ -797,7 +823,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\tdefined by the user."
 msgstr ""
 
-#: templates/start.html:165
+#: templates/start.html:163
 msgid "This access offers the model full flexibility."
 msgstr ""
 
