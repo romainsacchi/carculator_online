@@ -206,7 +206,7 @@ msgstr ""
 
 #: templates/404.html:117
 msgid "If the issue persists, please contact us at "
-msgstr "Si le porblème persiste, veuillez nous contacter à l'adresse suivante: "
+msgstr "Si le problème persiste, veuillez nous contacter à l'adresse suivante: "
 
 #: templates/404.html:118
 msgid "You will be redirected to a page where you can perform a new calculation."
