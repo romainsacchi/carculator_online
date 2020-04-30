@@ -125,7 +125,7 @@
 	</main>
 
 	<!-- Start footer -->
-	<footer id="mu-footer" role="contentinfo">
+	<footer id="mu-footer" role="contentinfo" style="position:fixed;bottom:0">
 			<div class="container" style="width:100%;">
 				<div class="row" style="width:100%;margin-top:25px;">
 				  <div class="column" style="width:20%;float:left;text-align:center;">
@@ -173,12 +173,11 @@
 	function redirect(){
 	 if (seconds <=0){
 
-	 // redirect to new url after counter  down.
+	 // redirect to new url after counter down.
 	  window.location = url;
 	 } else {
 	  seconds--;
-	  document.getElementById("pageInfo").innerHTML="Redirecting to Home Page after "
-	+seconds+" seconds."
+
 	  setTimeout("redirect()", 1000)
 	 }
 	}
