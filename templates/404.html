@@ -165,7 +165,8 @@
   <script language="JavaScript" type="text/javascript">
 
 	var seconds = 6;
-	// countdown timer. took 6 because page takes approx 1 sec to load
+	// countdown timer.
+	console.log("start");
 
 	var url="{{url_for('start')}}";
 	// variable for start.html url
@@ -175,8 +176,10 @@
 
 	 // redirect to new url after counter down.
 	  window.location = url;
+	  console.log('redirect');
 	 } else {
 	  seconds--;
+	  console.log(seconds);
 
 	  setTimeout("redirect()", 1000)
 	 }
