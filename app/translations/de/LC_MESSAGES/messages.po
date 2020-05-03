@@ -196,14 +196,14 @@ msgid ""
 "Sorry, it seems we cannot find the results you requested. The id "
 "specified ("
 msgstr ""
-"Entschuldigung, es scheint, dass wir die von Ihnen gewünschten Ergebnisse nicht finden können. Die angegebene ID ("
+"Es scheint, dass wir die von Ihnen gewünschten Ergebnisse nicht finden können. Die angegebene ID ("
 
 #: templates/404.html:115
 msgid ""
 ") may either be invalid, or the time for\n"
 "\t\t\t\t\t\t\twhich your results are saved in our database has expired."
 msgstr ""
-") kann entweder ungültig sein, oder die Zeit, für die Ihre Ergebnisse in unserer Datenbank gespeichert sind, ist abgelaufen."
+") ist entweder ungültig sein, oder die Zeit, während der Ihre Ergebnisse in unserer Datenbank gespeichert sind, ist abgelaufen."
 
 #: templates/404.html:117
 msgid "If the issue persists, please contact us at "
