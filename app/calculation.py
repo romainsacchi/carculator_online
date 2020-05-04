@@ -398,11 +398,13 @@ class Calculation:
 
                         list_res_costs.append(
                             [
-                                data_cost[0, s, pt, y, cat],
+
                                 size[s],
                                 powertrain[pt],
-                                year[y],
                                 cost_category[cat],
+                                year[y],
+                                data_cost[s, pt, cat, y, 0]
+
                             ]
                         )
 
