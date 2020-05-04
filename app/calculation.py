@@ -720,7 +720,6 @@ class Calculation:
         :returns: returns the file path of the exported inventory.
         :rtype: str.
         """
-
         list_act = lci
         data = []
 
