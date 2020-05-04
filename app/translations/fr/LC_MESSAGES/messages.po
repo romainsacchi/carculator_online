@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-30 19:04+0200\n"
+"POT-Creation-Date: 2020-05-04 10:48+0200\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -195,14 +195,16 @@ msgid ""
 "Sorry, it seems we cannot find the results you requested. The id "
 "specified ("
 msgstr ""
-"Désolé, nous ne trouvons pas les résultats que vous avez demandé. L'identifiant spécifié ("
+"Désolé, nous ne trouvons pas les résultats que vous avez demandé. "
+"L'identifiant spécifié ("
 
 #: templates/404.html:115
 msgid ""
 ") may either be invalid, or the time for\n"
 "\t\t\t\t\t\t\twhich your results are saved in our database has expired."
 msgstr ""
-") est soit invalide, ou la période pour laquelle vos résultats sont sauvegardés dans notre base de données a expiré."
+") est soit invalide, ou la période pour laquelle vos résultats sont "
+"sauvegardés dans notre base de données a expiré."
 
 #: templates/404.html:117
 msgid "If the issue persists, please contact us at "
@@ -210,23 +212,25 @@ msgstr "Si le problème persiste, veuillez nous contacter à l'adresse suivante:
 
 #: templates/404.html:118
 msgid "You will be redirected to a page where you can perform a new calculation."
-msgstr "Vous allez être redirigé vers une page où vous pourrez effectuer un nouveau calcul."
+msgstr ""
+"Vous allez être redirigé vers une page où vous pourrez effectuer un "
+"nouveau calcul."
 
 #: templates/404.html:136 templates/index.html:972 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:354 templates/start.html:187 templates/tool.html:804
+#: templates/result.html:351 templates/start.html:187 templates/tool.html:804
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
 #: templates/404.html:136 templates/index.html:972 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:354 templates/start.html:187 templates/tool.html:804
+#: templates/result.html:351 templates/start.html:187 templates/tool.html:804
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
 #: templates/404.html:137 templates/index.html:973 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:355 templates/start.html:188 templates/tool.html:805
+#: templates/result.html:352 templates/start.html:188 templates/tool.html:805
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
 
@@ -309,7 +313,7 @@ msgstr ""
 "énergétiques."
 
 #: templates/index.html:194
-msgid "Results partly rely on the background inventory data of the "
+msgid "Results partly rely on the background inventory data of "
 msgstr "Les résultats présentés reposent en partie sur la base de données "
 
 #: templates/index.html:194
@@ -607,11 +611,11 @@ msgstr ""
 "Toute utilisation des résultats présentés, ou des inventaires ayant servi"
 " à les produire, doit être dûement référencée comme suit:"
 
-#: templates/result.html:170
+#: templates/result.html:167
 msgid "LIFE CYCLE IMPACT ASSESSMENT"
 msgstr "EVALUATION DES IMPACTS DU CYCLE DE VIE"
 
-#: templates/result.html:174
+#: templates/result.html:171
 msgid ""
 "By default, the chart below shows the environmental impacts in terms of\n"
 "\t\t\t\t\t\t\t\t\tgreenhouse gas emissions emitted for each vehicle, per "
@@ -634,11 +638,11 @@ msgstr ""
 "aussi possible de présenter le résultat sous forme de tableau depuis le "
 "menu déroulant 'Stacked Bar Chart' situé dans le coin en haut à gauche."
 
-#: templates/result.html:193
+#: templates/result.html:190
 msgid "LIFE CYCLE COST ASSESSMENT"
 msgstr "EVALUATION DES COÛTS DU CYCLE DE VIE"
 
-#: templates/result.html:197
+#: templates/result.html:194
 msgid ""
 "The chart below represents the cost of ownership per kilometer driven for"
 " each vehicle.\n"
@@ -650,11 +654,11 @@ msgstr ""
 "cycle de vie des véhicules. Les futurs coûts du carburant et de "
 "l'électricité sont également considérés dans cette analyse."
 
-#: templates/result.html:213
+#: templates/result.html:210
 msgid "BENCHMARK"
 msgstr "COMPARAISON"
 
-#: templates/result.html:217
+#: templates/result.html:214
 msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
@@ -662,35 +666,35 @@ msgstr ""
 "Cette section compare la distance parcourue par chaque véhicule étant "
 "donné un budget choisi."
 
-#: templates/result.html:219
+#: templates/result.html:216
 msgid "How long can the vehicles drive on a life cycle budget of 1"
 msgstr "Quelle est la distance parcourue étant donné un budget d'un"
 
-#: templates/result.html:221
+#: templates/result.html:218
 msgid "kg CO2-eq."
 msgstr ""
 
-#: templates/result.html:222
+#: templates/result.html:219
 msgid "Euro"
 msgstr ""
 
-#: templates/result.html:223
+#: templates/result.html:220
 msgid "liter of petrol-eq."
 msgstr "litre de pétrole-eq."
 
-#: templates/result.html:242
+#: templates/result.html:239
 msgid "OTHER INDICATORS"
 msgstr "AUTTRES INDICATEURS"
 
-#: templates/result.html:250
+#: templates/result.html:247
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr "Consommation d'énergie Tank-to-wheel le long du cycle de conduite"
 
-#: templates/result.html:254
+#: templates/result.html:251
 msgid "GHG emissions vs. ownership costs"
 msgstr "Emissions de gaz à effet de serre et coûts d'utilisation"
 
-#: templates/result.html:261
+#: templates/result.html:258
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -713,7 +717,7 @@ msgstr ""
 "sont capables de récupérer partiellement l'énergie libérée lors du "
 "freinage. Ceci explique que les sections plongeantes de leur courbe."
 
-#: templates/result.html:269
+#: templates/result.html:266
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
@@ -723,11 +727,11 @@ msgstr ""
 "de leur émissions de gaz à effet de serre et leur coût d'utilisation le "
 "long de leur cycle de vie."
 
-#: templates/result.html:295
+#: templates/result.html:292
 msgid "Accumulated impacts over lifetime"
 msgstr "Impacts cumulés lors du cycle de vie"
 
-#: templates/result.html:300
+#: templates/result.html:297
 msgid ""
 "The graph below illustrates the accumulated impacts of the vehicles along"
 " their use phase.\n"
@@ -746,79 +750,79 @@ msgstr ""
 " et aux émissions directes. Vous pouvez choisir la catégorie d'impact à "
 "considérer depuis le menu déroulant."
 
-#: templates/result.html:306
+#: templates/result.html:303
 msgid "Occupation of arable land [m2/year]"
 msgstr "Occupation de terre arable [m2/an]"
 
-#: templates/result.html:307
+#: templates/result.html:304
 msgid "Climate change [kg CO2-eq.]"
 msgstr "Changement climatique [kg CO2-eq.]"
 
-#: templates/result.html:308
+#: templates/result.html:305
 msgid "Depletion of fossil energy resources [kg oil-eq.]"
 msgstr "Epuisement des ressources d'énergie fossile [kg pétrole-eq.]"
 
-#: templates/result.html:309
+#: templates/result.html:306
 msgid "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:310
+#: templates/result.html:307
 msgid "Eutrophication of non-marine aquatic environments [kg P-eq.]"
 msgstr "Eutrophisation des milieux aquatiques non-marins [kg P-eq.]"
 
-#: templates/result.html:311
+#: templates/result.html:308
 msgid "Human toxicity [kg 1,4-DC-eq.]"
 msgstr "Toxicité humaine [kg 1,4-DC-eq.]"
 
-#: templates/result.html:312
+#: templates/result.html:309
 msgid "Ionizing radiation [kg U235-Eq]"
 msgstr "Rayonnement ionisant [kg U235-Eq]"
 
-#: templates/result.html:313
+#: templates/result.html:310
 msgid "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]"
 msgstr "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]"
 
-#: templates/result.html:314
+#: templates/result.html:311
 msgid "Eutrophication of non-marine aquatic environments [kg N-eq.]"
 msgstr "Eutrophisation des milieux aquatiques marins [kg N-eq.]"
 
-#: templates/result.html:315
+#: templates/result.html:312
 msgid "Depletion of metal resources [kg iron-eq.]"
 msgstr "Epuisement des ressources en métaux [kg fer-eq.]"
 
-#: templates/result.html:316
+#: templates/result.html:313
 msgid "Natural land transformation [m2]"
 msgstr "Transformation de terre naturelle [m2]"
 
-#: templates/result.html:317
+#: templates/result.html:314
 msgid "Deterioration of the ozone layer [kg CFC-11-eq.]"
 msgstr "Détérioration de la couche d'ozone [kg CFC-11-eq.]"
 
-#: templates/result.html:318
+#: templates/result.html:315
 msgid "Formation of fine particles [kg PM10-eq.]"
 msgstr "Formation de particules fines [kg PM10-eq.]"
 
-#: templates/result.html:319
+#: templates/result.html:316
 msgid "Smog formation [kg NMVOC-eq.]"
 msgstr "Formation de brouillard de pollution [kg NMVOC-eq.]"
 
-#: templates/result.html:320
+#: templates/result.html:317
 msgid "Terrestrial acidification [kg SO2-Eq-eq.]"
 msgstr "Acidification terrestre [kg SO2-eq.]"
 
-#: templates/result.html:321
+#: templates/result.html:318
 msgid "Terrestrial toxicity [kg 1,4-DC.-eq.]"
 msgstr "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]"
 
-#: templates/result.html:322
+#: templates/result.html:319
 msgid "Land occupation in an urban environment [m2 / year]"
 msgstr "Occupation de terre en milieu urbain [m2/an]"
 
-#: templates/result.html:323
+#: templates/result.html:320
 msgid "Depletion of fresh water reserves [m3]"
 msgstr "Epuisement des réserves d'eau douce [m3]"
 
-#: templates/result.html:324
+#: templates/result.html:321
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr "Emissions de bruit [Person-Pascal/seconde]"
 
@@ -1939,4 +1943,7 @@ msgstr "nombre d'itérations"
 
 #~ msgid "Natural gas"
 #~ msgstr "Gaz comprimé"
+
+#~ msgid "Results partly rely on the background inventory data of the "
+#~ msgstr "Les résultats présentés reposent en partie sur la base de données "
 
