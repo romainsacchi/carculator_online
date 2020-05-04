@@ -788,7 +788,6 @@ class Calculation:
             "Project parameters",
         }
         frmt = lambda x: bold if row[0] in highlighted else None
-
         sheet = workbook.add_worksheet(name)
 
         for row_index, row in enumerate(data):
