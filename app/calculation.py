@@ -798,7 +798,6 @@ class Calculation:
                     sheet.write_number(row_index, col_index, value, frmt(value))
                 else:
                     sheet.write_string(row_index, col_index, value, frmt(value))
-
         workbook.close()
         output.seek(0)
 
