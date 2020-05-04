@@ -377,7 +377,7 @@ class Calculation:
         arr_benchmark = []
         dict_scatter = defaultdict(list)
 
-        list_res_costs = [["value", "size", "powertrain", "year", "cost category"]]
+        list_res_costs = [["size", "powertrain", "cost category", "year", "value"]]
 
         for s in range(0, len(size)):
             for pt in range(0, len(powertrain)):
@@ -390,11 +390,11 @@ class Calculation:
                                     size[s],
                                     powertrain[pt],
                                     year[y],
-                                    1 / data_cost[0, s, pt, y, cat],
+                                    1 / data_cost[s, pt, cat, y, 0],
                                 ]
                             )
                             k = powertrain[pt] + ", " + str(year[y]) + ", " + size[s]
-                            dict_scatter[k].append(data_cost[0, s, pt, y, cat])
+                            dict_scatter[k].append(data_cost[s, pt, cat, y, 0])
 
                         list_res_costs.append(
                             [
