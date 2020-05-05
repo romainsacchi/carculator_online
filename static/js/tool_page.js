@@ -733,7 +733,10 @@ function size_list_update(){
             var list_pt = [i18n("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
                      i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")]
 
+            console.log(list_pt);
             for (var pt = 0; y < listItems.length; y++){
+
+                console.log(listItems[pt].innerHTML);
                 if (list_pt.includes(listItems[pt].innerHTML)){
                     new_powertrain = true;
                 }
