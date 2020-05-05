@@ -730,16 +730,16 @@ function size_list_update(){
             };
 
             var new_powertrain = false
-
-            console.log([i18n("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
-                     i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")])
+            var list_pt = [i18n("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
+                     i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")]
 
             for (var pt = 0; y < listItems.length; y++){
-                if ([i18n("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
-                     i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")].includes(listItems[pt])){
+                if (list_pt.includes(listItems[pt])){
                     new_powertrain = true;
                 }
             };
+
+            console.log(old_year, new_powertrain);
 
             if (old_year==true && new_powertrain==true){
                 // Warning message if the powertrain is BEV, FCEV and hybrids, before 2011
