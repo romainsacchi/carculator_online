@@ -731,7 +731,7 @@ function size_list_update(){
 
             var new_powertrain = false
 
-            console.log([i18("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
+            console.log([i18n("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
                      i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")])
 
             for (var pt = 0; y < listItems.length; y++){
