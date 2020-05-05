@@ -96,6 +96,7 @@
       "large": "Grande routière",
       "SUV": "SUV",
       "Van": "Van",
+      "powertrain_not_existing": "Un ou plusieurs types de propulsion sélectionné(s) n'existai(en)t peut-être pas pour la ou les année(s) sélectionnée(s). De ce fait, considérez les résultats avec prudence.",
       "insufficient_width": "La mise en page de ce site web n'a pas optimal pour la largeur d'écran de votre appareil. Nous recommandons d'utiliser un appareil avec un écran plus large.",
       "AT": "Autriche",
       "AU": "Australie",

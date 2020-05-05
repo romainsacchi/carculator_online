@@ -697,29 +697,76 @@ function size_list_update(){
 
     if (listYears.length == 0){
         var str = i18n("select_time_horizon")
-       $.notify({
-        icon: 'glyphicon glyphicon-warning-sign',
-        message: str
-        },
-        {
-            placement: {
-                from: "top",
-                align: "center"
+           $.notify({
+            icon: 'glyphicon glyphicon-warning-sign',
+            message: str
             },
-            type:'warning'
-        },
-        {
-            animate: {
-                enter: 'animated bounceInDown',
-                exit: 'animated bounceOutUp'
+            {
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                type:'warning'
             },
-        }
-        );
+            {
+                animate: {
+                    enter: 'animated bounceInDown',
+                    exit: 'animated bounceOutUp'
+                },
+            }
+            );
 
        return;
     }
     else{
         if (listItems.length>0 & listSizes.length>0){
+
+            var old_year = false;
+
+            for (var y = 0; y < listYears.length; y++){
+                if (listYears[y]<2011){
+                    old_year=true;
+                }
+            };
+
+            var new_powertrain = false
+
+            console.log([i18("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
+                     i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")])
+
+            for (var pt = 0; y < listItems.length; y++){
+                if ([i18("electric"), i18n("fuel_cell"), i18n("hybrid_petrol"), i18n("hybrid_diesel"),
+                     i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")].includes(listItems[pt])){
+                    new_powertrain = true;
+                }
+            };
+
+            if (old_year==true && new_powertrain==true){
+                // Warning message if the powertrain is BEV, FCEV and hybrids, before 2011
+                var str = i18n("powertrain_not_existing")
+                $.notify({
+                icon: 'glyphicon glyphicon-warning-sign',
+                message: str
+                },
+                {
+                    placement: {
+                        from: "top",
+                        align: "center"
+                    },
+                    type:'warning'
+                },
+                {
+                    animate: {
+                        enter: 'animated bounceInDown',
+                        exit: 'animated bounceOutUp'
+                    },
+                }
+                );
+
+            };
+
+
+
             $("#manufacture_section").attr('style', 'display:block;margin:30px;');
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');

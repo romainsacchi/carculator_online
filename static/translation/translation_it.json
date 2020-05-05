@@ -96,6 +96,7 @@
       "large": "Berlina tre volumi",
       "SUV": "SUV",
       "Van": "Van",
+      "powertrain_not_existing": "Uno o più dei propulsori selezionati potrebbero non essere esistiti per gli anni selezionati. Pertanto, considerare i risultati con cautela.",
       "insufficient_width": "Il layout di questo sito Web non è ottimale per la larghezza dello schermo del dispositivo. Si consiglia di utilizzare un dispositivo con uno schermo più grande.",
       "AT": "Austria",
       "AU": "Australia",

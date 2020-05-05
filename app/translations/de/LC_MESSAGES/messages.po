@@ -565,7 +565,7 @@ msgstr "Gilt für die Größenkategorie"
 
 #: templates/result.html:98
 msgid "Export Brightway2-compatible inventories"
-msgstr "Brightway2-kompatible Bestände exportieren"
+msgstr "Brightway2-kompatible Inventardaten exportieren"
 
 #: templates/result.html:102
 msgid "Share results"
@@ -991,7 +991,7 @@ msgid ""
 "design, energy chains, etc."
 msgstr ""
 "carculator kann die Oekobilanz verschiedener Fahrzeuge berechnen für "
-"bestimmte Refernzjahre unter Berücksichtigung technologischer "
+"bestimmte Referenzjahre unter Berücksichtigung technologischer "
 "Fortschritte bei den Fahrzeugen, der Treibstoffversorgung, etc."
 
 #: templates/tool.html:192
@@ -1195,6 +1195,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
 "usual scenarios from energy models."
 msgstr ""
+"Das Modell muss den Fahrzyklus der Fahrzeuge kennen (d.h. das Geschwindigkeitsniveau pro Sekunde, um den Beschleunigungs- "
+"und Bremsbedarf ableiten zu können) sowie andere Dinge, wie z.B. die Anzahl der Fahrgäste, das Land, in dem die "
+"Fahrzeuge betrieben werden, usw. Die prognostizierten Strommixe basieren auf Business-as-usual-Szenarien aus Energiemodellen."
 
 #: templates/tool.html:413
 msgid " For European country, the projections originate the"
