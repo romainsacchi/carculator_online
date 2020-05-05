@@ -724,8 +724,7 @@ function size_list_update(){
             var old_year = false;
 
             for (var y = 0; y < listYears.length; y++){
-                console.log(listYears[y]);
-                if (listYears[y]<2011){
+                if (parseInt(listYears[y].innerHTML)<2011){
                     old_year=true;
                 }
             };
@@ -735,8 +734,7 @@ function size_list_update(){
                      i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")]
 
             for (var pt = 0; y < listItems.length; y++){
-                console.log(listItems[pt]);
-                if (list_pt.includes(listItems[pt])){
+                if (list_pt.includes(listItems[pt].innerHTML)){
                     new_powertrain = true;
                 }
             };
