@@ -734,7 +734,7 @@ function size_list_update(){
                      i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")]
 
             console.log(list_pt);
-            for (var pt = 0; y < listItems.length; y++){
+            for (var pt = 0; pt < listItems.length; pt++){
 
                 console.log(listItems[pt].innerHTML);
                 if (list_pt.includes(listItems[pt].innerHTML)){
