@@ -738,6 +738,7 @@ function size_list_update(){
                 }
             };
 
+
             if (old_year==true && new_powertrain==true){
                 // Warning message if the powertrain is BEV, FCEV and hybrids, before 2011
                 var str = i18n("powertrain_not_existing")
