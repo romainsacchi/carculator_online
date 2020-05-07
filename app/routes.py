@@ -124,7 +124,6 @@ def tool_page(country):
                     "RegionCode"
                 ]
 
-
         share_biofuel = (
             app.calc.biofuel.sel(
                 region=region,
@@ -195,7 +194,7 @@ def tool_page(country):
         _("SUV"),
         _("Van"),
     ]
-    years = [i for i in range(2010, 2051)]
+    years = [i for i in range(2000, 2051)]
     driving_cycles = [
         "WLTC",
         "WLTC 3.1",
@@ -217,7 +216,6 @@ def tool_page(country):
         driving_cycles=driving_cycles,
         config=config,
     )
-
 
 @app.route("/search_car_model/<search_item>")
 def search_car_model(search_item):
