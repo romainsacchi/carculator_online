@@ -52,6 +52,8 @@
       "urban land occupation":"Occupation de terre en milieu urbain [m2/an]",
       "water depletion":"Epuisement des réserves d'eau douce [m3]",
       "human noise":"Emissions de bruit [Person-Pascal/seconde]",
+      "primary energy, renewable": "Energie primaire, renouvelable [Megajoule]",
+      "primary energy, non-renewable": "Energie primaire, non renouvelable [Megajoule]",
       "petrol": "Essence",
       "diesel": "Diesel",
       "natural_gas": "Gaz comprimé",

@@ -125,6 +125,8 @@ class Calculation:
             "Land occupation in an urban environment [m2 / year]": "urban land occupation",
             "Depletion of fresh water reserves [m3]": "water depletion",
             "Noise emissions [Person-Pascal/second]": "human noise",
+            "Primary energy, renewable [Megajoule]": "primary energy, renewable",
+            "Primary energy, non-renewable [Megajoule]": "primary energy, non-renewable"
         }
 
         self.d_impact_it = {
@@ -147,6 +149,8 @@ class Calculation:
             "Occupazione di terreno urbano [m2/anno]": "urban land occupation",
             "Esaurimento delle riserve di acqua dolce [m3]": "water depletion",
             "Inquinamento acustico [Person-Pascal / secondo]": "human noise",
+            "Energia primaria, rinnovabile [Megajoule]": "primary energy, renewable",
+            "Energia primaria, non rinnovabile [Megajoule]": "primary energy, non-renewable"
         }
 
         self.d_impact_fr = {
@@ -169,6 +173,8 @@ class Calculation:
             "Occupation de terre en milieu urbain [m2/an]": "urban land occupation",
             "Epuisement des réserves d'eau douce [m3]": "water depletion",
             "Emissions de bruit [Person-Pascal/seconde]": "human noise",
+            "Energie primaire, renouvelable [Megajoule]": "primary energy, renewable",
+            "Energi primaire, non renouvelable [Megajoule]": "primary energy, non-renewable"
         }
 
         self.d_impact_de = {
@@ -191,6 +197,8 @@ class Calculation:
             "Flächennutzung in städtischen Gebieten [m2/Jahr]": "urban land occupation",
             "Erschöpfung der Süsswasservorräte [m3]": "water depletion",
             "Geräuschemission [Person-Pascal / Sekunde]": "human noise",
+            "Primärenergie, erneuerbar [Megajoule]": "primary energy, renewable",
+            "Primärenergie, nicht erneuerbar [Megajoule]": "primary energy, non-renewable"
         }
 
         self.d_cat_en = {
