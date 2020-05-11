@@ -203,7 +203,7 @@ class Calculation:
 
         self.d_cat_en = {
             "Direct emissions": "direct",
-            "Fuel manufacture": "energy chain",
+            "Fuel supply": "energy chain",
             "Energy storage": "energy storage",
             "Chassis": "glider",
             "Maintenance": "maintenance",
