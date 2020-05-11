@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-04 10:48+0200\n"
+"POT-Creation-Date: 2020-05-11 19:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,80 +90,72 @@ msgstr ""
 msgid "Invalid username or password"
 msgstr ""
 
-#: app/routes.py:140 app/routes.py:179
+#: app/routes.py:139 app/routes.py:178
 msgid "Petrol"
 msgstr ""
 
-#: app/routes.py:140 app/routes.py:180
+#: app/routes.py:139 app/routes.py:179
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:140 app/routes.py:182
+#: app/routes.py:139 app/routes.py:181
 msgid "Electric"
 msgstr ""
 
-#: app/routes.py:141 app/routes.py:193
+#: app/routes.py:140 app/routes.py:192
 msgid "Mid-size"
 msgstr ""
 
-#: app/routes.py:181
+#: app/routes.py:180
 msgid "CNG"
 msgstr ""
 
-#: app/routes.py:183
+#: app/routes.py:182
 msgid "Fuel cell"
 msgstr ""
 
-#: app/routes.py:184
+#: app/routes.py:183
 msgid "Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:185
+#: app/routes.py:184
 msgid "Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:186
+#: app/routes.py:185
 msgid "(Plugin) Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:187
+#: app/routes.py:186
 msgid "(Plugin) Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:190
+#: app/routes.py:189
 msgid "Minicompact"
 msgstr ""
 
-#: app/routes.py:191
+#: app/routes.py:190
 msgid "Subcompact"
 msgstr ""
 
-#: app/routes.py:192
+#: app/routes.py:191
 msgid "Compact"
 msgstr ""
 
-#: app/routes.py:194
+#: app/routes.py:193
 msgid "Large"
 msgstr ""
 
-#: app/routes.py:195
+#: app/routes.py:194
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:196
+#: app/routes.py:195
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:381
+#: app/routes.py:379
 msgid "Email sent!"
-msgstr ""
-
-#: src/carculator/carculator/model.py:702
-msgid "battery discharge efficiency"
-msgstr ""
-
-#: src/carculator/carculator/model.py:703
-msgid "fuel cell system efficiency"
 msgstr ""
 
 #: templates/404.html:18 templates/result.html:18
@@ -204,21 +196,21 @@ msgstr ""
 msgid "You will be redirected to a page where you can perform a new calculation."
 msgstr ""
 
-#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/404.html:136 templates/index.html:984 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:351 templates/start.html:187 templates/tool.html:804
+#: templates/result.html:353 templates/start.html:187 templates/tool.html:804
 msgid "Copyright"
 msgstr ""
 
-#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/404.html:136 templates/index.html:984 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:351 templates/start.html:187 templates/tool.html:804
+#: templates/result.html:353 templates/start.html:187 templates/tool.html:804
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/404.html:137 templates/index.html:973 templates/login.html:115
+#: templates/404.html:137 templates/index.html:985 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:352 templates/start.html:188 templates/tool.html:805
+#: templates/result.html:354 templates/start.html:188 templates/tool.html:805
 msgid "All rights reserved"
 msgstr ""
 
@@ -454,40 +446,40 @@ msgstr ""
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:890
+#: templates/index.html:902
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:890
+#: templates/index.html:902
 msgid "US"
 msgstr ""
 
-#: templates/index.html:892
+#: templates/index.html:904
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:905 templates/param_table.html:78
+#: templates/index.html:917 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:909
+#: templates/index.html:921
 msgid "Enter Email"
 msgstr ""
 
-#: templates/index.html:913
+#: templates/index.html:925
 msgid "Message"
 msgstr ""
 
-#: templates/index.html:916
+#: templates/index.html:928
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:923
+#: templates/index.html:935
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:924
+#: templates/index.html:936
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 
@@ -757,6 +749,14 @@ msgstr ""
 
 #: templates/result.html:321
 msgid "Noise emissions [Person-Pascal/second]"
+msgstr ""
+
+#: templates/result.html:322
+msgid "Primary energy, renewable [Megajoule]"
+msgstr ""
+
+#: templates/result.html:323
+msgid "Primary energy, non-renewable [Megajoule]"
 msgstr ""
 
 #: templates/start.html:97

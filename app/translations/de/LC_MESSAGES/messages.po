@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-04 10:48+0200\n"
+"POT-Creation-Date: 2020-05-11 19:55+0200\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -97,81 +97,73 @@ msgstr "Sie sind jetzt ein registrierter Benutzer!"
 msgid "Invalid username or password"
 msgstr "Ungültiger Benutzername oder Passwort"
 
-#: app/routes.py:140 app/routes.py:179
+#: app/routes.py:139 app/routes.py:178
 msgid "Petrol"
 msgstr "Benzin"
 
-#: app/routes.py:140 app/routes.py:180
+#: app/routes.py:139 app/routes.py:179
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:140 app/routes.py:182
+#: app/routes.py:139 app/routes.py:181
 msgid "Electric"
 msgstr "Elektrisch"
 
-#: app/routes.py:141 app/routes.py:193
+#: app/routes.py:140 app/routes.py:192
 msgid "Mid-size"
 msgstr "Mittelklasse"
 
-#: app/routes.py:181
+#: app/routes.py:180
 msgid "CNG"
 msgstr "Komprimiertes Gas"
 
-#: app/routes.py:183
+#: app/routes.py:182
 msgid "Fuel cell"
 msgstr "Brennstoffzelle"
 
-#: app/routes.py:184
+#: app/routes.py:183
 msgid "Hybrid-petrol"
 msgstr "Hybrid-Benzin"
 
-#: app/routes.py:185
+#: app/routes.py:184
 msgid "Hybrid-diesel"
 msgstr "Hybrid-Diesel"
 
-#: app/routes.py:186
+#: app/routes.py:185
 msgid "(Plugin) Hybrid-petrol"
 msgstr "(Plugin) Hybrid-Benzin"
 
-#: app/routes.py:187
+#: app/routes.py:186
 msgid "(Plugin) Hybrid-diesel"
 msgstr "(Plugin) Hybrid-Diesel"
 
-#: app/routes.py:190
+#: app/routes.py:189
 msgid "Minicompact"
 msgstr "Kleinstwagen"
 
-#: app/routes.py:191
+#: app/routes.py:190
 msgid "Subcompact"
 msgstr "Kleinwagen"
 
-#: app/routes.py:192
+#: app/routes.py:191
 msgid "Compact"
 msgstr "Kompaktklasse"
 
-#: app/routes.py:194
+#: app/routes.py:193
 msgid "Large"
 msgstr "Oberklasse"
 
-#: app/routes.py:195
+#: app/routes.py:194
 msgid "SUV"
 msgstr "Geländewagen"
 
-#: app/routes.py:196
+#: app/routes.py:195
 msgid "Van"
 msgstr "Van"
 
-#: app/routes.py:381
+#: app/routes.py:379
 msgid "Email sent!"
 msgstr "Email gesendet!"
-
-#: src/carculator/carculator/model.py:702
-msgid "battery discharge efficiency"
-msgstr ""
-
-#: src/carculator/carculator/model.py:703
-msgid "fuel cell system efficiency"
-msgstr ""
 
 #: templates/404.html:18 templates/result.html:18
 msgid "Carculator : Results"
@@ -219,21 +211,21 @@ msgstr ""
 "Sie werden zu einer Seite weitergeleitet, auf der Sie eine neue "
 "Berechnung durchführen können."
 
-#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/404.html:136 templates/index.html:984 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:351 templates/start.html:187 templates/tool.html:804
+#: templates/result.html:353 templates/start.html:187 templates/tool.html:804
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/404.html:136 templates/index.html:972 templates/login.html:114
+#: templates/404.html:136 templates/index.html:984 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:351 templates/start.html:187 templates/tool.html:804
+#: templates/result.html:353 templates/start.html:187 templates/tool.html:804
 msgid "Paul Scherrer Institut"
 msgstr "Paul Scherrer Institut"
 
-#: templates/404.html:137 templates/index.html:973 templates/login.html:115
+#: templates/404.html:137 templates/index.html:985 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:352 templates/start.html:188 templates/tool.html:805
+#: templates/result.html:354 templates/start.html:188 templates/tool.html:805
 msgid "All rights reserved"
 msgstr "Alle Rechte vorbehalten"
 
@@ -480,40 +472,40 @@ msgstr "Publikationen zur"
 msgid "mobility"
 msgstr "mobilität"
 
-#: templates/index.html:890
+#: templates/index.html:902
 msgid "CONTACT"
 msgstr "KONTAKTIEREN SIE"
 
-#: templates/index.html:890
+#: templates/index.html:902
 msgid "US"
 msgstr "UNS"
 
-#: templates/index.html:892
+#: templates/index.html:904
 msgid "We are always happy to hear from you."
 msgstr "Wir freuen uns von Ihnen zu hören."
 
-#: templates/index.html:905 templates/param_table.html:78
+#: templates/index.html:917 templates/param_table.html:78
 #: templates/tool.html:374
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:909
+#: templates/index.html:921
 msgid "Enter Email"
 msgstr "Email"
 
-#: templates/index.html:913
+#: templates/index.html:925
 msgid "Message"
 msgstr "Nachricht"
 
-#: templates/index.html:916
+#: templates/index.html:928
 msgid "SUBMIT"
 msgstr "ABSENDEN"
 
-#: templates/index.html:923
+#: templates/index.html:935
 msgid "carculator support"
 msgstr "Carculator Support"
 
-#: templates/index.html:924
+#: templates/index.html:936
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 "Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten "
@@ -828,6 +820,14 @@ msgstr "Erschöpfung der Süsswasservorräte [m3]"
 #: templates/result.html:321
 msgid "Noise emissions [Person-Pascal/second]"
 msgstr "Geräuschemission [Person-Pascal / Sekunde]"
+
+#: templates/result.html:322
+msgid "Primary energy, renewable [Megajoule]"
+msgstr "Primärenergie, erneuerbar [Megajoule]"
+
+#: templates/result.html:323
+msgid "Primary energy, non-renewable [Megajoule]"
+msgstr "Primärenergie, nicht erneuerbar [Megajoule]"
 
 #: templates/start.html:97
 msgid "Simple"
@@ -1195,9 +1195,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
 "usual scenarios from energy models."
 msgstr ""
-"Das Modell muss den Fahrzyklus der Fahrzeuge kennen (d.h. das Geschwindigkeitsniveau pro Sekunde, um den Beschleunigungs- "
-"und Bremsbedarf ableiten zu können) sowie andere Dinge, wie z.B. die Anzahl der Fahrgäste, das Land, in dem die "
-"Fahrzeuge betrieben werden, usw. Die prognostizierten Strommixe basieren auf Business-as-usual-Szenarien aus Energiemodellen."
+"Das Modell muss den Fahrzyklus der Fahrzeuge kennen (d.h. das "
+"Geschwindigkeitsniveau pro Sekunde, um den Beschleunigungs- und "
+"Bremsbedarf ableiten zu können) sowie andere Dinge, wie z.B. die Anzahl "
+"der Fahrgäste, das Land, in dem die Fahrzeuge betrieben werden, usw. Die "
+"prognostizierten Strommixe basieren auf Business-as-usual-Szenarien aus "
+"Energiemodellen."
 
 #: templates/tool.html:413
 msgid " For European country, the projections originate the"
