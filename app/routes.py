@@ -537,7 +537,7 @@ def get_inventory_excel_for_bw():
             'Content-Encoding': mimetype_tuple[1]
         })
     response.headers = response_headers
-    response.set_cookie('fileDownload', 'true', path='/')
+    #response.set_cookie('fileDownload', 'true', path='/')
     return response
 
     #resp = make_response(app.lci_to_bw)
