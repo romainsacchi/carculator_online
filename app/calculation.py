@@ -173,8 +173,8 @@ class Calculation:
             "Occupation de terre en milieu urbain [m2/an]": "urban land occupation",
             "Epuisement des réserves d'eau douce [m3]": "water depletion",
             "Emissions de bruit [Person-Pascal/seconde]": "human noise",
-            "Energie primaire, renouvelable [Megajoule]": "primary energy, renewable",
-            "Energi primaire, non renouvelable [Megajoule]": "primary energy, non-renewable"
+            "Energie primaire, renouvelable [Mégajoule]": "primary energy, renewable",
+            "Energi primaire, non renouvelable [Mégajoule]": "primary energy, non-renewable"
         }
 
         self.d_impact_de = {
