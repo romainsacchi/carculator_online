@@ -98,7 +98,7 @@ def start():
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-#@login_required
+@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
