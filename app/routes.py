@@ -12,7 +12,8 @@ from flask import (
     url_for,
     json,
     flash,
-    Response
+    Response,
+    Headers
 )
 import datetime
 import mimetypes
