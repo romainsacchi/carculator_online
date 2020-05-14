@@ -511,10 +511,36 @@ def get_language():
 @app.route("/get_inventory_excel_for_bw")
 @login_required
 def get_inventory_excel_for_bw():
-    resp = make_response(app.lci_to_bw)
-    resp.headers["Content-Disposition"] = "attachment; filename=inventory.xlsx"
-    resp.headers["Content-type"] = "text/csv"
-    return resp
+
+    response = Response()
+    response.status_code = 200
+    response.data = app.lci_to_bw
+    file_name = 'carculator_inventory_export_{}.xlsx'.format(
+        datetime.now().strftime('%d/%m/%Y'))
+    mimetype_tuple = mimetypes.guess_type(file_name)
+    response_headers = Headers({
+        'Pragma': "public",  # required,
+        'Expires': '0',
+        'Cache-Control': 'must-revalidate, post-check=0, pre-check=0',
+        'Cache-Control': 'private',  # required for certain browsers,
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': 'attachment; filename=\"%s\";' % file_name,
+        'Content-Transfer-Encoding': 'binary',
+        'Content-Length': len(response.data)
+    })
+
+    if not mimetype_tuple[1] is None:
+        response.update({
+            'Content-Encoding': mimetype_tuple[1]
+        })
+    response.headers = response_headers
+    response.set_cookie('fileDownload', 'true', path='/')
+    return response
+
+    #resp = make_response(app.lci_to_bw)
+    #resp.headers["Content-Disposition"] = "attachment; filename=inventory.xlsx"
+    #resp.headers["Content-type"] = "text/csv"
+    #return resp
 
 
 @app.route("/get_param_table")

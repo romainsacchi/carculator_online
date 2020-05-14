@@ -432,7 +432,7 @@ class Calculation:
         results_acc = results * lifetime
 
         lci = self.ic.export_lci(presamples=False)
-        self.excel_lci = self.write_lci_to_excel(lci, "carculator").read()
+        self.excel_lci = self.write_lci_to_excel(lci, "carculator")
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -808,7 +808,8 @@ class Calculation:
                     sheet.write_number(row_index, col_index, value, frmt(value))
                 else:
                     sheet.write_string(row_index, col_index, value, frmt(value))
-        output.seek(0)
-        workbook.close()
 
-        return output
+        workbook.close()
+        output.seek(0)
+
+        return output.read()
