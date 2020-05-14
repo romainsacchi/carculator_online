@@ -519,7 +519,7 @@ def get_inventory_excel_for_bw():
     response.status_code = 200
     response.data = app.lci_to_bw
     file_name = 'carculator_inventory_export_{}.xlsx'.format(
-        datetime.date())
+        str(datetime.date.today()))
     mimetype_tuple = mimetypes.guess_type(file_name)
     response_headers = Headers({
         'Pragma': "public",  # required,
