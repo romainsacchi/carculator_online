@@ -12,8 +12,7 @@ from flask import (
     url_for,
     json,
     flash,
-    Response,
-    Headers
+    Response
 )
 import datetime
 import mimetypes
@@ -522,7 +521,7 @@ def get_inventory_excel_for_bw():
     file_name = 'carculator_inventory_export_{}.xlsx'.format(
         str(datetime.date.today()))
     mimetype_tuple = mimetypes.guess_type(file_name)
-    response_headers = Headers({
+    response_headers = {
         'Pragma': "public",  # required,
         'Expires': '0',
         'Cache-Control': 'must-revalidate, post-check=0, pre-check=0',
@@ -531,7 +530,7 @@ def get_inventory_excel_for_bw():
         'Content-Disposition': 'attachment; filename=\"%s\";' % file_name,
         'Content-Transfer-Encoding': 'binary',
         'Content-Length': len(response.data)
-    })
+    }
 
     if not mimetype_tuple[1] is None:
         response.update({
