@@ -113,12 +113,20 @@ def tool_page(country):
     if country is None:
         config = {"config": "false"}
     else:
-        response = (
-            app.calc.electricity_mix.loc[dict(country=country,
-            variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
-            .interp(year=[2010, 2020, 2035, 2050])
-            .values
-        )
+        try:
+            response = (
+                app.calc.electricity_mix.loc[dict(country=country,
+                variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+                .interp(year=[2010, 2020, 2035, 2050])
+                .values
+            )
+        except KeyError:
+            response = (
+                app.calc.electricity_mix.loc[dict(country='RER',
+                variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+                .interp(year=[2010, 2020, 2035, 2050])
+                .values
+            )
         response = np.round(
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()

@@ -348,6 +348,12 @@ class Calculation:
         task.progress = 70
         db.session.commit()
 
+        if lang is None:
+            lang="en"
+
+        if lang not in ['en', 'fr', 'de', 'it']:
+            lang='en'
+
         if lang == "en":
             powertrain = [
                 self.d_rev_pt_en[pt] for pt in cost.coords["powertrain"].values.tolist()
@@ -381,6 +387,8 @@ class Calculation:
             cost_category = [
                 self.d_rev_cost_de[c] for c in cost.coords["cost_type"].values.tolist()
             ]
+
+
 
         arr_benchmark = []
         dict_scatter = defaultdict(list)
