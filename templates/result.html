@@ -80,6 +80,11 @@
 					  <a class="navbar-brand" href="#"><img src="/static/images/mediumsmall.png" style="height:40px;float:left;"></a>
 
 					{% if current_user.is_anonymous %}
+						<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:10px;margin-left:10px;"></i>
+						<form action="/get_inventory_excel_for_bw" style="display:inline-block;float:right;;">
+							<button class="online-button"
+									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
+                      	</form>
 						<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin-top:5px;">
 							<button class="online-button"
 									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;
