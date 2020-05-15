@@ -461,12 +461,14 @@ def get_job_status(job_key):
         job = Job.fetch(job_key, connection=conn)
     except NoSuchJobError:
         response = jsonify({"job status": "job not found"})
+        print('NO SUCH JOB {}'.format(job_key))
         return make_response(response, 404)
 
     try:
         progress_status = Task.query.filter_by(id=job_key).first().progress
     except:
         response = jsonify({"job status": "failed"})
+        print('JOB FAIL {}'.format(job_key))
         return make_response(response, 404)
 
 
