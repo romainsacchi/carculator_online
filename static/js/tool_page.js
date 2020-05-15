@@ -1690,7 +1690,7 @@ function get_results(){
 
             iterations++;
             // Stop asking if it takes more than a minute
-            if (iterations >= 20){
+            if (iterations >= 60){
                 clearInterval(interval);
                 var str = i18n('job_lost')
                         $.notify({
