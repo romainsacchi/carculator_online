@@ -670,12 +670,21 @@ class Calculation:
         if "custom electricity mix" not in new_dict[("Background",)]:
             years =  new_dict[("Functional unit",)]["year"]
             country = new_dict[("Background",)]["country"]
-            response = (
-                self.electricity_mix.loc[dict(country=country,
-            variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
-                .interp(year=years)
-                .values
-            )
+            try:
+                response = (
+                    self.electricity_mix.loc[dict(country=country,
+                variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+                    .interp(year=years)
+                    .values
+                )
+            except KeyError:
+                response = (
+                    self.electricity_mix.loc[dict(country='RER',
+                variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+                    .interp(year=years)
+                    .values
+                )
+
             new_dict[("Background",)]["custom electricity mix"] = response
 
         # Ensure that the electricity mix split equals 1
