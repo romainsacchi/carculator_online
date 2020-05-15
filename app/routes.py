@@ -101,7 +101,7 @@ def start():
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-@login_required
+#@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -512,7 +512,7 @@ def get_language():
 
 
 @app.route("/get_inventory_excel_for_bw")
-@login_required
+#@login_required
 def get_inventory_excel_for_bw():
 
     response = Response()
