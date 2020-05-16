@@ -291,7 +291,6 @@
 				})();
 
 				if (browser == "safari"){
-					console.log(browser)
 					var redirectWindow = window.open("about:blank", '_blank');
 				};
 
@@ -348,7 +347,7 @@
 									var url = '/display_result/'+job_id;
 
 									if (browser == "safari"){
-										redirectWindow.location=url;
+										redirectWindow.location.assign(url);
 										redirectWindow.location;
 									}else{
 										var redirectWindow = window.open(url, '_blank');
