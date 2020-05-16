@@ -763,9 +763,17 @@ function size_list_update(){
 
             };
 
+            var coll = document.getElementById('collapsible_parameters');
+            coll.addEventListener("click", function() {
 
+                var content = document.getElementById('manufacture_section');
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block";
+                }
+              });
 
-            $("#manufacture_section").attr('style', 'display:block;margin:30px;');
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
