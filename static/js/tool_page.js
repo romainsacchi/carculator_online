@@ -1722,8 +1722,27 @@ function get_results(){
                     if (status['job status'] == 'finished'){
                         old_progress = 0;
                         clearInterval(interval);
-                        var redirectWindow = window.open('/display_result/'+job_id, '_blank');
-                        redirectWindow.location;
+                        var url = '/display_result/'+job_id;
+                        $.notify({
+										icon: 'glyphicon glyphicon-time',
+										message: i18n('link_to_results'),
+										url: url,
+										target: '_blank',
+										},
+										{
+											placement: {
+												from: "top",
+												align: "center"
+											},
+											type:'success',
+											delay:30000
+										},
+										{
+											animate: {
+												enter: 'animated bounceInDown',
+												exit: 'animated bounceOutUp'
+											},
+										});
                         return;
                     }
 

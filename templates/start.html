@@ -211,8 +211,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-
-
 		<script>
 
 		//  Load the JSON File
@@ -274,26 +272,6 @@
 
 					});
 
-				// If Safari
-				var browser = (function() {
-					var test = function(regexp) {
-						return regexp.test(window.navigator.userAgent);
-					}
-					switch (true) {
-						case test(/edg/i): return "edge";
-						case test(/opr/i) && (!!window.opr || !!window.opera): return "opera";
-						case test(/chrome/i) && !!window.chrome: return "chrome";
-						case test(/trident/i): return "ie";
-						case test(/firefox/i): return "firefox";
-						case test(/safari/i): return "safari";
-						default: return "other";
-					}
-				})();
-
-				if (browser == "safari"){
-					var redirectWindow = window.open("about:blank", '_blank');
-				};
-
 				$.when($.ajax({
 							url: "/get_results/",
 							type: 'POST',
@@ -346,13 +324,26 @@
 									old_progress = 0;
 									var url = '/display_result/'+job_id;
 
-									if (browser == "safari"){
-										redirectWindow.location.assign(url);
-										redirectWindow.location;
-									}else{
-										var redirectWindow = window.open(url, '_blank');
-										redirectWindow.location;
-									};
+									$.notify({
+										icon: 'glyphicon glyphicon-time',
+										message: i18n('link_to_results'),
+										url: url,
+										target: '_blank',
+										},
+										{
+											placement: {
+												from: "top",
+												align: "center"
+											},
+											type:'success',
+											delay:30000
+										},
+										{
+											animate: {
+												enter: 'animated bounceInDown',
+												exit: 'animated bounceOutUp'
+											},
+										});
 
 									clearInterval(interval);
 									return;
