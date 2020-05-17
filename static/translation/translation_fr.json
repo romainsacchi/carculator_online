@@ -20,6 +20,7 @@
       "missing_country":"Le pays pour lequel conduire cette analyse est manquant.",
       "mix_1":"Il semblerait que le mix électrique pour ",
       "mix_2":" ne soit pas égale à 100%.",
+      "country_not_found": "Nous n'avons pu détecter le pays pour lequel faire l'analyse. Patientez quelques secondes et essayer à nouveau.",
       "job_queued":"Votre analyse va être traitée. Une nouvelle notification vous fournira un lien vers la page des résultats. Cela peut prendre jusqu'à une minute. Veuillez ne pas fermer cette fenêtre.",
       "link_to_results": "Cliquez sur cette notification afin d'être redirigé vers la page des résultats.",
       "job_lost":"Il semblerait que votre analyse ait été interrompue. Nous vous suggérons de la lancer une nouvelle fois. Si toutefois le problème persiste, contactez-nous.",

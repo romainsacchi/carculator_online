@@ -244,6 +244,34 @@
 
 			function get_results(){
 				var country = $("#country").html();
+
+				if (country == ""){
+
+					var str = i18n("country_not_found")
+
+					$.notify({
+					icon: '	glyphicon glyphicon-warning',
+					message: str
+					}
+					,
+					{
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						type:'warning'
+					},
+					{
+						animate: {
+							enter: 'animated bounceInDown',
+							exit: 'animated bounceOutUp'
+						},
+
+					});
+
+					return
+
+				};
 				var data = {"year":["2020","2035", "2050"], "type":[i18n('petrol'), i18n('diesel'), i18n('electric')],
 								"size":[i18n('medium')], "driving_cycle":"WLTC",
 								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",

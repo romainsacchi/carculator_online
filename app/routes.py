@@ -131,6 +131,7 @@ def tool_page(country):
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()
 
+
         region = app.calc.region_map[country][
                     "RegionCode"
                 ]

@@ -20,6 +20,7 @@
       "missing_country":"It seems that the country for which to conduct the analysis is missing.",
       "mix_1":"It seems that the electricity mix for ",
       "mix_2":" is not equal to 100 percent.",
+      "country_not_found": "We have not been able to detect the country to run the analysis for. Please wait a few seconds and try again.",
       "job_queued":"Your job has been queued. A new notification will provide you with a link to the results page. This may take up to one minute. Do not close this tab.",
       "link_to_results": "Click on this notification to be redirected to the results page.",
       "job_lost":"It seems your job has been lost. We suggest you start the calculation again. If the issue persists, please contact us.",
