@@ -117,14 +117,14 @@ def tool_page(country):
             response = (
                 app.calc.electricity_mix.loc[dict(country=country,
                 variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
-                .interp(year=[2010, 2020, 2035, 2050])
+                .interp(year=[2020, 2035, 2050])
                 .values
             )
         except KeyError:
             response = (
                 app.calc.electricity_mix.loc[dict(country='RER',
                 variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
-                .interp(year=[2010, 2020, 2035, 2050])
+                .interp(year=[2020, 2035, 2050])
                 .values
             )
         response = np.round(
@@ -141,12 +141,12 @@ def tool_page(country):
                 fuel_type='Biomass fuel',
                 scenario='SSP2-Base',
             )
-            .interp(year=[2010, 2020, 2035, 2050])
+            .interp(year=[2020, 2035, 2050])
             .values
         )
 
         config = {
-            "year": ["2010", "2020", "2035", "2050"],
+            "year": ["2020", "2035", "2050"],
             "type": [_("Petrol"), _("Diesel"), _("Electric")],
             "size": [_("Mid-size")],
             "driving_cycle": "WLTC",
