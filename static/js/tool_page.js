@@ -1830,27 +1830,6 @@ function get_results(){
                     })
          }, 3000);
     });
-
-    var str = i18n('popup_blocker')
-    $.notify({
-        icon: 'glyphicon glyphicon-time',
-        message: str
-        }
-        ,
-        {
-            placement: {
-                from: "top",
-                align: "center"
-            },
-            type:'warning'
-        },
-        {
-            animate: {
-                enter: 'animated bounceInDown',
-                exit: 'animated bounceOutUp'
-            },
-
-        });
 };
 
 function set_mix_to_zero(){

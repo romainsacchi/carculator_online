@@ -66,6 +66,42 @@ class Calculation:
             "Hybride-essence rechargeable": "PHEV-p",
             "Hybride-diesel rechargeable": "PHEV-d",
         }
+        self.d_pt_all={
+            "Petrol": "ICEV-p",
+            "Diesel": "ICEV-d",
+            "CNG": "ICEV-g",
+            "Electric": "BEV",
+            "Fuel cell": "FCEV",
+            "Hybrid-petrol": "HEV-p",
+            "Hybrid-diesel": "HEV-d",
+            "(Plugin) Hybrid-petrol": "PHEV-p",
+            "(Plugin) Hybrid-diesel": "PHEV-d",
+            "Benzina": "ICEV-p",
+            "Gas compresso": "ICEV-g",
+            "Elettrica": "BEV",
+            "Cella a combustibile": "FCEV",
+            "Ibrido benzina": "HEV-p",
+            "Ibrido diesel": "HEV-d",
+            "Ibrido-benzina (Plugin)": "PHEV-p",
+            "Ibrido-diesel (Plugin)": "PHEV-d",
+            "Benzin": "ICEV-p",
+            "Komprimiertes Gas": "ICEV-g",
+            "Elektrisch": "BEV",
+            "Brennstoffzelle": "FCEV",
+            "Hybrid-Benzin": "HEV-p",
+            "Hybrid-Diesel": "HEV-d",
+            "(Plugin) Hybrid-Benzin": "PHEV-p",
+            "(Plugin) Hybrid-Diesel": "PHEV-d",
+            "Essence": "ICEV-p",
+            "Gaz comprimé": "ICEV-g",
+            "Electrique": "BEV",
+            "Pile à combustible": "FCEV",
+            "Hybride-essence": "HEV-p",
+            "Hybride-diesel": "HEV-d",
+            "Hybride-essence rechargeable": "PHEV-p",
+            "Hybride-diesel rechargeable": "PHEV-d"
+        }
+
         self.d_size_en = {
             "Minicompact": "Mini",
             "Subcompact": "Small",
@@ -103,6 +139,32 @@ class Calculation:
             "Oberklasse": "Large",
             "Geländewagen": "SUV",
             "Van": "Van",
+        }
+
+        self.d_size_all={
+            "Minicompact": "Mini",
+            "Subcompact": "Small",
+            "Compact": "Lower medium",
+            "Mid-size": "Medium",
+            "Large": "Large",
+            "SUV": "SUV",
+            "Van": "Van",
+            "Mini-citadine": "Mini",
+            "Citadine": "Small",
+            "Berline compacte": "Lower medium",
+            "Berline familiale": "Medium",
+            "Grande routière": "Large",
+            "Mini citycar": "Mini",
+            "Citycar": "Small",
+            "Berlina compatta": "Lower medium",
+            "Berlina medio-grande": "Medium",
+            "Berlina tre volumi": "Large",
+            "Kleinstwagen": "Mini",
+            "Kleinwagen": "Small",
+            "Kompaktklasse": "Lower medium",
+            "Mittelklasse": "Medium",
+            "Oberklasse": "Large",
+            "Geländewagen": "SUV"
         }
 
         self.d_impact_en = {
@@ -637,36 +699,11 @@ class Calculation:
         }
         new_dict = {}
 
-        if lang not in ['en', 'fr', 'it', 'de']:
-            lang='en'
-
-        if lang == "en":
-            new_dict[("Functional unit",)] = {
-                "powertrain": [self.d_pt_en[x] for x in raw_dict["type"]],
+        new_dict[("Functional unit",)] = {
+                "powertrain": [self.d_pt_all[x] for x in raw_dict["type"]],
                 "year": [int(x) for x in raw_dict["year"]],
-                "size": [self.d_size_en[s] for s in raw_dict["size"]],
+                "size": [self.d_size_all[s] for s in raw_dict["size"]],
             }
-        if lang == "fr":
-            new_dict[("Functional unit",)] = {
-                "powertrain": [self.d_pt_fr[x] for x in raw_dict["type"]],
-                "year": [int(x) for x in raw_dict["year"]],
-                "size": [self.d_size_fr[s] for s in raw_dict["size"]],
-            }
-
-        if lang == "it":
-            new_dict[("Functional unit",)] = {
-                "powertrain": [self.d_pt_it[x] for x in raw_dict["type"]],
-                "year": [int(x) for x in raw_dict["year"]],
-                "size": [self.d_size_it[s] for s in raw_dict["size"]],
-            }
-
-        if lang == "de":
-            new_dict[("Functional unit",)] = {
-                "powertrain": [self.d_pt_de[x] for x in raw_dict["type"]],
-                "year": [int(x) for x in raw_dict["year"]],
-                "size": [self.d_size_de[s] for s in raw_dict["size"]],
-            }
-
 
         f_d = {}
         new_dict[("Driving cycle",)] = raw_dict["driving_cycle"]
@@ -676,8 +713,8 @@ class Calculation:
 
         # Ensure that the electricity mix is present
         if "custom electricity mix" not in new_dict[("Background",)]:
-            years =  new_dict[("Functional unit",)]["year"]
-            country = new_dict[("Background",)]["country"]
+            years= new_dict[("Functional unit",)]["year"]
+            country= new_dict[("Background",)]["country"]
             try:
                 response = (
                     self.electricity_mix.loc[dict(country=country,
@@ -710,18 +747,8 @@ class Calculation:
                 k = tuple(k.split(","))
                 name = k[0]
                 cat = self.d_categories[name]
-                if lang == "en":
-                    powertrain = self.d_pt_en[k[1]]
-                    size = self.d_size_en[k[2]]
-                if lang == "de":
-                    powertrain = self.d_pt_de[k[1]]
-                    size = self.d_size_de[k[2]]
-                if lang == "fr":
-                    powertrain = self.d_pt_fr[k[1]]
-                    size = self.d_size_fr[k[2]]
-                if lang == "it":
-                    powertrain = self.d_pt_it[k[1]]
-                    size = self.d_size_it[k[2]]
+                powertrain = self.d_pt_all[k[1]]
+                size = self.d_size_all[k[2]]
                 val = [float(n) for n in v] * len(new_dict[("Functional unit",)]["year"])
 
             d_val = {
