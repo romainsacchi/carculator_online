@@ -112,6 +112,7 @@ def tool_page(country):
 
     if country is None:
         config = {"config": "false"}
+
     else:
         try:
             response = (
@@ -131,10 +132,12 @@ def tool_page(country):
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()
 
-
-        region = app.calc.region_map[country][
-                    "RegionCode"
-                ]
+        try:
+            region = app.calc.region_map[country][
+                        "RegionCode"
+                    ]
+        except KeyError:
+            region = "EUR"
 
         share_biofuel = (
             app.calc.biofuel.sel(
