@@ -803,6 +803,7 @@ class Calculation:
                             "reference product",
                         ],
                     )
+                )
 
                 for e in k["exchanges"]:
                     data.append(
