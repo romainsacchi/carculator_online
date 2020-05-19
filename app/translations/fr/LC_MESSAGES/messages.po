@@ -228,11 +228,11 @@ msgstr "Tous droits réservés"
 
 #: templates/index.html:19
 msgid "Carculator : Home"
-msgstr "Carculator : Acceuil"
+msgstr "Carculator : Accueil"
 
 #: templates/index.html:72
 msgid "Home"
-msgstr "Acceuil"
+msgstr "Accueil"
 
 #: templates/index.html:73
 msgid "About"
@@ -267,7 +267,7 @@ msgid ""
 "Make fast comparisons between different cars, under different scenarios. "
 "Save and export your results. Import them in your model."
 msgstr ""
-"Faites des comparisons rapides entre véhicules de différentes catégories,"
+"Faites des comparaisons rapides entre véhicules de différentes catégories,"
 " soumis à des scénarios énergétiques distincts. Sauvegardez et exportez "
 "vos résultats. Importez-les dans votre propre modèle."
 
@@ -837,7 +837,7 @@ msgid ""
 "\n"
 "\t\t\t\t\t\t\t\t\t\t\tan electricity-run vehicle, for  "
 msgstr ""
-"Directemment accéder aux résultats de la comparaison entre un véhicule "
+"Directement accéder aux résultats de la comparaison entre un véhicule "
 "fonctionnant à l'essence, au diesel et à l'électricité en "
 
 #: templates/start.html:108
