@@ -101,7 +101,7 @@ def start():
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-#@login_required
+@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -528,7 +528,7 @@ def get_language():
 
 
 @app.route("/get_inventory_excel_for_bw")
-#@login_required
+@login_required
 def get_inventory_excel_for_bw():
 
     response = Response()
@@ -553,14 +553,7 @@ def get_inventory_excel_for_bw():
             'Content-Encoding': mimetype_tuple[1]
         })
     response.headers = response_headers
-    #response.set_cookie('fileDownload', 'true', path='/')
     return response
-
-    #resp = make_response(app.lci_to_bw)
-    #resp.headers["Content-Disposition"] = "attachment; filename=inventory.xlsx"
-    #resp.headers["Content-type"] = "text/csv"
-    #return resp
-
 
 @app.route("/get_param_table")
 def get_param_table():
