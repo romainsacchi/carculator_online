@@ -19,9 +19,9 @@ import mimetypes
 from .email_support import email_out
 import numpy as np
 import os
-from rq import Queue
-from rq.job import Job, NoSuchJobError
-from .worker import conn
+#from rq import Queue
+#from rq.job import Job, NoSuchJobError
+#from .worker import conn
 from .calculation import Calculation
 from flask_babel import _
 from flask_login import current_user, login_user, logout_user, login_required
@@ -34,7 +34,6 @@ app.calc = Calculation()
 app.lci_to_bw = ""
 
 progress_status = 0
-
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

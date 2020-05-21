@@ -1006,6 +1006,7 @@ var map = AmCharts.makeChart("chartdiv", {
         {"id":"IE"},
         {"id":"IN"},
         {"id":"IT"},
+        {"id":"IS"},
         {"id":"JP"},
         {"id":"LT"},
         {"id":"LU"},

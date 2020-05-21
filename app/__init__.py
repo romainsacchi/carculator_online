@@ -7,6 +7,7 @@ from flask_login import LoginManager
 import logging
 from logging.handlers import SMTPHandler
 import os
+from .version import __version__
 
 ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online");
 TEMPLATES_DIR = os.path.join(ROOT, "templates")
@@ -17,6 +18,9 @@ MIGRATION_DIR = os.path.join(ROOT, "migrations")
 app = Flask(__name__,
             template_folder="../templates",
             static_folder="../static")
+
+# app version
+app.version = __version__
 
 # Setup flask-babel
 babel = Babel(app)

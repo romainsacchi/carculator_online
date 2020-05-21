@@ -70,6 +70,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+.ipynb
 
 # pyenv
 .python-version
@@ -100,3 +101,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+#user data
+extract_users.py
+users_extract.csv

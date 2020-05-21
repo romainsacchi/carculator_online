@@ -80,17 +80,16 @@
 					  <a class="navbar-brand" href="#"><img src="/static/images/mediumsmall.png" style="height:40px;float:left;"></a>
 
 					{% if current_user.is_anonymous %}
-						<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:10px;margin-left:10px;"></i>
-						<form action="/get_inventory_excel_for_bw" style="display:inline-block;float:right;;">
-							<button class="online-button"
-									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
-                      	</form>
+
 						<form action="{{ url_for('login') }}" style="display:inline-block;float:right;margin-top:5px;">
 							<button class="online-button"
 									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;
 									display:inline-block;margin: 0 auto !important;">{{ _('Login') }}</button>
 						  </form>
+
 					{% else %}
+
+
 						<form action="{{ url_for('logout') }}" style="display:inline-block;float:right;margin-top:5px;">
 						<button class="online-button"
 								style="margin:5px;background-color:transparent;color:white;border:1px solid white;
@@ -98,13 +97,22 @@
 					  </form>
 					<h4 style="color:white;display:inline-block;float:right;margin-right:10px;font-family:inherit;font-weight:500;line-height:1.1;margin-top:10px;"> {{ current_user.username }}</h4>
 					<i class="icon-user" style="color:white;font-size:20px;float:right;display:inline-block;margin-right:10px;margin-top:10px;margin-left:10px;"></i>
-						<form action="/get_inventory_excel_for_bw" style="display:inline-block;float:right;;">
+
+					{% endif %}
+
+					<button class="online-button"
+								style="float:right;margin-left:5px;margin-right:5px;margin-top:0px;background-color:transparent;color:white;border:1px solid white;"
+								onclick=" window.open('https://carculator.readthedocs.io/en/latest/modeling.html', '_blank'); return false;">{{ _('Modeling and assumptions') }}
+					</button>
+
+					<form action="/get_inventory_excel_for_bw" style="display:inline-block;float:right;">
 							<button class="online-button"
 									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
-                      	</form>
-					{% endif %}
-                         <button class="online-button" onclick="share_results()"
-                              style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Share results') }}</button>
+					</form>
+
+					 <button class="online-button" onclick="share_results()"
+						  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Share results') }}
+					 </button>
 			</div>
 		</nav>
 		</div>
@@ -153,7 +161,7 @@
 								<br>Sacchi R., Bauer C., Cox B., Mutel C.
 									<br>Submitted to Renewable and Sustainable Energy Reviews. In review. <a target='_blank' href="https://www.psi.ch/en/media/57994/download"><u>Article (PDF)</u></a>.
 								<br>
-								<br><i>carculator online (1.0.0), carculator (1.0.5)</i>
+								<br><i>carculator online (1.0.1), carculator (1.0.6)</i>
 								</p>
 							</div>
                 		</div>

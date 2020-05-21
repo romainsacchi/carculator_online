@@ -4,10 +4,10 @@ asteval==0.9.15
 astroid==2.3.1
 astunparse==1.6.2
 Babel==2.7.0
-bw2calc==1.7.8
-bw2data==3.6.2
-bw2io==0.7.11.3
-bw2parameters==0.6.6
+bw2calc
+bw2data
+bw2io
+bw2parameters
 -e git+https://github.com/romainsacchi/carculator#egg=carculator
 certifi==2019.9.11
 chardet==3.0.4
