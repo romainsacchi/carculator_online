@@ -81,3 +81,4 @@ flask-login
 flask-wtf
 WTForms
 pycountry
+email-validator
