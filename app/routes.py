@@ -428,7 +428,7 @@ def get_results():
     job = q.enqueue_call(
         func=app.calc.process_results,
         args=(d, lang, job_id),
-        result_ttl=360,
+        result_ttl=3600,
         job_id=job_id,
     )
 
