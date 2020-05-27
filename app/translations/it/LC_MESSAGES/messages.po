@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-23 12:27+0200\n"
+"POT-Creation-Date: 2020-05-26 20:02+0200\n"
 "PO-Revision-Date: 2019-10-17 13:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: it\n"
@@ -97,71 +97,72 @@ msgstr "Congratulazioni, ora sei un utente registrato!"
 msgid "Invalid username or password"
 msgstr "Nome utente o password non validi"
 
-#: app/routes.py:153 app/routes.py:192
+#: app/routes.py:153 app/routes.py:197 app/routes.py:222
 msgid "Petrol"
 msgstr "Benzina"
 
-#: app/routes.py:153 app/routes.py:193
+#: app/routes.py:153 app/routes.py:203 app/routes.py:223
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:153 app/routes.py:195
+#: app/routes.py:153 app/routes.py:209 app/routes.py:225
 msgid "Electric"
 msgstr "Elettrica"
 
-#: app/routes.py:154 app/routes.py:206
+#: app/routes.py:154 app/routes.py:186 app/routes.py:198 app/routes.py:204
+#: app/routes.py:210 app/routes.py:236
 msgid "Mid-size"
 msgstr "Berlina medio-grande"
 
-#: app/routes.py:194
+#: app/routes.py:224
 msgid "CNG"
 msgstr "Gas compresso"
 
-#: app/routes.py:196
+#: app/routes.py:226
 msgid "Fuel cell"
 msgstr "Cella a combustibile"
 
-#: app/routes.py:197
+#: app/routes.py:227
 msgid "Hybrid-petrol"
 msgstr "Ibrido benzina"
 
-#: app/routes.py:198
+#: app/routes.py:228
 msgid "Hybrid-diesel"
 msgstr "Ibrido diesel"
 
-#: app/routes.py:199
+#: app/routes.py:229
 msgid "(Plugin) Hybrid-petrol"
 msgstr "Ibrido-benzina (Plugin)"
 
-#: app/routes.py:200
+#: app/routes.py:230
 msgid "(Plugin) Hybrid-diesel"
 msgstr "Ibrido-diesel (Plugin)"
 
-#: app/routes.py:203
+#: app/routes.py:233
 msgid "Minicompact"
 msgstr "Mini citycar"
 
-#: app/routes.py:204
+#: app/routes.py:234
 msgid "Subcompact"
 msgstr "Citycar"
 
-#: app/routes.py:205
+#: app/routes.py:235
 msgid "Compact"
 msgstr "Berlina compatta"
 
-#: app/routes.py:207
+#: app/routes.py:237
 msgid "Large"
 msgstr "Berlina tre volumi"
 
-#: app/routes.py:208
+#: app/routes.py:238
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:209
+#: app/routes.py:239
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:393
+#: app/routes.py:413
 msgid "Email sent!"
 msgstr "Email inviata!"
 
@@ -209,21 +210,21 @@ msgstr ""
 "Verrete reindirizzati ad una pagina dove potrete eseguire un nuovo "
 "calcolo."
 
-#: templates/404.html:136 templates/index.html:1032 templates/login.html:114
+#: templates/404.html:136 templates/index.html:1033 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:366 templates/start.html:187 templates/tool.html:815
+#: templates/result.html:366 templates/start.html:187 templates/tool.html:945
 msgid "Copyright"
 msgstr "Diritti d’autore"
 
-#: templates/404.html:136 templates/index.html:1032 templates/login.html:114
+#: templates/404.html:136 templates/index.html:1033 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:366 templates/start.html:187 templates/tool.html:815
+#: templates/result.html:366 templates/start.html:187 templates/tool.html:945
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/404.html:137 templates/index.html:1033 templates/login.html:115
+#: templates/404.html:137 templates/index.html:1034 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:367 templates/start.html:188 templates/tool.html:816
+#: templates/result.html:367 templates/start.html:188 templates/tool.html:946
 msgid "All rights reserved"
 msgstr "Tutti i diritti sono riservati"
 
@@ -275,35 +276,33 @@ msgstr ""
 msgid "Try it out now!"
 msgstr "Provalo adesso!"
 
-#: templates/index.html:166
+#: templates/index.html:167
 msgid "or"
 msgstr "oppure"
 
-#: templates/index.html:174
+#: templates/index.html:175
 msgid "Install"
 msgstr "Installa"
 
-#: templates/index.html:179
+#: templates/index.html:180
 msgid ""
 "Make detailed or fleet-wide analyses. Perform sensitivity and uncertainty"
 " analyses. Use results in other Python libraries. Export your inventories"
 " directly into Brightway2."
 msgstr ""
-"Effettuare analisi dettagliate e calcoli "
-"a livello di flotta. Eseguire analisi"
-" di sensibilità e di incertezza. "
-"Collegare i vostri modelli ad altre "
-"librerie Python."
+"Effettuare analisi dettagliate e calcoli a livello di flotta. Eseguire "
+"analisi di sensibilità e di incertezza. Collegare i vostri modelli ad "
+"altre librerie Python."
 
-#: templates/index.html:191
+#: templates/index.html:192
 msgid "requires python >=3.6"
 msgstr "richiede python >=3.6"
 
-#: templates/index.html:235
+#: templates/index.html:236
 msgid "ABOUT"
 msgstr ""
 
-#: templates/index.html:241
+#: templates/index.html:242
 msgid ""
 "is an open-source, comprehensive and transparent life cycle assessment "
 "tool for passenger cars. It allows for an economic and environmental "
@@ -315,149 +314,149 @@ msgstr ""
 "ambientale di tipi differenti di vetture in diversi scenari di guida e "
 "approvvigionamento energetico."
 
-#: templates/index.html:242
+#: templates/index.html:243
 msgid "Results partly rely on the background inventory data of "
 msgstr "I risultati si basano in parte sui dati dell'inventario di base di "
 
-#: templates/index.html:242
+#: templates/index.html:243
 msgid " and the implementation of impact assessment methods therein."
 msgstr " e sull'implementazione dei metodi di valutazione dell'impatto."
 
-#: templates/index.html:258
+#: templates/index.html:259
 msgid "Unmute"
 msgstr "Attiva l'audio"
 
-#: templates/index.html:344
+#: templates/index.html:345
 msgid "Clean Code"
 msgstr ""
 
-#: templates/index.html:345
+#: templates/index.html:346
 msgid "The code is kept as clean and accessible as possible."
 msgstr "Il codice è tenuto il più “pulito” e accessibile possibile."
 
-#: templates/index.html:356
+#: templates/index.html:357
 msgid "Great Features"
 msgstr "Molte funzionalità"
 
-#: templates/index.html:357
+#: templates/index.html:358
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr "Analisi del ciclo di vita veloci e completamente parametrizzate."
 
-#: templates/index.html:368
+#: templates/index.html:369
 msgid "Fast Library"
 msgstr "Libreria efficiente"
 
-#: templates/index.html:369
+#: templates/index.html:370
 msgid "A Python library version allows for even more specific assessments."
 msgstr "Una libreria Python che offre valutazioni ancora più specifiche."
 
-#: templates/index.html:380
+#: templates/index.html:381
 msgid "Compatible"
 msgstr "Compatibile"
 
-#: templates/index.html:381
+#: templates/index.html:382
 msgid "Export inventories compatible with"
 msgstr "Consente di esportare inventari compatibili con "
 
-#: templates/index.html:394
+#: templates/index.html:395
 msgid "State-of-the-art"
 msgstr "Stato dell’arte"
 
-#: templates/index.html:395
+#: templates/index.html:396
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 "Si affida ad inventari recentemente pubblicati per modellare le catene "
 "energetiche."
 
-#: templates/index.html:406
+#: templates/index.html:407
 msgid "Well Documented"
 msgstr "Ben documentato "
 
-#: templates/index.html:407
+#: templates/index.html:408
 msgid "The library is fully tested, documented and hosted on"
 msgstr "La libreria è interamente testata, documentata e disponibile su"
 
-#: templates/index.html:432
+#: templates/index.html:433
 msgid "Some facts about"
 msgstr "Alcune informazioni riguardo"
 
-#: templates/index.html:447
+#: templates/index.html:448
 msgid "Powertrains"
 msgstr "Motopropulsori"
 
-#: templates/index.html:460
+#: templates/index.html:461
 msgid "Size classes"
 msgstr "Classi di dimensione"
 
-#: templates/index.html:473
+#: templates/index.html:474
 msgid "Driving cycles"
 msgstr "Cicli di guida"
 
-#: templates/index.html:486
+#: templates/index.html:487
 msgid "Parameters"
 msgstr "Parametri"
 
-#: templates/index.html:499
+#: templates/index.html:500
 msgid "Li-ion battery types"
 msgstr "Tipologie di batterie Li-ion"
 
-#: templates/index.html:512
+#: templates/index.html:513
 msgid "Electricity mixes for battery charging"
 msgstr "Miscele di elettricità per la ricarica della batteria"
 
-#: templates/index.html:524
+#: templates/index.html:525
 msgid "Time horizons"
 msgstr "Orizzonti temporali"
 
-#: templates/index.html:537
+#: templates/index.html:538
 msgid "Cars used for calibration"
 msgstr "Vetture usate per la calibrazione"
 
-#: templates/index.html:561
+#: templates/index.html:562
 msgid "OUR TEAM"
 msgstr "Il nostro team"
 
-#: templates/index.html:563
+#: templates/index.html:564
 msgid "The team behind the development of"
 msgstr "Il team che si è occupato dello sviluppo del"
 
-#: templates/index.html:563
+#: templates/index.html:564
 msgid "sits at the Paul Scherrer Institute, in the "
 msgstr "ha sede al Paul Scherrer Institute, presso il "
 
-#: templates/index.html:588
+#: templates/index.html:589
 msgid "Pilot"
 msgstr "Pilota"
 
-#: templates/index.html:613
+#: templates/index.html:614
 msgid "Pit-stop manager"
 msgstr "Manager del pit-stop"
 
-#: templates/index.html:631
+#: templates/index.html:632
 msgid "Designer (now at INFRAS)"
 msgstr "Designer (ora a INFRAS)"
 
-#: templates/index.html:657
+#: templates/index.html:658
 msgid "Engine specialist"
 msgstr "Specialista di motori"
 
-#: templates/index.html:681
+#: templates/index.html:682
 msgid "Chief Aerodynamicist"
 msgstr "Capo aerodinamico"
 
-#: templates/index.html:702
+#: templates/index.html:703
 msgid "Mechanic"
 msgstr "Meccanico"
 
-#: templates/index.html:727
+#: templates/index.html:728
 msgid "OUR PARTNERS"
 msgstr "I nostri partner"
 
-#: templates/index.html:729
+#: templates/index.html:730
 msgid "carculator was developed within the "
 msgstr "carculator è stato sviluppato all’interno del "
 
-#: templates/index.html:730
+#: templates/index.html:731
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
@@ -465,56 +464,56 @@ msgstr ""
 "fondato da innosuisse. Abbiamo ricevuto finanziamenti supplementari "
 "tramite i progetti di ricerca "
 
-#: templates/index.html:732 templates/index.html:734
+#: templates/index.html:733 templates/index.html:735
 msgid "and "
 msgstr "e "
 
-#: templates/index.html:733
+#: templates/index.html:734
 msgid "as well as "
 msgstr ", così come "
 
-#: templates/index.html:793
+#: templates/index.html:794
 msgid "Publications on"
 msgstr "Pubblicazioni sul tema della "
 
-#: templates/index.html:793
+#: templates/index.html:794
 msgid "mobility"
 msgstr "mobilità"
 
-#: templates/index.html:950
+#: templates/index.html:951
 msgid "CONTACT"
 msgstr "Contattaci"
 
-#: templates/index.html:950
+#: templates/index.html:951
 msgid "US"
 msgstr " "
 
-#: templates/index.html:952
+#: templates/index.html:953
 msgid "We are always happy to hear from you."
 msgstr "Siamo sempre felici di ricevere la vostra opinione"
 
-#: templates/index.html:965 templates/param_table.html:78
-#: templates/tool.html:385
+#: templates/index.html:966 templates/param_table.html:78
+#: templates/tool.html:785
 msgid "Name"
 msgstr "Nome"
 
-#: templates/index.html:969
+#: templates/index.html:970
 msgid "Enter Email"
 msgstr "Inserisci email"
 
-#: templates/index.html:973
+#: templates/index.html:974
 msgid "Message"
 msgstr "Lascia il tuo messaggio"
 
-#: templates/index.html:976
+#: templates/index.html:977
 msgid "SUBMIT"
 msgstr "Inviare"
 
-#: templates/index.html:983
+#: templates/index.html:984
 msgid "carculator support"
 msgstr "Domande su carculator"
 
-#: templates/index.html:984
+#: templates/index.html:985
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr "Scrivici se hai domande sullo strumento, sui metodi usati o sui risultati."
 
@@ -538,27 +537,27 @@ msgstr "Carculator : Parametri"
 msgid "PARAMETERS"
 msgstr "PARAMETRI"
 
-#: templates/param_table.html:77 templates/tool.html:384
+#: templates/param_table.html:77 templates/tool.html:784
 msgid "Importance"
 msgstr "Importanza"
 
-#: templates/param_table.html:79 templates/tool.html:386
+#: templates/param_table.html:79 templates/tool.html:786
 msgid "Description"
 msgstr "Descrizione"
 
-#: templates/param_table.html:80 templates/tool.html:387
+#: templates/param_table.html:80 templates/tool.html:787
 msgid "Unit"
 msgstr "Unità"
 
-#: templates/param_table.html:81 templates/tool.html:388
+#: templates/param_table.html:81 templates/tool.html:788
 msgid "Source"
 msgstr "Riferimento"
 
-#: templates/param_table.html:82 templates/tool.html:389
+#: templates/param_table.html:82 templates/tool.html:789
 msgid "Applies to powertrain"
 msgstr "Si applica al gruppo propulsore"
 
-#: templates/param_table.html:83 templates/tool.html:390
+#: templates/param_table.html:83 templates/tool.html:790
 msgid "Applies to size"
 msgstr "Si applica alle dimensioni"
 
@@ -1032,19 +1031,462 @@ msgstr "Scelta"
 msgid "Selection"
 msgstr "Selezione"
 
-#: templates/tool.html:300
-msgid "CAR PARAMETERS"
-msgstr "PARAMETRI DEI VEICOLI"
+#: templates/tool.html:302
+msgid "USE"
+msgstr "USO"
 
-#: templates/tool.html:300
+#: templates/tool.html:306
+msgid ""
+"This section defines parameters concerned with the use phase of the "
+"vehicles."
+msgstr ""
+"Questa sezione definisce i parametri relativi alla fase di utilizzo dei "
+"veicoli."
+
+#: templates/tool.html:307
+msgid ""
+"The model needs to know the driving cycle of the vehicles (i.e., the "
+"speed level per\n"
+"\t\t\t\t\t\t\t\t\tsecond of driving, to derive the needs for acceleration"
+" and braking) as well as a\n"
+"\t\t\t\t\t\t\t\t\tfew other things, such as the number of passengers, the"
+" country the vehicles are operated in, etc.<br>\n"
+"\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
+"usual scenarios from energy models."
+msgstr ""
+"Il modello ha bisogno di conoscere il ciclo di guida dei veicoli (cioè il"
+" livello di velocità al secondo di guida, per ricavare le esigenze di "
+"accelerazione e di frenata) così come alcune altre cose, come il numero "
+"di passeggeri, il paese in cui i veicoli sono utilizzati, ecc. I mix di "
+"elettricità proiettati sono basati su scenari di Business-as-usual dai "
+"modelli energetici."
+
+#: templates/tool.html:311
+msgid " For European country, the projections originate the"
+msgstr " Per i paesi europei, le proiezioni provengono dal "
+
+#: templates/tool.html:312
+msgid ""
+"from the European Commission. For African countries, projections "
+"originate the model"
+msgstr ""
+"della Commissione Europea. Per i paesi africani, le proiezioni provengono"
+" dal modello"
+
+#: templates/tool.html:314
+msgid "For other countries, projections are based on the IEA report"
+msgstr "Per gli altri paesi, le proiezioni si basano sul rapporto dell'AIE"
+
+#: templates/tool.html:320
+msgid "Driving cycle"
+msgstr "Ciclo di guida"
+
+#: templates/tool.html:322
+msgid ""
+"Driving cycles are meant to represent real conditions of use of the "
+"vehicle.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tCarculator uses the driving cycle to obtain the"
+" acceleration requirement of the vehicle over time.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
+"driving cycle."
+msgstr ""
+"I cicli di guida rappresentano le reali condizioni di utilizzo del "
+"veicolo. Carculator impiega i cicli di guida al fine di ottenere la "
+"richiesta di accelerazione del veicolo in funzione del tempo. Tutti i "
+"veicoli sono confrontati prendendo come riferimento lo stesso ciclo di "
+"guida."
+
+#: templates/tool.html:329
+msgid "Geographical conditions"
+msgstr "Condizioni geografiche"
+
+#: templates/tool.html:331
+msgid ""
+"The country of use will influence several important parameters in the "
+"life cycle assessment of vehicles.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tFor example, the electricity mix used to charge "
+"batteries of electric vehicles\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will"
+" be selected accordingly."
+msgstr ""
+"Il luogo di utilizzo influenzerà molti parametri importanti dell'analisi "
+"del ciclo di vita dei veicoli. Ad esempio, il mix di elettricità usato "
+"per ricaricare la batteria di un veicolo elettrico, o per produrre "
+"idrogeno attraverso elettrolisi, sará selezionato in base alla nazione "
+"selezionata."
+
+#: templates/tool.html:343
+msgid "Select a driving cycle"
+msgstr "Seleziona un ciclo di guida"
+
+#: templates/tool.html:359
+msgid "Select the country where the vehicles should be operated:"
+msgstr "Seleziona lo Stato dove i veicoli dovrebbero essere utilizzati:"
+
+#: templates/tool.html:369
+msgid "Electricity mix"
+msgstr "Mix energetico"
+
+#: templates/tool.html:371
+msgid ""
+"Electricity mixes will determine the carbon intensity of the electricity "
+"necessary\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tto operate the car during its Use phase. This may"
+" concern, for example, the electricity to charge the battery of an "
+"electric vehicle,\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tbut also the electricity needed to operate the "
+"electrolysis process to produce hydrogen\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
+msgstr ""
+"I mix di elettricitá determineranno le emissioni di carbonio necessarie "
+"ad operare la vettura durante la sua fase di utilizzo. Ció potrebbe "
+"riguardare, ad esempio, l'elettricitá richiesta a ricaricare la batteria "
+"di un veicolo elettrico, ma anche l'elettricitá richiesta alla produzione"
+" di idrogeno."
+
+#: templates/tool.html:377
+msgid "Passengers"
+msgstr "Passeggeri"
+
+#: templates/tool.html:379
+msgid ""
+"Each passenger has a body mass of 75 kilograms. The average number of "
+"passengers per car in Europe is 1.5.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
+"passenger mass, the cargo mass and the curb mass of the vehicle."
+msgstr ""
+"Ciascun passeggero ha una massa corporea di 75 kg. Il numero medio di "
+"passeggeri in Europa é 1.5. La massa di guida corrisponde alla somma "
+"della massa del passeggero, la massa dei bagagli e la massa "
+"dell'abitacolo del veicolo."
+
+#: templates/tool.html:383
+msgid "Lifetime"
+msgstr "Durata"
+
+#: templates/tool.html:385
+msgid ""
+"The total mileage of the car is used to normalize life cycle impacts per "
+"kilometer driven.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tThe annual mileage is used to differentiate "
+"emissions and energy requirement over time, as well as\n"
+"\t\t\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
+msgstr ""
+"Il chilometraggio totale della vettura é usato per normalizzare gli "
+"impatti del ciclo di vita per chilometro di guida."
+
+#: templates/tool.html:395
+msgid ""
+"Projection models suggest the following electricity mixes for the years "
+"selected for the selected country.\n"
+"\t\t\t\t\t\t\t\t\t\t\tYou may modify them."
+msgstr ""
+"I modelli di proiezione suggeriscono i seguenti mix di energia elettrica "
+"per gli anni selezionati per il paese selezionato."
+
+#: templates/tool.html:407
+msgid "Hydro"
+msgstr "Idroelettrico"
+
+#: templates/tool.html:410
+msgid "Nuclear"
+msgstr "Nucleare"
+
+#: templates/tool.html:412
+msgid "Gas"
+msgstr ""
+
+#: templates/tool.html:414
+msgid "Solar"
+msgstr "Solare"
+
+#: templates/tool.html:416
+msgid "Wind"
+msgstr "Eolico"
+
+#: templates/tool.html:418
+msgid "Biomass"
+msgstr "Biomasse"
+
+#: templates/tool.html:420
+msgid "Coal"
+msgstr "Carbone"
+
+#: templates/tool.html:422
+msgid "Oil"
+msgstr "Petrolio"
+
+#: templates/tool.html:424
+msgid "Geothermal"
+msgstr "Geotermia"
+
+#: templates/tool.html:426
+msgid "Waste"
+msgstr "Rifiuti"
+
+#: templates/tool.html:433
+msgid "Set to zero"
+msgstr "Impostare su zero"
+
+#: templates/tool.html:440
+msgid "Adjust the number of passengers"
+msgstr "Modifica il numero di passeggeri"
+
+#: templates/tool.html:450
+msgid "Adjust the cargo mass"
+msgstr "Modifica la massa della merce"
+
+#: templates/tool.html:457
+msgid "Adjust the total mileage"
+msgstr "Aggiusta il chilometraggio totale"
+
+#: templates/tool.html:463
+msgid "Adjust the yearly mileage"
+msgstr "Aggiusta il chilometraggio annuale"
+
+#: templates/tool.html:492
+msgid "TANK-TO-WHEEL EFFICIENCY"
+msgstr ""
+
+#: templates/tool.html:498
+msgid ""
+"This section allows to adjust the tank-to-wheel efficiency of the "
+"vehicles. It represents the fraction of energy provided by the energy "
+"storage unit effectively transmitted to the wheels. "
+msgstr ""
+"Questa sezione permette di regolare l'efficienza del serbatoio a ruota dei veicoli. "
+"Questo tasso di efficienza rappresenta la frazione di energia fornita dall'accumulatore di energia effettivamente trasmessa alle ruote."
+
+#: templates/tool.html:500
+msgid ""
+"The energy storage efficiency for battery electric cars corresponds to "
+"the battery discharge efficiency."
+msgstr ""
+"L'efficienza dell'accumulo di energia per le auto elettriche a batteria corrisponde all'efficienza di scarica della batteria."
+
+#: templates/tool.html:502
+msgid ""
+"The energy storage efficiency for fuel cell cars corresponds to the fuel "
+"cell system efficiency."
+msgstr ""
+"L'efficienza dell'immagazzinamento dell'energia per le auto a celle a combustibile corrisponde all'efficienza del sistema a celle a combustibile."
+
+#: templates/tool.html:516
+msgid "POWERTRAIN EFFICIENCY"
+msgstr "Efficienza del gruppo propulsore"
+
+#: templates/tool.html:525
+msgid "Efficiency rate for"
+msgstr "Tasso di efficienza per"
+
+#: templates/tool.html:528
+msgid "Energy storage efficiency"
+msgstr "Efficienza dell'immagazzinamento dell'energia"
+
+#: templates/tool.html:531
+msgid "Engine efficiency"
+msgstr "Efficienza del motore"
+
+#: templates/tool.html:534
+msgid "Drivetrain efficiency"
+msgstr "Efficienza del sistema di trasmissione"
+
+#: templates/tool.html:537
+msgid "Tank-to-wheel efficiency"
+msgstr "Efficienza Tank-to-wheel"
+
+#: templates/tool.html:565
+msgid "ENERGY STORAGE AND FUEL PATHWAYS"
+msgstr "STOCCAGGIO ENERGETICO E TIPI DI COMBUSTIBILE"
+
+#: templates/tool.html:571
+msgid ""
+"If battery electric or plugin-hybrid vehicles are selected, it is "
+"possible to adjust a few parameters about the battery. The user can "
+"adjust the battery mass. Note that, by default, sixty percent of the mass"
+" is assumed to be taken by the cells. The user can also adjust the energy"
+" density of the battery cells. These two parameters defines a new "
+"capacity for the battery. Note that a heavier battery will increase the "
+"energy consumption of the vehicle."
+msgstr ""
+"Se vengono selezionati veicoli elettrici a batteria, è possibile regolare"
+" alcuni parametri relativi alla batteria. L'utente può regolare la massa "
+"della batteria. Si noti che, per impostazione predefinita, si presume che"
+" le celle prendano il 60 per cento della massa. L'utente può anche "
+"regolare la densità di energia delle celle della batteria. Questi due "
+"parametri definiscono una nuova capacità della batteria. Si noti che una "
+"batteria più pesante aumenterà il consumo di energia del veicolo."
+
+#: templates/tool.html:573
+msgid ""
+"The lifetime of the battery can also be adjusted. If the lifetime is "
+"lower than the lifetime of the vehicle, a battery replacement is needed. "
+"For example, if the battery is expected to last 150,000 km and the "
+"vehicle lifetime is 200,000 km, an additional 0.33 unit of a second "
+"battery will be needed. This assumes that the environmental burden of the"
+" remaining 0.66 unit of the second battery will be allocated to a second-"
+"life application. If you do not like this assumption, you can set the "
+"battery lifetime to be exactly half of that of the vehicle lifetime. This"
+" way, the environmental burden of the second battery will be entirely "
+"allocated to the vehicle."
+msgstr ""
+"Anche la durata della batteria può essere regolata. Se la durata è "
+"inferiore a quella del veicolo, è necessario sostituire la batteria. Ad "
+"esempio, se si prevede che la batteria duri 150.000 km e la durata del "
+"veicolo è di 200.000 km, sarà necessaria un'ulteriore unità di 0,33 di "
+"una seconda batteria. Ciò presuppone che l'onere ambientale della "
+"restante 0,66 unità della seconda batteria sarà assegnato a "
+"un'applicazione di seconda vita. Se questo presupposto non vi piace, "
+"potete impostare la durata della batteria esattamente la metà di quella "
+"del veicolo. In questo modo, il carico ambientale della seconda batteria "
+"sarà interamente assegnato al veicolo."
+
+#: templates/tool.html:575
+msgid ""
+"Finally, the user can select the chemistry and the origin of manufacture "
+"of the battery. The origin of manufacture will set the type of "
+"electricity to manufacture the battery cells."
+msgstr ""
+"Infine, l'utente può selezionare la chimica e l'origine della produzione "
+"della batteria. L'origine della produzione imposterà il tipo di "
+"elettricità per produrre le celle della batteria."
+
+#: templates/tool.html:589
+msgid "ENERGY STORAGE"
+msgstr "ACCUMULO DI ENERGIA"
+
+#: templates/tool.html:598
+msgid "Energy storage for"
+msgstr "Batteria per"
+
+#: templates/tool.html:601
+msgid "Battery mass"
+msgstr "Massa della batteria"
+
+#: templates/tool.html:604
+msgid "Cell energy density"
+msgstr "Densità di energia delle celle"
+
+#: templates/tool.html:607
+msgid "Battery capacity"
+msgstr "Capacità"
+
+#: templates/tool.html:610
+msgid "Battery lifetime"
+msgstr "Durata della vita"
+
+#: templates/tool.html:613
+msgid "Chemistry"
+msgstr "Chimica"
+
+#: templates/tool.html:616
+msgid "Origin"
+msgstr "Origine"
+
+#: templates/tool.html:628
+msgid ""
+"In this section, we define the pathway used to supply fuel for the "
+"vehicles as well as the technology used for on-board energy storage.<br>"
+"\n"
+"\t\t\t\t\t\t\t\t\tThe user can select conventional pathways to represent "
+"the supply and use of common fuels such as diesel\n"
+"\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural gas, but also "
+"alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
+msgstr ""
+"I carburanti alternativi qui presentati sono i cosiddetti carburanti di "
+"'seconda generazione', poiché sono prodotti a partire da materiale "
+"residuo di origine vegetale. Ciò significa che non competono con la "
+"produzione di colture ai fini dell'approvvigionamento alimentare."
+
+#: templates/tool.html:631
+msgid ""
+"The alternative fuels presented here are so-called \"2nd generation\" "
+"fuels, as they are produced from residual plant-based material.\n"
+"\t\t\t\t\t\t\t\t\tThis means that they do not compete with crops "
+"production with the purpose of food supply."
+msgstr ""
+"I carburanti alternativi presentati qui sono i cosiddetti \"2a "
+"generazione \" carburanti, poiché sono prodotti a partire da materiale "
+"residuo vegetale. Questo significa che non competono con i raccolti "
+"produzione ai fini dell'approvvigionamento alimentare."
+
+#: templates/tool.html:633
+msgid ""
+"Additionally, several pathways are presented for the supply of hydrogen "
+"to be used in fuel cell cars.\n"
+"\t\t\t\t\t\t\t\t\tHydrogen can either be produced by electrolysis, which "
+"is a process that requires electricity, or via a process called\n"
+"\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
+"methane to produce hydrogen."
+msgstr ""
+"Inoltre, vengono presentati diversi percorsi per la fornitura di idrogeno"
+" da utilizzare in auto a celle a combustibile. L'idrogeno può essere "
+"prodotto mediante elettrolisi, che è un processo che richiede elettricità"
+" o tramite un processo chiamato \" Steam Methane Reforming \" che "
+"utilizza il vapore e metano per produrre idrogeno."
+
+#: templates/tool.html:637
+msgid ""
+"Regarding energy storage technologies for battery electric vehicles, the "
+"user can choose between several types of lithium-ion-based chemistry\n"
+"\t\t\t\t\t\t\t\t\tbut also between different origins of manufacture. The "
+"origin of battery manufacture will determine the electricity mix used to "
+"produce the battery cells."
+msgstr ""
+"Per quanto riguarda le tecnologie di accumulo dell'energia per veicoli "
+"elettrici a batteria, il l'utente può scegliere tra diversi tipi di "
+"chimica a base di ioni di litio ma anche tra diverse origini di "
+"fabbricazione. Il l'origine della fabbricazione della batteria "
+"determinerà il mix di elettricità utilizzato per produrre le celle della "
+"batteria."
+
+#: templates/tool.html:640
+msgid ""
+"The fuel blend shares presented by default originate different projection"
+" models. They can be modified at will. It is to note however that the "
+"shre of\n"
+"\t\t\t\t\t\t\t\t\talternative fuel in the fuel blend an engine can "
+"operate on, can be, in practice, limited for technical reasons."
+msgstr ""
+"Le quote di miscela di carburante presentate di default danno origine a "
+"diversi modelli di proiezione. Possono essere modificati a piacere. È da "
+"notare, tuttavia, che la quota di carburante alternativo nella miscela di"
+" carburante su cui un motore può funzionare, può essere, in pratica, "
+"limitata per motivi tecnici."
+
+#: templates/tool.html:654
+msgid "FUEL PATHWAYS"
+msgstr "TIPO DI CARBURANTE"
+
+#: templates/tool.html:663
+msgid "Fuel blend for"
+msgstr "Miscela di carburante per"
+
+#: templates/tool.html:666
+msgid "Primary fuel"
+msgstr "Carburante primario"
+
+#: templates/tool.html:669
+msgid "Blend"
+msgstr "Miscela"
+
+#: templates/tool.html:672
+msgid "Secondary fuel"
+msgstr "Carburante secondario"
+
+#: templates/tool.html:700
+msgid "OTHER CAR PARAMETERS"
+msgstr "ALTRI PARAMETRI DELL'AUTO"
+
+#: templates/tool.html:700
 msgid "(Optional, click to expand.)"
 msgstr "(Facoltativo, fare clic per espandere questa sezione.)"
 
-#: templates/tool.html:309
+#: templates/tool.html:709
 msgid "Each car is defined by up to 200 input parameters."
 msgstr "Ogni auto è definita da un massimo di 200 parametri di input."
 
-#: templates/tool.html:310
+#: templates/tool.html:710
 msgid ""
 "The default values for these parameters are so-called \"most likely\" "
 "values, calibrated against a large number of car manufacturers data."
@@ -1053,7 +1495,7 @@ msgstr ""
 "probabili\", calibrati su un gran numero di dati delle case "
 "automobilistiche."
 
-#: templates/tool.html:311
+#: templates/tool.html:711
 msgid ""
 "You are however welcome to override the default value for any of these "
 "parameters if you have a specific case in mind"
@@ -1062,7 +1504,7 @@ msgstr ""
 "questi parametri se si ha in mente un caso specifico, tramite la barra di"
 " ricerca in basso."
 
-#: templates/tool.html:312
+#: templates/tool.html:712
 msgid ""
 "The search field below allows you to do that. Search for a parameter and "
 "add it by using the \"Add\" button in the right column of the search "
@@ -1071,7 +1513,7 @@ msgstr ""
 "Cerca un parametro e aggiungilo utilizzando il pulsante \"Aggiungi\" "
 "nella colonna di destra della tabella dei risultati della ricerca."
 
-#: templates/tool.html:313
+#: templates/tool.html:713
 msgid ""
 "The importance, or sensitivity, of a given parameter in regard to "
 "environmental impacts is indicated in the left column of the search "
@@ -1081,7 +1523,7 @@ msgstr ""
 "impatti ambientali è indicata nella colonna di sinistra della tabella dei"
 " risultati della ricerca."
 
-#: templates/tool.html:314
+#: templates/tool.html:714
 msgid ""
 "That is, a parameter with a high sensitivity is a parameter for which a "
 "change in its value of "
@@ -1089,69 +1531,69 @@ msgstr ""
 "Nello specifico, un parametro con un'alta sensibilità è un parametro per "
 "il quale un cambiamento nel suo valore di "
 
-#: templates/tool.html:314
+#: templates/tool.html:714
 msgid "leads to a change in environmental impacts by 0.5 to"
 msgstr ""
 "porta a un cambiamento negli impatti ambientali da un minimo di 0,5 fino "
 "a un massimo di"
 
-#: templates/tool.html:314
+#: templates/tool.html:714
 msgid ""
 "against\n"
 "\t\t\t\t\t\t\t\t\t\t0.3 to"
 msgstr "rispetto a un minimo di 0,3 fino a un massimo di"
 
-#: templates/tool.html:315
+#: templates/tool.html:715
 msgid "for a parameter with medium sensitivity, and 0 to"
 msgstr ""
 "nel caso di un parametro con sensibilità media, e da un minimo di 0 fino "
 "a un massimo di"
 
-#: templates/tool.html:315
+#: templates/tool.html:715
 msgid "for a parameter with low sensitivity."
 msgstr "nel caso di un parametro con bassa sensibilità."
 
-#: templates/tool.html:319
+#: templates/tool.html:719
 msgid "See full parameters list"
 msgstr "Vedi l'elenco completo dei parametri"
 
-#: templates/tool.html:325
+#: templates/tool.html:725
 msgid "Frequently asked questions (click to see an answer)"
 msgstr "Domande frequenti (clicca per vedere la risposta)"
 
-#: templates/tool.html:327
+#: templates/tool.html:727
 msgid "How to change the mass of the battery of an electric vehicle?"
 msgstr "Come modificare la massa della batteria di un veicolo elettrico?"
 
-#: templates/tool.html:328
+#: templates/tool.html:728
 msgid "How to change the capacity of the battery of an electric vehicle?"
 msgstr "Come modificare la capacità della batteria di un veicolo elettrico?"
 
-#: templates/tool.html:329
+#: templates/tool.html:729
 msgid "How to change the efficiency of the engine?"
 msgstr "Come modificare l'efficienza del motore?"
 
-#: templates/tool.html:330
+#: templates/tool.html:730
 msgid "How to change the weight of the passengers?"
 msgstr "Come modificare il peso dei passeggeri?"
 
-#: templates/tool.html:331
+#: templates/tool.html:731
 msgid "How to change hybridization level of future diesel vehicles?"
 msgstr "Come modificare il livello di ibridazione dei futuri veicoli diesel?"
 
-#: templates/tool.html:332
+#: templates/tool.html:732
 msgid "How to change the lifetime of a battery?"
 msgstr "Come cambiare la durata di una batteria?"
 
-#: templates/tool.html:333
+#: templates/tool.html:733
 msgid "How to change the efficiency of a fuel cell stack?"
 msgstr "Come modificare l'efficienza di una pila di celle a combustibile?"
 
-#: templates/tool.html:338
+#: templates/tool.html:738
 msgid "Change the mass of the battery on a electric vehicle"
 msgstr "Cambia la massa della batteria su un veicolo elettrico"
 
-#: templates/tool.html:339
+#: templates/tool.html:739
 msgid ""
 "The mass of the battery of an electric vehicle can be changed by "
 "modifying\n"
@@ -1178,355 +1620,43 @@ msgstr ""
 "aumenterà anche la massa motrice del veicolo (\"driving mass\")e "
 "l'energia necessaria per spostarla di 1 km (\"tank to wheel energy\")."
 
-#: templates/tool.html:348
+#: templates/tool.html:748
 msgid "Consider the following relations:"
 msgstr "Considera le seguenti relazioni:"
 
-#: templates/tool.html:354
+#: templates/tool.html:754
 msgid "but also:"
 msgstr "ma anche:"
 
-#: templates/tool.html:372
+#: templates/tool.html:772
 msgid "Add any parameter you would like to modify."
 msgstr "Aggiungi i parametri che desideri modificare."
 
-#: templates/tool.html:374
+#: templates/tool.html:774
 msgid "Search for parameters to modify"
 msgstr "Cerca i parametri da modificare (in inglese)"
 
-#: templates/tool.html:391
+#: templates/tool.html:791
 msgid "Add?"
 msgstr "Aggiungi?"
 
-#: templates/tool.html:415
-msgid "USE"
-msgstr "USO"
-
-#: templates/tool.html:419
-msgid ""
-"This section defines parameters concerned with the use phase of the "
-"vehicles."
-msgstr ""
-"Questa sezione definisce i parametri relativi alla fase di utilizzo dei "
-"veicoli."
-
-#: templates/tool.html:420
-msgid ""
-"The model needs to know the driving cycle of the vehicles (i.e., the "
-"speed level per\n"
-"\t\t\t\t\t\t\t\t\tsecond of driving, to derive the needs for acceleration"
-" and braking) as well as a\n"
-"\t\t\t\t\t\t\t\t\tfew other things, such as the number of passengers, the"
-" country the vehicles are operated in, etc.<br>\n"
-"\t\t\t\t\t\t\t\t\tProjected electricity mixes are based on Business-as-"
-"usual scenarios from energy models."
-msgstr ""
-"Il modello ha bisogno di conoscere il ciclo di guida dei veicoli (cioè il"
-" livello di velocità al secondo di guida, per ricavare le esigenze di "
-"accelerazione e di frenata) così come alcune altre cose, come il numero "
-"di passeggeri, il paese in cui i veicoli sono utilizzati, ecc. I mix di "
-"elettricità proiettati sono basati su scenari di Business-as-usual dai "
-"modelli energetici."
-
-#: templates/tool.html:424
-msgid " For European country, the projections originate the"
-msgstr " Per i paesi europei, le proiezioni provengono dal "
-
-#: templates/tool.html:425
-msgid ""
-"from the European Commission. For African countries, projections "
-"originate the model"
-msgstr ""
-"della Commissione Europea. Per i paesi africani, le proiezioni provengono"
-" dal modello"
-
-#: templates/tool.html:427
-msgid "For other countries, projections are based on the IEA report"
-msgstr "Per gli altri paesi, le proiezioni si basano sul rapporto dell'AIE"
-
-#: templates/tool.html:433
-msgid "Driving cycle"
-msgstr "Ciclo di guida"
-
-#: templates/tool.html:435
-msgid ""
-"Driving cycles are meant to represent real conditions of use of the "
-"vehicle.\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\tCarculator uses the driving cycle to obtain the"
-" acceleration requirement of the vehicle over time.\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\tAll the vehicles are compared against the same "
-"driving cycle."
-msgstr ""
-"I cicli di guida rappresentano le reali condizioni di utilizzo del "
-"veicolo. Carculator impiega i cicli di guida al fine di ottenere la "
-"richiesta di accelerazione del veicolo in funzione del tempo. Tutti i "
-"veicoli sono confrontati prendendo come riferimento lo stesso ciclo di "
-"guida."
-
-#: templates/tool.html:442
-msgid "Geographical conditions"
-msgstr "Condizioni geografiche"
-
-#: templates/tool.html:444
-msgid ""
-"The country of use will influence several important parameters in the "
-"life cycle assessment of vehicles.\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tFor example, the electricity mix used to charge "
-"batteries of electric vehicles\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t or to produce hydrogen through electrolysis will"
-" be selected accordingly."
-msgstr ""
-"Il luogo di utilizzo influenzerà molti parametri importanti dell'analisi "
-"del ciclo di vita dei veicoli. Ad esempio, il mix di elettricità usato "
-"per ricaricare la batteria di un veicolo elettrico, o per produrre "
-"idrogeno attraverso elettrolisi, sará selezionato in base alla nazione "
-"selezionata."
-
-#: templates/tool.html:456
-msgid "Select a driving cycle"
-msgstr "Seleziona un ciclo di guida"
-
-#: templates/tool.html:472
-msgid "Select the country where the vehicles should be operated:"
-msgstr "Seleziona lo Stato dove i veicoli dovrebbero essere utilizzati:"
-
-#: templates/tool.html:482
-msgid "Electricity mix"
-msgstr "Mix energetico"
-
-#: templates/tool.html:484
-msgid ""
-"Electricity mixes will determine the carbon intensity of the electricity "
-"necessary\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tto operate the car during its Use phase. This may"
-" concern, for example, the electricity to charge the battery of an "
-"electric vehicle,\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tbut also the electricity needed to operate the "
-"electrolysis process to produce hydrogen\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
-msgstr ""
-"I mix di elettricitá determineranno le emissioni di carbonio necessarie "
-"ad operare la vettura durante la sua fase di utilizzo. Ció potrebbe "
-"riguardare, ad esempio, l'elettricitá richiesta a ricaricare la batteria "
-"di un veicolo elettrico, ma anche l'elettricitá richiesta alla produzione"
-" di idrogeno."
-
-#: templates/tool.html:490
-msgid "Passengers"
-msgstr "Passeggeri"
-
-#: templates/tool.html:492
-msgid ""
-"Each passenger has a body mass of 75 kilograms. The average number of "
-"passengers per car in Europe is 1.5.\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\tThe total driving mass is the sum of the total "
-"passenger mass, the cargo mass and the curb mass of the vehicle."
-msgstr ""
-"Ciascun passeggero ha una massa corporea di 75 kg. Il numero medio di "
-"passeggeri in Europa é 1.5. La massa di guida corrisponde alla somma "
-"della massa del passeggero, la massa dei bagagli e la massa "
-"dell'abitacolo del veicolo."
-
-#: templates/tool.html:496
-msgid "Lifetime"
-msgstr "Durata"
-
-#: templates/tool.html:498
-msgid ""
-"The total mileage of the car is used to normalize life cycle impacts per "
-"kilometer driven.\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tThe annual mileage is used to differentiate "
-"emissions and energy requirement over time, as well as\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
-msgstr ""
-"Il chilometraggio totale della vettura é usato per normalizzare gli "
-"impatti del ciclo di vita per chilometro di guida."
-
-#: templates/tool.html:508
-msgid ""
-"Projection models suggest the following electricity mixes for the years "
-"selected for the selected country.\n"
-"\t\t\t\t\t\t\t\t\t\t\tYou may modify them."
-msgstr ""
-"I modelli di proiezione suggeriscono i seguenti mix di energia elettrica "
-"per gli anni selezionati per il paese selezionato."
-
-#: templates/tool.html:520
-msgid "Hydro"
-msgstr "Idroelettrico"
-
-#: templates/tool.html:523
-msgid "Nuclear"
-msgstr "Nucleare"
-
-#: templates/tool.html:525
-msgid "Gas"
-msgstr ""
-
-#: templates/tool.html:527
-msgid "Solar"
-msgstr "Solare"
-
-#: templates/tool.html:529
-msgid "Wind"
-msgstr "Eolico"
-
-#: templates/tool.html:531
-msgid "Biomass"
-msgstr "Biomasse"
-
-#: templates/tool.html:533
-msgid "Coal"
-msgstr "Carbone"
-
-#: templates/tool.html:535
-msgid "Oil"
-msgstr "Petrolio"
-
-#: templates/tool.html:537
-msgid "Geothermal"
-msgstr "Geotermia"
-
-#: templates/tool.html:539
-msgid "Waste"
-msgstr "Rifiuti"
-
-#: templates/tool.html:546
-msgid "Set to zero"
-msgstr "Impostare su zero"
-
-#: templates/tool.html:553
-msgid "Adjust the number of passengers"
-msgstr "Modifica il numero di passeggeri"
-
-#: templates/tool.html:563
-msgid "Adjust the cargo mass"
-msgstr "Modifica la massa della merce"
-
-#: templates/tool.html:570
-msgid "Adjust the total mileage"
-msgstr "Aggiusta il chilometraggio totale"
-
-#: templates/tool.html:576
-msgid "Adjust the yearly mileage"
-msgstr "Aggiusta il chilometraggio annuale"
-
-#: templates/tool.html:605
-msgid "ENERGY STORAGE AND FUEL PATHWAYS"
-msgstr "STOCCAGGIO ENERGETICO E TIPI DI COMBUSTIBILE"
-
-#: templates/tool.html:610
-msgid ""
-"In this section, we define the pathway used to supply fuel for the "
-"vehicles as well as the technology used for on-board energy storage.<br>"
-"\n"
-"\t\t\t\t\t\t\t\t\tThe user can select conventional pathways to represent "
-"the supply and use of common fuels such as diesel\n"
-"\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural gas, but also "
-"alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
-msgstr ""
-"I carburanti alternativi qui presentati sono i cosiddetti carburanti di "
-"'seconda generazione', poiché sono prodotti a partire da materiale "
-"residuo di origine vegetale. Ciò significa che non competono con la "
-"produzione di colture ai fini dell'approvvigionamento alimentare."
-
-#: templates/tool.html:613
-msgid ""
-"The alternative fuels presented here are so-called \"2nd generation\" "
-"fuels, as they are produced from residual plant-based material.\n"
-"\t\t\t\t\t\t\t\t\tThis means that they do not compete with crops "
-"production with the purpose of food supply."
-msgstr ""
-"I carburanti alternativi presentati qui sono i cosiddetti \"2a "
-"generazione \" carburanti, poiché sono prodotti a partire da materiale "
-"residuo vegetale. Questo significa che non competono con i raccolti "
-"produzione ai fini dell'approvvigionamento alimentare."
-
-#: templates/tool.html:615
-msgid ""
-"Additionally, several pathways are presented for the supply of hydrogen "
-"to be used in fuel cell cars.\n"
-"\t\t\t\t\t\t\t\t\tHydrogen can either be produced by electrolysis, which "
-"is a process that requires electricity, or via a process called\n"
-"\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
-"methane to produce hydrogen."
-msgstr ""
-"Inoltre, vengono presentati diversi percorsi per la fornitura di idrogeno"
-" da utilizzare in auto a celle a combustibile. L'idrogeno può essere "
-"prodotto mediante elettrolisi, che è un processo che richiede elettricità"
-" o tramite un processo chiamato \" Steam Methane Reforming \" che "
-"utilizza il vapore e metano per produrre idrogeno."
-
-#: templates/tool.html:619
-msgid ""
-"Regarding energy storage technologies for battery electric vehicles, the "
-"user can choose between several types of lithium-ion-based chemistry\n"
-"\t\t\t\t\t\t\t\t\tbut also between different origins of manufacture. The "
-"origin of battery manufacture will determine the electricity mix used to "
-"produce the battery cells."
-msgstr ""
-"Per quanto riguarda le tecnologie di accumulo dell'energia per veicoli "
-"elettrici a batteria, il l'utente può scegliere tra diversi tipi di "
-"chimica a base di ioni di litio ma anche tra diverse origini di "
-"fabbricazione. Il l'origine della fabbricazione della batteria "
-"determinerà il mix di elettricità utilizzato per produrre le celle della "
-"batteria."
-
-#: templates/tool.html:622
-msgid ""
-"The fuel blend shares presented by default originate different projection"
-" models. They can be modified at will. It is to note however that the "
-"shre of\n"
-"\t\t\t\t\t\t\t\t\talternative fuel in the fuel blend an engine can "
-"operate on, can be, in practice, limited for technical reasons."
-msgstr ""
-"Le quote di miscela di carburante presentate di default danno origine a "
-"diversi modelli di proiezione. Possono essere modificati a piacere. È da "
-"notare, tuttavia, che la quota di carburante alternativo nella miscela di"
-" carburante su cui un motore può funzionare, può essere, in pratica, "
-"limitata per motivi tecnici."
-
-#: templates/tool.html:636
-msgid "FUEL PATHWAYS"
-msgstr "TIPO DI CARBURANTE"
-
-#: templates/tool.html:645
-msgid "Fuel blend for"
-msgstr "Miscela di carburante per"
-
-#: templates/tool.html:648
-msgid "Primary fuel"
-msgstr "Carburante primario"
-
-#: templates/tool.html:651
-msgid "Blend"
-msgstr "Miscela"
-
-#: templates/tool.html:654
-msgid "Secondary fuel"
-msgstr "Carburante secondario"
-
-#: templates/tool.html:657
-msgid "Type of energy storage"
-msgstr "Tipo di accumulo di energia"
-
-#: templates/tool.html:686
+#: templates/tool.html:816
 msgid "CALCULATION SETTINGS"
 msgstr "IMPOSTAZIONI DI CALCOLO"
 
-#: templates/tool.html:697
+#: templates/tool.html:827
 msgid "Linking algorithm"
 msgstr "Algoritmo di calcolo"
 
-#: templates/tool.html:699
+#: templates/tool.html:829
 msgid "Functional unit"
 msgstr "Unità funzionale"
 
-#: templates/tool.html:700
+#: templates/tool.html:830
 msgid "Calculation mode"
 msgstr "Modo di calcolo"
 
-#: templates/tool.html:708
+#: templates/tool.html:838
 msgid ""
 "A so-called \"attributional\" linking\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t algorithm will reflect average impacts\n"
@@ -1544,15 +1674,15 @@ msgstr ""
 "alla realizzazione dell’unità funzionale specificata, partendo da un "
 "sistema stazionario."
 
-#: templates/tool.html:718
+#: templates/tool.html:848
 msgid "Attributional"
 msgstr "Attributivo"
 
-#: templates/tool.html:724
+#: templates/tool.html:854
 msgid "Consequential"
 msgstr "Consequenziale"
 
-#: templates/tool.html:730
+#: templates/tool.html:860
 msgid ""
 "Three types of functional unit are offered. The user can opt for a "
 "comparison normalized\n"
@@ -1567,27 +1697,27 @@ msgstr ""
 "anche possibile definire una composizione della flotta nel corso del "
 "tempo."
 
-#: templates/tool.html:738
+#: templates/tool.html:868
 msgid "Unit, per km"
 msgstr "Unità, per km"
 
-#: templates/tool.html:744
+#: templates/tool.html:874
 msgid "Driven distance"
 msgstr "Distanza di guida"
 
-#: templates/tool.html:747
+#: templates/tool.html:877
 msgid "in km"
 msgstr ""
 
-#: templates/tool.html:753
+#: templates/tool.html:883
 msgid "Fleet"
 msgstr "Flotta"
 
-#: templates/tool.html:759
+#: templates/tool.html:889
 msgid "Specify fleet composition"
 msgstr "Specifica la composizione della flotta"
 
-#: templates/tool.html:766
+#: templates/tool.html:896
 msgid ""
 "A simple calculation will use \"most likely\" values as model inputs and "
 "outputs.\n"
@@ -1606,15 +1736,15 @@ msgstr ""
 "modello. Ciò comporta la generazione di risultati rappresentati da "
 "intervalli di probabilità"
 
-#: templates/tool.html:776
+#: templates/tool.html:906
 msgid "Simple calculation"
 msgstr "Calcolo semplificato"
 
-#: templates/tool.html:782
+#: templates/tool.html:912
 msgid "Error propagation (Monte Carlo)"
 msgstr "Propagazione dell’errore (Monte Carlo)"
 
-#: templates/tool.html:785
+#: templates/tool.html:915
 msgid "number of iterations"
 msgstr "numero di iterazioni"
 
@@ -1631,4 +1761,414 @@ msgstr "numero di iterazioni"
 #~ "Collegare i vostri modelli ad altre "
 #~ "librerie Python. Esportare i vostri "
 #~ "inventari direttamente in Brightway2."
+
+#~ msgid "CAR PARAMETERS"
+#~ msgstr "PARAMETRI DEI VEICOLI"
+
+#~ msgid "Type of energy storage"
+#~ msgstr "Tipo di accumulo di energia"
+
+#~ msgid ""
+#~ "\n"
+#~ "                                    If battery "
+#~ "electric or plugin-hybrid vehicles are"
+#~ " selected, it is possible to adjust"
+#~ " a few parameters about the battery."
+#~ "\n"
+#~ "                                    The user can "
+#~ "adjust the battery mass. Note that, "
+#~ "by default, 60 percent of the mass"
+#~ " is assumed to be taken by the"
+#~ " cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery.\n"
+#~ "                                    Note that a "
+#~ "heavier battery will increase the energy"
+#~ " consumption of the vehicle.\n"
+#~ "\n"
+#~ "                                    The lifetime of"
+#~ " the battery can also be adjusted."
+#~ " If the lifetime is lower than "
+#~ "the lifetime of the vehicle, a "
+#~ "battery replacement is needed.\n"
+#~ "                                    For example, if"
+#~ " the battery is expected to last "
+#~ "150,000 km and the vehicle lifetime "
+#~ "is 200,000 km, an additional 0.33 "
+#~ "unit of a second battery will be"
+#~ " needed.\n"
+#~ "                                    This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application.\n"
+#~ "                                    If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime.\n"
+#~ "                                    This way, the"
+#~ " environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle.\n"
+#~ "\n"
+#~ "                                    Finally, the "
+#~ "user can select the chemistry and "
+#~ "the origin of manufacture of the "
+#~ "battery. The origin of manufacture will"
+#~ " set the\n"
+#~ "                                    type of "
+#~ "electricity to manufacture the battery "
+#~ "cells.\n"
+#~ "                                    "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery.\n"
+#~ "                                    The user can "
+#~ "adjust the battery mass. Note that, "
+#~ "by default, 60 percent of the mass"
+#~ " is assumed to be taken by the"
+#~ " cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery.\n"
+#~ "                                    Note that a "
+#~ "heavier battery will increase the energy"
+#~ " consumption of the vehicle.\n"
+#~ "\n"
+#~ "                                    The lifetime of"
+#~ " the battery can also be adjusted."
+#~ " If the lifetime is lower than "
+#~ "the lifetime of the vehicle, a "
+#~ "battery replacement is needed.\n"
+#~ "                                    For example, if"
+#~ " the battery is expected to last "
+#~ "150,000 km and the vehicle lifetime "
+#~ "is 200,000 km, an additional 0.33 "
+#~ "unit of a second battery will be"
+#~ " needed.\n"
+#~ "                                    This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application.\n"
+#~ "                                    If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime.\n"
+#~ "                                    This way, the"
+#~ " environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle.\n"
+#~ "\n"
+#~ "                                    Finally, the "
+#~ "user can select the chemistry and "
+#~ "the origin of manufacture of the "
+#~ "battery. The origin of manufacture will"
+#~ " set the\n"
+#~ "                                    type of "
+#~ "electricity to manufacture the battery "
+#~ "cells."
+#~ msgstr ""
+#~ "Se vengono selezionati veicoli elettrici "
+#~ "a batteria o ibridi a spina, è "
+#~ "possibile regolare alcuni parametri relativi"
+#~ " alla batteria. L'utente può regolare "
+#~ "la massa della batteria. Si noti "
+#~ "che, per impostazione predefinita, si "
+#~ "presume che le celle prendano il "
+#~ "60% della massa; l'utente può anche "
+#~ "regolare la densità di energia delle "
+#~ "celle della batteria. Questi due "
+#~ "parametri definiscono una nuova capacità "
+#~ "della batteria. Si noti che una "
+#~ "batteria più pesante aumenterà il "
+#~ "consumo di energia del veicolo. Anche"
+#~ " la durata della batteria può essere"
+#~ " regolata. Se la durata è inferiore"
+#~ " a quella del veicolo, è necessario"
+#~ " sostituire la batteria. Ad esempio, "
+#~ "se si prevede che la batteria duri"
+#~ " 150.000 km e la durata del "
+#~ "veicolo è di 200.000 km, sarà "
+#~ "necessaria un'ulteriore unità di 0,33 di"
+#~ " una seconda batteria. Ciò presuppone "
+#~ "che l'onere ambientale della restante "
+#~ "0,66 unità della seconda batteria sarà"
+#~ " assegnato a un'applicazione di seconda "
+#~ "vita.  Se questo presupposto non vi "
+#~ "piace, potete impostare la durata della"
+#~ " batteria esattamente la metà di "
+#~ "quella del veicolo. In questo modo, "
+#~ "il carico ambientale della seconda "
+#~ "batteria sarà interamente assegnato al "
+#~ "veicolo. Infine, l'utente può selezionare "
+#~ "la chimica e l'origine della produzione"
+#~ " della batteria. L'origine della produzione"
+#~ " stabilirà il tipo di elettricità per"
+#~ " produrre le celle della batteria."
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery.\n"
+#~ "                                    The user can "
+#~ "adjust the battery mass. Note that, "
+#~ "by default, 60 percent of the mass"
+#~ " is assumed to be taken by the"
+#~ " cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery.\n"
+#~ "                                    Note that a "
+#~ "heavier battery will increase the energy"
+#~ " consumption of the vehicle.\n"
+#~ "                                    The lifetime of"
+#~ " the battery can also be adjusted."
+#~ " If the lifetime is lower than "
+#~ "the lifetime of the vehicle, a "
+#~ "battery replacement is needed.\n"
+#~ "                                    For example, if"
+#~ " the battery is expected to last "
+#~ "150,000 km and the vehicle lifetime "
+#~ "is 200,000 km, an additional 0.33 "
+#~ "unit of a second battery will be"
+#~ " needed.\n"
+#~ "                                    This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application.\n"
+#~ "                                    If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime.\n"
+#~ "                                    This way, the"
+#~ " environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle.\n"
+#~ "                                    Finally, the "
+#~ "user can select the chemistry and "
+#~ "the origin of manufacture of the "
+#~ "battery. The origin of manufacture will"
+#~ " set the\n"
+#~ "                                    type of "
+#~ "electricity to manufacture the battery "
+#~ "cells."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery. The user can adjust "
+#~ "the battery mass. Note that, by "
+#~ "default, 60 percent of the mass is"
+#~ " assumed to be taken by the "
+#~ "cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery. Note that a heavier battery "
+#~ "will increase the energy consumption of"
+#~ " the vehicle.\n"
+#~ "                                    The lifetime of"
+#~ " the battery can also be adjusted."
+#~ " If the lifetime is lower than "
+#~ "the lifetime of the vehicle, a "
+#~ "battery replacement is needed. For "
+#~ "example, if the battery is expected "
+#~ "to last 150,000 km and the vehicle"
+#~ " lifetime is 200,000 km, an "
+#~ "additional 0.33 unit of a second "
+#~ "battery will be needed.\n"
+#~ "                                    This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application. If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime.\n"
+#~ "                                    This way, the"
+#~ " environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle. Finally, the user can"
+#~ " select the chemistry and the origin"
+#~ " of manufacture of the battery. The"
+#~ " origin of manufacture will set the"
+#~ " type of electricity to manufacture "
+#~ "the battery cells."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery. The user can adjust "
+#~ "the battery mass. Note that, by "
+#~ "default, 60 percent of the mass is"
+#~ " assumed to be taken by the "
+#~ "cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery. Note that a heavier battery "
+#~ "will increase the energy consumption of"
+#~ " the vehicle.\n"
+#~ "                                    The lifetime of"
+#~ " the battery can also be adjusted."
+#~ " If the lifetime is lower than "
+#~ "the lifetime of the vehicle, a "
+#~ "battery replacement is needed. For "
+#~ "example, if the battery is expected "
+#~ "to last 150,000 km and the vehicle"
+#~ " lifetime is 200,000 km, an "
+#~ "additional 0.33 unit of a second "
+#~ "battery will be needed. This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application. If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime. This way, the "
+#~ "environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle. Finally, the user can"
+#~ " select the chemistry and the origin"
+#~ " of manufacture of the battery. The"
+#~ " origin of manufacture will set the"
+#~ " type of electricity to manufacture "
+#~ "the battery cells."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery. The user can adjust "
+#~ "the battery mass. Note that, by "
+#~ "default, 60 percent of the mass is"
+#~ " assumed to be taken by the "
+#~ "cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery. Note that a heavier battery "
+#~ "will increase the energy consumption of"
+#~ " the vehicle.\n"
+#~ "                                    The lifetime of"
+#~ " the battery can also be adjusted."
+#~ " If the lifetime is lower than "
+#~ "the lifetime of the vehicle, a "
+#~ "battery replacement is needed.\n"
+#~ "                                    For example, if"
+#~ " the battery is expected to last "
+#~ "150,000 km and the vehicle lifetime "
+#~ "is 200,000 km, an additional 0.33 "
+#~ "unit of a second battery will be"
+#~ " needed.\n"
+#~ "                                    This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application.\n"
+#~ "                                    If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime.\n"
+#~ "                                    This way, the"
+#~ " environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle.\n"
+#~ "                                    Finally, the "
+#~ "user can select the chemistry and "
+#~ "the origin of manufacture of the "
+#~ "battery.\n"
+#~ "                                    The origin of"
+#~ " manufacture will set the type of "
+#~ "electricity to manufacture the battery "
+#~ "cells."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery. The user can adjust "
+#~ "the battery mass. Note that, by "
+#~ "default, 60 percent of the mass is"
+#~ " assumed to be taken by the "
+#~ "cells.\n"
+#~ "                                    The user can "
+#~ "also adjust the energy density of "
+#~ "the battery cells. These two parameters"
+#~ " defines a new capacity for the "
+#~ "battery. Note that a heavier battery "
+#~ "will increase the energy consumption of"
+#~ " the vehicle."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The lifetime of the battery can "
+#~ "also be adjusted. If the lifetime "
+#~ "is lower than the lifetime of the"
+#~ " vehicle, a battery replacement is "
+#~ "needed. For example, if the battery "
+#~ "is expected to last 150,000 km and"
+#~ " the vehicle lifetime is 200,000 km,"
+#~ " an additional 0.33 unit of a "
+#~ "second battery will be needed.\n"
+#~ "                                    This assumes "
+#~ "that the environmental burden of the "
+#~ "remaining 0.66 unit of the second "
+#~ "battery will be allocated to a "
+#~ "second-life application. If you do "
+#~ "not like this assumption, you can "
+#~ "set the battery lifetime to be "
+#~ "exactly half of that of the "
+#~ "vehicle lifetime.\n"
+#~ "                                    This way, the"
+#~ " environmental burden of the second "
+#~ "battery will be entirely allocated to"
+#~ " the vehicle."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If battery electric or plugin-hybrid "
+#~ "vehicles are selected, it is possible"
+#~ " to adjust a few parameters about "
+#~ "the battery. The user can adjust "
+#~ "the battery mass. Note that, by "
+#~ "default, 60 percent of the mass is"
+#~ " assumed to be taken by the "
+#~ "cells. The user can also adjust "
+#~ "the energy density of the battery "
+#~ "cells. These two parameters defines a"
+#~ " new capacity for the battery. Note"
+#~ " that a heavier battery will increase"
+#~ " the energy consumption of the "
+#~ "vehicle."
+#~ msgstr ""
 

@@ -182,7 +182,37 @@ def tool_page(country):
                                         }
                                 },
                 "energy storage": {
-                    "electric": {"type":"NMC", "origin":"CN"}
+                    "electric": {
+                        _("Mid-size"): {
+                            "type":"NMC",
+                             "origin":"CN",
+                             "energy battery mass": [385, 305, 230],
+                             "battery cell energy density": [0.23, 0.36, 0.49],
+                             "battery lifetime kilometers": [200000, 200000, 200000]
+                        }
+
+                         }
+                },
+                "efficiency": {
+                    _("Petrol"): {
+                        _("Mid-size") :{
+                            "engine efficiency": [0.27, 0.31, 0.35],
+                            "drivetrain efficiency": [0.81, 0.84, 0.87]
+                        }
+                    },
+                    _("Diesel"): {
+                        _("Mid-size") :{
+                            "engine efficiency": [0.3, 0.32, 0.35],
+                            "drivetrain efficiency": [0.81, 0.84, 0.87]
+                        }
+                    },
+                    _("Electric"): {
+                        _("Mid-size") :{
+                            "engine efficiency": [0.85, 0.87, 0.88],
+                            "drivetrain efficiency": [0.85, 0.87, 0.88],
+                            "battery discharge efficiency": [0.88, 0.89, 0.89]
+                        }
+                    }
                 },
                 "custom electricity mix": response,
             },
@@ -345,19 +375,9 @@ def search_params(param_item, powertrain_filter, size_filter):
 
 @app.route("/get_param_value/<name>/<pt>/<s>/<y>")
 def get_param_value(name, pt, s, y):
-    lang = session.get("language", "en")
-    if lang == "en":
-        pt = [app.calc.d_pt_en[p] for p in pt.split(",")]
-        s = [app.calc.d_size_en[x] for x in s.split(",")]
-    if lang == "de":
-        pt = [app.calc.d_pt_de[p] for p in pt.split(",")]
-        s = [app.calc.d_size_de[x] for x in s.split(",")]
-    if lang == "fr":
-        pt = [app.calc.d_pt_fr[p] for p in pt.split(",")]
-        s = [app.calc.d_size_fr[x] for x in s.split(",")]
-    if lang == "it":
-        pt = [app.calc.d_pt_it[p] for p in pt.split(",")]
-        s = [app.calc.d_size_it[x] for x in s.split(",")]
+    name = name.split(",")
+    pt = [app.calc.d_pt_all[p] for p in pt.split(",")]
+    s = [app.calc.d_size_all[x] for x in s.split(",")]
 
     y = y.split(",")
     y = [int(a) for a in y]
@@ -420,7 +440,6 @@ def get_results():
     db.session.commit()
 
     lang = session.get("language", "en")
-
     d = app.calc.format_dictionary(request.get_json(), lang, job_id)
 
     # Create a connection to the Redis server
@@ -597,7 +616,7 @@ def get_fuel_blend(country, years):
                 fuel_type='Biomass fuel',
                 scenario='SSP2-Base',
             )
-            .interp(year=years)
+            .interp(year=years, kwargs={"fill_value": "extrapolate"})
             .values
         )
 

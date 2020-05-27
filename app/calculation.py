@@ -714,7 +714,7 @@ class Calculation:
         f_d = {}
         new_dict[("Driving cycle",)] = raw_dict["driving_cycle"]
         new_dict[("Background",)] = {
-            k: v for k, v in raw_dict["background params"].items()
+            k: v for k, v in raw_dict["background params"].items() if k not in ("energy storage", "efficiency")
         }
 
         # Ensure that the electricity mix is present
@@ -738,9 +738,23 @@ class Calculation:
 
             new_dict[("Background",)]["custom electricity mix"] = response
 
+
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
             el /= np.sum(np.array(el))
+
+
+
+        if "energy storage" in raw_dict["background params"]:
+            if "electric" in raw_dict["background params"]["energy storage"]:
+                if len(raw_dict["background params"]["energy storage"]["electric"])>0:
+                    energy_storage = raw_dict["background params"]["energy storage"]["electric"]
+                    new_dict[("Background",)]["energy storage"] = {'electric':{}}
+
+                    for e in energy_storage:
+                        for p in energy_storage[e]:
+                            if p in ('type', 'origin'):
+                                new_dict[("Background",)]["energy storage"]["electric"][p] = energy_storage[e][p]
 
         for k, v in raw_dict["foreground params"].items():
             if k in d_sliders:
@@ -763,6 +777,44 @@ class Calculation:
             }
 
             f_d[(cat, powertrain, size, name, "none")] = d_val
+
+        if "energy storage" in raw_dict["background params"]:
+            energy_storage = raw_dict["background params"]["energy storage"]["electric"]
+
+            for e in energy_storage:
+                size = self.d_size_all[e]
+                for p in energy_storage[e]:
+                    if p not in ('type', 'origin'):
+                        name = p
+                        cat = self.d_categories[name]
+                        powertrain ="BEV"
+                        val = energy_storage[e][p]
+
+                        d_val = {
+                            (k, "loc"): v
+                            for k, v in list(zip(new_dict[("Functional unit",)]["year"], val))
+                        }
+
+                        f_d[(cat, powertrain, size, name, "none")] = d_val
+
+        if "efficiency" in raw_dict["background params"]:
+            efficiency = raw_dict["background params"]["efficiency"]
+
+            for eff in efficiency:
+                powertrain = self.d_pt_all[eff]
+                for s in efficiency[eff]:
+                    size = self.d_size_all[s]
+                    for c in efficiency[eff][s]:
+                        name = c
+                        cat = self.d_categories[name]
+
+                        if np.sum(efficiency[eff][s][c]) != 0:
+                            val = efficiency[eff][s][c]
+                            d_val = {
+                                (k, "loc"): v
+                                for k, v in list(zip(new_dict[("Functional unit",)]["year"], val))
+                            }
+                            f_d[(cat, powertrain, size, name, "none")] = d_val
 
         new_dict[("Foreground",)] = f_d
 

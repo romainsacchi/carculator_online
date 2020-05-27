@@ -656,6 +656,8 @@
 
 })();
 
+var isConfig = false;
+
 // Radio buttons for vehicle type selection
 $('#vehicle_type input:radio').addClass('input_hidden');
 $('#vehicle_type label').click(function() {
@@ -739,6 +741,38 @@ function size_list_update(){
             };
 
 
+
+
+            if (isConfig==false){
+                console.log("entered")
+
+                var tableRef = document.getElementById('efficiency_table');
+                var rowCount = tableRef.rows.length;
+                while (rowCount>2){
+                tableRef.deleteRow(2);
+                var rowCount = tableRef.rows.length;
+                }
+
+                create_efficiency_table();
+                prepare_data_for_efficiency();
+
+                // Create energy storage table
+                var tableRef = document.getElementById('energy_storage_table');
+                var rowCount = tableRef.rows.length;
+                while (rowCount>2){
+                    tableRef.deleteRow(2);
+                    var rowCount = tableRef.rows.length;
+                }
+                create_energy_storage_table();
+                prepare_data_for_energy_storage();
+
+            }else{
+                isConfig=false;
+
+            };
+
+
+
             if (old_year==true && new_powertrain==true){
                 // Warning message if the powertrain is BEV, FCEV and hybrids, before 2011
                 var str = i18n("powertrain_not_existing")
@@ -775,9 +809,12 @@ function size_list_update(){
               });
 
             $("#use_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
+            $("#efficiency_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
             generate_driving_cycle_graph('WLTC');
+
+
 
             // Create fuel table
             var tableRef = document.getElementById('fuel_pathway_table');
@@ -787,6 +824,9 @@ function size_list_update(){
                 var rowCount = tableRef.rows.length;
             }
             create_fuel_table();
+
+
+
 
             }
         else{return;};
@@ -858,6 +898,19 @@ function size_list_update(){
     table.appendChild(thead);
     table.appendChild(tbody);
     row.appendChild(table);
+
+
+
+    // Create energy storage table
+    //var tableRef = document.getElementById('energy_storage_table');
+    //var rowCount = tableRef.rows.length;
+    //while (rowCount>2){
+    //    tableRef.deleteRow(2);
+    //    var rowCount = tableRef.rows.length;
+    //}
+    //create_energy_storage_table();
+    //update_energy_storage_table([]);
+
 
     // Create fuel table
     var tableRef = document.getElementById('fuel_pathway_table');
@@ -1053,6 +1106,7 @@ var map = AmCharts.makeChart("chartdiv", {
         {"id":"MZ"},
         {"id":"NE"},
         {"id":"NG"},
+        {"id":"NL"},
         {"id":"NM"},
         {"id":"RW"},
         {"id":"SD"},
@@ -1629,19 +1683,110 @@ function collect_configuration(){
     };
 
     // Retrieve energy storage
+    var divs = $("#energy_storage_table > tbody").find('div');
     var energy_storage = {};
-    var selects = $("#fuel_pathway_table > tbody").find('select');
-    var fuels = ['petrol', 'diesel', 'cng', 'hydrogen', 'electric']
 
-    for (f=0; f<fuels.length; f++){
-        if (document.getElementById(fuels[f]+"_storage")) {
-            var storage_type = document.getElementById(fuels[f]+"_storage").value;
-            energy_storage[fuels[f]] = {'type':storage_type};
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+
+    for (pt=0;pt<listPowertrains.length;pt++){
+        if (listPowertrains[pt].innerHTML == i18n("electric")){
+            for (s=0;s<listSizes.length;s++){
+                energy_storage[listSizes[s].innerHTML] = {
+                    "energy battery mass":[],
+                    "battery cell energy density":[],
+                    "battery lifetime kilometers":[],
+                    "type": "",
+                    "origin": ""
+                    };
+
+                var div = $("[id='"+"type_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"']").children()
+                var select = $(div[0]).find("option:selected").val()
+                energy_storage[listSizes[s].innerHTML]["type"] = select;
+
+                var div = $("[id='"+"origin_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"']").children()
+                var select = $(div[0]).find("option:selected").val()
+                energy_storage[listSizes[s].innerHTML]["origin"] = select;
+
+                for (y=0;y<listYears.length;y++){
+
+                    var slider = $("[id='"+"mass_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var val = parseInt(slider.noUiSlider.get().split(" ")[0]);
+                    energy_storage[listSizes[s].innerHTML]["energy battery mass"].push(val)
+
+                    var slider = $("[id='"+"energy_density_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var val = parseFloat(slider.noUiSlider.get().split(" ")[0]);
+                    energy_storage[listSizes[s].innerHTML]["battery cell energy density"].push(val)
+
+                    var slider = $("[id='"+"lifetime_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var val = slider.noUiSlider.get().split(" ")[0];
+                    val = parseInt(val.replace(",", ""));
+                    energy_storage[listSizes[s].innerHTML]["battery lifetime kilometers"].push(val)
+
+                }
+            }
         };
     };
 
+    // Retrieve efficiencies
+    var divs = $("#efficiency_table > tbody").find('div');
+    var efficiency = {};
+
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+
+    for (pt=0;pt<listPowertrains.length;pt++){
+        efficiency[listPowertrains[pt].innerHTML] = {};
+        if (![i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")].includes(listPowertrains[pt].innerHTML)){
+            for (s=0;s<listSizes.length;s++){
+                efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML] = {
+                    "battery discharge efficiency":[],
+                    "fuel cell stack efficiency":[],
+                    "engine efficiency":[],
+                    "drivetrain efficiency":[],
+                    };
+
+                for (y=0;y<listYears.length;y++){
+
+                    if (listPowertrains[pt].innerHTML == i18n("electric")){
+                        var slider = $("[id='"+"storage_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                        var val = parseFloat(slider.noUiSlider.get());
+                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["battery discharge efficiency"].push(val)
+                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["fuel cell stack efficiency"].push(0)
+                    };
+
+                    if (listPowertrains[pt].innerHTML == i18n("fuel_cell")){
+                        var slider = $("[id='"+"storage_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                        var val = parseFloat(slider.noUiSlider.get());
+                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["battery discharge efficiency"].push(0)
+                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["fuel cell stack efficiency"].push(val)
+                    };
+
+                    if (![i18n("electric"), i18n("fuel_cell")].includes(listPowertrains[pt].innerHTML)){
+                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["battery discharge efficiency"].push(0)
+                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["fuel cell stack efficiency"].push(0)
+                    }
+
+                    var slider = $("[id='"+"engine_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var val = parseFloat(slider.noUiSlider.get());
+                    efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["engine efficiency"].push(val)
+
+                    var slider = $("[id='"+"drivetrain_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var val = parseFloat(slider.noUiSlider.get());
+                    efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["drivetrain efficiency"].push(val)
+
+
+                }
+            }
+        };
+    };
+
+
     background_params['fuel blend'] = fuel_blend;
-    background_params['energy storage'] = energy_storage;
+    background_params['energy storage'] = {'electric': energy_storage};
+    background_params['efficiency'] = efficiency;
     params['foreground params'] = foreground_params;
     params['background params'] = background_params;
 
@@ -1999,6 +2144,8 @@ $("#InputParameters").on("keyup", function() {
 
                 var tableRef = document.getElementById('table_inputs').getElementsByTagName('tbody')[0];
 
+                json = json[0]
+
                 for (pt=0;pt<arr_request[1].length;pt++){
                     for (s=0;s<arr_request[2].length;s++){
                     var newRow = tableRef.insertRow();
@@ -2277,6 +2424,23 @@ function fill_in_from_config_file(data){
             tableRef.deleteRow(2);
             var rowCount = tableRef.rows.length;
         }
+
+        // Create energy storage table
+        var tableRef = document.getElementById('energy_storage_table');
+        var rowCount = tableRef.rows.length;
+        while (rowCount>2){
+            tableRef.deleteRow(2);
+            var rowCount = tableRef.rows.length;
+        }
+
+        // Create efficiency table
+        var tableRef = document.getElementById('efficiency_table');
+        var rowCount = tableRef.rows.length;
+        while (rowCount>2){
+            tableRef.deleteRow(2);
+            var rowCount = tableRef.rows.length;
+        }
+
         //  Load the JSON File
         $.when($.ajax({
                     url: "/get_language",
@@ -2291,7 +2455,220 @@ function fill_in_from_config_file(data){
                     i18n.translator.add(json);
                     create_fuel_table();
                     update_fuel_sliders(data);
+                    create_energy_storage_table();
+                    update_energy_storage_table(data);
+                    create_efficiency_table();
+                    update_efficiency_table(data);
                 });
+};
+
+function update_efficiency_table(data){
+
+    var efficiency_data = data["background params"]["efficiency"];
+
+    var map_params = {
+        "battery discharge efficiency": "storage_eff",
+        "fuel cell stack efficiency": "storage_eff",
+        "engine efficiency": "engine_eff",
+        "drivetrain efficiency": "drivetrain_eff"
+    }
+
+    for (var pt in efficiency_data) {
+        // check if the property/key is defined in the object itself, not in parent
+        if (efficiency_data.hasOwnProperty(pt)) {
+
+            for (var size in efficiency_data[pt]){
+
+                for (y=0;y<data["year"].length;y++){
+
+                    for (var param in efficiency_data[pt][size]){
+
+                        p = map_params[param]
+
+                        if (efficiency_data[pt][size][param][y] != 0){
+
+                            if ($("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']").length > 0){
+                            var slider = $("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
+
+                            slider.noUiSlider.updateOptions({
+                                        start: efficiency_data[pt][size][param][y]
+                            });
+
+                        };
+                        }
+                    };
+                };
+            };
+        }
+    }
+};
+
+function prepare_data_for_efficiency(){
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+    var tableRef = document.getElementById('efficiency_table').getElementsByTagName('tbody')[0];
+
+    var arr_pt = [];
+    var arr_y = [];
+    var arr_s = [];
+
+    for (var y = 0; y < listYears.length; y++){arr_y.push(listYears[y].innerHTML)};
+    for (var s = 0; s < listSizes.length; s++){arr_s.push(listSizes[s].innerHTML)};
+    for (var pt = 0; pt < listPowertrains.length; pt++){arr_pt.push(listPowertrains[pt].innerHTML)};
+
+    var list_param = ["battery discharge efficiency", "fuel cell stack efficiency", "engine efficiency", "drivetrain efficiency"]
+
+    var data = $.when(
+
+            $.ajax({
+                url: "/get_param_value/"+list_param+"/"+arr_pt+"/"+arr_s+"/"+arr_y,
+                dataType: 'json',
+                type: 'GET',
+                success : function(raw) {
+                   var json = raw
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+
+                var efficiency_data = {};
+
+                for (var pt = 0; pt < arr_pt.length; pt++ ){
+                    efficiency_data[arr_pt[pt]] = {};
+                    for (var s = 0; s < arr_s.length; s++ ){
+                        efficiency_data[arr_pt[pt]][arr_s[s]] = {};
+                        for (var param = 0; param < list_param.length; param++){
+                            efficiency_data[arr_pt[pt]][arr_s[s]][list_param[param]] =  []
+                            for (var y = 0; y < arr_y.length; y ++){
+                                efficiency_data[arr_pt[pt]][arr_s[s]][list_param[param]][y] = json[s][pt][param][y]
+                            };
+                        };
+                    };
+                };
+
+                var data = {};
+                data["year"] = arr_y;
+                data["background params"] = {"efficiency":{}};
+                data["background params"]["efficiency"] = efficiency_data;
+                update_efficiency_table(data);
+
+            });
+
+};
+
+function prepare_data_for_energy_storage(){
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+    var tableRef = document.getElementById('energy_storage_table').getElementsByTagName('tbody')[0];
+
+    var arr_pt = [];
+    var arr_y = [];
+    var arr_s = [];
+    for (var pt = 0; pt < listPowertrains.length; pt++){
+        if (listPowertrains[pt].innerHTML == i18n("electric")
+            ){
+                arr_pt.push(listPowertrains[pt].innerHTML)
+            };
+
+        };
+
+    if (arr_pt.length == 0){return [];};
+
+    for (var y = 0; y < listYears.length; y++){arr_y.push(listYears[y].innerHTML)};
+    for (var s = 0; s < listSizes.length; s++){arr_s.push(listSizes[s].innerHTML)};
+
+    var list_param = ["energy battery mass", "battery cell energy density", "battery lifetime kilometers"]
+
+
+
+    var data = $.when(
+
+            $.ajax({
+                url: "/get_param_value/"+list_param+"/"+arr_pt+"/"+arr_s+"/"+arr_y,
+                dataType: 'json',
+                type: 'GET',
+                success : function(raw) {
+                   var json = raw
+                    return json
+                    },
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+
+                var energy_data = {};
+                for (var s = 0; s < arr_s.length; s++ ){
+
+                    energy_data[arr_s[s]] = {};
+
+                    for (var pt = 0; pt < arr_pt.length; pt ++){
+                        var cats = ["energy battery mass", "battery cell energy density", "battery lifetime kilometers"]
+                        for (var c = 0; c < cats.length; c++){
+
+                            var arr = [];
+                            for (var y = 0; y < arr_y.length; y ++){
+
+
+                                    var size = arr_s[s];
+                                    var cat = cats[c];
+                                    arr.push(json[s][pt][c][y])
+
+                                };
+
+                            energy_data[[size]][[cat]] = arr
+
+
+                        }
+                    energy_data[[size]]["type"] = "NMC"
+                    energy_data[[size]]["origin"] = "CN"
+
+                    }
+
+                }
+
+                var data = {};
+                data["year"] = arr_y;
+                data["background params"] = {"energy storage":{"electric":{}}};
+                data["background params"]["energy storage"]["electric"] = energy_data;
+                update_energy_storage_table(data);
+            });
+
+};
+
+function update_energy_storage_table(data){
+
+    var battery_data = data["background params"]["energy storage"]["electric"];
+
+    for (var size in battery_data) {
+        // check if the property/key is defined in the object itself, not in parent
+        if (battery_data.hasOwnProperty(size)) {
+            var pt = i18n("electric");
+            for (y=0;y<data["year"].length;y++){
+                var slider_mass = $("[id='"+"mass_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
+                 slider_mass.noUiSlider.updateOptions({
+                                    start: battery_data[size]["energy battery mass"][y]
+                                });
+                var slider_density = $("[id='"+"energy_density_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
+                slider_density.noUiSlider.updateOptions({
+                                    start: battery_data[size]["battery cell energy density"][y]
+                                });
+                var slider_lifetime = $("[id='"+"lifetime_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
+                slider_lifetime.noUiSlider.updateOptions({
+                                    start: battery_data[size]["battery lifetime kilometers"][y]
+                                });
+        }
+
+        var div = $("[id='"+"type_"+pt+"_"+size+"']").children()
+        var select = $(div[0])
+        select.val(battery_data[size]["type"]);
+
+        var div = $("[id='"+"origin_"+pt+"_"+size+"']").children()
+        var select = $(div[0])
+        select.val(battery_data[size]["origin"]);
+
+        }
+    }
+
 };
 
 function update_fuel_sliders(data){
@@ -2327,26 +2704,6 @@ function update_fuel_sliders(data){
             }
         }
     };
-
-    for (var key in energy_storage){
-        var energy_storage_select = document.getElementById(key+"_storage");
-        energy_storage_select.value = energy_storage[key]['type']
-    }
-};
-
-holder.ondrop = function(e) {
-    this.className = '';
-    e.preventDefault();
-
-    var file = e.dataTransfer.files[0],
-        reader = new FileReader();
-    reader.onload = function(event) {
-        var data = JSON.parse(reader.result);
-        fill_in_from_config_file(data);
-    };
-
-    reader.readAsText(file);
-    return false;
 };
 
 function create_fuel_table() {
@@ -2406,9 +2763,7 @@ function create_fuel_table() {
                         if (y==0){
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +
                             '</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>'
-                            + '<td align="left" style="color:white"><select id="electric_storage" style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
-                            + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
-                            + '<option value="LFP">Lithium iron phosphate (LFP)</option></td>'
+
 
                         }else{
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +
@@ -2441,7 +2796,7 @@ function create_fuel_table() {
                             + '</option><option value="bioethanol - sugarbeet">'+i18n("bioethanol_sugarbeet")+'</option>'
                             + '<option value="bioethanol - maize starch">'+i18n("bioethanol_maize_starch")+'</option>'
                             + '<option value="synthetic gasoline">'+i18n("synthetic_gasoline")+'</option></select></td>'
-                            + '<td align="left" style="color:white">'+i18n('tank_polyethylene')+'</td>'
+
                         }else{
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
                             + '</td><td align="left" style="color:white">'
@@ -2470,7 +2825,7 @@ function create_fuel_table() {
                             +'</option><option value="biodiesel - algae">'+i18n("biodiesel_algae")
                             + '</option><option value="biodiesel - cooking oil">'+i18n("biodiesel_cooking_oil")
                             + '</option><option value="synthetic diesel">'+i18n("synthetic_diesel")+'</option></select></td>'
-                            + '<td align="left" style="color:white">'+i18n('tank_polyethylene')+'</td>'
+
 
                         }else{
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
@@ -2497,7 +2852,7 @@ function create_fuel_table() {
                             + '<td align="left" style="color:white"><select id="cng secondary fuel" style="color:grey">'
                             + '</option><option value="biogas">'+i18n("biogas")
                             + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
-                             + '<td align="left" style="color:white">'+i18n('tank_fiberglass')+'</td>'
+
 
                         }else{
 
@@ -2527,9 +2882,7 @@ function create_fuel_table() {
                             + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="electrolysis">'
                             + i18n("electrolysis")+'</option><option value="smr">'+i18n("smr")
                             +'</option><option value="smr with CCS">'+i18n("smr_ccs")+'</select></td>'
-                            + '<td align="left" style="color:white"><select id="hydrogen_storage" style="color:grey"><option value="carbon fiber">'+i18n("hydrogen_tank_carbon_fiber")+'</option>'
-                            + '<option value="hdpe">'+i18n("hydrogen_tank_hdpe")+'</option>'
-                            + '<option value="aluminium">'+i18n("hydrogen_tank_aluminium")+'</option></td>'
+
                         }else{
 
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
@@ -2578,7 +2931,314 @@ function create_fuel_table() {
     }
 };
 
+function create_energy_storage_table() {
 
+    var list_fuel = [];
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+
+    var tableRef = document.getElementById('energy_storage_table').getElementsByTagName('tbody')[0];
+    var rowCount = tableRef.rows.length;
+    //while (rowCount>2){
+    //    tableRef.deleteRow(2);
+    //    var rowCount = tableRef.rows.length;
+    //}
+
+    for (var pt = 0; pt < listPowertrains.length; pt++){
+
+        // Choose the appropriate powertrains: only select BEVs and PHEVs.
+
+        var fuel = "";
+        var fuel_real_name="";
+
+        if (listPowertrains[pt].innerText == i18n('electric')){
+            fuel = i18n('fuel_electric');
+            fuel_real_name = i18n('electric');
+        };
+
+        if (fuel_real_name != "" && !list_fuel.includes(fuel_real_name)){
+            for (var s = 0; s < listSizes.length; s++){
+                var size = listSizes[s].innerText;
+                for (var y = 0; y < listYears.length; y++){
+                var year = listYears[y].innerText;
+
+                    var newRow = tableRef.insertRow();
+
+                            if (y==0){
+                                var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
+                                '</td><td align="left" style="color:white"><div id="mass_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="energy_density_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="capacity_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="lifetime_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="type_'+fuel_real_name+'_'+size+'" style="width:300px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="origin_'+fuel_real_name+'_'+size+'" style="width:100px;margin-top:50px;margin-bottom:10px;"></div></td>'
+
+                            }else{
+
+                                var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
+                                '</td><td align="left" style="color:white"><div id="mass_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="energy_density_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="capacity_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="lifetime_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+
+
+                            };
+
+
+
+                newRow.innerHTML = row_content;
+                row_content='';
+        };
+            };
+
+            list_fuel.push(fuel_real_name);
+            fuel_real_name = "";
+        };
+    }
+    if (typeof newRow != "undefined") {
+
+        // Append table to div
+        tableRef.append(newRow);
+
+        var divs = $("#energy_storage_table > tbody").find('div');
+
+        for (var i=0; i<divs.length; i++){
+
+            var div_type = divs[i].id.split("_")[0];
+
+            if (div_type == "mass"){
+
+                var slider = noUiSlider.create(divs[i], {
+                        start: 150,
+                        tooltips: true,
+                        step:5,
+                        connect: true,
+                        range: {
+                            'min': 50,
+                            'max': 600
+                        },
+                        format: wNumb({
+                            decimals: 0,
+                            thousand: ',',
+                            suffix: ' kg'
+                        })
+                    });
+
+                slider.id = "_"+divs[i].id
+
+                slider.on('update', function(values, handle){
+                    var id = this.id.slice(6,);
+                    var energy_density = $("[id='"+"energy_density_"+id+"']").text().split(" ")[0]
+                    var capacity = $("[id='"+"capacity_"+id+"']")
+                    var mass = parseInt(values[0].split(" ")[0]);
+                    capacity.text(parseInt(mass * 0.6 * energy_density) + " kWh");
+                 });
+
+            };
+
+            if (div_type == "energy"){
+
+                var slider = noUiSlider.create(divs[i], {
+                        start: 0.2,
+                        tooltips: true,
+                        connect: true,
+                        range: {
+                            'min': 0.01,
+                            'max': .6
+                        },
+                        format: wNumb({
+                            decimals: 2,
+                            suffix: ' kWh/kg'
+                        })
+                    });
+
+                slider.id = "_"+divs[i].id
+                slider.on('update', function(values, handle){
+                    var id = this.id.slice(16,);
+                    var mass = $("[id='"+"mass_"+id+"']").text().split(" ")[0];
+                    var capacity = $("[id='"+"capacity_"+id+"']")
+                    var energy_density = parseFloat(values[0].split(" ")[0]);
+                    capacity.text(parseInt(mass * 0.6 * energy_density)+ " kWh");
+
+                 });
+
+            };
+
+
+
+            if (div_type == "lifetime"){
+
+                var slider = noUiSlider.create(divs[i], {
+                        start: 200000,
+                        tooltips: true,
+                        connect: true,
+                        step: 10000,
+                        range: {
+                            'min': 100000,
+                            'max': 500000
+                        },
+                        format: wNumb({
+                            decimals: 0,
+                            thousand: ',',
+                            suffix: ' km'
+                        })
+                    });
+
+                slider.id = "_"+divs[i].id
+
+            };
+
+
+
+            if (divs[i].id.split("_")[0] == "type"){
+
+                divs[i].innerHTML = '<select style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
+                                    + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
+                                    + '<option value="LFP">Lithium iron phosphate (LFP)</option></select>'
+
+            }
+
+            if (divs[i].id.split("_")[0] == "origin"){
+
+                divs[i].innerHTML = '<select style="color:grey"><option value="CN">'+i18n("china")+'</option>'
+                                    + '<option value="JP">'+i18n("japan")+'</option>'
+                                    + '<option value="RER">'+i18n("europe")+'</option>'
+                                    + '<option value="NO">'+i18n("norway")+'</option>'
+                                    + '<option value="US">'+i18n("united_states")+'</option></select>'
+
+            }
+
+
+
+        }
+
+
+
+    }
+
+};
+
+function create_efficiency_table() {
+    console.log("table creation")
+    var list_fuel = [];
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+    var listSizes = document.querySelectorAll( '#size_list > li' );
+
+    var tableRef = document.getElementById('efficiency_table').getElementsByTagName('tbody')[0];
+    var rowCount = tableRef.rows.length;
+
+    for (var pt = 0; pt < listPowertrains.length; pt++){
+
+        // Choose the appropriate powertrains
+        var valid_pt = false;
+        if (!["plugin_hybrid_diesel", "plugin_hybrid_petrol"].includes(listPowertrains[pt].innerText)){
+            valid_pt = true;
+        };
+
+        if (valid_pt==true && !list_fuel.includes(listPowertrains[pt].innerText)){
+            for (var s = 0; s < listSizes.length; s++){
+                var size = listSizes[s].innerText;
+                for (var y = 0; y < listYears.length; y++){
+
+                    var year = listYears[y].innerText;
+                    var newRow = tableRef.insertRow();
+
+                    if (![i18n("electric"), i18n("fuel_cell")].includes(listPowertrains[pt].innerText)){
+
+                        var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
+                        '</td><td align="left" style="color:white"></td>'
+                        + '<td align="left" style="color:white"><div id="engine_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="powertrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+
+                    }else{
+
+                        var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
+                        '</td><td align="left" style="color:white"><div id="storage_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="engine_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="powertrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+
+
+                    };
+
+                newRow.innerHTML = row_content;
+                row_content='';
+                };
+            };
+            list_fuel.push(listPowertrains[pt].innerText);
+        };
+    }
+
+    if (typeof newRow != "undefined") {
+
+        // Append table to div
+        tableRef.append(newRow);
+
+        var divs = $(tableRef).find('div');
+
+        for (var i=0; i<divs.length; i++){
+            if (divs[i].id.split("_")[0]!="powertrain"){
+                console.log(divs[i])
+
+                var slider = noUiSlider.create(divs[i], {
+                        start: 0.9,
+                        tooltips: true,
+                        step:0.01,
+                        connect: true,
+                        range: {
+                            'min': 0.01,
+                            'max': 1
+                        },
+                        format: wNumb({
+                            decimals: 2
+                        })
+                    });
+
+                slider.id = "_"+divs[i].id
+
+                slider.on('update', function(values, handle){
+                    var id = this.id.split("_").slice(-3).join("_");
+
+                    if ($("[id='"+"storage_eff_"+id+"']").length > 0){
+                        var storage_eff = parseFloat($("[id='"+"storage_eff_"+id+"']").text())
+                    }else{
+                        var storage_eff = 1.0
+                    };
+
+                    var engine_eff = parseFloat($("[id='"+"engine_eff_"+id+"']").text())
+                    var drivetrain_eff = parseFloat($("[id='"+"drivetrain_eff_"+id+"']").text())
+
+                    var efficiency = storage_eff * engine_eff * drivetrain_eff;
+
+                    var total_efficiency = $("[id='"+"powertrain_eff_"+id+"']")
+                    total_efficiency.text(parseInt(efficiency*100) + " %");
+                 });
+
+            };
+
+
+        };
+    };
+};
+
+holder.ondrop = function(e) {
+    this.className = '';
+    e.preventDefault();
+
+    var file = e.dataTransfer.files[0],
+        reader = new FileReader();
+    reader.onload = function(event) {
+        var data = JSON.parse(reader.result);
+        isConfig = true;
+        fill_in_from_config_file(data);
+    };
+
+    reader.readAsText(file);
+    return false;
+};
 
 
 

@@ -193,6 +193,11 @@
       "cc_per_km": "Climate change [kg CO2-eq./km]",
       "driving_cycle": "Driving cycle time [seconds]",
       "mute": "Mute",
-      "unmute": "Unmute"
+      "unmute": "Unmute",
+      "china": "China",
+      "japan": "Japan",
+      "europe": "Europe",
+      "norway": "Norway",
+      "united_states": "United States"
   }
 }

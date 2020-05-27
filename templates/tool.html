@@ -287,120 +287,7 @@
 		</section>
 		<!-- End SCOPE -->
 
-		<!-- Start CAR PARAMETERS -->
-		<section id="mu-about" style="background-color:grey;">
-			<div class="container" style="width:90%;">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="row" id="collapsible_parameters">
-							<h2><img class="image" src="/static/images/icons/manufacture_icon.png"
-												  style="height:65px; width:80px; border-right:3px solid white;
-														padding:15px;margin-bottom:0px;display:inline-block;"
-												 alt="image">
-						<span style="color:white;">{{_('CAR PARAMETERS')}}<p style="display:inline-block;margin-left:10px;">{{_("(Optional, click to expand.)")}}</p></span></h2>
 
-						</div>
-						<div class="mu-about-area" style="padding-top:20px;" >
-							<!-- Start About Us Content -->
-							<div class="mu-about-content" style="display:none;margin:30px;" id="manufacture_section">
-								<div class="row" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white">
-									<div class="col-md-5">
-										<p >
-										{{_('Each car is defined by up to 200 input parameters.')}}<br>
-									{{_('The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.')}}
-										<br><u>{{_('You are however welcome to override the default value for any of these parameters if you have a specific case in mind')}}</u><br>
-									{{_('The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.')}}<br>
-									{{_('The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table.')}} <br>
-									{{_('That is, a parameter with a high sensitivity is a parameter for which a change in its value of ')}}1% {{_('leads to a change in environmental impacts by 0.5 to')}} 1%, {{_('against
-										0.3 to')}} 0.5% {{_('for a parameter with medium sensitivity, and 0 to')}} 0.3% {{_('for a parameter with low sensitivity.')}}
-									</p>
-									<button class="online-button" onclick="window.open('/get_param_table','_blank');"
-													style="margin:3px;background-color:transparent;color:white;border:1px solid white;width:250px;">
-													{{_('See full parameters list')}}
-									</button>
-
-									</div>
-									<div class="col-md-3" >
-
-												<h6>{{_('Frequently asked questions (click to see an answer)')}}</h6>
-												<ul>
-													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">{{_('How to change the mass of the battery of an electric vehicle?')}}</a></li>
-													<li><a onclick="change_tutorial_video('capacity_battery')" href="javascript:;" style="color:white;">{{_('How to change the capacity of the battery of an electric vehicle?')}}</a></li>
-													<li><a onclick="change_tutorial_video('engine_eff')" href="javascript:;" style="color:white;">{{_('How to change the efficiency of the engine?')}}</a></li>
-													<li><a onclick="change_tutorial_video('passenger_mass')" href="javascript:;" style="color:white;">{{_('How to change the weight of the passengers?')}}</a></li>
-													<li><a onclick="change_tutorial_video('hybrid_level')" href="javascript:;" style="color:white;">{{_('How to change hybridization level of future diesel vehicles?')}}</a></li>
-													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">{{_('How to change the lifetime of a battery?')}}</a></li>
-													<li><a onclick="change_tutorial_video('fc_eff')" href="javascript:;" style="color:white;">{{_('How to change the efficiency of a fuel cell stack?')}}</a></li>
-												</ul>
-
-									</div>
-									<div class="col-md-4">
-										<h6 id="tutorial_title">{{_('Change the mass of the battery on a electric vehicle')}}</h6>
-										<p id="tutorial_text">{{_('The mass of the battery of an electric vehicle can be changed by modifying
-										the value of the energy battery mass parameter. The mass of the battery is further split into
-										Balance Of Plant (BoP) components mass and battery cells mass.
-										Hence, increasing the mass of the battery will also increase the mass of the battery cells
-										and eventually the energy capacity of the battery. However, increasing the mass
-										of the battery will also increase the driving mass of the vehicle and the energy required
-										to move it over 1 km.')}}</p>
-
-										<p id = "tutorial_relation" style='margin:20px;border:2px solid white;padding:5px;'>
-										{{_('Consider the following relations:')}}<br>
-										energy battery mass [kg] &times; battery cell mass share [%] &equals; mass of battery cells [kg]
-                                        <br>
-                                        mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
-										<br>
-
-										{{_('but also:')}}
-
-										<br>
-										curb mass &equals; battery cell mass &plus; battery BoP mass &plus; ...
-											<br>
-										driving mass &equals; curb mass &plus; cargo mass
-											<br>
-										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)
-										</p>
-									</div>
-								<div class="row">
-											<div class="col-md-12">
-												<img class="image" src="/static/images/battery_mass_tutorial.gif" alt="image" id="tutorial_video"
-												style="height:300px;margin:20px;border:2px solid white;padding:5px;display: block;margin-left: auto;margin-right: auto;">
-											</div>
-								</div>
-								</div>
-
-								<p style="color:white;margin:20px;">{{_('Add any parameter you would like to modify.')}}</p>
-
-								<input class="form-control" id="InputParameters" type="text" placeholder="{{_('Search for parameters to modify')}}">
-									  <br>
-								<div class="container" style="width:100%;">
-									<div class="row" id="powertrain_row" style="width:100%;">
-									</div>
-								</div>
-										<br>
-									  <table class="table" style="color:white;font-size:12px;">
-										<thead>
-										  <tr>
-											<th>{{_('Importance')}}</th>
-											<th>{{_('Name')}}</th>
-											<th>{{_('Description')}}</th>
-											  <th>{{_('Unit')}}</th>
-											  <th>{{_('Source')}}</th>
-											  <th>{{_('Applies to powertrain')}}</th>
-											  <th>{{_('Applies to size')}}</th>
-											  <th>{{_('Add?')}}</th>
-										  </tr>
-										</thead>
-										<tbody id="TableParameters">
-										</tbody>
-									  </table>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		</section>
-		<!-- End CAR PARAMETERS -->
 
 		<!-- Start USE -->
 		<section id="mu-testimonials">
@@ -592,7 +479,80 @@
 		</section>
 		<!-- End Publications -->
 
-		<!-- Start FUEL PATHWAYS -->
+		<!-- Start POWERTRAIN EFFICIENCY -->
+		<section id="mu-about" style="background-color:grey;">
+			<div class="container" style="width:90%;">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row" >
+							<h2><img class="image" src="/static/images/icons/manufacture_icon.png"
+												  style="height:85px; width:100px; border-right:3px solid white;
+														padding:20px;margin-bottom:0px;display:inline-block;margin-left:-30px;"
+												 alt="image">
+						<span style="color:white;">{{_('TANK-TO-WHEEL EFFICIENCY')}}</span></h2></div>
+						<div class="mu-about-area" style="padding-top:0px;padding-bottom:50px;">
+							<!-- Start About Us Content -->
+							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;margin-top:0px;" id="efficiency_section">
+
+                                <p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+									{{_('This section allows to adjust the tank-to-wheel efficiency of the vehicles. It represents the fraction of energy provided by the energy storage unit effectively transmitted to the wheels. ')}}
+                                    <br>
+                                    {{_('The energy storage efficiency for battery electric cars corresponds to the battery discharge efficiency.')}}
+                                    <br>
+                                    {{_('The energy storage efficiency for fuel cell cars corresponds to the fuel cell system efficiency.')}}
+                                    </p>
+
+                                <div class="container" style="width:100%;">
+									<div class="row" id = "row_efficiency" style="width:100%;color:white;">
+										<table class="table" id="efficiency_table">
+											<thead>
+                                                <tr>
+                                                        <td align="left" colspan="5">
+                                                            <div class="row" >
+                                                                <h6>
+                                                                    <img class="image" src="/static/images/icons/powertrain_icon.png"
+                                                                                      style="height:70px;padding:20px;display:inline-block;"
+                                                                                     alt="image">
+                                                                    <span style="color:white;">{{_('POWERTRAIN EFFICIENCY')}}</span>
+                                                                </h6>
+                                                            </div>
+                                                        </td>
+                                                </tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th>
+														<h3>{{_('Efficiency rate for')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Energy storage efficiency')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Engine efficiency')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Drivetrain efficiency')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Tank-to-wheel efficiency')}}</h3>
+													</th>
+
+												</tr>
+											</tbody>
+
+										</table>
+
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</section>
+		<!-- End POWERTRAIN EFFICIENCY -->
+
+        <!-- Start FUEL PATHWAYS -->
 		<section id="mu-about" style="background-color:#626567;">
 			<div class="container" style="width:90%;">
 				<div class="row">
@@ -606,6 +566,64 @@
 						<div class="mu-about-area" style="padding-top:0px;padding-bottom:50px;">
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;margin-top:0px;" id="fuel_section">
+
+                                <p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+									{{_('If battery electric or plugin-hybrid vehicles are selected, it is possible to adjust a few parameters about the battery. The user can adjust the battery mass. Note that, by default, sixty percent of the mass is assumed to be taken by the cells. The user can also adjust the energy density of the battery cells. These two parameters defines a new capacity for the battery. Note that a heavier battery will increase the energy consumption of the vehicle.')}}
+
+                                    {{_('The lifetime of the battery can also be adjusted. If the lifetime is lower than the lifetime of the vehicle, a battery replacement is needed. For example, if the battery is expected to last 150,000 km and the vehicle lifetime is 200,000 km, an additional 0.33 unit of a second battery will be needed. This assumes that the environmental burden of the remaining 0.66 unit of the second battery will be allocated to a second-life application. If you do not like this assumption, you can set the battery lifetime to be exactly half of that of the vehicle lifetime. This way, the environmental burden of the second battery will be entirely allocated to the vehicle.')}}
+
+                                    {{_('Finally, the user can select the chemistry and the origin of manufacture of the battery. The origin of manufacture will set the type of electricity to manufacture the battery cells.')}}
+								</p>
+
+                                <div class="container" style="width:100%;">
+									<div class="row" id = "row_storage" style="width:100%;color:white;">
+										<table class="table" id="energy_storage_table">
+											<thead>
+											<tr>
+													<td align="left" colspan="5">
+														<div class="row" >
+															<h6>
+																<img class="image" src="/static/images/icons/car_battery_icon.png"
+																				  style="height:70px;padding:20px;display:inline-block;"
+																				 alt="image">
+																<span style="color:white;">{{_('ENERGY STORAGE')}}</span>
+															</h6>
+														</div>
+													</td>
+											</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th>
+														<h3>{{_('Energy storage for')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Battery mass')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Cell energy density')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Battery capacity')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Battery lifetime')}}</h3>
+													</th>
+                                                    <th>
+														<h3>{{_('Chemistry')}}</h3>
+													</th>
+                                                    <th>
+														<h3>{{_('Origin')}}</h3>
+													</th>
+
+												</tr>
+											</tbody>
+
+										</table>
+
+									</div>
+								</div>
+
 								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
 									{{_('In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
 									The user can select conventional pathways to represent the supply and use of common fuels such as diesel
@@ -653,9 +671,6 @@
 													<th>
 														<h3>{{_('Secondary fuel')}}</h3>
 													</th>
-													<th>
-														<h3>{{_('Type of energy storage')}}</h3>
-													</th>
 												</tr>
 
 											</tbody>
@@ -671,6 +686,121 @@
 			</div>
 		</section>
 		<!-- End FUEL PATHWAYS -->
+
+        <!-- Start CAR PARAMETERS -->
+		<section id="mu-about" style="background-color:#b8b8b8;">
+			<div class="container" style="width:90%;">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row" id="collapsible_parameters">
+							<h2><img class="image" src="/static/images/icons/parameter_icon.png"
+												  style="height:65px; width:80px; border-right:3px solid white;
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:white;">{{_('OTHER CAR PARAMETERS')}}<p style="display:inline-block;margin-left:10px;">{{_("(Optional, click to expand.)")}}</p></span></h2>
+
+						</div>
+						<div class="mu-about-area" style="padding-top:20px;" >
+							<!-- Start About Us Content -->
+							<div class="mu-about-content" style="display:none;margin:30px;" id="manufacture_section">
+								<div class="row" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white">
+									<div class="col-md-5">
+										<p >
+										{{_('Each car is defined by up to 200 input parameters.')}}<br>
+									{{_('The default values for these parameters are so-called "most likely" values, calibrated against a large number of car manufacturers data.')}}
+										<br><u>{{_('You are however welcome to override the default value for any of these parameters if you have a specific case in mind')}}</u><br>
+									{{_('The search field below allows you to do that. Search for a parameter and add it by using the "Add" button in the right column of the search results table.')}}<br>
+									{{_('The importance, or sensitivity, of a given parameter in regard to environmental impacts is indicated in the left column of the search results table.')}} <br>
+									{{_('That is, a parameter with a high sensitivity is a parameter for which a change in its value of ')}}1% {{_('leads to a change in environmental impacts by 0.5 to')}} 1%, {{_('against
+										0.3 to')}} 0.5% {{_('for a parameter with medium sensitivity, and 0 to')}} 0.3% {{_('for a parameter with low sensitivity.')}}
+									</p>
+									<button class="online-button" onclick="window.open('/get_param_table','_blank');"
+													style="margin:3px;background-color:transparent;color:white;border:1px solid white;width:250px;">
+													{{_('See full parameters list')}}
+									</button>
+
+									</div>
+									<div class="col-md-3" >
+
+												<h6>{{_('Frequently asked questions (click to see an answer)')}}</h6>
+												<ul>
+													<li><a onclick="change_tutorial_video('mass_battery')" href="javascript:;" style="color:white;">{{_('How to change the mass of the battery of an electric vehicle?')}}</a></li>
+													<li><a onclick="change_tutorial_video('capacity_battery')" href="javascript:;" style="color:white;">{{_('How to change the capacity of the battery of an electric vehicle?')}}</a></li>
+													<li><a onclick="change_tutorial_video('engine_eff')" href="javascript:;" style="color:white;">{{_('How to change the efficiency of the engine?')}}</a></li>
+													<li><a onclick="change_tutorial_video('passenger_mass')" href="javascript:;" style="color:white;">{{_('How to change the weight of the passengers?')}}</a></li>
+													<li><a onclick="change_tutorial_video('hybrid_level')" href="javascript:;" style="color:white;">{{_('How to change hybridization level of future diesel vehicles?')}}</a></li>
+													<li><a onclick="change_tutorial_video('battery_lifetime')" href="javascript:;" style="color:white;">{{_('How to change the lifetime of a battery?')}}</a></li>
+													<li><a onclick="change_tutorial_video('fc_eff')" href="javascript:;" style="color:white;">{{_('How to change the efficiency of a fuel cell stack?')}}</a></li>
+												</ul>
+
+									</div>
+									<div class="col-md-4">
+										<h6 id="tutorial_title">{{_('Change the mass of the battery on a electric vehicle')}}</h6>
+										<p id="tutorial_text">{{_('The mass of the battery of an electric vehicle can be changed by modifying
+										the value of the energy battery mass parameter. The mass of the battery is further split into
+										Balance Of Plant (BoP) components mass and battery cells mass.
+										Hence, increasing the mass of the battery will also increase the mass of the battery cells
+										and eventually the energy capacity of the battery. However, increasing the mass
+										of the battery will also increase the driving mass of the vehicle and the energy required
+										to move it over 1 km.')}}</p>
+
+										<p id = "tutorial_relation" style='margin:20px;border:2px solid white;padding:5px;'>
+										{{_('Consider the following relations:')}}<br>
+										energy battery mass [kg] &times; battery cell mass share [%] &equals; mass of battery cells [kg]
+                                        <br>
+                                        mass of battery cell [kg] &times; battery cell energy density [kWh/kg] &equals; energy stored in the battery [kWh]
+										<br>
+
+										{{_('but also:')}}
+
+										<br>
+										curb mass &equals; battery cell mass &plus; battery BoP mass &plus; ...
+											<br>
+										driving mass &equals; curb mass &plus; cargo mass
+											<br>
+										tank to wheel energy &equals; &fnof;(driving mass, engine power, ...)
+										</p>
+									</div>
+								<div class="row">
+											<div class="col-md-12">
+												<img class="image" src="/static/images/battery_mass_tutorial.gif" alt="image" id="tutorial_video"
+												style="height:300px;margin:20px;border:2px solid white;padding:5px;display: block;margin-left: auto;margin-right: auto;">
+											</div>
+								</div>
+								</div>
+
+								<p style="color:white;margin:20px;">{{_('Add any parameter you would like to modify.')}}</p>
+
+								<input class="form-control" id="InputParameters" type="text" placeholder="{{_('Search for parameters to modify')}}">
+									  <br>
+								<div class="container" style="width:100%;">
+									<div class="row" id="powertrain_row" style="width:100%;">
+									</div>
+								</div>
+										<br>
+									  <table class="table" style="color:white;font-size:12px;">
+										<thead>
+										  <tr>
+											<th>{{_('Importance')}}</th>
+											<th>{{_('Name')}}</th>
+											<th>{{_('Description')}}</th>
+											  <th>{{_('Unit')}}</th>
+											  <th>{{_('Source')}}</th>
+											  <th>{{_('Applies to powertrain')}}</th>
+											  <th>{{_('Applies to size')}}</th>
+											  <th>{{_('Add?')}}</th>
+										  </tr>
+										</thead>
+										<tbody id="TableParameters">
+										</tbody>
+									  </table>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</section>
+		<!-- End CAR PARAMETERS -->
 
 
 		<!-- Start CALCULATIONS -->
