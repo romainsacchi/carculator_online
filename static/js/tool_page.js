@@ -2876,12 +2876,25 @@ function create_fuel_table() {
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
                             + '</td><td align="left" style="color:white">'
                             + '<select id="hydrogen primary fuel" style="color:grey">'
-                            + '</option><option value="smr">'+i18n("smr") + '<option value="electrolysis">'+i18n("electrolysis")
-                            +'</option><option value="smr with CCS">'+i18n("smr_ccs")+'</select></td>'
+                            + '<option value="smr - natural gas">'+i18n("smr") + '</option>'
+                            + '<option value="electrolysis">'+i18n("electrolysis")+'</option>'
+                            + '<option value="smr - natural gas with CCS">'+i18n("smr_ccs")+'</option>'
+                            + '<option value="smr - biogas">'+i18n("smr_biogas") +'</option>'
+                            +'<option value="smr - biogas with CCS">'+i18n("smr_biogas_ccs")+'</option>'
+                            +'<option value="coal gasification">'+i18n("coal_gasification")+'</option>'
+                            +'</select>'
+                            +'</td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"><select id="hydrogen secondary fuel" style="color:grey"><option value="electrolysis">'
-                            + i18n("electrolysis")+'</option><option value="smr">'+i18n("smr")
-                            +'</option><option value="smr with CCS">'+i18n("smr_ccs")+'</select></td>'
+                            + '<td align="left" style="color:white">'
+                            + '<select id="hydrogen secondary fuel" style="color:grey">'
+                            + '<option value="electrolysis">'+i18n("electrolysis")+'</option>'
+                            + '<option value="smr - natural gas">'+i18n("smr") + '</option>'
+                            + '<option value="smr - natural gas with CCS">'+i18n("smr_ccs")+'</option>'
+                            + '<option value="smr - biogas">'+i18n("smr_biogas") +'</option>'
+                            + '<option value="smr - biogas with CCS">'+i18n("smr_biogas_ccs")+'</option>'
+                            +'<option value="coal gasification">'+i18n("coal_gasification")+'</option>'
+                            + '</select>'
+                            + '</td>'
 
                         }else{
 

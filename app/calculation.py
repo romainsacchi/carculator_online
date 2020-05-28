@@ -779,23 +779,24 @@ class Calculation:
             f_d[(cat, powertrain, size, name, "none")] = d_val
 
         if "energy storage" in raw_dict["background params"]:
-            energy_storage = raw_dict["background params"]["energy storage"]["electric"]
+            if "electric" in raw_dict["background params"]["energy storage"]:
+                energy_storage = raw_dict["background params"]["energy storage"]["electric"]
 
-            for e in energy_storage:
-                size = self.d_size_all[e]
-                for p in energy_storage[e]:
-                    if p not in ('type', 'origin'):
-                        name = p
-                        cat = self.d_categories[name]
-                        powertrain ="BEV"
-                        val = energy_storage[e][p]
+                for e in energy_storage:
+                    size = self.d_size_all[e]
+                    for p in energy_storage[e]:
+                        if p not in ('type', 'origin'):
+                            name = p
+                            cat = self.d_categories[name]
+                            powertrain = "BEV"
+                            val = energy_storage[e][p]
 
-                        d_val = {
-                            (k, "loc"): v
-                            for k, v in list(zip(new_dict[("Functional unit",)]["year"], val))
-                        }
+                            d_val = {
+                                (k, "loc"): v
+                                for k, v in list(zip(new_dict[("Functional unit",)]["year"], val))
+                            }
 
-                        f_d[(cat, powertrain, size, name, "none")] = d_val
+                            f_d[(cat, powertrain, size, name, "none")] = d_val
 
         if "efficiency" in raw_dict["background params"]:
             efficiency = raw_dict["background params"]["efficiency"]
