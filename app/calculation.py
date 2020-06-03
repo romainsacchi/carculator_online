@@ -621,6 +621,7 @@ class Calculation:
         task.progress = 95
         db.session.commit()
 
+
         TtW_energy = cm.ecm.motive_energy_per_km(
             driving_mass=arr.sel(parameter="driving mass"),
             rr_coef=arr.sel(parameter="rolling resistance coefficient"),
