@@ -35,6 +35,7 @@ import xlsxwriter
 
 app.calc = Calculation()
 app.export = None
+app.job_key = None
 #app.inputs = ""
 
 progress_status = 0
@@ -482,6 +483,8 @@ def get_results():
 
     job_id = str(uuid.uuid1())
 
+    app.job_key = job_id
+
     # Add task to db
     task = Task(id=job_id, progress=0,)
     db.session.add(task)
@@ -518,7 +521,6 @@ def display_result(job_key):
         job = Job.fetch(job_key, connection=conn)
         if job.is_finished:
             app.export = job.result[1]
-            print(app.export)
             return render_template("result.html", data=job.result[0])
     except NoSuchJobError:
         return render_template("404.html", job_id=job_key)
@@ -695,10 +697,13 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version):
     response = Response()
     response.status_code = 200
 
-    print(app.export)
-    print(type(app.export))
+    job = Job.fetch(app.job_key, connection=conn)
+    export = job.result[1]
 
-    lci = app.export.write_lci(
+    print(export)
+    print(type(export))
+
+    lci = export.write_lci(
         presamples=False,
         ecoinvent_compatibility=compatibility,
         ecoinvent_version=ecoinvent_version,
