@@ -693,6 +693,7 @@ class Calculation:
             self.inputs)
         )
 
+
     def format_dictionary(self, raw_dict, lang, job_id):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
