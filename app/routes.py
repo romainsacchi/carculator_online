@@ -694,6 +694,9 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version):
     response = Response()
     response.status_code = 200
 
+    print(app.export)
+    print(type(app.export))
+
     lci = app.export.write_lci(
         presamples=False,
         ecoinvent_compatibility=compatibility,
