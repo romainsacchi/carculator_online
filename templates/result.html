@@ -111,11 +111,11 @@
 					</form>-->
 
 					<div class="dropdown">
-					  <button class="online-button"
+					  <button class="online-button" onclick="dropdown_function()"
 							  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">
 						  {{ _('Export Brightway2-compatible inventories') }}
 					  </button>
-					  <div id="myDropdown" class="dropdown-content">
+					  <div id="export_dropdown" class="dropdown-content">
 						<a href="/get_inventory_excel_for_bw/True/3.5">{{_("for ")}} ecoinvent 3.5 cutoff</a>
 						<a href="/get_inventory_excel_for_bw/True/3.6">{{_("for ")}} ecoinvent 3.6 cutoff</a>
 						<a href="/get_inventory_excel_for_bw/False/3.5">{{_("for ")}} REMIND-ecoinvent 3.5 cutoff</a>
@@ -474,6 +474,25 @@
 	$('#select_impact').on('change', function() {
 	  generate_chart_accumulated_impacts(data[6], i18n(this.value), this.value);
 	});
+
+	function dropdown_function(){
+		document.getElementById("export_dropdown").classList.toggle("show");
+	}
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+		  var openDropdown = dropdowns[i];
+		  if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		  }
+		}
+	  }
+	}
+
+
 
 </script>
 
