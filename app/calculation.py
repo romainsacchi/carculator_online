@@ -689,8 +689,8 @@ class Calculation:
                     list_res_acc,
                 ]
             ),
-            self.A,
-            self.inputs
+            (self.A,
+            self.inputs)
         )
 
     def format_dictionary(self, raw_dict, lang, job_id):
