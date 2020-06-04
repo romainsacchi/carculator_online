@@ -31,15 +31,9 @@ from werkzeug.urls import url_parse
 import uuid
 import io
 import xlsxwriter
-#from carculator import ExportInventory
 
 app.calc = Calculation()
-app.export = None
-app.job_key = None
-#app.inputs = ""
-
 progress_status = 0
-
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -483,8 +477,6 @@ def get_results():
 
     job_id = str(uuid.uuid1())
 
-    app.job_key = job_id
-
     # Add task to db
     task = Task(id=job_id, progress=0,)
     db.session.add(task)
@@ -520,8 +512,7 @@ def display_result(job_key):
     try:
         job = Job.fetch(job_key, connection=conn)
         if job.is_finished:
-            app.export = job.result[1]
-            return render_template("result.html", data=job.result[0])
+            return render_template("result.html", data=job.result[0], uuid=job_key)
     except NoSuchJobError:
         return render_template("404.html", job_id=job_key)
 
@@ -685,9 +676,9 @@ def write_lci_to_excel(lci, name):
     return output.read()
 
 
-@app.route("/get_inventory_excel_for_bw/<compatibility>/<ecoinvent_version>")
+@app.route("/get_inventory_excel_for_bw/<compatibility>/<ecoinvent_version>/<job_key>")
 @login_required
-def get_inventory_excel_for_bw(compatibility, ecoinvent_version):
+def get_inventory_excel_for_bw(compatibility, ecoinvent_version, job_key):
 
     if compatibility == "True":
         compatibility = True
@@ -696,8 +687,8 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version):
 
     response = Response()
     response.status_code = 200
-
-    job = Job.fetch(app.job_key, connection=conn)
+    print(job_key)
+    job = Job.fetch(job_key, connection=conn)
     export = job.result[1]
 
     print(export)
