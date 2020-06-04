@@ -1,8 +1,7 @@
 from app import db
 from carculator import *
 import json
-import io
-import xlsxwriter
+
 import csv
 from collections import defaultdict
 from app.models import Task
@@ -501,8 +500,9 @@ class Calculation:
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
 
-        lci = self.ic.export_lci(presamples=False)
-        self.excel_lci = self.write_lci_to_excel(lci, "carculator")
+        #lci = self.ic.export_lci(presamples=False)
+        #self.excel_lci = self.write_lci_to_excel(lci, "carculator")
+        self.excel_lci = ExportInventory(self.ic.A, self.ic.rev_inputs)
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -827,93 +827,4 @@ class Calculation:
 
         return new_dict
 
-    def write_lci_to_excel(self, lci, name):
-        """
-        Export an Excel file that can be consumed by Brightway2.
 
-        :returns: returns the file path of the exported inventory.
-        :rtype: str.
-        """
-        list_act = lci
-        data = []
-
-        data.extend((["Database", name], ("format", "Excel spreadsheet")))
-        data.append([])
-
-        for k in list_act:
-            if k.get("exchanges"):
-                data.extend(
-                    (
-                        ["Activity", k["name"]],
-                        ("location", k["location"]),
-                        ("production amount", float(k["production amount"])),
-                        ("reference product", k.get("reference product")),
-                        ("type", "process"),
-                        ("unit", k["unit"]),
-                        ("worksheet name", "None"),
-                        ["Exchanges"],
-                        [
-                            "name",
-                            "amount",
-                            "database",
-                            "location",
-                            "unit",
-                            "categories",
-                            "type",
-                            "reference product",
-                        ],
-                    )
-                )
-
-                for e in k["exchanges"]:
-                    data.append(
-                        [
-                            e["name"],
-                            float(e["amount"]),
-                            e["database"],
-                            e.get("location", "None"),
-                            e["unit"],
-                            "::".join(e.get("categories", ())),
-                            e["type"],
-                            e.get("reference product"),
-                        ]
-                    )
-            else:
-                data.extend(
-                    (
-                        ["Activity", k["name"]],
-                        ("type", "biosphere"),
-                        ("unit", k["unit"]),
-                        ("worksheet name", "None"),
-                    )
-                )
-            data.append([])
-
-        output = io.BytesIO()
-        workbook = xlsxwriter.Workbook(output, {"in_memory": True})
-        bold = workbook.add_format({"bold": True})
-        bold.set_font_size(12)
-        highlighted = {
-            "Activity",
-            "Database",
-            "Exchanges",
-            "Parameters",
-            "Database parameters",
-            "Project parameters",
-        }
-        frmt = lambda x: bold if row[0] in highlighted else None
-        sheet = workbook.add_worksheet(name)
-
-        for row_index, row in enumerate(data):
-            for col_index, value in enumerate(row):
-                if value is None:
-                    continue
-                elif isinstance(value, float):
-                    sheet.write_number(row_index, col_index, value, frmt(value))
-                else:
-                    sheet.write_string(row_index, col_index, value, frmt(value))
-
-        workbook.close()
-        output.seek(0)
-
-        return output.read()

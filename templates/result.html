@@ -110,6 +110,19 @@
 									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
 					</form>
 
+					<div class="dropdown">
+					  <button class="online-button"
+							  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">
+						  {{ _('Export Brightway2-compatible inventories') }}
+					  </button>
+					  <div id="myDropdown" class="dropdown-content">
+						<a href="/get_inventory_excel_for_bw/True/3.5">{{_("for ")}} ecoinvent 3.5 cutoff</a>
+						<a href="/get_inventory_excel_for_bw/True/3.6">{{_("for ")}} ecoinvent 3.6 cutoff</a>
+						<a href="/get_inventory_excel_for_bw/False/3.5">{{_("for ")}} REMIND-ecoinvent 3.5 cutoff</a>
+						<a href="/get_inventory_excel_for_bw/False/3.6">{{_("for ")}} REMIND-ecoinvent 3.5 cutoff</a>
+					  </div>
+					</div>
+
 					 <button class="online-button" onclick="share_results()"
 						  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Share results') }}
 					 </button>

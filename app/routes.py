@@ -12,7 +12,7 @@ from flask import (
     url_for,
     json,
     flash,
-    Response
+    Response,
 )
 import datetime
 import mimetypes
@@ -29,11 +29,14 @@ from app.models import User, Task
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 import uuid
+import io
+import xlsxwriter
 
 app.calc = Calculation()
 app.lci_to_bw = ""
 
 progress_status = 0
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -115,15 +118,45 @@ def tool_page(country):
     else:
         try:
             response = (
-                app.calc.electricity_mix.loc[dict(country=country,
-                variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+                app.calc.electricity_mix.loc[
+                    dict(
+                        country=country,
+                        variable=[
+                            "Hydro",
+                            "Nuclear",
+                            "Gas",
+                            "Solar",
+                            "Wind",
+                            "Biomass",
+                            "Coal",
+                            "Oil",
+                            "Geothermal",
+                            "Waste",
+                        ],
+                    )
+                ]
                 .interp(year=[2020, 2035, 2050])
                 .values
             )
         except KeyError:
             response = (
-                app.calc.electricity_mix.loc[dict(country='RER',
-                variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+                app.calc.electricity_mix.loc[
+                    dict(
+                        country="RER",
+                        variable=[
+                            "Hydro",
+                            "Nuclear",
+                            "Gas",
+                            "Solar",
+                            "Wind",
+                            "Biomass",
+                            "Coal",
+                            "Oil",
+                            "Geothermal",
+                            "Waste",
+                        ],
+                    )
+                ]
                 .interp(year=[2020, 2035, 2050])
                 .values
             )
@@ -132,17 +165,13 @@ def tool_page(country):
         ).tolist()
 
         try:
-            region = app.calc.region_map[country][
-                        "RegionCode"
-                    ]
+            region = app.calc.region_map[country]["RegionCode"]
         except KeyError:
             region = "EUR"
 
         share_biofuel = (
             app.calc.biofuel.sel(
-                region=region,
-                fuel_type='Biomass fuel',
-                scenario='SSP2-Base',
+                region=region, fuel_type="Biomass fuel", scenario="SSP2-Base",
             )
             .interp(year=[2020, 2035, 2050])
             .values
@@ -161,58 +190,59 @@ def tool_page(country):
             },
             "background params": {
                 "country": country,
-                "fuel blend": {'petrol': {'primary fuel': {
-                                            'type':'petrol',
-                                            'share':np.round((1.0 - share_biofuel), 2).tolist()
-                                                            }
-                                        ,
-                                         'secondary fuel': {
-                                            'type':'bioethanol - wheat straw',
-                                             'share':np.round(share_biofuel, 2).tolist()
-                                         }}
-                                        ,
-                               'diesel': {'primary fuel': {
-                                            'type':'diesel',
-                                            'share':np.round((1.0 - share_biofuel), 2).tolist()
-                                        },
-                                         'secondary fuel': {
-                                             'type':'biodiesel - algae',
-                                             'share':np.round(share_biofuel, 2).tolist()
-                                         }
-                                        }
-                                },
+                "fuel blend": {
+                    "petrol": {
+                        "primary fuel": {
+                            "type": "petrol",
+                            "share": np.round((1.0 - share_biofuel), 2).tolist(),
+                        },
+                        "secondary fuel": {
+                            "type": "bioethanol - wheat straw",
+                            "share": np.round(share_biofuel, 2).tolist(),
+                        },
+                    },
+                    "diesel": {
+                        "primary fuel": {
+                            "type": "diesel",
+                            "share": np.round((1.0 - share_biofuel), 2).tolist(),
+                        },
+                        "secondary fuel": {
+                            "type": "biodiesel - algae",
+                            "share": np.round(share_biofuel, 2).tolist(),
+                        },
+                    },
+                },
                 "energy storage": {
                     "electric": {
                         _("Mid-size"): {
-                            "type":"NMC",
-                             "origin":"CN",
-                             "energy battery mass": [385, 305, 230],
-                             "battery cell energy density": [0.23, 0.36, 0.49],
-                             "battery lifetime kilometers": [200000, 200000, 200000]
+                            "type": "NMC",
+                            "origin": "CN",
+                            "energy battery mass": [385, 305, 230],
+                            "battery cell energy density": [0.23, 0.36, 0.49],
+                            "battery lifetime kilometers": [200000, 200000, 200000],
                         }
-
-                         }
+                    }
                 },
                 "efficiency": {
                     _("Petrol"): {
-                        _("Mid-size") :{
+                        _("Mid-size"): {
                             "engine efficiency": [0.27, 0.31, 0.35],
-                            "drivetrain efficiency": [0.81, 0.84, 0.87]
+                            "drivetrain efficiency": [0.81, 0.84, 0.87],
                         }
                     },
                     _("Diesel"): {
-                        _("Mid-size") :{
+                        _("Mid-size"): {
                             "engine efficiency": [0.3, 0.32, 0.35],
-                            "drivetrain efficiency": [0.81, 0.84, 0.87]
+                            "drivetrain efficiency": [0.81, 0.84, 0.87],
                         }
                     },
                     _("Electric"): {
-                        _("Mid-size") :{
+                        _("Mid-size"): {
                             "engine efficiency": [0.85, 0.87, 0.88],
                             "drivetrain efficiency": [0.85, 0.87, 0.88],
-                            "battery discharge efficiency": [0.88, 0.89, 0.89]
+                            "battery discharge efficiency": [0.88, 0.89, 0.89],
                         }
-                    }
+                    },
                 },
                 "custom electricity mix": response,
             },
@@ -227,7 +257,7 @@ def tool_page(country):
         _("Hybrid-petrol"),
         _("Hybrid-diesel"),
         _("(Plugin) Hybrid-petrol"),
-        _("(Plugin) Hybrid-diesel")
+        _("(Plugin) Hybrid-diesel"),
     ]
     sizes = [
         _("Minicompact"),
@@ -260,6 +290,7 @@ def tool_page(country):
         driving_cycles=driving_cycles,
         config=config,
     )
+
 
 @app.route("/search_car_model/<search_item>")
 def search_car_model(search_item):
@@ -418,8 +449,23 @@ def get_electricity_mix(ISO, years):
     """ Return the electricity mix for the ISO country code and the year(s) given """
     years = [int(y) for y in years.split(",")]
     response = (
-        app.calc.electricity_mix.loc[dict(country=ISO,
-            variable=["Hydro","Nuclear","Gas","Solar","Wind","Biomass","Coal","Oil","Geothermal","Waste"])]
+        app.calc.electricity_mix.loc[
+            dict(
+                country=ISO,
+                variable=[
+                    "Hydro",
+                    "Nuclear",
+                    "Gas",
+                    "Solar",
+                    "Wind",
+                    "Biomass",
+                    "Coal",
+                    "Oil",
+                    "Geothermal",
+                    "Waste",
+                ],
+            )
+        ]
         .interp(year=years)
         .values
     )
@@ -483,21 +529,19 @@ def get_job_status(job_key):
         job = Job.fetch(job_key, connection=conn)
     except NoSuchJobError:
         response = jsonify({"job status": "job not found"})
-        print('NO SUCH JOB {}'.format(job_key))
+        print("NO SUCH JOB {}".format(job_key))
         return make_response(response, 404)
 
     try:
         progress_status = Task.query.filter_by(id=job_key).first().progress
     except:
         response = jsonify({"job status": "failed"})
-        print('JOB FAIL {}'.format(job_key))
+        print("JOB FAIL {}".format(job_key))
         return make_response(response, 404)
-
 
     response = jsonify(
         {"job status": job.get_status(), "progress_status": progress_status}
     )
-
 
     return make_response(response, 200)
 
@@ -545,33 +589,135 @@ def get_language():
     return make_response(data, 200)
 
 
-@app.route("/get_inventory_excel_for_bw")
+def write_lci_to_excel(lci, name):
+    """
+        Export an Excel file that can be consumed by Brightway2.
+
+        :returns: returns the file path of the exported inventory.
+        :rtype: str.
+        """
+    list_act = lci
+    data = []
+
+    data.extend((["Database", name], ("format", "Excel spreadsheet")))
+    data.append([])
+
+    for k in list_act:
+        if k.get("exchanges"):
+            data.extend(
+                (
+                    ["Activity", k["name"]],
+                    ("location", k["location"]),
+                    ("production amount", float(k["production amount"])),
+                    ("reference product", k.get("reference product")),
+                    ("type", "process"),
+                    ("unit", k["unit"]),
+                    ("worksheet name", "None"),
+                    ["Exchanges"],
+                    [
+                        "name",
+                        "amount",
+                        "database",
+                        "location",
+                        "unit",
+                        "categories",
+                        "type",
+                        "reference product",
+                    ],
+                )
+            )
+
+            for e in k["exchanges"]:
+                data.append(
+                    [
+                        e["name"],
+                        float(e["amount"]),
+                        e["database"],
+                        e.get("location", "None"),
+                        e["unit"],
+                        "::".join(e.get("categories", ())),
+                        e["type"],
+                        e.get("reference product"),
+                    ]
+                )
+        else:
+            data.extend(
+                (
+                    ["Activity", k["name"]],
+                    ("type", "biosphere"),
+                    ("unit", k["unit"]),
+                    ("worksheet name", "None"),
+                )
+            )
+        data.append([])
+
+    output = io.BytesIO()
+    workbook = xlsxwriter.Workbook(output, {"in_memory": True})
+    bold = workbook.add_format({"bold": True})
+    bold.set_font_size(12)
+    highlighted = {
+        "Activity",
+        "Database",
+        "Exchanges",
+        "Parameters",
+        "Database parameters",
+        "Project parameters",
+    }
+    frmt = lambda x: bold if row[0] in highlighted else None
+    sheet = workbook.add_worksheet(name)
+
+    for row_index, row in enumerate(data):
+        for col_index, value in enumerate(row):
+            if value is None:
+                continue
+            elif isinstance(value, float):
+                sheet.write_number(row_index, col_index, value, frmt(value))
+            else:
+                sheet.write_string(row_index, col_index, value, frmt(value))
+
+    workbook.close()
+    output.seek(0)
+
+    return output.read()
+
+
+@app.route("/get_inventory_excel_for_bw/<compatibility>/<ecoinvent_version>")
 @login_required
-def get_inventory_excel_for_bw():
+def get_inventory_excel_for_bw(compatibility, ecoinvent_version):
+
+    if compatibility == "True":
+        compatibility = True
+    else:
+        compatibility = False
 
     response = Response()
     response.status_code = 200
-    response.data = app.lci_to_bw
-    file_name = 'carculator_inventory_export_{}.xlsx'.format(
-        str(datetime.date.today()))
+    lci = app.lci_to_bw.write_lci(
+        presamples=False,
+        ecoinvent_compatibility=compatibility,
+        ecoinvent_version=ecoinvent_version,
+    )
+    data = write_lci_to_excel(lci, "carculator export")
+
+    response.data = data
+    file_name = "carculator_inventory_export_{}.xlsx".format(str(datetime.date.today()))
     mimetype_tuple = mimetypes.guess_type(file_name)
     response_headers = {
-        'Pragma': "public",  # required,
-        'Expires': '0',
-        'Cache-Control': 'must-revalidate, post-check=0, pre-check=0',
-        'Cache-Control': 'private',  # required for certain browsers,
-        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'Content-Disposition': 'attachment; filename=\"%s\";' % file_name,
-        'Content-Transfer-Encoding': 'binary',
-        'Content-Length': len(response.data)
+        "Pragma": "public",  # required,
+        "Expires": "0",
+        "Cache-Control": "must-revalidate, post-check=0, pre-check=0",
+        "Cache-Control": "private",  # required for certain browsers,
+        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Content-Disposition": 'attachment; filename="%s";' % file_name,
+        "Content-Transfer-Encoding": "binary",
+        "Content-Length": len(response.data),
     }
 
     if not mimetype_tuple[1] is None:
-        response.update({
-            'Content-Encoding': mimetype_tuple[1]
-        })
+        response.update({"Content-Encoding": mimetype_tuple[1]})
     response.headers = response_headers
     return response
+
 
 @app.route("/get_param_table")
 def get_param_table():
@@ -604,24 +750,24 @@ def get_param_table():
 
     return render_template("param_table.html", params=params)
 
+
 @app.route("/get_fuel_blend/<country>/<years>")
 def get_fuel_blend(country, years):
     years = [int(y) for y in years.split(",")]
     region = app.calc.region_map[country]["RegionCode"]
 
     share_biofuel = (
-            app.calc.biofuel.sel(
-                region=region,
-                value=0,
-                fuel_type='Biomass fuel',
-                scenario='SSP2-Base',
-            )
-            .interp(year=years, kwargs={"fill_value": "extrapolate"})
-            .values
+        app.calc.biofuel.sel(
+            region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
         )
+        .interp(year=years, kwargs={"fill_value": "extrapolate"})
+        .values
+    )
 
     response = {}
     for y in years:
-        response[y]={'primary':np.round(1-share_biofuel, 2)[years.index(y)],
-                     'secondary':np.round(share_biofuel, 2)[years.index(y)]}
+        response[y] = {
+            "primary": np.round(1 - share_biofuel, 2)[years.index(y)],
+            "secondary": np.round(share_biofuel, 2)[years.index(y)],
+        }
     return jsonify(response)
