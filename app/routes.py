@@ -31,9 +31,11 @@ from werkzeug.urls import url_parse
 import uuid
 import io
 import xlsxwriter
+from carculator import ExportInventory
 
 app.calc = Calculation()
-app.lci_to_bw = ""
+app.A = ""
+app.inputs = ""
 
 progress_status = 0
 
@@ -516,7 +518,8 @@ def display_result(job_key):
     try:
         job = Job.fetch(job_key, connection=conn)
         if job.is_finished:
-            app.lci_to_bw = job.result[1]
+            app.A = job.result[1]
+            app.inputs = job.result[2]
             return render_template("result.html", data=job.result[0])
     except NoSuchJobError:
         return render_template("404.html", job_id=job_key)
@@ -692,7 +695,8 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version):
 
     response = Response()
     response.status_code = 200
-    lci = app.lci_to_bw.write_lci(
+    exp = ExportInventory(app.A, app.inputs)
+    lci = exp.write_lci(
         presamples=False,
         ecoinvent_compatibility=compatibility,
         ecoinvent_version=ecoinvent_version,
