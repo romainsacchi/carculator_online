@@ -410,8 +410,6 @@
 
 
     var data = {{data|safe}};
-    console.log(data);
-
     var lang_data = data[0]
 
     $.when($.ajax({
@@ -476,6 +474,7 @@
 	});
 
 	function dropdown_function(){
+		console.log("dropdown");
 		document.getElementById("export_dropdown").classList.toggle("show");
 	}
 	// Close the dropdown if the user clicks outside of it
