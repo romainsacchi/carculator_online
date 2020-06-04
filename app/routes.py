@@ -687,12 +687,9 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version, job_key):
 
     response = Response()
     response.status_code = 200
-    print(job_key)
+
     job = Job.fetch(job_key, connection=conn)
     export = job.result[1]
-
-    print(export)
-    print(type(export))
 
     lci = export.write_lci(
         presamples=False,
