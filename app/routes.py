@@ -34,7 +34,7 @@ import xlsxwriter
 #from carculator import ExportInventory
 
 app.calc = Calculation()
-#app.A = ""
+app.export = None
 #app.inputs = ""
 
 progress_status = 0
