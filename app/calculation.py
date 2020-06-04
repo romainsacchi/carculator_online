@@ -349,8 +349,7 @@ class Calculation:
         self.d_rev_cat_fr = {v: k for k, v, in self.d_cat_fr.items()}
         self.d_rev_cat_it = {v: k for k, v, in self.d_cat_it.items()}
         self.d_rev_cat_de = {v: k for k, v, in self.d_cat_de.items()}
-        self.A = ""
-        self.inputs = ""
+        self.excel = ""
 
     def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
@@ -503,8 +502,7 @@ class Calculation:
 
         #lci = self.ic.export_lci(presamples=False)
         #self.excel_lci = self.write_lci_to_excel(lci, "carculator")
-        self.A = self.ic.A
-        self.inputs = self.ic.rev_inputs
+        self.export = ExportInventory(self.ic.A, self.ic.rev_inputs)
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -689,10 +687,8 @@ class Calculation:
                     list_res_acc,
                 ]
             ),
-            (self.A,
-            self.inputs)
+            self.export,
         )
-
 
     def format_dictionary(self, raw_dict, lang, job_id):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
