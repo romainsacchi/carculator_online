@@ -70,3 +70,28 @@ body { font-family: Verdana;}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+.select-table
+{
+	float:left;
+	list-style-type:none;
+
+	width:auto;
+	height:220px;
+	overflow-y:auto;
+
+	margin:0 0.5em 0.5em 0;
+	padding:0em;
+
+	border:2px solid #888;
+	border-radius:0.2em;
+
+	background:#ddd;
+	color:#555;
+}
+
+.c-1-color { background: rgb(31,119,180); }
+.c-2-color { background: rgb(152, 223, 138); }
+.c-3-color { background: rgb(255, 127, 14); }
+.c-4-color { background: rgb(214, 39, 40); }
+

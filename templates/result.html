@@ -45,6 +45,7 @@
 
 
 	<!-- NoUISlider -->
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.css" rel="stylesheet">
 
 	<!-- Animate.css -->
   	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
@@ -174,7 +175,7 @@
 								<br>Sacchi R., Bauer C., Cox B., Mutel C.
 									<br>Submitted to Renewable and Sustainable Energy Reviews. In review. <a target='_blank' href="https://www.psi.ch/en/media/57994/download"><u>Article (PDF)</u></a>.
 								<br>
-								<br><i>carculator online (1.0.4), carculator (1.0.8)</i>
+								<br><i>carculator online (1.0.5), carculator (1.0.9)</i>
 								</p>
 							</div>
                 		</div>
@@ -190,17 +191,32 @@
 												  style="height:70px; width:90px; border-right:3px solid rgba(0,0,0,0.6);
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">{{ _('LIFE CYCLE IMPACT ASSESSMENT') }}</span></h2>
+						<span style="color:grey;">{{ _('LIFE CYCLE IMPACT ASSESSMENT - MIDPOINT INDICATORS') }}</span></h2>
 				</div>
 						<div class="mu-about-area" style="padding-top:20px;">
 							<div class="col-md-12">
 								<p>{{ _("By default, the chart below shows the environmental impacts in terms of
 									greenhouse gas emissions emitted for each vehicle, per km driven. The results are sub-divided
 									into categories: powertrain, maintenance, fuel manufacture, energy storage, etc.
-									The user can change the environmental indicator under the dropdown menu impact category.
-									It is also possible to visualize the results as a table or other sorts of chart by using the
-									dropdown menu located in the top-left corner of the chart area.") }}</p>
-								<div id="chart_impacts" style="margin:5px auto;overflow:auto;"></div>
+									The user can change the environmental indicator using the list on the left.
+									The user can isolate some of the impact categories by clicking them out from the legend area.") }}</p>
+
+								<table>
+									<tr>
+										<td>
+											<ol class = "select-table" style="width:20vw;height:auto;margin:0"
+												id="table_impact_cat">
+											</ol>
+										</td>
+										<td style="padding-top:100px;">
+											<svg id="chart_impacts" style="padding-top:150px auto;height:650px;width:65vw;"></svg>
+										</td>
+									</tr>
+								</table>
+
+
+
+
 							</div>
                 		</div>
             </div>
@@ -209,18 +225,42 @@
 		<section id="mu-about" style="background-color:#f2f2f2;">
 			<div class="container" style="width:90%;">
 				<div class="row">
-					<h2><img class="image" src="/static/images/cost_icon_grey.png"
-												  style="height:70px; width:80px; border-right:3px solid grey;
+					<h2><img class="image" src="/static/images/human_health_icon.png"
+												  style="height:80px; width:85px; border-right:3px solid grey;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:grey;">{{ _('LIFE CYCLE COST ASSESSMENT') }}</span></h2>
+						<span style="color:grey;">{{ _('LIFE CYCLE IMPACT ASSESSMENT - SINGLE SCORE') }}</span></h2>
 				</div>
 					<div class="mu-about-area" style="padding-top:20px;">
 						<div class="col-md-12">
-							<p>{{ _("The chart below represents the cost of ownership per kilometer driven for each vehicle.
-								It considers future electricity and fuel prices, as well as the amortization of the
-								vehicle purchase over time.") }}</p>
-							<div id="chart_costs" style="margin:5px auto;overflow:auto;"></div>
+							<p>{{ _("The environmental midpoint indicators listed above are characterized and grouped into three main
+								endpoint indicators, namely: damage to human health, damage to ecosystems
+								and resources depletion. These indicators are further monetized to obtain external costs
+								on the environment, according to the StepWise2006 method.
+								This allows to compare them to the cost of ownership (Euro) and obtain a single score by adding them up.
+								The user can adjust the importance to be given to the three environmental indicators as well as the cost of ownership
+								to produce a specific ranking. To remove the cost of ownership from the results and keep environmental indicators only,
+								move the right-most handle of the slider to the right.") }}</p>
+
+							<table class="table table-hover" style="margin-top:20px;">
+								<tr colspan="4">
+									<div id="slider_weight"></div>
+								</tr>
+								<tr>
+									<th width="25%">{{_("Human health impacts")}}</th>
+									<th width="25%">{{_("Ecosystem impacts")}}</th>
+									<th width="25%">{{_("Resource depletion")}}</th>
+									<th width="25%">{{_("Cost of ownership")}}</th>
+
+								</tr>
+								<tr>
+									<td id="human_health_div" style="background-color:rgba(31,119,180, 0.2);"></td>
+									<td id="ecosystem_div" style="background-color:rgba(152, 223, 138, 0.2);"></td>
+									<td id="resource_div" style="background-color:rgba(255, 127, 14, 0.2);"></td>
+									<td id="cost_div" style="background-color:rgba(214, 39, 40, 0.2);"></td>
+								</tr>
+							</table>
+							<svg id="chart_endpoint" style="margin:20px auto;padding-top:150px auto;height:650px;width:80vw;"></svg>
 						</div>
                 	</div>
 			</div>
@@ -325,28 +365,10 @@
 												before the use phase, while the slope illustrates variable emissions associated with the preparation of the fuel
 												(or generation of the electricity) and direct exhaust and non-exhaust emissions. You may select an impact
 												category to consider from the dropdown menu below.") }}</p>
+
+
+
 											<select id='select_impact' style='color:grey;'>
-														<option value='agricultural land occupation'>{{ _('Occupation of arable land [m2/year]') }}</option>
-														<option value='climate change'>{{ _('Climate change [kg CO2-eq.]') }}</option>
-														<option value='fossil depletion'>{{ _('Depletion of fossil energy resources [kg oil-eq.]') }}</option>
-														<option value='freshwater ecotoxicity'>{{ _('Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]') }}</option>
-														<option value='freshwater eutrophication'>{{ _('Eutrophication of non-marine aquatic environments [kg P-eq.]') }}</option>
-														<option value='human toxicity'>{{ _('Human toxicity [kg 1,4-DC-eq.]') }}</option>
-														<option value='ionizing radiation'>{{ _('Ionizing radiation [kg U235-Eq]') }}</option>
-														<option value='marine ecotoxicity'>{{ _('Toxicity of marine aquatic environments [kg 1,4-DC-eq.]') }}</option>
-														<option value='marine eutrophication'>{{ _('Eutrophication of non-marine aquatic environments [kg N-eq.]') }}</option>
-														<option value='metal depletion'>{{ _('Depletion of metal resources [kg iron-eq.]') }}</option>
-														<option value='natural land transformation'>{{ _('Natural land transformation [m2]') }}</option>
-														<option value='ozone depletion'>{{ _('Deterioration of the ozone layer [kg CFC-11-eq.]') }}</option>
-														<option value='particulate matter formation'>{{ _('Formation of fine particles [kg PM10-eq.]') }}</option>
-														<option value='photochemical oxidant formation'>{{ _('Smog formation [kg NMVOC-eq.]') }}</option>
-														<option value='terrestrial acidification'>{{ _('Terrestrial acidification [kg SO2-Eq-eq.]') }}</option>
-														<option value='terrestrial ecotoxicity'>{{ _('Terrestrial toxicity [kg 1,4-DC.-eq.]') }}</option>
-														<option value='urban land occupation'>{{ _('Land occupation in an urban environment [m2 / year]') }}</option>
-														<option value='water depletion'>{{ _('Depletion of fresh water reserves [m3]') }}</option>
-														<option value='human noise'>{{ _('Noise emissions [Person-Pascal/second]') }}</option>
-														<option value='primary energy, renewable'>{{ _('Primary energy, renewable [Megajoule]') }}</option>
-														<option value='primary energy, non-renewable'>{{ _('Primary energy, non-renewable [Megajoule]') }}</option>
 											</select>
 										</td>
 									</tr>
@@ -400,77 +422,106 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-notify@3.1.3/bootstrap-notify.min.js"></script>
 	<script type="text/javascript" src="/static/js/i18n.js"></script>
-	<script type="text/javascript" src="/static/js/result_page.js"></script>
+
 	<!-- D3.js -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.min.js"></script>
 	<!-- NVD3.js -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.js"></script>
 
 	<script>
 
-
     var data = {{data|safe}};
+
     var lang_data = data[0]
 
     $.when($.ajax({
-                url: "/language_result_display/"+lang_data,
+                url: "/get_language",
                 dataType: 'json',
                 type: 'GET',
                 success : function(data) {
                    var json = data
                     return json
                     },
-                error: function(xhr, status, error){console.log(error) }})
-     ).done(function(j){
+                error: function(xhr, status, error){console.log(error)}})
+            ).done(function(json){
+                i18n.translator.add(json);
 
-     	//  Load the JSON File
-		var name_default_impact;
-		var chart_title;
-		var chart_title_cost;
-		$.when($.ajax({
-					url: "/get_language",
-					dataType: 'json',
-					type: 'GET',
-					success : function(data) {
-					   var json = data
-						return json
-						},
-					error: function(xhr, status, error){console.log(error) }})
-				).done(function(json){
-					i18n.translator.add(json);
-					console.log(json);
+                // fill-in select lists
+				var impact_categories = {{ impact_cat|safe }}
+				for (ic=0;ic<impact_categories.length;ic++){
+					$("#table_impact_cat").append('<li><a href="#">'+i18n(impact_categories[ic])+'</a></li>');
+					var o = new Option(i18n(impact_categories[ic]), impact_categories[ic]);
+					$(o).html(i18n(impact_categories[ic]));
+					$("#select_impact").append(o);
+				};
 
-					// Generate LCIA chart
-					name_default_impact = i18n("climate change");
-					chart_title = i18n("chart_title");
-					generate_chart_impacts(data[1], chart_title, name_default_impact);
+				$('a').click(function (e) {
+					e.preventDefault();
+				  });
 
-					// Generate LCC chart
-					chart_title_cost = i18n("chart_title_cost");
-					generate_chart_costs(data[2], chart_title_cost);
+				// Generate LCIA chart
+				name_default_impact = i18n("climate change");
+				rearrange_data_for_LCA_chart(name_default_impact);
 
-					// Generate benchmarks
-					generate_benchmark(data[3], "climate change");
-
-					// Generate line chart TtW energy
-					generate_line_chart_TtW_energy(data[4]);
-
-					// Generate scatter chart
-					generate_scatter_chart(data[5]);
-
-					// Generate chart accumulated impacts
-					$("#select_impact").val('climate change')
-					generate_chart_accumulated_impacts(data[6], i18n("climate change"), "climate change");
-
+				// Generate single scores
+				var slider_weight = document.getElementById('slider_weight');
+				var slider = noUiSlider.create(slider_weight, {
+				 start: [0.32, 0.64, 0.96],
+				 connect: [true, true, true, true],
+				range: {
+					'min': [0],
+					'max': [1]
+				},
+				step: 0.01,
+				format: wNumb({
+					decimals: 2
+				})
 				});
+
+				slider.on('update', function(values, handle){
+						var human_health_val = parseInt(values[0] * 100);
+						var ecosystem_val = parseInt((values[1] - values[0])*100);
+						var resource_val = parseInt((values[2] - values[1])*100);
+						var cost_val = parseInt((1 - values[2])*100);
+						$("#human_health_div").text(human_health_val + " %");
+						$("#ecosystem_div").text(ecosystem_val + " %");
+						$("#resource_div").text(resource_val + " %");
+						$("#cost_div").text(cost_val + " %");
+						rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, resource_val, cost_val);
+					 });
+
+				var connect = slider_weight.querySelectorAll('.noUi-connect');
+				var classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color'];
+
+				for (var i = 0; i < connect.length; i++) {
+				connect[i].classList.add(classes[i]);
+				};
+
+
+
+				// Generate benchmarks
+				generate_benchmark(data[2], "climate change");
+
+				// Generate line chart TtW energy
+				generate_line_chart_TtW_energy(data[3]);
+
+				// Generate scatter chart
+				generate_scatter_chart(data[4]);
+
+				// Generate chart accumulated impacts
+				$("#select_impact").val('climate change')
+				generate_chart_accumulated_impacts(data[5], "climate change");
             });
 
 
+
     $('#select_benchmark').on('change', function() {
-	  generate_benchmark(data[3], this.value);
+	  generate_benchmark(data[2], this.value);
 	});
 	$('#select_impact').on('change', function() {
-	  generate_chart_accumulated_impacts(data[6], i18n(this.value), this.value);
+	  generate_chart_accumulated_impacts(data[5], this.value);
 	});
 
 	function dropdown_function(){
@@ -493,7 +544,7 @@
 
 
 </script>
-
+<script type="text/javascript" src="/static/js/result_page.js"></script>
 
 </body>
 </html>

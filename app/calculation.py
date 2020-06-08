@@ -167,27 +167,27 @@ class Calculation:
         }
 
         self.d_impact_en = {
-            "Occupation of arable land [m2/year]": "agricultural land occupation",
-            "Climate change [kg CO2-eq.]": "climate change",
-            "Depletion of fossil energy resources [kg oil-eq.]": "fossil depletion",
-            "Toxicity of non-marine aquatic environments [kg 1,4-DC-eq.]": "freshwater ecotoxicity",
-            "Eutrophication of non-marine aquatic environments [kg P-eq.]": "freshwater eutrophication",
-            "Human toxicity [kg 1,4-DC-eq.]": "human toxicity",
-            "Ionizing radiation [kg U235-Eq]": "ionising radiation",
-            "Toxicity of marine aquatic environments [kg 1,4-DC-eq.]": "marine ecotoxicity",
-            "Eutrophication of non-marine aquatic environments [kg N-eq.]": "marine eutrophication",
-            "Depletion of metal resources [kg iron-eq.]": "metal depletion",
-            "Natural land transformation [m2]": "natural land transformation",
-            "Deterioration of the ozone layer [kg CFC-11-eq.]": "ozone depletion",
-            "Formation of fine particles [kg PM10-eq.]": "particulate matter formation",
-            "Smog formation [kg NMVOC-eq.]": "photochemical oxidant formation",
-            "Terrestrial acidification [kg SO2-Eq-eq.]": "terrestrial acidification",
-            "Terrestrial toxicity [kg 1,4-DC.-eq.]": "terrestrial ecotoxicity",
-            "Land occupation in an urban environment [m2 / year]": "urban land occupation",
-            "Depletion of fresh water reserves [m3]": "water depletion",
-            "Noise emissions [Person-Pascal/second]": "human noise",
-            "Primary energy, renewable [Megajoule]": "primary energy, renewable",
-            "Primary energy, non-renewable [Megajoule]": "primary energy, non-renewable"
+            "Occupation of arable land": "agricultural land occupation",
+            "Climate change": "climate change",
+            "Depletion of fossil energy resources": "fossil depletion",
+            "Toxicity of non-marine aquatic environments": "freshwater ecotoxicity",
+            "Eutrophication of non-marine aquatic environments": "freshwater eutrophication",
+            "Human toxicity": "human toxicity",
+            "Ionizing radiation": "ionising radiation",
+            "Toxicity of marine aquatic environments": "marine ecotoxicity",
+            "Eutrophication of non-marine aquatic environments": "marine eutrophication",
+            "Depletion of metal resources": "metal depletion",
+            "Natural land transformation": "natural land transformation",
+            "Deterioration of the ozone layer": "ozone depletion",
+            "Formation of fine particles": "particulate matter formation",
+            "Smog formation": "photochemical oxidant formation",
+            "Terrestrial acidification": "terrestrial acidification",
+            "Terrestrial toxicity": "terrestrial ecotoxicity",
+            "Land occupation in an urban environment": "urban land occupation",
+            "Depletion of fresh water reserves": "water depletion",
+            "Noise emissions": "human noise",
+            "Primary energy, renewable": "primary energy, renewable",
+            "Primary energy, non-renewable": "primary energy, non-renewable"
         }
 
         self.d_impact_it = {
@@ -409,52 +409,14 @@ class Calculation:
         task.progress = 70
         db.session.commit()
 
-        if lang is None:
-            lang="en"
-
-        if lang not in ['en', 'fr', 'de', 'it']:
-            lang='en'
-
-        if lang == "en":
-            powertrain = [
-                self.d_rev_pt_en[pt] for pt in cost.coords["powertrain"].values.tolist()
-            ]
-            size = [self.d_rev_size_en[s] for s in cost.coords["size"].values.tolist()]
-            cost_category = cost.coords["cost_type"].values.tolist()
-
-        if lang == "fr":
-            powertrain = [
-                self.d_rev_pt_fr[pt] for pt in cost.coords["powertrain"].values.tolist()
-            ]
-            size = [self.d_rev_size_fr[s] for s in cost.coords["size"].values.tolist()]
-            cost_category = [
-                self.d_rev_cost_fr[c] for c in cost.coords["cost_type"].values.tolist()
-            ]
-
-        if lang == "it":
-            powertrain = [
-                self.d_rev_pt_it[pt] for pt in cost.coords["powertrain"].values.tolist()
-            ]
-            size = [self.d_rev_size_it[s] for s in cost.coords["size"].values.tolist()]
-            cost_category = [
-                self.d_rev_cost_it[c] for c in cost.coords["cost_type"].values.tolist()
-            ]
-
-        if lang == "de":
-            powertrain = [
-                self.d_rev_pt_de[pt] for pt in cost.coords["powertrain"].values.tolist()
-            ]
-            size = [self.d_rev_size_de[s] for s in cost.coords["size"].values.tolist()]
-            cost_category = [
-                self.d_rev_cost_de[c] for c in cost.coords["cost_type"].values.tolist()
-            ]
-
-
+        powertrain = cost.coords["powertrain"].values.tolist()
+        size = cost.coords["size"].values.tolist()
+        cost_category = cost.coords["cost_type"].values.tolist()
 
         arr_benchmark = []
         dict_scatter = defaultdict(list)
 
-        list_res_costs = [["size", "powertrain", "cost category", "year", "value"]]
+        list_res_costs = []
 
         for s in range(0, len(size)):
             for pt in range(0, len(powertrain)):
@@ -472,18 +434,18 @@ class Calculation:
                             )
                             k = powertrain[pt] + ", " + str(year[y]) + ", " + size[s]
                             dict_scatter[k].append(data_cost[s, pt, cat, y, 0])
-
-                        list_res_costs.append(
-                            [
-
-                                size[s],
-                                powertrain[pt],
-                                cost_category[cat],
-                                year[y],
-                                data_cost[s, pt, cat, y, 0]
-
-                            ]
-                        )
+                        else:
+                            list_res_costs.append(
+                                [
+                                    "ownership cost",
+                                    size[s],
+                                    powertrain[pt],
+                                    year[y],
+                                    cost_category[cat],
+                                    data_cost[s, pt, cat, y, 0],
+                                    data_cost[s, pt, :, y, 0].sum()
+                                ]
+                            )
 
         self.ic = InventoryCalculation(
             cm.array,
@@ -500,8 +462,6 @@ class Calculation:
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
 
-        #lci = self.ic.export_lci(presamples=False)
-        #self.excel_lci = self.write_lci_to_excel(lci, "carculator")
         self.export = ExportInventory(self.ic.A, self.ic.rev_inputs)
 
         # Update task progress to db
@@ -512,45 +472,11 @@ class Calculation:
         data = np.float64(results.values)
         data_acc = results_acc.values
 
-        if lang == "fr":
-            impact = [
-                self.d_rev_cat_fr[f] for f in results.coords["impact"].values.tolist()
-            ]
-            impact_category = [
-                self.d_rev_impact_fr[i]
-                for i in results.coords["impact_category"].values.tolist()
-            ]
+        impact = results.coords["impact"].values.tolist()
+        impact_category = results.coords["impact_category"].values.tolist()
 
-        if lang == "de":
-            impact = [
-                self.d_rev_cat_de[f] for f in results.coords["impact"].values.tolist()
-            ]
-            impact_category = [
-                self.d_rev_impact_de[i]
-                for i in results.coords["impact_category"].values.tolist()
-            ]
+        list_res = []
 
-        if lang == "it":
-            impact = [
-                self.d_rev_cat_it[f] for f in results.coords["impact"].values.tolist()
-            ]
-            impact_category = [
-                self.d_rev_impact_it[i]
-                for i in results.coords["impact_category"].values.tolist()
-            ]
-
-        if lang == "en":
-            impact = [
-                self.d_rev_cat_en[f] for f in results.coords["impact"].values.tolist()
-            ]
-            impact_category = [
-                self.d_rev_impact_en[i]
-                for i in results.coords["impact_category"].values.tolist()
-            ]
-
-        list_res = [
-            ["impact category", "size", "powertrain", "year", "category", "value"]
-        ]
         list_res_acc = []
         for imp in range(0, len(impact_category)):
             for s in range(0, len(size)):
@@ -587,6 +513,7 @@ class Calculation:
                                     year[y],
                                     impact[cat],
                                     data[imp, s, pt, y, cat, 0],
+                                    data[imp, s, pt, y, :, 0].sum()
                                 ]
                             )
 
@@ -639,34 +566,12 @@ class Calculation:
         task.progress = 90
         db.session.commit()
 
-        if lang == "en":
-            list_names = [
-                [self.d_rev_size_en[s], self.d_rev_pt_en[p], y]
-                for s in arr.coords["size"].values.tolist()
-                for p in arr.coords["powertrain"].values.tolist()
-                for y in arr.coords["year"].values.tolist()
-            ]
-        if lang == "it":
-            list_names = [
-                [self.d_rev_size_it[s], self.d_rev_pt_it[p], y]
-                for s in arr.coords["size"].values.tolist()
-                for p in arr.coords["powertrain"].values.tolist()
-                for y in arr.coords["year"].values.tolist()
-            ]
-        if lang == "de":
-            list_names = [
-                [self.d_rev_size_de[s], self.d_rev_pt_de[p], y]
-                for s in arr.coords["size"].values.tolist()
-                for p in arr.coords["powertrain"].values.tolist()
-                for y in arr.coords["year"].values.tolist()
-            ]
-        if lang == "fr":
-            list_names = [
-                [self.d_rev_size_fr[s], self.d_rev_pt_fr[p], y]
-                for s in arr.coords["size"].values.tolist()
-                for p in arr.coords["powertrain"].values.tolist()
-                for y in arr.coords["year"].values.tolist()
-            ]
+        list_names = [
+            [s, p, y]
+            for s in size
+            for p in powertrain
+            for y in year
+        ]
 
         TtW_list = list(zip(list_names, TtW_energy))
 
@@ -675,12 +580,13 @@ class Calculation:
         task.progress = 100
         db.session.commit()
 
+        list_res.extend(list_res_costs)
+
         return (
             json.dumps(
                 [
                     lang,
                     list_res,
-                    list_res_costs,
                     arr_benchmark,
                     TtW_list,
                     dict_scatter,
@@ -707,9 +613,9 @@ class Calculation:
         new_dict = {}
 
         new_dict[("Functional unit",)] = {
-                "powertrain": [self.d_pt_all[x] for x in raw_dict["type"]],
+                "powertrain": [x for x in raw_dict["type"]],
                 "year": [int(x) for x in raw_dict["year"]],
-                "size": [self.d_size_all[s] for s in raw_dict["size"]],
+                "size": [s for s in raw_dict["size"]],
             }
 
         f_d = {}
@@ -768,8 +674,8 @@ class Calculation:
                 k = tuple(k.split(","))
                 name = k[0]
                 cat = self.d_categories[name]
-                powertrain = self.d_pt_all[k[1]]
-                size = self.d_size_all[k[2]]
+                powertrain = k[1]
+                size = k[2]
                 val = [float(n) for n in v] * len(new_dict[("Functional unit",)]["year"])
 
             d_val = {
@@ -784,7 +690,7 @@ class Calculation:
                 energy_storage = raw_dict["background params"]["energy storage"]["electric"]
 
                 for e in energy_storage:
-                    size = self.d_size_all[e]
+                    size = e
                     for p in energy_storage[e]:
                         if p not in ('type', 'origin'):
                             name = p
@@ -803,9 +709,9 @@ class Calculation:
             efficiency = raw_dict["background params"]["efficiency"]
 
             for eff in efficiency:
-                powertrain = self.d_pt_all[eff]
+                powertrain = eff
                 for s in efficiency[eff]:
-                    size = self.d_size_all[s]
+                    size = s
                     for c in efficiency[eff][s]:
                         name = c
                         cat = self.d_categories[name]
@@ -826,5 +732,3 @@ class Calculation:
         db.session.commit()
 
         return new_dict
-
-

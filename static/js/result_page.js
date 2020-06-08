@@ -1,46 +1,5 @@
 
 
- function generate_chart_impacts(data, title, default_cat){
-    $("#chart_impacts").pivotUI(
-      data, {
-        rows: ["impact category", "category"],
-        cols: ["year", "powertrain", "size"],
-        vals: ["value"],
-        inclusions: {"impact category":[default_cat]},
-        "colOrder": "value_a_to_z",
-        aggregatorName: "Sum",
-        rendererName: "Stacked Bar Chart",
-        renderers: $.extend(
-            $.pivotUtilities.renderers,
-            $.pivotUtilities.export_renderers,
-          $.pivotUtilities.plotly_renderers
-        ),
-        rendererOptions: {plotly: {title: {text: title}}},
-        onRefresh: function(config){
-            imp = config["inclusions"]["impact category"][0]
-            }
-      });
- };
-
- function generate_chart_costs(data, title){
-    $("#chart_costs").pivotUI(
-      data, {
-        rows: ["cost category"],
-        cols: ["year", "powertrain", "size"],
-        vals: ["value"],
-        exclusions: {"cost category":["total"]},
-        "colOrder": "value_a_to_z",
-        aggregatorName: "Sum",
-        rendererName: "Stacked Bar Chart",
-        renderers: $.extend(
-            $.pivotUtilities.renderers,
-            $.pivotUtilities.export_renderers,
-          $.pivotUtilities.plotly_renderers
-        ),
-        rendererOptions: {plotly: { title: {text: title}}},
-      });
- };
-
  function generate_progress_bars(filter){
         if (filter == "climate change"){
 
@@ -143,13 +102,12 @@ function generate_benchmark(data, cat){
     };
 
     arr_data.sort(function(x,y){return y[4] - x[4];});
-    console.log(arr_data)
 
     for (i = 0; i < arr_data.length; i++) {
       var tr = document.createElement('tr');
       var td_name = document.createElement('td');
       td_name.setAttribute("width", "30%");
-      td_name.innerHTML = "<h3 style='color:white;'>" + arr_data[i][2] + ", " + arr_data[i][3] + ", " + arr_data[i][1] + "</h3>"
+      td_name.innerHTML = "<h3 style='color:white;'>" + i18n(arr_data[i][2]) + " - " + i18n(arr_data[i][1]) + ", " + arr_data[i][3] + "</h3>"
       var td_bar = document.createElement('td');
       td_bar.setAttribute("width", "60%");
       var div_bar_wrap = document.createElement('div');
@@ -209,7 +167,7 @@ function generate_line_chart_TtW_energy(data){
                 max_val = Number(data[x][1][i]);
             };
         }
-        var name = data[x][0][1] + ", " + data[x][0][2] + ", " + data[x][0][0]
+        var name = i18n(data[x][0][1]) + " - " + i18n(data[x][0][0]) + " - " + data[x][0][2]
         datum.push({values:arr_data, key:name, area:false})
     };
 
@@ -250,7 +208,13 @@ function generate_scatter_chart(data){
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
-            datum.push({values:[{"x": data[key][0], "y":data[key][1], "size":400, "shape":"circle"}], key:key})
+            var arr_names = key.split(",");
+            var pt = i18n(arr_names[0]);
+            var y = arr_names[1];
+            var size = i18n(arr_names[2]);
+            datum.push({values:[{"x": data[key][0],
+                                 "y":data[key][1], "size":400, "shape":"circle"}],
+                                 key:pt+" - " + size + " - " + y})
         }
     }
 
@@ -296,11 +260,11 @@ function generate_scatter_chart(data){
     });
 };
 
-function generate_chart_accumulated_impacts(data, name_impact, impact){
+function generate_chart_accumulated_impacts(data, impact){
 
     var datum = [];
     for (var x=0; x < data.length; x++){
-        if (data[x][0] == name_impact){
+        if (data[x][0] == impact){
             var arr_data = [];
             for (var i = 0; i < 100; i++){
                 arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
@@ -327,7 +291,7 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
 
       if (impact == "ozone depletion" ){
           chart_acc.yAxis     //Chart y-axis settings
-          .axisLabel(name_impact)
+          .axisLabel(i18n("unit_"+impact))
           .tickFormat(d3.format('.0e'))
           .showMaxMin(false);
       }
@@ -336,13 +300,13 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
 
             if (impact == "human noise"){
               chart_acc.yAxis     //Chart y-axis settings
-              .axisLabel(name_impact)
+              .axisLabel(i18n("unit_"+impact))
               .tickFormat(d3.format('s'))
               .showMaxMin(false);
 
             }else{
               chart_acc.yAxis     //Chart y-axis settings
-              .axisLabel(name_impact)
+              .axisLabel(i18n("unit_"+impact))
               .tickFormat(d3.format(',d'))
               .showMaxMin(false);
 
@@ -362,6 +326,251 @@ function generate_chart_accumulated_impacts(data, name_impact, impact){
     });
 
 };
+
+ // Update impact categories chart when selection is changed.
+ $("#table_impact_cat").on("click", "li", function () {
+    var impact_cat = $(this).text();
+    rearrange_data_for_LCA_chart(impact_cat)
+});
+
+function rearrange_data_for_LCA_chart(impact_cat){
+
+    val = [];
+    var real_impact_name = "";
+
+    for (a = 0; a < data[1].length; a++){
+        if (i18n(data[1][a][0]) == impact_cat){
+            real_impact_name = data[1][a][0];
+            val.push(data[1][a]);
+        }
+    };
+
+    val.sort(function(x,y){return y[6] - x[6];});
+
+    list_cat = [];
+
+    for (a = 0; a < val.length; a++){
+        if (!list_cat.includes(val[a][4])){
+            list_cat.push(val[a][4])
+        };
+    };
+
+    var data_to_plot = [];
+
+    for (a = 0; a < list_cat.length; a++){
+        var impact_dict={};
+        impact_dict['key'] = i18n(list_cat[a]);
+        impact_dict['values'] = [];
+
+        for (b=0; b < val.length; b++){
+            if (val[b][4] == list_cat[a]){
+                impact_dict['values'].push({
+                    'x': i18n(val[b][2])+" - "+i18n(val[b][1])+" - "+val[b][3],
+                    'y': val[b][5]
+                })
+            }
+        }
+
+        data_to_plot.push(impact_dict)
+    };
+
+
+    nv.addGraph(function() {
+            var chart = nv.models.multiBarChart()
+                    .margin({left:100, bottom:180})  //Adjust chart margins to give the x-axis some breathing room.
+                    .stacked(true);
+            chart.xAxis.rotateLabels(-30);
+
+
+            var unit_name = "unit_"+real_impact_name;
+
+            chart.yAxis     //Chart y-axis settings
+              .axisLabel(i18n(unit_name)+"/km")
+              .tickFormat(d3.format('.03f'))
+              .showMaxMin(false);
+
+            if (["ozone depletion", "freshwater eutrophication", "marine eutrophication", "natural land transformation",
+                    "particulate matter formation", "photochemical oxidant formation", "terrestrail acidification",
+                    "terrestrial ecotoxicity"].includes(real_impact_name)){
+                  chart.yAxis
+                  .tickFormat(d3.format('.02e'))
+                  .showMaxMin(false);
+              }
+            if (real_impact_name == "human noise"){
+              chart.yAxis
+              .tickFormat(d3.format('s'))
+              .showMaxMin(false);
+            };
+
+            if (real_impact_name == "ownership cost"){
+              chart.yAxis
+              .tickFormat(d3.format('.02f'))
+              .showMaxMin(false);
+            };
+
+
+
+            d3.select('#chart_impacts')
+                .datum(data_to_plot)
+                .transition().duration(500).call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+};
+
+
+function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, resource_val, cost_val){
+    var mid_to_end = {
+         "climate change":[{"name":"human health", "CF":9.28e-7},{"name":"ecosystem", "CF":2.8e-9 + 7.65e-14}],
+         "agricultural land occupation":[{"name":"ecosystem", "CF":8.88e-9}],
+         "fossil depletion":[{"name":"resource", "CF":0.46}],
+         "freshwater ecotoxicity":[{"name":"ecosystem", "CF":6.95e-10}],
+         "freshwater eutrophication":[{"name":"ecosystem", "CF":6.71e-7}],
+         "human toxicity":[{"name":"human health", "CF":3.32e-6}],
+         "ionising radiation":[{"name":"human health", "CF":8.5e-9}],
+         "marine ecotoxicity":[{"name":"ecosystem", "CF":1.05e-10}],
+         "marine eutrophication":[{"name":"ecosystem", "CF":1.7e-9}],
+         "metal depletion":[{"name":"resource", "CF":6.19e-2 * 2.31e-1}],
+         "natural land transformation":[{"name":"ecosystem", "CF":8.88e-9}],
+         "ozone depletion":[{"name":"human health", "CF":5.31e-4}],
+         "particulate matter formation":[{"name":"human health", "CF":6.29e-4}],
+         "photochemical oxidant formation":[{"name":"human health", "CF":9.1e-7},{"name":"ecosystem", "CF":1.29e-7}],
+         "terrestrial acidification":[{"name":"ecosystem", "CF":2.12e-7}],
+         "terrestrial ecotoxicity":[{"name":"ecosystem", "CF":1.14e-11}],
+         "urban land occupation":[{"name":"ecosystem", "CF":8.88e-9}],
+         "water depletion":[{"name":"human health", "CF":2.22e-6},{"name":"ecosystem", "CF":1.35e-8 + 6.04e-13}],
+         "human noise":[{"name":"human health", "CF":5.66e-10}],
+         "ownership cost":[{"name":"ownership cost", "CF":1}]
+    };
+
+    var list_recipient = ["human health", "ecosystem", "resource", "ownership cost"];
+    var CF_human_health = 7.4e4
+    var CF_ecosystem = 3.08e7
+    var CF_resource = 1.0
+    var CF_cost = 1.0
+
+    var processed_data = [];
+
+    for (recipient=0;recipient<list_recipient.length;recipient++){
+        for (a=0; a<data[1].length;a++){
+
+            if (data[1][a][0] in mid_to_end){
+                for (b=0;b<mid_to_end[data[1][a][0]].length;b++){
+                    if (mid_to_end[data[1][a][0]][b]["name"]==list_recipient[recipient]){
+                        if (list_recipient[recipient] == "human health"){
+                            processed_data.push(["human health",
+                                                    data[1][a][1],
+                                                    data[1][a][2],
+                                                    data[1][a][3],
+                                                    data[1][a][4],
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_human_health*(human_health_val/100)])
+                        };
+                        if (list_recipient[recipient] == "ecosystem"){
+                            processed_data.push(["ecosystem",
+                                                    data[1][a][1],
+                                                    data[1][a][2],
+                                                    data[1][a][3],
+                                                    data[1][a][4],
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_ecosystem*(ecosystem_val/100)])
+                        };
+                        if (list_recipient[recipient] == "resource"){
+                            processed_data.push(["resource", data[1][a][1],
+                                                                data[1][a][2],
+                                                                data[1][a][3],
+                                                                data[1][a][4],
+                                                                data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_resource*(resource_val/100)])
+                        };
+                        if (list_recipient[recipient] == "ownership cost"){
+                            processed_data.push(["ownership cost", data[1][a][1],
+                                                    data[1][a][2],
+                                                    data[1][a][3],
+                                                    data[1][a][4],
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_cost*(cost_val/100)])
+                        };
+
+                    }
+            }
+
+            };
+
+        }
+    };
+
+    var data_to_plot = [];
+
+    for (a = 0; a < list_recipient.length; a++){
+        var impact_dict={};
+
+        impact_dict['key'] = i18n(list_recipient[a]);
+
+        impact_dict['values'] = [];
+
+        if (list_recipient[a] == "human health"){
+            impact_dict['color'] = "#1f77b4"
+        }
+        if (list_recipient[a] == "ecosystem"){
+            impact_dict['color'] = "#98df8a"
+        }
+        if (list_recipient[a] == "resource"){
+            impact_dict['color'] = "#ff7f0e"
+        }
+        if (list_recipient[a] == "ownership cost"){
+            impact_dict['color'] = "#d62728"
+        }
+
+
+        var list_vehicles = [];
+
+        for (b=0; b < processed_data.length; b++){
+            if (processed_data[b][0] == list_recipient[a]){
+                var vehicle = i18n(processed_data[b][2])+" - "+i18n(processed_data[b][1])+" - "+processed_data[b][3];
+
+                if (!list_vehicles.includes(vehicle)){
+                    impact_dict['values'].push({
+                    'x': vehicle,
+                    'y': processed_data[b][5]
+                    });
+                    list_vehicles.push(vehicle);
+                }else{
+                    for (c=0;c<impact_dict['values'].length;c++){
+                        if (impact_dict['values'][c]["x"] == vehicle){
+                            impact_dict['values'][c]["y"] += processed_data[b][5]
+                        }
+                    };
+                }
+            }
+        }
+        data_to_plot.push(impact_dict)
+    };
+
+    nv.addGraph(function() {
+            var chart = nv.models.multiBarChart()
+                    .margin({left:100, bottom:180})  //Adjust chart margins to give the x-axis some breathing room.
+                    .stacked(true);
+            chart.xAxis.rotateLabels(-30);
+
+
+            var unit_name = i18n("total_impact");
+
+            chart.yAxis     //Chart y-axis settings
+              .axisLabel(unit_name+"/km")
+              .tickFormat(d3.format('.03f'))
+              .showMaxMin(false);
+
+            d3.select('#chart_endpoint')
+                .datum(data_to_plot)
+                .transition().duration(500).call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+
+
+};
+
 
 
 

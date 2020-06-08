@@ -6,8 +6,8 @@ listen = ['default']
 
 redis_url = os.getenv('REDISCLOUD_URL', 'None')
 
-conn = redis.from_url(redis_url)
 
+conn = redis.from_url(redis_url)
 
 if __name__ == '__main__':
     with Connection(conn):

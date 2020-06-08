@@ -740,11 +740,16 @@ function size_list_update(){
                 }
             };
 
-
-
-
             if (isConfig==false){
-                console.log("entered")
+
+                // Create fuel table
+                var tableRef = document.getElementById('fuel_pathway_table');
+                var rowCount = tableRef.rows.length;
+                while (rowCount>2){
+                    tableRef.deleteRow(2);
+                    var rowCount = tableRef.rows.length;
+                }
+                create_fuel_table();
 
                 var tableRef = document.getElementById('efficiency_table');
                 var rowCount = tableRef.rows.length;
@@ -754,7 +759,6 @@ function size_list_update(){
                 }
 
                 create_efficiency_table();
-                prepare_data_for_efficiency();
 
                 // Create energy storage table
                 var tableRef = document.getElementById('energy_storage_table');
@@ -764,14 +768,28 @@ function size_list_update(){
                     var rowCount = tableRef.rows.length;
                 }
                 create_energy_storage_table();
-                prepare_data_for_energy_storage();
+
+                $.when($.ajax({
+                    url: "/get_language",
+                    dataType: 'json',
+                    type: 'GET',
+                    success : function(data) {
+                       var json = data
+                        return json
+                        },
+                    error: function(xhr, status, error){console.log(error)}})
+                ).done(function(json){
+                    i18n.translator.add(json);
+
+
+                    prepare_data_for_efficiency();
+
+                    prepare_data_for_energy_storage();
+                });
 
             }else{
                 isConfig=false;
-
             };
-
-
 
             if (old_year==true && new_powertrain==true){
                 // Warning message if the powertrain is BEV, FCEV and hybrids, before 2011
@@ -813,20 +831,6 @@ function size_list_update(){
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
             generate_driving_cycle_graph('WLTC');
-
-
-
-            // Create fuel table
-            var tableRef = document.getElementById('fuel_pathway_table');
-            var rowCount = tableRef.rows.length;
-            while (rowCount>2){
-                tableRef.deleteRow(2);
-                var rowCount = tableRef.rows.length;
-            }
-            create_fuel_table();
-
-
-
 
             }
         else{return;};
@@ -900,26 +904,6 @@ function size_list_update(){
     row.appendChild(table);
 
 
-
-    // Create energy storage table
-    //var tableRef = document.getElementById('energy_storage_table');
-    //var rowCount = tableRef.rows.length;
-    //while (rowCount>2){
-    //    tableRef.deleteRow(2);
-    //    var rowCount = tableRef.rows.length;
-    //}
-    //create_energy_storage_table();
-    //update_energy_storage_table([]);
-
-
-    // Create fuel table
-    var tableRef = document.getElementById('fuel_pathway_table');
-    var rowCount = tableRef.rows.length;
-    while (rowCount>2){
-        tableRef.deleteRow(2);
-        var rowCount = tableRef.rows.length;
-    }
-    create_fuel_table();
 };
 
 // Populate table with search results as the search field is updated.
@@ -1212,8 +1196,7 @@ function getSelectedCountries() {
             },
         error: function(xhr, status, error){console.log(error)}})
     ).done(function(json){
-
-        // Lop through divs in fuel tables
+        // Loop through divs in fuel tables
         var divs = $("#fuel_pathway_table > tbody").find('div');
 
         for (i=0; i<divs.length; i++){
@@ -1593,13 +1576,13 @@ function collect_configuration(){
 
     var list_type = [];
     for (var item = 0; item < listItems.length; item++){
-        list_type.push(listItems[item].innerHTML);
+        list_type.push(i18n(listItems[item].innerHTML));
     };
     params['type'] = list_type;
 
     var list_size = [];
     for (var item = 0; item < listSizes.length; item++){
-        list_size.push(listSizes[item].innerHTML);
+        list_size.push(i18n(listSizes[item].innerHTML));
     };
     params['size'] = list_size;
 
@@ -1609,8 +1592,8 @@ function collect_configuration(){
 
         $("#table_inputs tbody tr").each(function () {
             var name = this.childNodes[0].innerHTML;
-            var pt = this.childNodes[1].innerHTML;
-            var size = this.childNodes[2].innerHTML;
+            var pt = i18n(this.childNodes[1].innerHTML);
+            var size = i18n(this.childNodes[2].innerHTML);
             var unit = this.childNodes[3].innerHTML;
 
             vals=[]
@@ -1691,9 +1674,9 @@ function collect_configuration(){
     var listSizes = document.querySelectorAll( '#size_list > li' );
 
     for (pt=0;pt<listPowertrains.length;pt++){
-        if (listPowertrains[pt].innerHTML == i18n("electric")){
+        if (i18n(listPowertrains[pt].innerHTML) == "BEV"){
             for (s=0;s<listSizes.length;s++){
-                energy_storage[listSizes[s].innerHTML] = {
+                energy_storage[i18n(listSizes[s].innerHTML)] = {
                     "energy battery mass":[],
                     "battery cell energy density":[],
                     "battery lifetime kilometers":[],
@@ -1701,28 +1684,29 @@ function collect_configuration(){
                     "origin": ""
                     };
 
-                var div = $("[id='"+"type_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"']").children()
+                var div = $("[id='"+"type_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"']").children()
                 var select = $(div[0]).find("option:selected").val()
-                energy_storage[listSizes[s].innerHTML]["type"] = select;
+                energy_storage[i18n(listSizes[s].innerHTML)]["type"] = select;
 
-                var div = $("[id='"+"origin_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"']").children()
+                var div = $("[id='"+"origin_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"']").children()
                 var select = $(div[0]).find("option:selected").val()
-                energy_storage[listSizes[s].innerHTML]["origin"] = select;
+                energy_storage[i18n(listSizes[s].innerHTML)]["origin"] = select;
 
                 for (y=0;y<listYears.length;y++){
 
-                    var slider = $("[id='"+"mass_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+
+                    var slider = $("[id='"+"mass_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = parseInt(slider.noUiSlider.get().split(" ")[0]);
-                    energy_storage[listSizes[s].innerHTML]["energy battery mass"].push(val)
+                    energy_storage[i18n(listSizes[s].innerHTML)]["energy battery mass"].push(val)
 
-                    var slider = $("[id='"+"energy_density_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var slider = $("[id='"+"energy_density_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = parseFloat(slider.noUiSlider.get().split(" ")[0]);
-                    energy_storage[listSizes[s].innerHTML]["battery cell energy density"].push(val)
+                    energy_storage[i18n(listSizes[s].innerHTML)]["battery cell energy density"].push(val)
 
-                    var slider = $("[id='"+"lifetime_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var slider = $("[id='"+"lifetime_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = slider.noUiSlider.get().split(" ")[0];
                     val = parseInt(val.replace(",", ""));
-                    energy_storage[listSizes[s].innerHTML]["battery lifetime kilometers"].push(val)
+                    energy_storage[i18n(listSizes[s].innerHTML)]["battery lifetime kilometers"].push(val)
 
                 }
             }
@@ -1738,10 +1722,10 @@ function collect_configuration(){
     var listSizes = document.querySelectorAll( '#size_list > li' );
 
     for (pt=0;pt<listPowertrains.length;pt++){
-        efficiency[listPowertrains[pt].innerHTML] = {};
-        if (![i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")].includes(listPowertrains[pt].innerHTML)){
+        efficiency[i18n(listPowertrains[pt].innerHTML)] = {};
+        if (!["PHEV-p", "PHEV-d"].includes(i18n(listPowertrains[pt].innerHTML))){
             for (s=0;s<listSizes.length;s++){
-                efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML] = {
+                efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)] = {
                     "battery discharge efficiency":[],
                     "fuel cell stack efficiency":[],
                     "engine efficiency":[],
@@ -1750,32 +1734,32 @@ function collect_configuration(){
 
                 for (y=0;y<listYears.length;y++){
 
-                    if (listPowertrains[pt].innerHTML == i18n("electric")){
-                        var slider = $("[id='"+"storage_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    if (i18n(listPowertrains[pt].innerHTML) == "BEV"){
+                        var slider = $("[id='"+"storage_eff_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                         var val = parseFloat(slider.noUiSlider.get());
-                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["battery discharge efficiency"].push(val)
-                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["fuel cell stack efficiency"].push(0)
+                        efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["battery discharge efficiency"].push(val)
+                        efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["fuel cell stack efficiency"].push(0)
                     };
 
-                    if (listPowertrains[pt].innerHTML == i18n("fuel_cell")){
-                        var slider = $("[id='"+"storage_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    if (i18n(listPowertrains[pt].innerHTML) == "FCEV"){
+                        var slider = $("[id='"+"storage_eff_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                         var val = parseFloat(slider.noUiSlider.get());
-                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["battery discharge efficiency"].push(0)
-                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["fuel cell stack efficiency"].push(val)
+                        efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["battery discharge efficiency"].push(0)
+                        efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["fuel cell stack efficiency"].push(val)
                     };
 
-                    if (![i18n("electric"), i18n("fuel_cell")].includes(listPowertrains[pt].innerHTML)){
-                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["battery discharge efficiency"].push(0)
-                        efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["fuel cell stack efficiency"].push(0)
+                    if (!["BEV", "FCEV"].includes(i18n(listPowertrains[pt].innerHTML))){
+                        efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["battery discharge efficiency"].push(0)
+                        efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["fuel cell stack efficiency"].push(0)
                     }
 
-                    var slider = $("[id='"+"engine_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var slider = $("[id='"+"engine_eff_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = parseFloat(slider.noUiSlider.get());
-                    efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["engine efficiency"].push(val)
+                    efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["engine efficiency"].push(val)
 
-                    var slider = $("[id='"+"drivetrain_eff_"+listPowertrains[pt].innerHTML+"_"+listSizes[s].innerHTML+"_"+listYears[y].innerHTML+"']")[0]
+                    var slider = $("[id='"+"drivetrain_eff_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = parseFloat(slider.noUiSlider.get());
-                    efficiency[listPowertrains[pt].innerHTML][listSizes[s].innerHTML]["drivetrain efficiency"].push(val)
+                    efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["drivetrain efficiency"].push(val)
 
 
                 }
@@ -1797,7 +1781,6 @@ function collect_configuration(){
 function get_results(){
     var data = collect_configuration();
     if (data == null){
-        console.log('data null');
         return;
     };
     var str = i18n('job_queued')
@@ -2116,7 +2099,7 @@ $("#InputParameters").on("keyup", function() {
         var pt = listPowertrains[i].innerHTML;
 
         if (powertrains.indexOf(pt) >=0 ){
-            l_pt.push(pt);
+            l_pt.push(i18n(pt));
         }
     }
 
@@ -2124,10 +2107,9 @@ $("#InputParameters").on("keyup", function() {
         var s = listSizes[j].innerHTML;
 
         if (sizes.indexOf(s) >=0 ){
-            l_s.push(s);
+            l_s.push(i18n(s));
         }
      }
-
 
     var arr_request = [name, l_pt, l_s, unit, years]
         $.when(
@@ -2149,8 +2131,8 @@ $("#InputParameters").on("keyup", function() {
                 for (pt=0;pt<arr_request[1].length;pt++){
                     for (s=0;s<arr_request[2].length;s++){
                     var newRow = tableRef.insertRow();
-                    var row_content = '<td align="left" style="color:white">'+arr_request[0]+'</td><td align="left" style="color:white">'+arr_request[1][pt]+'</td>'
-                    row_content += '<td align="left" style="color:white">'+arr_request[2][s]+'</td><td align="left" style="color:white">'+arr_request[3]+'</td>'
+                    var row_content = '<td align="left" style="color:white">'+arr_request[0]+'</td><td align="left" style="color:white">'+i18n(arr_request[1][pt])+'</td>'
+                    row_content += '<td align="left" style="color:white">'+i18n(arr_request[2][s])+'</td><td align="left" style="color:white">'+arr_request[3]+'</td>'
                     var param_content ='';
                     for (y=0;y<arr_request[4].length;y++){
 
@@ -2312,7 +2294,7 @@ function fill_in_from_config_file(data){
 
         $("#powertrain_list").empty();
         for (y in data['type']){
-            $("#powertrain_list").append('<li>'+data['type'][y]+'</li>');
+            $("#powertrain_list").append('<li>'+i18n(data['type'][y])+'</li>');
         };
 
         // Remove powertrains from left frame
@@ -2320,7 +2302,7 @@ function fill_in_from_config_file(data){
         var items = ul.getElementsByTagName("li");
         for (y in data['type']){
             for (var i = 0; i < items.length; ++i) {
-                if (items[i].innerHTML == data["type"][y]){
+                if (items[i].innerHTML == i18n(data["type"][y])){
                     ul.removeChild(items[i]);
                 };
               };
@@ -2328,7 +2310,7 @@ function fill_in_from_config_file(data){
 
         $("#size_list").empty();
         for (y in data['size']){
-            $("#size_list").append('<li>'+data['size'][y]+'</li>');
+            $("#size_list").append('<li>'+i18n(data['size'][y])+'</li>');
         };
 
         // Remove powertrains from left frame
@@ -2336,7 +2318,7 @@ function fill_in_from_config_file(data){
         var items = ul.getElementsByTagName("li");
         for (y in data['size']){
             for (var i = 0; i < items.length; ++i) {
-                if (items[i].innerHTML == data["size"][y]){
+                if (items[i].innerHTML == i18n(data["size"][y])){
                     ul.removeChild(items[i]);
                 };
               };
@@ -2359,8 +2341,8 @@ function fill_in_from_config_file(data){
             var arr = p.split(',');
             if (arr.length == 4){
                 var param = arr[0];
-                var pwt = arr[1];
-                var size = arr[2];
+                var pwt = i18n(arr[1]);
+                var size = i18n(arr[2]);
                 var unit = arr[3];
                 var tableRef = document.getElementById('table_inputs').getElementsByTagName('tbody')[0];
                 var newRow = tableRef.insertRow();
@@ -2446,8 +2428,8 @@ function fill_in_from_config_file(data){
                     url: "/get_language",
                     dataType: 'json',
                     type: 'GET',
-                    success : function(data) {
-                       var json = data
+                    success : function(dict) {
+                       var json = dict
                         return json
                         },
                     error: function(xhr, status, error){console.log(error)}})
@@ -2504,6 +2486,7 @@ function update_efficiency_table(data){
 };
 
 function prepare_data_for_efficiency(){
+
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -2514,8 +2497,8 @@ function prepare_data_for_efficiency(){
     var arr_s = [];
 
     for (var y = 0; y < listYears.length; y++){arr_y.push(listYears[y].innerHTML)};
-    for (var s = 0; s < listSizes.length; s++){arr_s.push(listSizes[s].innerHTML)};
-    for (var pt = 0; pt < listPowertrains.length; pt++){arr_pt.push(listPowertrains[pt].innerHTML)};
+    for (var s = 0; s < listSizes.length; s++){arr_s.push(i18n(listSizes[s].innerHTML))};
+    for (var pt = 0; pt < listPowertrains.length; pt++){arr_pt.push(i18n(listPowertrains[pt].innerHTML))};
 
     var list_param = ["battery discharge efficiency", "fuel cell stack efficiency", "engine efficiency", "drivetrain efficiency"]
 
@@ -2551,7 +2534,21 @@ function prepare_data_for_efficiency(){
                 data["year"] = arr_y;
                 data["background params"] = {"efficiency":{}};
                 data["background params"]["efficiency"] = efficiency_data;
-                update_efficiency_table(data);
+
+                //  Load the JSON File
+                $.when($.ajax({
+                            url: "/get_language",
+                            dataType: 'json',
+                            type: 'GET',
+                            success : function(data) {
+                               var json = data
+                                return json
+                                },
+                            error: function(xhr, status, error){console.log(error)}})
+                        ).done(function(json){
+                            i18n.translator.add(json);
+                            update_efficiency_table(data);
+                            })
 
             });
 
@@ -2567,9 +2564,9 @@ function prepare_data_for_energy_storage(){
     var arr_y = [];
     var arr_s = [];
     for (var pt = 0; pt < listPowertrains.length; pt++){
-        if (listPowertrains[pt].innerHTML == i18n("electric")
+        if (i18n(listPowertrains[pt].innerHTML) == "BEV"
             ){
-                arr_pt.push(listPowertrains[pt].innerHTML)
+                arr_pt.push("BEV")
             };
 
         };
@@ -2577,11 +2574,9 @@ function prepare_data_for_energy_storage(){
     if (arr_pt.length == 0){return [];};
 
     for (var y = 0; y < listYears.length; y++){arr_y.push(listYears[y].innerHTML)};
-    for (var s = 0; s < listSizes.length; s++){arr_s.push(listSizes[s].innerHTML)};
+    for (var s = 0; s < listSizes.length; s++){arr_s.push(i18n(listSizes[s].innerHTML))};
 
     var list_param = ["energy battery mass", "battery cell energy density", "battery lifetime kilometers"]
-
-
 
     var data = $.when(
 
@@ -2607,30 +2602,23 @@ function prepare_data_for_energy_storage(){
 
                             var arr = [];
                             for (var y = 0; y < arr_y.length; y ++){
-
-
                                     var size = arr_s[s];
                                     var cat = cats[c];
                                     arr.push(json[s][pt][c][y])
 
                                 };
-
                             energy_data[[size]][[cat]] = arr
-
-
                         }
                     energy_data[[size]]["type"] = "NMC"
                     energy_data[[size]]["origin"] = "CN"
-
                     }
-
                 }
-
                 var data = {};
                 data["year"] = arr_y;
                 data["background params"] = {"energy storage":{"electric":{}}};
                 data["background params"]["energy storage"]["electric"] = energy_data;
                 update_energy_storage_table(data);
+
             });
 
 };
@@ -2642,7 +2630,7 @@ function update_energy_storage_table(data){
     for (var size in battery_data) {
         // check if the property/key is defined in the object itself, not in parent
         if (battery_data.hasOwnProperty(size)) {
-            var pt = i18n("electric");
+            var pt = "BEV";
             for (y=0;y<data["year"].length;y++){
                 var slider_mass = $("[id='"+"mass_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
                  slider_mass.noUiSlider.updateOptions({
@@ -2652,6 +2640,7 @@ function update_energy_storage_table(data){
                 slider_density.noUiSlider.updateOptions({
                                     start: battery_data[size]["battery cell energy density"][y]
                                 });
+
                 var slider_lifetime = $("[id='"+"lifetime_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
                 slider_lifetime.noUiSlider.updateOptions({
                                     start: battery_data[size]["battery lifetime kilometers"][y]
@@ -2953,10 +2942,6 @@ function create_energy_storage_table() {
 
     var tableRef = document.getElementById('energy_storage_table').getElementsByTagName('tbody')[0];
     var rowCount = tableRef.rows.length;
-    //while (rowCount>2){
-    //    tableRef.deleteRow(2);
-    //    var rowCount = tableRef.rows.length;
-    //}
 
     for (var pt = 0; pt < listPowertrains.length; pt++){
 
@@ -2980,31 +2965,28 @@ function create_energy_storage_table() {
 
                             if (y==0){
                                 var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
-                                '</td><td align="left" style="color:white"><div id="mass_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="energy_density_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="capacity_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="lifetime_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="type_'+fuel_real_name+'_'+size+'" style="width:300px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="origin_'+fuel_real_name+'_'+size+'" style="width:100px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                '</td><td align="left" style="color:white"><div id="mass_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="energy_density_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="capacity_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="lifetime_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="type_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'" style="width:300px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="origin_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'" style="width:100px;margin-top:50px;margin-bottom:10px;"></div></td>'
 
                             }else{
 
                                 var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
-                                '</td><td align="left" style="color:white"><div id="mass_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="energy_density_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="capacity_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-                                + '<td align="left" style="color:white"><div id="lifetime_'+fuel_real_name+'_'+size+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                '</td><td align="left" style="color:white"><div id="mass_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="energy_density_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="capacity_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
+                                + '<td align="left" style="color:white"><div id="lifetime_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
 
 
                             };
 
-
-
-                newRow.innerHTML = row_content;
-                row_content='';
-        };
+                    newRow.innerHTML = row_content;
+                    row_content='';
+                };
             };
-
             list_fuel.push(fuel_real_name);
             fuel_real_name = "";
         };
@@ -3078,8 +3060,6 @@ function create_energy_storage_table() {
 
             };
 
-
-
             if (div_type == "lifetime"){
 
                 var slider = noUiSlider.create(divs[i], {
@@ -3102,8 +3082,6 @@ function create_energy_storage_table() {
 
             };
 
-
-
             if (divs[i].id.split("_")[0] == "type"){
 
                 divs[i].innerHTML = '<select style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
@@ -3119,21 +3097,13 @@ function create_energy_storage_table() {
                                     + '<option value="RER">'+i18n("europe")+'</option>'
                                     + '<option value="NO">'+i18n("norway")+'</option>'
                                     + '<option value="US">'+i18n("united_states")+'</option></select>'
-
             }
-
-
-
         }
-
-
-
     }
 
 };
 
 function create_efficiency_table() {
-    console.log("table creation")
     var list_fuel = [];
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
@@ -3146,11 +3116,11 @@ function create_efficiency_table() {
 
         // Choose the appropriate powertrains
         var valid_pt = false;
-        if (!["plugin_hybrid_diesel", "plugin_hybrid_petrol"].includes(listPowertrains[pt].innerText)){
+        if (!["PHEV-d", "PHEV-p"].includes(i18n(listPowertrains[pt].innerText))){
             valid_pt = true;
         };
 
-        if (valid_pt==true && !list_fuel.includes(listPowertrains[pt].innerText)){
+        if (valid_pt==true && !list_fuel.includes(i18n(listPowertrains[pt].innerText))){
             for (var s = 0; s < listSizes.length; s++){
                 var size = listSizes[s].innerText;
                 for (var y = 0; y < listYears.length; y++){
@@ -3158,30 +3128,28 @@ function create_efficiency_table() {
                     var year = listYears[y].innerText;
                     var newRow = tableRef.insertRow();
 
-                    if (![i18n("electric"), i18n("fuel_cell")].includes(listPowertrains[pt].innerText)){
+                    if (!["BEV", "FCEV"].includes(i18n(listPowertrains[pt].innerText))){
 
                         var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
                         '</td><td align="left" style="color:white"></td>'
-                        + '<td align="left" style="color:white"><div id="engine_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="powertrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="engine_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="powertrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
 
                     }else{
 
                         var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
-                        '</td><td align="left" style="color:white"><div id="storage_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="engine_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="powertrain_eff_'+listPowertrains[pt].innerText+'_'+size+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-
-
-                    };
+                        '</td><td align="left" style="color:white"><div id="storage_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="engine_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="powertrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                    }
 
                 newRow.innerHTML = row_content;
                 row_content='';
                 };
             };
-            list_fuel.push(listPowertrains[pt].innerText);
+            list_fuel.push(i18n(listPowertrains[pt].innerText));
         };
     }
 
@@ -3194,7 +3162,7 @@ function create_efficiency_table() {
 
         for (var i=0; i<divs.length; i++){
             if (divs[i].id.split("_")[0]!="powertrain"){
-                console.log(divs[i])
+
 
                 var slider = noUiSlider.create(divs[i], {
                         start: 0.9,

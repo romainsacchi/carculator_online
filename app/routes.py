@@ -132,7 +132,7 @@ def tool_page(country):
                         ],
                     )
                 ]
-                .interp(year=[2020, 2035, 2050])
+                .interp(year=[2020, 2050])
                 .values
             )
         except KeyError:
@@ -154,7 +154,7 @@ def tool_page(country):
                         ],
                     )
                 ]
-                .interp(year=[2020, 2035, 2050])
+                .interp(year=[2020, 2050])
                 .values
             )
         response = np.round(
@@ -170,13 +170,13 @@ def tool_page(country):
             app.calc.biofuel.sel(
                 region=region, fuel_type="Biomass fuel", scenario="SSP2-Base",
             )
-            .interp(year=[2020, 2035, 2050])
+            .interp(year=[2020, 2050])
             .values
         )
 
         config = {
-            "year": ["2020", "2035", "2050"],
-            "type": [_("Petrol"), _("Diesel"), _("Electric")],
+            "year": ["2020", "2050"],
+            "type": [_("Petrol"), _("Diesel"), _("CNG"), _("Electric")],
             "size": [_("Mid-size")],
             "driving_cycle": "WLTC",
             "foreground params": {
@@ -210,34 +210,40 @@ def tool_page(country):
                     },
                 },
                 "energy storage": {
-                    "electric": {
-                        _("Mid-size"): {
+                    "BEV": {
+                        "Medium": {
                             "type": "NMC",
                             "origin": "CN",
-                            "energy battery mass": [385, 305, 230],
-                            "battery cell energy density": [0.23, 0.36, 0.49],
-                            "battery lifetime kilometers": [200000, 200000, 200000],
+                            "energy battery mass": [385, 230],
+                            "battery cell energy density": [0.23, 0.49],
+                            "battery lifetime kilometers": [200000, 200000],
                         }
                     }
                 },
                 "efficiency": {
-                    _("Petrol"): {
-                        _("Mid-size"): {
-                            "engine efficiency": [0.27, 0.31, 0.35],
-                            "drivetrain efficiency": [0.81, 0.84, 0.87],
+                    "ICEV-p": {
+                        "Medium": {
+                            "engine efficiency": [0.27, 0.35],
+                            "drivetrain efficiency": [0.81, 0.87],
                         }
                     },
-                    _("Diesel"): {
-                        _("Mid-size"): {
-                            "engine efficiency": [0.3, 0.32, 0.35],
-                            "drivetrain efficiency": [0.81, 0.84, 0.87],
+                    "ICEV-d": {
+                        "Medium": {
+                            "engine efficiency": [0.3, 0.35],
+                            "drivetrain efficiency": [0.81, 0.87],
                         }
                     },
-                    _("Electric"): {
-                        _("Mid-size"): {
-                            "engine efficiency": [0.85, 0.87, 0.88],
-                            "drivetrain efficiency": [0.85, 0.87, 0.88],
-                            "battery discharge efficiency": [0.88, 0.89, 0.89],
+                    "ICEV-g": {
+                        "Medium": {
+                            "engine efficiency": [0.26, 0.35],
+                            "drivetrain efficiency": [0.81, 0.87],
+                        }
+                    },
+                    "BEV": {
+                        "Medium": {
+                            "engine efficiency": [0.85, 0.88],
+                            "drivetrain efficiency": [0.85, 0.88],
+                            "battery discharge efficiency": [0.88, 0.89],
                         }
                     },
                 },
@@ -288,7 +294,6 @@ def tool_page(country):
         config=config,
     )
 
-
 @app.route("/search_car_model/<search_item>")
 def search_car_model(search_item):
     """ Return a list of cars if cars contain `search item`"""
@@ -299,7 +304,6 @@ def search_car_model(search_item):
         if any(search_item.lower() in x.lower() for x in car)
     ]
     return jsonify(cars[:5])
-
 
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):
@@ -400,12 +404,11 @@ def search_params(param_item, powertrain_filter, size_filter):
 
     return jsonify(response[:7])
 
-
 @app.route("/get_param_value/<name>/<pt>/<s>/<y>")
 def get_param_value(name, pt, s, y):
     name = name.split(",")
-    pt = [app.calc.d_pt_all[p] for p in pt.split(",")]
-    s = [app.calc.d_size_all[x] for x in s.split(",")]
+    pt = [p for p in pt.split(",")]
+    s = [x for x in s.split(",")]
 
     y = y.split(",")
     y = [int(a) for a in y]
@@ -417,13 +420,11 @@ def get_param_value(name, pt, s, y):
     )
     return jsonify(val)
 
-
 @app.route("/get_driving_cycle/<driving_cycle>")
 def get_driving_cycle(driving_cycle):
     """ Return a driving cycle"""
     dc = app.calc.get_dc(driving_cycle)
     return jsonify(dc.tolist())
-
 
 @app.route("/send_email", methods=["POST"])
 def send_email():
@@ -439,7 +440,6 @@ def send_email():
     recipients = [app.config["RECIPIENT"]]
     email_out("Question", sender, recipients, body)
     return _("Email sent!")
-
 
 @app.route("/get_electricity_mix/<ISO>/<years>")
 def get_electricity_mix(ISO, years):
@@ -469,7 +469,6 @@ def get_electricity_mix(ISO, years):
     response = np.true_divide(response.T, response.sum(axis=1)).T
     response = np.round(response, 2)
     return jsonify(response.tolist())
-
 
 @app.route("/get_results/", methods=["POST"])
 def get_results():
@@ -511,8 +510,35 @@ def display_result(job_key):
 
     try:
         job = Job.fetch(job_key, connection=conn)
+
         if job.is_finished:
-            return render_template("result.html", data=job.result[0], uuid=job_key)
+            # retrieve impact categories
+            impact_cat = [
+             "climate change",
+             "agricultural land occupation",
+             "fossil depletion",
+             "freshwater ecotoxicity",
+             "freshwater eutrophication",
+             "human toxicity",
+             "ionising radiation",
+             "marine ecotoxicity",
+             "marine eutrophication",
+             "metal depletion",
+             "natural land transformation",
+             "ozone depletion",
+             "particulate matter formation",
+             "photochemical oxidant formation",
+             "terrestrial acidification",
+             "terrestrial ecotoxicity",
+             "urban land occupation",
+             "water depletion",
+             "human noise",
+             "primary energy, renewable",
+             "primary energy, non-renewable",
+              "ownership cost"
+            ]
+            return render_template("result.html", data=job.result[0], uuid=job_key, impact_cat=impact_cat)
+
     except NoSuchJobError:
         return render_template("404.html", job_id=job_key)
 
@@ -582,7 +608,6 @@ def get_language():
         data = json.load(fh)
 
     return make_response(data, 200)
-
 
 def write_lci_to_excel(lci, name):
     """
@@ -672,9 +697,7 @@ def write_lci_to_excel(lci, name):
 
     workbook.close()
     output.seek(0)
-
     return output.read()
-
 
 @app.route("/get_inventory_excel_for_bw/<compatibility>/<ecoinvent_version>/<job_key>")
 @login_required
