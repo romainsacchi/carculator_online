@@ -624,7 +624,7 @@ msgstr ""
 
 #: templates/result.html:194
 msgid "LIFE CYCLE IMPACT ASSESSMENT - MIDPOINT INDICATORS"
-msgstr "ÖKOBILANZ - HALBPUNKT-INDIKATOREN"
+msgstr "ÖKOBILANZ - EINZEL-INDIKATOREN"
 
 #: templates/result.html:198
 msgid ""
@@ -638,15 +638,14 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tThe user can isolate some of the impact categories by "
 "clicking them out from the legend area."
 msgstr ""
-"Standardmäßig werden die Treibhausgasemissionen auf einer Basis pro "
-"Fahrzeug und gefahrenem Kilometer dargestellt. Der Benutzer kann andere "
-"Indikatoren aus der Liste auf der linken Seite auswählen. Der Benutzer "
-"kann auch einen Aufpralltyp entfernen oder isolieren, indem er auf ihn in"
-" der Legende klickt."
+"Standardmäßig werden die Treibhausgasemissionen pro "
+"Fahrzeug und gefahrenem Kilometer dargestellt. Benutzer können andere "
+"Indikatoren aus der Liste auf der linken Seite auswählen. Benutzer können "
+"auch einzelne Beiträge durch Anklicken entfernen oder isolieren."
 
 #: templates/result.html:232
 msgid "LIFE CYCLE IMPACT ASSESSMENT - SINGLE SCORE"
-msgstr "ÖKOBILANZ - EINZELPARTITUR"
+msgstr "ÖKOBILANZ - AGGREGIERTE ERGEBNISSE"
 
 #: templates/result.html:236
 msgid ""
@@ -667,17 +666,14 @@ msgid ""
 "\t\t\t\t\t\t\t\tmove the right-most handle of the slider to the right."
 msgstr ""
 "Die im vorigen Abschnitt aufgeführten Umweltindikatoren sind in drei "
-"endgültige Indikatoren gruppiert: Auswirkungen auf die menschliche "
+"Kategorien gruppiert: Auswirkungen auf die menschliche "
 "Gesundheit, Auswirkungen auf die Ökosysteme (terrestrische, aquatische "
 "und marine) und Erschöpfung nicht erneuerbarer Ressourcen. Diese drei "
 "Indikatoren werden dann mit Hilfe der Methode Stepwise2006 in "
 "Umweltkosten umgerechnet, wodurch sie eine gemeinsame Einheit (Euro) "
-"haben. Sie können dann mit den Kilometerkosten verglichen werden, um eine"
-" Rangfolge zwischen den Fahrzeugen zu erstellen. Der Benutzer kann eine "
-"Reihe von Präferenzen für bestimmte Indikatoren angeben, die deren "
-"relative Bedeutung angeben. Der Benutzer kann auch den "
-"Wirtschaftsindikator entfernen, indem er seine Bedeutung auf 0 Prozent "
-"reduziert, um nur die drei Umweltindikatoren beizubehalten."
+"erhalten. Sie können dann mit den Kilometerkosten verglichen werden, um eine"
+" Rangfolge zwischen den Fahrzeugen zu erstellen. Benutzer können "
+"Präferenzen für bestimmte Indikatoren angeben, diese also stärker oder weniger stark gewichten. "
 
 #: templates/result.html:250
 msgid "Human health impacts"
