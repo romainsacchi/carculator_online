@@ -95,7 +95,7 @@
 										<i class="icon-globe" style="color:white;font-size:50px;margin: 0 auto !important;"></i>
 										</span>
 										<h2 class="mu-heading-title">{{_('Simple')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Directly see the results of a comparison between a gasoline, a diesel and
+										<h4 style="color:white;display:inline;">{{ _("Directly see the results of a comparison between a gasoline, a diesel, a gaz and
 											an electricity-run vehicle, for  ") }}</h4><h4 id="country" style="color:white;display:inline"></h4>
 
 
@@ -106,7 +106,7 @@
 										<i class="icon-globe" style="color:white;font-size:50px;"></i>
 										</span>
 										<h2 class="mu-heading-title">{{_('Intermediate')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Set the parameters for a comparison between a gasoline, a diesel and
+										<h4 style="color:white;display:inline;">{{ _("Set the parameters for a comparison between a gasoline, a diesel, a gas and
 											an electricity-run vehicle, for  ") }}</h4><h4 id="country_2" style="color:white;display:inline"></h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
 
 
@@ -145,7 +145,7 @@
 									<td  style="border-top:0;">
 										<div style="text-align:center;">
 											<p style="color:white;display:inline;">{{_("This 'Simple' access to the model gives the environmental impacts and life cycle costs of modern, mid-size diesel,
-											gasoline and battery electric vehicles; for the country you are located in, for the year 2020, 2035 and 2050. The vehicle parameters correspond to the standard settings in our model.")}}</p>
+											gasoline, gas and battery electric vehicles; for the country you are located in, for the year 2020 and 2050. The vehicle parameters correspond to the standard settings in our model.")}}</p>
 										</div>
 
 									</td>
@@ -271,8 +271,8 @@
 					return
 
 				};
-				var data = {"year":["2020", "2050"], "type":[i18n('petrol'), i18n('diesel'), i18n("natural_gas"), i18n('electric')],
-								"size":[i18n('medium')], "driving_cycle":"WLTC",
+				var data = {"year":["2020", "2050"], "type":["ICEV-p, "ICEV-d, "ICEV-g", "BEV"],
+								"size":["Medium"], "driving_cycle":"WLTC",
 								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
 								"mileage-slider":"12 000"},
 								"background params": {"country":country_code}
