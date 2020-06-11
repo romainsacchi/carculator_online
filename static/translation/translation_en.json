@@ -261,6 +261,7 @@
       "europe": "Europe",
       "norway": "Norway",
       "united_states": "United States",
-      "total_impact": "Single score impact"
+      "total_impact": "Single score impact",
+      "country_not_available": "Sorry, it seems we do not have the necessary data for the country you are located in. Alternatively, you may try the 'Advanced' mode which lets you adjust geography-related parameters."
   }
 }

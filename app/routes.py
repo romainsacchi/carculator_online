@@ -31,6 +31,7 @@ from werkzeug.urls import url_parse
 import uuid
 import io
 import xlsxwriter
+import pickle
 
 app.calc = Calculation()
 progress_status = 0
@@ -84,19 +85,16 @@ def logout():
     logout_user()
     return redirect(session.get("url", url_for("start")))
 
-
 @app.route("/")
 def index():
     """Return homepage."""
     lang = session.get("language", "en")
     return render_template("index.html", lang=lang)
 
-
 @app.route("/start")
 def start():
     """Return start page."""
     return render_template("start.html")
-
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
@@ -304,6 +302,92 @@ def search_car_model(search_item):
         if any(search_item.lower() in x.lower() for x in car)
     ]
     return jsonify(cars[:5])
+
+
+
+@app.route("/direct_results")
+def direct_results():
+    """ This function is meant to produce quick results for all available countries and store them as pickles.
+        This allows to prevent a full calculation when results are accessed through the 'Simple' mode.
+        It is to be run every time substantial changes are made to 'carculator'."""
+    
+    countries = [
+        "AT","AU", "BE", "BG", "BR", "CA", "CH", "CL", "CN", "CY", "CZ", "DE", "DK", "EE",
+        "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IN", "IT", "IS", "JP", "LT", "LU",
+        "LV", "MT", "PL", "PT", "RO", "RU", "SE", "SI", "SK", "US", "ZA", "AO",
+        "BF", "BI", "BJ", "BW",
+        "CD", "CF", "CG", "CI", "CM", "DJ", "DZ", "EG", "ER", "ET", "GA", "GH", "GM", "GN", "GQ", "GW",
+        "KE","LR", "LS", "LY", "MA", "ML", "MR", "MW", "MZ", "NE", "NG", "NL",
+        "NM", "RW",  "SD", "SL",
+        "SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM","ZW", "NO"]
+
+    for country in countries:
+        job_id = str(uuid.uuid1())
+    
+        # Add task to db
+        task = Task(id=job_id, progress=0,)
+        db.session.add(task)
+        db.session.commit()
+    
+        d={('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020, 2050], 'size': ['Medium']},
+           ('Driving cycle',): 'WLTC',
+           ('Background',): {'country': country},
+           ('Foreground',): {('Glider', 'all', 'all', 'average passengers', 'none'): {(2020, 'loc'): 1.5,
+                                                                                      (2050, 'loc'): 1.5},
+                             ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 150.0,
+                                                                              (2050, 'loc'): 150.0},
+                             ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2020, 'loc'): 200000.0,
+                                                                                        (2050, 'loc'): 200000.0},
+                             ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2020, 'loc'): 12000.0,
+                                                                                        (2050, 'loc'): 12000.0}}}
+        data, _ = app.calc.process_results(d, "en", job_id)
+        data = json.loads(data)
+        data.append(job_id)
+
+        with open('data/quick_results_{}'.format(country), 'wb') as f:
+            pickle.dump(data, f)
+
+    res = make_response(jsonify({"job id": job_id}), 200)
+    return res
+
+@app.route("/display_quick_results/<country>")
+def display_quick_results(country):
+    pickled_data = open('data/quick_results_{}'.format(country),'rb')
+    data = pickle.load(pickled_data)
+    pickled_data.close()
+
+    job_id = data[-1]
+    data = data[:-1]
+
+    if not current_user.is_authenticated:
+        session["url"] = "/display_quick_results/" + job_id
+
+    # retrieve impact categories
+    impact_cat = [
+     "climate change",
+     "agricultural land occupation",
+     "fossil depletion",
+     "freshwater ecotoxicity",
+     "freshwater eutrophication",
+     "human toxicity",
+     "ionising radiation",
+     "marine ecotoxicity",
+     "marine eutrophication",
+     "metal depletion",
+     "natural land transformation",
+     "ozone depletion",
+     "particulate matter formation",
+     "photochemical oxidant formation",
+     "terrestrial acidification",
+     "terrestrial ecotoxicity",
+     "urban land occupation",
+     "water depletion",
+     "human noise",
+     "primary energy, renewable",
+     "primary energy, non-renewable",
+      "ownership cost"
+    ]
+    return render_template("result.html", data=json.dumps(data), uuid=job_id, impact_cat=impact_cat)
 
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):

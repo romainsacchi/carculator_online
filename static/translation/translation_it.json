@@ -262,6 +262,7 @@
       "europe": "Europa",
       "norway": "Norvegia",
       "united_states": "Stati Uniti",
-      "total_impact": "Impatto totale"
+      "total_impact": "Impatto totale",
+    "country_not_available": "Sembra che non abbiamo i dati necessari per effettuare un'analisi per il paese in cui vi trovate. In alternativa, si può provare la modalità 'Avanzata' che consente di regolare i parametri relativi alla geografia."
   }
 }

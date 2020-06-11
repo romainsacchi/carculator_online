@@ -284,16 +284,20 @@
 					return
 
 				};
-				var data = {"year":["2020", "2050"], "type":["ICEV-p", "ICEV-d", "ICEV-g", "BEV"],
-								"size":["Medium"], "driving_cycle":"WLTC",
-								"foreground params":{"passenger-slider":"1.5", "cargo-slider":"150", "lifetime-slider":"200 000",
-								"mileage-slider":"12 000"},
-								"background params": {"country":country_code}
-								};
 
-				var str = i18n('job_queued')
-				$.notify({
-					icon: '	glyphicon glyphicon-time',
+				var available_countries = countries = ["AT","AU", "BE", "BG", "BR", "CA", "CH", "CL", "CN", "CY", "CZ", "DE", "DK", "EE",
+				"ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IN", "IT", "IS", "JP", "LT", "LU",
+				"LV", "MT", "PL", "PT", "RO", "RU", "SE", "SI", "SK", "US", "ZA", "AO", "BF", "BI", "BJ", "BW",
+				"CD", "CF", "CG", "CI", "CM", "DJ", "DZ", "EG", "ER", "ET", "GA", "GH", "GM", "GN", "GQ", "GW",
+				"KE","LR", "LS", "LY", "MA", "ML", "MR", "MW", "MZ", "NE", "NG", "NL", "NM", "RW",  "SD", "SL",
+				"SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM","ZW", "NO"]
+
+				if (!available_countries.includes(country_code)){
+
+					var str = i18n("country_not_available")
+
+					$.notify({
+					icon: '	glyphicon glyphicon-warning',
 					message: str
 					}
 					,
@@ -302,7 +306,7 @@
 							from: "top",
 							align: "center"
 						},
-						type:'success'
+						type:'warning'
 					},
 					{
 						animate: {
@@ -312,158 +316,13 @@
 
 					});
 
-				$.when($.ajax({
-							url: "/get_results/",
-							type: 'POST',
-							data:JSON.stringify(data),
-							contentType: "application/json",
-							dataType: 'json',
-							success : function(json) {
-							   var response = json
-								return response
-								},
-							error: function(xhr, status, error){console.log(error)}})
-						).then(function (response) {
-					var job_id = response['job id'];
-					// Check task status every 3 seconds
+					return
 
-					var iterations = 0;
-					const interval = setInterval(function() {
-						iterations++;
-						// Stop asking if it takes more than a minute
-						if (iterations >= 20){
-							clearInterval(interval);
-							var str = i18n('job_lost')
-									$.notify({
-										icon: '	glyphicon glyphicon-warning',
-										message: str
-										},
-										{
-											placement: {
-												from: "top",
-												align: "center"
-											},
-											type:'danger'
-										},
-										{
-											animate: {
-												enter: 'animated bounceInDown',
-												exit: 'animated bounceOutUp'
-											},
 
-										});
+				};
 
-									return;
-								}
-
-						$.ajax('/check_status/'+job_id).then(function (status) {
-							return status;
-							}).then(function (status) {
-
-								if (status['job status'] == 'finished'){
-									old_progress = 0;
-									var url = '/display_result/'+job_id;
-
-									$.notify({
-										icon: 'glyphicon glyphicon-time',
-										message: i18n('link_to_results'),
-										url: url,
-										target: '_blank',
-										},
-										{
-											placement: {
-												from: "top",
-												align: "center"
-											},
-											type:'success',
-											delay:30000
-										},
-										{
-											animate: {
-												enter: 'animated bounceInDown',
-												exit: 'animated bounceOutUp'
-											},
-										});
-
-									clearInterval(interval);
-									return;
-								}
-
-								var new_progress = Number(status["progress_status"]);
-								var str = i18n('completion_rate');
-
-								if (new_progress > old_progress){
-									$.notify({
-										icon: 'glyphicon glyphicon-time',
-										message: str + " " + status["progress_status"] + "%"
-										},
-										{
-											placement: {
-												from: "top",
-												align: "center"
-											},
-											type:'success'
-										},
-										{
-											animate: {
-												enter: 'animated bounceInDown',
-												exit: 'animated bounceOutUp'
-											},
-										});
-									old_progress = Number(status["progress_status"]);
-								};
-
-								if (status['job status'] == 'job not found'){
-								var str = i18n('job_lost')
-									$.notify({
-										icon: '	glyphicon glyphicon-warning',
-										message: str
-										},
-										{
-											placement: {
-												from: "top",
-												align: "center"
-											},
-											type:'danger'
-										},
-										{
-											animate: {
-												enter: 'animated bounceInDown',
-												exit: 'animated bounceOutUp'
-											},
-
-										});
-									clearInterval(interval);
-									return;
-								};
-
-								if (status['job status'] == 'failed'){
-									var str = i18n('job_lost')
-										$.notify({
-											icon: '	glyphicon glyphicon-warning',
-											message: str
-											},
-											{
-												placement: {
-													from: "top",
-													align: "center"
-												},
-												type:'danger'
-											},
-											{
-												animate: {
-													enter: 'animated bounceInDown',
-													exit: 'animated bounceOutUp'
-												},
-
-											});
-										clearInterval(interval);
-										return;
-								};
-
-								})
-					 }, 3000);
-				});
+				// if country is identified and available
+				window.open('/display_quick_results/' + country_code, '_blank');
 			};
 		</script>
   </body>
