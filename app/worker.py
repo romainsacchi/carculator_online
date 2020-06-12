@@ -6,8 +6,11 @@ listen = ['default']
 
 redis_url = os.getenv('REDISCLOUD_URL', 'None')
 
-
-conn = redis.from_url(redis_url)
+try:
+    conn = redis.from_url(redis_url)
+except ValueError:
+    print("Cannot connect to Redis server.")
+    conn = None
 
 if __name__ == '__main__':
     with Connection(conn):

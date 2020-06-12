@@ -63,6 +63,7 @@ def register():
 def login():
     if current_user.is_authenticated:
         return redirect(session.get("url", url_for("start")))
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -70,7 +71,8 @@ def login():
             flash(_("Invalid username or password"))
             return redirect(url_for("login"))
         login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get("next")
+        next_page = request.args.get("next", url_for("start"))
+
         if not next_page or url_parse(next_page).netloc != "":
             if "url" in session:
                 next_page = session.get("url", url_for("start"))
@@ -94,6 +96,7 @@ def index():
 @app.route("/start")
 def start():
     """Return start page."""
+    session["url"] = url_for("start")
     return render_template("start.html")
 
 @app.route("/tool", defaults={"country": None})
