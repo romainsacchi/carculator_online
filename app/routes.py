@@ -306,8 +306,6 @@ def search_car_model(search_item):
     ]
     return jsonify(cars[:5])
 
-
-
 @app.route("/direct_results")
 def direct_results():
     """ This function is meant to produce quick results for all available countries and store them as pickles.
