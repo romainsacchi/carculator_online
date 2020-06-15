@@ -470,7 +470,7 @@ class Calculation:
         task.progress = 90
         db.session.commit()
 
-        data = results.values
+        data = np.float64(results.values)
         data_acc = results_acc.values
 
         powertrain = results.coords["powertrain"].values.tolist()
