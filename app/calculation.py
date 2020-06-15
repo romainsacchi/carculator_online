@@ -458,6 +458,8 @@ class Calculation:
         db.session.commit()
 
         results = self.ic.calculate_impacts()
+        powertrain = results.coords["powertrain"].values.tolist()
+        size = results.coords["size"].values.tolist()
 
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
