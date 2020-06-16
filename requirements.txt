@@ -8,7 +8,7 @@ bw2calc
 bw2data
 bw2io
 bw2parameters
--e git+https://github.com/romainsacchi/carculator#egg=carculator >=1.1.0
+-e git+https://github.com/romainsacchi/carculator#egg=carculator >=1.1.1
 certifi==2019.9.11
 chardet==3.0.4
 Click==7.0

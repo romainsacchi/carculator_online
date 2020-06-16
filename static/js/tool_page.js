@@ -1560,7 +1560,7 @@ function collect_configuration(){
     }
 
     // Retrieve all necessary data and gather it into a dictionary
-    // Initiate dictionary
+    // Create dictionaries
     var params = {};
     var background_params={};
     var foreground_params = {};
@@ -1641,8 +1641,40 @@ function collect_configuration(){
                 var fuel = divs[i].id.split('_')[0];
                 var year = divs[i].id.split('_')[1];
                 var value = parseFloat(slider.noUiSlider.get()) / 100
+
+                // Ensure that no two same fuels are selected
+
+
+
                 var primary_fuel_select = document.getElementById(fuel+" primary fuel");
                 var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
+
+                if (primary_fuel_select.value == secondary_fuel_select.value){
+
+                    var str = i18n('similar_fuels')
+                    $.notify({
+                        icon: 'glyphicon glyphicon-warning-sign',
+                        message: str
+                        }
+                        ,
+                        {
+                            placement: {
+                                from: "top",
+                                align: "center"
+                            },
+                            type:'warning'
+                        },
+                        {
+                            animate: {
+                                enter: 'animated bounceInDown',
+                                exit: 'animated bounceOutUp'
+                            },
+
+                        }
+                        );
+                    return null;
+
+                };
 
                 if (fuel in fuel_blend){
 
@@ -2930,7 +2962,9 @@ function create_fuel_table() {
             div_secondary.text(parseInt(100-values[0]) + ' %')
             div_secondary.val(parseInt(100-values[0]))
          })
-    }
+    };
+
+
 };
 
 function create_energy_storage_table() {

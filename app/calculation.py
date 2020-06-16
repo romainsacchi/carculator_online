@@ -629,8 +629,8 @@ class Calculation:
 
         # Ensure that the electricity mix is present
         if "custom electricity mix" not in new_dict[("Background",)]:
-            years= new_dict[("Functional unit",)]["year"]
-            country= new_dict[("Background",)]["country"]
+            years = new_dict[("Functional unit",)]["year"]
+            country = new_dict[("Background",)]["country"]
             try:
                 response = (
                     self.electricity_mix.loc[dict(country=country,

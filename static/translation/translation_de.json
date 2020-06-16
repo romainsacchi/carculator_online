@@ -264,6 +264,7 @@
       "norway": "Norwegen",
       "united_states": "Vereinigte Staaten",
       "total_impact": "Gesamtauswirkung",
-      "country_not_availbale": "Es tut uns leid, es scheint, dass wir nicht über die notwendigen Daten für das Land verfügen, in dem Sie sich befinden. Alternativ können Sie den Modus 'Erweitert' ausprobieren, in dem Sie geographische Parameter anpassen können."
+      "country_not_availbale": "Es tut uns leid, es scheint, dass wir nicht über die notwendigen Daten für das Land verfügen, in dem Sie sich befinden. Alternativ können Sie den Modus 'Erweitert' ausprobieren, in dem Sie geographische Parameter anpassen können.",
+      "similar_fuels" : "Eine der Treibstoff-Mixe enthält identische Primär- und Sekundärbrennstoffe. Dies ist nicht erlaubt."
   }
 }

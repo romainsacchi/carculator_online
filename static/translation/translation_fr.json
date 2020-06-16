@@ -263,6 +263,7 @@
       "norway": "Norvège",
       "united_states": "Etats-Unis",
       "total_impact": "Impact total",
-      "country_not_available": "Il semble que nous n'ayons pas les données nécéssaires pour effectuer une analyse pour le pays dans lequel vous vous trouvez. Vous pouvez néanmoins essayez le mode 'Avancé', qui vous permet d'ajuster les paramètres qui ont attrait au lieu d'utilisation."
+      "country_not_available": "Il semble que nous n'ayons pas les données nécéssaires pour effectuer une analyse pour le pays dans lequel vous vous trouvez. Vous pouvez néanmoins essayez le mode 'Avancé', qui vous permet d'ajuster les paramètres qui ont attrait au lieu d'utilisation.",
+      "similar_fuels" : "L'un des mélanges de carburant a un carburant principal similaire au carburant secondaire. Ceci n'est pas autorisé."
   }
 }
