@@ -144,6 +144,8 @@
       "smr_ccs": "par SMR de gaz naturel avec séquestration de carbone",
       "smr_biogas": "par SMR de biogaz",
       "smr_biogas_ccs": "par SMR de gaz naturel avec séquestration de carbone",
+      "wood_gasification": "par la gazéification de biomasse ligneuse",
+      "wood_gasification_ccs": "par la gazéification de biomasse ligneuse avec séquestration de carbone",
       "coal_gasification": "par la gazéification de charbon",
       "hydrogen_tank_carbon_fiber": "à partir de fibre de carbone",
       "hydrogen_tank_hdpe": "à partir de polyéthylène haute densité",

@@ -143,6 +143,8 @@
       "smr": "aus Steam Methane Reforming (SMR) aus Erdgas",
      "smr_ccs": "aus SMR aus Erdgas mit Kohlenstoffabscheidung und -speicherung",
      "smr_biogas": "SMR aus Biogas",
+      "wood_gasification": "aus der Vergasung von holzartiger Biomasse",
+      "wood_gasification_ccs": "aus der Vergasung von holzartiger Biomasse mit Kohlenstoffabscheidung und -speicherung",
      "coal_gasification": "Kohlevergasung",
      "smr_biogas_ccs": "SMR aus Biogas mit Kohlenstoffabscheidung und -speicherung",
      "hydrogen_tank_carbon_fiber": "aus Kohlefaser",

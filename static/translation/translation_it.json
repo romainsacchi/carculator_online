@@ -144,6 +144,8 @@
       "smr_ccs": "Dal SMR con cattura del carbonio",
       "smr_biogas": "Dal SMR di biogas",
       "smr_biogas_ccs": "Dal SMR di biogas con cattura del carbonio",
+      "wood_gasification": "Dalla gassificazione della biomassa legnosa",
+      "wood_gasification_ccs": "Dalla gassificazione della biomassa legnosa con cattura e stoccaggio del carbonio",
       "coal_gasification": "Gassificazione del carbone",
       "hydrogen_tank_carbon_fiber": "da fibra di carbonio",
       "hydrogen_tank_hdpe": "da polietilene ad alta densità",
