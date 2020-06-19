@@ -106,11 +106,6 @@
 								onclick=" window.open('https://carculator.readthedocs.io/en/latest/modeling.html', '_blank'); return false;">{{ _('Modeling and assumptions') }}
 					</button>
 
-					<!--<form action="/get_inventory_excel_for_bw" style="display:inline-block;float:right;">
-							<button class="online-button"
-									style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">{{ _('Export Brightway2-compatible inventories') }}</button>
-					</form>-->
-
 					<div class="dropdown">
 					  <button class="dropbtn" onclick="dropdown_function()"
 							  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;">
@@ -127,6 +122,9 @@
 					 <button class="online-button" onclick="share_results()"
 						  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Share results') }}
 					 </button>
+					<button class="online-button" onclick="export_results()"
+						  style="float:right;margin:5px;background-color:transparent;color:white;border:1px solid white;display:inline-block;">{{ _('Export results to CSV') }}
+					</button>
 			</div>
 		</nav>
 		</div>
@@ -175,7 +173,7 @@
 								<br>Sacchi R., Bauer C., Cox B., Mutel C.
 									<br>Submitted to Renewable and Sustainable Energy Reviews. In review. <a target='_blank' href="https://www.psi.ch/en/media/57994/download"><u>Article (PDF)</u></a>.
 								<br>
-								<br><i>carculator online (1.0.8), carculator (1.1.2)</i>
+								<br><i>carculator online (1.0.9), carculator (1.1.2)</i>
 								</p>
 							</div>
                 		</div>
@@ -429,6 +427,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.js"></script>
+	<script src="https://www.papaparse.com/resources/js/papaparse.js"></script>
 
 	<script>
 

@@ -100,7 +100,6 @@ class Calculation:
             "Hybride-essence rechargeable": "PHEV-p",
             "Hybride-diesel rechargeable": "PHEV-d"
         }
-
         self.d_size_en = {
             "Minicompact": "Mini",
             "Subcompact": "Small",
@@ -119,7 +118,6 @@ class Calculation:
             "SUV": "SUV",
             "Van": "Van",
         }
-
         self.d_size_it = {
             "Mini citycar": "Mini",
             "Citycar": "Small",
@@ -129,7 +127,6 @@ class Calculation:
             "SUV": "SUV",
             "Van": "Van",
         }
-
         self.d_size_de = {
             "Kleinstwagen": "Mini",
             "Kleinwagen": "Small",
@@ -139,7 +136,6 @@ class Calculation:
             "Geländewagen": "SUV",
             "Van": "Van",
         }
-
         self.d_size_all={
             "Minicompact": "Mini",
             "Subcompact": "Small",
@@ -166,166 +162,6 @@ class Calculation:
             "Geländewagen": "SUV"
         }
 
-        self.d_impact_en = {
-            "Occupation of arable land": "agricultural land occupation",
-            "Climate change": "climate change",
-            "Depletion of fossil energy resources": "fossil depletion",
-            "Toxicity of non-marine aquatic environments": "freshwater ecotoxicity",
-            "Eutrophication of non-marine aquatic environments": "freshwater eutrophication",
-            "Human toxicity": "human toxicity",
-            "Ionizing radiation": "ionising radiation",
-            "Toxicity of marine aquatic environments": "marine ecotoxicity",
-            "Eutrophication of non-marine aquatic environments": "marine eutrophication",
-            "Depletion of metal resources": "metal depletion",
-            "Natural land transformation": "natural land transformation",
-            "Deterioration of the ozone layer": "ozone depletion",
-            "Formation of fine particles": "particulate matter formation",
-            "Smog formation": "photochemical oxidant formation",
-            "Terrestrial acidification": "terrestrial acidification",
-            "Terrestrial toxicity": "terrestrial ecotoxicity",
-            "Land occupation in an urban environment": "urban land occupation",
-            "Depletion of fresh water reserves": "water depletion",
-            "Noise emissions": "human noise",
-            "Primary energy, renewable": "primary energy, renewable",
-            "Primary energy, non-renewable": "primary energy, non-renewable"
-        }
-
-        self.d_impact_it = {
-            "Occupazione di terreni agricoli [m2 / anno]": "agricultural land occupation",
-            "Cambiamenti climatici [kg CO2-eq.]": "climate change",
-            "Esaurimento delle risorse energetiche fossili [kg di petrolio eq.]": "fossil depletion",
-            "Tossicità per gli ambienti acquatici non marini [kg 1,4-DC-eq.]": "freshwater ecotoxicity",
-            "Eutrofizzazione di ambienti acquatici non marini [kg P-eq.]": "freshwater eutrophication",
-            "Tossicità per l'uomo [kg 1,4-DC-eq.]": "human toxicity",
-            "Radiazione ionizzante [kg U235-eq.]": "ionising radiation",
-            "Tossicità per gli ambienti acquatici marini [kg 1,4-DC-eq.]": "marine ecotoxicity",
-            "Eutrofizzazione di ambienti acquatici non marini [kg N-eq.]": "marine eutrophication",
-            "Esaurimento delle risorse metalliche [kg ferro-eq.]": "metal depletion",
-            "Trasformazione del terreno naturale [m2]": "natural land transformation",
-            "Deterioramento dello strato di ozono [kg CFC-11-eq.]": "ozone depletion",
-            "Formazione di particolato [kg PM10-eq.]": "particulate matter formation",
-            "Formazione di smog [kg NMVOC-eq.]": "photochemical oxidant formation",
-            "Acidificazione terrestre [kg SO2-Eq-eq.]": "terrestrial acidification",
-            "Tossicità terrestre [kg 1,4-DC.-eq.]": "terrestrial ecotoxicity",
-            "Occupazione di terreno urbano [m2/anno]": "urban land occupation",
-            "Esaurimento delle riserve di acqua dolce [m3]": "water depletion",
-            "Inquinamento acustico [Person-Pascal / secondo]": "human noise",
-            "Energia primaria, rinnovabile [Megajoule]": "primary energy, renewable",
-            "Energia primaria, non rinnovabile [Megajoule]": "primary energy, non-renewable"
-        }
-
-        self.d_impact_fr = {
-            "Occupation de terre arable [m2/an]": "agricultural land occupation",
-            "Changement climatique [kg CO2-eq.]": "climate change",
-            "Epuisement des ressources d'énergie fossile [kg pétrole-eq.]": "fossil depletion",
-            "Toxicité des milieux aquatiques non-marins [kg 1,4-DC-eq.]": "freshwater ecotoxicity",
-            "Eutrophisation des milieux aquatiques non-marins [kg P-eq.]": "freshwater eutrophication",
-            "Toxicité humaine [kg 1,4-DC-eq.]": "human toxicity",
-            "Rayonnement ionisant [kg U235-Eq]": "ionising radiation",
-            "Toxicité des milieux aquatiques marins [kg 1,4-DC-eq.]": "marine ecotoxicity",
-            "Eutrophisation des milieux aquatiques marins [kg N-eq.]": "marine eutrophication",
-            "Epuisement des ressources en métaux [kg fer-eq.]": "metal depletion",
-            "Transformation de terre naturelle [m2]": "natural land transformation",
-            "Détérioration de la couche d'ozone [kg CFC-11-eq.]": "ozone depletion",
-            "Formation de particules fines [kg PM10-eq.]": "particulate matter formation",
-            "Formation de brouillard de pollution [kg NMVOC-eq.]": "photochemical oxidant formation",
-            "Acidification terrestre [kg SO2-eq.]": "terrestrial acidification",
-            "Toxicité des milieux terrestres [kg 1,4-DC.-eq.]": "terrestrial ecotoxicity",
-            "Occupation de terre en milieu urbain [m2/an]": "urban land occupation",
-            "Epuisement des réserves d'eau douce [m3]": "water depletion",
-            "Emissions de bruit [Person-Pascal/seconde]": "human noise",
-            "Energie primaire, renouvelable [Mégajoule]": "primary energy, renewable",
-            "Energi primaire, non renouvelable [Mégajoule]": "primary energy, non-renewable"
-        }
-
-        self.d_impact_de = {
-            "Ackerlandnutzung [m2 / Jahr]": "agricultural land occupation",
-            "Klimawandel [kg CO2-Äq.]": "climate change",
-            "Erschöpfung fossiler Energieressourcen [kg Öläquivalent]": "fossil depletion",
-            "Toxizität in Gewässern ausserhalb des Meeres [kg 1,4-DC-Äq.]": "freshwater ecotoxicity",
-            "Eutrophierung von Gewässern ausserhalb des Meeres [kg P-Äq.]": "freshwater eutrophication",
-            "Humantoxizität [kg 1,4-DC-Äq.]": "human toxicity",
-            "Ionisierende Strahlung [kg U235-Eq]": "ionising radiation",
-            "Toxizität in Gewässern des Meeres [kg 1,4-DC-Äq.]": "marine ecotoxicity",
-            "Eutrophierung von Gewässern im Meer [kg N-Äq.]": "marine eutrophication",
-            "Erschöpfung der Metallressourcen [kg Eisenäquivalent]": "metal depletion",
-            "Natürliche Landumwandlung [m2]": "natural land transformation",
-            "Zerstörung der Ozonschicht [kg FCKW-11-Äq.]": "ozone depletion",
-            "Bildung von Feinstaub [kg PM10-Äq.]": "particulate matter formation",
-            "Smogbildung [kg NMVOC-Äq.]": "photochemical oxidant formation",
-            "Terrestrische Versauerung [kg SO2-Äq.]": "terrestrial acidification",
-            "Terrestrische Toxizität [kg 1,4-DC.-Äq.]": "terrestrial ecotoxicity",
-            "Flächennutzung in städtischen Gebieten [m2/Jahr]": "urban land occupation",
-            "Erschöpfung der Süsswasservorräte [m3]": "water depletion",
-            "Geräuschemission [Person-Pascal / Sekunde]": "human noise",
-            "Primärenergie, erneuerbar [Megajoule]": "primary energy, renewable",
-            "Primärenergie, nicht erneuerbar [Megajoule]": "primary energy, non-renewable"
-        }
-
-        self.d_cat_en = {
-            "Direct emissions": "direct",
-            "Fuel supply": "energy chain",
-            "Energy storage": "energy storage",
-            "Chassis": "glider",
-            "Maintenance": "maintenance",
-            "End of Life": "EoL",
-            "Powertrain": "powertrain",
-            "Road": "road",
-        }
-
-        self.d_cat_de = {
-            "Direkte Emissionen": "direct",
-            "Kraftstoffherstellung": "energy chain",
-            "Energiespeicher": "energy storage",
-            "Fahrwerk": "glider",
-            "Wartungsarbeiten": "maintenance",
-            "Entsorgung": "EoL",
-            "Antriebsstrang": "powertrain",
-            "Straße": "road",
-        }
-
-        self.d_cat_fr = {
-            "Emissions directes": "direct",
-            "Fabrication du carburant": "energy chain",
-            "Stockage du carburant": "energy storage",
-            "Chassis": "glider",
-            "Maintenance": "maintenance",
-            "Fin de vie": "EoL",
-            "Motorisation": "powertrain",
-            "Route": "road",
-        }
-        self.d_cat_it = {
-            "Emissioni dirette": "direct",
-            "Produzione di carburante": "energy chain",
-            "Accumulo di energia": "energy storage",
-            "Telaio": "glider",
-            "Manutenzione": "maintenance",
-            "Fine della vita": "EoL",
-            "Motore": "powertrain",
-            "Strada": "road",
-        }
-        self.d_cost_fr = {
-            "Achat": "purchase",
-            "Remplacement de composants": "component replacement",
-            "Carburant": "energy",
-            "Maintenance": "maintenance",
-            "total": "total",
-        }
-
-        self.d_cost_de = {
-            "Kauf": "purchase",
-            "Komponententausch": "component replacement",
-            "Treibstoff": "energy",
-            "Wartung": "maintenance",
-            "total": "total",
-        }
-        self.d_cost_it = {
-            "Acquisto": "purchase",
-            "Sostituzione dei componenti": "component replacement",
-            "Carburante": "energy",
-            "Manutenzione": "maintenance",
-            "total": "total",
-        }
         self.d_rev_pt_en = {v: k for k, v, in self.d_pt_en.items()}
         self.d_rev_pt_fr = {v: k for k, v, in self.d_pt_fr.items()}
         self.d_rev_pt_it = {v: k for k, v, in self.d_pt_it.items()}
@@ -336,19 +172,6 @@ class Calculation:
         self.d_rev_size_it = {v: k for k, v, in self.d_size_it.items()}
         self.d_rev_size_de = {v: k for k, v, in self.d_size_de.items()}
 
-        self.d_rev_cost_fr = {v: k for k, v, in self.d_cost_fr.items()}
-        self.d_rev_cost_it = {v: k for k, v, in self.d_cost_it.items()}
-        self.d_rev_cost_de = {v: k for k, v, in self.d_cost_de.items()}
-
-        self.d_rev_impact_en = {v: k for k, v, in self.d_impact_en.items()}
-        self.d_rev_impact_fr = {v: k for k, v, in self.d_impact_fr.items()}
-        self.d_rev_impact_it = {v: k for k, v, in self.d_impact_it.items()}
-        self.d_rev_impact_de = {v: k for k, v, in self.d_impact_de.items()}
-
-        self.d_rev_cat_en = {v: k for k, v, in self.d_cat_en.items()}
-        self.d_rev_cat_fr = {v: k for k, v, in self.d_cat_fr.items()}
-        self.d_rev_cat_it = {v: k for k, v, in self.d_cat_it.items()}
-        self.d_rev_cat_de = {v: k for k, v, in self.d_cat_de.items()}
         self.excel = ""
 
     def load_map_file(self, lang):
@@ -387,6 +210,152 @@ class Calculation:
 
     def get_dc(self, dc):
         return get_standard_driving_cycle(dc)
+
+    def create_config_array(self, dict_params, array):
+
+        arr = []
+        powertrain = [pt for pt in dict_params[('Functional unit',)]['powertrain']]
+        size = [s for s in dict_params[('Functional unit',)]['size']]
+        year = [y for y in dict_params[('Functional unit',)]['year']]
+        driving_cycle = dict_params[('Driving cycle',)]
+        country = dict_params[('Background',)]['country']
+        passengers = dict_params[('Foreground',)][('Glider', 'all', 'all', 'average passengers', 'none')][(year[0], 'loc')]
+        cargo_mass = dict_params[('Foreground',)][('Glider', 'all', 'all', 'cargo mass', 'none')][(year[0], 'loc')]
+        lifetime = dict_params[('Foreground',)][('Driving', 'all', 'all', 'lifetime kilometers', 'none')][(year[0], 'loc')]
+        km_per_year = dict_params[('Foreground',)][('Driving', 'all', 'all', 'kilometers per year', 'none')][(year[0], 'loc')]
+
+        for pt in powertrain:
+            for s in size:
+                for y in year:
+                    electricity_mix = self.electricity_mix.loc[
+                                            dict(
+                                                country=country,
+                                                variable=[
+                                                    "Hydro",
+                                                    "Nuclear",
+                                                    "Gas",
+                                                    "Solar",
+                                                    "Wind",
+                                                    "Biomass",
+                                                    "Coal",
+                                                    "Oil",
+                                                    "Geothermal",
+                                                    "Waste",
+                                                ],
+                                            )
+                                        ].interp(year=y).values.tolist()
+                    params = [pt, s, y, lifetime, km_per_year, passengers, cargo_mass, driving_cycle, country, electricity_mix]
+                    other_params = array.sel(powertrain=pt, size=s, year=y, value=0, parameter=[
+                        'TtW energy',
+                        'driving mass',
+                        'combustion power',
+                        'electric power',
+                        'range',
+                        'engine efficiency',
+                        'drivetrain efficiency',
+                        'TtW efficiency',
+                        'battery discharge efficiency',
+                        'energy battery mass',
+                        'battery cell energy density',
+                        'electric energy stored',
+                        'battery lifetime kilometers',
+                    ]).values.tolist()
+                    params.extend(other_params)
+
+                    if pt in ('BEV'):
+                        battery_chem = dict_params[('Background',)]["energy storage"]["electric"]["type"]
+                        battery_origin = dict_params[('Background',)]["energy storage"]["electric"]["origin"]
+                        primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["", "", "", ""]
+                    else:
+                        battery_chem, battery_origin = ["", ""]
+
+                    if pt in ('ICEV-p', 'PHEV-p', 'HEV-p'):
+                        if "fuel blend" in dict_params[('Background',)]:
+                            if "petrol" in dict_params[('Background',)]["fuel blend"]:
+                                primary_fuel_type = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["type"]
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["share"][year.index(y)]
+                                secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["type"]
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["share"][year.index(y)]
+                            else:
+                                region = self.region_map[country]["RegionCode"]
+                                share_biofuel = self.biofuel.sel(
+                                    region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
+                                share_biofuel = float(share_biofuel)
+                                primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["petrol", 1-share_biofuel, "bioethanol - wheat straw", share_biofuel]
+
+                        else:
+                            region = self.region_map[country]["RegionCode"]
+                            share_biofuel = self.biofuel.sel(
+                                    region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
+                            share_biofuel = float(share_biofuel)
+                            primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["petrol", 1-share_biofuel, "bioethanol - wheat straw", share_biofuel]
+
+
+                    if pt in ('ICEV-d', 'PHEV-d', 'HEV-d'):
+                        if "fuel blend" in dict_params[('Background',)]:
+                            if "diesel" in dict_params[('Background',)]["fuel blend"]:
+                                primary_fuel_type = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["type"]
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["share"][year.index(y)]
+                                secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["type"]
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["share"][year.index(y)]
+                            else:
+                                region = self.region_map[country]["RegionCode"]
+                                share_biofuel = self.biofuel.sel(
+                                    region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
+                                share_biofuel = float(share_biofuel)
+                                primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["diesel", 1-share_biofuel, "biodiesel - algae", share_biofuel]
+                        else:
+                            region = self.region_map[country]["RegionCode"]
+                            share_biofuel = self.biofuel.sel(
+                                    region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
+                            share_biofuel = float(share_biofuel)
+                            primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["diesel", 1-share_biofuel, "biodiesel - algae", share_biofuel]
+
+                    if pt in ('ICEV-g'):
+                        if "fuel blend" in dict_params[('Background',)]:
+                            if "cng" in dict_params[('Background',)]["fuel blend"]:
+                                primary_fuel_type = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["type"]
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["share"][year.index(y)]
+                                secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["type"]
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["share"][year.index(y)]
+                            else:
+                                region = self.region_map[country]["RegionCode"]
+                                share_biofuel = self.biofuel.sel(
+                                    region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
+                                share_biofuel = float(share_biofuel)
+                                primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas", share_biofuel]
+                        else:
+                            region = self.region_map[country]["RegionCode"]
+                            share_biofuel = self.biofuel.sel(
+                                    region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
+                            share_biofuel = float(share_biofuel)
+                            primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas", share_biofuel]
+
+                    if pt in ('FCEV'):
+                        if "fuel blend" in dict_params[('Background',)]:
+                            if "hydrogen" in dict_params[('Background',)]["fuel blend"]:
+                                primary_fuel_type = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["type"]
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["share"][year.index(y)]
+                                secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["type"]
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["share"][year.index(y)]
+                            else:
+                                primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["electrolysis", 1, "", ""]
+                        else:
+                            primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["electrolysis", 1, "", ""]
+
+
+                    params.extend([battery_chem, battery_origin, primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share])
+
+
+                    arr.append(params)
+
+        return arr
 
     def process_results(self, d, lang, job_id):
         """ Calculate LCIA and store results in an array of arrays """
@@ -594,6 +563,7 @@ class Calculation:
                     TtW_list,
                     dict_scatter,
                     list_res_acc,
+                    self.create_config_array(d, cm.array)
                 ]
             ),
             self.export,
@@ -735,3 +705,5 @@ class Calculation:
         db.session.commit()
 
         return new_dict
+
+

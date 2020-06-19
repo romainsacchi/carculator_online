@@ -35,6 +35,59 @@
     );
  };
 
+ function export_results()
+{
+    var data_to_parse = data[1];
+    for (d=0;d<data_to_parse.length;d++){
+        var impact_cat = data_to_parse[d][0];
+        for (sub=0;sub<data_to_parse[d].length;sub++){
+            data_to_parse[d][sub] = i18n(data_to_parse[d][sub]);
+
+        };
+        data_to_parse[d].splice(6,1)
+        data_to_parse[d].push(i18n('unit_'+impact_cat))
+    };
+
+    data_to_parse.unshift([i18n('impact_category'), i18n('size'), i18n('powertrain'), i18n('year'), i18n('impact_source'), i18n('value'), i18n('unit')]);
+
+    data_to_parse.unshift([]);
+    for (d=0;d<data[6].length;d++){
+        for (sub=0;sub<data[6][d].length;sub++){
+            data[6][d][sub] = i18n(data[6][d][sub]);
+        };
+        data_to_parse.unshift(data[6][d])
+    };
+
+    data_to_parse.unshift(['', '', '','(km)','(km)', '(unit)', '(kg)','','',
+    '(Hydro, Nuclear, Gas, Solar, Wind, Biomass, Coal, Oil, Geothermal, Waste)','(kj/km)','(kg)','(kW)', '(kW)', '(km)',
+     '(0-1)', '(0-1)', '(0-1)', '(0-1)', '(kg)', '(kWh/kg)', '(kWh)', '(km)', '', '',
+     '', '(0-1)', '', '(0-1)']);
+    data_to_parse.unshift(['Powertrain', 'Size', 'Year','Lifetime','Km per year', 'Number of passengers', 'Cargo mass','Driving cycle','Country', 'Electricity mix',
+     'TtW energy','Driving mass','Combustion engine power','Electric engine power','Range','Engine eff.', 'Drivetrain eff.', 'Tank-to-wheel eff.',
+     'Energy storage eff.','Battery mass', 'Cell energy density', 'Battery cap.', 'Battery lifetime', 'Battery chemistry', 'Battery origin',
+     'Primary fuel', 'Primary fuel share', 'Secondary fuel', 'Secondary fuel share']);
+
+    data_to_parse.unshift([]);
+    data_to_parse.unshift(['carculator online 1.0.9', 'carculator 1.1.2', 'https://carculator.psi.ch']);
+
+    var csv = Papa.unparse(data_to_parse);
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    var csvURL =  null;
+    if (navigator.msSaveBlob)
+    {
+        csvURL = navigator.msSaveBlob(csvData, 'carculator_results_export.csv');
+    }
+    else
+    {
+        csvURL = window.URL.createObjectURL(csvData);
+    }
+
+    var tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', 'carculator_results_export.csv');
+    tempLink.click();
+}
+
  function export_bw2_inventories(){
  	var str = i18n('inventory_download')
     $.notify({

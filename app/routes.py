@@ -313,14 +313,16 @@ def direct_results():
         It is to be run every time substantial changes are made to 'carculator'."""
     
     countries = [
-        "AT","AU", "BE", "BG", "BR", "CA", "CH", "CL", "CN", "CY", "CZ", "DE", "DK", "EE",
+        "AT","AU",
+        "BE", "BG", "BR", "CA", "CH", "CL", "CN", "CY", "CZ", "DE", "DK", "EE",
         "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IN", "IT", "IS", "JP", "LT", "LU",
         "LV", "MT", "PL", "PT", "RO", "RU", "SE", "SI", "SK", "US", "ZA", "AO",
         "BF", "BI", "BJ", "BW",
         "CD", "CF", "CG", "CI", "CM", "DJ", "DZ", "EG", "ER", "ET", "GA", "GH", "GM", "GN", "GQ", "GW",
         "KE","LR", "LS", "LY", "MA", "ML", "MR", "MW", "MZ", "NE", "NG", "NL",
         "NM", "RW",  "SD", "SL",
-        "SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM","ZW", "NO"]
+        "SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM","ZW", "NO"
+    ]
 
     for country in countries:
         job_id = str(uuid.uuid1())
@@ -627,7 +629,6 @@ def display_result(job_key):
     except NoSuchJobError:
         return render_template("404.html", job_id=job_key)
 
-
 @app.route("/check_status/<job_key>")
 def get_job_status(job_key):
     """ Check the status of the job for the given `job_id` """
@@ -651,7 +652,6 @@ def get_job_status(job_key):
 
     return make_response(response, 200)
 
-
 @app.context_processor
 def inject_conf_var():
     return dict(
@@ -662,18 +662,15 @@ def inject_conf_var():
         ),
     )
 
-
 @app.route("/language/<language>")
 def set_language(language=None):
     session["language"] = language
     return redirect(url_for("index"))
 
-
 @app.route("/language_result_display/<language>")
 def set_language_for_result_display(language):
     session["language"] = language
     return make_response(jsonify({"current language": language}), 200)
-
 
 @app.route("/get_language")
 def get_language():
@@ -825,7 +822,6 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version, job_key):
     response.headers = response_headers
     return response
 
-
 @app.route("/get_param_table")
 def get_param_table():
     lang = session.get("language", "en")
@@ -856,7 +852,6 @@ def get_param_table():
             d[6] = [app.calc.d_rev_size_it[pt] for pt in d[6]]
 
     return render_template("param_table.html", params=params)
-
 
 @app.route("/get_fuel_blend/<country>/<years>")
 def get_fuel_blend(country, years):
