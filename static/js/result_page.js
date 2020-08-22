@@ -68,7 +68,7 @@
      'Primary fuel', 'Primary fuel share', 'Secondary fuel', 'Secondary fuel share']);
 
     data_to_parse.unshift([]);
-    data_to_parse.unshift(['carculator online 1.1.0', 'carculator 1.1.9', 'https://carculator.psi.ch']);
+    data_to_parse.unshift(['carculator online 1.1.1', 'carculator 1.2.3', 'https://carculator.psi.ch']);
 
     var csv = Papa.unparse(data_to_parse);
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
@@ -443,7 +443,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
               .showMaxMin(false);
 
             if (["ozone depletion", "freshwater eutrophication", "marine eutrophication", "natural land transformation",
-                    "particulate matter formation", "photochemical oxidant formation", "terrestrail acidification",
+                    "particulate matter formation", "photochemical oxidant formation", "terrestrial acidification",
                     "terrestrial ecotoxicity"].includes(real_impact_name)){
                   chart.yAxis
                   .tickFormat(d3.format('.02e'))

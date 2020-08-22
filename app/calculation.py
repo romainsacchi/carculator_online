@@ -428,7 +428,6 @@ class Calculation:
 
         results = self.ic.calculate_impacts().astype("float64")
 
-
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
         results_acc = results * lifetime
 
