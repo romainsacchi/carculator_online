@@ -2867,11 +2867,11 @@ function create_fuel_table() {
                             var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
                             + '</td><td align="left" style="color:white">'
                             + '<select id="cng primary fuel" style="color:grey"><option value="cng">'
-                            + i18n("fuel_natural_gas")+'</option><option value="biogas">'+i18n("biogas")
+                            + i18n("fuel_natural_gas")+'</option><option value="biogas - sewage sludge">'+i18n("biogas")
                             + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
                             + '<td align="left" style="color:white">'+inner_table+'</td>'
                             + '<td align="left" style="color:white"><select id="cng secondary fuel" style="color:grey">'
-                            + '</option><option value="biogas">'+i18n("biogas")
+                            + '</option><option value="biogas - sewage sludge">'+i18n("biogas")
                             + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
 
 
