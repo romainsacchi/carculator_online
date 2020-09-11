@@ -328,14 +328,14 @@ class Calculation:
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
                                 ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
                                 share_biofuel = float(share_biofuel)
-                                primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas", share_biofuel]
+                                primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas - sewage sludge", share_biofuel]
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
                                 ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
                             share_biofuel = float(share_biofuel)
-                            primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas", share_biofuel]
+                            primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas - sewage sludge", share_biofuel]
 
                     if pt in ('FCEV'):
                         if "fuel blend" in dict_params[('Background',)]:
