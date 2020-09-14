@@ -176,7 +176,7 @@ def tool_page(country):
         )
 
         config = {
-            "year": ["2020", "2050"],
+            "year": ["2020"],
             "type": [_("Petrol"), _("Diesel"), _("CNG"), _("Electric")],
             "size": [_("Mid-size")],
             "driving_cycle": "WLTC",
@@ -332,17 +332,13 @@ def direct_results():
         db.session.add(task)
         db.session.commit()
     
-        d={('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020, 2050], 'size': ['Medium']},
+        d={('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020], 'size': ['Medium']},
            ('Driving cycle',): 'WLTC',
            ('Background',): {'country': country},
-           ('Foreground',): {('Glider', 'all', 'all', 'average passengers', 'none'): {(2020, 'loc'): 1.5,
-                                                                                      (2050, 'loc'): 1.5},
-                             ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 150.0,
-                                                                              (2050, 'loc'): 150.0},
-                             ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2020, 'loc'): 200000.0,
-                                                                                        (2050, 'loc'): 200000.0},
-                             ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2020, 'loc'): 12000.0,
-                                                                                        (2050, 'loc'): 12000.0}}}
+           ('Foreground',): {('Glider', 'all', 'all', 'average passengers', 'none'): {(2020, 'loc'): 1.5},
+                             ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 150.0},
+                             ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2020, 'loc'): 200000.0},
+                             ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2020, 'loc'): 12000.0}}}
         data, _ = app.calc.process_results(d, "en", job_id)
         data = json.loads(data)
         data.append(job_id)
@@ -385,10 +381,10 @@ def display_quick_results(country):
      "terrestrial ecotoxicity",
      "urban land occupation",
      "water depletion",
-     "human noise",
-     "primary energy, renewable",
-     "primary energy, non-renewable",
-      "ownership cost"
+     "noise emissions",
+     "renewable primary energy",
+     "non-renewable primary energy",
+     "ownership cost"
     ]
     return render_template("result.html", data=json.dumps(data), uuid=job_id, impact_cat=impact_cat)
 
@@ -619,10 +615,10 @@ def display_result(job_key):
              "terrestrial ecotoxicity",
              "urban land occupation",
              "water depletion",
-             "human noise",
-             "primary energy, renewable",
-             "primary energy, non-renewable",
-              "ownership cost"
+             "noise emissions",
+             "renewable primary energy",
+             "non-renewable primary energy",
+             "ownership cost"
             ]
             return render_template("result.html", data=job.result[0], uuid=job_key, impact_cat=impact_cat)
 

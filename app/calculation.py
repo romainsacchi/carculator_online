@@ -562,7 +562,8 @@ class Calculation:
                     TtW_list,
                     dict_scatter,
                     list_res_acc,
-                    self.create_config_array(d, cm.array)
+                    self.create_config_array(d, cm.array),
+                    d[("Background",)]["country"]
                 ]
             ),
             self.export,

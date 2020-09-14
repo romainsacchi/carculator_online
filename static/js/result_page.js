@@ -132,6 +132,177 @@
     );
  };
 
+function find_currency(country){
+
+    // A dictionary to map ISO country code to currency code
+    dict_country_currency = {
+        "AT":"EUR",
+        "AU":"AUD",
+        "BE":"EUR",
+        "BG":"BGN",
+        "BR":"BRL",
+        "CA":"CAD",
+        "CH":"CHF",
+        "CL":"CLP",
+        "CN":"CNY",
+        "CY":"CYP",
+        "CZ":"CZK",
+        "DE":"EUR",
+        "DK":"DKK",
+        "EE":"EEK",
+        "ES":"EUR",
+        "FI":"EUR",
+        "FR":"EUR",
+        "GB":"GBP",
+        "GR":"EUR",
+        "HR":"HRK",
+        "HU":"HUF",
+        "IE":"EUR",
+        "IN":"INR",
+        "IT":"EUR",
+        "IS":"ISK",
+        "JP":"JPY",
+        "LT":"LTL",
+        "LU":"EUR",
+        "LV":"LVL",
+        "MT":"MTL",
+        "PL":"PLN",
+        "PT":"EUR",
+        "RO":"ROL",
+        "RU":"RUR",
+        "SE":"SEK",
+        "SI":"SIT",
+        "SK":"SKK",
+        "US":"USD",
+        "ZA":"ZAR",
+        "AO":"AOA",
+        "BF":"XOF",
+        "BI":"BIF",
+        "BJ":"XOF",
+        "BW":"BWP",
+        "CD":"CDF",
+        "CF":"XAF",
+        "CG":"XAF",
+        "CI":"XOF",
+        "CM":"XAF",
+        "DJ":"DJF",
+        "DZ":"DZD",
+        "EG":"EGP",
+        "ER":"ERN",
+        "ET":"ETB",
+        "GA":"XAF",
+        "GH":"GHC",
+        "GM":"GMD",
+        "GN":"GNF",
+        "GQ":"XAF",
+        "GW":"GWP",
+        "KE":"KES",
+        "LR":"LRD",
+        "LS":"ZAR",
+        "LY":"LYD",
+        "MA":"MAD",
+        "ML":"XOF",
+        "MR":"MRO",
+        "MW":"MWK",
+        "MZ":"MZM",
+        "NE":"XOF",
+        "NG":"NGN",
+        "NL":"EUR",
+        "NM":"NAD",
+        "RW":"RWF",
+        "SD":"SDD",
+        "SL":"SLL",
+        "SN":"XOF",
+        "SO":"SOS",
+        "SS":"SDD",
+        "SZ":"SZL",
+        "TD":"XAF",
+        "TG":"XOF",
+        "TN":"TND",
+        "TZ":"TZS",
+        "UG":"UGX",
+        "ZM":"ZMK",
+        "ZW":"ZWD",
+        "NO":"NOK",
+    };
+
+    var dict_currency_rates = {
+        "EUR":"1",
+        "AUD":"1.63",
+        "BGN":"1.96",
+        "BRL":"6.31",
+        "CAD":"1.57",
+        "CHF":"1.08",
+        "CNY":"8.1",
+        "CZK":"26.7",
+        "DKK":"7.44",
+        "RON":"4.86",
+        "RUR":"89.5",
+        "SEK":"10.4",
+        "XOF":"120",
+        "XAF":"120",
+        "SDD":"65.7",
+        "TND":"3.26",
+        "ZMK":"23.7",
+        "NOK":"10.7",
+        "AMD":"577",
+        "AZN":"2.02",
+        "BYN":"3.125",
+        "BAM":"1.96",
+        "HRK":"7.54",
+        "GEL":"3.7",
+        "HUF":"357",
+        "ISK":"160",
+        "MDL":"19.6",
+        "MKD":"61",
+        "PLN":"4.45",
+        "RSD":"118",
+        "TRY":"8.9",
+        "UAH":"33",
+        "GBP":"0.92",
+        "USD":"0.84",
+    };
+
+    var currency = dict_country_currency[country]
+
+    // We check first that the currency demanded is not part of a
+    // list of common currencies
+    if (currency in dict_currency_rates){
+
+        var exchange_rate = dict_currency_rates[currency];
+
+    // If not, then we fetch it from fixer.io
+    }else{
+
+        var API_key = "5c3df599b709a168d11c488eb81beb05";
+
+        var exchange_rate = 0.0;
+        $.get("http://data.fixer.io/api/latest?access_key="+API_key+"&symbols="+currency, function (response) {
+
+                            if(
+                                String(JSON.stringify(response["success"])) == "true"
+                            ){
+                                exchange_rate = String(JSON.stringify(response["rates"][currency]))
+                                exchange_rate = Number(exchange_rate);
+                            }else{
+                                exchange_rate = 1.0
+                            };
+                        }, "jsonp");
+
+    };
+
+    return [exchange_rate, currency]
+};
+
+// Fetch the currency name and exchange rate
+var currency_info = find_currency(data.slice(-1)[0]);
+var currency_exch_rate = Number(currency_info[0]);
+var currency_name = currency_info[1];
+
+
+// Update label in benchmark dropdown list
+document.getElementById('select_benchmark')[1].innerHTML = currency_name;
+
 function generate_benchmark(data, cat){
 
     $("#table_benchmark tbody tr").remove();
@@ -144,7 +315,15 @@ function generate_benchmark(data, cat){
 
     for (var i = 0; i < data.length; i++){
         if (data[i][0] == cat){
-            arr_data.push(data[i]);
+            // if the category is "cost",
+            // we need to convert the currency first
+            if (cat == "cost"){
+                var val = Number(data[i][4]) / currency_exch_rate;
+                data[i][4] = val;
+                arr_data.push(data[i]);
+            }else{
+                arr_data.push(data[i]);
+            };
         };
     };
 
@@ -176,7 +355,7 @@ function generate_benchmark(data, cat){
       td_bar.appendChild(div_bar_wrap);
       var td_km = document.createElement('td');
       td_km.setAttribute("width", "10%");
-      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + arr_data[i][4].toFixed(1) + "</span> km</h3>"
+      td_km.innerHTML = "<h3 style='color:white;'><span class='count'>" + Number(arr_data[i][4]).toFixed(1) + "</span> km</h3>"
       tr.appendChild(td_name);
       tr.appendChild(td_bar);
       tr.appendChild(td_km);
@@ -265,7 +444,8 @@ function generate_scatter_chart(data){
             var pt = i18n(arr_names[0]);
             var y = arr_names[1];
             var size = i18n(arr_names[2]);
-            datum.push({values:[{"x": data[key][0],
+            // we convert the cost in the user's currency
+            datum.push({values:[{"x": data[key][0]*currency_exch_rate,
                                  "y":data[key][1], "size":400, "shape":"circle"}],
                                  key:pt+" - " + size + " - " + y})
         }
@@ -285,7 +465,7 @@ function generate_scatter_chart(data){
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
-          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" €/km</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO2-eq/km</li></ul>"
+          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" " + currency_name+"/km</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO2-eq/km</li></ul>"
           return html;
         })
       var gwp_str = i18n("cc_per_km");
@@ -294,7 +474,7 @@ function generate_scatter_chart(data){
           .tickFormat(d3.format('.02f'))
           .ticks(10);
 
-      var cost_str = i18n("cost");
+      var cost_str = currency_name + "/km";
       chart.xAxis     //Chart x-axis settings
           .axisLabel(cost_str)
           .tickFormat(d3.format('.02f'))
@@ -394,7 +574,21 @@ function rearrange_data_for_LCA_chart(impact_cat){
     for (a = 0; a < data[1].length; a++){
         if (i18n(data[1][a][0]) == impact_cat){
             real_impact_name = data[1][a][0];
-            val.push(data[1][a]);
+
+            // if impact_cat is cost, we need to convert
+            // to the user's currency
+            if (real_impact_name=="ownership cost"){
+                var data_to_insert = data[1][a].slice();
+                var cost_val_total = data_to_insert[6] * currency_exch_rate
+                var cost_val = data_to_insert[5] * currency_exch_rate
+                console.log(data_to_insert[6], cost_val_total, currency_exch_rate);
+                data_to_insert[6] = cost_val_total;
+                data_to_insert[5] = cost_val;
+                val.push(data_to_insert);
+            }else{
+                val.push(data[1][a]);
+            };
+
         }
     };
 
@@ -457,12 +651,11 @@ function rearrange_data_for_LCA_chart(impact_cat){
 
             if (real_impact_name == "ownership cost"){
               chart.yAxis
+              .axisLabel(currency_name+"/km")
               .tickFormat(d3.format('.02f'))
               .showMaxMin(false);
+
             };
-
-
-
             d3.select('#chart_impacts')
                 .datum(data_to_plot)
                 .transition().duration(500).call(chart);
@@ -494,7 +687,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
          "terrestrial ecotoxicity":[{"name":"ecosystem", "CF":1.14e-11}],
          "urban land occupation":[{"name":"ecosystem", "CF":8.88e-9}],
          "water depletion":[{"name":"human health", "CF":2.22e-6},{"name":"ecosystem", "CF":1.35e-8 + 6.04e-13}],
-         "human noise":[{"name":"human health", "CF":5.66e-10}],
+         "noise emissions":[{"name":"human health", "CF":5.66e-10}],
          "ownership cost":[{"name":"ownership cost", "CF":1}]
     };
 
