@@ -489,10 +489,10 @@ class Calculation:
                             )
 
                         # For accumulated impacts, we get the intercept (powertrain + glider + energy storage + EoL)
-                        intercept = data_acc[imp, s, pt, y, 3:-1, 0].sum()
+                        intercept = data_acc[imp, s, pt, y, 4:-1, 0].sum()
 
                         # For accumulated impacts, we get the slope (energy chain + road + maintenance)
-                        slope = data[imp, s, pt, y, :2, 0].sum()
+                        slope = data[imp, s, pt, y, :4, 0].sum()
                         slope += data[imp, s, pt, y, -1, 0].sum()
 
                         list_res_acc.append(
