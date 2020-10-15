@@ -346,6 +346,7 @@ def direct_results():
         with open('data/quick_results_{}'.format(country), 'wb') as f:
             pickle.dump(data, f)
 
+
     res = make_response(jsonify({"job id": job_id}), 200)
     return res
 
