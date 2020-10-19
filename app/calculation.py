@@ -373,6 +373,15 @@ class Calculation:
         data_cost = cost.values
         year = cost.coords["year"].values.tolist()
 
+        # Functional unit
+        fu_unit = d[("Functional unit", )]["fu"]["unit"]
+        fu_qty = d[("Functional unit", )]["fu"]["quantity"]
+
+        if fu_unit == "vkm":
+            load_factor = 1
+        else:
+            load_factor = cm["average passengers"].mean().values
+
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 70
@@ -402,7 +411,7 @@ class Calculation:
                                 ]
                             )
                             k = powertrain[pt] + ", " + str(year[y]) + ", " + size[s]
-                            dict_scatter[k].append(data_cost[s, pt, cat, y, 0])
+                            dict_scatter[k].append(data_cost[s, pt, cat, y, 0]/load_factor*fu_qty)
                         else:
                             list_res_costs.append(
                                 [
@@ -411,8 +420,8 @@ class Calculation:
                                     powertrain[pt],
                                     year[y],
                                     cost_category[cat],
-                                    data_cost[s, pt, cat, y, 0],
-                                    data_cost[s, pt, :, y, 0].sum()
+                                    data_cost[s, pt, cat, y, 0]/load_factor*fu_qty,
+                                    data_cost[s, pt, :, y, 0].sum()/load_factor*fu_qty
                                 ]
                             )
 
@@ -563,7 +572,9 @@ class Calculation:
                     dict_scatter,
                     list_res_acc,
                     self.create_config_array(d, cm.array),
-                    d[("Background",)]["country"]
+                    d[("Background",)]["country"],
+                    d[("Functional unit",)]["fu"]["quantity"],
+                    d[("Functional unit",)]["fu"]["unit"]
                 ]
             ),
             self.export,
@@ -589,6 +600,7 @@ class Calculation:
                 "powertrain": [x for x in raw_dict["type"]],
                 "year": [int(x) for x in raw_dict["year"]],
                 "size": [s for s in raw_dict["size"]],
+                "fu": raw_dict["fu"]
             }
 
         f_d = {}

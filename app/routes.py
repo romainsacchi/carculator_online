@@ -180,6 +180,7 @@ def tool_page(country):
             "type": [_("Petrol"), _("Diesel"), _("CNG"), _("Electric")],
             "size": [_("Mid-size")],
             "driving_cycle": "WLTC",
+            "fu": {"unit": "vkm", "quantity": 1},
             "foreground params": {
                 "passenger-slider": "1.5",
                 "cargo-slider": "150",
@@ -332,7 +333,7 @@ def direct_results():
         db.session.add(task)
         db.session.commit()
     
-        d={('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020], 'size': ['Medium']},
+        d={('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020], 'size': ['Medium'], 'fu': {"unit": "vkm", "quantity": 1}},
            ('Driving cycle',): 'WLTC',
            ('Background',): {'country': country},
            ('Foreground',): {('Glider', 'all', 'all', 'average passengers', 'none'): {(2020, 'loc'): 1.5},
@@ -345,7 +346,6 @@ def direct_results():
 
         with open('data/quick_results_{}'.format(country), 'wb') as f:
             pickle.dump(data, f)
-
 
     res = make_response(jsonify({"job id": job_id}), 200)
     return res

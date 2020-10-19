@@ -1,5 +1,3 @@
-
-
  function generate_progress_bars(filter){
         if (filter == "climate change"){
 
@@ -68,7 +66,7 @@
      'Primary fuel', 'Primary fuel share', 'Secondary fuel', 'Secondary fuel share']);
 
     data_to_parse.unshift([]);
-    data_to_parse.unshift(['carculator online 1.1.1', 'carculator 1.2.4', 'https://carculator.psi.ch']);
+    data_to_parse.unshift(['carculator online 1.1.2', 'carculator 1.2.6', 'https://carculator.psi.ch']);
 
     var csv = Papa.unparse(data_to_parse);
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
@@ -295,7 +293,7 @@ function find_currency(country){
 };
 
 // Fetch the currency name and exchange rate
-var currency_info = find_currency(data.slice(-1)[0]);
+var currency_info = find_currency(data[7]);
 var currency_exch_rate = Number(currency_info[0]);
 var currency_name = currency_info[1];
 
@@ -435,7 +433,9 @@ function generate_line_chart_TtW_energy(data){
     });
 };
 
-function generate_scatter_chart(data){
+function generate_scatter_chart(data, qty, unit){
+
+    console.log(qty, unit);
     var datum = [];
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
@@ -465,7 +465,7 @@ function generate_scatter_chart(data){
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
-          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" " + currency_name+"/km</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO2-eq/km</li></ul>"
+          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" " + currency_name+"/"+ qty + " - " +  unit +"</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO2-eq/"+ qty + " - " +  unit+"</li></ul>"
           return html;
         })
       var gwp_str = i18n("cc_per_km");
@@ -474,7 +474,7 @@ function generate_scatter_chart(data){
           .tickFormat(d3.format('.02f'))
           .ticks(10);
 
-      var cost_str = currency_name + "/km";
+      var cost_str = currency_name + "/" + qty + " - " + unit;
       chart.xAxis     //Chart x-axis settings
           .axisLabel(cost_str)
           .tickFormat(d3.format('.02f'))
@@ -632,7 +632,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
             var unit_name = "unit_"+real_impact_name;
 
             chart.yAxis     //Chart y-axis settings
-              .axisLabel(i18n(unit_name)+"/km")
+              .axisLabel(i18n(unit_name)+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.03f'))
               .showMaxMin(false);
 
@@ -651,7 +651,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
 
             if (real_impact_name == "ownership cost"){
               chart.yAxis
-              .axisLabel(currency_name+"/km")
+              .axisLabel(currency_name+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.02f'))
               .showMaxMin(false);
 
@@ -801,7 +801,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
             var unit_name = i18n("total_impact");
 
             chart.yAxis     //Chart y-axis settings
-              .axisLabel(unit_name+"/km")
+              .axisLabel(unit_name+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.03f'))
               .showMaxMin(false);
 

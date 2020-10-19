@@ -1799,12 +1799,18 @@ function collect_configuration(){
         };
     };
 
+    // Retrieve functional unit specs
+
+    var fu={};
+    fu["unit"] = $("#functional_unit_select").val();
+    fu["quantity"] = $("#fu_distance").val();
 
     background_params['fuel blend'] = fuel_blend;
     background_params['energy storage'] = {'electric': energy_storage};
     background_params['efficiency'] = efficiency;
     params['foreground params'] = foreground_params;
     params['background params'] = background_params;
+    params["fu"] = fu;
 
     return params;
 
@@ -2454,6 +2460,12 @@ function fill_in_from_config_file(data){
             tableRef.deleteRow(2);
             var rowCount = tableRef.rows.length;
         }
+
+        // Fill in functional unit
+        console.log(data);
+        $("#functional_unit_select").val(data['fu']['unit']);
+        $("#fu_distance").val(data['fu']['quantity']);
+
 
         //  Load the JSON File
         $.when($.ajax({

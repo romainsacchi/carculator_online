@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-19 17:11+0200\n"
+"POT-Creation-Date: 2020-10-19 18:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,71 +90,71 @@ msgstr ""
 msgid "Invalid username or password"
 msgstr ""
 
-#: app/routes.py:180 app/routes.py:256
+#: app/routes.py:180 app/routes.py:257
 msgid "Petrol"
 msgstr ""
 
-#: app/routes.py:180 app/routes.py:257
+#: app/routes.py:180 app/routes.py:258
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:180 app/routes.py:258
+#: app/routes.py:180 app/routes.py:259
 msgid "CNG"
 msgstr ""
 
-#: app/routes.py:180 app/routes.py:259
+#: app/routes.py:180 app/routes.py:260
 msgid "Electric"
 msgstr ""
 
-#: app/routes.py:181 app/routes.py:270
+#: app/routes.py:181 app/routes.py:271
 msgid "Mid-size"
 msgstr ""
 
-#: app/routes.py:260
+#: app/routes.py:261
 msgid "Fuel cell"
 msgstr ""
 
-#: app/routes.py:261
+#: app/routes.py:262
 msgid "Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:262
+#: app/routes.py:263
 msgid "Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:263
+#: app/routes.py:264
 msgid "(Plugin) Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:264
+#: app/routes.py:265
 msgid "(Plugin) Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:267
+#: app/routes.py:268
 msgid "Minicompact"
 msgstr ""
 
-#: app/routes.py:268
+#: app/routes.py:269
 msgid "Subcompact"
 msgstr ""
 
-#: app/routes.py:269
+#: app/routes.py:270
 msgid "Compact"
 msgstr ""
 
-#: app/routes.py:271
+#: app/routes.py:272
 msgid "Large"
 msgstr ""
 
-#: app/routes.py:272
+#: app/routes.py:273
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:273
+#: app/routes.py:274
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:529
+#: app/routes.py:527
 msgid "Email sent!"
 msgstr ""
 
@@ -196,21 +196,21 @@ msgstr ""
 msgid "You will be redirected to a page where you can perform a new calculation."
 msgstr ""
 
-#: templates/404.html:136 templates/index.html:1102 templates/login.html:114
+#: templates/404.html:136 templates/index.html:1160 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:399 templates/start.html:187 templates/tool.html:945
+#: templates/result.html:399 templates/start.html:187 templates/tool.html:952
 msgid "Copyright"
 msgstr ""
 
-#: templates/404.html:136 templates/index.html:1102 templates/login.html:114
+#: templates/404.html:136 templates/index.html:1160 templates/login.html:114
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:399 templates/start.html:187 templates/tool.html:945
+#: templates/result.html:399 templates/start.html:187 templates/tool.html:952
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/404.html:137 templates/index.html:1103 templates/login.html:115
+#: templates/404.html:137 templates/index.html:1161 templates/login.html:115
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:400 templates/start.html:188 templates/tool.html:946
+#: templates/result.html:400 templates/start.html:188 templates/tool.html:953
 msgid "All rights reserved"
 msgstr ""
 
@@ -260,30 +260,30 @@ msgstr ""
 msgid "Try it out now!"
 msgstr ""
 
-#: templates/index.html:205
+#: templates/index.html:230
 msgid "or"
 msgstr ""
 
-#: templates/index.html:213
+#: templates/index.html:238
 msgid "Install"
 msgstr ""
 
-#: templates/index.html:218
+#: templates/index.html:243
 msgid ""
 "Make detailed or fleet-wide analyses. Perform sensitivity and uncertainty"
 " analyses. Use results in other Python libraries. Export your inventories"
 " directly into Brightway2."
 msgstr ""
 
-#: templates/index.html:230
+#: templates/index.html:255
 msgid "requires python >=3.6"
 msgstr ""
 
-#: templates/index.html:305
+#: templates/index.html:363
 msgid "ABOUT"
 msgstr ""
 
-#: templates/index.html:311
+#: templates/index.html:369
 msgid ""
 "is an open-source, comprehensive and transparent life cycle assessment "
 "tool for passenger cars. It allows for an economic and environmental "
@@ -291,202 +291,202 @@ msgid ""
 "supply scenarios."
 msgstr ""
 
-#: templates/index.html:312
+#: templates/index.html:370
 msgid "Results partly rely on the background inventory data of "
 msgstr ""
 
-#: templates/index.html:312
+#: templates/index.html:370
 msgid " and the implementation of impact assessment methods therein."
 msgstr ""
 
-#: templates/index.html:328
+#: templates/index.html:386
 msgid "Unmute"
 msgstr ""
 
-#: templates/index.html:414
+#: templates/index.html:472
 msgid "Clean Code"
 msgstr ""
 
-#: templates/index.html:415
+#: templates/index.html:473
 msgid "The code is kept as clean and accessible as possible."
 msgstr ""
 
-#: templates/index.html:426
+#: templates/index.html:484
 msgid "Great Features"
 msgstr ""
 
-#: templates/index.html:427
+#: templates/index.html:485
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr ""
 
-#: templates/index.html:438
+#: templates/index.html:496
 msgid "Fast Library"
 msgstr ""
 
-#: templates/index.html:439
+#: templates/index.html:497
 msgid "A Python library version allows for even more specific assessments."
 msgstr ""
 
-#: templates/index.html:450
+#: templates/index.html:508
 msgid "Compatible"
 msgstr ""
 
-#: templates/index.html:451
+#: templates/index.html:509
 msgid "Export inventories compatible with"
 msgstr ""
 
-#: templates/index.html:464
+#: templates/index.html:522
 msgid "State-of-the-art"
 msgstr ""
 
-#: templates/index.html:465
+#: templates/index.html:523
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 
-#: templates/index.html:476
+#: templates/index.html:534
 msgid "Well Documented"
 msgstr ""
 
-#: templates/index.html:477
+#: templates/index.html:535
 msgid "The library is fully tested, documented and hosted on"
 msgstr ""
 
-#: templates/index.html:502
+#: templates/index.html:560
 msgid "Some facts about"
 msgstr ""
 
-#: templates/index.html:517
+#: templates/index.html:575
 msgid "Powertrains"
 msgstr ""
 
-#: templates/index.html:530
+#: templates/index.html:588
 msgid "Size classes"
 msgstr ""
 
-#: templates/index.html:543
+#: templates/index.html:601
 msgid "Driving cycles"
 msgstr ""
 
-#: templates/index.html:556
+#: templates/index.html:614
 msgid "Parameters"
 msgstr ""
 
-#: templates/index.html:569
+#: templates/index.html:627
 msgid "Li-ion battery types"
 msgstr ""
 
-#: templates/index.html:582
+#: templates/index.html:640
 msgid "Electricity mixes for battery charging"
 msgstr ""
 
-#: templates/index.html:594
+#: templates/index.html:652
 msgid "Time horizons"
 msgstr ""
 
-#: templates/index.html:607
+#: templates/index.html:665
 msgid "Cars used for calibration"
 msgstr ""
 
-#: templates/index.html:631
+#: templates/index.html:689
 msgid "OUR TEAM"
 msgstr ""
 
-#: templates/index.html:633
+#: templates/index.html:691
 msgid "The team behind the development of"
 msgstr ""
 
-#: templates/index.html:633
+#: templates/index.html:691
 msgid "sits at the Paul Scherrer Institute, in the "
 msgstr ""
 
-#: templates/index.html:658
+#: templates/index.html:716
 msgid "Pilot"
 msgstr ""
 
-#: templates/index.html:683
+#: templates/index.html:741
 msgid "Pit-stop manager"
 msgstr ""
 
-#: templates/index.html:701
+#: templates/index.html:759
 msgid "Designer (now at INFRAS)"
 msgstr ""
 
-#: templates/index.html:727
+#: templates/index.html:785
 msgid "Engine specialist"
 msgstr ""
 
-#: templates/index.html:751
+#: templates/index.html:809
 msgid "Chief Aerodynamicist"
 msgstr ""
 
-#: templates/index.html:772
+#: templates/index.html:830
 msgid "Mechanic"
 msgstr ""
 
-#: templates/index.html:797
+#: templates/index.html:855
 msgid "OUR PARTNERS"
 msgstr ""
 
-#: templates/index.html:799
+#: templates/index.html:857
 msgid "carculator was developed within the "
 msgstr ""
 
-#: templates/index.html:800
+#: templates/index.html:858
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
 msgstr ""
 
-#: templates/index.html:802 templates/index.html:804
+#: templates/index.html:860 templates/index.html:862
 msgid "and "
 msgstr ""
 
-#: templates/index.html:803
+#: templates/index.html:861
 msgid "as well as "
 msgstr ""
 
-#: templates/index.html:863
+#: templates/index.html:921
 msgid "Publications on"
 msgstr ""
 
-#: templates/index.html:863
+#: templates/index.html:921
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:1020
+#: templates/index.html:1078
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:1020
+#: templates/index.html:1078
 msgid "US"
 msgstr ""
 
-#: templates/index.html:1022
+#: templates/index.html:1080
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:1035 templates/param_table.html:78
+#: templates/index.html:1093 templates/param_table.html:78
 #: templates/tool.html:785
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:1039
+#: templates/index.html:1097
 msgid "Enter Email"
 msgstr ""
 
-#: templates/index.html:1043
+#: templates/index.html:1101
 msgid "Message"
 msgstr ""
 
-#: templates/index.html:1046
+#: templates/index.html:1104
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:1053
+#: templates/index.html:1111
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:1054
+#: templates/index.html:1112
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 
@@ -770,8 +770,8 @@ msgid ""
 "This 'Simple' access to the model gives the environmental impacts and "
 "life cycle costs of modern, mid-size diesel,\n"
 "\t\t\t\t\t\t\t\t\t\t\tgasoline, gas and battery electric vehicles; for "
-"the country you are located in, for the year 2020 and 2050. The vehicle "
-"parameters correspond to the standard settings in our model."
+"the country you are located in, for the year 2020. The vehicle parameters"
+" correspond to the standard settings in our model."
 msgstr ""
 
 #: templates/start.html:154
@@ -1416,35 +1416,39 @@ msgstr ""
 
 #: templates/tool.html:860
 msgid ""
-"Three types of functional unit are offered. The user can opt for a "
-"comparison normalized\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tper kilometer driven. The user can also"
-" choose a specific distance driven instead. Finally, it is also possible"
-"\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto define a fleet composition over time."
+"The user can opt for a comparison normalized per vehicle-kilometer driven"
+" or per passenger-kilometer. \"\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\"The user can also choose a specific "
+"distance driven. Finally, it is also possible to generate fleet-average "
+"vehicles \"\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\"if a fleet composition is given."
 msgstr ""
 
 #: templates/tool.html:868
-msgid "Unit, per km"
+msgid "Quantity"
 msgstr ""
 
-#: templates/tool.html:874
-msgid "Driven distance"
+#: templates/tool.html:872
+msgid "Vehicle kilometer"
 msgstr ""
 
-#: templates/tool.html:877
-msgid "in km"
+#: templates/tool.html:873
+msgid "Passenger kilometer"
 msgstr ""
 
-#: templates/tool.html:883
-msgid "Fleet"
+#: templates/tool.html:878
+msgid "Over"
 msgstr ""
 
 #: templates/tool.html:889
+msgid "Fleet"
+msgstr ""
+
+#: templates/tool.html:895
 msgid "Specify fleet composition"
 msgstr ""
 
-#: templates/tool.html:896
+#: templates/tool.html:903
 msgid ""
 "A simple calculation will use \"most likely\" values as model inputs and "
 "outputs.\n"
@@ -1457,15 +1461,15 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
 msgstr ""
 
-#: templates/tool.html:906
+#: templates/tool.html:913
 msgid "Simple calculation"
 msgstr ""
 
-#: templates/tool.html:912
+#: templates/tool.html:919
 msgid "Error propagation (Monte Carlo)"
 msgstr ""
 
-#: templates/tool.html:915
+#: templates/tool.html:922
 msgid "number of iterations"
 msgstr ""
 

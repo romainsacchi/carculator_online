@@ -857,26 +857,32 @@
 													<td style="vertical-align: top;">
 														<div class="help-tip" style="position:relative;margin:0 auto;margin-bottom:25px;
 																					top:0;right:0;">
-																<p>{{_('Three types of functional unit are offered. The user can opt for a comparison normalized
-																	per kilometer driven. The user can also choose a specific distance driven instead. Finally, it is also possible
-																	to define a fleet composition over time.')}}</p>
-															</div>
+																<p>{{_('The user can opt for a comparison normalized per vehicle-kilometer driven or per passenger-kilometer. "
+																	"The user can also choose a specific distance driven. Finally, it is also possible to generate fleet-average vehicles "
+																	"if a fleet composition is given.')}}</p>
+														</div>
 
-														<div class="form-check" style="vertical-align:middle;">
-														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
-														  <label class="form-check-label" for="defaultCheck3">
-															{{_('Unit, per km')}}
-														  </label>
+														<div style="align:center;">
+															<table class="table-borderless" style="border-collapse: separate;  border-spacing: 10px 20px;margin: 0 auto;">
+																<tr>
+																	<td>{{_("Quantity")}}</td>
+																	<td>1</td>
+																	<td>
+																		<select id="functional_unit_select" style="color:grey;display:inline-block">
+																			<option value="vkm">{{_("Vehicle kilometer")}}</option>
+																			<option value="pkm">{{_("Passenger kilometer")}}</option>
+																		</select>
+																	</td>
+																</tr>
+																<tr>
+																	<td>{{_("Over")}}</td>
+																	<td><input type="number" min="0" max="1000000" class="form-control" style="width:80px;text-align:center;margin: 0 auto" value="1" id="fu_distance"></td>
+																	<td>km</td>
+																</tr>
+															</table>
 														</div>
-														<div class="form-check" style="vertical-align:middle;">
-														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" disabled>
-														  <label class="form-check-label" for="defaultCheck4">
-															{{_('Driven distance')}}
-														  </label>
-															<div class="form-group">
-															  <input placeholder="{{_('in km')}}" type="text" class="form-control" style="width:100px;text-align:center;margin: 0 auto" disabled>
-															</div>
-														</div>
+
+
 														<div class="form-check">
 														  <input class="form-check-input" type="checkbox" value="" id="defaultCheck5" disabled>
 														  <label class="form-check-label" for="defaultCheck5">
@@ -889,7 +895,8 @@
 															  border:1px solid white;width:auto;" disabled>{{_('Specify fleet composition')}}</button></div>
 
 
-														</div></td>
+														</div>
+													</td>
 													<td style="vertical-align: top;">
 														<div class="help-tip" style="position:relative;margin:0 auto;margin-bottom:25px;
 																					top:0;right:0;">
