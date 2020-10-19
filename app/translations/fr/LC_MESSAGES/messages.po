@@ -854,6 +854,12 @@ msgid ""
 "the country you are located in, for the year 2020. The vehicle parameters"
 " correspond to the standard settings in our model."
 msgstr ""
+"Le mode d'accès 'Simple' mène "
+"l'utilisateur directemment aux résultats. Les"
+" résultats présentés sont les performances"
+" environnmentales d'un véhicule essence, "
+"diesel, gaz et électrique, en 2020, "
+"pour le pays où vous vous trouvez."
 
 #: templates/start.html:154
 msgid ""

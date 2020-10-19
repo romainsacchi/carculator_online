@@ -854,6 +854,8 @@ msgid ""
 "the country you are located in, for the year 2020. The vehicle parameters"
 " correspond to the standard settings in our model."
 msgstr ""
+"Questo "semplice" accesso al modello fornisce gli impatti ambientali e i costi del ciclo di vita di un veicolo "
+"moderno di medie dimensioni diesel, benzina, gas e batteria elettrica; per il paese in cui vi trovate, per l'anno 2020."
 
 #: templates/start.html:154
 msgid ""
