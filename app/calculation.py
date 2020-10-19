@@ -411,7 +411,11 @@ class Calculation:
                                 ]
                             )
                             k = powertrain[pt] + ", " + str(year[y]) + ", " + size[s]
-                            dict_scatter[k].append(data_cost[s, pt, cat, y, 0]/load_factor*fu_qty)
+                            print(data_cost[s, pt, cat, y, 0])
+                            print(load_factor)
+                            print(fu_qty)
+                            cost_val = data_cost[s, pt, cat, y, 0]/load_factor*fu_qty
+                            dict_scatter[k].append(cost_val)
                         else:
                             list_res_costs.append(
                                 [
