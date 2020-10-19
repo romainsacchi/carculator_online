@@ -412,11 +412,16 @@ class Calculation:
                             )
                             k = powertrain[pt] + ", " + str(year[y]) + ", " + size[s]
                             print(data_cost[s, pt, cat, y, 0])
+
                             print(load_factor)
                             print(fu_qty)
                             cost_val = data_cost[s, pt, cat, y, 0]/load_factor*fu_qty
                             dict_scatter[k].append(cost_val)
                         else:
+                            print(data_cost[s, pt, cat, y, 0])
+                            print(data_cost[s, pt, cat, y, 0].sum())
+                            print(load_factor)
+                            print(fu_qty)
                             list_res_costs.append(
                                 [
                                     "ownership cost",
