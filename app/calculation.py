@@ -429,8 +429,8 @@ class Calculation:
                                     powertrain[pt],
                                     year[y],
                                     cost_category[cat],
-                                    float(data_cost[s, pt, cat, y, 0])/load_factor*fu_qty,
-                                    float(data_cost[s, pt, :, y, 0].sum())/load_factor*fu_qty
+                                    float(data_cost[s, pt, cat, y, 0])/float(load_factor)*int(fu_qty),
+                                    float(data_cost[s, pt, :, y, 0].sum())/float(load_factor)*int(fu_qty)
                                 ]
                             )
 
