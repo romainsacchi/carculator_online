@@ -639,8 +639,6 @@ class Calculation:
         for el in new_dict[("Background",)]["custom electricity mix"]:
             el /= np.sum(np.array(el))
 
-
-
         if "energy storage" in raw_dict["background params"]:
             if "electric" in raw_dict["background params"]["energy storage"]:
                 if len(raw_dict["background params"]["energy storage"]["electric"])>0:
