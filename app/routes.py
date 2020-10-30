@@ -130,6 +130,11 @@ def tool_page(country):
                             "Oil",
                             "Geothermal",
                             "Waste",
+                            "Biogas CCS",
+                            "Biomass CCS",
+                            "Coal CCS",
+                            "Gas CCS",
+                            "Wood CCS",
                         ],
                     )
                 ]
@@ -152,6 +157,11 @@ def tool_page(country):
                             "Oil",
                             "Geothermal",
                             "Waste",
+                            "Biogas CCS",
+                            "Biomass CCS",
+                            "Coal CCS",
+                            "Gas CCS",
+                            "Wood CCS"
                         ],
                     )
                 ]
@@ -544,6 +554,11 @@ def get_electricity_mix(ISO, years):
                     "Oil",
                     "Geothermal",
                     "Waste",
+                    "Biogas CCS",
+                    "Biomass CCS",
+                    "Coal CCS",
+                    "Gas CCS",
+                    "Wood CCS",
                 ],
             )
         ]
