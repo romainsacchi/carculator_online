@@ -45,6 +45,8 @@
 	    <!-- Tool page Style -->
     <link href="/static/css/tool_style.css" rel="stylesheet">
 
+	<!-- Flag icons -->
+	  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css'>
 
     <!-- Fonts -->
 
@@ -70,12 +72,23 @@
 					<!-- Image Logo -->
 					  <a class="navbar-brand" href="#"><img src="/static/images/mediumsmall.png" style="height:40px;float:left;"></a>
 
+						<ul class="nav navbar-nav mu-menu navbar-right">
+								<li><a href="{{ url_for('set_language', language='en') }}" ><span class="flag-icon flag-icon-gb"></span></a></li>
+								<li><a href="{{ url_for('set_language', language='de') }}" ><span class="flag-icon flag-icon-de"></span></a></li>
+								<li><a href="{{ url_for('set_language', language='fr') }}" ><span class="flag-icon flag-icon-fr"></span></a></li>
+								<li><a href="{{ url_for('set_language', language='it') }}" ><span class="flag-icon flag-icon-it"></span></a></li>
+						</ul>
+
+					  <button class="online-button"
+									style="float:right;margin-left:5px;margin-right:5px;margin-top:0px;background-color:transparent;color:white;border:1px solid white;"
+									onclick=" window.open('https://carculator.readthedocs.io/en/latest/modeling.html', '_blank'); return false;">{{ _('Modeling and assumptions') }}
+					  </button>
 
 
-				  <button class="online-button"
-								style="float:right;margin-left:5px;margin-right:5px;margin-top:0px;background-color:transparent;color:white;border:1px solid white;"
-								onclick=" window.open('https://carculator.readthedocs.io/en/latest/modeling.html', '_blank'); return false;">{{ _('Modeling and assumptions') }}
-				  </button>
+
+
+
+
 
 			</div>
 		</nav>
@@ -298,8 +311,8 @@
 
 							</tr>
 							<tr>
-								<th>Choice</th>
-								<th>Selection</th>
+								<th>{{_("Choice")}}</th>
+								<th>{{_("Selection")}}</th>
 							</tr>
 							<tr>
 								<th style="width:50%;border:0;">

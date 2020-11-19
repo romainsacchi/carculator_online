@@ -91,6 +91,7 @@ def logout():
 def index():
     """Return homepage."""
     lang = session.get("language", "en")
+    session["url"] = url_for("index")
     return render_template("index.html", lang=lang)
 
 @app.route("/start")
@@ -724,12 +725,13 @@ def inject_conf_var():
 @app.route("/language/<language>")
 def set_language(language=None):
     session["language"] = language
-    return redirect(url_for("index"))
+    return redirect(session["url"])
 
 @app.route("/language_result_display/<language>")
 def set_language_for_result_display(language):
     session["language"] = language
     return make_response(jsonify({"current language": language}), 200)
+
 
 @app.route("/get_language")
 def get_language():
