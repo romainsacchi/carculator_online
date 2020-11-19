@@ -104,7 +104,7 @@ def start():
 @app.route("/new_car/<country>")
 def new_car(country):
     """Return new_car page."""
-    session["url"] = url_for("new_car")
+    session["url"] = url_for("new_car") + "/" + country
     powertrains = [
         _("Petrol"),
         _("Diesel"),
