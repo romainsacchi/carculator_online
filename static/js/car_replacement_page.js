@@ -752,7 +752,7 @@ var slider_annual_mileage = document.getElementById('annual-mileage-slider');
   noUiSlider.create(slider_annual_mileage, {
      start: [12000],
     range: {
-        'min': [1000],
+        'min': [6000],
         'max': [40000]
     },
     step: 1000,
@@ -1054,9 +1054,71 @@ function generate_graph(data){
             ' (' + i18n("in") + ' ' + Number(year_prod_old_car + Math.round(replacement/annual_mileage)) + ' ' + i18n("instead of") + ' '
             + Number(year_prod_old_car + Math.round(lifetime/annual_mileage)) + ')</p>');
 
+        update_label(datum, i);
+
         build_graph(datum, graph_name, year_prod_old_car, annual_mileage);
 
     };
+
+};
+
+function update_label(datum, i){
+
+
+    var ref_result = Number(datum[0]["values"].slice(-1)[0]["y"]);
+    var alt_result = Number(datum[1]["values"].slice(-1)[0]["y"]);
+    var ratio = parseFloat(alt_result / ref_result)
+
+    if (ratio > 1.2) {
+
+        var str_1 = i18n("clearly_not_1")
+        var str_2 = i18n("clearly_not_2")
+
+        $("#label_graph_" + i).append("<p>" + str_1 + Math.round((ratio - 1) * 100) + str_2 + "</p>")
+    }
+
+    if ((ratio > 1.1) && (ratio <= 1.2)) {
+
+        var str_1 = i18n("probably_not_1")
+        var str_2 = i18n("probably_not_2")
+
+        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
+
+    }
+
+    if ((ratio > .9) && (ratio < 1)) {
+
+        var str_1 = i18n("hard_to_say_1_neg")
+        var str_2 = i18n("hard_to_say_2_neg")
+
+        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+
+    }
+
+    if ((ratio >= 1) && (ratio <= 1.1)) {
+
+        var str_1 = i18n("hard_to_say_1_pos")
+        var str_2 = i18n("hard_to_say_2_pos")
+
+        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
+
+    }
+
+    if ((ratio < .9) && (ratio > 0.8)) {
+
+        var str_1 = i18n("probably_1")
+        var str_2 = i18n("probably_2")
+
+        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+
+    }
+
+    if (ratio < .8) {
+        var str_1 = i18n("clearly_1")
+        var str_2 = i18n("clearly_2")
+
+        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+    }
 
 };
 

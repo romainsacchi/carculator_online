@@ -282,6 +282,18 @@
     "instead of": "anstelle von",
     "Early replacement": "Vorzeitige Ersetzung",
     "Late replacement": "Späte Ersetzung",
-    "scenario": "Szenario"
+    "scenario": "Szenario",
+    "clearly_not_1": "Eindeutig keine gute Idee. Ein frühzeitiger Ersatz Ihres aktuellen Autos durch dieses Modell kann zu ",
+    "clearly_not_2": "&#37 mehr Emissionen führen, als wenn Sie es so spät wie möglich ersetzen",
+    "probably_not_1": "Wahrscheinlich keine gute Idee. Ein frühzeitiger Ersatz Ihres aktuellen Autos durch dieses Modell kann zu ",
+    "probably_not_2": "&#37 mehr Emissionen führen, als wenn Sie es so spät wie möglich ersetzen",
+    "hard_to_say_1_neg": "Das ist schwer zu sagen. Wenn Sie Ihr jetziges Auto frühzeitig durch dieses Modell ersetzen, kann dies zu ",
+    "hard_to_say_2_neg": "&#37 weniger Emissionen führen, als wenn Sie es so spät wie möglich ersetzen. Angesichts der Unsicherheiten unseres Modells reicht der Unterschied nicht aus, um eine Schlussfolgerung zu ziehen.",
+    "hard_to_say_1_pos": "Das ist schwer zu sagen. Wenn Sie Ihr jetziges Auto frühzeitig durch dieses Modell ersetzen, kann dies zu ",
+    "hard_to_say_2_pos": "&#37 mehr Emissionen führen, als wenn Sie es so spät wie möglich ersetzen. Angesichts der Unsicherheiten unseres Modells reicht der Unterschied nicht aus, um eine Schlussfolgerung zu ziehen.",
+    "probably_1": "Wahrscheinlich eine gute Idee. Wenn Sie Ihr jetziges Auto frühzeitig durch dieses Modell ersetzen, kann dies zu ",
+    "probably_2": "&#37 weniger Emissionen führen, als wenn Sie es so spät wie möglich ersetzen.",
+    "clearly_1": "Los! Ein frühzeitiger Ersatz Ihres aktuellen Autos durch dieses Modell kann zu ",
+    "clearly_2": "&#37 weniger Emissionen führen, als wenn Sie es so spät wie möglich ersetzen."
   }
 }

@@ -272,6 +272,18 @@
     "impact_category": "Impact category",
     "impact_source": "Impact source",
     "value": "Value",
-    "missing_vehicles": "Your vehicle selection list is empty."
+    "missing_vehicles": "Your vehicle selection list is empty.",
+    "clearly_not_1": "Clearly not a good idea. Replacing your current car early by this model may lead to ",
+    "clearly_not_2": "&#37 higher emissions than replacing it the latest possible.",
+    "probably_not_1": "Probably not a good idea. Replacing your current car early by this model may lead to ",
+    "probably_not_2": "&#37 higher emissions than replacing it the latest possible.",
+    "hard_to_say_1_neg": "Hard to say. Replacing your current car early by this model may lead to ",
+    "hard_to_say_2_neg": "&#37 lower emissions than replacing it the latest possible. Given uncertainties in our model, the difference is not enough to draw a conclusion.",
+    "hard_to_say_1_pos": "Hard to say. Replacing your current car early by this model may lead to ",
+    "hard_to_say_2_pos": "&#37 higher emissions than replacing it the latest possible. Given uncertainties in our model, the difference is not enough to draw a conclusion.",
+    "probably_1": "Probably a good idea. Replacing your current car early by this model may lead to ",
+    "probably_2": "&#37 lower emissions than replacing it the latest possible.",
+    "clearly_1": "Go for it! Replacing your current car early by this model may lead to ",
+    "clearly_2": "&#37 lower emissions than replacing it the latest possible."
   }
 }

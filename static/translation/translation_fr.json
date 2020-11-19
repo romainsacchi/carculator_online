@@ -280,6 +280,18 @@
     "in": "en",
     "instead of": "au lieu de",
     "Early replacement": "Remplacement anticipé",
-    "Late replacement": "Remplacement tardif"
+    "Late replacement": "Remplacement tardif",
+    "clearly_not_1" : "Clairement pas une bonne idée. Le remplacement anticipé de votre voiture actuelle par ce modèle peut conduire à ",
+    "clearly_not_2" : "&#37 d'émissions en plus que de la remplacer le plus tard possible",
+    "probably_not_1" : "Probablement pas une bonne idée. Le remplacement anticipé de votre voiture actuelle par ce modèle peut conduire à ",
+    "probably_not_2" : "&#37 d'émissions en plus que de la remplacer le plus tard possible",
+    "hard_to_say_1_neg" : "Difficile à dire. Le remplacement anticipé de votre voiture actuelle par ce modèle peut conduire à ",
+    "hard_to_say_2_neg" : "&#37 d'émissions en moins que de la remplacer le plus tard possible. Compte tenu des incertitudes de notre modèle, la différence n'est pas suffisante pour en tirer une conclusion",
+    "hard_to_say_1_pos" : "Difficile à dire. Le remplacement anticipé de votre voiture actuelle par ce modèle peut conduire à ",
+    "hard_to_say_2_pos" : "&#37 d'émissions en plus que de la remplacer le plus tard possible. Compte tenu des incertitudes de notre modèle, la différence n'est pas suffisante pour en tirer une conclusion",
+    "probably_1" : "Probablement une bonne idée. Le remplacement anticipé de votre voiture actuelle par ce modèle peut conduire à ",
+    "probably_2" : "&#37 d'émissions en moins que de la remplacer le plus tard possible",
+    "clearly_1" : "Allez-y ! Le remplacement anticipé de votre voiture actuelle par ce modèle peut conduire à ",
+    "clearly_2" : "&#37 d'émissions en moins que de la remplacer le plus tard possible"
   }
 }

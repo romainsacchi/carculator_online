@@ -281,6 +281,18 @@
     "instead of": "invece di",
     "Early replacement": "Sostituzione anticipata",
     "Late replacement": "Sostituzione tardiva",
-    "scenario": "scenario"
+    "scenario": "scenario",
+    "clearly_not_1" : "Chiaramente non è una buona idea. La sostituzione anticipata dell'auto attuale con questo modello può portare a un aumento delle emissioni dell'",
+    "clearly_not_2" : "&#37 in più rispetto alla sostituzione più tardiva possibile",
+    "probably_not_1" : "Probabilmente non è una buona idea. La sostituzione anticipata dell'auto attuale con questo modello può portare a un aumento delle emissioni dell'",
+    "probably_not_2" : "&#37 in più rispetto alla sostituzione più tardiva possibile",
+    "hard_to_say_1_neg" : "E' difficile da dire. La sostituzione anticipata dell'auto attuale con questo modello può portare a un aumento delle emissioni dell'",
+    "hard_to_say_2_neg" : "&#37 in meno rispetto alla sostituzione più tardiva possibile. Date le incertezze del nostro modello, la differenza non è sufficiente per trarre una conclusione",
+    "hard_to_say_1_pos" : "E' difficile da dire. La sostituzione anticipata dell'auto attuale con questo modello può portare a un aumento delle emissioni dell'",
+    "hard_to_say_2_pos" : "&#37 in più rispetto alla sostituzione più tardiva possibile. Date le incertezze del nostro modello, la differenza non è sufficiente per trarre una conclusione",
+    "probably_1" : "Probabilmente è una buona idea. La sostituzione anticipata dell'auto attuale con questo modello può portare a una riduzione delle emissioni dell'",
+    "probably_2" : "&#37 in meno rispetto alla sostituzione più tardiva possibile.",
+    "clearly_1" : "Vai! La sostituzione anticipata dell'auto attuale con questo modello può portare a una riduzione delle emissioni dell'",
+    "clearly_2" : "&#37 in meno rispetto alla sostituzione più tardiva possibile"
   }
 }
