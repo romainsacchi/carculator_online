@@ -11,6 +11,7 @@
     "curb_mass":"Curb mass",
     "only_one_country":"Currently, only one country can be selected.",
     "category_not_available":"Sorry, this category of vehicle is not available yet.",
+    "function_not_available":"Sorry, this function is not available yet.",
     "select_time_horizon":"A time horizon must be selected first.",
     "all_params_set":"You have set all the required parameters. Whenever ready, hit the Calculate button.",
     "missing_type": "It seems that the type of vehicle to analyze is missing.",
@@ -270,6 +271,7 @@
     "year": "Year",
     "impact_category": "Impact category",
     "impact_source": "Impact source",
-    "value": "Value"
+    "value": "Value",
+    "missing_vehicles": "Your vehicle selection list is empty."
   }
 }

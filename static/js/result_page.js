@@ -465,7 +465,7 @@ function generate_scatter_chart(data, qty, unit){
 
       chart.tooltip.contentGenerator(function (d) {
           var html = "<h2 style='margin:15px;'>"+d.series[0].key+"</h2> <ul>";
-          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" " + currency_name+"/"+ qty + " - " +  unit +"</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO2-eq/"+ qty + " - " +  unit+"</li></ul>"
+          html += "<ul><li style='margin-left:30px;'>"+ d.value.toFixed(2) +" " + currency_name+"/"+ qty + " - " +  unit +"</li><li style='margin-left:30px;'>" + d.series[0].value.toFixed(2) + " kg CO<sub>2</sub>-eq/"+ qty + " - " +  unit+"</li></ul>"
           return html;
         })
       var gwp_str = i18n("cc_per_km");
@@ -509,7 +509,7 @@ function generate_chart_accumulated_impacts(data, impact){
     };
 
     nv.addGraph(function() {
-     var chart_acc = nv.models.lineChart()
+    var chart_acc = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
                     .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.

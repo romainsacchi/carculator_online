@@ -40,6 +40,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
     <!-- Montserrat for Title -->
   	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  	<!-- Toggle button style sheet -->
+	  <link href="/static/css/toggle_button.css" rel="stylesheet">
 
 
 
@@ -83,45 +85,212 @@
 			<div class="container">
 				<div class="row">
 					<div class="mu-counter-area" style="padding-top:100px;">
+
+						<!-- Table for passenger transport -->
 						<div class="row">
+							<!-- Toggle button -->
+							<div style="margin-bottom:20px;width:100%;text-align:center;">
+								<span class="mu-install-icon-box"
+									  style="display:inline;">
+									<i class="fas fa-car" style="color:white;font-size:40px;"></i>
+									<input type="checkbox" id="toggle_checkbox">
+									<label for="toggle_checkbox"></label>
+									<i class="fas fa-truck" style="color:white;font-size:40px;"></i>
+								</span>
+							</div>
 
 
-
-							<table class="table table-border-0" style="margin: 0 auto !important;float:none;">
+							<table id="table_passenger" class="table table-border-0" style="margin: 0 auto !important;float:none;">
 								<thead>
-								<tr class="d-flex">
-									<td style="width:33.33%;border-top:0;text-align:center;">
-										<span class="mu-install-icon-box">
-										<i class="icon-globe" style="color:white;font-size:50px;margin: 0 auto !important;"></i>
-										</span>
-										<h2 class="mu-heading-title">{{_('Simple')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Directly see the results of a comparison between a gasoline, a diesel, a gaz and
-											an electricity-run vehicle, for  ") }}</h4><h4 id="country" style="color:white;display:inline"></h4>
-
-
-
-									</td>
-									<td style="width:33.33%;border-top:0;text-align:center;">
-										<span class="mu-install-icon-box">
-										<i class="icon-globe" style="color:white;font-size:50px;"></i>
-										</span>
-										<h2 class="mu-heading-title">{{_('Intermediate')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Set the parameters for a comparison between a gasoline, a diesel, a gas and
-											an electricity-run vehicle, for  ") }}</h4><h4 id="country_2" style="color:white;display:inline"></h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
-
-
-									</td>
-									<td  style="width:33.33%;border-top:0;text-align:center;">
-										<span class="mu-install-icon-box">
-										<i class="icon-globe" style="color:white;font-size:50px;"></i>
-										</span>
-										<h2 class="mu-heading-title">{{_('Advanced')}}</h2>
-										<h4 style="color:white;display:inline;">{{ _("Build your own comparative scenario.") }}</h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
-										</p>
-
-									</td>
+								<tr>
+									<th style="color:white;margin: 0 auto;text-align:center;font-size:16px;border-right: 1px solid #ddd">{{_('Passenger car replacement')}}</th>
+									<th colspan="3" style="color:white;margin: 0 auto;text-align:center;font-size:16px;border-right: 1px solid #ddd;">{{_('Passenger cars comparison')}}</th>
+									<th style="color:white;margin: 0 auto;text-align:center;font-size:16px;">{{_('Intermodal comparison')}}</th>
 								</tr>
 								<tr class="d-flex">
+
+									<td style="width:25%;border-top:0;text-align:center;border-right: 1px solid #ddd;">
+										<span class="mu-install-icon-box" style="margin:0">
+											<i class="fas fa-car" style="color:white;font-size:40px;margin: 0 auto !important;"></i>
+											<i class="fas fa-arrow-circle-right" style="color:white;font-size:30px;margin: 0 auto !important;"></i>
+											<i class="fas fa-car" style="color:white;font-size:40px;margin: 0 auto !important;"></i>
+										</span>
+										<h2 class="mu-heading-title" style="margin-top:16px;">{{_('A new car?')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Is it time to change my vehicle?")}}
+											{{_("Does it make sense in terms of environmental impacts?")}}
+											{{_("Create a custom analysis for your case.")}}</h4>
+									</td>
+
+									<td style="width:25%;border-top:0;text-align:center;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Simple')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Directly see the results of a comparison between a gasoline, a diesel, a gaz and
+											an electricity-run vehicle, for  ") }}</h4><h4 id="country_2" style="color:white;display:inline"></h4>
+									</td>
+
+									<td style="width:25%;border-top:0;text-align:center;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Intermediate')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Set the parameters for a comparison between a gasoline, a diesel, a gas and
+											an electricity-run vehicle, for  ") }}</h4><h4 id="country_3" style="color:white;display:inline"></h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
+
+
+									</td>
+									<td  style="width:25%;border-top:0;text-align:center;border-right: 1px solid #ddd;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Advanced')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Build your own comparative scenario.") }}</h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
+
+
+									</td>
+
+									<td  style="width:25%;border-top:0;text-align:center;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-motorcycle" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-car" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-bus" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Car, bus, bike?')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Compare different means of transport for passengers.") }}</h4>
+
+
+									</td>
+
+								</tr>
+								<tr class="d-flex">
+
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
+										<div style="text-align:center;">
+											<!--<button class="online-button" onclick="window.open('/new_car/' + country_code, '_blank')">{{_('Old better than new?')}}</button>-->
+											<button class="online-button" onclick="not_available()">{{_('Old better than new?')}}</button>
+										</div>
+
+									</td>
+
 									<td  style="border-top:0;">
 										<div style="text-align:center;">
 											<button class="online-button" onclick="get_results()">{{_('Yes, keep it simple!')}}</button>
@@ -134,14 +303,31 @@
 										</div>
 
 									</td>
-									<td  style="border-top:0;">
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
 										<div style="text-align:center;">
 											<button class="online-button" onclick="window.open('/tool', '_blank')">{{_("Let's build it from scratch.")}}</button>
 										</div>
 
 									</td>
+									<td  style="border-top:0;">
+										<div style="text-align:center;">
+											<button class="online-button" onclick="not_available()">{{_("The best way to go.")}}</button>
+										</div>
+
+									</td>
 								</tr>
+
 								<tr class="d-flex">
+
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
+										<div style="text-align:center;">
+											<p style="color:white;display:inline;">{{_("Set up an analysis to answer your specific question: should you change your current vehicle for a new one?")}}
+											{{_("In this analysis, you will be asked for details on your current vehicle as well as your driving habits to find out whether changing your current ")}}
+											{{_("leads to environmental benefits, and if so, under which conditions.")}}</p>
+										</div>
+
+									</td>
+
 									<td  style="border-top:0;">
 										<div style="text-align:center;">
 											<p style="color:white;display:inline;">{{_("This 'Simple' access to the model gives the environmental impacts and life cycle costs of modern, mid-size diesel,
@@ -158,7 +344,7 @@
 										</div>
 
 									</td>
-									<td  style="border-top:0;">
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
 										<div style="text-align:center;">
 											<p style="color:white;display:inline;">{{_("This access offers the model full flexibility.")}}
 										</div>
@@ -167,6 +353,258 @@
 								</tr>
 								</thead>
 							</table>
+
+							<table id="table_freight" class="table table-border-0"
+								   style="margin: 0 auto !important;float:none;display:none;">
+								<thead>
+								<tr>
+									<th style="color:white;margin: 0 auto;text-align:center;font-size:16px;border-right: 1px solid #ddd">{{_('Truck replacement')}}</th>
+									<th colspan="3" style="color:white;margin: 0 auto;text-align:center;font-size:16px;border-right: 1px solid #ddd;">{{_('Medium and heavy duty trucks comparison')}}</th>
+									<th style="color:white;margin: 0 auto;text-align:center;font-size:16px;">{{_('Intermodal comparison')}}</th>
+								</tr>
+								<tr class="d-flex">
+
+									<td style="width:25%;border-top:0;text-align:center;border-right: 1px solid #ddd;">
+										<span class="mu-install-icon-box" style="margin:0">
+											<i class="fas fa-truck" style="color:white;font-size:40px;margin: 0 auto !important;"></i>
+											<i class="fas fa-arrow-circle-right" style="color:white;font-size:30px;margin: 0 auto !important;"></i>
+											<i class="fas fa-truck" style="color:white;font-size:40px;margin: 0 auto !important;"></i>
+										</span>
+										<h2 class="mu-heading-title" style="margin-top:16px;">{{_('A new truck?')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Is it time to change my vehicle?")}}
+											{{_("Does it make sense in terms of environmental impacts?")}}
+											{{_("Create a custom analysis for your case.")}}</h4>
+									</td>
+
+									<td style="width:25%;border-top:0;text-align:center;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 auto;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 auto;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 auto;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 20px 0 20px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 20px 0 20px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 20px 0 20px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Simple')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Directly see the results of a comparison between a gasoline, a diesel, a gaz and
+											an electricity-run vehicle, for  ") }}</h4><h4 id="country_4" style="color:white;display:inline"></h4>
+									</td>
+
+									<td style="width:25%;border-top:0;text-align:center;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Intermediate')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Set the parameters for a comparison between a gasoline, a diesel, a gas and
+											an electricity-run vehicle, for  ") }}</h4><h4 id="country_5" style="color:white;display:inline"></h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
+
+
+									</td>
+									<td  style="width:25%;border-top:0;text-align:center;border-right: 1px solid #ddd;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Advanced')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Build your own comparative scenario.") }}</h4><br><h4 style="color:white;display:inline;">{{ _("(requires login)") }}</h4>
+									</td>
+
+									<td  style="width:25%;border-top:0;text-align:center;">
+										<table style="margin: 0 auto;">
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 1px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-question" style="color:white;font-size:15px;margin:0 5px 0 5px;"></i>
+
+													</td>
+
+												</tr>
+												<tr>
+
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-truck" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-train" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+													<td style="margin:0 15px 0 15px;">
+															<i class="fas fa-plane" style="color:white;font-size:25px;margin: 0 5px 0 5px !important;"></i>
+
+													</td>
+												</tr>
+											</table>
+										<h2 class="mu-heading-title">{{_('Truck, train, plane?')}}</h2>
+										<h4 style="color:white;display:inline;">{{ _("Compare different means of transport for freight.") }}</h4>
+									</td>
+
+								</tr>
+								<tr class="d-flex">
+
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
+										<div style="text-align:center;">
+											<button class="online-button" onclick="not_available()">{{_('Old better than new?')}}</button>
+										</div>
+
+									</td>
+
+									<td  style="border-top:0;">
+										<div style="text-align:center;">
+											<button class="online-button" onclick="not_available()">{{_('Yes, keep it simple!')}}</button>
+										</div>
+
+									</td>
+									<td  style="border-top:0;">
+										<div style="text-align:center;">
+											<button class="online-button" onclick="not_available()">{{_("I'd like to see what's behind.")}}</button>
+										</div>
+
+									</td>
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
+										<div style="text-align:center;">
+											<button class="online-button" onclick="not_available()">{{_("Let's build it from scratch.")}}</button>
+										</div>
+
+									</td>
+									<td  style="border-top:0;">
+										<div style="text-align:center;">
+											<button class="online-button" onclick="not_available()">{{_("The best way to go.")}}</button>
+										</div>
+
+									</td>
+								</tr>
+
+								<tr class="d-flex">
+
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
+										<div style="text-align:center;">
+											<p style="color:white;display:inline;">{{_("Set up an analysis to answer your specific question: should you change your current vehicle for a new one?")}}
+											{{_("In this analysis, you will be asked for details on your current vehicle as well as your driving habits to find out whether changing your current ")}}
+											{{_("leads to environmental benefits, and if so, under which conditions.")}}</p>
+										</div>
+
+									</td>
+
+									<td  style="border-top:0;">
+										<div style="text-align:center;">
+											<p style="color:white;display:inline;">{{_("This 'Simple' access to the model gives the environmental impacts and life cycle costs of modern, mid-size diesel,
+											gasoline, gas and battery electric vehicles; for the country you are located in, for the year 2020. The vehicle parameters correspond to the standard settings in our model.")}}</p>
+										</div>
+
+									</td>
+									<td  style="border-top:0;">
+										<div style="text-align:center;">
+											<p style="color:white;display:inline;">{{_("With this version, the same results as with the 'Simple' access are given, but you have access and can modify all the vehicle parameters.
+											Additionally, country-specific electricity mixes for charging the batteries of battery vehicles and producing hydrogen via electrolysis can be selected; the electricity mixes can also be
+											defined by the user.")}}
+											</p>
+										</div>
+
+									</td>
+									<td  style="border-top:0;border-right: 1px solid #ddd;">
+										<div style="text-align:center;">
+											<p style="color:white;display:inline;">{{_("This access offers the model full flexibility.")}}
+										</div>
+
+									</td>
+								</tr>
+								</thead>
+							</table>
+
+
 						</div>
 					</div>
 				</div>
@@ -213,6 +651,41 @@
 
 		<script>
 
+		 $('#toggle_checkbox').change(function() {
+			if(this.checked) {
+				$('#table_passenger').hide();
+				$('#table_freight').show(1000);
+			}else{
+				$('#table_freight').hide();
+				$('#table_passenger').show(1000);
+
+			};
+		});
+
+		function not_available(){
+			var str= i18n('function_not_available')
+			$.notify({
+				icon: 'glyphicon glyphicon-warning-sign',
+				message: str
+			},
+			{
+				placement: {
+					from: "top",
+					align: "center"
+				},
+				type:'warning'
+			},
+			{
+				animate: {
+					enter: 'animated bounceInDown',
+					exit: 'animated bounceOutUp'
+				},
+			}
+			);
+
+			return;
+		};
+
 		//  Load the JSON File
 		var country_code = "";
 		$.when($.ajax({
@@ -235,6 +708,9 @@
                             country_code = country_code.replace(/^"|"$/g, '');
                             $("#country").html(i18n(country_code));
                             $("#country_2").html(i18n(country_code));
+                            $("#country_3").html(i18n(country_code));
+                            $("#country_4").html(i18n(country_code));
+                            $("#country_5").html(i18n(country_code));
 
                         }, "jsonp");
 
@@ -244,6 +720,9 @@
                         country_code = country_code.replace(/^"|"$/g, '');
                         $("#country").html(i18n(country_code));
                         $("#country_2").html(i18n(country_code));
+                        $("#country_3").html(i18n(country_code));
+                        $("#country_4").html(i18n(country_code));
+                        $("#country_5").html(i18n(country_code));
                         }, "jsonp");
 					};
 				});

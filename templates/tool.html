@@ -220,11 +220,13 @@
 												  </thead>
 												  <tbody>
 													<tr  style="text-align:center;;">
-													  <td><ol data-draggable="target" id="years_list_choice">
+													  <td>
+														  <ol data-draggable="target" id="years_list_choice">
 														{% for y in years %}
 														<li data-draggable="item">{{ y }}</li>
 														{% endfor %}
-													</ol></td>
+														  </ol>
+													  </td>
 													  <td><ol data-draggable="target" id="years_list">
 													</ol></td>
 													</tr>
@@ -299,7 +301,8 @@
 												  style="height:80px; width:80px; border-right:3px solid #fff;
 														padding:15px;margin-bottom:0px;display:inline-block;"
 												 alt="image">
-						<span style="color:white;">{{_('USE')}}</span></h2></div>
+						<span style="color:white;">{{_('USE')}}</span></h2>
+						</div>
 						<div class="mu-testimonials-area" style="text-align:center;padding-top:50px;padding-bottom:50px;left:0;right:0;">
 							<div class="mu-testimonials-content" style="display:none;" id="use_section">
 								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">

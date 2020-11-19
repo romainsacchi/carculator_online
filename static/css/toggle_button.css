@@ -1,0 +1,66 @@
+*
+{
+    -webkit-tap-highlight-color: transparent;
+}
+
+#toggle_checkbox
+{
+    display: none;
+}
+
+label
+{
+
+    display: inline-block;
+    width: 90px;
+    height: 45px;
+    margin: auto;
+    margin-bottom:-30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+label:before
+{
+    top: 8px;
+    left: 8px;
+    width: 30px;
+    height: 30px;
+    border: 3px solid white;
+}
+
+label:after
+{
+    top: 0;
+    right: 0;
+    width: 90px;
+    height: 45px;
+    border: 3px solid white;
+}
+
+label:before, label:after
+{
+    content: "";
+    position: absolute;
+    border-radius: 45px;
+    box-sizing: border-box;
+    transition: 0.5s ease top, 0.5s ease left, 0.5s ease right, 0.5s ease width, 0.5s ease height, 0.5s ease border-color;
+}
+
+#toggle_checkbox:checked + label:before
+{
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 45px;
+    border-color: white;
+}
+
+#toggle_checkbox:checked + label:after
+{
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border-color: white;
+}

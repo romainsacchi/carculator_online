@@ -99,6 +99,53 @@ def start():
     session["url"] = url_for("start")
     return render_template("start.html")
 
+@app.route("/new_car", defaults={"country": None})
+@app.route("/new_car/<country>")
+def new_car(country):
+    """Return new_car page."""
+    session["url"] = url_for("new_car")
+    powertrains = [
+        _("Petrol"),
+        _("Diesel"),
+        _("CNG"),
+        _("Electric"),
+        _("Fuel cell"),
+        _("Hybrid-petrol"),
+        _("Hybrid-diesel"),
+        _("(Plugin) Hybrid-petrol"),
+        _("(Plugin) Hybrid-diesel"),
+    ]
+    sizes = [
+        _("Minicompact"),
+        _("Subcompact"),
+        _("Compact"),
+        _("Mid-size"),
+        _("Large"),
+        _("SUV"),
+        _("Van"),
+    ]
+
+    vehicles = [x + ", " + y for x in powertrains for y in sizes]
+
+    return render_template("new_car.html", country=country, vehicles=vehicles, lang=session.get("language", "en"))
+
+def get_car_repl_data(country, cycle):
+    fp = r"data/car replacement data/" + cycle + "_" + country + ".pickle"
+    pickled_data = open(fp, 'rb')
+    data = pickle.load(pickled_data)
+    pickled_data.close()
+
+    return data
+
+@app.route("/fetch_car_repl_results/<country>/<cycle>")
+def fetch_car_repl_results(country, cycle):
+    arr = get_car_repl_data(country, cycle)
+
+
+    response = arr.sel(value=0).to_dict()
+
+    return jsonify(response)
+
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
 @login_required

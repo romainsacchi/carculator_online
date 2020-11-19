@@ -11,6 +11,7 @@
     "curb_mass":"Fahrzeugmasse",
     "only_one_country":"Derzeit kann nur ein Land ausgewählt werden.",
     "category_not_available":"Diese Fahrzeugkategorie ist noch nicht verfügbar.",
+    "function_not_available":"diese Funktion ist noch nicht verfügbar.",
     "select_time_horizon":"Zuerst muss ein Zeithorizont ausgewählt werden.",
     "all_params_set":"Sie haben alle erforderlichen Parameter eingestellt. Wenn Sie fertig sind, klicken Sie auf die Schaltfläche \"Berechnen\".",
     "missing_type": "Es scheint, dass der zu analysierende Fahrzeugtyp fehlt.",
@@ -272,6 +273,15 @@
     "year": "Jahr",
     "impact_category": "Wirkungskategorie",
     "impact_source": "Wirkungsquelle",
-    "value": "Wert"
+    "value": "Wert",
+    "missing_vehicles": "Ihre Fahrzeugauswahl ist leer.",
+    "Use (km)": "Benutzen (km)",
+    "km (or year ": "km (oder Jahr ",
+    "Replaced by": "Ersetzt durch",
+    "in": "in",
+    "instead of": "anstelle von",
+    "Early replacement": "Vorzeitige Ersetzung",
+    "Late replacement": "Späte Ersetzung",
+    "scenario": "Szenario"
   }
 }

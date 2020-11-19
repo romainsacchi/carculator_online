@@ -11,6 +11,7 @@
     "curb_mass":"Massa in ordine di marcia",
     "only_one_country":"Attualmente è possibile selezionare solo un paese.",
     "category_not_available":"Spiacenti, questa categoria di veicoli non è ancora disponibile.",
+    "function_not_available":"Spiacenti, questa funzione non è ancora disponibile.",
     "select_time_horizon":"Un orizzonte temporale deve essere selezionato per primo.",
     "all_params_set":"Hai impostato tutti i parametri richiesti. Quando è pronto, premi il pulsante Calcolare.",
     "missing_type": "Sembra che manchi il tipo di veicolo da analizzare.",
@@ -271,6 +272,15 @@
     "year": "Anno",
     "impact_category": "Categoria d'impatto",
     "impact_source": "Fonte di impatto",
-    "value": "Valore"
+    "value": "Valore",
+    "missing_vehicles": "La selezione del veicolo è vuota.",
+    "Use (km)": "Uso (km)",
+    "km (or year ": "km (o anno ",
+    "Replaced by": "Sostituito da",
+    "in": "in",
+    "instead of": "invece di",
+    "Early replacement": "Sostituzione anticipata",
+    "Late replacement": "Sostituzione tardiva",
+    "scenario": "scenario"
   }
 }

@@ -11,6 +11,7 @@
     "curb_mass":"Masse à vide",
     "only_one_country":"Pour le moment, un seul pays peut être sélectionné."   ,
     "category_not_available":"Désolé, cette catégorie de véhicule n'est pas encore disponible.",
+    "function_not_available":"Désolé, cette fonction n'est pas encore disponible.",
     "select_time_horizon":"Une année doit d'abord être sélectionnée.",
     "all_params_set":"Vous avez réglé tous les paramètres nécéssaires. Vous pouvez lancer l'analyse en cliquant sur le bouton 'Calculer' en haut à droite.",
     "missing_type": "Le ou les type(s) de véhicule à analyser est/sont manquant.",
@@ -271,6 +272,14 @@
     "year": "Année",
     "impact_category": "Catégorie d'impact",
     "impact_source": "Source d'impact",
-    "value": "Valeur"
+    "value": "Valeur",
+    "missing_vehicles": "Votre sélection de véhicule future est vide.",
+    "Use (km)": "Utilisation (km)",
+    "km (or year ": "km (ou année ",
+    "Replaced by": "Remplacée par",
+    "in": "en",
+    "instead of": "au lieu de",
+    "Early replacement": "Remplacement anticipé",
+    "Late replacement": "Remplacement tardif"
   }
 }
