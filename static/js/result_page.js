@@ -391,8 +391,8 @@ function generate_line_chart_TtW_energy(data){
     var max_x_val = 0
 
     for (var v=0; v<data.length; v++){
-        if (Number(data[v]["values"].slice(-1)["y"]) > max_y_val){ max_y_val = Number(data[v]["values"].slice(-1)["y"])}
-        if (Number(data[v]["values"].slice(-1)["x"]) > max_x_val){ max_x_val = Number(data[v]["values"].slice(-1)["x"])}
+        if (parseFloat(data[v]["values"].slice(-1)["y"]) > max_y_val){ max_y_val = Math.round(parseFloat(data[v]["values"].slice(-1)["y"]))}
+        if (parseFloat(data[v]["values"].slice(-1)["x"]) > max_x_val){ max_x_val = Math.round(parseFloat(data[v]["values"].slice(-1)["x"]))}
     };
 
     console.log(max_x_val)
