@@ -390,18 +390,15 @@ function generate_line_chart_TtW_energy(data){
     var max_y_val = 0
     var max_x_val = 0
 
-
-    console.log(data[0]["values"])
-    console.log(data[0]["values"].slice(-1))
-    console.log(data[0]["values"].slice(-1)[0]["y"])
-
     for (var v=0; v<data.length; v++){
+        var pt = data[v]["key"].split(" - ")[0];
+        var s = data[v]["key"].split(" - ")[1];
+        var y = data[v]["key"].split(" - ")[2];
+        data[v]["key"] = i18n(pt) + " - " + i18n(s) + " - " + y
         if (parseFloat(data[v]["values"].slice(-1)[0]["y"]) > max_y_val){ max_y_val = Math.round(parseFloat(data[v]["values"].slice(-1)[0]["y"]))}
         if (parseFloat(data[v]["values"].slice(-1)[0]["x"]) > max_x_val){ max_x_val = Math.round(parseFloat(data[v]["values"].slice(-1)[0]["x"]))}
     };
 
-    console.log(max_x_val)
-    console.log(max_y_val)
 
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
@@ -412,7 +409,7 @@ function generate_line_chart_TtW_energy(data){
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
                     .forceY([0, max_y_val * 1.1])
-                    .forceX([0, max_x_val * 1.1]);
+                    .forceX([0, max_x_val]);
 
       var dc_str = i18n("driving_cycle");
       chart.xAxis     //Chart x-axis settings
