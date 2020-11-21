@@ -376,7 +376,7 @@ class Calculation:
             year=d[("Functional unit",)]["year"],
             value=0,
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
-            .sum(dim="parameter").cumsum()
+            .cumsum(dim="second").sum(dim="parameter")
 
         print(cm.array.coords)
         print(cm.energy.coords)
