@@ -532,22 +532,13 @@ class Calculation:
             year=d[("Functional unit",)]["year"],
             value=0,
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
-            .sum(dim=["parameter"]).cumsum().values.tolist()
+            .sum(dim=["parameter"]).cumsum().to_dict()
 
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 90
         db.session.commit()
-
-        list_names = [
-            [s, p, y]
-            for s in d[("Functional unit",)]["size"]
-            for p in d[("Functional unit",)]["powertrain"]
-            for y in d[("Functional unit",)]["year"]
-        ]
-
-        TtW_list = list(zip(list_names, TtW_energy))
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -562,7 +553,7 @@ class Calculation:
                     lang,
                     list_res,
                     arr_benchmark,
-                    TtW_list,
+                    TtW_energy,
                     dict_scatter,
                     list_res_acc,
                     self.create_config_array(d, cm.array),
