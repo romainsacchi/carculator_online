@@ -404,7 +404,7 @@ function generate_line_chart_TtW_energy(data){
         }
     }
 
-    console.log(datum):
+    console.log(datum);
 
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
