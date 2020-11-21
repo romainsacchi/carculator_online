@@ -871,6 +871,8 @@ function get_results_replacement_car(){
     var radio_group = $("input[name=driving_cycle]");
     var cycle = radio_group.filter(":checked").attr("id");
 
+    var list_impact_cat = [];
+
     $.when($.ajax({
                 url: "/fetch_car_repl_results/" + country + "/" + cycle,
                 type: 'GET',
@@ -891,44 +893,68 @@ function get_results_replacement_car(){
 
                 var impacts_current_car = extract_car_impacts(data, pt, s, y);
 
-                data_array.push([pt, s, y, impacts_current_car[0], impacts_current_car[1]])
+                for (var imp in impacts_current_car) {
 
-                // Create fuel table, remove existing rows if any
-                var tableRef = document.getElementById('results_table');
-                var rowCount = tableRef.rows.length;
-                while (rowCount>3){
-                    tableRef.deleteRow(3);
-                    var rowCount = tableRef.rows.length;
-                }
+                    if (impacts_current_car.hasOwnProperty(imp)) {
+                        data_array.push([pt, s, y, imp, impacts_current_car[imp][0], impacts_current_car[imp][1]])
+                        }
+                    }
+
+
+
 
                 var ol = document.getElementById("list_selection");
                 var items = ol.getElementsByTagName("li");
+
                 for (var i = 0; i < items.length; ++i) {
                     pt = i18n(items[i].innerHTML.split(",")[0]);
                     s = i18n(items[i].innerHTML.split(",")[1].trim());
 
-                    for (var new_y = y + 1; new_y < 2031; ++new_y){
+                    for (var new_y = y + 1; new_y < 2041; ++new_y){
 
                         var impacts = extract_car_impacts(data, pt, s, new_y);
-                        data_array.push([pt, s, new_y, impacts[0], impacts[1]])
+
+                        for (var imp in impacts) {
+
+                        if (impacts.hasOwnProperty(imp)) {
+
+                            if (!list_impact_cat.includes(imp)){list_impact_cat.push(imp)};
+
+                            data_array.push([pt, s, new_y, imp, impacts[imp][0], impacts[imp][1]]);
+
+                            }
+                        }
+
+
+                    }
+                };
+
+                for (var impact = 0; impact < list_impact_cat.length; impact++){
+
+                    var impact_name = list_impact_cat[impact].split(" ")[0];
+
+                    // Create results tables, remove existing rows if any
+                    var tableRef = document.getElementById(impact_name + '_results_table');
+                    var rowCount = tableRef.rows.length;
+                    while (rowCount>1){
+                        tableRef.deleteRow(1);
+                        var rowCount = tableRef.rows.length;
                     }
 
 
-                };
-
-                for (var i = 0; i < items.length; i+=3) {
-                    $('#results_table tr:last').after('<tr><td id="label_graph_' + i + '"></td><td id="label_graph_' + Number(i + 1) +
-                         '"></td><td id="label_graph_' + Number(i + 2) + '"></td></tr>'
-                        + '<tr><td><div><svg  id="graph_' + i
+                    for (var i = 0; i < items.length; i+=3) {
+                    $('#' + impact_name + '_results_table tr:last').after('<tr><td id="label_graph_' + impact_name+ "_" + i + '"></td><td id="label_graph_' + impact_name+ "_" + Number(i + 1) +
+                         '"></td><td id="label_graph_' + impact_name+ "_" + Number(i + 2) + '"></td></tr>'
+                        + '<tr><td><div><svg  id="graph_' + impact_name+ "_" + i
                         + '" style="; height: 400px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div>'+
-                        '<td><div><svg  id="graph_' + Number(i + 1)
+                        '<td><div><svg  id="graph_' + impact_name+ "_" + Number(i + 1)
                         + '" style="height: 400px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div>' +
-                        '<td><div><svg  id="graph_' + Number(i + 2)
+                        '<td><div><svg  id="graph_' + impact_name+ "_" + Number(i + 2)
                         + '" style="height: 400px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div></td></tr>');
                 };
 
+                }
                 generate_graph(data_array);
-
             });
 
     $("#results").show();
@@ -957,112 +983,126 @@ function generate_graph(data){
     var year_prod_old_car = Number($("#production_year_current").val());
 
     // Year of max replacement = lifetime of first vehicle / annual mileage
-    var year_max_repl = year_prod_old_car + Math.round(lifetime / annual_mileage)
+    var year_ref_repl = year_prod_old_car + Math.round(lifetime / annual_mileage)
 
     // Year of early replacement = early lifetime of first vehicle / annual mileage
     var year_alt_repl = year_prod_old_car + Math.round(replacement / annual_mileage)
 
     // Production year of second vehicle = Year of max replacement - 1
-    var year_prod_repl_car = year_max_repl - 1
+    var year_ref_prod_repl_car = year_ref_repl - 1
 
     // Production year of second vehicle in alternative scenario = Year of early replacement - 1
-    var year_prod_repl_car_alt = year_alt_repl - 1
+    var year_alt_prod_repl_car = year_alt_repl - 1
 
     var ol = document.getElementById("list_selection");
     var items = ol.getElementsByTagName("li");
 
-    for (var i = 0; i < items.length; ++i) {
+    for (var impact = 0; impact < list_impact_cat.length; impact++){
+
+        var impact_name = list_impact_cat[impact];
+
+        var sub_array = [];
+
+        for (d=0; d < data_array.length; d++){
+            if (data_array[d][3] == impact_name){
+                sub_array.push([data_array[d][0], data_array[d][1], data_array[d][2], data_array[d][4], data_array[d][5]])
+            }
+        };
+
+        for (var i = 0; i < items.length; ++i) {
 
 
-        var impact_ref_scenario = [];
+            var impact_ref_scenario = [];
 
-        // Increment of 1000 km and calculate impacts of old car
-        var prod_impact = Number(data_array[0][3]) / 1000;
-        var km_impact = Number(data_array[0][4]) / 1000;
+            // Increment of 1000 km and calculate impacts of old car
+            var prod_impact = Number(sub_array[0][3]) / 1000;
+            var km_impact = Number(sub_array[0][4]) / 1000;
 
-        for (km=0; km <= lifetime; km += 1000){
-            impact_ref_scenario.push({"x":km,
-                "y": Number((prod_impact + (km_impact * km)))})
-        }
+            for (km=0; km <= lifetime; km += 1000){
+                impact_ref_scenario.push({"x":km,
+                    "y": Number((prod_impact + (km_impact * km)))})
+            }
 
-        // Append impacts of new car for a given year
-        var last_val = Number(impact_ref_scenario.slice(-1)[0]["y"])
-        var last_km = impact_ref_scenario.slice(-1)[0]["x"]
+            // Append impacts of new car for a given year
+            var last_val = Number(impact_ref_scenario.slice(-1)[0]["y"])
+            var last_km = impact_ref_scenario.slice(-1)[0]["x"]
 
-        // Locate new car in data_array
-        pt = i18n(items[i].innerHTML.split(",")[0]);
-        s = i18n(items[i].innerHTML.split(",")[1].trim());
-        y = year_prod_repl_car;
+            // Locate new car in data_array
+            pt = i18n(items[i].innerHTML.split(",")[0]);
+            s = i18n(items[i].innerHTML.split(",")[1].trim());
+            y = year_ref_prod_repl_car;
 
-        for (c=1; c <= data_array.length - 1; c ++){
+            for (c=1; c <= sub_array.length - 1; c ++){
 
-            if ((data_array[c][0] == pt) && (data_array[c][1] == s) && (data_array[c][2] == y)){
-                var prod_impact = Number(data_array[c][3]) / 1000;
-                var km_impact = Number(data_array[c][4]) / 1000;
+                if ((sub_array[c][0] == pt) && (sub_array[c][1] == s) && (sub_array[c][2] == y)){
+                    var prod_impact = Number(sub_array[c][3]) / 1000;
+                    var km_impact = Number(sub_array[c][4]) / 1000;
+                };
             };
-        };
 
-        for (km=1000; km <= (lifetime - (lifetime - replacement)); km += 1000){
-            impact_ref_scenario.push({"x":km + last_km,
-            "y": Number((last_val + (prod_impact + (km_impact * km))))})
-        };
-
-
-        data_ref =  {values: impact_ref_scenario, key: i18n("Late replacement"), color:"#ED9F4D"};
-
-        // Impact of alternative scenario
-        var impact_alt_scenario = [];
-
-        // Increment of 1000 km and calculate impacts of old car
-        var prod_impact = Number(data_array[0][3]) / 1000;
-        var km_impact = Number(data_array[0][4]) / 1000;
-        for (km=0; km <= replacement; km += 1000){
-
-            impact_alt_scenario.push({"x": km,
-                "y": Number((prod_impact + (km_impact * km)))})
-        }
-
-        // Append impacts of new car for a given year
-        var last_val = Number(impact_alt_scenario.slice(-1)[0]["y"])
-        var last_km = impact_alt_scenario.slice(-1)[0]["x"]
-
-        // Locate new car in data_array
-        pt = i18n(items[i].innerHTML.split(",")[0]);
-        s = i18n(items[i].innerHTML.split(",")[1].trim());
-        y = year_prod_repl_car_alt;
-
-        for (c=1; c <= data_array.length - 1; c ++){
-
-            if ((data_array[c][0] == pt) && (data_array[c][1] == s) && (data_array[c][2] == y)){
-                var prod_impact = Number(data_array[c][3]) / 1000;
-                var km_impact = Number(data_array[c][4]) / 1000;
+            for (km=1000; km <= (lifetime - (lifetime - replacement)); km += 1000){
+                impact_ref_scenario.push({"x":km + last_km,
+                "y": Number((last_val + (prod_impact + (km_impact * km))))})
             };
-        };
 
-        for (km=1000; km <= lifetime; km += 1000){
 
-            impact_alt_scenario.push({"x": km + last_km,
-            "y": Number(last_val + (prod_impact + (km_impact * km)))})
-        }
+            data_ref =  {values: impact_ref_scenario, key: i18n("Late replacement"), color:"#ED9F4D"};
 
-        data_alt = {values: impact_alt_scenario, key: i18n("Early replacement"), color:"#10C613"};
-        var datum = [data_ref, data_alt];
-        var graph_name = "#graph_" + i
+            // Impact of alternative scenario
+            var impact_alt_scenario = [];
 
-        // Graph title
-        $("#label_graph_" + i).html('<p style="color:white;">' + i18n("Replaced by")+ ' ' + items[i].innerHTML +
-            ' (' + i18n("in") + ' ' + Number(year_prod_old_car + Math.round(replacement/annual_mileage)) + ' ' + i18n("instead of") + ' '
-            + Number(year_prod_old_car + Math.round(lifetime/annual_mileage)) + ')</p>');
+            // Increment of 1000 km and calculate impacts of old car
+            var prod_impact = Number(sub_array[0][3]) / 1000;
+            var km_impact = Number(sub_array[0][4]) / 1000;
+            for (km=0; km <= replacement; km += 1000){
 
-        update_label(datum, i);
+                impact_alt_scenario.push({"x": km,
+                    "y": Number((prod_impact + (km_impact * km)))})
+            }
 
-        build_graph(datum, graph_name, year_prod_old_car, annual_mileage);
+            // Append impacts of new car for a given year
+            var last_val = Number(impact_alt_scenario.slice(-1)[0]["y"])
+            var last_km = impact_alt_scenario.slice(-1)[0]["x"]
+
+            // Locate new car in data_array
+            pt = i18n(items[i].innerHTML.split(",")[0]);
+            s = i18n(items[i].innerHTML.split(",")[1].trim());
+            y = year_alt_prod_repl_car;
+
+            for (c=1; c <= sub_array.length - 1; c ++){
+
+                if ((sub_array[c][0] == pt) && (sub_array[c][1] == s) && (sub_array[c][2] == y)){
+                    var prod_impact = Number(sub_array[c][3]) / 1000;
+                    var km_impact = Number(sub_array[c][4]) / 1000;
+                };
+            };
+
+            for (km=1000; km <= lifetime; km += 1000){
+
+                impact_alt_scenario.push({"x": km + last_km,
+                "y": Number(last_val + (prod_impact + (km_impact * km)))})
+            }
+
+            data_alt = {values: impact_alt_scenario, key: i18n("Early replacement"), color:"#10C613"};
+            var datum = [data_ref, data_alt];
+            var graph_name = "#graph_" +impact_name.split(" ")[0] + "_" + i
+            var label_name = "#label_graph_" +impact_name.split(" ")[0] + "_" + i
+
+            // Graph title
+            $(label_name).html('<p style="color:white;">' + i18n("Replaced by")+ ' ' + items[i].innerHTML +
+                ' (' + i18n("in") + ' ' + Number(year_prod_old_car + Math.round(replacement/annual_mileage)) + ' ' + i18n("instead of") + ' '
+                + Number(year_prod_old_car + Math.round(lifetime/annual_mileage)) + ')</p>');
+
+            update_label(datum, label_name, i);
+
+            build_graph(datum, graph_name, year_prod_old_car, annual_mileage);
 
     };
 
+    }
 };
 
-function update_label(datum, i){
+function update_label(datum, label_name, i){
 
 
     var ref_result = Number(datum[0]["values"].slice(-1)[0]["y"]);
@@ -1074,7 +1114,7 @@ function update_label(datum, i){
         var str_1 = i18n("clearly_not_1")
         var str_2 = i18n("clearly_not_2")
 
-        $("#label_graph_" + i).append("<p>" + str_1 + Math.round((ratio - 1) * 100) + str_2 + "</p>")
+        $(label_name).append("<p>" + str_1 + Math.round((ratio - 1) * 100) + str_2 + "</p>")
     }
 
     if ((ratio > 1.1) && (ratio <= 1.2)) {
@@ -1082,7 +1122,7 @@ function update_label(datum, i){
         var str_1 = i18n("probably_not_1")
         var str_2 = i18n("probably_not_2")
 
-        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
+        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
 
     }
 
@@ -1091,7 +1131,7 @@ function update_label(datum, i){
         var str_1 = i18n("hard_to_say_1_neg")
         var str_2 = i18n("hard_to_say_2_neg")
 
-        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
 
     }
 
@@ -1100,7 +1140,7 @@ function update_label(datum, i){
         var str_1 = i18n("hard_to_say_1_pos")
         var str_2 = i18n("hard_to_say_2_pos")
 
-        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
+        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
 
     }
 
@@ -1109,7 +1149,7 @@ function update_label(datum, i){
         var str_1 = i18n("probably_1")
         var str_2 = i18n("probably_2")
 
-        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
 
     }
 
@@ -1117,7 +1157,7 @@ function update_label(datum, i){
         var str_1 = i18n("clearly_1")
         var str_2 = i18n("clearly_2")
 
-        $("#label_graph_" + i).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
     }
 
 };
@@ -1131,8 +1171,37 @@ function build_graph(datum, graph_name, year_0, annual_mileage){
                             .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                             .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                             .showYAxis(true)        //Show the y-axis
-                            .forceY([0, 120])
                             .showXAxis(true);    //Show the x-axis
+
+
+            if (graph_name.split("_")[1] == "climate"){
+                chart_acc.forceY([0, 120])
+                var precision = 1
+                var unit = "t CO<sub>2</sub>-eq."
+                var unit_axis = "t CO2-eq."
+            }
+
+            if (graph_name.split("_")[1] == "particulate"){
+                chart_acc.forceY([0, 0.3])
+                var precision = 2
+                var unit = "t PM<sub>10</sub>-eq."
+                var unit_axis = "t PM10-eq."
+            }
+
+            if (graph_name.split("_")[1] == "photochemical"){
+                chart_acc.forceY([0, 0.3])
+                var precision = 2
+                var unit = "t NMVOC-eq."
+                var unit_axis = "t NMVOC-eq."
+            }
+
+            if (graph_name.split("_")[1] == "fossil"){
+                chart_acc.forceY([0, 50])
+                var precision = 1
+                var unit = "GJ fossil"
+                var unit_axis = "GJ fossil"
+            }
+
 
             chart_acc.interactiveLayer.tooltip.contentGenerator(function (d) {
                   var html = "<p>" + d.value.toLocaleString()
@@ -1142,7 +1211,7 @@ function build_graph(datum, graph_name, year_0, annual_mileage){
 
                   d.series.forEach(function(elem){
                   html += "<li style='list-style-type: none;'><p style='color:"+elem.color+"'>"
-                            +elem.key+" " + i18n("scenario") + ": <b>" + elem.value.toFixed(1) + "</b> t CO<sub>2</sub>-eq.</p></li>";
+                            +elem.key+" " + i18n("scenario") + ": <b>" + elem.value.toFixed(precision) + "</b>" + unit + "</p></li>";
                   })
                   html += "</ul>"
                   return html;
@@ -1156,7 +1225,7 @@ function build_graph(datum, graph_name, year_0, annual_mileage){
                   ;
 
             chart_acc.yAxis     //Chart y-axis settings
-              .axisLabel("t CO2-eq.")
+              .axisLabel(unit)
               .tickFormat(d3.format('.r'))
               .showMaxMin(false);
 
@@ -1182,6 +1251,7 @@ function selection_update(){
 
 // Extract production and variable impacts from the data array
 function extract_car_impacts(data, pt, s, y){
+
     var list_pt = data["coords"]["powertrain"]["data"]
     var list_size = data["coords"]["size"]["data"]
     var list_year = data["coords"]["year"]["data"]
@@ -1201,13 +1271,23 @@ function extract_car_impacts(data, pt, s, y){
     var index_energy_chain = list_impact.indexOf("energy chain");
     var index_road = list_impact.indexOf("road");
 
-    arr = data["data"][index_current_car_size][index_current_car_pt][index_current_car_year]
+    response = {};
 
-    var current_car_prod_impact = (arr[index_glider] + arr[index_powertrain] + arr[index_energy_storage]) * 200000;
-    var current_car_km_impact = (arr[index_direct_exhaust] + arr[index_direct_non_exhaust]
-        + arr[index_maintenance] + arr[index_energy_chain] + arr[index_road]);
+    list_impact_cat = data["coords"]["impact_category"]["data"];
 
-    return [current_car_prod_impact, current_car_km_impact]
+    for (imp = 0; imp < list_impact_cat.length; imp ++){
+
+        arr = data["data"][imp][index_current_car_size][index_current_car_pt][index_current_car_year]
+
+        var current_car_prod_impact = (arr[index_glider] + arr[index_powertrain] + arr[index_energy_storage]) * 200000;
+        var current_car_km_impact = (arr[index_direct_exhaust] + arr[index_direct_non_exhaust]
+            + arr[index_maintenance] + arr[index_energy_chain] + arr[index_road]);
+
+        response[list_impact_cat[imp]] = [current_car_prod_impact, current_car_km_impact]
+
+    };
+
+    return response
 
 };
 

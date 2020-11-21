@@ -725,7 +725,7 @@ def inject_conf_var():
 @app.route("/language/<language>")
 def set_language(language=None):
     session["language"] = language
-    return redirect(session["url"])
+    return redirect(session.get("url", url_for('index')))
 
 @app.route("/language_result_display/<language>")
 def set_language_for_result_display(language):

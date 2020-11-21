@@ -521,29 +521,18 @@ class Calculation:
                             ]
                         )
 
-        arr = cm.array.sel(
-            powertrain=d[("Functional unit",)]["powertrain"],
-            size=d[("Functional unit",)]["size"],
-            year=d[("Functional unit",)]["year"],
-        )
-
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 95
         db.session.commit()
 
+        TtW_energy = self.energy.sel(
+            powertrain=d[("Functional unit",)]["powertrain"],
+            size=d[("Functional unit",)]["size"],
+            year=d[("Functional unit",)]["year"],
+            parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
+            .sum(dim=["parameter"]).cumsum().values.tolist()
 
-        TtW_energy = cm.ecm.motive_energy_per_km(
-            driving_mass=arr.sel(parameter="driving mass"),
-            rr_coef=arr.sel(parameter="rolling resistance coefficient"),
-            drag_coef=arr.sel(parameter="aerodynamic drag coefficient"),
-            frontal_area=arr.sel(parameter="frontal area"),
-            ttw_efficiency=arr.sel(parameter="TtW efficiency"),
-            recuperation_efficiency=arr.sel(parameter="recuperation efficiency"),
-            motor_power=arr.sel(parameter="electric power"),
-        ).reshape(len(powertrain) * len(size) * len(year), -1)
-
-        TtW_energy = TtW_energy.cumsum(axis=1).tolist()
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()

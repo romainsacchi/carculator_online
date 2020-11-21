@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-19 13:47+0100\n"
+"POT-Creation-Date: 2020-11-20 10:06+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -96,71 +96,72 @@ msgstr "Vous êtes maintenant enregistré en tant qu'utilisateur."
 msgid "Invalid username or password"
 msgstr "Nom d'utilisateur ou mot de passe invalide"
 
-#: app/routes.py:108 app/routes.py:237 app/routes.py:314
+#: app/routes.py:109 app/routes.py:238 app/routes.py:315
 msgid "Petrol"
 msgstr "Essence"
 
-#: app/routes.py:109 app/routes.py:237 app/routes.py:315
+#: app/routes.py:110 app/routes.py:238 app/routes.py:316
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:110 app/routes.py:237 app/routes.py:316
+#: app/routes.py:111 app/routes.py:238 app/routes.py:317
 msgid "CNG"
 msgstr "Gaz comprimé"
 
-#: app/routes.py:111 app/routes.py:237 app/routes.py:317
+#: app/routes.py:112 app/routes.py:238 app/routes.py:318
 msgid "Electric"
 msgstr "Electrique"
 
-#: app/routes.py:112 app/routes.py:318
+#: app/routes.py:113 app/routes.py:319
 msgid "Fuel cell"
 msgstr "Pile à combustible"
 
-#: app/routes.py:113 app/routes.py:319
+#: app/routes.py:114 app/routes.py:320
 msgid "Hybrid-petrol"
 msgstr "Hybride-essence"
 
-#: app/routes.py:114 app/routes.py:320
+#: app/routes.py:115 app/routes.py:321
 msgid "Hybrid-diesel"
 msgstr "Hybride-diesel"
 
-#: app/routes.py:115 app/routes.py:321
+#: app/routes.py:116 app/routes.py:322
 msgid "(Plugin) Hybrid-petrol"
 msgstr "Hybride-essence rechargeable"
 
-#: app/routes.py:116 app/routes.py:322
+#: app/routes.py:117 app/routes.py:323
 msgid "(Plugin) Hybrid-diesel"
 msgstr "Hybride-diesel rechargeable"
 
-#: app/routes.py:119 app/routes.py:325
+#: app/routes.py:120 app/routes.py:326 templates/new_car.html:230
 msgid "Minicompact"
 msgstr "Mini-citadine"
 
-#: app/routes.py:120 app/routes.py:326
+#: app/routes.py:121 app/routes.py:327 templates/new_car.html:234
 msgid "Subcompact"
 msgstr "Citadine"
 
-#: app/routes.py:121 app/routes.py:327
+#: app/routes.py:122 app/routes.py:328 templates/new_car.html:238
 msgid "Compact"
 msgstr "Berline compacte"
 
-#: app/routes.py:122 app/routes.py:238 app/routes.py:328
+#: app/routes.py:123 app/routes.py:239 app/routes.py:329
+#: templates/new_car.html:242
 msgid "Mid-size"
 msgstr "Berline familiale"
 
-#: app/routes.py:123 app/routes.py:329 templates/new_car.html:233
+#: app/routes.py:124 app/routes.py:330 templates/new_car.html:246
 msgid "Large"
 msgstr "Grande routière"
 
-#: app/routes.py:124 app/routes.py:330 templates/new_car.html:237
+#: app/routes.py:125 app/routes.py:331 templates/new_car.html:250
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:125 app/routes.py:331 templates/new_car.html:241
+#: app/routes.py:126 app/routes.py:332 templates/new_car.html:254
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:583
+#: app/routes.py:584
 msgid "Email sent!"
 msgstr "Email envoyé!"
 
@@ -217,23 +218,23 @@ msgstr ""
 "nouveau calcul."
 
 #: templates/404.html:136 templates/index.html:1175 templates/login.html:114
-#: templates/new_car.html:397 templates/param_table.html:116
+#: templates/new_car.html:410 templates/param_table.html:116
 #: templates/register.html:170 templates/result.html:399
-#: templates/start.html:624 templates/tool.html:979
+#: templates/start.html:625 templates/tool.html:979
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
 #: templates/404.html:136 templates/index.html:1175 templates/login.html:114
-#: templates/new_car.html:397 templates/param_table.html:116
+#: templates/new_car.html:410 templates/param_table.html:116
 #: templates/register.html:170 templates/result.html:399
-#: templates/start.html:624 templates/tool.html:979
+#: templates/start.html:625 templates/tool.html:979
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
 #: templates/404.html:137 templates/index.html:1176 templates/login.html:115
-#: templates/new_car.html:398 templates/param_table.html:117
+#: templates/new_car.html:411 templates/param_table.html:117
 #: templates/register.html:171 templates/result.html:400
-#: templates/start.html:625 templates/tool.html:980
+#: templates/start.html:626 templates/tool.html:980
 msgid "All rights reserved"
 msgstr "Tous droits réservés"
 
@@ -546,200 +547,205 @@ msgstr "Cliquez pour vous enregistrer!"
 msgid "Carculator : Should I keep my old cars?"
 msgstr "Carculator: dois-je garder mon ancien véhicule?"
 
-#: templates/new_car.html:77 templates/result.html:106 templates/tool.html:99
+#: templates/new_car.html:84 templates/result.html:106 templates/tool.html:99
 msgid "Modeling and assumptions"
 msgstr "Modélisation et hypothèses (en anglais)"
 
-#: templates/new_car.html:96
+#: templates/new_car.html:109
 msgid "PRINCIPLE"
 msgstr "PRINCIPE"
 
-#: templates/new_car.html:104
+#: templates/new_car.html:117
 msgid ""
 "The principle of this exercise is to calculate the difference in terms\n"
 "\t\t\t\t\t\t\t\t\t\tof greenhouse gas emissions (kg of CO2-eq.) between "
 "two scenarios."
 msgstr ""
-"Le principe de cet exercice est de calculer la différence en terme d'émissions de gaz à effet de serre "
-"(kg CO2-eq.) entre deux scénarios."
+"Le principe de cet exercice est de calculer la différence en terme "
+"d'émissions de gaz à effet de serre (kg CO2-eq.) entre deux scénarios."
 
-#: templates/new_car.html:108
+#: templates/new_car.html:121
 msgid ""
 "A first scenario (so-called \"late replacement\", refer to orange line in"
 " graph) where your current vehicle is used to the full extent of its "
 "useful lifetime, and then replaced by a (more modern) vehicle of your "
 "choice."
 msgstr ""
-"Un premier scénario (appelé 'remplacement tardif', voir la courbe orange dans le graphique à droite) représente "
-"l'utilisation de votre véhicule actuel le plus longtemps possible, avant d'être remplacé par un second véhicule "
-"plus moderne."
+"Un premier scénario (appelé 'remplacement tardif', voir la courbe orange "
+"dans le graphique à droite) représente l'utilisation de votre véhicule "
+"actuel le plus longtemps possible, avant d'être remplacé par un second "
+"véhicule plus moderne."
 
-#: templates/new_car.html:109
+#: templates/new_car.html:122
 msgid ""
 "A second scenario (so-called \"early replacement\", refer to green line "
 "in graph) where your current car is replaced before the end of its useful"
 " lifetime, and then replaced by a (more modern) vehicle of your choice."
 msgstr ""
-"Un second scénario (appelé 'remplacement anticipé', voir la courbe verte dans le graphique à droite) représente "
-"un remplacement de votre véhicule avant sa fin de vie naturelle, afin d'être remplacé par un second véhicule "
-"plus moderne."
+"Un second scénario (appelé 'remplacement anticipé', voir la courbe verte "
+"dans le graphique à droite) représente un remplacement de votre véhicule "
+"avant sa fin de vie naturelle, afin d'être remplacé par un second "
+"véhicule plus moderne."
 
-#: templates/new_car.html:112
+#: templates/new_car.html:125
 msgid ""
 "The difference between these two scenarios is an indicator of whether it "
 "is beneficial to renew your current vehicle,\n"
 "\t\t\t\t\t\t\t\t\tgiven the context of use you specify."
 msgstr ""
-"La différence entre ces deux scénarios, en terme d'émission de gaz à effet de serrre, "
-"est un indicateur pour savoir s'il est bénéfique de remplacer votre véhicule actuel afin sa fin de vie."
+"La différence entre ces deux scénarios, en terme d'émission de gaz à "
+"effet de serrre, est un indicateur pour savoir s'il est bénéfique de "
+"remplacer votre véhicule actuel afin sa fin de vie."
 
-#: templates/new_car.html:180
+#: templates/new_car.html:193
 msgid "CURRENT VEHICLE"
 msgstr "VEHICULE ACTUEL"
 
-#: templates/new_car.html:185
+#: templates/new_car.html:198
 msgid "We need to know a few details about your current car."
 msgstr "Vous devez renseigner quelques détails sur votre véhicule actuel."
 
-#: templates/new_car.html:189
+#: templates/new_car.html:202
 msgid "Age"
 msgstr "Âge"
 
-#: templates/new_car.html:190
+#: templates/new_car.html:203
 msgid "Engine type"
 msgstr "Type de moteur"
 
-#: templates/new_car.html:191 templates/tool.html:190
+#: templates/new_car.html:204 templates/tool.html:190
 msgid "Size"
 msgstr "Taille"
 
-#: templates/new_car.html:192
+#: templates/new_car.html:205
 msgid "Driving habits"
 msgstr "Type de conduite"
 
-#: templates/new_car.html:193
+#: templates/new_car.html:206
 msgid "Location"
 msgstr "Géographie"
 
-#: templates/new_car.html:197
+#: templates/new_car.html:210
 msgid "When has your car been produced?"
 msgstr "Quelle est l'année de production de votre véhicule?"
 
-#: templates/new_car.html:197
+#: templates/new_car.html:210
 msgid "This will also be interpreted as the first year of use."
-msgstr "Ceci sera également interprété comme l'année de première mise en circulation."
+msgstr ""
+"Ceci sera également interprété comme l'année de première mise en "
+"circulation."
 
-#: templates/new_car.html:201
+#: templates/new_car.html:214
 msgid "What is the engine type of your car?"
 msgstr "Quel est le type de moteur de votre véhicule?"
 
-#: templates/new_car.html:205
+#: templates/new_car.html:218
 msgid "What is the size class of your car?"
 msgstr "Quelle est la catégorie de taille de votre véhicule?"
 
-#: templates/new_car.html:213
+#: templates/new_car.html:226
 msgid "Size class"
 msgstr "Catégorie de taille"
 
-#: templates/new_car.html:214
+#: templates/new_car.html:227
 msgid "Model example"
 msgstr "Example de modèles"
 
-#: templates/new_car.html:217
-msgid "Mini"
-msgstr "Mini-citadine"
-
-#: templates/new_car.html:221
-msgid "Small"
-msgstr "Citadine"
-
-#: templates/new_car.html:225
-msgid "Lower medium"
-msgstr "Berline compacte"
-
-#: templates/new_car.html:229
-msgid "Medium"
-msgstr "Berline familiale"
-
-#: templates/new_car.html:248
+#: templates/new_car.html:261
 msgid "Do you mostly drive:"
 msgstr "Conduisez-vous la plupart du temps:"
 
-#: templates/new_car.html:249
+#: templates/new_car.html:262
 msgid "A mix of city, countryside and highway"
 msgstr "en ville, en campagne mais aussi sur autoroute"
 
-#: templates/new_car.html:250
+#: templates/new_car.html:263
 msgid "in cities"
 msgstr "en ville"
 
-#: templates/new_car.html:251
+#: templates/new_car.html:264
 msgid "in the countryside"
 msgstr "en campagne"
 
-#: templates/new_car.html:252
+#: templates/new_car.html:265
 msgid "on highways"
 msgstr "sur autoroute"
 
-#: templates/new_car.html:255
+#: templates/new_car.html:268
 msgid "Where are you located?"
 msgstr "Dans quel pays utilisez-vous votre véhicule?"
 
-#: templates/new_car.html:280
+#: templates/new_car.html:293
 msgid "FUTURE VEHICLE(S)"
 msgstr "VEHICULE(S) FUTUR(S)"
 
-#: templates/new_car.html:288
+#: templates/new_car.html:301
 msgid ""
 "Choose the vehicle(s) you are considering as your next purchase\n"
 "\t\t\t\t\t\t\t\t\tby dragging them from the left frame to the right "
 "frame. Once this si done, hit the button to the right."
 msgstr ""
-"Choisissez les véhicules que vous considérez pour votre prochain achat."
-"Déplacez-les de la liste de gauche vers la liste de droite."
-"Ensuite, cliquez sur le bouton à droite."
+"Choisissez les véhicules que vous considérez pour votre prochain achat"
+".Déplacez-les de la liste de gauche vers la liste de droite.Ensuite, "
+"cliquez sur le bouton à droite."
 
-#: templates/new_car.html:294 templates/tool.html:95
+#: templates/new_car.html:307 templates/tool.html:95
 msgid "Calculate"
 msgstr "Calculer"
 
-#: templates/new_car.html:335 templates/result.html:142
+#: templates/new_car.html:314 templates/tool.html:217 templates/tool.html:241
+#: templates/tool.html:263
+msgid "Choice"
+msgstr "Choix"
+
+#: templates/new_car.html:315 templates/tool.html:218 templates/tool.html:242
+#: templates/tool.html:264
+msgid "Selection"
+msgstr "Sélection"
+
+#: templates/new_car.html:348 templates/result.html:142
 msgid "RESULTS"
 msgstr "RESULTATS"
 
-#: templates/new_car.html:341
+#: templates/new_car.html:354
 msgid "Please use the handles below to appreciate their effect on the results."
-msgstr "Utilisez les boutons glisseurs en dessous afin d'apprécier leur influence sur les résultats."
+msgstr ""
+"Utilisez les boutons glisseurs en dessous afin d'apprécier leur influence"
+" sur les résultats."
 
-#: templates/new_car.html:346
+#: templates/new_car.html:359
 msgid "Annual mileage"
 msgstr "Kilométrage annuel"
 
-#: templates/new_car.html:349
+#: templates/new_car.html:362
 msgid "Vehicle lifetime"
 msgstr "Fin de vie du premier véhicule"
 
-#: templates/new_car.html:352
+#: templates/new_car.html:365
 msgid "Time of replacement"
 msgstr "Remplacement anticipé du premier véhicule"
 
-#: templates/new_car.html:358
+#: templates/new_car.html:371
 msgid "How many kilometers do you drive in a year?"
 msgstr "Combien de kilomètres conduisez-vous par an?"
 
-#: templates/new_car.html:362
+#: templates/new_car.html:375
 msgid ""
 "What do you think is the maximum mileage your car can drive before being "
 "permanently discarded?"
-msgstr "Quel est le kilométrage maximal que votre véhicule actuel peut atteindre avant d'étre mis hors-service?"
+msgstr ""
+"Quel est le kilométrage maximal que votre véhicule actuel peut atteindre "
+"avant d'étre mis hors-service?"
 
-#: templates/new_car.html:363
+#: templates/new_car.html:376
 msgid ""
 "This value will be used as a reference scenario where the vehicle is "
 "replaced the latest possible."
-msgstr "Ce kiométrage est utilisé pour le scénario de référence 'remplacement tardif'."
+msgstr ""
+"Ce kiométrage est utilisé pour le scénario de référence 'remplacement "
+"tardif'."
 
-#: templates/new_car.html:366
+#: templates/new_car.html:379
 msgid "When do you wish to replace your vehicle?"
 msgstr "A quel kilométrage souhaitez-vous remplacer votre véhicule actuel?"
 
@@ -1008,7 +1014,7 @@ msgstr "Remplacement de voiture"
 msgid "Passenger cars comparison"
 msgstr "Comparaison de voitures"
 
-#: templates/start.html:108 templates/start.html:362
+#: templates/start.html:108 templates/start.html:363
 msgid "Intermodal comparison"
 msgstr "Comparaison intermodale"
 
@@ -1016,23 +1022,23 @@ msgstr "Comparaison intermodale"
 msgid "A new car?"
 msgstr "Une nouvelle voiture?"
 
-#: templates/start.html:119 templates/start.html:373
+#: templates/start.html:119 templates/start.html:374
 msgid "Is it time to change my vehicle?"
 msgstr "Est-il temps de changer ma voiture?"
 
-#: templates/start.html:120 templates/start.html:374
+#: templates/start.html:120 templates/start.html:375
 msgid "Does it make sense in terms of environmental impacts?"
 msgstr "Cela a t-il du sens vis-à-vis de l'environnement?"
 
-#: templates/start.html:121 templates/start.html:375
+#: templates/start.html:121 templates/start.html:376
 msgid "Create a custom analysis for your case."
 msgstr "Créez une analyse spécifique à votre cas."
 
-#: templates/start.html:158 templates/start.html:412
+#: templates/start.html:158 templates/start.html:413
 msgid "Simple"
 msgstr ""
 
-#: templates/start.html:159 templates/start.html:413
+#: templates/start.html:159 templates/start.html:414
 msgid ""
 "Directly see the results of a comparison between a gasoline, a diesel, a "
 "gaz and\n"
@@ -1041,11 +1047,11 @@ msgstr ""
 "Directement accéder aux résultats de la comparaison entre un véhicule "
 "fonctionnant à l'essence, au diesel, au gaz et à l'électricité en "
 
-#: templates/start.html:197 templates/start.html:451
+#: templates/start.html:197 templates/start.html:452
 msgid "Intermediate"
 msgstr "Intermédiaire"
 
-#: templates/start.html:198 templates/start.html:452
+#: templates/start.html:198 templates/start.html:453
 msgid ""
 "Set the parameters for a comparison between a gasoline, a diesel, a gas "
 "and\n"
@@ -1054,16 +1060,16 @@ msgstr ""
 "Voir les paramètres pour une analyse comparative entre un véhicule "
 "fonctionnant à l'essence, au diesel, au gaz et à l'électricité en "
 
-#: templates/start.html:199 templates/start.html:238 templates/start.html:453
-#: templates/start.html:492
+#: templates/start.html:199 templates/start.html:238 templates/start.html:454
+#: templates/start.html:493
 msgid "(requires login)"
 msgstr "(requiert la connexion de l'utilisateur)"
 
-#: templates/start.html:237 templates/start.html:491
+#: templates/start.html:237 templates/start.html:492
 msgid "Advanced"
 msgstr "Avancé"
 
-#: templates/start.html:238 templates/start.html:492
+#: templates/start.html:238 templates/start.html:493
 msgid "Build your own comparative scenario."
 msgstr "Faites votre propre analyse comparative"
 
@@ -1075,27 +1081,27 @@ msgstr "Voiture, bus, moto?"
 msgid "Compare different means of transport for passengers."
 msgstr "Comparez différents types de transport public."
 
-#: templates/start.html:288 templates/start.html:538
+#: templates/start.html:288 templates/start.html:289 templates/start.html:539
 msgid "Old better than new?"
 msgstr "Le neuf préférable à l'ancien?"
 
-#: templates/start.html:295 templates/start.html:545
+#: templates/start.html:296 templates/start.html:546
 msgid "Yes, keep it simple!"
 msgstr "Oui, montrez-moi les résultats!"
 
-#: templates/start.html:301 templates/start.html:551
+#: templates/start.html:302 templates/start.html:552
 msgid "I'd like to see what's behind."
 msgstr "J'aimerai voir ce qu'il y a derrière."
 
-#: templates/start.html:307 templates/start.html:557
+#: templates/start.html:308 templates/start.html:558
 msgid "Let's build it from scratch."
 msgstr "Partons depuis le début."
 
-#: templates/start.html:313 templates/start.html:563
+#: templates/start.html:314 templates/start.html:564
 msgid "The best way to go."
 msgstr "La meilleur façon d'y aller."
 
-#: templates/start.html:323 templates/start.html:573
+#: templates/start.html:324 templates/start.html:574
 msgid ""
 "Set up an analysis to answer your specific question: should you change "
 "your current vehicle for a new one?"
@@ -1103,7 +1109,7 @@ msgstr ""
 "Créez une analyse spécifique à votre cas: devriez-vous changer votre "
 "véhicule actuel?"
 
-#: templates/start.html:324 templates/start.html:574
+#: templates/start.html:325 templates/start.html:575
 msgid ""
 "In this analysis, you will be asked for details on your current vehicle "
 "as well as your driving habits to find out whether changing your current "
@@ -1112,13 +1118,13 @@ msgstr ""
 "votre véhicule actuel ainsi que sur vos habitudes de conduite afin de "
 "savoir si changer votre véhicule "
 
-#: templates/start.html:325 templates/start.html:575
+#: templates/start.html:326 templates/start.html:576
 msgid "leads to environmental benefits, and if so, under which conditions."
 msgstr ""
 "est vraiment bénéfique pour l'environnement, et si oui, à quelles "
 "conditions."
 
-#: templates/start.html:332 templates/start.html:582
+#: templates/start.html:333 templates/start.html:583
 msgid ""
 "This 'Simple' access to the model gives the environmental impacts and "
 "life cycle costs of modern, mid-size diesel,\n"
@@ -1131,7 +1137,7 @@ msgstr ""
 "véhicule essence, diesel, gaz et électrique, en 2020, pour le pays où "
 "vous vous trouvez."
 
-#: templates/start.html:339 templates/start.html:589
+#: templates/start.html:340 templates/start.html:590
 msgid ""
 "With this version, the same results as with the 'Simple' access are "
 "given, but you have access and can modify all the vehicle parameters.\n"
@@ -1145,27 +1151,27 @@ msgstr ""
 "paramètres des véhicules comparés. De plus, il est possible de définir le"
 " mix électrique pour charger le véhicule électrique, etc."
 
-#: templates/start.html:348 templates/start.html:598
+#: templates/start.html:349 templates/start.html:599
 msgid "This access offers the model full flexibility."
 msgstr "Ce mode d'accès offre à l'utilisaeur toute la flexibilité du modèle."
 
-#: templates/start.html:360
+#: templates/start.html:361
 msgid "Truck replacement"
 msgstr ""
 
-#: templates/start.html:361
+#: templates/start.html:362
 msgid "Medium and heavy duty trucks comparison"
 msgstr ""
 
-#: templates/start.html:372
+#: templates/start.html:373
 msgid "A new truck?"
 msgstr ""
 
-#: templates/start.html:529
+#: templates/start.html:530
 msgid "Truck, train, plane?"
 msgstr ""
 
-#: templates/start.html:530
+#: templates/start.html:531
 msgid "Compare different means of transport for freight."
 msgstr ""
 
@@ -1257,14 +1263,6 @@ msgstr ""
 "Différentes catégories de taille sont disponibles, pour n'importe quel "
 "type de propulsion. Pour référence, une VW Golf appartient à la catégorie"
 " 'Moyenne inférieure'."
-
-#: templates/tool.html:217 templates/tool.html:241 templates/tool.html:263
-msgid "Choice"
-msgstr "Choix"
-
-#: templates/tool.html:218 templates/tool.html:242 templates/tool.html:264
-msgid "Selection"
-msgstr "Sélection"
 
 #: templates/tool.html:304
 msgid "USE"
@@ -2261,4 +2259,16 @@ msgstr "nombre d'itérations"
 
 #~ msgid "Is it time to change your car?"
 #~ msgstr "Est-il temps de changer ma voiture?"
+
+#~ msgid "Mini"
+#~ msgstr "Mini-citadine"
+
+#~ msgid "Small"
+#~ msgstr "Citadine"
+
+#~ msgid "Lower medium"
+#~ msgstr "Berline compacte"
+
+#~ msgid "Medium"
+#~ msgstr "Berline familiale"
 
