@@ -526,7 +526,7 @@ class Calculation:
         task.progress = 95
         db.session.commit()
 
-        TtW_energy = self.energy.sel(
+        TtW_energy = cm.energy.sel(
             powertrain=d[("Functional unit",)]["powertrain"],
             size=d[("Functional unit",)]["size"],
             year=d[("Functional unit",)]["year"],
