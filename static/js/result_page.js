@@ -399,7 +399,7 @@ function generate_line_chart_TtW_energy(data){
 
                 var name = i18n(pt_list[pt]) + " - " + i18n(size_list[s]) + " - " + i18n(year_list[y]);
                 var arr_data = data["data"][s][pt][y]
-                datum.push({value: arr_data, key: name, area:false})
+                datum.push({values: arr_data, key: name, area:false})
             }
         }
     }
