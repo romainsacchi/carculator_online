@@ -440,7 +440,7 @@ function generate_scatter_chart(data, qty, unit){
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
-            var arr_names = key.split(",");
+            var arr_names = key.split(", ");
             var pt = i18n(arr_names[0]);
             var y = arr_names[1];
             var size = i18n(arr_names[2]);
@@ -502,7 +502,7 @@ function generate_chart_accumulated_impacts(data, impact){
             for (var i = 0; i < 100; i++){
                 arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
             }
-            var name = data[x][2] + ", " + data[x][3] + ", " + data[x][1]
+            var name = i18n(data[x][2]) + " - " + i18n(data[x][1]) + " - " + data[x][3]
             datum.push({values:arr_data, key:name})
         };
 
