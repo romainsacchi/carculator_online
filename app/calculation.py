@@ -530,6 +530,7 @@ class Calculation:
             powertrain=d[("Functional unit",)]["powertrain"],
             size=d[("Functional unit",)]["size"],
             year=d[("Functional unit",)]["year"],
+            value=0,
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
             .sum(dim=["parameter"]).cumsum().values.tolist()
 
