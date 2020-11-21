@@ -526,16 +526,21 @@ class Calculation:
         task.progress = 95
         db.session.commit()
 
-        TtW_energy = cm.energy.sel(
+        df = cm.energy.sel(
             powertrain=d[("Functional unit",)]["powertrain"],
             size=d[("Functional unit",)]["size"],
             year=d[("Functional unit",)]["year"],
             value=0,
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
-            .sum(dim="parameter").cumsum().to_dict()
+            .sum(dim="parameter").cumsum().to_dataframe("val")
 
-        print(TtW_energy["coords"]["powertrain"]["data"])
-        print(TtW_energy["coords"]["size"]["data"])
+        d = df["val"].unstack([0, 1, 2]).to_dict()
+
+        TtW_energy = []
+        for key in d:
+            name = self.d_pt_all[key[1]] + " - " + self.d_size_all[key[0]] + " - " + str(key[2])
+            data = {"values": [{"x": k, "y": v} for k, v in d[key].items()], "key": name}
+            TtW_energy.append(data)
 
 
         # Update task progress to db

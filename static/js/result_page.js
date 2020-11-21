@@ -387,29 +387,7 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
-    var pt_list = data["coords"]["powertrain"]["data"].reverse()
-    var size_list = data["coords"]["size"]["data"].reverse()
-    var year_list = data["coords"]["year"]["data"].reverse()
-    var second_list = data["coords"]["second"]["data"].reverse()
 
-    var datum = []
-
-    for (var s=0; s < size_list.length; s++){
-        for (var pt=0; pt < pt_list.length; pt++){
-            for (var y=0; y < year_list.length; y++){
-
-                var name = i18n(pt_list[pt]) + " - " + i18n(size_list[s]) + " - " + i18n(year_list[y]);
-                var arr_data = data["data"][s][pt][y]
-
-                var arr = []
-                for (var sec=0; sec < second_list.length; sec++){
-                    arr.push({'x': sec, 'y': arr_data[sec]})
-                };
-
-                datum.push({values: arr, key: name, area:false})
-            }
-        }
-    }
 
     console.log(datum);
 
