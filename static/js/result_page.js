@@ -387,10 +387,6 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
-
-
-    console.log(datum);
-
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
@@ -412,7 +408,7 @@ function generate_line_chart_TtW_energy(data){
           .showMaxMin(false);
 
       d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
-          .datum(datum)         //Populate the <svg> element with chart data...
+          .datum(data)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
       d3.selectAll('.nv-axis .tick line').attr('display','none')
