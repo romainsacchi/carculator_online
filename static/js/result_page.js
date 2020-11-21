@@ -390,6 +390,7 @@ function generate_line_chart_TtW_energy(data){
     var pt_list = data["coords"]["powertrain"]["data"]
     var size_list = data["coords"]["size"]["data"]
     var year_list = data["coords"]["year"]["data"]
+    var second_list = data["coords"]["second"]["data"]
 
     var datum = []
 
@@ -399,7 +400,13 @@ function generate_line_chart_TtW_energy(data){
 
                 var name = i18n(pt_list[pt]) + " - " + i18n(size_list[s]) + " - " + i18n(year_list[y]);
                 var arr_data = data["data"][s][pt][y]
-                datum.push({values: arr_data, key: name, area:false})
+
+                var arr = []
+                for (var sec=0; sec < second_list.length; sec++){
+                    arr.push({'x': sec, 'y': arr_data[sec]})
+                };
+
+                datum.push({values: arr, key: name, area:false})
             }
         }
     }
