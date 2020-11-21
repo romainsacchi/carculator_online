@@ -395,6 +395,9 @@ function generate_line_chart_TtW_energy(data){
         if (Number(data[v]["values"].slice(-1)["x"]) > max_x_val){ max_x_val = Number(data[v]["values"].slice(-1)["x"])}
     };
 
+    console.log(max_x_val)
+    console.log(max_y_val)
+
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
