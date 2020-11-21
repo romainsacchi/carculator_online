@@ -534,6 +534,9 @@ class Calculation:
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
             .sum(dim="parameter").cumsum().to_dict()
 
+        print(TtW_energy["coords"]["powertrain"]["data"])
+        print(TtW_energy["coords"]["size"]["data"])
+
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
