@@ -532,7 +532,7 @@ class Calculation:
             year=d[("Functional unit",)]["year"],
             value=0,
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
-            .sum(dim=["parameter"]).cumsum().to_dict()
+            .sum(dim="parameter").cumsum().to_dict()
 
 
         # Update task progress to db

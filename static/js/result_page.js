@@ -387,10 +387,10 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
-    var pt_list = data["coords"]["powertrain"]["data"]
-    var size_list = data["coords"]["size"]["data"]
-    var year_list = data["coords"]["year"]["data"]
-    var second_list = data["coords"]["second"]["data"]
+    var pt_list = data["coords"]["powertrain"]["data"].reverse()
+    var size_list = data["coords"]["size"]["data"].reverse()
+    var year_list = data["coords"]["year"]["data"].reverse()
+    var second_list = data["coords"]["second"]["data"].reverse()
 
     var datum = []
 
