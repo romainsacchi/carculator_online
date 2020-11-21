@@ -369,6 +369,26 @@ class Calculation:
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
         cm = CarModel(arr, cycle=d[("Driving cycle",)])
         cm.set_all()
+
+        cumsum = cm.energy.sel(
+            powertrain=d[("Functional unit",)]["powertrain"],
+            size=d[("Functional unit",)]["size"],
+            year=d[("Functional unit",)]["year"],
+            value=0,
+            parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
+            .sum(dim="parameter").cumsum()
+
+        TtW_energy = []
+
+        for pt in cumsum.coords["powertrain"].values.tolist():
+            for s in cumsum.coords["size"].values.tolist():
+                for y in cumsum.coords["year"].values.tolist():
+                    ttw_dic = {"values": [], "key": pt + " - " + s + " - " + str(y)}
+                    ttw_dic["values"] = [{"x": str(i), "y": str(j)}
+                                         for i, j in enumerate(cumsum.sel(powertrain=pt, size=s, year=y).values)]
+                    TtW_energy.append(ttw_dic)
+
+                    
         cost = cm.calculate_cost_impacts(scope=d[("Functional unit",)])
         data_cost = cost.values
         year = cost.coords["year"].values.tolist()
@@ -526,24 +546,7 @@ class Calculation:
         task.progress = 95
         db.session.commit()
 
-        cumsum = cm.energy.sel(
-            powertrain=d[("Functional unit",)]["powertrain"],
-            size=d[("Functional unit",)]["size"],
-            year=d[("Functional unit",)]["year"],
-            value=0,
-            parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
-            .sum(dim="parameter").cumsum()
 
-
-        TtW_energy = []
-
-        for pt in cumsum.coords["powertrain"].values.tolist():
-            for s in cumsum.coords["size"].values.tolist():
-                for y in cumsum.coords["year"].values.tolist():
-                    ttw_dic = {"values": [], "key": pt + " - " + s + " - " + str(y)}
-                    ttw_dic["values"] = [{"x": str(i), "y": str(j)}
-                                            for i, j in enumerate(cumsum.sel(powertrain=pt, size=s, year=y).values)]
-                    TtW_energy.append(ttw_dic)
 
 
         # Update task progress to db
