@@ -393,11 +393,11 @@ function generate_line_chart_TtW_energy(data){
 
     console.log(data[0]["values"])
     console.log(data[0]["values"].slice(-1))
-    console.log(data[0]["values"].slice(-1)["y"])
+    console.log(data[0]["values"].slice(-1)[0]["y"])
 
     for (var v=0; v<data.length; v++){
-        if (parseFloat(data[v]["values"].slice(-1)["y"]) > max_y_val){ max_y_val = Math.round(parseFloat(data[v]["values"].slice(-1)["y"]))}
-        if (parseFloat(data[v]["values"].slice(-1)["x"]) > max_x_val){ max_x_val = Math.round(parseFloat(data[v]["values"].slice(-1)["x"]))}
+        if (parseFloat(data[v]["values"].slice(-1)[0]["y"]) > max_y_val){ max_y_val = Math.round(parseFloat(data[v]["values"].slice(-1)["y"]))}
+        if (parseFloat(data[v]["values"].slice(-1)[0]["x"]) > max_x_val){ max_x_val = Math.round(parseFloat(data[v]["values"].slice(-1)["x"]))}
     };
 
     console.log(max_x_val)
