@@ -539,7 +539,7 @@ class Calculation:
         TtW_energy = []
         for key in d:
             name = self.d_pt_all[key[1]] + " - " + self.d_size_all[key[0]] + " - " + str(key[2])
-            data = {"values": [{"x": k, "y": v} for k, v in d[key].items()], "key": name}
+            data = {"values": [{"x": str(k), "y": str(v)} for k, v in d[key].items()], "key": name}
             TtW_energy.append(data)
 
 
