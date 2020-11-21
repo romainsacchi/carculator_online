@@ -534,6 +534,9 @@ class Calculation:
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
             .sum(dim="parameter").cumsum()
 
+        print(cumsum.sel(powertrain="BEV", year=2020, size="Medium", second=1800))
+        print(cumsum.sel(powertrain="ICEV-p", year=2020, size="Medium", second=1800))
+
         TtW_energy = []
 
         for pt in cumsum.coords["powertrain"].values.tolist():
