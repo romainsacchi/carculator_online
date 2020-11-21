@@ -540,7 +540,7 @@ class Calculation:
             for s in cumsum.coords["size"].values:
                 for y in cumsum.coords["year"].values:
                     ttw_dic = {"values": [], "key": pt + " - " + s + " - " + str(y)}
-                    ttw_dic["values"] = [{"x": i, "y": j}
+                    ttw_dic["values"] = [{"x": str(i), "y": str(j)}
                                             for i, j in enumerate(cumsum.sel(powertrain=pt, size=s, year=y).values)]
                     TtW_energy.append(ttw_dic)
 
