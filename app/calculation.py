@@ -378,10 +378,6 @@ class Calculation:
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
             .cumsum(dim="second").sum(dim="parameter")
 
-        print(cm.array.coords)
-        print(cm.energy.coords)
-        print(cumsum.coords)
-
         TtW_energy = []
 
         for pt in cumsum.coords["powertrain"].values.tolist():

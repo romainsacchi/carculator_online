@@ -387,6 +387,14 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
+    var max_y_val = 0
+    var max_x_val = 0
+
+    for (var v=0; v<data.length; v++){
+        if (Number(data[v]["values"].slice(-1)["y"]) > max_y_val){ max_y_val = Number(data[v]["values"].slice(-1)["y"])}
+        if (Number(data[v]["values"].slice(-1)["x"]) > max_x_val){ max_x_val = Number(data[v]["values"].slice(-1)["x"])}
+    };
+
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
                     .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
@@ -395,7 +403,8 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .forceY([0]);
+                    .forceY([0, max_y_val * 1.1])
+                    .forceX([0, max_x_val * 1.1]);
 
       var dc_str = i18n("driving_cycle");
       chart.xAxis     //Chart x-axis settings
