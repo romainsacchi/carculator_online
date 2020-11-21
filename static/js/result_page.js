@@ -386,20 +386,23 @@ function generate_benchmark(data, cat){
 };
 
 function generate_line_chart_TtW_energy(data){
-    var datum = [];
-    var max_val = 0;
-    for (var x=0; x < data.length; x++){
-        var arr_data = [];
-        for (var i = 0; i < data[x][1].length; i++){
-            arr_data.push({"x":i, "y": Number(data[x][1][i]).toFixed(0)})
 
-            if (Number(data[x][1][i]) > max_val){
-                max_val = Number(data[x][1][i]);
-            };
+    var pt_list = data["coords"]["powertrain"]["data"]
+    var size_list = data["coords"]["size"]["data"]
+    var year_list = data["coords"]["year"]["data"]
+
+    var datum = []
+
+    for (var s=0; s < size_list.length; s++){
+        for (var pt=0; pt < pt_list.length; pt++){
+            for (var y=0; y < year_list.length; y++){
+
+                var name = i18n(pt_list[pt]) + " - " + i18n(size_list[s]) + " - " + i18n(year_list[y]);
+                var arr_data = data["data"][s][pt][y]
+                datum.push({value: arr_data, key: name, area:false})
+            }
         }
-        var name = i18n(data[x][0][1]) + " - " + i18n(data[x][0][0]) + " - " + data[x][0][2]
-        datum.push({values:arr_data, key:name, area:false})
-    };
+    }
 
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
@@ -409,7 +412,7 @@ function generate_line_chart_TtW_energy(data){
                     .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                     .showYAxis(true)        //Show the y-axis
                     .showXAxis(true)        //Show the x-axis
-                    .forceY([0, max_val * 1.1]);
+                    .forceY([0]);
 
       var dc_str = i18n("driving_cycle");
       chart.xAxis     //Chart x-axis settings
