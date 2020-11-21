@@ -534,12 +534,12 @@ class Calculation:
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
             .sum(dim="parameter").cumsum().to_dataframe("val")
 
-        d = df["val"].unstack([0, 1, 2]).to_dict()
+        dic_ttw = df["val"].unstack([0, 1, 2]).to_dict()
 
         TtW_energy = []
-        for key in d:
+        for key in dic_ttw:
             name = key[1] + " - " + key[0] + " - " + str(key[2])
-            data = {"values": [{"x": str(k), "y": str(v)} for k, v in d[key].items()], "key": name}
+            data = {"values": [{"x": str(k), "y": str(v)} for k, v in dic_ttw[key].items()], "key": name}
             TtW_energy.append(data)
 
 
