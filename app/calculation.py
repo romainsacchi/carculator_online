@@ -542,9 +542,9 @@ class Calculation:
 
         list_names = [
             [s, p, y]
-            for s in size
-            for p in powertrain
-            for y in year
+            for s in d[("Functional unit",)]["size"]
+            for p in d[("Functional unit",)]["powertrain"]
+            for y in d[("Functional unit",)]["year"]
         ]
 
         TtW_list = list(zip(list_names, TtW_energy))
