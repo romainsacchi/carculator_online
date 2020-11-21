@@ -378,6 +378,9 @@ class Calculation:
             parameter=["motive energy", "auxiliary energy", "recuperated energy"]) \
             .sum(dim="parameter").cumsum()
 
+        print(cm.coords)
+        print(cumsum.coords)
+
         TtW_energy = []
 
         for pt in cumsum.coords["powertrain"].values.tolist():
@@ -388,7 +391,7 @@ class Calculation:
                                          for i, j in enumerate(cumsum.sel(powertrain=pt, size=s, year=y).values)]
                     TtW_energy.append(ttw_dic)
 
-                    
+
         cost = cm.calculate_cost_impacts(scope=d[("Functional unit",)])
         data_cost = cost.values
         year = cost.coords["year"].values.tolist()
