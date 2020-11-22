@@ -789,7 +789,7 @@ var max_range = slider_lifetime.noUiSlider.get();
 max_range = max_range.replace(' km','');
 max_range = Number(max_range.replace(',',''));
 
-  noUiSlider.create(slider_replacement, {
+noUiSlider.create(slider_replacement, {
      start: [max_range*.6],
     range: {
         'min': [100000],
@@ -806,8 +806,11 @@ max_range = Number(max_range.replace(',',''));
 
 // When updating the lifetime slider, its value must become the max range
 // of the replacement time slider
-// Also, whn updated, trigger graphs generation
-slider_lifetime.noUiSlider.on('end', function (values, handle) {
+// Also, it defines the minimum range for the annual mileage
+// so that the manafacture year of the second vehicle does
+// not go above 2040
+// Also, when updated, trigger graphs generation
+slider_lifetime.noUiSlider.on('set', function (values, handle) {
 
     max_range = slider_lifetime.noUiSlider.get();
     max_range = max_range.replace(' km','');
@@ -820,19 +823,31 @@ slider_lifetime.noUiSlider.on('end', function (values, handle) {
         }
     });
 
+    var prod_year_first_car = $("#production_year_current").val()
+    var min_mileage = Math.round((max_range / (2040 - prod_year_first_car)) / 1000) * 1000
+
+    slider_annual_mileage.noUiSlider.updateOptions({
+        range: {
+            'min': min_mileage,
+            'max': [40000]
+        }
+    });
+
     generate_graph(data_array);
     }
 );
 
 // Trigger graph update when updating replacement time slider
-slider_replacement.noUiSlider.on('end', function (values, handle) {
+slider_replacement.noUiSlider.on('set', function (values, handle) {
     generate_graph(data_array);
     }
 );
 
 // Trigger graph update when updating annual mileage slider
-slider_annual_mileage.noUiSlider.on('end', function (values, handle) {
+slider_annual_mileage.noUiSlider.on('set', function (values, handle) {
     generate_graph(data_array);
+
+
     }
 );
 
@@ -943,14 +958,14 @@ function get_results_replacement_car(){
 
 
                     for (var i = 0; i < items.length; i+=3) {
-                    $('#' + impact_name + '_results_table tr:last').after('<tr><td id="label_graph_' + impact_name+ "_" + i + '"></td><td id="label_graph_' + impact_name+ "_" + Number(i + 1) +
-                         '"></td><td id="label_graph_' + impact_name+ "_" + Number(i + 2) + '"></td></tr>'
-                        + '<tr><td><div><svg  id="graph_' + impact_name+ "_" + i
-                        + '" style="; height: 400px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div>'+
-                        '<td><div><svg  id="graph_' + impact_name+ "_" + Number(i + 1)
-                        + '" style="height: 400px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div>' +
-                        '<td><div><svg  id="graph_' + impact_name+ "_" + Number(i + 2)
-                        + '" style="height: 400px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div></td></tr>');
+                    $('#' + impact_name + '_results_table tr:last').after('<tr><td style="width:33.33%" id="label_graph_' + impact_name+ "_" + i + '"></td><td style="width:33.33%" id="label_graph_' + impact_name+ "_" + Number(i + 1) +
+                         '"></td><td style="width:33.33%" id="label_graph_' + impact_name+ "_" + Number(i + 2) + '"></td></tr>'
+                        + '<tr><td style="width:33.33%"><div><svg  id="graph_' + impact_name+ "_" + i
+                        + '" style="height: 350px; width: 570px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div>'+
+                        '<td style="width:33.33%"><div><svg  id="graph_' + impact_name+ "_" + Number(i + 1)
+                        + '" style="height: 350px; width: 570px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div>' +
+                        '<td style="width:33.33%"><div><svg  id="graph_' + impact_name+ "_" + Number(i + 2)
+                        + '" style="height: 350px; width: 570px; font-size: 16px; color: grey; margin-bottom: 20px; fill: white;"></div></td></tr>');
                 };
 
                 }
@@ -965,6 +980,15 @@ function get_results_replacement_car(){
 
     // Change the background color of the "Calculate" button
      document.getElementById("calculateButton").style.backgroundColor='transparent';
+
+     // display climate change results table and hide others
+     $("#climate_results_table").show();
+    $("#particulate_results_table").hide();
+    $("#photochemical_results_table").hide();
+    $("#fossil_results_table").hide();
+    document.getElementById("button_cc").style.backgroundColor='lightgreen';
+
+
   };
 
 function generate_graph(data){
@@ -1102,6 +1126,54 @@ function generate_graph(data){
     }
 };
 
+
+function switch_results_table(id){
+    if (id=="button_cc"){
+        $("#climate_results_table").show();
+        $("#particulate_results_table").hide();
+        $("#photochemical_results_table").hide();
+        $("#fossil_results_table").hide();
+        $("#button_cc").css({ "background-color": 'lightgreen'});
+        $("#button_pm").css({ "background-color": 'transparent'});
+        $("#button_smog").css({ "background-color": 'transparent'});
+        $("#button_fossil").css({ "background-color": 'transparent'});
+
+
+    };
+    if (id=="button_pm"){
+        $("#climate_results_table").hide();
+        $("#particulate_results_table").show();
+        $("#photochemical_results_table").hide();
+        $("#fossil_results_table").hide();
+        $("#button_cc").css({ "background-color": 'transparent'});
+        $("#button_pm").css({ "background-color": 'lightgreen'});
+        $("#button_smog").css({ "background-color": 'transparent'});
+        $("#button_fossil").css({ "background-color": 'transparent'});
+    };
+    if (id=="button_smog"){
+        $("#climate_results_table").hide();
+        $("#particulate_results_table").hide();
+        $("#photochemical_results_table").show();
+        $("#fossil_results_table").hide();
+        $("#button_cc").css({ "background-color": 'transparent'});
+        $("#button_pm").css({ "background-color": 'transparent'});
+        $("#button_smog").css({ "background-color": 'lightgreen'});
+        $("#button_fossil").css({ "background-color": 'transparent'});
+    };
+    if (id=="button_fossil"){
+        $("#climate_results_table").hide();
+        $("#particulate_results_table").hide();
+        $("#photochemical_results_table").hide();
+        $("#fossil_results_table").show();
+        $("#button_cc").css({ "background-color": 'transparent'});
+        $("#button_pm").css({ "background-color": 'transparent'});
+        $("#button_smog").css({ "background-color": 'transparent'});
+        $("#button_fossil").css({ "background-color": 'lightgreen'});
+    };
+
+};
+
+
 function update_label(datum, label_name, i){
 
 
@@ -1167,7 +1239,7 @@ function build_graph(datum, graph_name, year_0, annual_mileage){
     nv.addGraph(function() {
 
             var chart_acc = nv.models.lineChart()
-                            .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
+                            .margin({left:60, bottom:40, right:60})  //Adjust chart margins to give the x-axis some breathing room.
                             .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                             .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                             .showYAxis(true)        //Show the y-axis
@@ -1225,7 +1297,7 @@ function build_graph(datum, graph_name, year_0, annual_mileage){
                   ;
 
             chart_acc.yAxis     //Chart y-axis settings
-              .axisLabel(unit)
+              .axisLabel(unit_axis)
               .tickFormat(d3.format('.r'))
               .showMaxMin(false);
 
@@ -1235,9 +1307,9 @@ function build_graph(datum, graph_name, year_0, annual_mileage){
 
             d3.selectAll('.nv-axis .tick line').attr('fill','gray')
             d3.selectAll('.nvd3 g.nv-groups g path.nv-line').attr('stroke-width','5px')
-            d3.select(graph_name).style('fill', "white");
+            d3.select(graph_name).style({"fill": "white", "width": "570px"});
             //Update the chart when window resizes.
-            nv.utils.windowResize(function() { chart_acc.update() });
+            nv.utils.windowResize(function() {chart_acc.update() });
             return chart_acc;
             });
 

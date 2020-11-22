@@ -351,9 +351,34 @@
 					<div class="mu-about-area"
 						 style="text-align:center;padding-top:20px;padding-bottom:20px;left:0;right:0;height:100%;">
 
-						<p style="color:white;text-align:left;">{{_('Please use the handles below to appreciate their effect on the results.')}}</p>
-						<br>
+
 						<table class="table" style="color:white;" id="params_table">
+							<tr>
+								<td colspan="3">
+									<h3 style="color:white;text-align:left;">1. {{_('Choose an emission type to look at.')}}</h3>
+
+									<button class="online-button" id="button_cc"
+									style="width:auto;margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;"
+									onclick="switch_results_table(this.id)">{{_("climate change")}}</button>
+									<button class="online-button" id="button_pm"
+									style="width:auto;margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;"
+									onclick="switch_results_table(this.id)">{{_("particulate matter formation")}}</button>
+									<button class="online-button" id="button_smog"
+									style="width:auto;margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;"
+									onclick="switch_results_table(this.id)">{{_("photochemical oxidant formation")}}</button>
+									<button class="online-button" id="button_fossil"
+									style="width:auto;margin-left:5px;margin-right:5px;margin-top:5px;margin-bottom:5px;background-color:transparent;color:white;border:1px solid white;"
+									onclick="switch_results_table(this.id)">{{_("fossil depletion")}}</button>
+
+								</td>
+
+							</tr>
+							<tr>
+								<td colspan="3">
+									<h3 style="color:white;text-align:left;margin-top:5px;margin-bottom:5px;">2. {{_('Please use the handles below to appreciate their effect on the results.')}}</h3>
+								</td>
+							</tr>
+
 							<tr>
 								<th width="33.33%">
 									{{_('Annual mileage')}}
@@ -385,12 +410,10 @@
 								<td style="border:0;"><div style="margin-top:50px;margin-right:15px;margin-bottom:50px;" id="lifetime-slider"></div></td>
 								<td style="border:0;"><div style="margin-top:50px;margin-right:15px;margin-bottom:50px;" id="replacement-slider"></div></td>
 							</tr>
-							<tr>
 
-							</tr>
 						</table>
 						<br>
-						<table class="table" style="color:white;display:none;" id="climate_results_table">
+						<table class="table" style="color:white;" id="climate_results_table">
 							<tr>
 								<th colspan="3">
 									{{_('climate change')}}
@@ -398,21 +421,21 @@
 							</tr>
 						</table>
 
-						<table class="table" style="color:white;display:none;" id="particulate_results_table">
+						<table class="table" style="color:white;" id="particulate_results_table">
 							<tr>
 								<th colspan="3">
 									{{_('particulate matter formation')}}
 								</th>
 							</tr>
 						</table>
-						<table class="table" style="color:white;display:none;" id="photochemical_results_table">
+						<table class="table" style="color:white;" id="photochemical_results_table">
 							<tr>
 								<th colspan="3">
 									{{_('photochemical oxidant formation')}}
 								</th>
 							</tr>
 						</table>
-						<table class="table" style="color:white;display:none;" id="fossil_results_table">
+						<table class="table" style="color:white;" id="fossil_results_table">
 							<tr>
 								<th colspan="3">
 									{{_('fossil depletion')}}

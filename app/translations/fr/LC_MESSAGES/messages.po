@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-20 10:06+0100\n"
+"POT-Creation-Date: 2020-11-22 18:53+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -218,21 +218,21 @@ msgstr ""
 "nouveau calcul."
 
 #: templates/404.html:136 templates/index.html:1175 templates/login.html:114
-#: templates/new_car.html:410 templates/param_table.html:116
+#: templates/new_car.html:467 templates/param_table.html:116
 #: templates/register.html:170 templates/result.html:399
 #: templates/start.html:625 templates/tool.html:979
 msgid "Copyright"
 msgstr "Droits d'auteur attribués à l'"
 
 #: templates/404.html:136 templates/index.html:1175 templates/login.html:114
-#: templates/new_car.html:410 templates/param_table.html:116
+#: templates/new_car.html:467 templates/param_table.html:116
 #: templates/register.html:170 templates/result.html:399
 #: templates/start.html:625 templates/tool.html:979
 msgid "Paul Scherrer Institut"
 msgstr "Institut Paul Scherrer"
 
 #: templates/404.html:137 templates/index.html:1176 templates/login.html:115
-#: templates/new_car.html:411 templates/param_table.html:117
+#: templates/new_car.html:468 templates/param_table.html:117
 #: templates/register.html:171 templates/result.html:400
 #: templates/start.html:626 templates/tool.html:980
 msgid "All rights reserved"
@@ -707,29 +707,49 @@ msgstr "Sélection"
 msgid "RESULTS"
 msgstr "RESULTATS"
 
-#: templates/new_car.html:354
+#: templates/new_car.html:358
+msgid "Choose an emission type to look at."
+msgstr "Choisissez un type d'émission à considérer."
+
+#: templates/new_car.html:362 templates/new_car.html:419
+msgid "climate change"
+msgstr "Changement climatique"
+
+#: templates/new_car.html:365 templates/new_car.html:427
+msgid "particulate matter formation"
+msgstr "Formation de particules fines"
+
+#: templates/new_car.html:368 templates/new_car.html:434
+msgid "photochemical oxidant formation"
+msgstr "Formation de brouillard de pollution"
+
+#: templates/new_car.html:371 templates/new_car.html:441
+msgid "fossil depletion"
+msgstr "Epuisement des ressources d'énergie fossile"
+
+#: templates/new_car.html:378
 msgid "Please use the handles below to appreciate their effect on the results."
 msgstr ""
 "Utilisez les boutons glisseurs en dessous afin d'apprécier leur influence"
 " sur les résultats."
 
-#: templates/new_car.html:359
+#: templates/new_car.html:384
 msgid "Annual mileage"
 msgstr "Kilométrage annuel"
 
-#: templates/new_car.html:362
+#: templates/new_car.html:387
 msgid "Vehicle lifetime"
 msgstr "Fin de vie du premier véhicule"
 
-#: templates/new_car.html:365
+#: templates/new_car.html:390
 msgid "Time of replacement"
 msgstr "Remplacement anticipé du premier véhicule"
 
-#: templates/new_car.html:371
+#: templates/new_car.html:396
 msgid "How many kilometers do you drive in a year?"
 msgstr "Combien de kilomètres conduisez-vous par an?"
 
-#: templates/new_car.html:375
+#: templates/new_car.html:400
 msgid ""
 "What do you think is the maximum mileage your car can drive before being "
 "permanently discarded?"
@@ -737,7 +757,7 @@ msgstr ""
 "Quel est le kilométrage maximal que votre véhicule actuel peut atteindre "
 "avant d'étre mis hors-service?"
 
-#: templates/new_car.html:376
+#: templates/new_car.html:401
 msgid ""
 "This value will be used as a reference scenario where the vehicle is "
 "replaced the latest possible."
@@ -745,7 +765,7 @@ msgstr ""
 "Ce kiométrage est utilisé pour le scénario de référence 'remplacement "
 "tardif'."
 
-#: templates/new_car.html:379
+#: templates/new_car.html:404
 msgid "When do you wish to replace your vehicle?"
 msgstr "A quel kilométrage souhaitez-vous remplacer votre véhicule actuel?"
 
