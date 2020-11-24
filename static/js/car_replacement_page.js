@@ -834,7 +834,7 @@ slider_lifetime.noUiSlider.on('set', function (values, handle) {
     });
 
     generate_graph(data_array);
-    
+
     }
 );
 
