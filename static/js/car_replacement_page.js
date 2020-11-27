@@ -656,6 +656,13 @@
 
 })();
 
+
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip({
+    html: true
+  });
+});
+
 //  Load the JSON File with translations
 $.when($.ajax({
             url: "/get_language",
@@ -1187,7 +1194,7 @@ function update_label(datum, label_name, i){
         var str_1 = i18n("clearly_not_1")
         var str_2 = i18n("clearly_not_2")
 
-        $(label_name).append("<p>" + str_1 + Math.round((ratio - 1) * 100) + str_2 + "</p>")
+        $(label_name).append("<p style='background-color:rgb(255, 99, 71, .2);'>" + str_1 + Math.round((ratio - 1) * 100) + str_2 + "</p>")
     }
 
     if ((ratio > 1.1) && (ratio <= 1.2)) {
@@ -1195,7 +1202,7 @@ function update_label(datum, label_name, i){
         var str_1 = i18n("probably_not_1")
         var str_2 = i18n("probably_not_2")
 
-        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
+        $(label_name).append("<p style='background-color:rgb(255, 189, 71, .2);'>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
 
     }
 
@@ -1204,7 +1211,7 @@ function update_label(datum, label_name, i){
         var str_1 = i18n("hard_to_say_1_neg")
         var str_2 = i18n("hard_to_say_2_neg")
 
-        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+        $(label_name).append("<p style='background-color:rgb(255, 255, 71, .2);'>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
 
     }
 
@@ -1213,7 +1220,7 @@ function update_label(datum, label_name, i){
         var str_1 = i18n("hard_to_say_1_pos")
         var str_2 = i18n("hard_to_say_2_pos")
 
-        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
+        $(label_name).append("<p style='background-color:rgb(255, 255, 71, .2);'>"+str_1+ Math.round((ratio - 1) * 100) + str_2 + "</p>")
 
     }
 
@@ -1222,7 +1229,7 @@ function update_label(datum, label_name, i){
         var str_1 = i18n("probably_1")
         var str_2 = i18n("probably_2")
 
-        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+        $(label_name).append("<p style='background-color:rgb(0, 205, 233, .2);'>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
 
     }
 
@@ -1230,7 +1237,7 @@ function update_label(datum, label_name, i){
         var str_1 = i18n("clearly_1")
         var str_2 = i18n("clearly_2")
 
-        $(label_name).append("<p>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
+        $(label_name).append("<p style='background-color:rgb(0, 205, 93, .2);'>"+str_1+ Math.round((ratio - 1) * -1 * 100) + str_2 + "</p>")
     }
 
 };
