@@ -387,6 +387,7 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
+
     var max_y_val = 0
     var max_x_val = 0
 
@@ -817,6 +818,115 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
 
 };
 
+$('input[name="method_radar_graph"]').click(function() {
+        console.log("clicked");
+        generate_radar_chart(data[1]);
+    });
+
+function generate_radar_chart(data){
+    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var margin = {top: 100, right: 120, bottom: 130, left: 120},
+        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var list_cars = [];
+    var list_methods = [];
+    var chart_data = [];
+
+    var checked_methods = $('input[name="method_radar_graph"]:checked');
+
+    for (meth=0; meth < checked_methods.length; meth++){
+            list_methods.push(
+                checked_methods[meth]["defaultValue"]
+            )
+    }
+
+    for (var l=0; l < data.length; l++){
+        var car = data[l][1] + " - " + data[l][2] + " - " + data[l][3]
+        var method = data[l][0]
+
+        if (!list_cars.includes(car)){list_cars.push(car)};
+    }
+
+    // populate legend
+    $("#radarChart_legend").html('');
+    var color_choice = ["#EDC951","#CC333F","#00A0B0", "#7FD61C", "#1C94D6", "#7A1CD6",
+                        "#D11CD6", "#D61C98"]
+
+    var str = "<ul style='padding-left:10px;'>"
+    for (c=0;c<list_cars.length;c++){
+        var pt = i18n(list_cars[c].split(" - ")[1])
+        var s = i18n(list_cars[c].split(" - ")[0])
+        var y = list_cars[c].split(" - ")[2]
+        var car = pt + " - " + s + " - " + y
+        str += "<li style='font-size:14px;color:" + color_choice[c] + "'>" + car + "</li>"
+    }
+    str += "</ul>"
+    $("#radarChart_legend").append(str);
+
+
+    var max_val = {};
+
+    for (var imp=0; imp < list_methods.length; imp++){
+        max_val[list_methods[imp]] = 0;
+        for (var l=0; l < data.length; l++){
+            if (data[l][0] == list_methods[imp]){
+                if (data[l][6] > max_val[list_methods[imp]]){
+                    max_val[list_methods[imp]] = data[l][6]
+                }
+            }
+        };
+    };
+
+    for (var car=0; car < list_cars.length; car++){
+        var list_data_sub = [];
+        for (var imp=0; imp < list_methods.length; imp++){
+            for (var l=0; l < data.length; l++){
+                var c = data[l][1] + " - " + data[l][2] + " - " + data[l][3]
+                if ((data[l][0] == list_methods[imp])&(c == list_cars[car])){
+                    if (max_val[list_methods[imp]] != 0){
+                        list_data_sub.push({axis:i18n(list_methods[imp]), value: data[l][6] / max_val[list_methods[imp]]})
+                    }
+                    break
+                }
+            };
+        };
+        chart_data.push(list_data_sub)
+    };
+
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+
+
+
+
+
+    var color = d3.scale.ordinal()
+        .range(color_choice);
+
+    var radarChartOptions = {
+      w: width,
+      h: height,
+      margin: margin,
+      maxValue: 0.5,
+      levels: 5,
+      roundStrokes: true,
+      color: color
+    };
+    //Call function to draw the Radar chart
+    RadarChart(".radarChart", chart_data, radarChartOptions);
+
+};
 
 
 

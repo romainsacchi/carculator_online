@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-22 18:53+0100\n"
+"POT-Creation-Date: 2020-11-27 16:42+0100\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -133,32 +133,32 @@ msgstr "(Plugin) Hybrid-Benzin"
 msgid "(Plugin) Hybrid-diesel"
 msgstr "(Plugin) Hybrid-Diesel"
 
-#: app/routes.py:120 app/routes.py:326 templates/new_car.html:230
+#: app/routes.py:120 app/routes.py:326 templates/new_car.html:232
 msgid "Minicompact"
 msgstr "Kleinstwagen"
 
-#: app/routes.py:121 app/routes.py:327 templates/new_car.html:234
+#: app/routes.py:121 app/routes.py:327 templates/new_car.html:238
 msgid "Subcompact"
 msgstr "Kleinwagen"
 
-#: app/routes.py:122 app/routes.py:328 templates/new_car.html:238
+#: app/routes.py:122 app/routes.py:328 templates/new_car.html:242
 msgid "Compact"
 msgstr "Kompaktklasse"
 
 #: app/routes.py:123 app/routes.py:239 app/routes.py:329
-#: templates/new_car.html:242
+#: templates/new_car.html:246
 msgid "Mid-size"
 msgstr "Mittelklasse"
 
-#: app/routes.py:124 app/routes.py:330 templates/new_car.html:246
+#: app/routes.py:124 app/routes.py:330 templates/new_car.html:250
 msgid "Large"
 msgstr "Oberklasse"
 
-#: app/routes.py:125 app/routes.py:331 templates/new_car.html:250
+#: app/routes.py:125 app/routes.py:331 templates/new_car.html:254
 msgid "SUV"
 msgstr "Geländewagen"
 
-#: app/routes.py:126 app/routes.py:332 templates/new_car.html:254
+#: app/routes.py:126 app/routes.py:332 templates/new_car.html:258
 msgid "Van"
 msgstr "Van"
 
@@ -221,22 +221,22 @@ msgstr ""
 "Berechnung durchführen können."
 
 #: templates/404.html:136 templates/index.html:1175 templates/login.html:114
-#: templates/new_car.html:467 templates/param_table.html:116
-#: templates/register.html:170 templates/result.html:399
+#: templates/new_car.html:471 templates/param_table.html:116
+#: templates/register.html:170 templates/result.html:448
 #: templates/start.html:625 templates/tool.html:979
 msgid "Copyright"
 msgstr "Copyright"
 
 #: templates/404.html:136 templates/index.html:1175 templates/login.html:114
-#: templates/new_car.html:467 templates/param_table.html:116
-#: templates/register.html:170 templates/result.html:399
+#: templates/new_car.html:471 templates/param_table.html:116
+#: templates/register.html:170 templates/result.html:448
 #: templates/start.html:625 templates/tool.html:979
 msgid "Paul Scherrer Institut"
 msgstr "Paul Scherrer Institut"
 
 #: templates/404.html:137 templates/index.html:1176 templates/login.html:115
-#: templates/new_car.html:468 templates/param_table.html:117
-#: templates/register.html:171 templates/result.html:400
+#: templates/new_car.html:472 templates/param_table.html:117
+#: templates/register.html:171 templates/result.html:449
 #: templates/start.html:626 templates/tool.html:980
 msgid "All rights reserved"
 msgstr "Alle Rechte vorbehalten"
@@ -549,15 +549,15 @@ msgstr "Hier klicken zur Registrierung"
 msgid "Carculator : Should I keep my old cars?"
 msgstr "Carculator : Soll ich meine alten Autos behalten?"
 
-#: templates/new_car.html:84 templates/result.html:106 templates/tool.html:99
+#: templates/new_car.html:86 templates/result.html:106 templates/tool.html:99
 msgid "Modeling and assumptions"
 msgstr "Modellierung und Annahmen (auf Englisch)"
 
-#: templates/new_car.html:109
+#: templates/new_car.html:111
 msgid "PRINCIPLE"
 msgstr "GRUNDSATZ"
 
-#: templates/new_car.html:117
+#: templates/new_car.html:119
 msgid ""
 "The principle of this exercise is to calculate the difference in terms\n"
 "\t\t\t\t\t\t\t\t\t\tof greenhouse gas emissions (kg of CO2-eq.) between "
@@ -566,7 +566,7 @@ msgstr ""
 "Das Prinzip dieser Übung besteht darin, die Differenz in Bezug auf die "
 "Treibhausgasemissionen (kg CO2-Äq.) zwischen zwei Szenarien zu berechnen."
 
-#: templates/new_car.html:121
+#: templates/new_car.html:123
 msgid ""
 "A first scenario (so-called \"late replacement\", refer to orange line in"
 " graph) where your current vehicle is used to the full extent of its "
@@ -578,7 +578,7 @@ msgstr ""
 "genutzt wird Nutzungsdauer, und dann durch ein (moderneres) Fahrzeug "
 "Ihrer Wahl ersetzt."
 
-#: templates/new_car.html:122
+#: templates/new_car.html:124
 msgid ""
 "A second scenario (so-called \"early replacement\", refer to green line "
 "in graph) where your current car is replaced before the end of its useful"
@@ -589,7 +589,7 @@ msgstr ""
 "Nutzungsdauer ersetzt wird und dann durch ein (moderneres) Fahrzeug Ihrer"
 " Wahl ersetzt wird."
 
-#: templates/new_car.html:125
+#: templates/new_car.html:127
 msgid ""
 "The difference between these two scenarios is an indicator of whether it "
 "is beneficial to renew your current vehicle,\n"
@@ -599,87 +599,87 @@ msgstr ""
 " ob es vorteilhaft ist, Ihr aktuelles Fahrzeug unter Berücksichtigung des"
 " von Ihnen angegebenen Nutzungskontextes zu erneuern."
 
-#: templates/new_car.html:193
+#: templates/new_car.html:195
 msgid "CURRENT VEHICLE"
 msgstr "AKTUELLES FAHRZEUG"
 
-#: templates/new_car.html:198
+#: templates/new_car.html:200
 msgid "We need to know a few details about your current car."
 msgstr "Wir müssen ein paar Details über Ihr aktuelles Fahrzeug wissen."
 
-#: templates/new_car.html:202
+#: templates/new_car.html:204
 msgid "Age"
 msgstr "Alter"
 
-#: templates/new_car.html:203
+#: templates/new_car.html:205
 msgid "Engine type"
 msgstr "Motortyp"
 
-#: templates/new_car.html:204 templates/tool.html:190
+#: templates/new_car.html:206 templates/tool.html:190
 msgid "Size"
 msgstr "Grösse/Kategorie"
 
-#: templates/new_car.html:205
+#: templates/new_car.html:207
 msgid "Driving habits"
 msgstr "Fahrgewohnheiten"
 
-#: templates/new_car.html:206
+#: templates/new_car.html:208
 msgid "Location"
 msgstr "Geographie"
 
-#: templates/new_car.html:210
+#: templates/new_car.html:212
 msgid "When has your car been produced?"
 msgstr "Wann ist Ihr Auto produziert worden?"
 
-#: templates/new_car.html:210
+#: templates/new_car.html:212
 msgid "This will also be interpreted as the first year of use."
 msgstr "Dies wird auch als das erste Jahr der Anwendung interpretiert."
 
-#: templates/new_car.html:214
+#: templates/new_car.html:216
 msgid "What is the engine type of your car?"
 msgstr "Welchen Motortyp hat Ihr Auto?"
 
-#: templates/new_car.html:218
+#: templates/new_car.html:220
 msgid "What is the size class of your car?"
 msgstr "Welche ist die Größenklasse Ihres Autos?"
 
-#: templates/new_car.html:226
+#: templates/new_car.html:228
 msgid "Size class"
 msgstr "Größenklasse"
 
-#: templates/new_car.html:227
+#: templates/new_car.html:229
 msgid "Model example"
 msgstr "Modell-Beispiele"
 
-#: templates/new_car.html:261
+#: templates/new_car.html:265
 msgid "Do you mostly drive:"
 msgstr "Fahren Sie hauptsächlich Auto:"
 
-#: templates/new_car.html:262
+#: templates/new_car.html:266
 msgid "A mix of city, countryside and highway"
 msgstr "Eine Mischung aus Stadt, Land und Autobahn"
 
-#: templates/new_car.html:263
+#: templates/new_car.html:267
 msgid "in cities"
 msgstr "in Städten"
 
-#: templates/new_car.html:264
+#: templates/new_car.html:268
 msgid "in the countryside"
 msgstr "auf dem Land"
 
-#: templates/new_car.html:265
+#: templates/new_car.html:269
 msgid "on highways"
 msgstr "auf Autobahnen"
 
-#: templates/new_car.html:268
+#: templates/new_car.html:272
 msgid "Where are you located?"
 msgstr "Wo befinden Sie sich?"
 
-#: templates/new_car.html:293
+#: templates/new_car.html:297
 msgid "FUTURE VEHICLE(S)"
 msgstr "ZWEITES FAHRZEUG"
 
-#: templates/new_car.html:301
+#: templates/new_car.html:305
 msgid ""
 "Choose the vehicle(s) you are considering as your next purchase\n"
 "\t\t\t\t\t\t\t\t\tby dragging them from the left frame to the right "
@@ -689,67 +689,71 @@ msgstr ""
 "Betracht ziehen, indem Sie es/sie vom linken Rahmen auf den rechten "
 "Rahmen ziehen. Sobald dies geschehen ist, drücken Sie den Knopf rechts."
 
-#: templates/new_car.html:307 templates/tool.html:95
+#: templates/new_car.html:311 templates/tool.html:95
 msgid "Calculate"
 msgstr "Berechnen"
 
-#: templates/new_car.html:314 templates/tool.html:217 templates/tool.html:241
+#: templates/new_car.html:318 templates/tool.html:217 templates/tool.html:241
 #: templates/tool.html:263
 msgid "Choice"
 msgstr "Auswahlmöglichkeit"
 
-#: templates/new_car.html:315 templates/tool.html:218 templates/tool.html:242
+#: templates/new_car.html:319 templates/tool.html:218 templates/tool.html:242
 #: templates/tool.html:264
 msgid "Selection"
 msgstr "Auswahl"
 
-#: templates/new_car.html:348 templates/result.html:142
+#: templates/new_car.html:352 templates/result.html:142
 msgid "RESULTS"
 msgstr "ERGEBNISSE"
 
-#: templates/new_car.html:358
+#: templates/new_car.html:362
 msgid "Choose an emission type to look at."
 msgstr "Wählen Sie eine Emissionsart, die Sie sich ansehen möchten."
 
-#: templates/new_car.html:362 templates/new_car.html:419
+#: templates/new_car.html:366 templates/new_car.html:423
+#: templates/result.html:377
 msgid "climate change"
 msgstr "Klimawandel"
 
-#: templates/new_car.html:365 templates/new_car.html:427
+#: templates/new_car.html:369 templates/new_car.html:431
+#: templates/result.html:378
 msgid "particulate matter formation"
 msgstr "Bildung von Feinstaub"
 
-#: templates/new_car.html:368 templates/new_car.html:434
+#: templates/new_car.html:372 templates/new_car.html:438
+#: templates/result.html:401
 msgid "photochemical oxidant formation"
 msgstr "Smogbildung"
 
-#: templates/new_car.html:371 templates/new_car.html:441
+#: templates/new_car.html:375 templates/new_car.html:445
+#: templates/result.html:405
 msgid "fossil depletion"
 msgstr "Erschöpfung fossiler Energieressourcen"
 
-#: templates/new_car.html:378
+#: templates/new_car.html:382
 msgid "Please use the handles below to appreciate their effect on the results."
 msgstr ""
 "Bitte benutzen Sie die untenstehenden Schaltflächen, um ihre Wirkung auf "
 "die Ergebnisse zu beurteilen."
 
-#: templates/new_car.html:384
+#: templates/new_car.html:388
 msgid "Annual mileage"
 msgstr "Jährliche Fahrleistung"
 
-#: templates/new_car.html:387
+#: templates/new_car.html:391
 msgid "Vehicle lifetime"
 msgstr "Aktuelle Fahrzeug-Lebensdauer"
 
-#: templates/new_car.html:390
+#: templates/new_car.html:394
 msgid "Time of replacement"
 msgstr "Ersatz des derzeitigen Fahrzeugs"
 
-#: templates/new_car.html:396
+#: templates/new_car.html:400
 msgid "How many kilometers do you drive in a year?"
 msgstr "Wie viele Kilometer fahren Sie im Jahr?"
 
-#: templates/new_car.html:400
+#: templates/new_car.html:404
 msgid ""
 "What do you think is the maximum mileage your car can drive before being "
 "permanently discarded?"
@@ -757,7 +761,7 @@ msgstr ""
 "Wie hoch ist Ihrer Meinung nach die maximale Kilometerleistung, die Ihr "
 "Auto fahren kann, bevor es endgültig ausrangiert wird?"
 
-#: templates/new_car.html:401
+#: templates/new_car.html:405
 msgid ""
 "This value will be used as a reference scenario where the vehicle is "
 "replaced the latest possible."
@@ -765,7 +769,7 @@ msgstr ""
 "Dieser Wert wird als Referenzszenario verwendet, bei dem das aktuelle "
 "Fahrzeug so spät wie möglich ersetzt wird."
 
-#: templates/new_car.html:404
+#: templates/new_car.html:408
 msgid "When do you wish to replace your vehicle?"
 msgstr "Wann möchten Sie Ihr jetziges Fahrzeug ersetzen?"
 
@@ -1002,7 +1006,11 @@ msgstr ""
 msgid "Accumulated impacts over lifetime"
 msgstr "Kumulierte Auswirkungen über die Lebensdauer"
 
-#: templates/result.html:361
+#: templates/result.html:359
+msgid "Radar graph of midpoint indicators"
+msgstr "Radargrafik für Mittelpunktsindikatoren"
+
+#: templates/result.html:364
 msgid ""
 "The graph below illustrates the accumulated impacts of the vehicles along"
 " their use phase.\n"
@@ -1022,6 +1030,78 @@ msgstr ""
 "des Stroms) und direkten Abgas- und Nichtabgasemissionen verbunden sind. "
 "Sie können aus dem Dropdown-Menü unten eine Wirkungskategorie auswählen, "
 "die berücksichtigt werden soll."
+
+#: templates/result.html:374
+msgid "Check the midpoint indicators you would like to include."
+msgstr "Wählen Sie die Mittelpunktsindikatoren aus, die Sie einbeziehen möchten."
+
+#: templates/result.html:379
+msgid "ownership cost"
+msgstr "Kilometerkosten"
+
+#: templates/result.html:383
+msgid "freshwater ecotoxicity"
+msgstr "Toxizität in Gewässern ausserhalb des Meeres"
+
+#: templates/result.html:384
+msgid "human toxicity"
+msgstr "Humantoxizität"
+
+#: templates/result.html:385
+msgid "terrestrial ecotoxicity"
+msgstr "Terrestrische Toxizität"
+
+#: templates/result.html:388
+msgid "marine eutrophication"
+msgstr "Eutrophierung von Gewässern im Meer"
+
+#: templates/result.html:389
+msgid "terrestrial acidification"
+msgstr "Terrestrische Versauerung"
+
+#: templates/result.html:390
+msgid "freshwater eutrophication"
+msgstr "Eutrophierung von Gewässern ausserhalb des Meeres"
+
+#: templates/result.html:393
+msgid "natural land transformation"
+msgstr "Natürliche Landumwandlung"
+
+#: templates/result.html:394
+msgid "agricultural land occupation"
+msgstr "Ackerlandnutzung"
+
+#: templates/result.html:395
+msgid "urban land occupation"
+msgstr "Flächennutzung in städtischen Gebieten"
+
+#: templates/result.html:399
+msgid "ionising radiation"
+msgstr "Ionisierende Strahlung"
+
+#: templates/result.html:400
+msgid "ozone depletion"
+msgstr "Zerstörung der Ozonschicht"
+
+#: templates/result.html:404
+msgid "water depletion"
+msgstr "Erschöpfung der Süsswasservorräte"
+
+#: templates/result.html:406
+msgid "metal depletion"
+msgstr "Erschöpfung der Metallressourcen"
+
+#: templates/result.html:410
+msgid "noise emissions"
+msgstr "Geräuschemission"
+
+#: templates/result.html:411
+msgid "renewable primary energy"
+msgstr "Primärenergie, erneuerbar"
+
+#: templates/result.html:412
+msgid "non-renewable primary energy"
+msgstr "Primärenergie, nicht erneuerbar"
 
 #: templates/start.html:106
 msgid "Passenger car replacement"

@@ -355,6 +355,9 @@
 										<th class="col-md-6">
 											<h3>{{ _('Accumulated impacts over lifetime') }}</h3>
 										</th>
+										<th class="col-md-6">
+											<h3>{{ _('Radar graph of midpoint indicators') }}</h3>
+										</th>
 									</tr>
 									<tr>
 										<td>
@@ -364,19 +367,66 @@
 												(or generation of the electricity) and direct exhaust and non-exhaust emissions. You may select an impact
 												category to consider from the dropdown menu below.") }}</p>
 
-
-
 											<select id='select_impact' style='color:grey;'>
 											</select>
 										</td>
+										<td>
+											<p>{{_('Check the midpoint indicators you would like to include.')}}</p>
+											<table style="font-size:10px;">
+												<tr>
+													<td width="33.33%"><input type="checkbox" name="method_radar_graph" value="climate change" style="margin-right:10px;" checked>{{_('climate change')}}</td>
+													<td width="33.33%"><input type="checkbox" name="method_radar_graph" value="particulate matter formation" style="margin-right:10px;" checked>{{_('particulate matter formation')}}</td>
+													<td width="33.33%"><input type="checkbox" name="method_radar_graph" value="ownership cost" style="margin-right:10px;" checked>{{_('ownership cost')}}</td>
+
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="method_radar_graph" value="freshwater ecotoxicity" style="margin-right:10px;">{{_('freshwater ecotoxicity')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="human toxicity" style="margin-right:10px;" checked>{{_('human toxicity')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="terrestrial ecotoxicity" style="margin-right:10px;">{{_('terrestrial ecotoxicity')}}</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="method_radar_graph" value="marine eutrophication" style="margin-right:10px;">{{_('marine eutrophication')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="terrestrial acidification" style="margin-right:10px;">{{_('terrestrial acidification')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="freshwater eutrophication" style="margin-right:10px;">{{_('freshwater eutrophication')}}</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="method_radar_graph" value="natural land transformation" style="margin-right:10px;">{{_('natural land transformation')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="agricultural land occupation" style="margin-right:10px;">{{_('agricultural land occupation')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="urban land occupation" style="margin-right:10px;">{{_('urban land occupation')}}</td>
+
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="method_radar_graph" value="ionising radiation" style="margin-right:10px;">{{_('ionising radiation')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="ozone depletion" style="margin-right:10px;">{{_('ozone depletion')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="photochemical oxidant formation" style="margin-right:10px;" checked>{{_('photochemical oxidant formation')}}</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="method_radar_graph" value="water depletion" style="margin-right:10px;">{{_('water depletion')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="fossil depletion" style="margin-right:10px;">{{_('fossil depletion')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="metal depletion" style="margin-right:10px;" checked>{{_('metal depletion')}}</td>
+
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="method_radar_graph" value="noise emissions" style="margin-right:10px;" checked>{{_('noise emissions')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="renewable primary energy" style="margin-right:10px;">{{_('renewable primary energy')}}</td>
+													<td><input type="checkbox" name="method_radar_graph" value="non-renewable primary energy" style="margin-right:10px;" checked>{{_('non-renewable primary energy')}}</td>
+												</tr>
+												<tr>
+													</tr>
+											</table>
+										</td>
 									</tr>
 									<tr>
-										<td>
+										<td style="border:0;">
 											<div>
 												<svg id="chart-accumulated"
 											   		style="width:40vw;height:30vw; font-size:16px; color:grey;margin-bottom:20px;">
 												</svg>
 											</div>
+										</td>
+										<td  style="border:0;">
+											<div id="radarChart_legend"></div>
+											<div class="radarChart" style="margin: 0 auto;color:white;"></div>
 										</td>
 									</tr>
 								</tbody>
@@ -428,6 +478,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.js"></script>
 	<script src="https://www.papaparse.com/resources/js/papaparse.js"></script>
+	<script type="text/javascript" src="/static/js/radarChart.js"></script>
 
 	<script>
 
@@ -504,6 +555,7 @@
 				generate_benchmark(data[2], "climate change");
 
 				// Generate line chart TtW energy
+				console.log(data);
 				generate_line_chart_TtW_energy(data[3]);
 
 				// Generate scatter chart
@@ -512,6 +564,9 @@
 				// Generate chart accumulated impacts
 				$("#select_impact").val('climate change')
 				generate_chart_accumulated_impacts(data[5], "climate change");
+
+				// Generate radar chart
+				generate_radar_chart(data[1]);
             });
 
 
