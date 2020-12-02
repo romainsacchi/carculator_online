@@ -547,7 +547,7 @@ msgstr "Hier klicken zur Registrierung"
 
 #: templates/new_car.html:17
 msgid "Carculator : Should I keep my old cars?"
-msgstr "Carculator : Soll ich meine alten Autos behalten?"
+msgstr "Carculator : Soll ich mein altes Autos behalten, oder mit ein neues kaufen? Was ist besser für die Umwelt??"
 
 #: templates/new_car.html:86 templates/result.html:106 templates/tool.html:99
 msgid "Modeling and assumptions"
@@ -563,8 +563,8 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\tof greenhouse gas emissions (kg of CO2-eq.) between "
 "two scenarios."
 msgstr ""
-"Das Prinzip dieser Übung besteht darin, die Differenz in Bezug auf die "
-"Treibhausgasemissionen (kg CO2-Äq.) zwischen zwei Szenarien zu berechnen."
+"Das Prinzip dieser Übung besteht darin, die Differenz zwischen zwei Szenarien in Bezug auf die "
+"Treibhausgasemissionen (kg CO2-Äq.) zu berechnen."
 
 #: templates/new_car.html:123
 msgid ""
@@ -575,8 +575,8 @@ msgid ""
 msgstr ""
 "Ein erstes Szenario (sogenannter 'später Ersatz', siehe orangefarbene "
 "Linie in der Grafik), bei dem Ihr aktuelles Fahrzeug in vollem Umfang "
-"genutzt wird Nutzungsdauer, und dann durch ein (moderneres) Fahrzeug "
-"Ihrer Wahl ersetzt."
+"der LEbensdauer genutzt wird, und dann durch ein (moderneres) Fahrzeug "
+"Ihrer Wahl ersetzt wird."
 
 #: templates/new_car.html:124
 msgid ""
@@ -585,7 +585,7 @@ msgid ""
 " lifetime, and then replaced by a (more modern) vehicle of your choice."
 msgstr ""
 "Ein zweites Szenario (sogenannter 'vorzeitiger Ersatz', siehe grüne Linie"
-" in der Grafik), bei dem Ihr aktuelles Fahrzeug vor dem Ende seiner "
+" in der Grafik), bei dem Ihr aktuelles Fahrzeug vorzeitig vor dem Ende seiner "
 "Nutzungsdauer ersetzt wird und dann durch ein (moderneres) Fahrzeug Ihrer"
 " Wahl ersetzt wird."
 
@@ -596,8 +596,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tgiven the context of use you specify."
 msgstr ""
 "Der Unterschied zwischen diesen beiden Szenarien ist ein Indikator dafür,"
-" ob es vorteilhaft ist, Ihr aktuelles Fahrzeug unter Berücksichtigung des"
-" von Ihnen angegebenen Nutzungskontextes zu erneuern."
+" ob es ökologisch vorteilhaft ist, Ihr aktuelles Fahrzeug unter Berücksichtigung der"
+" von Ihnen angegebenen Nutzung zu erneuern."
+
 
 #: templates/new_car.html:195
 msgid "CURRENT VEHICLE"
@@ -605,11 +606,11 @@ msgstr "AKTUELLES FAHRZEUG"
 
 #: templates/new_car.html:200
 msgid "We need to know a few details about your current car."
-msgstr "Wir müssen ein paar Details über Ihr aktuelles Fahrzeug wissen."
+msgstr "Wir brauchen dazu ein paar Details über Ihr aktuelles Fahrzeug."
 
 #: templates/new_car.html:204
 msgid "Age"
-msgstr "Alter"
+msgstr "Alter des Autos"
 
 #: templates/new_car.html:205
 msgid "Engine type"
@@ -633,7 +634,7 @@ msgstr "Wann ist Ihr Auto produziert worden?"
 
 #: templates/new_car.html:212
 msgid "This will also be interpreted as the first year of use."
-msgstr "Dies wird auch als das erste Jahr der Anwendung interpretiert."
+msgstr "Dies wird auch als das erste Jahr der Nutzung interpretiert."
 
 #: templates/new_car.html:216
 msgid "What is the engine type of your car?"
@@ -661,7 +662,7 @@ msgstr "Eine Mischung aus Stadt, Land und Autobahn"
 
 #: templates/new_car.html:267
 msgid "in cities"
-msgstr "in Städten"
+msgstr "in der Stadt"
 
 #: templates/new_car.html:268
 msgid "in the countryside"
@@ -673,11 +674,11 @@ msgstr "auf Autobahnen"
 
 #: templates/new_car.html:272
 msgid "Where are you located?"
-msgstr "Wo befinden Sie sich?"
+msgstr "In welchem Land fahren Sie hauptsächlich?"
 
 #: templates/new_car.html:297
 msgid "FUTURE VEHICLE(S)"
-msgstr "ZWEITES FAHRZEUG"
+msgstr "ZUKÜNFTIGE(S) FAHRZEUG(E)"
 
 #: templates/new_car.html:305
 msgid ""
@@ -685,9 +686,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\tby dragging them from the left frame to the right "
 "frame. Once this si done, hit the button to the right."
 msgstr ""
-"Wählen Sie das/die Fahrzeug(e), das/die Sie als Ihren nächsten Kauf in "
-"Betracht ziehen, indem Sie es/sie vom linken Rahmen auf den rechten "
-"Rahmen ziehen. Sobald dies geschehen ist, drücken Sie den Knopf rechts."
+"Wählen Sie das/die Fahrzeug(e), das/die Sie für Ihren nächsten Kauf in "
+"Betracht ziehen, indem Sie es/sie vom linken Rahmen in den rechten "
+"Rahmen ziehen. Drücken Sie danach den Knopf rechts."
 
 #: templates/new_car.html:311 templates/tool.html:95
 msgid "Calculate"
@@ -735,7 +736,8 @@ msgstr "Erschöpfung fossiler Energieressourcen"
 msgid "Please use the handles below to appreciate their effect on the results."
 msgstr ""
 "Bitte benutzen Sie die untenstehenden Schaltflächen, um ihre Wirkung auf "
-"die Ergebnisse zu beurteilen."
+"die Ergebnisse zu sehen."
+
 
 #: templates/new_car.html:388
 msgid "Annual mileage"
@@ -743,7 +745,7 @@ msgstr "Jährliche Fahrleistung"
 
 #: templates/new_car.html:391
 msgid "Vehicle lifetime"
-msgstr "Aktuelle Fahrzeug-Lebensdauer"
+msgstr "Geschätzte Fahrzeug-Lebensdauer"
 
 #: templates/new_car.html:394
 msgid "Time of replacement"
@@ -761,6 +763,7 @@ msgstr ""
 "Wie hoch ist Ihrer Meinung nach die maximale Kilometerleistung, die Ihr "
 "Auto fahren kann, bevor es endgültig ausrangiert wird?"
 
+
 #: templates/new_car.html:405
 msgid ""
 "This value will be used as a reference scenario where the vehicle is "
@@ -771,7 +774,7 @@ msgstr ""
 
 #: templates/new_car.html:408
 msgid "When do you wish to replace your vehicle?"
-msgstr "Wann möchten Sie Ihr jetziges Fahrzeug ersetzen?"
+msgstr "Nach wie vielen Kilometern möchten Sie Ihr jetziges Fahrzeug vorzeitig ersetzen?"
 
 #: templates/param_table.html:9
 msgid "Carculator : Parameters"
