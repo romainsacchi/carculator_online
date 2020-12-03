@@ -1833,7 +1833,11 @@ function collect_configuration(){
     fu["quantity"] = $("#fu_distance").val();
 
     background_params['fuel blend'] = fuel_blend;
-    background_params['electric utility factor'] = electric_utility;
+
+    if (!Object.keys(electric_utility).length === 0){
+        background_params['electric utility factor'] = electric_utility;
+    }
+
     background_params['energy storage'] = {'electric': energy_storage};
     background_params['efficiency'] = efficiency;
     params['foreground params'] = foreground_params;
@@ -2691,7 +2695,6 @@ function update_electric_utility_sliders(data){
 console.log("update_electric_utility")
     // Electric utility shares
     var electric_utility = data['background params']['electric utility factor']
-    console.log(electric_utility)
     var listYears = document.querySelectorAll( '#years_list > li' );
 
     for (var key in electric_utility) {
