@@ -236,7 +236,7 @@ def tool_page(country):
         config = {
             "year": ["2020"],
             "type": ["ICEV-p", "ICEV-d", "ICEV-g", "BEV"],
-            "size": [_("Mid-size")],
+            "size": ["Medium"],
             "driving_cycle": "WLTC",
             "fu": {"unit": "vkm", "quantity": 1},
             "foreground params": {
