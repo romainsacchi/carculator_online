@@ -214,7 +214,7 @@ class Calculation:
     def create_config_array(self, dict_params, array):
 
         arr = []
-        year = [y for y in dict_params[('Functional unit',)]['year']]
+        year = [int(y) for y in dict_params[('Functional unit',)]['year']]
         driving_cycle = dict_params[('Driving cycle',)]
         country = dict_params[('Background',)]['country']
         passengers = dict_params[('Foreground',)][('Glider', 'all', 'all', 'average passengers', 'none')][(year[0], 'loc')]
@@ -348,7 +348,11 @@ class Calculation:
 
 
 
-        print(arr)
+        for r in arr:
+            print(r)
+            for y in r:
+                print(type(y))
+                
         return arr
 
     def process_results(self, d, lang, job_id):
