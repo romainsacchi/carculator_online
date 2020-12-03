@@ -353,8 +353,6 @@ class Calculation:
 
                     arr.append(params)
 
-        print(arr)
-
         return arr
 
     def process_results(self, d, lang, job_id):
@@ -571,6 +569,17 @@ class Calculation:
         db.session.commit()
 
         list_res.extend(list_res_costs)
+
+        print(lang,
+                    list_res,
+                    arr_benchmark,
+                    TtW_energy,
+                    dict_scatter,
+                    list_res_acc,
+                    self.create_config_array(d, cm.array),
+                    d[("Background",)]["country"],
+                    d[("Functional unit",)]["fu"]["quantity"],
+                    d[("Functional unit",)]["fu"]["unit"])
 
         return (
             json.dumps(
