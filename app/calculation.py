@@ -224,7 +224,7 @@ class Calculation:
 
         for pt in array.coords["powertrain"].values:
             for s in array.coords["size"].values:
-                for y in array.coords["year"].values:
+                for y in array.coords["year"].values.astype(int):
                     electricity_mix = self.electricity_mix.loc[
                                             dict(
                                                 country=country,
@@ -347,7 +347,7 @@ class Calculation:
 
 
 
-        
+
         print(arr)
         return arr
 
