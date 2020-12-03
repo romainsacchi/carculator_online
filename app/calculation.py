@@ -351,8 +351,16 @@ class Calculation:
 
                     arr.append(params)
 
-        print(arr)
 
+
+        for r in arr:
+            if isinstance(r, np.int64):
+                r = int(r)
+            if isinstance(r, list):
+                for y in r:
+                    if isinstance(y, np.int64):
+                        y = int(y)
+        print(arr)
         return arr
 
     def process_results(self, d, lang, job_id):
