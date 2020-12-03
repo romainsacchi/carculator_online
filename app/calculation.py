@@ -349,11 +349,11 @@ class Calculation:
                         else:
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["electrolysis", 1, "", ""]
 
-
                     params.extend([battery_chem, battery_origin, primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share])
 
-
                     arr.append(params)
+
+        print(arr)
 
         return arr
 
