@@ -345,14 +345,6 @@ class Calculation:
 
                     arr.append(params)
 
-
-
-
-        for r in arr:
-            print(r)
-            for y in r:
-                print(type(y))
-
         return arr
 
     def process_results(self, d, lang, job_id):
@@ -555,9 +547,6 @@ class Calculation:
         task.progress = 95
         db.session.commit()
 
-
-
-
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 90
@@ -569,18 +558,6 @@ class Calculation:
         db.session.commit()
 
         list_res.extend(list_res_costs)
-
-        json.dumps([lang])
-        json.dumps([list_res])
-        json.dumps([arr_benchmark])
-        json.dumps([TtW_energy])
-        json.dumps([dict_scatter])
-        json.dumps([list_res_acc])
-        json.dumps([self.create_config_array(d, cm.array)])
-        json.dumps([d[("Background",)]["country"]])
-        json.dumps([d[("Functional unit",)]["fu"]["quantity"]])
-        json.dumps([d[("Functional unit",)]["fu"]["unit"]])
-
 
         return (
             json.dumps(

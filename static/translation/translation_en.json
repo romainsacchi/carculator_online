@@ -288,6 +288,9 @@
     "clearly_1": "Go for it! Replacing your current car early by this model may lead to ",
     "clearly_2": "&#37 lower emissions than replacing it the latest possible.",
     "electric_mode": "km electric",
-    "combustion_mode": "km combustion"
+    "combustion_mode": "km combustion",
+    "not_a_number": "One of the years selected does not seem valid. Remove it to proceed further.",
+    "not_a_powertrain": "One of the powertrains selected does not seem valid. Remove it to proceed further.",
+    "not_a_size": "One of the size classes does not seem valid. Remove it to proceed further."
   }
 }

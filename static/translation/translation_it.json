@@ -297,6 +297,9 @@
     "clearly_1" : "Vai! La sostituzione anticipata dell'auto attuale con questo modello può portare a una riduzione delle emissioni dell'",
     "clearly_2" : "&#37 in meno rispetto alla sostituzione più tardiva possibile",
     "electric_mode": "km elettrico",
-    "combustion_mode": "km combustione"
+    "combustion_mode": "km combustione",
+    "not_a_number": "Uno degli anni selezionati non sembra valido.",
+    "not_a_powertrain": "Uno dei tipi di propulsione selezionati non sembra valido.",
+    "not_a_size": "Una delle categorie di dimensioni selezionate non sembra essere valida."
   }
 }

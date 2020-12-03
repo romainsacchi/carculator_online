@@ -298,6 +298,9 @@
     "clearly_1": "Los! Ein frühzeitiger Ersatz Ihres aktuellen Autos durch dieses Modell kann zu ",
     "clearly_2": "&#37 weniger Emissionen führen, als wenn Sie es so spät wie möglich ersetzen.",
     "electric_mode": "km Elektromotor",
-    "combustion_mode": "km Verbrennungsmotor"
+    "combustion_mode": "km Verbrennungsmotor",
+    "not_a_number": "Eines der ausgewählten Jahre scheint nicht gültig zu sein.",
+    "not_a_powertrain": "Einer der ausgewählten Laufwerkstypen scheint nicht gültig zu sein.",
+    "not_a_size": "Eine der ausgewählten Größenkategorien scheint nicht gültig zu sein."
   }
 }

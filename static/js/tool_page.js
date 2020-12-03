@@ -680,7 +680,6 @@ $('#vehicle_type label').click(function() {
 
 // Detect when powertrains are added
 function size_list_update(){
-    console.log("size_list_update")
     var listItems = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -713,6 +712,33 @@ function size_list_update(){
 
             var old_year = false;
             for (var y = 0; y < listYears.length; y++){
+
+                if (isNaN(parseInt(listYears[y].innerHTML))){
+
+                    var str = i18n("not_a_number")
+                       $.notify({
+                        icon: 'glyphicon glyphicon-warning-sign',
+                        message: str
+                        },
+                        {
+                            placement: {
+                                from: "top",
+                                align: "center"
+                            },
+                            type:'warning'
+                        },
+                        {
+                            animate: {
+                                enter: 'animated bounceInDown',
+                                exit: 'animated bounceOutUp'
+                            },
+                        }
+                        );
+
+                   return;
+
+                }
+
                 if (parseInt(listYears[y].innerHTML)<2011){
                     old_year=true;
                 }
@@ -723,12 +749,73 @@ function size_list_update(){
                      i18n("plugin_hybrid_petrol"), i18n("plugin_hybrid_diesel")]
 
             for (var pt = 0; pt < listItems.length; pt++){
+
+                if (!['BEV', 'ICEV-p', 'ICEV-d',
+                        'ICEV-g', 'HEV-d', 'HEV-p',
+                        'PHEV-p', 'PHEV-d', 'FCEV'].includes(
+                        i18n(listItems[pt].innerHTML)
+                        )
+                        ){
+
+                        var str = i18n("not_a_powertrain")
+                           $.notify({
+                            icon: 'glyphicon glyphicon-warning-sign',
+                            message: str
+                            },
+                            {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type:'warning'
+                            },
+                            {
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                },
+                            }
+                            );
+
+                       return;
+                }
+
                 if (list_pt.includes(listItems[pt].innerHTML)){
                     new_powertrain = true;
                 }
             };
 
-            console.log(list_pt)
+            for (var s = 0; s < listSizes.length; s++){
+
+                if (!['Mini', 'Small', 'Lower medium', 'Medium',
+                        'Large', 'SUV', 'Van'].includes(
+                        i18n(listSizes[s].innerHTML)
+                        )
+                        ){
+
+                        var str = i18n("not_a_size")
+                           $.notify({
+                            icon: 'glyphicon glyphicon-warning-sign',
+                            message: str
+                            },
+                            {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type:'warning'
+                            },
+                            {
+                                animate: {
+                                    enter: 'animated bounceInDown',
+                                    exit: 'animated bounceOutUp'
+                                },
+                            }
+                            );
+
+                       return;
+                }
+            };
 
 
 
@@ -783,7 +870,6 @@ function size_list_update(){
             create_energy_storage_table();
 
             if (isConfig == false){
-                console.log(isConfig)
                 prepare_data_for_efficiency();
                 prepare_data_for_energy_storage();
             }
@@ -1188,7 +1274,6 @@ function getSelectedCountries() {
 
 
     if (isConfig == false){
-        console.log("getting biofuel shares...")
 
         $.when($.ajax({
             url: "/get_fuel_blend/"+selected+"/"+list_year,
@@ -2335,7 +2420,6 @@ function change_tutorial_video(type){
 
 
 function fill_in_from_config_file(data){
-    console.log("fill_in_from_config_file")
     // Display first section
     $('#label_car').trigger('click');
 
@@ -2361,9 +2445,6 @@ function fill_in_from_config_file(data){
     };
 
     // Remove powertrains from left frame
-
-    console.log(data["type"])
-
     var ul = document.getElementById("powertrain_list_choice");
     var items = ul.getElementsByTagName("li");
     for (y in data['type']){
@@ -2477,7 +2558,6 @@ function fill_in_from_config_file(data){
 };
 
 function update_efficiency_table(data){
-    console.log("update_efficiency_table")
     var efficiency_data = data["background params"]["efficiency"];
 
     var map_params = {
@@ -2518,7 +2598,6 @@ function update_efficiency_table(data){
 };
 
 function prepare_data_for_efficiency(){
-    console.log("prepare_data_for_efficiency")
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -2570,7 +2649,6 @@ function prepare_data_for_efficiency(){
 };
 
 function prepare_data_for_energy_storage(){
-    console.log("prepare_data_for_energy_storage")
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -2591,8 +2669,6 @@ function prepare_data_for_energy_storage(){
 
     for (var y = 0; y < listYears.length; y++){arr_y.push(listYears[y].innerHTML)};
     for (var s = 0; s < listSizes.length; s++){
-        console.log(listSizes[s].innerHTML)
-        console.log(i18n(listSizes[s].innerHTML))
         arr_s.push(i18n(listSizes[s].innerHTML))
     };
 
@@ -2644,7 +2720,6 @@ function prepare_data_for_energy_storage(){
 };
 
 function update_energy_storage_table(data){
-    console.log("update_energy_storage")
 
     var battery_data = data["background params"]["energy storage"]["electric"];
 
@@ -2692,7 +2767,6 @@ function update_energy_storage_table(data){
 };
 
 function update_electric_utility_sliders(data){
-console.log("update_electric_utility")
     // Electric utility shares
     var electric_utility = data['background params']['electric utility factor']
     var listYears = document.querySelectorAll( '#years_list > li' );
@@ -2722,7 +2796,6 @@ console.log("update_electric_utility")
 };
 
 function update_fuel_sliders(data){
-    console.log("update_fuel_slider")
     // Fuel pathways
     var fuel_blend = data['background params']['fuel blend']
     var energy_storage = data['background params']['energy storage']
@@ -2743,12 +2816,8 @@ function update_fuel_sliders(data){
                 var slider_div = $('#'+String(fuel+'_'+year))
 
                 if (slider_div.length){
-                    console.log("fuel slider being updated...")
 
                     var slider = slider_div[0]
-
-                    console.log(slider)
-                    console.log(parseInt(primary_fuel_share[y]*100))
 
                     // a bug with the slider prevents from using 0
                     var val = parseInt(primary_fuel_share[y]*100)
@@ -2771,7 +2840,6 @@ function update_fuel_sliders(data){
 };
 
 function create_fuel_table() {
-    console.log("create_fuel_table")
 
 
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
@@ -2926,7 +2994,6 @@ function create_fuel_table() {
 };
 
 function create_electric_utility_table() {
-    console.log("create_electric_utility_table")
 
 
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
@@ -2986,7 +3053,7 @@ function create_electric_utility_table() {
                 connect: true,
                 range: {
                     'min': 0,
-                    'max': 60
+                    'max': 70
                 }
             });
 
@@ -3005,7 +3072,6 @@ function create_electric_utility_table() {
 };
 
 function create_energy_storage_table() {
-    console.log("create_energy_storage_table")
 
     var list_fuel = [];
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
@@ -3176,7 +3242,6 @@ function create_energy_storage_table() {
 };
 
 function create_efficiency_table() {
-    console.log("create_efficiency_table")
     var list_fuel = [];
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
@@ -3307,7 +3372,6 @@ holder.ondrop = function(e) {
 function start(data){
 
     async function firstFunction(){
-        console.log("fill_in")
         fill_in_from_config_file(data)
         size_list_update()
         return;
@@ -3317,7 +3381,6 @@ function start(data){
         await firstFunction();
         // now wait for firstFunction to finish...
         // Update sliders
-        console.log("update")
         update_fuel_sliders(data);
         update_electric_utility_sliders(data);
         update_energy_storage_table(data);
