@@ -214,8 +214,6 @@ class Calculation:
     def create_config_array(self, dict_params, array):
 
         arr = []
-        powertrain = [pt for pt in dict_params[('Functional unit',)]['powertrain']]
-        size = [s for s in dict_params[('Functional unit',)]['size']]
         year = [y for y in dict_params[('Functional unit',)]['year']]
         driving_cycle = dict_params[('Driving cycle',)]
         country = dict_params[('Background',)]['country']
@@ -352,6 +350,8 @@ class Calculation:
                     params.extend([battery_chem, battery_origin, primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share])
 
                     arr.append(params)
+
+        print(arr)
 
         return arr
 
