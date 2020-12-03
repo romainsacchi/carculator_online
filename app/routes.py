@@ -36,6 +36,18 @@ import pickle
 app.calc = Calculation()
 progress_status = 0
 
+
+is_maintenance_mode = False
+
+# Always throw a 503 during maintenance: http://is.gd/DksGDm
+
+@app.before_request
+def check_for_maintenance():
+    if is_maintenance_mode and request.path != url_for('maintenance'):
+        return redirect(url_for('maintenance'))
+        # Or alternatively, dont redirect
+        # return 'Sorry, off for maintenance!', 503
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:

@@ -570,16 +570,17 @@ class Calculation:
 
         list_res.extend(list_res_costs)
 
-        print(lang,
-                    list_res,
-                    arr_benchmark,
-                    TtW_energy,
-                    dict_scatter,
-                    list_res_acc,
-                    self.create_config_array(d, cm.array),
-                    d[("Background",)]["country"],
-                    d[("Functional unit",)]["fu"]["quantity"],
-                    d[("Functional unit",)]["fu"]["unit"])
+        json.dumps([lang])
+        json.dumps([list_res])
+        json.dumps([arr_benchmark])
+        json.dumps([TtW_energy])
+        json.dumps([dict_scatter])
+        json.dumps([list_res_acc])
+        json.dumps([self.create_config_array(d, cm.array)])
+        json.dumps([d[("Background",)]["country"]])
+        json.dumps([d[("Functional unit",)]["fu"]["quantity"]])
+        json.dumps([d[("Functional unit",)]["fu"]["unit"]])
+
 
         return (
             json.dumps(
