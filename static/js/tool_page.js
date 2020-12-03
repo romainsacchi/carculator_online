@@ -2357,10 +2357,14 @@ function fill_in_from_config_file(data){
     };
 
     // Remove powertrains from left frame
+
+    console.log(data["type"])
+
     var ul = document.getElementById("powertrain_list_choice");
     var items = ul.getElementsByTagName("li");
     for (y in data['type']){
         for (var i = 0; i < items.length; ++i) {
+
             if (items[i].innerHTML == i18n(data["type"][y])){
                 ul.removeChild(items[i]);
             };
@@ -2973,11 +2977,6 @@ function create_electric_utility_table() {
         var year = Number(divs[i].id.split("_")[2])
 
         var utility_factor = parseInt(((year * .01434) - 28.67)*100)
-
-        console.log(divs[i].id)
-        console.log(year)
-        console.log(utility_factor)
-
 
            var slider = noUiSlider.create(divs[i], {
                 start: utility_factor,

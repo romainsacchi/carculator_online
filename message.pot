@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-27 16:42+0100\n"
+"POT-Creation-Date: 2020-12-03 13:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,72 +90,72 @@ msgstr ""
 msgid "Invalid username or password"
 msgstr ""
 
-#: app/routes.py:109 app/routes.py:238 app/routes.py:315
+#: app/routes.py:109 app/routes.py:238 app/routes.py:325
 msgid "Petrol"
 msgstr ""
 
-#: app/routes.py:110 app/routes.py:238 app/routes.py:316
+#: app/routes.py:110 app/routes.py:238 app/routes.py:326
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:111 app/routes.py:238 app/routes.py:317
+#: app/routes.py:111 app/routes.py:238 app/routes.py:327
 msgid "CNG"
 msgstr ""
 
-#: app/routes.py:112 app/routes.py:238 app/routes.py:318
+#: app/routes.py:112 app/routes.py:238 app/routes.py:328
 msgid "Electric"
 msgstr ""
 
-#: app/routes.py:113 app/routes.py:319
+#: app/routes.py:113 app/routes.py:329
 msgid "Fuel cell"
 msgstr ""
 
-#: app/routes.py:114 app/routes.py:320
+#: app/routes.py:114 app/routes.py:330
 msgid "Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:115 app/routes.py:321
+#: app/routes.py:115 app/routes.py:331
 msgid "Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:116 app/routes.py:322
+#: app/routes.py:116 app/routes.py:332
 msgid "(Plugin) Hybrid-petrol"
 msgstr ""
 
-#: app/routes.py:117 app/routes.py:323
+#: app/routes.py:117 app/routes.py:333
 msgid "(Plugin) Hybrid-diesel"
 msgstr ""
 
-#: app/routes.py:120 app/routes.py:326 templates/new_car.html:232
+#: app/routes.py:120 app/routes.py:336 templates/new_car.html:232
 msgid "Minicompact"
 msgstr ""
 
-#: app/routes.py:121 app/routes.py:327 templates/new_car.html:238
+#: app/routes.py:121 app/routes.py:337 templates/new_car.html:238
 msgid "Subcompact"
 msgstr ""
 
-#: app/routes.py:122 app/routes.py:328 templates/new_car.html:242
+#: app/routes.py:122 app/routes.py:338 templates/new_car.html:242
 msgid "Compact"
 msgstr ""
 
-#: app/routes.py:123 app/routes.py:239 app/routes.py:329
+#: app/routes.py:123 app/routes.py:239 app/routes.py:339
 #: templates/new_car.html:246
 msgid "Mid-size"
 msgstr ""
 
-#: app/routes.py:124 app/routes.py:330 templates/new_car.html:250
+#: app/routes.py:124 app/routes.py:340 templates/new_car.html:250
 msgid "Large"
 msgstr ""
 
-#: app/routes.py:125 app/routes.py:331 templates/new_car.html:254
+#: app/routes.py:125 app/routes.py:341 templates/new_car.html:254
 msgid "SUV"
 msgstr ""
 
-#: app/routes.py:126 app/routes.py:332 templates/new_car.html:258
+#: app/routes.py:126 app/routes.py:342 templates/new_car.html:258
 msgid "Van"
 msgstr ""
 
-#: app/routes.py:584
+#: app/routes.py:594
 msgid "Email sent!"
 msgstr ""
 
@@ -205,24 +205,24 @@ msgstr ""
 msgid "You will be redirected to a page where you can perform a new calculation."
 msgstr ""
 
-#: templates/404.html:136 templates/index.html:1175 templates/login.html:114
+#: templates/404.html:136 templates/index.html:1184 templates/login.html:114
 #: templates/new_car.html:471 templates/param_table.html:116
-#: templates/register.html:170 templates/result.html:448
-#: templates/start.html:625 templates/tool.html:979
+#: templates/register.html:170 templates/result.html:449
+#: templates/start.html:625 templates/tool.html:1031
 msgid "Copyright"
 msgstr ""
 
-#: templates/404.html:136 templates/index.html:1175 templates/login.html:114
+#: templates/404.html:136 templates/index.html:1184 templates/login.html:114
 #: templates/new_car.html:471 templates/param_table.html:116
-#: templates/register.html:170 templates/result.html:448
-#: templates/start.html:625 templates/tool.html:979
+#: templates/register.html:170 templates/result.html:449
+#: templates/start.html:625 templates/tool.html:1031
 msgid "Paul Scherrer Institut"
 msgstr ""
 
-#: templates/404.html:137 templates/index.html:1176 templates/login.html:115
+#: templates/404.html:137 templates/index.html:1185 templates/login.html:115
 #: templates/new_car.html:472 templates/param_table.html:117
-#: templates/register.html:171 templates/result.html:449
-#: templates/start.html:626 templates/tool.html:980
+#: templates/register.html:171 templates/result.html:450
+#: templates/start.html:626 templates/tool.html:1032
 msgid "All rights reserved"
 msgstr ""
 
@@ -272,30 +272,30 @@ msgstr ""
 msgid "Try it out now!"
 msgstr ""
 
-#: templates/index.html:239
+#: templates/index.html:248
 msgid "or"
 msgstr ""
 
-#: templates/index.html:247
+#: templates/index.html:256
 msgid "Install"
 msgstr ""
 
-#: templates/index.html:252
+#: templates/index.html:261
 msgid ""
 "Make detailed or fleet-wide analyses. Perform sensitivity and uncertainty"
 " analyses. Use results in other Python libraries. Export your inventories"
 " directly into Brightway2."
 msgstr ""
 
-#: templates/index.html:264
+#: templates/index.html:273
 msgid "requires python >=3.6"
 msgstr ""
 
-#: templates/index.html:378
+#: templates/index.html:387
 msgid "ABOUT"
 msgstr ""
 
-#: templates/index.html:384
+#: templates/index.html:393
 msgid ""
 "is an open-source, comprehensive and transparent life cycle assessment "
 "tool for passenger cars. It allows for an economic and environmental "
@@ -303,202 +303,202 @@ msgid ""
 "supply scenarios."
 msgstr ""
 
-#: templates/index.html:385
+#: templates/index.html:394
 msgid "Results partly rely on the background inventory data of "
 msgstr ""
 
-#: templates/index.html:385
+#: templates/index.html:394
 msgid " and the implementation of impact assessment methods therein."
 msgstr ""
 
-#: templates/index.html:401
+#: templates/index.html:410
 msgid "Unmute"
 msgstr ""
 
-#: templates/index.html:487
+#: templates/index.html:496
 msgid "Clean Code"
 msgstr ""
 
-#: templates/index.html:488
+#: templates/index.html:497
 msgid "The code is kept as clean and accessible as possible."
 msgstr ""
 
-#: templates/index.html:499
+#: templates/index.html:508
 msgid "Great Features"
 msgstr ""
 
-#: templates/index.html:500
+#: templates/index.html:509
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr ""
 
-#: templates/index.html:511
+#: templates/index.html:520
 msgid "Fast Library"
 msgstr ""
 
-#: templates/index.html:512
+#: templates/index.html:521
 msgid "A Python library version allows for even more specific assessments."
 msgstr ""
 
-#: templates/index.html:523
+#: templates/index.html:532
 msgid "Compatible"
 msgstr ""
 
-#: templates/index.html:524
+#: templates/index.html:533
 msgid "Export inventories compatible with"
 msgstr ""
 
-#: templates/index.html:537
+#: templates/index.html:546
 msgid "State-of-the-art"
 msgstr ""
 
-#: templates/index.html:538
+#: templates/index.html:547
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 
-#: templates/index.html:549
+#: templates/index.html:558
 msgid "Well Documented"
 msgstr ""
 
-#: templates/index.html:550
+#: templates/index.html:559
 msgid "The library is fully tested, documented and hosted on"
 msgstr ""
 
-#: templates/index.html:575
+#: templates/index.html:584
 msgid "Some facts about"
 msgstr ""
 
-#: templates/index.html:590
+#: templates/index.html:599
 msgid "Powertrains"
 msgstr ""
 
-#: templates/index.html:603
+#: templates/index.html:612
 msgid "Size classes"
 msgstr ""
 
-#: templates/index.html:616
+#: templates/index.html:625
 msgid "Driving cycles"
 msgstr ""
 
-#: templates/index.html:629
+#: templates/index.html:638
 msgid "Parameters"
 msgstr ""
 
-#: templates/index.html:642
+#: templates/index.html:651
 msgid "Li-ion battery types"
 msgstr ""
 
-#: templates/index.html:655
+#: templates/index.html:664
 msgid "Electricity mixes for battery charging"
 msgstr ""
 
-#: templates/index.html:667
+#: templates/index.html:676
 msgid "Time horizons"
 msgstr ""
 
-#: templates/index.html:680
+#: templates/index.html:689
 msgid "Cars used for calibration"
 msgstr ""
 
-#: templates/index.html:704
+#: templates/index.html:713
 msgid "OUR TEAM"
 msgstr ""
 
-#: templates/index.html:706
+#: templates/index.html:715
 msgid "The team behind the development of"
 msgstr ""
 
-#: templates/index.html:706
+#: templates/index.html:715
 msgid "sits at the Paul Scherrer Institute, in the "
 msgstr ""
 
-#: templates/index.html:731
+#: templates/index.html:740
 msgid "Pilot"
 msgstr ""
 
-#: templates/index.html:756
+#: templates/index.html:765
 msgid "Pit-stop manager"
 msgstr ""
 
-#: templates/index.html:774
+#: templates/index.html:783
 msgid "Designer (now at INFRAS)"
 msgstr ""
 
-#: templates/index.html:800
+#: templates/index.html:809
 msgid "Engine specialist"
 msgstr ""
 
-#: templates/index.html:824
+#: templates/index.html:833
 msgid "Chief Aerodynamicist"
 msgstr ""
 
-#: templates/index.html:845
+#: templates/index.html:854
 msgid "Mechanic"
 msgstr ""
 
-#: templates/index.html:870
+#: templates/index.html:879
 msgid "OUR PARTNERS"
 msgstr ""
 
-#: templates/index.html:872
+#: templates/index.html:881
 msgid "carculator was developed within the "
 msgstr ""
 
-#: templates/index.html:873
+#: templates/index.html:882
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
 msgstr ""
 
-#: templates/index.html:875 templates/index.html:877
+#: templates/index.html:884 templates/index.html:886
 msgid "and "
 msgstr ""
 
-#: templates/index.html:876
+#: templates/index.html:885
 msgid "as well as "
 msgstr ""
 
-#: templates/index.html:936
+#: templates/index.html:945
 msgid "Publications on"
 msgstr ""
 
-#: templates/index.html:936
+#: templates/index.html:945
 msgid "mobility"
 msgstr ""
 
-#: templates/index.html:1093
+#: templates/index.html:1102
 msgid "CONTACT"
 msgstr ""
 
-#: templates/index.html:1093
+#: templates/index.html:1102
 msgid "US"
 msgstr ""
 
-#: templates/index.html:1095
+#: templates/index.html:1104
 msgid "We are always happy to hear from you."
 msgstr ""
 
-#: templates/index.html:1108 templates/param_table.html:78
-#: templates/tool.html:812
+#: templates/index.html:1117 templates/param_table.html:78
+#: templates/tool.html:864
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:1112
+#: templates/index.html:1121
 msgid "Enter Email"
 msgstr ""
 
-#: templates/index.html:1116
+#: templates/index.html:1125
 msgid "Message"
 msgstr ""
 
-#: templates/index.html:1119
+#: templates/index.html:1128
 msgid "SUBMIT"
 msgstr ""
 
-#: templates/index.html:1126
+#: templates/index.html:1135
 msgid "carculator support"
 msgstr ""
 
-#: templates/index.html:1127
+#: templates/index.html:1136
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 
@@ -667,22 +667,22 @@ msgstr ""
 #: templates/new_car.html:366 templates/new_car.html:423
 #: templates/result.html:377
 msgid "climate change"
-msgstr "Climate change"
+msgstr ""
 
 #: templates/new_car.html:369 templates/new_car.html:431
 #: templates/result.html:378
 msgid "particulate matter formation"
-msgstr "Formation of fine particles"
+msgstr ""
 
 #: templates/new_car.html:372 templates/new_car.html:438
 #: templates/result.html:401
 msgid "photochemical oxidant formation"
-msgstr "Smog formation"
+msgstr ""
 
 #: templates/new_car.html:375 templates/new_car.html:445
 #: templates/result.html:405
 msgid "fossil depletion"
-msgstr "Depletion of fossil energy resources"
+msgstr ""
 
 #: templates/new_car.html:382
 msgid "Please use the handles below to appreciate their effect on the results."
@@ -728,27 +728,27 @@ msgstr ""
 msgid "PARAMETERS"
 msgstr ""
 
-#: templates/param_table.html:77 templates/tool.html:811
+#: templates/param_table.html:77 templates/tool.html:863
 msgid "Importance"
 msgstr ""
 
-#: templates/param_table.html:79 templates/tool.html:813
+#: templates/param_table.html:79 templates/tool.html:865
 msgid "Description"
 msgstr ""
 
-#: templates/param_table.html:80 templates/tool.html:814
+#: templates/param_table.html:80 templates/tool.html:866
 msgid "Unit"
 msgstr ""
 
-#: templates/param_table.html:81 templates/tool.html:815
+#: templates/param_table.html:81 templates/tool.html:867
 msgid "Source"
 msgstr ""
 
-#: templates/param_table.html:82 templates/tool.html:816
+#: templates/param_table.html:82 templates/tool.html:868
 msgid "Applies to powertrain"
 msgstr ""
 
-#: templates/param_table.html:83 templates/tool.html:817
+#: templates/param_table.html:83 templates/tool.html:869
 msgid "Applies to size"
 msgstr ""
 
@@ -939,71 +939,71 @@ msgstr ""
 
 #: templates/result.html:379
 msgid "ownership cost"
-msgstr "Cost of ownership"
+msgstr ""
 
 #: templates/result.html:383
 msgid "freshwater ecotoxicity"
-msgstr "Toxicity of non-marine aquatic environments"
+msgstr ""
 
 #: templates/result.html:384
 msgid "human toxicity"
-msgstr "Human toxicity"
+msgstr ""
 
 #: templates/result.html:385
 msgid "terrestrial ecotoxicity"
-msgstr "Terrestrial toxicity"
+msgstr ""
 
 #: templates/result.html:388
 msgid "marine eutrophication"
-msgstr "Eutrophication of marine aquatic environments"
+msgstr ""
 
 #: templates/result.html:389
 msgid "terrestrial acidification"
-msgstr "Terrestrial acidification"
+msgstr ""
 
 #: templates/result.html:390
 msgid "freshwater eutrophication"
-msgstr "Eutrophication of non-marine aquatic environments"
+msgstr ""
 
 #: templates/result.html:393
 msgid "natural land transformation"
-msgstr "Natural land transformation"
+msgstr ""
 
 #: templates/result.html:394
 msgid "agricultural land occupation"
-msgstr "Occupation of arable land"
+msgstr ""
 
 #: templates/result.html:395
 msgid "urban land occupation"
-msgstr "Land occupation in an urban environment"
+msgstr ""
 
 #: templates/result.html:399
 msgid "ionising radiation"
-msgstr "Ionizing radiation"
+msgstr ""
 
 #: templates/result.html:400
 msgid "ozone depletion"
-msgstr "Deterioration of the ozone layer"
+msgstr ""
 
 #: templates/result.html:404
 msgid "water depletion"
-msgstr "Depletion of fresh water reserves"
+msgstr ""
 
 #: templates/result.html:406
 msgid "metal depletion"
-msgstr "Depletion of metal resources"
+msgstr ""
 
 #: templates/result.html:410
 msgid "noise emissions"
-msgstr "Noise emissions"
+msgstr ""
 
 #: templates/result.html:411
 msgid "renewable primary energy"
-msgstr "Primary energy, renewable"
+msgstr ""
 
 #: templates/result.html:412
 msgid "non-renewable primary energy"
-msgstr "Primary energy, non-renewable"
+msgstr ""
 
 #: templates/start.html:106
 msgid "Passenger car replacement"
@@ -1228,17 +1228,17 @@ msgid ""
 "For reference, a VW Golf corresponds to the Lower medium size class."
 msgstr ""
 
-#: templates/tool.html:304
+#: templates/tool.html:302
 msgid "USE"
 msgstr ""
 
-#: templates/tool.html:309
+#: templates/tool.html:307
 msgid ""
 "This section defines parameters concerned with the use phase of the "
 "vehicles."
 msgstr ""
 
-#: templates/tool.html:310
+#: templates/tool.html:308
 msgid ""
 "The model needs to know the driving cycle of the vehicles (i.e., the "
 "speed level per\n"
@@ -1250,25 +1250,25 @@ msgid ""
 "usual scenarios from energy models."
 msgstr ""
 
-#: templates/tool.html:314
+#: templates/tool.html:312
 msgid " For European country, the projections originate the"
 msgstr ""
 
-#: templates/tool.html:315
+#: templates/tool.html:313
 msgid ""
 "from the European Commission. For African countries, projections "
 "originate the model"
 msgstr ""
 
-#: templates/tool.html:317
+#: templates/tool.html:315
 msgid "For other countries, projections are based on the IEA report"
 msgstr ""
 
-#: templates/tool.html:323
+#: templates/tool.html:321
 msgid "Driving cycle"
 msgstr ""
 
-#: templates/tool.html:325
+#: templates/tool.html:323
 msgid ""
 "Driving cycles are meant to represent real conditions of use of the "
 "vehicle.\n"
@@ -1278,11 +1278,11 @@ msgid ""
 "driving cycle."
 msgstr ""
 
-#: templates/tool.html:332
+#: templates/tool.html:330
 msgid "Geographical conditions"
 msgstr ""
 
-#: templates/tool.html:334
+#: templates/tool.html:332
 msgid ""
 "The country of use will influence several important parameters in the "
 "life cycle assessment of vehicles.\n"
@@ -1292,19 +1292,19 @@ msgid ""
 " be selected accordingly."
 msgstr ""
 
-#: templates/tool.html:346
+#: templates/tool.html:344
 msgid "Select a driving cycle"
 msgstr ""
 
-#: templates/tool.html:362
+#: templates/tool.html:360
 msgid "Select the country where the vehicles should be operated:"
 msgstr ""
 
-#: templates/tool.html:372
+#: templates/tool.html:370
 msgid "Electricity mix"
 msgstr ""
 
-#: templates/tool.html:374
+#: templates/tool.html:372
 msgid ""
 "Electricity mixes will determine the carbon intensity of the electricity "
 "necessary\n"
@@ -1316,11 +1316,11 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\tfor a fuel cell-powered vehicle."
 msgstr ""
 
-#: templates/tool.html:380
+#: templates/tool.html:378
 msgid "Passengers"
 msgstr ""
 
-#: templates/tool.html:382
+#: templates/tool.html:380
 msgid ""
 "Each passenger has a body mass of 75 kilograms. The average number of "
 "passengers per car in Europe is 1.5.\n"
@@ -1328,11 +1328,11 @@ msgid ""
 "passenger mass, the cargo mass and the curb mass of the vehicle."
 msgstr ""
 
-#: templates/tool.html:386
+#: templates/tool.html:384
 msgid "Lifetime"
 msgstr ""
 
-#: templates/tool.html:388
+#: templates/tool.html:386
 msgid ""
 "The total mileage of the car is used to normalize life cycle impacts per "
 "kilometer driven.\n"
@@ -1341,378 +1341,427 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\tto calculate amortized costs of ownership."
 msgstr ""
 
-#: templates/tool.html:398
+#: templates/tool.html:396
 msgid ""
 "Projection models suggest the following electricity mixes for the years "
 "selected for the selected country.\n"
 "\t\t\t\t\t\t\t\t\t\t\tYou may modify them."
 msgstr ""
 
-#: templates/tool.html:410
+#: templates/tool.html:408
 msgid "Hydro"
 msgstr ""
 
-#: templates/tool.html:413
+#: templates/tool.html:411
 msgid "Nuclear"
 msgstr ""
 
-#: templates/tool.html:416
+#: templates/tool.html:414
 msgid "Gas"
 msgstr ""
 
-#: templates/tool.html:419
+#: templates/tool.html:417
 msgid "Solar"
 msgstr ""
 
-#: templates/tool.html:422
+#: templates/tool.html:420
 msgid "Wind"
 msgstr ""
 
-#: templates/tool.html:425
+#: templates/tool.html:423
 msgid "Biomass"
 msgstr ""
 
-#: templates/tool.html:428
+#: templates/tool.html:426
 msgid "Coal"
 msgstr ""
 
-#: templates/tool.html:431
+#: templates/tool.html:429
 msgid "Oil"
 msgstr ""
 
-#: templates/tool.html:434
+#: templates/tool.html:432
 msgid "Geothermal"
 msgstr ""
 
-#: templates/tool.html:437
+#: templates/tool.html:435
 msgid "Waste"
 msgstr ""
 
-#: templates/tool.html:440
+#: templates/tool.html:438
 msgid "Biogas with Carbon Capture and Storage (CCS)"
 msgstr ""
 
-#: templates/tool.html:443
+#: templates/tool.html:441
 msgid "Biomass with Carbon Capture and Storage (CCS)"
 msgstr ""
 
-#: templates/tool.html:446
+#: templates/tool.html:444
 msgid "Coal with Carbon Capture and Storage (CCS)"
 msgstr ""
 
-#: templates/tool.html:449
+#: templates/tool.html:447
 msgid "Natural gas with Carbon Capture and Storage (CCS)"
 msgstr ""
 
-#: templates/tool.html:452
+#: templates/tool.html:450
 msgid "Wood with Carbon Capture and Storage (CCS)"
 msgstr ""
 
-#: templates/tool.html:460
+#: templates/tool.html:458
 msgid "Set to zero"
 msgstr ""
 
-#: templates/tool.html:467
+#: templates/tool.html:465
 msgid "Adjust the number of passengers"
 msgstr ""
 
-#: templates/tool.html:477
+#: templates/tool.html:475
 msgid "Adjust the cargo mass"
 msgstr ""
 
-#: templates/tool.html:484
+#: templates/tool.html:482
 msgid "Adjust the total mileage"
 msgstr ""
 
-#: templates/tool.html:490
+#: templates/tool.html:488
 msgid "Adjust the yearly mileage"
 msgstr ""
 
-#: templates/tool.html:519
+#: templates/tool.html:517
 msgid "TANK-TO-WHEEL EFFICIENCY"
 msgstr ""
 
-#: templates/tool.html:525
+#: templates/tool.html:537
+msgid "POWERTRAIN EFFICIENCY"
+msgstr ""
+
+#: templates/tool.html:540
 msgid ""
 "This section allows to adjust the tank-to-wheel efficiency of the "
 "vehicles. It represents the fraction of energy provided by the energy "
 "storage unit effectively transmitted to the wheels. "
 msgstr ""
 
-#: templates/tool.html:527
+#: templates/tool.html:542
 msgid ""
 "The energy storage efficiency for battery electric cars corresponds to "
 "the battery discharge efficiency."
 msgstr ""
 
-#: templates/tool.html:529
+#: templates/tool.html:544
 msgid ""
 "The energy storage efficiency for fuel cell cars corresponds to the fuel "
 "cell system efficiency."
 msgstr ""
 
-#: templates/tool.html:543
-msgid "POWERTRAIN EFFICIENCY"
-msgstr ""
-
-#: templates/tool.html:552
+#: templates/tool.html:553
 msgid "Efficiency rate for"
 msgstr ""
 
-#: templates/tool.html:555
+#: templates/tool.html:556
 msgid "Energy storage efficiency"
 msgstr ""
 
-#: templates/tool.html:558
+#: templates/tool.html:559
 msgid "Engine efficiency"
 msgstr ""
 
-#: templates/tool.html:561
+#: templates/tool.html:562
 msgid "Drivetrain efficiency"
 msgstr ""
 
-#: templates/tool.html:564
+#: templates/tool.html:565
 msgid "Tank-to-wheel efficiency"
 msgstr ""
 
-#: templates/tool.html:592
+#: templates/tool.html:593
 msgid "ENERGY STORAGE AND FUEL PATHWAYS"
 msgstr ""
 
-#: templates/tool.html:598
-msgid ""
-"If battery electric or plugin-hybrid vehicles are selected, it is "
-"possible to adjust a few parameters about the battery. The user can "
-"adjust the battery mass. Note that, by default, sixty percent of the mass"
-" is assumed to be taken by the cells. The user can also adjust the energy"
-" density of the battery cells. These two parameters defines a new "
-"capacity for the battery. Note that a heavier battery will increase the "
-"energy consumption of the vehicle."
-msgstr ""
-
-#: templates/tool.html:600
-msgid ""
-"The lifetime of the battery can also be adjusted. If the lifetime is "
-"lower than the lifetime of the vehicle, a battery replacement is needed. "
-"For example, if the battery is expected to last 150,000 km and the "
-"vehicle lifetime is 200,000 km, an additional 0.33 unit of a second "
-"battery will be needed. This assumes that the environmental burden of the"
-" remaining 0.66 unit of the second battery will be allocated to a second-"
-"life application. If you do not like this assumption, you can set the "
-"battery lifetime to be exactly half of that of the vehicle lifetime. This"
-" way, the environmental burden of the second battery will be entirely "
-"allocated to the vehicle."
-msgstr ""
-
-#: templates/tool.html:602
-msgid ""
-"Finally, the user can select the chemistry and the origin of manufacture "
-"of the battery. The origin of manufacture will set the type of "
-"electricity to manufacture the battery cells."
-msgstr ""
-
-#: templates/tool.html:616
+#: templates/tool.html:611
 msgid "ENERGY STORAGE"
 msgstr ""
 
-#: templates/tool.html:625
-msgid "Energy storage for"
+#: templates/tool.html:614
+msgid ""
+"If battery electric or plugin-hybrid vehicles are selected, it is "
+"possible to adjust a few parameters about\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tthe battery. The user can adjust the "
+"battery mass. Note that, by default, sixty percent of the mass is assumed"
+"\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tto be taken by the cells. The user can "
+"also adjust the energy density of the battery cells.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThese two parameters defines a new "
+"capacity for the battery. Note that a heavier battery will increase\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy consumption of the vehicle."
 msgstr ""
 
-#: templates/tool.html:628
-msgid "Battery mass"
+#: templates/tool.html:619
+msgid ""
+"The lifetime of the battery can also be adjusted.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tIf the lifetime is lower than the "
+"lifetime of the vehicle, a battery replacement is needed.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFor example, if the battery is expected "
+"to last 150,000 km and the vehicle lifetime is 200,000 km, an additional "
+"0.33 unit of a second battery will be needed.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis assumes that the environmental "
+"burden of the remaining 0.66 unit of the second battery will be allocated"
+" to a second-life application. If you do not like this assumption, you "
+"can set the battery lifetime to be exactly half of that of the vehicle "
+"lifetime.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis way, the environmental burden of the"
+" second battery will be entirely allocated to the vehicle."
 msgstr ""
 
-#: templates/tool.html:631
-msgid "Cell energy density"
+#: templates/tool.html:624
+msgid ""
+"Finally, the user can select the chemistry and the origin of manufacture "
+"of the battery.\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThe origin of manufacture will set the "
+"type of electricity to manufacture the battery cells."
 msgstr ""
 
 #: templates/tool.html:634
-msgid "Battery capacity"
+msgid "Energy storage for"
 msgstr ""
 
 #: templates/tool.html:637
-msgid "Battery lifetime"
+msgid "Battery mass"
 msgstr ""
 
 #: templates/tool.html:640
-msgid "Chemistry"
+msgid "Cell energy density"
 msgstr ""
 
 #: templates/tool.html:643
+msgid "Battery capacity"
+msgstr ""
+
+#: templates/tool.html:646
+msgid "Battery lifetime"
+msgstr ""
+
+#: templates/tool.html:649
+msgid "Chemistry"
+msgstr ""
+
+#: templates/tool.html:652
 msgid "Origin"
 msgstr ""
 
-#: templates/tool.html:655
+#: templates/tool.html:672
+msgid "FUEL PATHWAYS"
+msgstr ""
+
+#: templates/tool.html:676
 msgid ""
 "In this section, we define the pathway used to supply fuel for the "
 "vehicles as well as the technology used for on-board energy storage.<br>"
 "\n"
-"\t\t\t\t\t\t\t\t\tThe user can select conventional pathways to represent "
-"the supply and use of common fuels such as diesel\n"
-"\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural gas, but also "
-"alternative fuels, such as bio-diesel, bio-ethanol and bio-methane."
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThe user can select conventional pathways"
+" to represent the supply and use of common fuels such as diesel\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tor unleaded petrol or compressed natural "
+"gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-"
+"methane."
 msgstr ""
 
-#: templates/tool.html:658
+#: templates/tool.html:679
 msgid ""
 "The alternative fuels presented here are so-called \"2nd generation\" "
 "fuels, as they are produced from residual plant-based material.\n"
-"\t\t\t\t\t\t\t\t\tThis means that they do not compete with crops "
-"production with the purpose of food supply."
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis means that they do not compete with "
+"crops production with the purpose of food supply."
 msgstr ""
 
-#: templates/tool.html:660
+#: templates/tool.html:681
 msgid ""
 "Additionally, several pathways are presented for the supply of hydrogen "
 "to be used in fuel cell cars.\n"
-"\t\t\t\t\t\t\t\t\tHydrogen can either be produced by electrolysis, which "
-"is a process that requires electricity, or via a process called\n"
-"\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses steam and "
-"methane to produce hydrogen."
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHydrogen can either be produced by "
+"electrolysis, which is a process that requires electricity, or via a "
+"process called\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses "
+"steam and methane to produce hydrogen."
 msgstr ""
 
-#: templates/tool.html:664
+#: templates/tool.html:685
 msgid ""
 "Regarding energy storage technologies for battery electric vehicles, the "
 "user can choose between several types of lithium-ion-based chemistry\n"
-"\t\t\t\t\t\t\t\t\tbut also between different origins of manufacture. The "
-"origin of battery manufacture will determine the electricity mix used to "
-"produce the battery cells."
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tbut also between different origins of "
+"manufacture. The origin of battery manufacture will determine the "
+"electricity mix used to produce the battery cells."
 msgstr ""
 
-#: templates/tool.html:667
+#: templates/tool.html:688
 msgid ""
 "The fuel blend shares presented by default originate different projection"
 " models. They can be modified at will. It is to note however that the "
 "shre of\n"
-"\t\t\t\t\t\t\t\t\talternative fuel in the fuel blend an engine can "
-"operate on, can be, in practice, limited for technical reasons."
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\talternative fuel in the fuel blend an "
+"engine can operate on, can be, in practice, limited for technical "
+"reasons."
 msgstr ""
 
-#: templates/tool.html:681
-msgid "FUEL PATHWAYS"
-msgstr ""
-
-#: templates/tool.html:690
+#: templates/tool.html:698
 msgid "Fuel blend for"
 msgstr ""
 
-#: templates/tool.html:693
+#: templates/tool.html:701
 msgid "Primary fuel"
 msgstr ""
 
-#: templates/tool.html:696
+#: templates/tool.html:704
 msgid "Blend"
 msgstr ""
 
-#: templates/tool.html:699
+#: templates/tool.html:707
 msgid "Secondary fuel"
 msgstr ""
 
-#: templates/tool.html:727
-msgid "OTHER CAR PARAMETERS"
+#: templates/tool.html:729
+msgid "ELECTRIC UTILITY SHARE"
 msgstr ""
 
-#: templates/tool.html:727
-msgid "(Optional, click to expand.)"
-msgstr ""
-
-#: templates/tool.html:736
-msgid "Each car is defined by up to 200 input parameters."
+#: templates/tool.html:733
+msgid ""
+"As you have selected a plugin hybrid vehicle, it is important to know the"
+" share of the kilometers\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tthat are driven in electric mode (as "
+"opposed to combustion mode). The value we provide by default\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tis from a study that correlates this share "
+"to the\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trange autonomy in electric mode: the higher"
+" the range autonomy in electric mode, the higher the share of kilometers "
+"driven in electric mode."
 msgstr ""
 
 #: templates/tool.html:737
+msgid ""
+"This also means that, as the capacity of the battery increases in the "
+"future, so does the share driven in electric mode."
+msgstr ""
+
+#: templates/tool.html:738
+msgid "But ultimately, this is specific to the behavior of the driver."
+msgstr ""
+
+#: templates/tool.html:739
+msgid "We let you modify this value here."
+msgstr ""
+
+#: templates/tool.html:748
+msgid "Electric utility share for"
+msgstr ""
+
+#: templates/tool.html:751
+msgid "Share of kilometers in electric mode vs. combustion mode"
+msgstr ""
+
+#: templates/tool.html:779
+msgid "OTHER CAR PARAMETERS"
+msgstr ""
+
+#: templates/tool.html:779
+msgid "(Optional, click to expand.)"
+msgstr ""
+
+#: templates/tool.html:788
+msgid "Each car is defined by up to 200 input parameters."
+msgstr ""
+
+#: templates/tool.html:789
 msgid ""
 "The default values for these parameters are so-called \"most likely\" "
 "values, calibrated against a large number of car manufacturers data."
 msgstr ""
 
-#: templates/tool.html:738
+#: templates/tool.html:790
 msgid ""
 "You are however welcome to override the default value for any of these "
 "parameters if you have a specific case in mind"
 msgstr ""
 
-#: templates/tool.html:739
+#: templates/tool.html:791
 msgid ""
 "The search field below allows you to do that. Search for a parameter and "
 "add it by using the \"Add\" button in the right column of the search "
 "results table."
 msgstr ""
 
-#: templates/tool.html:740
+#: templates/tool.html:792
 msgid ""
 "The importance, or sensitivity, of a given parameter in regard to "
 "environmental impacts is indicated in the left column of the search "
 "results table."
 msgstr ""
 
-#: templates/tool.html:741
+#: templates/tool.html:793
 msgid ""
 "That is, a parameter with a high sensitivity is a parameter for which a "
 "change in its value of "
 msgstr ""
 
-#: templates/tool.html:741
+#: templates/tool.html:793
 msgid "leads to a change in environmental impacts by 0.5 to"
 msgstr ""
 
-#: templates/tool.html:741
+#: templates/tool.html:793
 msgid ""
 "against\n"
 "\t\t\t\t\t\t\t\t\t\t0.3 to"
 msgstr ""
 
-#: templates/tool.html:742
+#: templates/tool.html:794
 msgid "for a parameter with medium sensitivity, and 0 to"
 msgstr ""
 
-#: templates/tool.html:742
+#: templates/tool.html:794
 msgid "for a parameter with low sensitivity."
 msgstr ""
 
-#: templates/tool.html:746
+#: templates/tool.html:798
 msgid "See full parameters list"
 msgstr ""
 
-#: templates/tool.html:752
+#: templates/tool.html:804
 msgid "Frequently asked questions (click to see an answer)"
 msgstr ""
 
-#: templates/tool.html:754
+#: templates/tool.html:806
 msgid "How to change the mass of the battery of an electric vehicle?"
 msgstr ""
 
-#: templates/tool.html:755
+#: templates/tool.html:807
 msgid "How to change the capacity of the battery of an electric vehicle?"
 msgstr ""
 
-#: templates/tool.html:756
+#: templates/tool.html:808
 msgid "How to change the efficiency of the engine?"
 msgstr ""
 
-#: templates/tool.html:757
+#: templates/tool.html:809
 msgid "How to change the weight of the passengers?"
 msgstr ""
 
-#: templates/tool.html:758
+#: templates/tool.html:810
 msgid "How to change hybridization level of future diesel vehicles?"
 msgstr ""
 
-#: templates/tool.html:759
+#: templates/tool.html:811
 msgid "How to change the lifetime of a battery?"
 msgstr ""
 
-#: templates/tool.html:760
+#: templates/tool.html:812
 msgid "How to change the efficiency of a fuel cell stack?"
 msgstr ""
 
-#: templates/tool.html:765
+#: templates/tool.html:817
 msgid "Change the mass of the battery on a electric vehicle"
 msgstr ""
 
-#: templates/tool.html:766
+#: templates/tool.html:818
 msgid ""
 "The mass of the battery of an electric vehicle can be changed by "
 "modifying\n"
@@ -1729,43 +1778,43 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\tto move it over 1 km."
 msgstr ""
 
-#: templates/tool.html:775
+#: templates/tool.html:827
 msgid "Consider the following relations:"
 msgstr ""
 
-#: templates/tool.html:781
+#: templates/tool.html:833
 msgid "but also:"
 msgstr ""
 
-#: templates/tool.html:799
+#: templates/tool.html:851
 msgid "Add any parameter you would like to modify."
 msgstr ""
 
-#: templates/tool.html:801
+#: templates/tool.html:853
 msgid "Search for parameters to modify"
 msgstr ""
 
-#: templates/tool.html:818
+#: templates/tool.html:870
 msgid "Add?"
 msgstr ""
 
-#: templates/tool.html:843
+#: templates/tool.html:895
 msgid "CALCULATION SETTINGS"
 msgstr ""
 
-#: templates/tool.html:854
+#: templates/tool.html:906
 msgid "Linking algorithm"
 msgstr ""
 
-#: templates/tool.html:856
+#: templates/tool.html:908
 msgid "Functional unit"
 msgstr ""
 
-#: templates/tool.html:857
+#: templates/tool.html:909
 msgid "Calculation mode"
 msgstr ""
 
-#: templates/tool.html:865
+#: templates/tool.html:917
 msgid ""
 "A so-called \"attributional\" linking\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t algorithm will reflect average impacts\n"
@@ -1777,15 +1826,15 @@ msgid ""
 "specified, departing from a steady-state system."
 msgstr ""
 
-#: templates/tool.html:875
+#: templates/tool.html:927
 msgid "Attributional"
 msgstr ""
 
-#: templates/tool.html:881
+#: templates/tool.html:933
 msgid "Consequential"
 msgstr ""
 
-#: templates/tool.html:887
+#: templates/tool.html:939
 msgid ""
 "The user can opt for a comparison normalized per vehicle-kilometer driven"
 " or per passenger-kilometer. \"\n"
@@ -1795,31 +1844,31 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\"if a fleet composition is given."
 msgstr ""
 
-#: templates/tool.html:895
+#: templates/tool.html:947
 msgid "Quantity"
 msgstr ""
 
-#: templates/tool.html:899
+#: templates/tool.html:951
 msgid "Vehicle kilometer"
 msgstr ""
 
-#: templates/tool.html:900
+#: templates/tool.html:952
 msgid "Passenger kilometer"
 msgstr ""
 
-#: templates/tool.html:905
+#: templates/tool.html:957
 msgid "Over"
 msgstr ""
 
-#: templates/tool.html:916
+#: templates/tool.html:968
 msgid "Fleet"
 msgstr ""
 
-#: templates/tool.html:922
+#: templates/tool.html:974
 msgid "Specify fleet composition"
 msgstr ""
 
-#: templates/tool.html:930
+#: templates/tool.html:982
 msgid ""
 "A simple calculation will use \"most likely\" values as model inputs and "
 "outputs.\n"
@@ -1832,15 +1881,15 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t represented by probability intervals."
 msgstr ""
 
-#: templates/tool.html:940
+#: templates/tool.html:992
 msgid "Simple calculation"
 msgstr ""
 
-#: templates/tool.html:946
+#: templates/tool.html:998
 msgid "Error propagation (Monte Carlo)"
 msgstr ""
 
-#: templates/tool.html:949
+#: templates/tool.html:1001
 msgid "number of iterations"
 msgstr ""
 

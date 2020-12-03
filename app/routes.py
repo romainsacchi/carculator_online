@@ -235,7 +235,7 @@ def tool_page(country):
 
         config = {
             "year": ["2020"],
-            "type": [_("Petrol"), _("Diesel"), _("CNG"), _("Electric")],
+            "type": ["ICEV-p", "ICEV-d", "ICEV-g", "BEV"],
             "size": [_("Mid-size")],
             "driving_cycle": "WLTC",
             "fu": {"unit": "vkm", "quantity": 1},
