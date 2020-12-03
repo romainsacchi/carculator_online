@@ -224,9 +224,9 @@ class Calculation:
         lifetime = dict_params[('Foreground',)][('Driving', 'all', 'all', 'lifetime kilometers', 'none')][(year[0], 'loc')]
         km_per_year = dict_params[('Foreground',)][('Driving', 'all', 'all', 'kilometers per year', 'none')][(year[0], 'loc')]
 
-        for pt in powertrain:
-            for s in size:
-                for y in year:
+        for pt in array.coords["powertrain"].values:
+            for s in array.coords["size"].values:
+                for y in array.coords["year"].values:
                     electricity_mix = self.electricity_mix.loc[
                                             dict(
                                                 country=country,
