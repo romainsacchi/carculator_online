@@ -462,7 +462,7 @@ class Calculation:
 
         self.ic = InventoryCalculation(
             cm.array,
-            scope=d[("Functional unit",)],
+            scope=d[("Functional unit",)]["fu"],
             background_configuration=d[("Background",)],
         )
         # Update task progress to db
