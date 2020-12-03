@@ -241,7 +241,7 @@ class Calculation:
                                                     "Waste",
                                                 ],
                                             )
-                                        ].interp(year=y).values.tolist()
+                                        ].interp(year=y).values.astype(float).tolist()
                     params = [pt, s, y, lifetime, km_per_year, passengers, cargo_mass, driving_cycle, country, electricity_mix]
                     other_params = array.sel(powertrain=pt, size=s, year=y, value=0, parameter=[
                         'TtW energy',
@@ -257,7 +257,7 @@ class Calculation:
                         'battery cell energy density',
                         'electric energy stored',
                         'battery lifetime kilometers',
-                    ]).values.tolist()
+                    ]).values.astype(float).tolist()
                     params.extend(other_params)
 
                     if pt in ('BEV'):
@@ -278,16 +278,14 @@ class Calculation:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
-                                share_biofuel = float(share_biofuel)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["petrol", 1-share_biofuel, "bioethanol - wheat straw", share_biofuel]
 
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
-                            share_biofuel = float(share_biofuel)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["petrol", 1-share_biofuel, "bioethanol - wheat straw", share_biofuel]
 
 
@@ -302,15 +300,13 @@ class Calculation:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
-                                share_biofuel = float(share_biofuel)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["diesel", 1-share_biofuel, "biodiesel - algae", share_biofuel]
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
-                            share_biofuel = float(share_biofuel)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["diesel", 1-share_biofuel, "biodiesel - algae", share_biofuel]
 
                     if pt in ('ICEV-g'):
@@ -324,15 +320,13 @@ class Calculation:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
-                                share_biofuel = float(share_biofuel)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas - sewage sludge", share_biofuel]
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values
-                            share_biofuel = float(share_biofuel)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas - sewage sludge", share_biofuel]
 
                     if pt in ('FCEV'):
