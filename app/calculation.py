@@ -666,6 +666,7 @@ class Calculation:
                 size = "all"
                 val = [float(v.replace(" ", ""))] * len(new_dict[("Functional unit",)]["year"])
             else:
+
                 k = tuple(k.split(","))
                 name = k[0]
                 cat = self.d_categories[name]
@@ -702,6 +703,7 @@ class Calculation:
 
         if "efficiency" in raw_dict["background params"]:
             efficiency = raw_dict["background params"]["efficiency"]
+            efficiency = {k: v for k, v in efficiency.items() if len(list(v.keys())) > 0}
 
             for eff in efficiency:
                 powertrain = eff
