@@ -400,7 +400,7 @@ class Calculation:
                     TtW_energy.append(ttw_dic)
 
 
-        cost = cm.calculate_cost_impacts(scope=d[("Functional unit",)])
+        cost = cm.calculate_cost_impacts()
         data_cost = cost.values
         year = cost.coords["year"].values.tolist()
 
