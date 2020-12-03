@@ -242,7 +242,7 @@ class Calculation:
                                                 ],
                                             )
                                         ].interp(year=y).values.astype(float).tolist()
-                    params = [pt, s, y, lifetime, km_per_year, passengers, cargo_mass, driving_cycle, country, electricity_mix]
+                    params = [pt, s, int(y), lifetime, km_per_year, passengers, cargo_mass, driving_cycle, country, electricity_mix]
                     other_params = array.sel(powertrain=pt, size=s, year=y, value=0, parameter=[
                         'TtW energy',
                         'driving mass',
@@ -352,7 +352,7 @@ class Calculation:
             print(r)
             for y in r:
                 print(type(y))
-                
+
         return arr
 
     def process_results(self, d, lang, job_id):
