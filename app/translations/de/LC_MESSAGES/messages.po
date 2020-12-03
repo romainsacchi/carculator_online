@@ -1262,23 +1262,23 @@ msgstr "Dieser Zugang zum Modell bietet volle Flexibilität."
 
 #: templates/start.html:361
 msgid "Truck replacement"
-msgstr ""
+msgstr "Lkw-Ersatz"
 
 #: templates/start.html:362
 msgid "Medium and heavy duty trucks comparison"
-msgstr ""
+msgstr "Vergleich mittlerer und schwerer Lastwagen"
 
 #: templates/start.html:373
 msgid "A new truck?"
-msgstr ""
+msgstr "Ein neuer Lastwagen?"
 
 #: templates/start.html:530
 msgid "Truck, train, plane?"
-msgstr ""
+msgstr "Lastwagen, Zug, Flugzeug?"
 
 #: templates/start.html:531
 msgid "Compare different means of transport for freight."
-msgstr ""
+msgstr "Vergleichen Sie verschiedene Transportmittel für Fracht."
 
 #: templates/tool.html:17
 msgid "Carculator : Configuration"
@@ -1671,6 +1671,21 @@ msgid ""
 "capacity for the battery. Note that a heavier battery will increase\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy consumption of the vehicle."
 msgstr ""
+"Wenn batterieelektrische oder Plugin-"
+"Hybrid-Fahrzeuge ausgewählt werden, ist es"
+" möglich, einige wenige Parameter über "
+"die Batterie einzustellen. Der Benutzer "
+"kann die Masse der Batterie einstellen."
+" Beachten Sie, dass standardmäßig davon "
+"ausgegangen wird, dass 60 Prozent der"
+" Masse von den Zellen eingenommen "
+"werden. Der Benutzer kann auch die "
+"Energiedichte der Batteriezellen einstellen. "
+"Diese beiden Parameter definieren eine "
+"neue Kapazität für die Batterie. "
+"Beachten Sie, dass eine schwerere "
+"Batterie den Energieverbrauch des Fahrzeugs"
+" erhöht."
 
 #: templates/tool.html:619
 msgid ""
@@ -1688,6 +1703,25 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis way, the environmental burden of the"
 " second battery will be entirely allocated to the vehicle."
 msgstr ""
+"Die Lebensdauer der Batterie kann "
+"ebenfalls eingestellt werden. Wenn die "
+"Lebensdauer geringer ist als die "
+"Lebensdauer des Fahrzeugs, ist ein "
+"Batterieaustausch erforderlich. Wenn die "
+"Batterie zum Beispiel 150.000 km halten"
+" soll und die Fahrzeuglebensdauer 200.000"
+" km beträgt, ist zusätzliche ein "
+"Drittel einer zweiten Batterie erforderlich."
+" Dies setzt voraus, dass die "
+"Umweltbelastung durch die verbleibenden zwei"
+" Drittel der zweiten Batterie einer "
+"Zweit-Anwendung zugeordnet werden. Wenn "
+"Ihnen diese Annahme nicht gefällt, "
+"können Sie die Batterielebensdauer auf "
+"genau die Hälfte der Fahrzeuglebensdauer "
+"einstellen. Auf diese Weise wird die "
+"Umweltbelastung der zweiten Batterie "
+"vollständig dem Fahrzeug zugeordnet."
 
 #: templates/tool.html:624
 msgid ""
@@ -1696,6 +1730,11 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThe origin of manufacture will set the "
 "type of electricity to manufacture the battery cells."
 msgstr ""
+"Schließlich können Benutzer die Chemie "
+"und den Herstellungsort der Batterie "
+"auswählen. Der Ort der Herstellung "
+"bestimmt die Art der Elektrizität zur"
+" Herstellung der Batteriezellen."
 
 #: templates/tool.html:634
 msgid "Energy storage for"
@@ -1740,6 +1779,15 @@ msgid ""
 "gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-"
 "methane."
 msgstr ""
+"In diesem Abschnitt definieren wir den"
+" Weg zur Kraftstoffversorgung der Fahrzeuge"
+" sowie die Technologie für die "
+"Speicherung von Energie an Bord. Der "
+"Benutzer kann die üblichen Kraftstoffe "
+"wie Diesel oder Benzin oder "
+"komprimiertes Erdgas wählen, aber auch "
+"alternative Kraftstoffe wie Biodiesel, "
+"Bioethanol und Biomethan."
 
 #: templates/tool.html:679
 msgid ""
@@ -1748,6 +1796,13 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis means that they do not compete with "
 "crops production with the purpose of food supply."
 msgstr ""
+"Bei den alternativen Kraftstoffen handelt "
+"es sich hier um sogenannte \"2nd "
+"Generation\" -Kraftstoffe, die aus "
+"pflanzlichen Reststoffen hergestellt werden. "
+"Dies bedeutet, dass sie nicht mit "
+"der Pflanzenproduktion im Sinne der "
+"Nahrungsmittelversorgung konkurrieren."
 
 #: templates/tool.html:681
 msgid ""
@@ -1759,6 +1814,16 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses "
 "steam and methane to produce hydrogen."
 msgstr ""
+"Darüber hinaus werden verschiedene Wege "
+"für die Bereitstellung von Wasserstoff "
+"für Brennstoffzellenautos dargestellt. Wasserstoff"
+" kann entweder durch Elektrolyse erzeugt"
+" werden, was ein Prozess ist, der "
+"Elektrizität erfordert, oder durch einen "
+"Prozess, der als \"Steam Methane "
+"Reforming\" bezeichnet wird und Dampf "
+"und Methan verwendet, um Wasserstoff zu"
+" erzeugen."
 
 #: templates/tool.html:685
 msgid ""
@@ -1768,6 +1833,14 @@ msgid ""
 "manufacture. The origin of battery manufacture will determine the "
 "electricity mix used to produce the battery cells."
 msgstr ""
+"In Bezug auf Energiespeichertechnologien für"
+" batteriebetriebene Elektrofahrzeuge kann der "
+"Benutzer zwischen verschiedenen Arten von "
+"Lithiumionen-basierter Chemie, aber auch "
+"zwischen verschiedenen Herstellungsorten wählen. "
+"Der Ort der Batterieherstellung bestimmt "
+"den Strommix, der zur Herstellung der"
+" Batteriezellen verwendet wird."
 
 #: templates/tool.html:688
 msgid ""
@@ -1778,6 +1851,16 @@ msgid ""
 "engine can operate on, can be, in practice, limited for technical "
 "reasons."
 msgstr ""
+"Die standardmässig eingestellten "
+"Kraftstoffmischungsanteile stammen aus "
+"unterschiedlichen Projektionsmodellen. Sie können"
+" nach Belieben modifiziert werden. Es "
+"ist jedoch zu beachten, dass der "
+"Anteil des alternativen Kraftstoffs an "
+"der Kraftstoffmischung, mit der ein "
+"Motor betrieben werden kann, in der "
+"Praxis aus technischen Gründen begrenzt "
+"sein kann."
 
 #: templates/tool.html:698
 msgid "Fuel blend for"
@@ -1797,7 +1880,7 @@ msgstr "Treibstoff beigemischt"
 
 #: templates/tool.html:729
 msgid "ELECTRIC UTILITY SHARE"
-msgstr ""
+msgstr "ANTEIL VON KM IN ELEKTRISCHEN BETRIEB"
 
 #: templates/tool.html:733
 msgid ""
@@ -1811,28 +1894,35 @@ msgid ""
 " the range autonomy in electric mode, the higher the share of kilometers "
 "driven in electric mode."
 msgstr ""
+"Da Sie ein Plugin-Hybridfahrzeug ausgewählt haben, ist es wichtig, den Anteil "
+"der Kilometer zu kennen, die im Elektromodus (im Gegensatz zum Verbrennungsmodus) "
+"gefahren werden. Der Wert, den wir standardmäßig aus einer Studie liefern, die diesen "
+"Anteil mit der Reichweitenautonomie im Elektromodus korreliert: je höher die Reichweitenautonomie "
+"im Elektromodus, desto höher der Anteil der im Elektromodus gefahrenen Kilometer."
 
 #: templates/tool.html:737
 msgid ""
 "This also means that, as the capacity of the battery increases in the "
 "future, so does the share driven in electric mode."
 msgstr ""
+"Dies bedeutet auch, dass mit zunehmender Kapazität der Batterie in Zukunft auch der Anteil, "
+"der im Elektrobetrieb gefahren wird, steigt."
 
 #: templates/tool.html:738
 msgid "But ultimately, this is specific to the behavior of the driver."
-msgstr ""
+msgstr "Letztendlich ist dies jedoch spezifisch für das Verhalten des Fahrers."
 
 #: templates/tool.html:739
 msgid "We let you modify this value here."
-msgstr ""
+msgstr "Wir lassen Sie diesen Wert hier ändern."
 
 #: templates/tool.html:748
 msgid "Electric utility share for"
-msgstr ""
+msgstr "Anteil der elektrifizierten km für"
 
 #: templates/tool.html:751
 msgid "Share of kilometers in electric mode vs. combustion mode"
-msgstr ""
+msgstr "Anteil der Kilometer im Elektromodus vs. Verbrennungsmodus"
 
 #: templates/tool.html:779
 msgid "OTHER CAR PARAMETERS"

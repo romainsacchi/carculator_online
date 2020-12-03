@@ -1840,7 +1840,7 @@ msgstr "Carburant secondaire"
 
 #: templates/tool.html:729
 msgid "ELECTRIC UTILITY SHARE"
-msgstr ""
+msgstr "PART DES KM EN MODE ELECTRIQUE"
 
 #: templates/tool.html:733
 msgid ""
@@ -2040,7 +2040,7 @@ msgstr "Ajoutez les paramètres que vous désirez modifier."
 
 #: templates/tool.html:853
 msgid "Search for parameters to modify"
-msgstr ""
+msgstr "Cherchez des paramètres à modifier"
 
 #: templates/tool.html:870
 msgid "Add?"
