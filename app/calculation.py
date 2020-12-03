@@ -382,7 +382,7 @@ class Calculation:
         else:
             cm.set_all()
 
-        cm.array = cm.array.fillna(0)
+        #cm.array = cm.array.fillna(0)
 
         cumsum = cm.energy.sel(
             powertrain=d[("Functional unit",)]["powertrain"],
