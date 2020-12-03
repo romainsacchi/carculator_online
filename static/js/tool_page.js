@@ -1,18 +1,7 @@
+
 (function( $ ){
 
-    //  Load the JSON File
-    $.when($.ajax({
-                url: "/get_language",
-                dataType: 'json',
-                type: 'GET',
-                success : function(data) {
-                   var json = data
-                    return json
-                    },
-                error: function(xhr, status, error){console.log(error)}})
-            ).done(function(json){
-                i18n.translator.add(json);
-            });
+
 
 /* ----------------------------------------------------------- */
 	/*  2. FIXED MENU
@@ -656,7 +645,6 @@
 
 })();
 
-var isConfig = false;
 
 // Radio buttons for vehicle type selection
 $('#vehicle_type input:radio').addClass('input_hidden');
@@ -692,6 +680,7 @@ $('#vehicle_type label').click(function() {
 
 // Detect when powertrains are added
 function size_list_update(){
+    console.log("size_list_update")
     var listItems = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -719,8 +708,7 @@ function size_list_update(){
             );
 
        return;
-    }
-    else{
+    }else{
         if (listItems.length>0 & listSizes.length>0){
 
             var old_year = false;
@@ -740,56 +728,65 @@ function size_list_update(){
                 }
             };
 
-            if (isConfig==false){
+            console.log(list_pt)
 
-                // Create fuel table
-                var tableRef = document.getElementById('fuel_pathway_table');
-                var rowCount = tableRef.rows.length;
-                while (rowCount>2){
-                    tableRef.deleteRow(2);
-                    var rowCount = tableRef.rows.length;
-                }
-                create_fuel_table();
 
-                var tableRef = document.getElementById('efficiency_table');
-                var rowCount = tableRef.rows.length;
-                while (rowCount>2){
+
+            for (var pt = 0; pt < listItems.length; pt++){
+                // if electric vehicles, display the section
+                // about energy storage
+                if (['BEV'].includes(i18n(listItems[pt].innerHTML))){
+                    $("#row_storage").show();
+                };
+                // if plugin hybrid vehicles, display the section
+                // about electric utility share
+                if (['PHEV-p', 'PHEV-d'].includes(i18n(listItems[pt].innerHTML))){
+                    $("#row_electric_utility_factor").show();
+                };
+            };
+
+            // Create fuel table
+            var tableRef = document.getElementById('fuel_pathway_table');
+            var rowCount = tableRef.rows.length;
+            while (rowCount>2){
                 tableRef.deleteRow(2);
                 var rowCount = tableRef.rows.length;
-                }
+            }
+            create_fuel_table();
 
-                create_efficiency_table();
-
-                // Create energy storage table
-                var tableRef = document.getElementById('energy_storage_table');
+            // Create electric utility share table
+            var tableRef = document.getElementById('electric_utility_factor_table');
+            var rowCount = tableRef.rows.length;
+            while (rowCount>2){
+                tableRef.deleteRow(2);
                 var rowCount = tableRef.rows.length;
-                while (rowCount>2){
-                    tableRef.deleteRow(2);
-                    var rowCount = tableRef.rows.length;
-                }
-                create_energy_storage_table();
+            }
+            create_electric_utility_table();
 
-                $.when($.ajax({
-                    url: "/get_language",
-                    dataType: 'json',
-                    type: 'GET',
-                    success : function(data) {
-                       var json = data
-                        return json
-                        },
-                    error: function(xhr, status, error){console.log(error)}})
-                ).done(function(json){
-                    i18n.translator.add(json);
+            // Create powertrain efficiency table
+            var tableRef = document.getElementById('efficiency_table');
+            var rowCount = tableRef.rows.length;
+            while (rowCount>2){
+            tableRef.deleteRow(2);
+            var rowCount = tableRef.rows.length;
+            }
 
+            create_efficiency_table();
 
-                    prepare_data_for_efficiency();
+            // Create energy storage table
+            var tableRef = document.getElementById('energy_storage_table');
+            var rowCount = tableRef.rows.length;
+            while (rowCount>2){
+                tableRef.deleteRow(2);
+                var rowCount = tableRef.rows.length;
+            }
+            create_energy_storage_table();
 
-                    prepare_data_for_energy_storage();
-                });
-
-            }else{
-                isConfig=false;
-            };
+            if (isConfig == false){
+                console.log(isConfig)
+                prepare_data_for_efficiency();
+                prepare_data_for_energy_storage();
+            }
 
             if (old_year==true && new_powertrain==true){
                 // Warning message if the powertrain is BEV, FCEV and hybrids, before 2011
@@ -830,6 +827,7 @@ function size_list_update(){
             $("#efficiency_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#fuel_section").attr('style', 'text-align:center;padding-top:50px;display:block;margin-top:0px;');
             $("#calculation_section").attr('style', 'text-align:center;padding-top:0px;padding-bottom:50px;display:block;');
+
             generate_driving_cycle_graph('WLTC');
 
             }
@@ -903,7 +901,7 @@ function size_list_update(){
     table.appendChild(tbody);
     row.appendChild(table);
 
-
+    return;
 };
 
 // Populate table with search results as the search field is updated.
@@ -1177,6 +1175,7 @@ function getSelectedCountries() {
   };
   // If country is selected, get electricity mixes
   // Get also biofuel shares
+
   if (selected.length>0){
 
     get_electricity_mix(selected)
@@ -1186,33 +1185,43 @@ function getSelectedCountries() {
         list_year.push(listYears[item].innerHTML);
     };
 
-    $.when($.ajax({
-        url: "/get_fuel_blend/"+selected+"/"+list_year,
-        dataType: 'json',
-        type: 'GET',
-        success : function(data) {
-           var json = data
-            return json
-            },
-        error: function(xhr, status, error){console.log(error)}})
-    ).done(function(json){
-        // Loop through divs in fuel tables
-        var divs = $("#fuel_pathway_table > tbody").find('div');
 
-        for (i=0; i<divs.length; i++){
 
-            if (typeof divs[i].id !== 'undefined') {
-                if (divs[i].id != ""){
+    if (isConfig == false){
+        console.log("getting biofuel shares...")
 
-                    var div_year = divs[i].id.split('_')[1]
-                    var slider = divs[i]
-                    slider.noUiSlider.updateOptions({
-                        start: parseInt(json[div_year]['primary']*100)
-                    });
+        $.when($.ajax({
+            url: "/get_fuel_blend/"+selected+"/"+list_year,
+            dataType: 'json',
+            type: 'GET',
+            success : function(data) {
+               var json = data
+                return json
+                },
+            error: function(xhr, status, error){console.log(error)}})
+        ).done(function(json){
+            // Loop through divs in fuel tables
+            var divs = $("#fuel_pathway_table > tbody").find('div');
+
+            for (i=0; i<divs.length; i++){
+
+                if (typeof divs[i].id !== 'undefined') {
+                    if (divs[i].id != ""){
+
+                        var div_year = divs[i].id.split('_')[1]
+                        var slider = divs[i]
+                        slider.noUiSlider.updateOptions({
+                            start: parseInt(json[div_year]['primary']*100)
+                        });
+                    }
+                    }
                 }
-                }
-            }
-        })
+            });
+
+
+
+    }
+
     };
 
   return selected;
@@ -1644,8 +1653,6 @@ function collect_configuration(){
 
                 // Ensure that no two same fuels are selected
 
-
-
                 var primary_fuel_select = document.getElementById(fuel+" primary fuel");
                 var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
 
@@ -1696,6 +1703,26 @@ function collect_configuration(){
             }
         }
     };
+
+    // Retrieve electric utility share
+    var divs = $("#electric_utility_factor_table > tbody").find('div');
+    var electric_utility = {};
+
+    for (i=0; i<divs.length; i++){
+
+        if (typeof divs[i].id !== 'undefined') {
+            if (divs[i].id != ""){
+
+                var slider = $("[id='"+divs[i].id+"']")[0]
+                var year = divs[i].id.split('_')[2];
+                var value = parseFloat(slider.noUiSlider.get()) / 100
+
+                electric_utility[year] = value
+            }
+        }
+    };
+
+
 
     // Retrieve energy storage
     var divs = $("#energy_storage_table > tbody").find('div');
@@ -1806,6 +1833,7 @@ function collect_configuration(){
     fu["quantity"] = $("#fu_distance").val();
 
     background_params['fuel blend'] = fuel_blend;
+    background_params['electric utility factor'] = electric_utility;
     background_params['energy storage'] = {'electric': energy_storage};
     background_params['efficiency'] = efficiency;
     params['foreground params'] = foreground_params;
@@ -2300,196 +2328,148 @@ function change_tutorial_video(type){
 
 }
 
-var holder = document.getElementById('holder');
-holder.ondragover = function() {
-    this.className = 'hover';
-    return false;
-};
-holder.ondragend = function() {
-    this.className = '';
-    return false;
-};
+
 
 function fill_in_from_config_file(data){
+    console.log("fill_in_from_config_file")
     // Display first section
-        $('#label_car').trigger('click');
+    $('#label_car').trigger('click');
 
-        // Add years to right frame
-        $("#years_list").empty();
-        for (y in data['year']){
-            $("#years_list").append('<li>'+data['year'][y]+'</li>');
-        };
-        // Remove years from left frame
-        var ul = document.getElementById("years_list_choice");
-        var items = ul.getElementsByTagName("li");
-        for (y in data['year']){
-            for (var i = 0; i < items.length; ++i) {
-                if (items[i].innerHTML == data["year"][y]){
-                    ul.removeChild(items[i]);
-                };
-              };
-        };
-
-        $("#powertrain_list").empty();
-        for (y in data['type']){
-            $("#powertrain_list").append('<li>'+i18n(data['type'][y])+'</li>');
-        };
-
-        // Remove powertrains from left frame
-        var ul = document.getElementById("powertrain_list_choice");
-        var items = ul.getElementsByTagName("li");
-        for (y in data['type']){
-            for (var i = 0; i < items.length; ++i) {
-                if (items[i].innerHTML == i18n(data["type"][y])){
-                    ul.removeChild(items[i]);
-                };
-              };
-        };
-
-        $("#size_list").empty();
-        for (y in data['size']){
-            $("#size_list").append('<li>'+i18n(data['size'][y])+'</li>');
-        };
-
-        // Remove powertrains from left frame
-        var ul = document.getElementById("size_list_choice");
-        var items = ul.getElementsByTagName("li");
-        for (y in data['size']){
-            for (var i = 0; i < items.length; ++i) {
-                if (items[i].innerHTML == i18n(data["size"][y])){
-                    ul.removeChild(items[i]);
-                };
-              };
-        };
-
-        size_list_update()
-
-        // Driving cycle
-        $('#driving_cycle_selected').text(data['driving_cycle']);
-        generate_driving_cycle_graph(data['driving_cycle']);
-
-        // Country
-        var country = data['background params']['country']
-        document.getElementById("country-selected").innerHTML = country
-        var area = map.getObjectById(country);
-        area.showAsSelected = true;
-
-        // Car parameters
-        for (p in data['foreground params']){
-            var arr = p.split(',');
-            if (arr.length == 4){
-                var param = arr[0];
-                var pwt = i18n(arr[1]);
-                var size = i18n(arr[2]);
-                var unit = arr[3];
-                var tableRef = document.getElementById('table_inputs').getElementsByTagName('tbody')[0];
-                var newRow = tableRef.insertRow();
-                var row_content = '<td align="left" style="color:white">'+param+'</td><td align="left" style="color:white">'+pwt+'</td>'
-                row_content += '<td align="left" style="color:white">'+size+'</td><td align="left" style="color:white">'+unit+'</td>';
-
-                for (v in data['foreground params'][p]){
-                    var val = parseFloat(data['foreground params'][p][v]);
-                    if (unit=='0-1'){
-                            row_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" max="1" value="'+val+'"></td>'
-                       }
-                       else {
-                            row_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" value="'+val+'"></td>'
-                       };
-                };
-                newRow.innerHTML = row_content;
-                row_content='';
-                param_content='';
+    // Add years to right frame
+    $("#years_list").empty();
+    for (y in data['year']){
+        $("#years_list").append('<li>'+data['year'][y]+'</li>');
+    };
+    // Remove years from left frame
+    var ul = document.getElementById("years_list_choice");
+    var items = ul.getElementsByTagName("li");
+    for (y in data['year']){
+        for (var i = 0; i < items.length; ++i) {
+            if (items[i].innerHTML == data["year"][y]){
+                ul.removeChild(items[i]);
             };
+          };
+    };
+
+    $("#powertrain_list").empty();
+    for (y in data['type']){
+        $("#powertrain_list").append('<li>'+i18n(data['type'][y])+'</li>');
+    };
+
+    // Remove powertrains from left frame
+    var ul = document.getElementById("powertrain_list_choice");
+    var items = ul.getElementsByTagName("li");
+    for (y in data['type']){
+        for (var i = 0; i < items.length; ++i) {
+            if (items[i].innerHTML == i18n(data["type"][y])){
+                ul.removeChild(items[i]);
+            };
+          };
+    };
+
+    $("#size_list").empty();
+    for (y in data['size']){
+        $("#size_list").append('<li>'+i18n(data['size'][y])+'</li>');
+    };
+
+    // Remove powertrains from left frame
+    var ul = document.getElementById("size_list_choice");
+    var items = ul.getElementsByTagName("li");
+    for (y in data['size']){
+        for (var i = 0; i < items.length; ++i) {
+            if (items[i].innerHTML == i18n(data["size"][y])){
+                ul.removeChild(items[i]);
+            };
+          };
+    };
+
+
+
+    // Driving cycle
+    $('#driving_cycle_selected').text(data['driving_cycle']);
+    generate_driving_cycle_graph(data['driving_cycle']);
+
+    // Country
+    var country = data['background params']['country']
+    document.getElementById("country-selected").innerHTML = country
+    var area = map.getObjectById(country);
+    area.showAsSelected = true;
+
+    // Car parameters
+    for (p in data['foreground params']){
+        var arr = p.split(',');
+        if (arr.length == 4){
+            var param = arr[0];
+            var pwt = i18n(arr[1]);
+            var size = i18n(arr[2]);
+            var unit = arr[3];
+            var tableRef = document.getElementById('table_inputs').getElementsByTagName('tbody')[0];
+            var newRow = tableRef.insertRow();
+            var row_content = '<td align="left" style="color:white">'+param+'</td><td align="left" style="color:white">'+pwt+'</td>'
+            row_content += '<td align="left" style="color:white">'+size+'</td><td align="left" style="color:white">'+unit+'</td>';
+
+            for (v in data['foreground params'][p]){
+                var val = parseFloat(data['foreground params'][p][v]);
+                if (unit=='0-1'){
+                        row_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" max="1" value="'+val+'"></td>'
+                   }
+                   else {
+                        row_content += '<td align="left"><input style="color:white;background:none;width:60px;" type="number" min="0" value="'+val+'"></td>'
+                   };
+            };
+            newRow.innerHTML = row_content;
+            row_content='';
+            param_content='';
         };
+    };
 
-        // Electricity mix(es)
-        var mix = data['background params']['custom electricity mix']
-        for (var year = 0; year < data['year'].length; year++){
-            var i = 0;
-            var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
-            $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
-                this.value = parseInt(Math.ceil(Number(mix[year][i] / sum_mix *100)))
-                i++
-            })
-        }
+    // Electricity mix(es)
+    var mix = data['background params']['custom electricity mix']
+    for (var year = 0; year < data['year'].length; year++){
+        var i = 0;
+        var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
+        $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
+            this.value = parseInt(Math.ceil(Number(mix[year][i] / sum_mix *100)))
+            i++
+        })
+    }
 
-        // Number of passengers
-        var num_pass = parseFloat(data['foreground params']['passenger-slider'])
-        slider_passenger.noUiSlider.updateOptions({
-            start: [num_pass]
-        });
-        // Mass of cargo
-        var mass_cargo = parseFloat(data['foreground params']['cargo-slider'])
-        slider_cargo.noUiSlider.updateOptions({
-            start: [mass_cargo]
-        });
-        // Vehicle lifetime
-        var lifetime = parseFloat(data['foreground params']['lifetime-slider'].replace(' ',''))
-        slider_lifetime.noUiSlider.updateOptions({
-            start: [lifetime]
-        });
-        // Annual km
-        var mileage = parseFloat(data['foreground params']['mileage-slider'].replace(' ',''))
-        slider_mileage.noUiSlider.updateOptions({
-            start: [mileage]
-        });
+    // Number of passengers
+    var num_pass = parseFloat(data['foreground params']['passenger-slider'])
+    slider_passenger.noUiSlider.updateOptions({
+        start: [num_pass]
+    });
+    // Mass of cargo
+    var mass_cargo = parseFloat(data['foreground params']['cargo-slider'])
+    slider_cargo.noUiSlider.updateOptions({
+        start: [mass_cargo]
+    });
+    // Vehicle lifetime
+    var lifetime = parseFloat(data['foreground params']['lifetime-slider'].replace(' ',''))
+    slider_lifetime.noUiSlider.updateOptions({
+        start: [lifetime]
+    });
+    // Annual km
+    var mileage = parseFloat(data['foreground params']['mileage-slider'].replace(' ',''))
+    slider_mileage.noUiSlider.updateOptions({
+        start: [mileage]
+    });
 
-        // Change the background color of the "Calculate" button
-        document.getElementById("calculateButton").style.backgroundColor='lightgreen';
+    // Change the background color of the "Calculate" button
+    document.getElementById("calculateButton").style.backgroundColor='lightgreen';
 
-        // Create fuel table
-        var tableRef = document.getElementById('fuel_pathway_table');
-        var rowCount = tableRef.rows.length;
-        while (rowCount>2){
-            tableRef.deleteRow(2);
-            var rowCount = tableRef.rows.length;
-        }
-
-        // Create energy storage table
-        var tableRef = document.getElementById('energy_storage_table');
-        var rowCount = tableRef.rows.length;
-        while (rowCount>2){
-            tableRef.deleteRow(2);
-            var rowCount = tableRef.rows.length;
-        }
-
-        // Create efficiency table
-        var tableRef = document.getElementById('efficiency_table');
-        var rowCount = tableRef.rows.length;
-        while (rowCount>2){
-            tableRef.deleteRow(2);
-            var rowCount = tableRef.rows.length;
-        }
-
-        // Fill in functional unit
-        console.log(data);
-        $("#functional_unit_select").val(data['fu']['unit']);
-        $("#fu_distance").val(data['fu']['quantity']);
+    // Fill in functional unit
+    $("#functional_unit_select").val(data['fu']['unit']);
+    $("#fu_distance").val(data['fu']['quantity']);
 
 
-        //  Load the JSON File
-        $.when($.ajax({
-                    url: "/get_language",
-                    dataType: 'json',
-                    type: 'GET',
-                    success : function(dict) {
-                       var json = dict
-                        return json
-                        },
-                    error: function(xhr, status, error){console.log(error)}})
-                ).done(function(json){
-                    i18n.translator.add(json);
-                    create_fuel_table();
-                    update_fuel_sliders(data);
-                    create_energy_storage_table();
-                    update_energy_storage_table(data);
-                    create_efficiency_table();
-                    update_efficiency_table(data);
-                });
+
+
+
 };
 
 function update_efficiency_table(data){
-
+    console.log("update_efficiency_table")
     var efficiency_data = data["background params"]["efficiency"];
 
     var map_params = {
@@ -2530,7 +2510,7 @@ function update_efficiency_table(data){
 };
 
 function prepare_data_for_efficiency(){
-
+    console.log("prepare_data_for_efficiency")
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -2560,7 +2540,6 @@ function prepare_data_for_efficiency(){
             ).done(function(json){
 
                 var efficiency_data = {};
-
                 for (var pt = 0; pt < arr_pt.length; pt++ ){
                     efficiency_data[arr_pt[pt]] = {};
                     for (var s = 0; s < arr_s.length; s++ ){
@@ -2578,27 +2557,12 @@ function prepare_data_for_efficiency(){
                 data["year"] = arr_y;
                 data["background params"] = {"efficiency":{}};
                 data["background params"]["efficiency"] = efficiency_data;
-
-                //  Load the JSON File
-                $.when($.ajax({
-                            url: "/get_language",
-                            dataType: 'json',
-                            type: 'GET',
-                            success : function(data) {
-                               var json = data
-                                return json
-                                },
-                            error: function(xhr, status, error){console.log(error)}})
-                        ).done(function(json){
-                            i18n.translator.add(json);
-                            update_efficiency_table(data);
-                            })
-
+                update_efficiency_table(data);
             });
-
 };
 
 function prepare_data_for_energy_storage(){
+    console.log("prepare_data_for_energy_storage")
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
@@ -2618,7 +2582,11 @@ function prepare_data_for_energy_storage(){
     if (arr_pt.length == 0){return [];};
 
     for (var y = 0; y < listYears.length; y++){arr_y.push(listYears[y].innerHTML)};
-    for (var s = 0; s < listSizes.length; s++){arr_s.push(i18n(listSizes[s].innerHTML))};
+    for (var s = 0; s < listSizes.length; s++){
+        console.log(listSizes[s].innerHTML)
+        console.log(i18n(listSizes[s].innerHTML))
+        arr_s.push(i18n(listSizes[s].innerHTML))
+    };
 
     var list_param = ["energy battery mass", "battery cell energy density", "battery lifetime kilometers"]
 
@@ -2668,6 +2636,7 @@ function prepare_data_for_energy_storage(){
 };
 
 function update_energy_storage_table(data){
+    console.log("update_energy_storage")
 
     var battery_data = data["background params"]["energy storage"]["electric"];
 
@@ -2676,19 +2645,29 @@ function update_energy_storage_table(data){
         if (battery_data.hasOwnProperty(size)) {
             var pt = "BEV";
             for (y=0;y<data["year"].length;y++){
+
                 var slider_mass = $("[id='"+"mass_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
-                 slider_mass.noUiSlider.updateOptions({
+
+                if (slider_mass){
+                    slider_mass.noUiSlider.updateOptions({
                                     start: battery_data[size]["energy battery mass"][y]
                                 });
+                }
+
                 var slider_density = $("[id='"+"energy_density_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
-                slider_density.noUiSlider.updateOptions({
+
+                if (slider_density){
+                    slider_density.noUiSlider.updateOptions({
                                     start: battery_data[size]["battery cell energy density"][y]
                                 });
+                }
 
                 var slider_lifetime = $("[id='"+"lifetime_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
-                slider_lifetime.noUiSlider.updateOptions({
+                if (slider_lifetime){
+                    slider_lifetime.noUiSlider.updateOptions({
                                     start: battery_data[size]["battery lifetime kilometers"][y]
                                 });
+                }
         }
 
         var div = $("[id='"+"type_"+pt+"_"+size+"']").children()
@@ -2704,7 +2683,39 @@ function update_energy_storage_table(data){
 
 };
 
+function update_electric_utility_sliders(data){
+console.log("update_electric_utility")
+    // Electric utility shares
+    var electric_utility = data['background params']['electric utility factor']
+    console.log(electric_utility)
+    var listYears = document.querySelectorAll( '#years_list > li' );
+
+    for (var key in electric_utility) {
+
+        // check if the property/key is defined in the object itself, not in parent
+        if (electric_utility.hasOwnProperty(key)) {
+
+            var slider_div = $('#electric_utility_'+ String(key))
+
+            if (slider_div.length){
+
+                var slider = slider_div[0]
+
+                // a bug with the slider prevents from using 0
+                var val = parseInt(electric_utility[key]*100)
+                if (val==0){val +=.001}
+
+                slider.noUiSlider.updateOptions({
+                    start: val
+                });
+
+                }
+        }
+    };
+};
+
 function update_fuel_sliders(data){
+    console.log("update_fuel_slider")
     // Fuel pathways
     var fuel_blend = data['background params']['fuel blend']
     var energy_storage = data['background params']['energy storage']
@@ -2722,237 +2733,161 @@ function update_fuel_sliders(data){
 
             for (y=0; y<listYears.length; y++){
                 var year = listYears[y].innerText;
-                var slider_id = String(fuel+'_'+year)
-                var slider = $("[id='"+slider_id+"']")[0]
-                slider.noUiSlider.updateOptions({
-                    start: parseInt(primary_fuel_share[y]*100)
-                });
+                var slider_div = $('#'+String(fuel+'_'+year))
 
-                // Change selected options
-                var primary_fuel_select = document.getElementById(fuel+" primary fuel");
-                primary_fuel_select.value = primary_fuel;
-                var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
-                secondary_fuel_select.value = secondary_fuel;
+                if (slider_div.length){
+                    console.log("fuel slider being updated...")
 
+                    var slider = slider_div[0]
+
+                    console.log(slider)
+                    console.log(parseInt(primary_fuel_share[y]*100))
+
+                    // a bug with the slider prevents from using 0
+                    var val = parseInt(primary_fuel_share[y]*100)
+                    if (val==0){val +=.001}
+
+
+                    slider.noUiSlider.updateOptions({
+                        start: val
+                    });
+
+                    // Change selected options
+                    var primary_fuel_select = document.getElementById(fuel+" primary fuel");
+                    primary_fuel_select.value = primary_fuel;
+                    var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
+                    secondary_fuel_select.value = secondary_fuel;
+                }
             }
         }
     };
 };
 
 function create_fuel_table() {
+    console.log("create_fuel_table")
 
-    var list_fuel = [];
+
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
 
     var tableRef = document.getElementById('fuel_pathway_table').getElementsByTagName('tbody')[0];
 
-    for (var pt = 0; pt < listPowertrains.length; pt++){
+    var list_fuel = ['petrol', 'diesel', 'cng', 'hydrogen', 'electric'];
 
-        // Choose the appropriate fuel
-        if (listPowertrains[pt].innerText == i18n('petrol')){
-            var fuel = i18n('fuel_petrol');
-            var fuel_real_name = 'petrol';
-        };
-        if (listPowertrains[pt].innerText == i18n('diesel')){
-            var fuel = i18n('fuel_diesel');
-            var fuel_real_name = 'diesel';
-        };
-        if (listPowertrains[pt].innerText == i18n('natural_gas')){
-            var fuel = i18n('fuel_natural_gas');
-            var fuel_real_name = 'cng';
-        };
-        if (listPowertrains[pt].innerText == i18n('electric')){
-            var fuel = i18n('fuel_electric');
-            var fuel_real_name = 'electric';
-        };
-        if (listPowertrains[pt].innerText == i18n('fuel_cell')){
-            var fuel = i18n('fuel_fuel_cell');
-            var fuel_real_name = 'hydrogen';
-        };
-        if (listPowertrains[pt].innerText == i18n('hybrid_petrol')){
-            var fuel = i18n('fuel_hybrid_petrol');
-            var fuel_real_name = 'petrol';
-        };
-        if (listPowertrains[pt].innerText == i18n('hybrid_diesel')){
-            var fuel = i18n('fuel_hybrid_diesel');
-            var fuel_real_name = 'diesel';
-        };
-        if (listPowertrains[pt].innerText == i18n('plugin_hybrid_petrol')){
-            var fuel = i18n('fuel_plugin_hybrid_petrol');
-            var fuel_real_name = 'petrol';
-        };
-        if (listPowertrains[pt].innerText == i18n('plugin_hybrid_diesel')){
-            var fuel = i18n('fuel_plugin_hybrid_diesel');
-            var fuel_real_name = 'diesel';
-        };
-
-        if (!list_fuel.includes(fuel)){
-            for (var y = 0; y < listYears.length; y++){
-                var year = listYears[y].innerText;
-
-                    var newRow = tableRef.insertRow();
-                    if (listPowertrains[pt].innerText == i18n('electric')){
-                        if (y==0){
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +
-                            '</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>'
-
-
-                        }else{
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year +
-                            '</td><td align="left" style="color:white" colspan=3>'+i18n('electricity_mix_already_specified')+'</td>'
-                            + '<td align="left" style="color:white"></td>'
-
-                        };
-
-                    };
-
-                    if (listPowertrains[pt].innerText == i18n('petrol')|listPowertrains[pt].innerText == i18n('hybrid_petrol')|listPowertrains[pt].innerText == i18n('fuel_plugin_hybrid_petrol')){
-
-                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+
-                        '_'+year+'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+
-                        fuel_real_name+'_'+year+'">85%</td></tr></table>'
-
-                        if (y==0){
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '<select id="petrol primary fuel" style="color:grey"><option value="petrol">'
-                            + i18n("fuel_petrol")+'</option><option value="bioethanol - wheat straw">'+i18n("bioethanol_wheat_straw")
-                            + '</option><option value="bioethanol - forest residues">'+i18n("bioethanol_forest_residues")
-                            + '</option><option value="bioethanol - sugarbeet">'+i18n("bioethanol_sugarbeet")+'</option>'
-                            + '<option value="bioethanol - maize starch">'+i18n("bioethanol_maize_starch")+'</option>'
-                            + '<option value="synthetic gasoline">'+i18n("synthetic_gasoline")+'</option></select></td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"><select id="petrol secondary fuel" style="color:grey">'
-                            +'</option><option value="bioethanol - wheat straw">'+i18n("bioethanol_wheat_straw")
-                            + '</option><option value="bioethanol - forest residues">'+i18n("bioethanol_forest_residues")
-                            + '</option><option value="bioethanol - sugarbeet">'+i18n("bioethanol_sugarbeet")+'</option>'
-                            + '<option value="bioethanol - maize starch">'+i18n("bioethanol_maize_starch")+'</option>'
-                            + '<option value="synthetic gasoline">'+i18n("synthetic_gasoline")+'</option></select></td>'
-
-                        }else{
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '</td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"></td>'
-                            + '<td align="left" style="color:white"></td>'
-                        };
-
-                    };
-
-                    if (listPowertrains[pt].innerText == i18n('diesel')|listPowertrains[pt].innerText == i18n('hybrid_diesel')|listPowertrains[pt].innerText == i18n('fuel_plugin_hybrid_diesel')){
-                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+'_'+year
-                        +'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+fuel_real_name+'_'+year
-                        +'">85%</td></tr></table>'
-
-                        if (y==0){
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '<select id="diesel primary fuel" style="color:grey"><option value="diesel">'
-                            + i18n("fuel_diesel")+'</option><option value="biodiesel - algae">'+i18n("biodiesel_algae")
-                            + '</option><option value="biodiesel - cooking oil">'+i18n("biodiesel_cooking_oil")
-                            + '</option><option value="synthetic diesel">'+i18n("synthetic_diesel")+'</option></select></td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"><select id="diesel secondary fuel" style="color:grey">'
-                            +'</option><option value="biodiesel - algae">'+i18n("biodiesel_algae")
-                            + '</option><option value="biodiesel - cooking oil">'+i18n("biodiesel_cooking_oil")
-                            + '</option><option value="synthetic diesel">'+i18n("synthetic_diesel")+'</option></select></td>'
-
-
-                        }else{
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '</td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"></td>'
-                            + '<td align="left" style="color:white"></td>'
-                        };
-                    };
-
-                    if (listPowertrains[pt].innerText == i18n('natural_gas')){
-                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+'_'+year
-                        +'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+fuel_real_name+'_'+year
-                        +'">85%</td></tr></table>'
-
-                        if (y==0){
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '<select id="cng primary fuel" style="color:grey"><option value="cng">'
-                            + i18n("fuel_natural_gas")+'</option><option value="biogas - sewage sludge">'+i18n("biogas")
-                            + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"><select id="cng secondary fuel" style="color:grey">'
-                            + '</option><option value="biogas - sewage sludge">'+i18n("biogas")
-                            + '</option><option value="syngas">'+i18n("syngas")+'</option></select></td>'
-
-
-                        }else{
-
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '</td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"></td>'
-                             + '<td align="left" style="color:white"></td>'
-
-                        };
-
-                    };
-
-                    if (listPowertrains[pt].innerText == i18n('fuel_cell')){
-                        var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel_real_name+'_'+year
-                        +'">15%</td><td><div id="'+fuel_real_name+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+fuel_real_name+'_'+year
-                        +'">85%</td></tr></table>'
-
-                        if (y==0){
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '<select id="hydrogen primary fuel" style="color:grey">'
-                            + '<option value="smr - natural gas">'+i18n("smr") + '</option>'
-                            + '<option value="electrolysis">'+i18n("electrolysis")+'</option>'
-                            + '<option value="smr - natural gas with CCS">'+i18n("smr_ccs")+'</option>'
-                            + '<option value="smr - biogas">'+i18n("smr_biogas") +'</option>'
-                            +'<option value="smr - biogas with CCS">'+i18n("smr_biogas_ccs")+'</option>'
-                            +'<option value="wood gasification">'+i18n("wood_gasification")+'</option>'
-                            +'<option value="wood gasification with CCS">'+i18n("wood_gasification_ccs")+'</option>'
-                            +'<option value="coal gasification">'+i18n("coal_gasification")+'</option>'
-                            +'</select>'
-                            +'</td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white">'
-                            + '<select id="hydrogen secondary fuel" style="color:grey">'
-                            + '<option value="electrolysis">'+i18n("electrolysis")+'</option>'
-                            + '<option value="smr - natural gas">'+i18n("smr") + '</option>'
-                            + '<option value="smr - natural gas with CCS">'+i18n("smr_ccs")+'</option>'
-                            + '<option value="smr - biogas">'+i18n("smr_biogas") +'</option>'
-                            + '<option value="smr - biogas with CCS">'+i18n("smr_biogas_ccs")+'</option>'
-                            +'<option value="wood gasification">'+i18n("wood_gasification")+'</option>'
-                            +'<option value="wood gasification with CCS">'+i18n("wood_gasification_ccs")+'</option>'
-                            +'<option value="coal gasification">'+i18n("coal_gasification")+'</option>'
-                            + '</select>'
-                            + '</td>'
-
-                        }else{
-
-                            var row_content = '<td align="left" style="color:white">'+ listPowertrains[pt].innerText +', '+ year
-                            + '</td><td align="left" style="color:white">'
-                            + '</td>'
-                            + '<td align="left" style="color:white">'+inner_table+'</td>'
-                            + '<td align="left" style="color:white"></td>'
-                            + '<td align="left" style="color:white"></td>'
-                        };
-                    };
-
-
-                newRow.innerHTML = row_content;
-                row_content='';
-        };
-            list_fuel.push(fuel);
-        };
+    var map_pt_to_fuel = {
+        'petrol': ['ICEV-p', 'HEV-p', 'PHEV-p'],
+        'diesel': ['ICEV-d', 'HEV-d', 'PHEV-d'],
+        'cng': ['ICEV-g'],
+        'electric': ['BEV', 'PHEV-p', 'PHEV-d'],
+        'hydrogen': ['FCEV']
     }
-    // Append table to div
-    tableRef.append(newRow);
+
+    var fuel_options = {
+        'petrol': ['petrol', 'bioethanol - wheat straw', 'bioethanol - forest residues',
+                    'bioethanol - sugarbeet', 'bioethanol - maize starch', 'synthetic gasoline'
+                    ],
+        'diesel': ['diesel', 'biodiesel - algae', 'biodiesel - cooking oil', 'synthetic diesel'],
+        'cng': ['cng', 'biogas - sewage sludge', 'biogas - biowaste', 'syngas'],
+        'electric': ['electric'],
+        'hydrogen': ['smr - natural gas', 'electrolysis', 'smr - biogas', 'coal gasification',
+                    'wood gasification', 'smr - natural gas with CCS', 'smr - biogas with CCS',
+                    'wood gasification with CCS']
+    }
+
+    for (var l_f=0; l_f < list_fuel.length; l_f++){
+
+        var list_pt = [];
+        var fuel = list_fuel[l_f];
+
+        for (var pt = 0; pt < listPowertrains.length; pt++){
+
+            var pt_name = i18n(listPowertrains[pt].innerText);
+            if (map_pt_to_fuel[fuel].includes(pt_name)){
+                list_pt.push(listPowertrains[pt].innerText)
+            }
+        };
+
+        if (list_pt.length > 0){
+            for (var y = 0; y < listYears.length; y++){
+            var year = listYears[y].innerText;
+            var newRow = tableRef.insertRow();
+
+            if (fuel != "electric"){
+
+                var inner_table = '<table style="border-spacing: 15px;"><tr><td id="primary_'+fuel+
+                        '_'+year+'">15%</td><td><div id="'+fuel+'_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div></td><td id="secondary_'+
+                        fuel+'_'+year+'">85%</td></tr></table>'
+
+                if (y==0){
+                    var row_content = '<td align="left" style="color:white">'
+                }else{
+                    var row_content = '<td align="left" style="color:white; border-top:0;">'
+                }
+
+                for (var pt=0; pt < list_pt.length; pt++){
+                    row_content += list_pt[pt] + ", "
+                }
+                row_content += " " + year
+
+                if (y==0){
+
+                    row_content += '</td><td align="left" style="color:white">'
+
+                    row_content += '<select id="' + fuel + ' primary fuel" style="color:grey">'
+
+                    for (f=0; f < fuel_options[fuel].length; f++){
+                        row_content += '<option value="' + fuel_options[fuel][f] + '">' + i18n(fuel_options[fuel][f]) + '</option>'
+                    }
+
+                    row_content += '</select></td>'
+                    row_content += '<td align="left" style="color:white">'+inner_table+'</td>'
+                    row_content += '</td><td align="left" style="color:white">'
+                    row_content += '<select id="' + fuel + ' secondary fuel" style="color:grey">'
+
+                    for (f=1; f < fuel_options[fuel].length; f++){
+                        row_content += '<option value="' + fuel_options[fuel][f] + '">' + i18n(fuel_options[fuel][f]) + '</option>'
+                    }
+                    row_content += '</select></td>'
+
+                }else{
+
+                    row_content += '</td><td align="left" style="color:white; border-top:0;">'
+                    row_content += '</td>'
+                    row_content += '<td align="left" style="color:white; border-top:0;">'+inner_table+'</td>'
+                            + '<td align="left" style="color:white; border-top:0;"></td>'
+                            + '<td align="left" style="color:white; border-top:0;"></td>'
+                }
+                newRow.innerHTML = row_content;
+
+            }else{
+
+                if (y==0){
+                    var row_content = '<td align="left" style="color:white">'
+                }else{
+                    var row_content = '<td align="left" style="color:white; border-top:0;">'
+                }
+
+                for (var pt=0; pt < list_pt.length; pt++){
+                    row_content += list_pt[pt] + ", "
+                }
+
+                row_content += " " + year
+
+                if (y==0){
+                    row_content += '</td><td align="left" style="color:white" colspan=3>'
+                    +i18n('electricity_mix_already_specified')
+                    +'</td>'
+                }else{
+                    row_content += '</td><td align="left" style="color:white; border-top:0;" colspan=3>'
+                    +'</td>'
+                }
+                newRow.innerHTML = row_content;
+            }
+            // Append table to div
+            tableRef.append(newRow);
+            };
+        };
+    };
 
     var divs = $("#fuel_pathway_table > tbody").find('div');
 
@@ -2983,7 +2918,92 @@ function create_fuel_table() {
 
 };
 
+function create_electric_utility_table() {
+    console.log("create_electric_utility_table")
+
+
+    var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
+    var listYears = document.querySelectorAll( '#years_list > li' );
+
+    var tableRef = document.getElementById('electric_utility_factor_table').getElementsByTagName('tbody')[0];
+
+    for (var y=0; y < listYears.length; y++){
+        var year = listYears[y].innerText;
+        var list_pt = "";
+        var row_content = "";
+        var newRow = tableRef.insertRow();
+        for (var pt=0; pt < listPowertrains.length; pt++){
+            var pwt = listPowertrains[pt].innerHTML;
+            if (['PHEV-p', 'PHEV-d'].includes(i18n(pwt))){
+                list_pt += pwt + ', ';
+
+                var inner_table = '<table style="border-spacing: 15px;"><tr><td id="share_electric_electric_utility_'+year+'">15%</td>'
+                                    +'<td><div id="electric_utility_'+year+'" style="width:200px;margin-left:15px;margin-right:15px;"></div>'
+                                    +'</td><td id="share_combustion_electric_utility_'+year+'">85%</td></tr></table>'
+                if (y==0){
+                    row_content = '<td align="left" style="color:white">'
+                }else{
+                    row_content = '<td align="left" style="color:white; border-top:0;">'
+                }
+
+                row_content += list_pt + " " + year
+
+                if (y==0){
+                    row_content += '</td><td align="left" style="color:white">'
+                    row_content += inner_table + '</td>'
+                }else{
+                    row_content += '</td><td align="left" style="color:white; border-top:0;">'
+                    row_content += inner_table + '</td>'
+                }
+            }
+        }
+        if (row_content != ""){newRow.innerHTML = row_content};
+        if (newRow.innerHTML != ""){
+        // Append table to div
+        tableRef.append(newRow);
+        };
+    }
+
+
+
+    var divs = $("#electric_utility_factor_table > tbody").find('div');
+
+    for (var i=0; i<divs.length; i++){
+
+        var year = Number(divs[i].id.split("_")[2])
+
+        var utility_factor = parseInt(((year * .01434) - 28.67)*100)
+
+        console.log(divs[i].id)
+        console.log(year)
+        console.log(utility_factor)
+
+
+           var slider = noUiSlider.create(divs[i], {
+                start: utility_factor,
+                connect: true,
+                range: {
+                    'min': 0,
+                    'max': 60
+                }
+            });
+
+         slider.id = "_"+divs[i].id
+         slider.on('update', function(values, handle){
+            var primary_id = "share_electric"+this.id
+            var secondary_id = "share_combustion"+this.id
+            var div_primary = $("[id='"+primary_id+"']")
+            var div_secondary = $("[id='"+secondary_id+"']")
+            div_primary.text(parseInt(values[0]) + ' % ' + i18n("electric_mode"))
+            div_primary.val(parseInt(values[0]))
+            div_secondary.text(parseInt(100-values[0]) + ' % ' + i18n("combustion_mode"))
+            div_secondary.val(parseInt(100-values[0]))
+         })
+    };
+};
+
 function create_energy_storage_table() {
+    console.log("create_energy_storage_table")
 
     var list_fuel = [];
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
@@ -3154,6 +3174,7 @@ function create_energy_storage_table() {
 };
 
 function create_efficiency_table() {
+    console.log("create_efficiency_table")
     var list_fuel = [];
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
@@ -3255,6 +3276,16 @@ function create_efficiency_table() {
     };
 };
 
+var holder = document.getElementById('holder');
+holder.ondragover = function() {
+    this.className = 'hover';
+    return false;
+};
+holder.ondragend = function() {
+    this.className = '';
+    return false;
+};
+
 holder.ondrop = function(e) {
     this.className = '';
     e.preventDefault();
@@ -3264,12 +3295,37 @@ holder.ondrop = function(e) {
     reader.onload = function(event) {
         var data = JSON.parse(reader.result);
         isConfig = true;
-        fill_in_from_config_file(data);
+        start(data);
     };
 
     reader.readAsText(file);
     return false;
 };
+
+function start(data){
+
+    async function firstFunction(){
+        console.log("fill_in")
+        fill_in_from_config_file(data)
+        size_list_update()
+        return;
+    };
+
+    async function secondFunction(){
+        await firstFunction();
+        // now wait for firstFunction to finish...
+        // Update sliders
+        console.log("update")
+        update_fuel_sliders(data);
+        update_electric_utility_sliders(data);
+        update_energy_storage_table(data);
+        update_efficiency_table(data);
+        isConfig = false;
+    };
+
+    secondFunction();
+
+}
 
 
 

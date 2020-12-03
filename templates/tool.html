@@ -289,8 +289,6 @@
 		</section>
 		<!-- End SCOPE -->
 
-
-
 		<!-- Start USE -->
 		<section id="mu-testimonials">
 			<div class="container" style="width:90%;">
@@ -516,18 +514,14 @@
 												  style="height:85px; width:100px; border-right:3px solid white;
 														padding:20px;margin-bottom:0px;display:inline-block;margin-left:-30px;"
 												 alt="image">
-						<span style="color:white;">{{_('TANK-TO-WHEEL EFFICIENCY')}}</span></h2></div>
+						<span style="color:white;">{{_('TANK-TO-WHEEL EFFICIENCY')}}</span></h2>
+
+						</div>
 						<div class="mu-about-area" style="padding-top:0px;padding-bottom:50px;">
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;margin-top:0px;" id="efficiency_section">
 
-                                <p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
-									{{_('This section allows to adjust the tank-to-wheel efficiency of the vehicles. It represents the fraction of energy provided by the energy storage unit effectively transmitted to the wheels. ')}}
-                                    <br>
-                                    {{_('The energy storage efficiency for battery electric cars corresponds to the battery discharge efficiency.')}}
-                                    <br>
-                                    {{_('The energy storage efficiency for fuel cell cars corresponds to the fuel cell system efficiency.')}}
-                                    </p>
+
 
                                 <div class="container" style="width:100%;">
 									<div class="row" id = "row_efficiency" style="width:100%;color:white;">
@@ -542,6 +536,13 @@
                                                                                      alt="image">
                                                                     <span style="color:white;">{{_('POWERTRAIN EFFICIENCY')}}</span>
                                                                 </h6>
+																<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+																{{_('This section allows to adjust the tank-to-wheel efficiency of the vehicles. It represents the fraction of energy provided by the energy storage unit effectively transmitted to the wheels. ')}}
+																<br>
+																{{_('The energy storage efficiency for battery electric cars corresponds to the battery discharge efficiency.')}}
+																<br>
+																{{_('The energy storage efficiency for fuel cell cars corresponds to the fuel cell system efficiency.')}}
+																</p>
                                                             </div>
                                                         </td>
                                                 </tr>
@@ -594,20 +595,14 @@
 							<!-- Start About Us Content -->
 							<div class="mu-about-content" style="display:none;padding-top:50px;left:0;right:0;margin-top:0px;" id="fuel_section">
 
-                                <p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
-									{{_('If battery electric or plugin-hybrid vehicles are selected, it is possible to adjust a few parameters about the battery. The user can adjust the battery mass. Note that, by default, sixty percent of the mass is assumed to be taken by the cells. The user can also adjust the energy density of the battery cells. These two parameters defines a new capacity for the battery. Note that a heavier battery will increase the energy consumption of the vehicle.')}}
 
-                                    {{_('The lifetime of the battery can also be adjusted. If the lifetime is lower than the lifetime of the vehicle, a battery replacement is needed. For example, if the battery is expected to last 150,000 km and the vehicle lifetime is 200,000 km, an additional 0.33 unit of a second battery will be needed. This assumes that the environmental burden of the remaining 0.66 unit of the second battery will be allocated to a second-life application. If you do not like this assumption, you can set the battery lifetime to be exactly half of that of the vehicle lifetime. This way, the environmental burden of the second battery will be entirely allocated to the vehicle.')}}
-
-                                    {{_('Finally, the user can select the chemistry and the origin of manufacture of the battery. The origin of manufacture will set the type of electricity to manufacture the battery cells.')}}
-								</p>
 
                                 <div class="container" style="width:100%;">
-									<div class="row" id = "row_storage" style="width:100%;color:white;">
+									<div class="row" id = "row_storage" style="width:100%;color:white;display:none;">
 										<table class="table" id="energy_storage_table">
 											<thead>
 											<tr>
-													<td align="left" colspan="5">
+													<td align="left" colspan="7">
 														<div class="row" >
 															<h6>
 																<img class="image" src="/static/images/icons/car_battery_icon.png"
@@ -615,6 +610,20 @@
 																				 alt="image">
 																<span style="color:white;">{{_('ENERGY STORAGE')}}</span>
 															</h6>
+															<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;width:100%;">
+																{{_('If battery electric or plugin-hybrid vehicles are selected, it is possible to adjust a few parameters about
+																the battery. The user can adjust the battery mass. Note that, by default, sixty percent of the mass is assumed
+																to be taken by the cells. The user can also adjust the energy density of the battery cells.
+																These two parameters defines a new capacity for the battery. Note that a heavier battery will increase
+																the energy consumption of the vehicle.')}}
+																{{_('The lifetime of the battery can also be adjusted.
+																If the lifetime is lower than the lifetime of the vehicle, a battery replacement is needed.
+																For example, if the battery is expected to last 150,000 km and the vehicle lifetime is 200,000 km, an additional 0.33 unit of a second battery will be needed.
+																This assumes that the environmental burden of the remaining 0.66 unit of the second battery will be allocated to a second-life application. If you do not like this assumption, you can set the battery lifetime to be exactly half of that of the vehicle lifetime.
+																This way, the environmental burden of the second battery will be entirely allocated to the vehicle.')}}
+																{{_('Finally, the user can select the chemistry and the origin of manufacture of the battery.
+																The origin of manufacture will set the type of electricity to manufacture the battery cells.')}}
+															</p>
 														</div>
 													</td>
 											</tr>
@@ -645,28 +654,10 @@
 
 												</tr>
 											</tbody>
-
 										</table>
-
 									</div>
 								</div>
 
-								<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
-									{{_('In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
-									The user can select conventional pathways to represent the supply and use of common fuels such as diesel
-									or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-methane.')}}<br>
-									{{_('The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
-									This means that they do not compete with crops production with the purpose of food supply.')}}<br>
-									{{_('Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
-									Hydrogen can either be produced by electrolysis, which is a process that requires electricity, or via a process called
-									"Steam Methane Reforming" which uses steam and methane to produce hydrogen.')}}<br>
-
-									{{_('Regarding energy storage technologies for battery electric vehicles, the user can choose between several types of lithium-ion-based chemistry
-									but also between different origins of manufacture. The origin of battery manufacture will determine the electricity mix used to produce the battery cells.')}}
-
-									{{_('The fuel blend shares presented by default originate different projection models. They can be modified at will. It is to note however that the shre of
-									alternative fuel in the fuel blend an engine can operate on, can be, in practice, limited for technical reasons.')}}
-								</p>
 								<div class="container" style="width:100%;">
 									<div class="row" id = "row_fuel" style="width:100%;color:white;">
 										<table class="table" id="fuel_pathway_table">
@@ -680,6 +671,23 @@
 																				 alt="image">
 																<span style="color:white;">{{_('FUEL PATHWAYS')}}</span>
 															</h6>
+
+															<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+																{{_('In this section, we define the pathway used to supply fuel for the vehicles as well as the technology used for on-board energy storage.<br>
+																The user can select conventional pathways to represent the supply and use of common fuels such as diesel
+																or unleaded petrol or compressed natural gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-methane.')}}<br>
+																{{_('The alternative fuels presented here are so-called "2nd generation" fuels, as they are produced from residual plant-based material.
+																This means that they do not compete with crops production with the purpose of food supply.')}}<br>
+																{{_('Additionally, several pathways are presented for the supply of hydrogen to be used in fuel cell cars.
+																Hydrogen can either be produced by electrolysis, which is a process that requires electricity, or via a process called
+																"Steam Methane Reforming" which uses steam and methane to produce hydrogen.')}}<br>
+
+																{{_('Regarding energy storage technologies for battery electric vehicles, the user can choose between several types of lithium-ion-based chemistry
+																but also between different origins of manufacture. The origin of battery manufacture will determine the electricity mix used to produce the battery cells.')}}
+
+																{{_('The fuel blend shares presented by default originate different projection models. They can be modified at will. It is to note however that the shre of
+																alternative fuel in the fuel blend an engine can operate on, can be, in practice, limited for technical reasons.')}}
+															</p>
 														</div>
 													</td>
 											</tr>
@@ -697,6 +705,50 @@
 													</th>
 													<th>
 														<h3>{{_('Secondary fuel')}}</h3>
+													</th>
+												</tr>
+
+											</tbody>
+
+										</table>
+
+									</div>
+								</div>
+
+								<div class="container" style="width:100%;">
+									<div class="row" id = "row_electric_utility_factor" style="width:100%;color:white;display:none;">
+										<table class="table" id="electric_utility_factor_table">
+											<thead>
+											<tr>
+												<td align="left" colspan="5">
+													<div class="row" >
+														<h6>
+															<img class="image" src="/static/images/icons/electric_utility_share.png"
+																			  style="height:70px;padding:20px;display:inline-block;"
+																			 alt="image">
+															<span style="color:white;">{{_('ELECTRIC UTILITY SHARE')}}</span>
+
+														</h6>
+														<p align="left" style="border:3px; border-style:solid; border-color:white; padding: 1em; color:white;">
+															{{_('As you have selected a plugin hybrid vehicle, it is important to know the share of the kilometers
+															that are driven in electric mode (as opposed to combustion mode). The value we provide by default
+															is from a study that correlates this share to the
+															range autonomy in electric mode: the higher the range autonomy in electric mode, the higher the share of kilometers driven in electric mode.')}}
+															{{_('This also means that, as the capacity of the battery increases in the future, so does the share driven in electric mode.')}}
+															{{_('But ultimately, this is specific to the behavior of the driver.')}}
+															{{_('We let you modify this value here.')}}<br>
+														</p>
+													</div>
+												</td>
+											</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th>
+														<h3>{{_('Electric utility share for')}}</h3>
+													</th>
+													<th>
+														<h3>{{_('Share of kilometers in electric mode vs. combustion mode')}}</h3>
 													</th>
 												</tr>
 
@@ -1031,10 +1083,36 @@
 
   <script type="text/javascript">
 
-			var config = {{ config|tojson }};
-			if (config["config"] != "false"){
-				fill_in_from_config_file(config)
-			};
+  	var config = {{ config|tojson }};
+  	var isConfig = false;
+
+  	$( document ).ready(function() {
+	  //  Load the JSON File
+		$.when($.ajax({
+					url: "/get_language",
+					dataType: 'json',
+					type: 'GET',
+					success : function(data) {
+					   var json = data
+						return json
+						},
+					error: function(xhr, status, error){console.log(error)}})
+				).done(function(json){
+					i18n.translator.add(json);
+					console.log("i18n loaded 1");
+					if (config["config"] != "false"){
+						isConfig= true;
+						var data = config;
+						start(data);
+					};
+
+				});
+
+
+	});
+
+
+
 
   </script>
 

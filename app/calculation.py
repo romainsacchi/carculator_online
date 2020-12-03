@@ -365,10 +365,21 @@ class Calculation:
         task.progress = 50
         db.session.commit()
 
+        scope = {
+            "powertrain": d[("Functional unit",)]["powertrain"],
+            "size": d[("Functional unit",)]["powertrain"]
+        }
+
+        self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
         cm = CarModel(arr, cycle=d[("Driving cycle",)])
-        cm.set_all()
+
+        if "electric utility factor" in d[("Background",)]:
+            uf = list(d[("Background",)]["electric utility factor"].values())
+            cm.set_all(electric_utility_factor=uf)
+        else:
+            cm.set_all()
 
         cumsum = cm.energy.sel(
             powertrain=d[("Functional unit",)]["powertrain"],
@@ -628,7 +639,6 @@ class Calculation:
                 )
 
             new_dict[("Background",)]["custom electricity mix"] = response
-
 
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:

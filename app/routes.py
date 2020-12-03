@@ -186,7 +186,7 @@ def tool_page(country):
                         ],
                     )
                 ]
-                .interp(year=[2020, 2050])
+                .interp(year=[2020])
                 .values
             )
         except KeyError:
@@ -213,7 +213,7 @@ def tool_page(country):
                         ],
                     )
                 ]
-                .interp(year=[2020, 2050])
+                .interp(year=[2020])
                 .values
             )
         response = np.round(
@@ -229,7 +229,7 @@ def tool_page(country):
             app.calc.biofuel.sel(
                 region=region, fuel_type="Biomass fuel", scenario="SSP2-Base",
             )
-            .interp(year=[2020, 2050])
+            .interp(year=[2020])
             .values
         )
 
@@ -268,42 +268,52 @@ def tool_page(country):
                             "share": np.round(share_biofuel, 2).tolist(),
                         },
                     },
+                    "cng": {
+                        "primary fuel": {
+                            "type": "cng",
+                            "share": np.round((1.0 - share_biofuel), 2).tolist(),
+                        },
+                        "secondary fuel": {
+                            "type": "biogas - sewage sludge",
+                            "share": np.round(share_biofuel, 2).tolist(),
+                        },
+                    }
                 },
                 "energy storage": {
                     "BEV": {
                         "Medium": {
                             "type": "NMC",
                             "origin": "CN",
-                            "energy battery mass": [385, 230],
-                            "battery cell energy density": [0.23, 0.49],
-                            "battery lifetime kilometers": [200000, 200000],
+                            "energy battery mass": [385],
+                            "battery cell energy density": [0.23],
+                            "battery lifetime kilometers": [200000],
                         }
                     }
                 },
                 "efficiency": {
                     "ICEV-p": {
                         "Medium": {
-                            "engine efficiency": [0.27, 0.35],
-                            "drivetrain efficiency": [0.81, 0.87],
+                            "engine efficiency": [0.27],
+                            "drivetrain efficiency": [0.81],
                         }
                     },
                     "ICEV-d": {
                         "Medium": {
-                            "engine efficiency": [0.3, 0.35],
-                            "drivetrain efficiency": [0.81, 0.87],
+                            "engine efficiency": [0.3],
+                            "drivetrain efficiency": [0.81],
                         }
                     },
                     "ICEV-g": {
                         "Medium": {
-                            "engine efficiency": [0.26, 0.35],
-                            "drivetrain efficiency": [0.81, 0.87],
+                            "engine efficiency": [0.26],
+                            "drivetrain efficiency": [0.81],
                         }
                     },
                     "BEV": {
                         "Medium": {
-                            "engine efficiency": [0.85, 0.88],
-                            "drivetrain efficiency": [0.85, 0.88],
-                            "battery discharge efficiency": [0.88, 0.89],
+                            "engine efficiency": [0.85],
+                            "drivetrain efficiency": [0.85],
+                            "battery discharge efficiency": [0.88],
                         }
                     },
                 },
@@ -623,6 +633,8 @@ def get_results():
 
     job_id = str(uuid.uuid1())
 
+    print(request.get_json())
+
     # Add task to db
     task = Task(id=job_id, progress=0,)
     db.session.add(task)
@@ -630,6 +642,8 @@ def get_results():
 
     lang = session.get("language", "en")
     d = app.calc.format_dictionary(request.get_json(), lang, job_id)
+
+    print(d)
 
     # Create a connection to the Redis server
     q = Queue(connection=conn)
