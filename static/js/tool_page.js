@@ -1834,7 +1834,7 @@ function collect_configuration(){
 
     background_params['fuel blend'] = fuel_blend;
 
-    if (!Object.keys(electric_utility).length === 0){
+    if (Object.keys(electric_utility).length != 0){
         background_params['electric utility factor'] = electric_utility;
     }
 
