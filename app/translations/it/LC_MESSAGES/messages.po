@@ -1183,7 +1183,7 @@ msgstr ""
 
 #: templates/start.html:288 templates/start.html:289 templates/start.html:539
 msgid "Old better than new?"
-msgstr ""
+msgstr "Un'auto vecchia è meglio di una nuova?"
 
 #: templates/start.html:296 templates/start.html:546
 msgid "Yes, keep it simple!"
@@ -1199,7 +1199,7 @@ msgstr "Costruiamolo da zero!"
 
 #: templates/start.html:314 templates/start.html:564
 msgid "The best way to go."
-msgstr ""
+msgstr "Andiamo"
 
 #: templates/start.html:324 templates/start.html:574
 msgid ""

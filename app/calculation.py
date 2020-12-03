@@ -367,8 +367,10 @@ class Calculation:
 
         scope = {
             "powertrain": d[("Functional unit",)]["powertrain"],
-            "size": d[("Functional unit",)]["powertrain"]
+            "size": d[("Functional unit",)]["size"]
         }
+
+        print(scope)
 
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])

@@ -1252,9 +1252,7 @@ msgstr ""
 "Mit dieser Version werden die gleichen Ergebnisse wie mit dem 'einfachen'"
 " Zugang erzielt, aber Sie haben erweiterte Möglichkeiten und können alle "
 "Fahrzeugparameter ändern. Zusätzlich können länderspezifische Strommixe "
-"für das Laden der Batterien von Batteriefahrzeugen und die Herstellung "
-"von Wasserstoff durch Elektrolyse ausgewählt werden; die Strommixe können"
-" ebenfalls vom Benutzer definiert werden."
+"für das Laden der Batterien von Batteriefahrzeugen"
 
 #: templates/start.html:349 templates/start.html:599
 msgid "This access offers the model full flexibility."
