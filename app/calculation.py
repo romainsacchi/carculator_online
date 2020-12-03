@@ -369,9 +369,7 @@ class Calculation:
             "powertrain": d[("Functional unit",)]["powertrain"],
             "size": d[("Functional unit",)]["size"]
         }
-        
-        self.cip = CarInputParameters()
-        self.cip.static()
+
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
@@ -382,7 +380,6 @@ class Calculation:
             cm.set_all(electric_utility_factor=uf)
         else:
             cm.set_all()
-
 
         cumsum = cm.energy.sel(
             powertrain=d[("Functional unit",)]["powertrain"],
