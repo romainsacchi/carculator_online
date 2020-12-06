@@ -271,9 +271,9 @@ class Calculation:
                         if "fuel blend" in dict_params[('Background',)]:
                             if "petrol" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["share"][year.index(y)].item(0)
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["share"][year.index(y)]
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["share"][year.index(y)].item(0)
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["share"][year.index(y)]
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
@@ -293,9 +293,9 @@ class Calculation:
                         if "fuel blend" in dict_params[('Background',)]:
                             if "diesel" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["share"][year.index(y)].item(0)
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["share"][year.index(y)]
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["share"][year.index(y)].item(0)
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["share"][year.index(y)]
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
@@ -313,9 +313,9 @@ class Calculation:
                         if "fuel blend" in dict_params[('Background',)]:
                             if "cng" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["share"][year.index(y)].item(0)
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["share"][year.index(y)]
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["share"][year.index(y)].item(0)
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["share"][year.index(y)]
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
@@ -333,9 +333,9 @@ class Calculation:
                         if "fuel blend" in dict_params[('Background',)]:
                             if "hydrogen" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["share"][year.index(y)].item(0)
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["share"][year.index(y)]
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["share"][year.index(y)].item(0)
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["share"][year.index(y)]
                             else:
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["electrolysis", 1, "", ""]
                         else:
