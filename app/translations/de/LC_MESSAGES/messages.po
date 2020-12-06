@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-12-03 13:36+0100\n"
+"POT-Creation-Date: 2020-12-06 14:58+0100\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -89,80 +89,79 @@ msgstr "Bitte verwenden Sie einen anderen Benutzernamen."
 msgid "Please use a different email address."
 msgstr "Bitte verwenden Sie eine andere E-Mail-Adresse."
 
-#: app/routes.py:57
+#: app/routes.py:69
 msgid "Congratulations, you are now a registered user!"
 msgstr "Sie sind jetzt ein registrierter Benutzer!"
 
-#: app/routes.py:71
+#: app/routes.py:83
 msgid "Invalid username or password"
 msgstr "Ungültiger Benutzername oder Passwort"
 
-#: app/routes.py:109 app/routes.py:238 app/routes.py:325
+#: app/routes.py:121 app/routes.py:337
 msgid "Petrol"
 msgstr "Benzin"
 
-#: app/routes.py:110 app/routes.py:238 app/routes.py:326
+#: app/routes.py:122 app/routes.py:338
 msgid "Diesel"
 msgstr ""
 
-#: app/routes.py:111 app/routes.py:238 app/routes.py:327
+#: app/routes.py:123 app/routes.py:339
 msgid "CNG"
 msgstr "Komprimiertes Gas"
 
-#: app/routes.py:112 app/routes.py:238 app/routes.py:328
+#: app/routes.py:124 app/routes.py:340
 msgid "Electric"
 msgstr "Elektrisch"
 
-#: app/routes.py:113 app/routes.py:329
+#: app/routes.py:125 app/routes.py:341
 msgid "Fuel cell"
 msgstr "Brennstoffzelle"
 
-#: app/routes.py:114 app/routes.py:330
+#: app/routes.py:126 app/routes.py:342
 msgid "Hybrid-petrol"
 msgstr "Hybrid-Benzin"
 
-#: app/routes.py:115 app/routes.py:331
+#: app/routes.py:127 app/routes.py:343
 msgid "Hybrid-diesel"
 msgstr "Hybrid-Diesel"
 
-#: app/routes.py:116 app/routes.py:332
+#: app/routes.py:128 app/routes.py:344
 msgid "(Plugin) Hybrid-petrol"
 msgstr "(Plugin) Hybrid-Benzin"
 
-#: app/routes.py:117 app/routes.py:333
+#: app/routes.py:129 app/routes.py:345
 msgid "(Plugin) Hybrid-diesel"
 msgstr "(Plugin) Hybrid-Diesel"
 
-#: app/routes.py:120 app/routes.py:336 templates/new_car.html:232
+#: app/routes.py:132 app/routes.py:348 templates/new_car.html:232
 msgid "Minicompact"
 msgstr "Kleinstwagen"
 
-#: app/routes.py:121 app/routes.py:337 templates/new_car.html:238
+#: app/routes.py:133 app/routes.py:349 templates/new_car.html:238
 msgid "Subcompact"
 msgstr "Kleinwagen"
 
-#: app/routes.py:122 app/routes.py:338 templates/new_car.html:242
+#: app/routes.py:134 app/routes.py:350 templates/new_car.html:242
 msgid "Compact"
 msgstr "Kompaktklasse"
 
-#: app/routes.py:123 app/routes.py:239 app/routes.py:339
-#: templates/new_car.html:246
+#: app/routes.py:135 app/routes.py:351 templates/new_car.html:246
 msgid "Mid-size"
 msgstr "Mittelklasse"
 
-#: app/routes.py:124 app/routes.py:340 templates/new_car.html:250
+#: app/routes.py:136 app/routes.py:352 templates/new_car.html:250
 msgid "Large"
 msgstr "Oberklasse"
 
-#: app/routes.py:125 app/routes.py:341 templates/new_car.html:254
+#: app/routes.py:137 app/routes.py:353 templates/new_car.html:254
 msgid "SUV"
 msgstr "Geländewagen"
 
-#: app/routes.py:126 app/routes.py:342 templates/new_car.html:258
+#: app/routes.py:138 app/routes.py:354 templates/new_car.html:258
 msgid "Van"
 msgstr "Van"
 
-#: app/routes.py:594
+#: app/routes.py:606
 msgid "Email sent!"
 msgstr "Email gesendet!"
 
@@ -174,21 +173,21 @@ msgstr ""
 msgid "fuel cell system efficiency"
 msgstr ""
 
-#: templates/404.html:18 templates/result.html:18
+#: templates/404.html:18 templates/maintenance.html:18 templates/result.html:18
 msgid "Carculator : Results"
 msgstr "Carculator : Ergebnisse"
 
-#: templates/404.html:86 templates/result.html:88 templates/start.html:65
-#: templates/tool.html:80
+#: templates/404.html:86 templates/maintenance.html:86 templates/result.html:88
+#: templates/start.html:65 templates/tool.html:80
 msgid "Login"
 msgstr "Einloggen"
 
-#: templates/404.html:92 templates/result.html:97 templates/start.html:70
-#: templates/tool.html:88
+#: templates/404.html:92 templates/maintenance.html:92 templates/result.html:97
+#: templates/start.html:70 templates/tool.html:88
 msgid "Logout"
 msgstr "Ausloggen"
 
-#: templates/404.html:112
+#: templates/404.html:112 templates/maintenance.html:112
 msgid "RESULTS NOT FOUND"
 msgstr "ERGEBNISSE NICHT GEFUNDEN"
 
@@ -220,24 +219,24 @@ msgstr ""
 "Sie werden zu einer Seite weitergeleitet, auf der Sie eine neue "
 "Berechnung durchführen können."
 
-#: templates/404.html:136 templates/index.html:1184 templates/login.html:114
-#: templates/new_car.html:471 templates/param_table.html:116
-#: templates/register.html:170 templates/result.html:449
-#: templates/start.html:625 templates/tool.html:1031
+#: templates/404.html:136 templates/index.html:1199 templates/login.html:114
+#: templates/maintenance.html:133 templates/new_car.html:471
+#: templates/param_table.html:116 templates/register.html:170
+#: templates/result.html:483 templates/start.html:627 templates/tool.html:1031
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/404.html:136 templates/index.html:1184 templates/login.html:114
-#: templates/new_car.html:471 templates/param_table.html:116
-#: templates/register.html:170 templates/result.html:449
-#: templates/start.html:625 templates/tool.html:1031
+#: templates/404.html:136 templates/index.html:1199 templates/login.html:114
+#: templates/maintenance.html:133 templates/new_car.html:471
+#: templates/param_table.html:116 templates/register.html:170
+#: templates/result.html:483 templates/start.html:627 templates/tool.html:1031
 msgid "Paul Scherrer Institut"
 msgstr "Paul Scherrer Institut"
 
-#: templates/404.html:137 templates/index.html:1185 templates/login.html:115
-#: templates/new_car.html:472 templates/param_table.html:117
-#: templates/register.html:171 templates/result.html:450
-#: templates/start.html:626 templates/tool.html:1032
+#: templates/404.html:137 templates/index.html:1200 templates/login.html:115
+#: templates/maintenance.html:134 templates/new_car.html:472
+#: templates/param_table.html:117 templates/register.html:171
+#: templates/result.html:484 templates/start.html:628 templates/tool.html:1032
 msgid "All rights reserved"
 msgstr "Alle Rechte vorbehalten"
 
@@ -290,15 +289,15 @@ msgstr ""
 msgid "Try it out now!"
 msgstr "Jetzt ausprobieren!"
 
-#: templates/index.html:248
+#: templates/index.html:251
 msgid "or"
 msgstr "oder"
 
-#: templates/index.html:256
+#: templates/index.html:259
 msgid "Install"
 msgstr "Installieren"
 
-#: templates/index.html:261
+#: templates/index.html:264
 msgid ""
 "Make detailed or fleet-wide analyses. Perform sensitivity and uncertainty"
 " analyses. Use results in other Python libraries. Export your inventories"
@@ -308,15 +307,15 @@ msgstr ""
 "Sensitivitäts- und Unsicherheitsanalysen durch. Verwenden Sie die "
 "Ergebnisse in anderen Python-Modellen. "
 
-#: templates/index.html:273
+#: templates/index.html:276
 msgid "requires python >=3.6"
 msgstr "benötigt python >=3.6"
 
-#: templates/index.html:387
+#: templates/index.html:402
 msgid "ABOUT"
 msgstr "ÜBER"
 
-#: templates/index.html:393
+#: templates/index.html:408
 msgid ""
 "is an open-source, comprehensive and transparent life cycle assessment "
 "tool for passenger cars. It allows for an economic and environmental "
@@ -328,149 +327,149 @@ msgstr ""
 "Evaluation verschiedener Typen von Personenwagen für mehrere Fahrzyklen "
 "und Energieversorgungsszenarien."
 
-#: templates/index.html:394
+#: templates/index.html:409
 msgid "Results partly rely on the background inventory data of "
 msgstr "Die Ökobilanzergebnisse basieren auf Hintergrund-Inventardaten aus der "
 
-#: templates/index.html:394
+#: templates/index.html:409
 msgid " and the implementation of impact assessment methods therein."
 msgstr " und der Implementierung von Bewertungsmethoden darin."
 
-#: templates/index.html:410
+#: templates/index.html:425
 msgid "Unmute"
 msgstr "Ton an"
 
-#: templates/index.html:496
+#: templates/index.html:511
 msgid "Clean Code"
 msgstr "Übersichtlicher Code"
 
-#: templates/index.html:497
+#: templates/index.html:512
 msgid "The code is kept as clean and accessible as possible."
 msgstr "Der Code ist so sauber und zugänglich wie möglich."
 
-#: templates/index.html:508
+#: templates/index.html:523
 msgid "Great Features"
 msgstr "Grossartige Funktionen"
 
-#: templates/index.html:509
+#: templates/index.html:524
 msgid "Allows for fast and highly parametrized life cycle assessments."
 msgstr "Ermöglicht schnelle und hochgradig parametrisierte Lebenszyklusanalysen."
 
-#: templates/index.html:520
+#: templates/index.html:535
 msgid "Fast Library"
 msgstr "Schnelle Library"
 
-#: templates/index.html:521
+#: templates/index.html:536
 msgid "A Python library version allows for even more specific assessments."
 msgstr "Eine Python Library Version erlaubt noch spezifischere Bewertungen."
 
-#: templates/index.html:532
+#: templates/index.html:547
 msgid "Compatible"
 msgstr "Kompatibel"
 
-#: templates/index.html:533
+#: templates/index.html:548
 msgid "Export inventories compatible with"
 msgstr "Exportiere Inventare die kompatibel sind mit"
 
-#: templates/index.html:546
+#: templates/index.html:561
 msgid "State-of-the-art"
 msgstr "Auf dem neuesten Stand"
 
-#: templates/index.html:547
+#: templates/index.html:562
 msgid "Relies on recent published inventories to model energy chains."
 msgstr ""
 "Baut auf neuesten, publizierten Inventaren auf, um Energieketten zu "
 "modellieren (siehe Veröffentlichungen)."
 
-#: templates/index.html:558
+#: templates/index.html:573
 msgid "Well Documented"
 msgstr "Ausgezeichnete Dokumentation"
 
-#: templates/index.html:559
+#: templates/index.html:574
 msgid "The library is fully tested, documented and hosted on"
 msgstr "Die Library ist vollständig gestestet, dokumentiert und gehostet auf"
 
-#: templates/index.html:584
+#: templates/index.html:599
 msgid "Some facts about"
 msgstr "Einige Fakten über"
 
-#: templates/index.html:599
+#: templates/index.html:614
 msgid "Powertrains"
 msgstr "Antriebsstränge"
 
-#: templates/index.html:612
+#: templates/index.html:627
 msgid "Size classes"
 msgstr "Grössenkategorien"
 
-#: templates/index.html:625
+#: templates/index.html:640
 msgid "Driving cycles"
 msgstr "Fahrzyklen"
 
-#: templates/index.html:638
+#: templates/index.html:653
 msgid "Parameters"
 msgstr "Parameter"
 
-#: templates/index.html:651
+#: templates/index.html:666
 msgid "Li-ion battery types"
 msgstr "Li-Ion Batterietypen"
 
-#: templates/index.html:664
+#: templates/index.html:679
 msgid "Electricity mixes for battery charging"
 msgstr "Strommixe zum Laden der Batterie"
 
-#: templates/index.html:676
+#: templates/index.html:691
 msgid "Time horizons"
 msgstr "Referenzjahre"
 
-#: templates/index.html:689
+#: templates/index.html:704
 msgid "Cars used for calibration"
 msgstr "Autos genutzt für die Kalibrierung"
 
-#: templates/index.html:713
+#: templates/index.html:728
 msgid "OUR TEAM"
 msgstr "UNSER TEAM"
 
-#: templates/index.html:715
+#: templates/index.html:730
 msgid "The team behind the development of"
 msgstr "Das Team hinter der Entwicklung von"
 
-#: templates/index.html:715
+#: templates/index.html:730
 msgid "sits at the Paul Scherrer Institute, in the "
 msgstr "ist am Paul Scherrer Institut, in der "
 
-#: templates/index.html:740
+#: templates/index.html:755
 msgid "Pilot"
 msgstr "Pilot"
 
-#: templates/index.html:765
+#: templates/index.html:780
 msgid "Pit-stop manager"
 msgstr "Boxenstopp Manager"
 
-#: templates/index.html:783
+#: templates/index.html:798
 msgid "Designer (now at INFRAS)"
 msgstr "Designer (bei INFRAS)"
 
-#: templates/index.html:809
+#: templates/index.html:824
 msgid "Engine specialist"
 msgstr "Motorspezialistin"
 
-#: templates/index.html:833
+#: templates/index.html:848
 msgid "Chief Aerodynamicist"
 msgstr "Chefaerodynamikerin"
 
-#: templates/index.html:854
+#: templates/index.html:869
 msgid "Mechanic"
 msgstr "Mechaniker"
 
-#: templates/index.html:879
+#: templates/index.html:894
 msgid "OUR PARTNERS"
 msgstr "UNSERE PARTNER"
 
-#: templates/index.html:881
+#: templates/index.html:896
 msgid "carculator was developed within the "
 msgstr "carculator wurde entwickelt im Rahmen des "
 
-#: templates/index.html:882
+#: templates/index.html:897
 msgid ""
 "funded by innosuisse. We received additional\n"
 "\t\t\t\t\t\t\t\tfunding via the research projects "
@@ -478,56 +477,56 @@ msgstr ""
 "finanziert von innosuisse. Zusätzliche Mittel stammen aus den "
 "Forschungsprojekten "
 
-#: templates/index.html:884 templates/index.html:886
+#: templates/index.html:899 templates/index.html:901
 msgid "and "
 msgstr "und "
 
-#: templates/index.html:885
+#: templates/index.html:900
 msgid "as well as "
 msgstr "sowie den beiden "
 
-#: templates/index.html:945
+#: templates/index.html:960
 msgid "Publications on"
 msgstr "Publikationen zur"
 
-#: templates/index.html:945
+#: templates/index.html:960
 msgid "mobility"
 msgstr "mobilität"
 
-#: templates/index.html:1102
+#: templates/index.html:1117
 msgid "CONTACT"
 msgstr "KONTAKTIEREN SIE"
 
-#: templates/index.html:1102
+#: templates/index.html:1117
 msgid "US"
 msgstr "UNS"
 
-#: templates/index.html:1104
+#: templates/index.html:1119
 msgid "We are always happy to hear from you."
 msgstr "Wir freuen uns von Ihnen zu hören."
 
-#: templates/index.html:1117 templates/param_table.html:78
+#: templates/index.html:1132 templates/param_table.html:78
 #: templates/tool.html:864
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:1121
+#: templates/index.html:1136
 msgid "Enter Email"
 msgstr "Email"
 
-#: templates/index.html:1125
+#: templates/index.html:1140
 msgid "Message"
 msgstr "Nachricht"
 
-#: templates/index.html:1128
+#: templates/index.html:1143
 msgid "SUBMIT"
 msgstr "ABSENDEN"
 
-#: templates/index.html:1135
+#: templates/index.html:1150
 msgid "carculator support"
 msgstr "Carculator Support"
 
-#: templates/index.html:1136
+#: templates/index.html:1151
 msgid "Write to us if you have any questions about the tool, methods or results."
 msgstr ""
 "Schreiben Sie uns, wenn Sie Fragen zum Tool, zu Methoden oder Resultaten "
@@ -544,6 +543,10 @@ msgstr "Neuer Benutzer?"
 #: templates/login.html:92
 msgid "Click to Register!"
 msgstr "Hier klicken zur Registrierung"
+
+#: templates/maintenance.html:115
+msgid "Sorry, the website is under maintenance"
+msgstr ""
 
 #: templates/new_car.html:17
 msgid "Carculator : Should I keep my old cars?"
@@ -706,7 +709,7 @@ msgstr "Auswahlmöglichkeit"
 msgid "Selection"
 msgstr "Auswahl"
 
-#: templates/new_car.html:352 templates/result.html:142
+#: templates/new_car.html:352 templates/result.html:144
 msgid "RESULTS"
 msgstr "ERGEBNISSE"
 
@@ -715,22 +718,22 @@ msgid "Choose an emission type to look at."
 msgstr "Wählen Sie eine Emissionsart, die Sie sich ansehen möchten."
 
 #: templates/new_car.html:366 templates/new_car.html:423
-#: templates/result.html:377
+#: templates/result.html:257
 msgid "climate change"
 msgstr "Klimawandel"
 
 #: templates/new_car.html:369 templates/new_car.html:431
-#: templates/result.html:378
+#: templates/result.html:259
 msgid "particulate matter formation"
 msgstr "Bildung von Feinstaub"
 
 #: templates/new_car.html:372 templates/new_car.html:438
-#: templates/result.html:401
+#: templates/result.html:267
 msgid "photochemical oxidant formation"
 msgstr "Smogbildung"
 
 #: templates/new_car.html:375 templates/new_car.html:445
-#: templates/result.html:405
+#: templates/result.html:285
 msgid "fossil depletion"
 msgstr "Erschöpfung fossiler Energieressourcen"
 
@@ -811,23 +814,24 @@ msgid "Applies to size"
 msgstr "Gilt für die Größenkategorie"
 
 #: templates/result.html:112
-msgid "Export Brightway2-compatible inventories"
-msgstr "Brightway2-kompatible Inventardaten exportieren"
+msgid "Export inventories"
+msgstr "Inventardaten exportieren"
 
 #: templates/result.html:115 templates/result.html:116
 #: templates/result.html:117 templates/result.html:118
+#: templates/result.html:119 templates/result.html:120
 msgid "for "
 msgstr "für "
 
-#: templates/result.html:123
+#: templates/result.html:125
 msgid "Share results"
 msgstr "Ergebnisse teilen"
 
-#: templates/result.html:126
+#: templates/result.html:128
 msgid "Export results to CSV"
 msgstr "Ergebnisse exportieren (CSV)"
 
-#: templates/result.html:145
+#: templates/result.html:147
 msgid ""
 "The different sections of this page present the results of your analysis,"
 " based on the\n"
@@ -841,7 +845,7 @@ msgstr ""
 "relevante Phase des Lebenszyklus des Fahrzeugs wird berücksichtigt und "
 "anhand von Umwelt- und Wirtschaftsindikatoren charakterisiert."
 
-#: templates/result.html:148
+#: templates/result.html:150
 msgid ""
 "This is a useful tool when comparing technologies that have environmental"
 " hotspots\n"
@@ -851,11 +855,11 @@ msgstr ""
 "in verschiedenen Phasen des Lebenszyklus eines Fahrzeugs Umwelt-Hotspots "
 "aufweisen."
 
-#: templates/result.html:165
+#: templates/result.html:167
 msgid "REFERENCE"
 msgstr "REFERENZ"
 
-#: templates/result.html:169
+#: templates/result.html:171
 msgid ""
 "Any use of the results or inventories under any form should be referenced"
 " as following:"
@@ -870,13 +874,13 @@ msgstr "ÖKOBILANZ - EINZEL-INDIKATOREN"
 #: templates/result.html:196
 msgid ""
 "By default, the chart below shows the environmental impacts in terms of\n"
-"\t\t\t\t\t\t\t\t\tgreenhouse gas emissions emitted for each vehicle, per "
-"km driven. The results are sub-divided\n"
-"\t\t\t\t\t\t\t\t\tinto categories: powertrain, maintenance, fuel "
-"manufacture, energy storage, etc.\n"
-"\t\t\t\t\t\t\t\t\tThe user can change the environmental indicator using "
-"the list on the left.\n"
-"\t\t\t\t\t\t\t\t\tThe user can isolate some of the impact categories by "
+"\t\t\t\t\t\t\tgreenhouse gas emissions emitted for each vehicle, per km "
+"driven. The results are sub-divided\n"
+"\t\t\t\t\t\t\tinto categories: powertrain, maintenance, fuel manufacture,"
+" energy storage, etc.\n"
+"\t\t\t\t\t\t\tThe user can change the environmental indicator using the "
+"list on the left.\n"
+"\t\t\t\t\t\t\tThe user can isolate some of the impact categories by "
 "clicking them out from the legend area."
 msgstr ""
 "Standardmäßig werden die Treibhausgasemissionen pro Fahrzeug und "
@@ -884,11 +888,136 @@ msgstr ""
 "der Liste auf der linken Seite auswählen. Benutzer können auch einzelne "
 "Beiträge durch Anklicken entfernen oder isolieren."
 
-#: templates/result.html:230
+#: templates/result.html:204
+msgid "Impacts per kilometer"
+msgstr "Auswirkungen pro Kilometer"
+
+#: templates/result.html:211
+msgid "Information on selected indicator"
+msgstr "Informationen zum ausgewählten Indikator"
+
+#: templates/result.html:231
+msgid "Accumulated impacts over lifetime"
+msgstr "Kumulierte Auswirkungen über die Lebensdauer"
+
+#: templates/result.html:234
+msgid "Midpoint indicators normalized by the average annual impact of a person"
+msgstr ""
+"Mittelwertindikatoren, normalisiert durch die durchschnittliche jährliche"
+" Auswirkung einer Person"
+
+#: templates/result.html:239
+msgid ""
+"The graph below illustrates the accumulated impacts of the vehicles along"
+" their use phase.\n"
+"\t\t\t\t\t\t\t\t\t\tThe intercept of the slope represents the impacts "
+"associated with the production of the vehicle, occurring\n"
+"\t\t\t\t\t\t\t\t\t\tbefore the use phase, while the slope illustrates "
+"variable emissions associated with the preparation of the fuel\n"
+"\t\t\t\t\t\t\t\t\t\t(or generation of the electricity) and direct exhaust"
+" and non-exhaust emissions. You may select an impact\n"
+"\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
+msgstr ""
+"Die nachstehende Grafik veranschaulicht die akkumulierten Auswirkungen "
+"der Fahrzeuge entlang ihrer Nutzungsphase. Der Schnittpunkt der Steigung "
+"stellt die mit der Produktion des Fahrzeugs verbundenen Auswirkungen dar,"
+" die vor der Nutzungsphase auftreten, während die Steigung die variablen "
+"Emissionen veranschaulicht, die mit der Vorbereitung des Kraftstoffs "
+"(oder der Stromerzeugung) und den direkten Abgas- und "
+"Nichtausgasemissionen verbunden sind. Sie können eine zu "
+"berücksichtigende Aufprallkategorie aus dem Dropdown-Menü unten "
+"auswählen."
+
+#: templates/result.html:246
+msgid ""
+"This graph shows midpoint indicators normalized by the average impacts of"
+" a person in 2010.\n"
+"\t\t\t\t\t\t\t\t\t\tThis helps identify which midpoint indicators are the"
+" most relevant.\n"
+"\t\t\t\t\t\t\t\t\t\tYou can add or remove indicators to consider."
+msgstr ""
+"Diese Grafik zeigt Mittelwertindikatoren, normalisiert durch die "
+"durchschnittlichen Auswirkungen einer Person im Jahr 2010. Auf diese "
+"Weise lässt sich feststellen, welche Halbzeitindikatoren am relevantesten"
+" sind. Sie können zu berücksichtigende Indikatoren hinzufügen oder "
+"entfernen."
+
+#: templates/result.html:249
+msgid ""
+"Because these indicators are normalized, they are not expressed in their "
+"original unit,\n"
+"\t\t\t\t\t\t\t\t\t\tbut as a fraction of the impact of an average person "
+"over the year 2010."
+msgstr ""
+"Da diese Indikatoren normalisiert sind, werden sie nicht in ihrer "
+"ursprünglichen Einheit ausgedrückt, sondern als ein Bruchteil der "
+"Auswirkung einer durchschnittlichen Person im Jahr 2010."
+
+#: templates/result.html:254
+msgid "Most recommended"
+msgstr "Verlässlichste"
+
+#: templates/result.html:258
+msgid "ozone depletion"
+msgstr "Zerstörung der Ozonschicht"
+
+#: templates/result.html:263
+msgid "Recommended"
+msgstr "Empfohlen"
+
+#: templates/result.html:266
+msgid "ionising radiation"
+msgstr "Ionisierende Strahlung"
+
+#: templates/result.html:268
+msgid "terrestrial acidification"
+msgstr "Terrestrische Versauerung"
+
+#: templates/result.html:269
+msgid "terrestrial eutrophication"
+msgstr "Terrestrische Eutrophierung"
+
+#: templates/result.html:273
+msgid "freshwater eutrophication"
+msgstr "Eutrophierung von Gewässern ausserhalb des Meeres"
+
+#: templates/result.html:274
+msgid "marine eutrophication"
+msgstr "Eutrophierung von Gewässern im Meer"
+
+#: templates/result.html:275
+msgid "human toxicity - carcinogenic"
+msgstr "Humantoxizität - karzinogen"
+
+#: templates/result.html:276
+msgid "human toxicity - non-carcinogenic"
+msgstr "Humantoxizität - nicht karzinogen"
+
+#: templates/result.html:279
+msgid "Least reliable"
+msgstr "Am wenigsten zuverlässig"
+
+#: templates/result.html:282
+msgid "natural land transformation"
+msgstr "Natürliche Landumwandlung"
+
+#: templates/result.html:283
+msgid "freshwater ecotoxicity"
+msgstr "Toxizität in Gewässern ausserhalb des Meeres"
+
+#: templates/result.html:284
+msgid "water depletion"
+msgstr "Erschöpfung der Süsswasservorräte"
+
+#: templates/result.html:288
+msgid "metal depletion"
+msgstr "Erschöpfung der Metallressourcen"
+
+#: templates/result.html:323
 msgid "LIFE CYCLE IMPACT ASSESSMENT - SINGLE SCORE"
 msgstr "ÖKOBILANZ - AGGREGIERTE ERGEBNISSE"
 
-#: templates/result.html:234
+#: templates/result.html:327
 msgid ""
 "The environmental midpoint indicators listed above are characterized and "
 "grouped into three main\n"
@@ -917,27 +1046,35 @@ msgstr ""
 "bestimmte Indikatoren angeben, diese also stärker oder weniger stark "
 "gewichten. "
 
-#: templates/result.html:248
+#: templates/result.html:341
 msgid "Human health impacts"
 msgstr "Auswirkungen auf die menschliche Gesundheit"
 
-#: templates/result.html:249
+#: templates/result.html:342
 msgid "Ecosystem impacts"
 msgstr "Auswirkungen auf das Ökosystem"
 
-#: templates/result.html:250
+#: templates/result.html:343
 msgid "Resource depletion"
 msgstr "Erschöpfung der Ressourcen"
 
-#: templates/result.html:251
+#: templates/result.html:344
 msgid "Cost of ownership"
 msgstr "Kilometerkosten"
 
-#: templates/result.html:274
+#: templates/result.html:355
+msgid "Midpoint indicators weighted contribution to single score"
+msgstr "Beitrag der Midpoint-Indikatoren zum aggregierte ergebnisse"
+
+#: templates/result.html:358
+msgid "Endpoint indicators contribution to single score"
+msgstr "Beitrag der Endpunkt-Indikatoren zum aggregierte ergebnisse"
+
+#: templates/result.html:386
 msgid "BENCHMARK"
 msgstr "VERGLEICH"
 
-#: templates/result.html:278
+#: templates/result.html:390
 msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
@@ -945,35 +1082,35 @@ msgstr ""
 "Hier wird die Entfernung verglichen, die jedes Fahrzeug bei einem "
 "bestimmten Lebenszyklusbudget zurücklegen kann."
 
-#: templates/result.html:280
+#: templates/result.html:392
 msgid "How long can the vehicles drive on a life cycle budget of 1"
 msgstr "Wie lange können die Fahrzeuge mit einem Lebenszyklusbudget von 1 fahren"
 
-#: templates/result.html:282
+#: templates/result.html:394
 msgid "kg CO2-eq."
 msgstr "kg CO2-Äq."
 
-#: templates/result.html:283
+#: templates/result.html:395
 msgid "Euro"
 msgstr ""
 
-#: templates/result.html:284
+#: templates/result.html:396
 msgid "liter of petrol-eq."
 msgstr "Liter Benzin-Äq."
 
-#: templates/result.html:303
+#: templates/result.html:415
 msgid "OTHER INDICATORS"
 msgstr "ANDERE INDIKATOREN"
 
-#: templates/result.html:311
+#: templates/result.html:423
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr "Tank-to-Wheel kumuliert den Energieverbrauch während des Fahrzyklus"
 
-#: templates/result.html:315
+#: templates/result.html:427
 msgid "GHG emissions vs. ownership costs"
 msgstr "THG-Emissionen im Verhältnis zu den Betriebskosten"
 
-#: templates/result.html:322
+#: templates/result.html:434
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -997,7 +1134,7 @@ msgstr ""
 "Brennstoffzellenfahrzeuge, die beim Bremsen freigesetzte Energie "
 "teilweise zurückgewinnen können, was die kurzzeitige Reduktion erklärt."
 
-#: templates/result.html:330
+#: templates/result.html:442
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
@@ -1007,140 +1144,39 @@ msgstr ""
 "(in Bezug auf die Treibhausgasemissionen) und den Anschaffungs- und "
 "Nutzungskosten."
 
-#: templates/result.html:356
-msgid "Accumulated impacts over lifetime"
-msgstr "Kumulierte Auswirkungen über die Lebensdauer"
-
-#: templates/result.html:359
-msgid "Radar graph of midpoint indicators"
-msgstr "Radargrafik für Mittelpunktsindikatoren"
-
-#: templates/result.html:364
-msgid ""
-"The graph below illustrates the accumulated impacts of the vehicles along"
-" their use phase.\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tThe intercept of the slope represents the impacts"
-" associated with the production of the vehicle, occurring\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tbefore the use phase, while the slope illustrates"
-" variable emissions associated with the preparation of the fuel\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t(or generation of the electricity) and direct "
-"exhaust and non-exhaust emissions. You may select an impact\n"
-"\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider from the dropdown menu below."
-msgstr ""
-"Die folgende Grafik zeigt die Auswirkungen der Fahrzeuge während ihrer "
-"Nutzungsphase. Der \"Fixbetrag\" bei Kilometer Null stellt die "
-"Auswirkungen dar, die mit der Produktion des Fahrzeugs vor der "
-"Nutzungsphase verbunden sind, während die Steigung variable Emissionen "
-"darstellt, die mit der Herstellung des Kraftstoffs (oder der Erzeugung "
-"des Stroms) und direkten Abgas- und Nichtabgasemissionen verbunden sind. "
-"Sie können aus dem Dropdown-Menü unten eine Wirkungskategorie auswählen, "
-"die berücksichtigt werden soll."
-
-#: templates/result.html:374
-msgid "Check the midpoint indicators you would like to include."
-msgstr "Wählen Sie die Mittelpunktsindikatoren aus, die Sie einbeziehen möchten."
-
-#: templates/result.html:379
-msgid "ownership cost"
-msgstr "Kilometerkosten"
-
-#: templates/result.html:383
-msgid "freshwater ecotoxicity"
-msgstr "Toxizität in Gewässern ausserhalb des Meeres"
-
-#: templates/result.html:384
-msgid "human toxicity"
-msgstr "Humantoxizität"
-
-#: templates/result.html:385
-msgid "terrestrial ecotoxicity"
-msgstr "Terrestrische Toxizität"
-
-#: templates/result.html:388
-msgid "marine eutrophication"
-msgstr "Eutrophierung von Gewässern im Meer"
-
-#: templates/result.html:389
-msgid "terrestrial acidification"
-msgstr "Terrestrische Versauerung"
-
-#: templates/result.html:390
-msgid "freshwater eutrophication"
-msgstr "Eutrophierung von Gewässern ausserhalb des Meeres"
-
-#: templates/result.html:393
-msgid "natural land transformation"
-msgstr "Natürliche Landumwandlung"
-
-#: templates/result.html:394
-msgid "agricultural land occupation"
-msgstr "Ackerlandnutzung"
-
-#: templates/result.html:395
-msgid "urban land occupation"
-msgstr "Flächennutzung in städtischen Gebieten"
-
-#: templates/result.html:399
-msgid "ionising radiation"
-msgstr "Ionisierende Strahlung"
-
-#: templates/result.html:400
-msgid "ozone depletion"
-msgstr "Zerstörung der Ozonschicht"
-
-#: templates/result.html:404
-msgid "water depletion"
-msgstr "Erschöpfung der Süsswasservorräte"
-
-#: templates/result.html:406
-msgid "metal depletion"
-msgstr "Erschöpfung der Metallressourcen"
-
-#: templates/result.html:410
-msgid "noise emissions"
-msgstr "Geräuschemission"
-
-#: templates/result.html:411
-msgid "renewable primary energy"
-msgstr "Primärenergie, erneuerbar"
-
-#: templates/result.html:412
-msgid "non-renewable primary energy"
-msgstr "Primärenergie, nicht erneuerbar"
-
-#: templates/start.html:106
+#: templates/start.html:108
 msgid "Passenger car replacement"
 msgstr "Ersatz von Personenkraftwagen"
 
-#: templates/start.html:107
+#: templates/start.html:109
 msgid "Passenger cars comparison"
 msgstr "Personenkraftwagen im Vergleich"
 
-#: templates/start.html:108 templates/start.html:363
+#: templates/start.html:110 templates/start.html:365
 msgid "Intermodal comparison"
 msgstr "Intermodaler Vergleich"
 
-#: templates/start.html:118
+#: templates/start.html:120
 msgid "A new car?"
 msgstr "Ein neues Auto?"
 
-#: templates/start.html:119 templates/start.html:374
+#: templates/start.html:121 templates/start.html:376
 msgid "Is it time to change my vehicle?"
 msgstr "Ist es Zeit, mein Fahrzeug zu wechseln?"
 
-#: templates/start.html:120 templates/start.html:375
+#: templates/start.html:122 templates/start.html:377
 msgid "Does it make sense in terms of environmental impacts?"
 msgstr "Ist es im Hinblick auf die Umweltauswirkungen sinnvoll?"
 
-#: templates/start.html:121 templates/start.html:376
+#: templates/start.html:123 templates/start.html:378
 msgid "Create a custom analysis for your case."
 msgstr "Erstellen Sie eine auf Ihren Fall zugeschnittene Analyse."
 
-#: templates/start.html:158 templates/start.html:413
+#: templates/start.html:160 templates/start.html:415
 msgid "Simple"
 msgstr "Einfach"
 
-#: templates/start.html:159 templates/start.html:414
+#: templates/start.html:161 templates/start.html:416
 msgid ""
 "Directly see the results of a comparison between a gasoline, a diesel, a "
 "gaz and\n"
@@ -1149,11 +1185,11 @@ msgstr ""
 "Ergebnisse eines Vergleichs zwischen einem Benziner, einem Diesel, einem "
 "Gas und einem Elektrofahrzeug, für: "
 
-#: templates/start.html:197 templates/start.html:452
+#: templates/start.html:199 templates/start.html:454
 msgid "Intermediate"
 msgstr "Mittel"
 
-#: templates/start.html:198 templates/start.html:453
+#: templates/start.html:200 templates/start.html:455
 msgid ""
 "Set the parameters for a comparison between a gasoline, a diesel, a gas "
 "and\n"
@@ -1163,48 +1199,48 @@ msgstr ""
 "Vergleich zwischen einem Benzin-, einem Diesel-, einem Gas und einem "
 "Elektrofahrzeug, für: "
 
-#: templates/start.html:199 templates/start.html:238 templates/start.html:454
-#: templates/start.html:493
+#: templates/start.html:201 templates/start.html:240 templates/start.html:456
+#: templates/start.html:495
 msgid "(requires login)"
 msgstr "(erfordert Login)"
 
-#: templates/start.html:237 templates/start.html:492
+#: templates/start.html:239 templates/start.html:494
 msgid "Advanced"
 msgstr "Fortgeschritten"
 
-#: templates/start.html:238 templates/start.html:493
+#: templates/start.html:240 templates/start.html:495
 msgid "Build your own comparative scenario."
 msgstr "Erstellen Sie Ihr eigenes Vergleichsszenario."
 
-#: templates/start.html:277
+#: templates/start.html:279
 msgid "Car, bus, bike?"
 msgstr "Auto, Bus, Motorrad?"
 
-#: templates/start.html:278
+#: templates/start.html:280
 msgid "Compare different means of transport for passengers."
 msgstr "Vergleichen Sie verschiedene Transportmittel für Passagiere."
 
-#: templates/start.html:288 templates/start.html:289 templates/start.html:539
+#: templates/start.html:290 templates/start.html:291 templates/start.html:541
 msgid "Old better than new?"
 msgstr "Neu besser als alt?"
 
-#: templates/start.html:296 templates/start.html:546
+#: templates/start.html:298 templates/start.html:548
 msgid "Yes, keep it simple!"
 msgstr "Ja, halte es einfach!"
 
-#: templates/start.html:302 templates/start.html:552
+#: templates/start.html:304 templates/start.html:554
 msgid "I'd like to see what's behind."
 msgstr "Ich würde gerne sehen, was dahinter steckt."
 
-#: templates/start.html:308 templates/start.html:558
+#: templates/start.html:310 templates/start.html:560
 msgid "Let's build it from scratch."
 msgstr "Lassen Sie es uns von Grund auf neu bauen."
 
-#: templates/start.html:314 templates/start.html:564
+#: templates/start.html:316 templates/start.html:566
 msgid "The best way to go."
 msgstr "Der beste Weg zum Ziel."
 
-#: templates/start.html:324 templates/start.html:574
+#: templates/start.html:326 templates/start.html:576
 msgid ""
 "Set up an analysis to answer your specific question: should you change "
 "your current vehicle for a new one?"
@@ -1212,7 +1248,7 @@ msgstr ""
 "Erstellen Sie eine Analyse, um Ihre spezifische Frage zu beantworten: "
 "Sollten Sie Ihr jetziges Fahrzeug gegen ein neues austauschen?"
 
-#: templates/start.html:325 templates/start.html:575
+#: templates/start.html:327 templates/start.html:577
 msgid ""
 "In this analysis, you will be asked for details on your current vehicle "
 "as well as your driving habits to find out whether changing your current "
@@ -1220,13 +1256,13 @@ msgstr ""
 "Bei dieser Analyse werden Sie um Angaben zu Ihrem derzeitigen Fahrzeug "
 "sowie zu Ihren Fahrgewohnheiten gebeten, um herauszufinden, "
 
-#: templates/start.html:326 templates/start.html:576
+#: templates/start.html:328 templates/start.html:578
 msgid "leads to environmental benefits, and if so, under which conditions."
 msgstr ""
 "ob und unter welchen Bedingungen ein Wechsel Ihres derzeitigen Fahrzeugs "
 "zu Umweltvorteilen führt."
 
-#: templates/start.html:333 templates/start.html:583
+#: templates/start.html:335 templates/start.html:585
 msgid ""
 "This 'Simple' access to the model gives the environmental impacts and "
 "life cycle costs of modern, mid-size diesel,\n"
@@ -1240,7 +1276,7 @@ msgstr ""
 "für das Jahr 2020. Die Fahrzeugparameter entsprechen den "
 "Standardeinstellungen in unserem Modell."
 
-#: templates/start.html:340 templates/start.html:590
+#: templates/start.html:342 templates/start.html:592
 msgid ""
 "With this version, the same results as with the 'Simple' access are "
 "given, but you have access and can modify all the vehicle parameters.\n"
@@ -1254,27 +1290,27 @@ msgstr ""
 "Fahrzeugparameter ändern. Zusätzlich können länderspezifische Strommixe "
 "für das Laden der Batterien von Batteriefahrzeugen"
 
-#: templates/start.html:349 templates/start.html:599
+#: templates/start.html:351 templates/start.html:601
 msgid "This access offers the model full flexibility."
 msgstr "Dieser Zugang zum Modell bietet volle Flexibilität."
 
-#: templates/start.html:361
+#: templates/start.html:363
 msgid "Truck replacement"
 msgstr "Lkw-Ersatz"
 
-#: templates/start.html:362
+#: templates/start.html:364
 msgid "Medium and heavy duty trucks comparison"
 msgstr "Vergleich mittlerer und schwerer Lastwagen"
 
-#: templates/start.html:373
+#: templates/start.html:375
 msgid "A new truck?"
 msgstr "Ein neuer Lastwagen?"
 
-#: templates/start.html:530
+#: templates/start.html:532
 msgid "Truck, train, plane?"
 msgstr "Lastwagen, Zug, Flugzeug?"
 
-#: templates/start.html:531
+#: templates/start.html:533
 msgid "Compare different means of transport for freight."
 msgstr "Vergleichen Sie verschiedene Transportmittel für Fracht."
 
@@ -1669,21 +1705,14 @@ msgid ""
 "capacity for the battery. Note that a heavier battery will increase\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tthe energy consumption of the vehicle."
 msgstr ""
-"Wenn batterieelektrische oder Plugin-"
-"Hybrid-Fahrzeuge ausgewählt werden, ist es"
-" möglich, einige wenige Parameter über "
-"die Batterie einzustellen. Der Benutzer "
-"kann die Masse der Batterie einstellen."
-" Beachten Sie, dass standardmäßig davon "
-"ausgegangen wird, dass 60 Prozent der"
-" Masse von den Zellen eingenommen "
-"werden. Der Benutzer kann auch die "
-"Energiedichte der Batteriezellen einstellen. "
-"Diese beiden Parameter definieren eine "
-"neue Kapazität für die Batterie. "
-"Beachten Sie, dass eine schwerere "
-"Batterie den Energieverbrauch des Fahrzeugs"
-" erhöht."
+"Wenn batterieelektrische oder Plugin-Hybrid-Fahrzeuge ausgewählt werden, "
+"ist es möglich, einige wenige Parameter über die Batterie einzustellen. "
+"Der Benutzer kann die Masse der Batterie einstellen. Beachten Sie, dass "
+"standardmäßig davon ausgegangen wird, dass 60 Prozent der Masse von den "
+"Zellen eingenommen werden. Der Benutzer kann auch die Energiedichte der "
+"Batteriezellen einstellen. Diese beiden Parameter definieren eine neue "
+"Kapazität für die Batterie. Beachten Sie, dass eine schwerere Batterie "
+"den Energieverbrauch des Fahrzeugs erhöht."
 
 #: templates/tool.html:619
 msgid ""
@@ -1701,25 +1730,16 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis way, the environmental burden of the"
 " second battery will be entirely allocated to the vehicle."
 msgstr ""
-"Die Lebensdauer der Batterie kann "
-"ebenfalls eingestellt werden. Wenn die "
-"Lebensdauer geringer ist als die "
-"Lebensdauer des Fahrzeugs, ist ein "
-"Batterieaustausch erforderlich. Wenn die "
-"Batterie zum Beispiel 150.000 km halten"
-" soll und die Fahrzeuglebensdauer 200.000"
-" km beträgt, ist zusätzliche ein "
-"Drittel einer zweiten Batterie erforderlich."
-" Dies setzt voraus, dass die "
-"Umweltbelastung durch die verbleibenden zwei"
-" Drittel der zweiten Batterie einer "
-"Zweit-Anwendung zugeordnet werden. Wenn "
-"Ihnen diese Annahme nicht gefällt, "
-"können Sie die Batterielebensdauer auf "
-"genau die Hälfte der Fahrzeuglebensdauer "
-"einstellen. Auf diese Weise wird die "
-"Umweltbelastung der zweiten Batterie "
-"vollständig dem Fahrzeug zugeordnet."
+"Die Lebensdauer der Batterie kann ebenfalls eingestellt werden. Wenn die "
+"Lebensdauer geringer ist als die Lebensdauer des Fahrzeugs, ist ein "
+"Batterieaustausch erforderlich. Wenn die Batterie zum Beispiel 150.000 km"
+" halten soll und die Fahrzeuglebensdauer 200.000 km beträgt, ist "
+"zusätzliche ein Drittel einer zweiten Batterie erforderlich. Dies setzt "
+"voraus, dass die Umweltbelastung durch die verbleibenden zwei Drittel der"
+" zweiten Batterie einer Zweit-Anwendung zugeordnet werden. Wenn Ihnen "
+"diese Annahme nicht gefällt, können Sie die Batterielebensdauer auf genau"
+" die Hälfte der Fahrzeuglebensdauer einstellen. Auf diese Weise wird die "
+"Umweltbelastung der zweiten Batterie vollständig dem Fahrzeug zugeordnet."
 
 #: templates/tool.html:624
 msgid ""
@@ -1728,11 +1748,9 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThe origin of manufacture will set the "
 "type of electricity to manufacture the battery cells."
 msgstr ""
-"Schließlich können Benutzer die Chemie "
-"und den Herstellungsort der Batterie "
-"auswählen. Der Ort der Herstellung "
-"bestimmt die Art der Elektrizität zur"
-" Herstellung der Batteriezellen."
+"Schließlich können Benutzer die Chemie und den Herstellungsort der "
+"Batterie auswählen. Der Ort der Herstellung bestimmt die Art der "
+"Elektrizität zur Herstellung der Batteriezellen."
 
 #: templates/tool.html:634
 msgid "Energy storage for"
@@ -1777,15 +1795,11 @@ msgid ""
 "gas, but also alternative fuels, such as bio-diesel, bio-ethanol and bio-"
 "methane."
 msgstr ""
-"In diesem Abschnitt definieren wir den"
-" Weg zur Kraftstoffversorgung der Fahrzeuge"
-" sowie die Technologie für die "
-"Speicherung von Energie an Bord. Der "
-"Benutzer kann die üblichen Kraftstoffe "
-"wie Diesel oder Benzin oder "
-"komprimiertes Erdgas wählen, aber auch "
-"alternative Kraftstoffe wie Biodiesel, "
-"Bioethanol und Biomethan."
+"In diesem Abschnitt definieren wir den Weg zur Kraftstoffversorgung der "
+"Fahrzeuge sowie die Technologie für die Speicherung von Energie an Bord. "
+"Der Benutzer kann die üblichen Kraftstoffe wie Diesel oder Benzin oder "
+"komprimiertes Erdgas wählen, aber auch alternative Kraftstoffe wie "
+"Biodiesel, Bioethanol und Biomethan."
 
 #: templates/tool.html:679
 msgid ""
@@ -1794,13 +1808,10 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThis means that they do not compete with "
 "crops production with the purpose of food supply."
 msgstr ""
-"Bei den alternativen Kraftstoffen handelt "
-"es sich hier um sogenannte \"2nd "
-"Generation\" -Kraftstoffe, die aus "
-"pflanzlichen Reststoffen hergestellt werden. "
-"Dies bedeutet, dass sie nicht mit "
-"der Pflanzenproduktion im Sinne der "
-"Nahrungsmittelversorgung konkurrieren."
+"Bei den alternativen Kraftstoffen handelt es sich hier um sogenannte "
+"\"2nd Generation\" -Kraftstoffe, die aus pflanzlichen Reststoffen "
+"hergestellt werden. Dies bedeutet, dass sie nicht mit der "
+"Pflanzenproduktion im Sinne der Nahrungsmittelversorgung konkurrieren."
 
 #: templates/tool.html:681
 msgid ""
@@ -1812,16 +1823,12 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\"Steam Methane Reforming\" which uses "
 "steam and methane to produce hydrogen."
 msgstr ""
-"Darüber hinaus werden verschiedene Wege "
-"für die Bereitstellung von Wasserstoff "
-"für Brennstoffzellenautos dargestellt. Wasserstoff"
-" kann entweder durch Elektrolyse erzeugt"
-" werden, was ein Prozess ist, der "
-"Elektrizität erfordert, oder durch einen "
-"Prozess, der als \"Steam Methane "
-"Reforming\" bezeichnet wird und Dampf "
-"und Methan verwendet, um Wasserstoff zu"
-" erzeugen."
+"Darüber hinaus werden verschiedene Wege für die Bereitstellung von "
+"Wasserstoff für Brennstoffzellenautos dargestellt. Wasserstoff kann "
+"entweder durch Elektrolyse erzeugt werden, was ein Prozess ist, der "
+"Elektrizität erfordert, oder durch einen Prozess, der als \"Steam Methane"
+" Reforming\" bezeichnet wird und Dampf und Methan verwendet, um "
+"Wasserstoff zu erzeugen."
 
 #: templates/tool.html:685
 msgid ""
@@ -1831,14 +1838,11 @@ msgid ""
 "manufacture. The origin of battery manufacture will determine the "
 "electricity mix used to produce the battery cells."
 msgstr ""
-"In Bezug auf Energiespeichertechnologien für"
-" batteriebetriebene Elektrofahrzeuge kann der "
-"Benutzer zwischen verschiedenen Arten von "
-"Lithiumionen-basierter Chemie, aber auch "
-"zwischen verschiedenen Herstellungsorten wählen. "
-"Der Ort der Batterieherstellung bestimmt "
-"den Strommix, der zur Herstellung der"
-" Batteriezellen verwendet wird."
+"In Bezug auf Energiespeichertechnologien für batteriebetriebene "
+"Elektrofahrzeuge kann der Benutzer zwischen verschiedenen Arten von "
+"Lithiumionen-basierter Chemie, aber auch zwischen verschiedenen "
+"Herstellungsorten wählen. Der Ort der Batterieherstellung bestimmt den "
+"Strommix, der zur Herstellung der Batteriezellen verwendet wird."
 
 #: templates/tool.html:688
 msgid ""
@@ -1849,15 +1853,11 @@ msgid ""
 "engine can operate on, can be, in practice, limited for technical "
 "reasons."
 msgstr ""
-"Die standardmässig eingestellten "
-"Kraftstoffmischungsanteile stammen aus "
-"unterschiedlichen Projektionsmodellen. Sie können"
-" nach Belieben modifiziert werden. Es "
-"ist jedoch zu beachten, dass der "
-"Anteil des alternativen Kraftstoffs an "
-"der Kraftstoffmischung, mit der ein "
-"Motor betrieben werden kann, in der "
-"Praxis aus technischen Gründen begrenzt "
+"Die standardmässig eingestellten Kraftstoffmischungsanteile stammen aus "
+"unterschiedlichen Projektionsmodellen. Sie können nach Belieben "
+"modifiziert werden. Es ist jedoch zu beachten, dass der Anteil des "
+"alternativen Kraftstoffs an der Kraftstoffmischung, mit der ein Motor "
+"betrieben werden kann, in der Praxis aus technischen Gründen begrenzt "
 "sein kann."
 
 #: templates/tool.html:698
@@ -1892,19 +1892,21 @@ msgid ""
 " the range autonomy in electric mode, the higher the share of kilometers "
 "driven in electric mode."
 msgstr ""
-"Da Sie ein Plugin-Hybridfahrzeug ausgewählt haben, ist es wichtig, den Anteil "
-"der Kilometer zu kennen, die im Elektromodus (im Gegensatz zum Verbrennungsmodus) "
-"gefahren werden. Der Wert, den wir standardmäßig aus einer Studie liefern, die diesen "
-"Anteil mit der Reichweitenautonomie im Elektromodus korreliert: je höher die Reichweitenautonomie "
-"im Elektromodus, desto höher der Anteil der im Elektromodus gefahrenen Kilometer."
+"Da Sie ein Plugin-Hybridfahrzeug ausgewählt haben, ist es wichtig, den "
+"Anteil der Kilometer zu kennen, die im Elektromodus (im Gegensatz zum "
+"Verbrennungsmodus) gefahren werden. Der Wert, den wir standardmäßig aus "
+"einer Studie liefern, die diesen Anteil mit der Reichweitenautonomie im "
+"Elektromodus korreliert: je höher die Reichweitenautonomie im "
+"Elektromodus, desto höher der Anteil der im Elektromodus gefahrenen "
+"Kilometer."
 
 #: templates/tool.html:737
 msgid ""
 "This also means that, as the capacity of the battery increases in the "
 "future, so does the share driven in electric mode."
 msgstr ""
-"Dies bedeutet auch, dass mit zunehmender Kapazität der Batterie in Zukunft auch der Anteil, "
-"der im Elektrobetrieb gefahren wird, steigt."
+"Dies bedeutet auch, dass mit zunehmender Kapazität der Batterie in "
+"Zukunft auch der Anteil, der im Elektrobetrieb gefahren wird, steigt."
 
 #: templates/tool.html:738
 msgid "But ultimately, this is specific to the behavior of the driver."
@@ -2899,7 +2901,7 @@ msgstr "Anzahl der Iterationen"
 #~ msgstr ""
 
 #~ msgid "agricultural land occupation"
-#~ msgstr ""
+#~ msgstr "Ackerlandnutzung"
 
 #~ msgid "climate change"
 #~ msgstr ""
@@ -2914,7 +2916,7 @@ msgstr "Anzahl der Iterationen"
 #~ msgstr ""
 
 #~ msgid "human toxicity"
-#~ msgstr ""
+#~ msgstr "Humantoxizität"
 
 #~ msgid "ionising radiation"
 #~ msgstr ""
@@ -2944,10 +2946,10 @@ msgstr "Anzahl der Iterationen"
 #~ msgstr ""
 
 #~ msgid "terrestrial ecotoxicity"
-#~ msgstr ""
+#~ msgstr "Terrestrische Toxizität"
 
 #~ msgid "urban land occupation"
-#~ msgstr ""
+#~ msgstr "Flächennutzung in städtischen Gebieten"
 
 #~ msgid "water depletion"
 #~ msgstr ""
@@ -2963,43 +2965,6 @@ msgstr "Anzahl der Iterationen"
 
 #~ msgid "LIFE CYCLE IMPACT ASSESSMENT"
 #~ msgstr "LEBENSZYKLUS-FOLGENABSCHÄTZUNG"
-
-#~ msgid ""
-#~ "By default, the chart below shows "
-#~ "the environmental impacts in terms of"
-#~ "\n"
-#~ "\t\t\t\t\t\t\t\t\tgreenhouse gas emissions "
-#~ "emitted for each vehicle, per km "
-#~ "driven. The results are sub-divided\n"
-#~ ""
-#~ "\t\t\t\t\t\t\t\t\tinto categories: powertrain, "
-#~ "maintenance, fuel manufacture, energy storage,"
-#~ " etc.\n"
-#~ "\t\t\t\t\t\t\t\t\tThe user can change "
-#~ "the environmental indicator under the "
-#~ "dropdown menu impact category.\n"
-#~ "\t\t\t\t\t\t\t\t\tIt is also possible to"
-#~ " visualize the results as a table "
-#~ "or other sorts of chart by using"
-#~ " the\n"
-#~ "\t\t\t\t\t\t\t\t\tdropdown menu located in "
-#~ "the top-left corner of the chart"
-#~ " area."
-#~ msgstr ""
-#~ "Die folgende Grafik zeigt standardmässig "
-#~ "die Umweltauswirkungen in Form der "
-#~ "Treibhausgasemissionen, die für jedes Fahrzeug"
-#~ " pro gefahrenem Kilometer ausgestossen "
-#~ "werden. Die Ergebnisse sind in "
-#~ "Kategorien unterteilt: Antriebsstrang, Wartung, "
-#~ "Kraftstoffherstellung, Energiespeicherung usw. Der"
-#~ " Benutzer kann die Umweltindikatoren unter"
-#~ " \"impact category\" ändern. Sie können "
-#~ "die Ergebnisse auch als Grafik oder "
-#~ "als andere Art von Diagramm anzeigen,"
-#~ " indem Sie das Dropdown-Menü in "
-#~ "der oberen linken Ecke des "
-#~ "Diagrammbereichs verwenden."
 
 #~ msgid "LIFE CYCLE COST ASSESSMENT"
 #~ msgstr "LEBENSZYKLUSKOSTENABSCHÄTZUNG"
@@ -3082,26 +3047,6 @@ msgstr "Anzahl der Iterationen"
 
 #~ msgid "Primary energy, non-renewable [Megajoule]"
 #~ msgstr "Primärenergie, nicht erneuerbar [Megajoule]"
-
-#~ msgid ""
-#~ "By default, the chart below shows "
-#~ "the environmental impacts in terms of"
-#~ "\n"
-#~ "\t\t\t\t\t\t\t\t\tgreenhouse gas emissions "
-#~ "emitted for each vehicle, per km "
-#~ "driven. The results are sub-divided\n"
-#~ ""
-#~ "\t\t\t\t\t\t\t\t\tinto categories: powertrain, "
-#~ "maintenance, fuel manufacture, energy storage,"
-#~ " etc.\n"
-#~ "\t\t\t\t\t\t\t\t\tThe user can change "
-#~ "the environmental indicator using the "
-#~ "list on the left.\n"
-#~ "\t\t\t\t\t\t\t\t\tThe user can isolate "
-#~ "some fo the impact categories by "
-#~ "clicking them out from the legend "
-#~ "area."
-#~ msgstr ""
 
 #~ msgid ""
 #~ "Directly see the results of a "
@@ -3410,4 +3355,88 @@ msgstr "Anzahl der Iterationen"
 #~ "Motor betrieben werden kann, in der "
 #~ "Praxis aus technischen Gründen begrenzt "
 #~ "sein kann."
+
+#~ msgid ""
+#~ "By default, the chart below shows "
+#~ "the environmental impacts in terms of"
+#~ "\n"
+#~ "\t\t\t\t\t\t\t\t\tgreenhouse gas emissions "
+#~ "emitted for each vehicle, per km "
+#~ "driven. The results are sub-divided\n"
+#~ ""
+#~ "\t\t\t\t\t\t\t\t\tinto categories: powertrain, "
+#~ "maintenance, fuel manufacture, energy storage,"
+#~ " etc.\n"
+#~ "\t\t\t\t\t\t\t\t\tThe user can change "
+#~ "the environmental indicator using the "
+#~ "list on the left.\n"
+#~ "\t\t\t\t\t\t\t\t\tThe user can isolate "
+#~ "some of the impact categories by "
+#~ "clicking them out from the legend "
+#~ "area."
+#~ msgstr ""
+#~ "Standardmäßig werden die Treibhausgasemissionen "
+#~ "pro Fahrzeug und gefahrenem Kilometer "
+#~ "dargestellt. Benutzer können andere "
+#~ "Indikatoren aus der Liste auf der "
+#~ "linken Seite auswählen. Benutzer können "
+#~ "auch einzelne Beiträge durch Anklicken "
+#~ "entfernen oder isolieren."
+
+#~ msgid "Radar graph of midpoint indicators"
+#~ msgstr "Radargrafik für Mittelpunktsindikatoren"
+
+#~ msgid ""
+#~ "The graph below illustrates the "
+#~ "accumulated impacts of the vehicles "
+#~ "along their use phase.\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\t\tThe intercept of the"
+#~ " slope represents the impacts associated"
+#~ " with the production of the vehicle,"
+#~ " occurring\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\t\tbefore the use phase,"
+#~ " while the slope illustrates variable "
+#~ "emissions associated with the preparation "
+#~ "of the fuel\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\t\t(or generation of the"
+#~ " electricity) and direct exhaust and "
+#~ "non-exhaust emissions. You may select "
+#~ "an impact\n"
+#~ "\t\t\t\t\t\t\t\t\t\t\t\tcategory to consider "
+#~ "from the dropdown menu below."
+#~ msgstr ""
+#~ "Die folgende Grafik zeigt die "
+#~ "Auswirkungen der Fahrzeuge während ihrer "
+#~ "Nutzungsphase. Der \"Fixbetrag\" bei Kilometer"
+#~ " Null stellt die Auswirkungen dar, "
+#~ "die mit der Produktion des Fahrzeugs "
+#~ "vor der Nutzungsphase verbunden sind, "
+#~ "während die Steigung variable Emissionen "
+#~ "darstellt, die mit der Herstellung des"
+#~ " Kraftstoffs (oder der Erzeugung des "
+#~ "Stroms) und direkten Abgas- und "
+#~ "Nichtabgasemissionen verbunden sind. Sie "
+#~ "können aus dem Dropdown-Menü unten "
+#~ "eine Wirkungskategorie auswählen, die "
+#~ "berücksichtigt werden soll."
+
+#~ msgid "Check the midpoint indicators you would like to include."
+#~ msgstr ""
+#~ "Wählen Sie die Mittelpunktsindikatoren aus,"
+#~ " die Sie einbeziehen möchten."
+
+#~ msgid "ownership cost"
+#~ msgstr "Kilometerkosten"
+
+#~ msgid "noise emissions"
+#~ msgstr "Geräuschemission"
+
+#~ msgid "renewable primary energy"
+#~ msgstr "Primärenergie, erneuerbar"
+
+#~ msgid "non-renewable primary energy"
+#~ msgstr "Primärenergie, nicht erneuerbar"
+
+#~ msgid "Export Brightway2-compatible inventories"
+#~ msgstr "Brightway2-kompatible Inventardaten exportieren"
 

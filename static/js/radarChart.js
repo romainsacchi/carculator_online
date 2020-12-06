@@ -19,7 +19,9 @@ function RadarChart(id, data, options) {
 	 opacityCircles: 0.1, 	//The opacity of the circles of each blob
 	 strokeWidth: 2, 		//The width of the stroke around each blob
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
-	 color: d3.scale.category10()	//Color function
+	 color: d3.scale.category10(),	//Color function
+	 suffix: '',
+	 precision: '.01f'
 	};
 
 	//Put all of the options into a variable called cfg
@@ -35,7 +37,7 @@ function RadarChart(id, data, options) {
 	var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
 		total = allAxis.length,					//The number of different axes
 		radius = Math.min(cfg.w/2, cfg.h/2), 	//Radius of the outermost circle
-		Format = d3.format('%'),			 	//Percentage formatting
+		Format = d3.format(cfg['precision']),
 		angleSlice = Math.PI * 2 / total;		//The width in radians of each "slice"
 
 	//Scale for the radius
@@ -48,14 +50,14 @@ function RadarChart(id, data, options) {
 	/////////////////////////////////////////////////////////
 
 	//Remove whatever chart with the same id/class was present before
-	d3.select(id).select("svg").remove();
+	d3.select('#'+id).select("svg").remove();
 
 	//Initiate the radar chart SVG
-	var svg = d3.select(id).append("svg")
+	var svg = d3.select('#'+id).append("svg")
 			.attr("width",  cfg.w + cfg.margin.left + cfg.margin.right)
 			.attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
 			.attr("class", "radar"+id)
-			.attr("fill", "white");
+			.attr("fill", "gray");
 	//Append a g element
 	var g = svg.append("g")
 			.attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + (cfg.h/2 + cfg.margin.top) + ")");
@@ -100,7 +102,7 @@ function RadarChart(id, data, options) {
 	   .attr("dy", "0.4em")
 	   .style("font-size", "10px")
 	   .attr("fill", "#737373")
-	   .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
+	   .text(function(d,i) { return Format(maxValue * d/cfg.levels) + cfg['suffix']; });
 
 	/////////////////////////////////////////////////////////
 	//////////////////// Draw the axes //////////////////////
@@ -169,13 +171,50 @@ function RadarChart(id, data, options) {
 			d3.select(this)
 				.transition().duration(200)
 				.style("fill-opacity", 0.7);
+
+            var coordinates= d3.mouse(this);
+            var newX = coordinates[0] - 10;
+            var newY = coordinates[1] - 10;
+
+			tooltip_label
+				.attr('x', newX)
+				.attr('y', newY)
+				.attr('font-size', '14px')
+				.attr('font-weight', 'bold')
+				.text(d[0]['key'])
+				.transition().duration(200)
+				.style('opacity', 1);
+
+		})
+		.on("mousemove", function (d,i){
+
+		    var coordinates= d3.mouse(this);
+            var newX = coordinates[0] - 10;
+            var newY = coordinates[1] - 10;
+
+		    tooltip_label
+				.attr('x', newX)
+				.attr('y', newY)
+				.attr('font-size', '14px')
+				.attr('font-weight', 'bold')
+				.text(d[0]['key'])
+				.transition().duration(200)
+				.style('opacity', 1);
+
 		})
 		.on('mouseout', function(){
 			//Bring back all blobs
 			d3.selectAll(".radarArea")
 				.transition().duration(200)
 				.style("fill-opacity", cfg.opacityArea);
+			tooltip_label.transition().duration(200)
+				.style("opacity", 0);
 		});
+
+        //Set up the small tooltip for when you hover over a circle
+        var tooltip_label = g.append("text")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
 	//Create the outlines
 	blobWrapper.append("path")
@@ -237,6 +276,9 @@ function RadarChart(id, data, options) {
 	var tooltip = g.append("text")
 		.attr("class", "tooltip")
 		.style("opacity", 0);
+
+
+
 
 	/////////////////////////////////////////////////////////
 	/////////////////// Helper Function /////////////////////

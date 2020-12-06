@@ -1,16 +1,4 @@
- function generate_progress_bars(filter){
-        if (filter == "climate change"){
-
-        };
-        if (filter == "cost"){
-
-        };
-        if (filter == "fossil depletion"){
-
-        };
- };
-
- function share_results(){
+function share_results(){
  	var str = i18n('save_results')
     $.notify(
         {
@@ -33,7 +21,7 @@
     );
  };
 
- function export_results()
+function export_results()
 {
     var data_to_parse = data[1];
     for (d=0;d<data_to_parse.length;d++){
@@ -66,7 +54,7 @@
      'Primary fuel', 'Primary fuel share', 'Secondary fuel', 'Secondary fuel share']);
 
     data_to_parse.unshift([]);
-    data_to_parse.unshift(['carculator online 1.1.3', 'carculator 1.2.9', 'https://carculator.psi.ch']);
+    data_to_parse.unshift(['carculator online 1.1.4', 'carculator 1.3.0', 'https://carculator.psi.ch']);
 
     var csv = Papa.unparse(data_to_parse);
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
@@ -86,7 +74,7 @@
     tempLink.click();
 }
 
- function export_bw2_inventories(){
+function export_bw2_inventories(){
  	var str = i18n('inventory_download')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
@@ -108,7 +96,7 @@
     );
  };
 
- function export_simapro_inventories(){
+function export_simapro_inventories(){
  	var str = i18n('inventory_download')
     $.notify({
         icon: "glyphicon glyphicon-warning-sign",
@@ -426,7 +414,7 @@ function generate_line_chart_TtW_energy(data){
           .datum(data)         //Populate the <svg> element with chart data...
           .call(chart);          //Finally, render the chart!
 
-      d3.selectAll('.nv-axis .tick line').attr('display','none')
+      //d3.selectAll('.nv-axis .tick line').attr('display','none')
       d3.select('#chart-ttw-energy').style('fill', "white");
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
@@ -436,7 +424,6 @@ function generate_line_chart_TtW_energy(data){
 
 function generate_scatter_chart(data, qty, unit){
 
-    console.log(qty, unit);
     var datum = [];
     for (var key in data) {
         // check if the property/key is defined in the object itself, not in parent
@@ -500,7 +487,7 @@ function generate_chart_accumulated_impacts(data, impact){
     for (var x=0; x < data.length; x++){
         if (data[x][0] == impact){
             var arr_data = [];
-            for (var i = 0; i < 100; i++){
+            for (var i = 0; i < 101; i++){
                 arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
             }
             var name = i18n(data[x][2]) + " - " + i18n(data[x][1]) + " - " + data[x][3]
@@ -519,8 +506,8 @@ function generate_chart_accumulated_impacts(data, impact){
                     .showXAxis(true);        //Show the x-axis
 
       chart_acc.xAxis     //Chart x-axis settings
-          .axisLabel('Use (km)')
-          .tickFormat(d3.format('.r'))
+          .axisLabel(i18n('use'))
+          .tickFormat(d3.format(',d'))
           ;
 
       if (impact == "ozone depletion" ){
@@ -552,8 +539,9 @@ function generate_chart_accumulated_impacts(data, impact){
           .datum(datum)         //Populate the <svg> element with chart data...
           .call(chart_acc);          //Finally, render the chart!
 
-      d3.selectAll('.nv-axis .tick line').attr('display','none')
-      d3.select('#chart-accumulated').style('fill', "white");
+      //d3.selectAll('.nv-axis .tick line').attr('display','none')
+      d3.select('#chart-accumulated').style('fill', "gray");
+      d3.selectAll('.nvd3 g.nv-groups g path.nv-line').attr('stroke-width','5px')
       //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart_acc.update() });
       return chart_acc;
@@ -564,8 +552,80 @@ function generate_chart_accumulated_impacts(data, impact){
  // Update impact categories chart when selection is changed.
  $("#table_impact_cat").on("click", "li", function () {
     var impact_cat = $(this).text();
+    var impact_name = $(this)[0].children[0].id;
     rearrange_data_for_LCA_chart(impact_cat)
+    console.log(impact_name);
+    update_impact_definition_table(impact_name)
 });
+
+function update_impact_definition_table(impact_name){
+
+    // remove existing rows
+    var tableRef = document.getElementById('impact_description').getElementsByTagName('tbody')[0];
+    var rowCount = tableRef.rows.length;
+    while (rowCount>0){
+        tableRef.deleteRow(0);
+        var rowCount = tableRef.rows.length;
+        }
+
+    console.log(impact_name)
+
+    var d_reliability = {
+        "agricultural land occupation": "moderate",
+        "climate change":"good",
+        "fossil depletion": "good",
+        "freshwater ecotoxicity": "poor",
+        "freshwater eutrophication": "moderate",
+        "human toxicity": "poor",
+        "ionising radiation": "poor",
+        "marine ecotoxicity": "poor",
+        "marine eutrophication": "poor",
+        "metal depletion": "poor",
+        "natural land transformation": "moderate",
+        "ozone depletion": "good",
+        "particulate matter formation": "moderate",
+        "photochemical oxidant formation": "good",
+        "terrestrial acidification": "moderate",
+        "terrestrial ecotoxicity": "moderate",
+        "urban land occupation": "good",
+        "water depletion": "moderate",
+        "noise emissions": "moderate",
+        "renewable primary energy": "moderate",
+        "non-renewable primary energy": "moderate",
+        "ownership cost": "moderate",
+    }
+
+    var newRow = tableRef.insertRow();
+    newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('name') + '</td><td>' + i18n(impact_name) + '</td></tr>'
+    // Append table to div
+    tableRef.append(newRow);
+    var newRow = tableRef.insertRow();
+    newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('unit') + '</td><td>' + i18n('unit_'+impact_name) + '</td></tr>'
+    // Append table to div
+    tableRef.append(newRow);
+    var newRow = tableRef.insertRow();
+    newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('description_impact') + '</td><td>' + i18n('description_' + impact_name) + '</td></tr>'
+    // Append table to div
+    tableRef.append(newRow);
+    var newRow = tableRef.insertRow();
+    newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('reliability_impact')
+    if (d_reliability[impact_name] == "good"){
+         newRow.innerHTML += '</td><td style="color:green;"><b>' + i18n(d_reliability[impact_name]) + '</b></td></tr>'
+    }
+    if (d_reliability[impact_name] == "moderate"){
+         newRow.innerHTML += '</td><td style="color:orange;"><b>' + i18n(d_reliability[impact_name]) + '</b></td></tr>'
+    }
+    if (d_reliability[impact_name] == "poor"){
+         newRow.innerHTML += '</td><td style="color:red;"><b>' + i18n(d_reliability[impact_name]) + '</b></td></tr>'
+    }
+
+    // Append table to div
+    tableRef.append(newRow);
+    var newRow = tableRef.insertRow();
+    newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('issue_impact') + '</td><td>' + i18n('issue_'+impact_name) + '</td></tr>'
+    // Append table to div
+    tableRef.append(newRow);
+}
 
 function rearrange_data_for_LCA_chart(impact_cat){
 
@@ -582,7 +642,6 @@ function rearrange_data_for_LCA_chart(impact_cat){
                 var data_to_insert = data[1][a].slice();
                 var cost_val_total = data_to_insert[6] * currency_exch_rate
                 var cost_val = data_to_insert[5] * currency_exch_rate
-                console.log(data_to_insert[6], cost_val_total, currency_exch_rate);
                 data_to_insert[6] = cost_val_total;
                 data_to_insert[5] = cost_val;
                 val.push(data_to_insert);
@@ -700,6 +759,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
 
     var processed_data = [];
 
+
     for (recipient=0;recipient<list_recipient.length;recipient++){
         for (a=0; a<data[1].length;a++){
 
@@ -712,7 +772,9 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
                                                     data[1][a][2],
                                                     data[1][a][3],
                                                     data[1][a][4],
-                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_human_health*(human_health_val/100)])
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_human_health*(human_health_val/100),
+                                                    data[1][a][0]
+                                                    ])
                         };
                         if (list_recipient[recipient] == "ecosystem"){
                             processed_data.push(["ecosystem",
@@ -720,21 +782,24 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
                                                     data[1][a][2],
                                                     data[1][a][3],
                                                     data[1][a][4],
-                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_ecosystem*(ecosystem_val/100)])
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_ecosystem*(ecosystem_val/100),
+                                                    data[1][a][0]])
                         };
                         if (list_recipient[recipient] == "resource"){
                             processed_data.push(["resource", data[1][a][1],
                                                                 data[1][a][2],
                                                                 data[1][a][3],
                                                                 data[1][a][4],
-                                                                data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_resource*(resource_val/100)])
+                                                                data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_resource*(resource_val/100),
+                                                    data[1][a][0]])
                         };
                         if (list_recipient[recipient] == "ownership cost"){
                             processed_data.push(["ownership cost", data[1][a][1],
                                                     data[1][a][2],
                                                     data[1][a][3],
                                                     data[1][a][4],
-                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_cost*(cost_val/100)])
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_cost*(cost_val/100),
+                                                    data[1][a][0]])
                         };
 
                     }
@@ -746,6 +811,8 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
     };
 
     var data_to_plot = [];
+
+
 
     for (a = 0; a < list_recipient.length; a++){
         var impact_dict={};
@@ -786,11 +853,12 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
                             impact_dict['values'][c]["y"] += processed_data[b][5]
                         }
                     };
-                }
+                };
             }
         }
         data_to_plot.push(impact_dict)
     };
+
 
     nv.addGraph(function() {
             var chart = nv.models.multiBarChart()
@@ -815,12 +883,113 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
             return chart;
         });
 
+    // Prepare data for radar graph as well
 
-};
+    var chart_data = [];
+
+    var list_impacts = [];
+    var list_colors = [];
+    var list_cars = [];
+    var list_data = [];
+
+    for (var d=0; d < processed_data.length; d++){
+        if (!list_impacts.includes(processed_data[d][6])){list_impacts.push(processed_data[d][6])}
+        var car = i18n(processed_data[d][2]) + " - " + i18n(processed_data[d][1]) + " - " + processed_data[d][3]
+        if (!list_cars.includes(car)){list_cars.push(car)}
+    };
+
+    var radarChart_data_endpoint = [];
+
+    for (var car = 0; car < list_cars.length; car++){
+        var car_data = [];
+        for (var imp = 0; imp < list_impacts.length; imp++){
+            var impact = 0
+
+            for (var d = 0; d < processed_data.length; d++){
+                var c = i18n(processed_data[d][2]) + " - " + i18n(processed_data[d][1]) + " - " + processed_data[d][3]
+
+                if (c == list_cars[car] && processed_data[d][6] == list_impacts[imp]){
+                    impact += processed_data[d][5]
+
+                }
+            }
+
+            if (impact > 0 ){
+
+                car_data.push({
+                    'axis': i18n(list_impacts[imp]),
+                    'value': impact,
+                    'key': list_cars[car]
+                    })
+            }
+        }
+          radarChart_data_endpoint.push(car_data)
+        }
+
+    var max_val = 0;
+
+    for (var d=0; d < radarChart_data_endpoint.length; d++){
+        for (var c=0; c < radarChart_data_endpoint[d].length; c++){
+            if (radarChart_data_endpoint[d][c]["value"] > max_val){max_val = radarChart_data_endpoint[d][c]["value"]}
+        }
+    }
+
+    var final_data= [];
+
+    var keep_impact = {};
+
+    for (var i = 0; i < list_impacts.length; i++){
+        keep_impact[i18n(list_impacts[i])] = 0
+    }
+
+    for (var d=0; d < radarChart_data_endpoint.length; d++){
+        for (var c=0; c < radarChart_data_endpoint[d].length; c++){
+            var val = parseFloat(radarChart_data_endpoint[d][c]["value"])
+            if (val < (0.05 * max_val)){
+                keep_impact[radarChart_data_endpoint[d][c]["axis"]] += 1
+            }
+        }
+    }
+
+    for (var d=0; d < radarChart_data_endpoint.length; d++){
+        var mid_data = [];
+        for (var c=0; c < radarChart_data_endpoint[d].length; c++){
+
+            if (keep_impact[radarChart_data_endpoint[d][c]["axis"]] < list_cars.length){
+                mid_data.push(radarChart_data_endpoint[d][c])
+            }
+        }
+        final_data.push(mid_data);
+    }
+
+    var color_choice = ["#EDC951","#CC333F","#00A0B0", "#7FD61C", "#1C94D6", "#7A1CD6",
+                        "#D11CD6", "#D61C98", "#631CD6", "#1CD6D5"]
+
+    var margin = {top: 100, right: 120, bottom: 130, left: 120},
+        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    var color = d3.scale.ordinal()
+        .range(color_choice);
+
+    var radarChartOptions = {
+      w: width,
+      h: height,
+      margin: margin,
+      maxValue: max_val,
+      levels: 5,
+      roundStrokes: true,
+      color: color,
+      suffix: ' pt',
+      precision: '.03f'
+    };
+    //Call function to draw the Radar chart
+    RadarChart("radarChart_end", final_data, radarChartOptions);
+    }
+
 
 $('input[name="method_radar_graph"]').click(function() {
-        console.log("clicked");
-        generate_radar_chart(data[1]);
+        generate_radar_chart(data[10]);
     });
 
 function generate_radar_chart(data){
@@ -843,46 +1012,78 @@ function generate_radar_chart(data){
     var chart_data = [];
 
     var checked_methods = $('input[name="method_radar_graph"]:checked');
+    var list_checked_methods = [];
 
-    for (meth=0; meth < checked_methods.length; meth++){
-            list_methods.push(
-                checked_methods[meth]["defaultValue"]
-            )
+    for (var m=0; m < checked_methods.length; m++){
+        list_checked_methods.push(checked_methods[m]['defaultValue'])
+    }
+
+    var d_meth_cat = {
+        'cat1': ['climate change - climate change total', 'human health - ozone layer depletion',
+                'human health - respiratory effects'],
+        'cat2': ['human health - ionising radiation', 'human health - photochemical ozone formation',
+                'ecosystem quality - freshwater and terrestrial acidification', 'ecosystem quality - terrestrial eutrophication',
+                'ecosystem quality - freshwater eutrophication', 'ecosystem quality - marine eutrophication'],
+        'cat3': ['human health - carcinogenic effects', 'human health - non-carcinogenic effects',
+                'resources - land use', 'ecosystem quality - freshwater ecotoxicity',
+                'resources - dissipated water', 'resources - fossils', 'resources - minerals and metals'],
+    }
+
+    for (meth=0; meth < list_checked_methods.length; meth++){
+
+        if (['cat1', 'cat2', 'cat3'].includes(list_checked_methods[meth])){
+
+            var meths = d_meth_cat[list_checked_methods[meth]];
+
+            for (var m=0; m < meths.length; m++){
+
+                list_methods.push(
+                    meths[m]
+                );
+                $('input[name="method_radar_graph"][value="'+meths[m]+'"]').prop( "checked", true );
+            };
+        }else{
+            if (!list_methods.includes(list_checked_methods[meth])){
+                list_methods.push(
+                    list_checked_methods[meth]
+                )
+            }
+
+        }
+    }
+
+    var meth_cat = ["cat1", "cat2", "cat3"];
+
+    for (var m=0; m < meth_cat.length; m++){
+
+        if (!list_checked_methods.includes(meth_cat[m])){
+            var meths = d_meth_cat[meth_cat[m]];
+
+            for (var me=0; me < meths.length; me++){
+                if (list_checked_methods.includes(meths[me])){
+                        //$('input[name="method_radar_graph"][value="'+meths[me]+'"]').prop( "checked", false );
+
+
+                }
+            }
+        }
     }
 
     for (var l=0; l < data.length; l++){
-        var car = data[l][1] + " - " + data[l][2] + " - " + data[l][3]
+        var car = data[l][2] + " - " + data[l][1] + " - " + data[l][3]
         var method = data[l][0]
-
         if (!list_cars.includes(car)){list_cars.push(car)};
     }
 
-    // populate legend
-    $("#radarChart_legend").html('');
     var color_choice = ["#EDC951","#CC333F","#00A0B0", "#7FD61C", "#1C94D6", "#7A1CD6",
                         "#D11CD6", "#D61C98"]
 
-    var str = "<ul style='padding-left:10px;'>"
-    for (c=0;c<list_cars.length;c++){
-        var pt = i18n(list_cars[c].split(" - ")[1])
-        var s = i18n(list_cars[c].split(" - ")[0])
-        var y = list_cars[c].split(" - ")[2]
-        var car = pt + " - " + s + " - " + y
-        str += "<li style='font-size:14px;color:" + color_choice[c] + "'>" + car + "</li>"
-    }
-    str += "</ul>"
-    $("#radarChart_legend").append(str);
+    var max_val = 0;
 
-
-    var max_val = {};
-
-    for (var imp=0; imp < list_methods.length; imp++){
-        max_val[list_methods[imp]] = 0;
-        for (var l=0; l < data.length; l++){
-            if (data[l][0] == list_methods[imp]){
-                if (data[l][6] > max_val[list_methods[imp]]){
-                    max_val[list_methods[imp]] = data[l][6]
-                }
+    for (var l=0; l < data.length; l++){
+        if (list_methods.includes(data[l][0])){
+            if (data[l][4] > max_val){
+                max_val = data[l][4]
             }
         };
     };
@@ -891,25 +1092,25 @@ function generate_radar_chart(data){
         var list_data_sub = [];
         for (var imp=0; imp < list_methods.length; imp++){
             for (var l=0; l < data.length; l++){
-                var c = data[l][1] + " - " + data[l][2] + " - " + data[l][3]
+                var c = data[l][2] + " - " + data[l][1] + " - " + data[l][3]
                 if ((data[l][0] == list_methods[imp])&(c == list_cars[car])){
-                    if (max_val[list_methods[imp]] != 0){
-                        list_data_sub.push({axis:i18n(list_methods[imp]), value: data[l][6] / max_val[list_methods[imp]]})
-                    }
-                    break
+                    var pt = i18n(list_cars[car].split(" - ")[0])
+                    var s = i18n(list_cars[car].split(" - ")[1])
+                    var y = i18n(list_cars[car].split(" - ")[2])
+                   list_data_sub.push({axis:i18n(list_methods[imp]),
+                   value: data[l][4]*100000,
+                   key: pt + " - " + s + " - " + String(y)
+                   })
                 }
             };
         };
         chart_data.push(list_data_sub)
     };
 
+
     //////////////////////////////////////////////////////////////
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
-
-
-
-
 
     var color = d3.scale.ordinal()
         .range(color_choice);
@@ -918,13 +1119,15 @@ function generate_radar_chart(data){
       w: width,
       h: height,
       margin: margin,
-      maxValue: 0.5,
+      maxValue: max_val,
       levels: 5,
       roundStrokes: true,
-      color: color
+      color: color,
+      suffix: '/1,000,000',
+      precision: '.01f'
     };
     //Call function to draw the Radar chart
-    RadarChart(".radarChart", chart_data, radarChartOptions);
+    RadarChart("radarChart_mid", chart_data, radarChartOptions);
 
 };
 

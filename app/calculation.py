@@ -271,21 +271,21 @@ class Calculation:
                         if "fuel blend" in dict_params[('Background',)]:
                             if "petrol" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["type"]
-                                primary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["share"][year.index(y)])
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["primary fuel"]["share"][year.index(y)].item(0)
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["type"]
-                                secondary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["share"][year.index(y)])
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["petrol"]["secondary fuel"]["share"][year.index(y)].item(0)
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.item(0)
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["petrol", 1-share_biofuel, "bioethanol - wheat straw", share_biofuel]
 
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).item(0)
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["petrol", 1-share_biofuel, "bioethanol - wheat straw", share_biofuel]
 
 
@@ -293,49 +293,49 @@ class Calculation:
                         if "fuel blend" in dict_params[('Background',)]:
                             if "diesel" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["type"]
-                                primary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["share"][year.index(y)])
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["primary fuel"]["share"][year.index(y)].item(0)
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["type"]
-                                secondary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["share"][year.index(y)])
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["diesel"]["secondary fuel"]["share"][year.index(y)].item(0)
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.item(0)
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["diesel", 1-share_biofuel, "biodiesel - algae", share_biofuel]
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.item(0)
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["diesel", 1-share_biofuel, "biodiesel - algae", share_biofuel]
 
                     if pt in ('ICEV-g'):
                         if "fuel blend" in dict_params[('Background',)]:
                             if "cng" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["type"]
-                                primary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["share"][year.index(y)])
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["primary fuel"]["share"][year.index(y)].item(0)
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["type"]
-                                secondary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["share"][year.index(y)])
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["cng"]["secondary fuel"]["share"][year.index(y)].item(0)
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.item(0)
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas - sewage sludge", share_biofuel]
                         else:
                             region = self.region_map[country]["RegionCode"]
                             share_biofuel = self.biofuel.sel(
                                     region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.astype(float)
+                                ).interp(year=y, kwargs={"fill_value": "extrapolate"}).values.item(0)
                             primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["cng", 1-share_biofuel, "biogas - sewage sludge", share_biofuel]
 
                     if pt in ('FCEV'):
                         if "fuel blend" in dict_params[('Background',)]:
                             if "hydrogen" in dict_params[('Background',)]["fuel blend"]:
                                 primary_fuel_type = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["type"]
-                                primary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["share"][year.index(y)])
+                                primary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["primary fuel"]["share"][year.index(y)].item(0)
                                 secondary_fuel_type = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["type"]
-                                secondary_fuel_share = float(dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["share"][year.index(y)])
+                                secondary_fuel_share = dict_params[('Background',)]["fuel blend"]["hydrogen"]["secondary fuel"]["share"][year.index(y)].item(0)
                             else:
                                 primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share = ["electrolysis", 1, "", ""]
                         else:
@@ -405,7 +405,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 70
+        task.progress = 60
         db.session.commit()
 
         powertrain = cost.coords["powertrain"].values.tolist()
@@ -457,7 +457,7 @@ class Calculation:
         )
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 80
+        task.progress = 70
         db.session.commit()
 
         results = self.ic.calculate_impacts().astype("float64")
@@ -469,7 +469,7 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 90
+        task.progress = 80
         db.session.commit()
 
         data = results.values
@@ -544,12 +544,63 @@ class Calculation:
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 95
+        task.progress = 90
         db.session.commit()
+
+        self.ic = InventoryCalculation(
+            cm.array,
+            scope=d[("Functional unit",)]["fu"],
+            background_configuration=d[("Background",)],
+            method="ilcd"
+        )
+        results = self.ic.calculate_impacts().astype("float64")
+
+        nf = np.array([
+            1.18e+4,
+            4.75e-4,
+            3.85e-5,
+            6.36e-2,
+            8.4e3,
+            8.4e3,
+            8.4e3,
+            8.4e3,
+            5.55e1,
+            7.34e-1,
+            2.83e1,
+            1.77e2,
+            4.22e3,
+            2.34e-2,
+            4.06e1,
+            7.18e-4,
+            1.18e4,
+            6.53e4,
+            1.4e6
+
+        ])
+
+        nf_impact = (results / nf[:, None, None, None, None, None]).sum(dim="impact")
+        impact_category = nf_impact.coords["impact_category"].values.tolist()
+
+        list_normalized_results = []
+
+        for i, imp in enumerate(impact_category):
+            for s, sz in enumerate(size):
+                for p, pwt in enumerate(powertrain):
+                    for y, yr in enumerate(year):
+
+                        list_normalized_results.append([
+                            imp,
+                            sz,
+                            pwt,
+                            int(yr),
+                            nf_impact[i, s, p, y, 0].values.item(0)
+                        ])
+
+        json.dumps([list_normalized_results])
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
-        task.progress = 90
+        task.progress = 85
         db.session.commit()
 
         # Update task progress to db
@@ -571,7 +622,8 @@ class Calculation:
                     self.create_config_array(d, cm.array),
                     d[("Background",)]["country"],
                     d[("Functional unit",)]["fu"]["quantity"],
-                    d[("Functional unit",)]["fu"]["unit"]
+                    d[("Functional unit",)]["fu"]["unit"],
+                    list_normalized_results
                 ]
             ),
             self.export,
