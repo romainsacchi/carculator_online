@@ -324,6 +324,9 @@
     "poor": "Debole",
     "moderate": "Moderata",
     "good": "Alta",
+    "most_robust": "Il più affidabile",
+    "moderate_robust": "Moderatamente affidabile",
+    "least_robust": "Il meno affidabile",
     "description_agricultural land occupation": "descrive la superficie di terreno agricolo temporaneamente occupata a seguito della fabbricazione, dell'utilizzo, della manutenzione e dello scarto di un veicolo in riferimento a 1 km.",
     "description_climate change":"descrive il rilascio di gas che potenzialmente contribuiscono al riscaldamento dell'atmosfera in seguito alla fabbricazione, all'uso, alla manutenzione e all'abbandono di un veicolo in riferimento a 1 km.",
     "description_fossil depletion": "descrive l'uso di energia a base fossile come risultato della fabbricazione, dell'uso, della manutenzione e dell'eliminazione di un veicolo in riferimento a 1 km.",
@@ -364,7 +367,7 @@
     "issue_terrestrial ecotoxicity": "",
     "issue_urban land occupation": "",
     "issue_water depletion": "",
-    "issue_noise emissions": "Le emissioni acustiche sono affidabili per gli attuali veicoli medi. Si noti che per i veicoli futuri sono stati utilizzati i coefficienti di rumorosità dei veicoli a corrente. Inoltre, anche se i coefficienti di rumore differiscono tra i vari tipi di propulsori, non lo sono tra le varie classi di grandezza. Infine, si suppone che i veicoli elettrici emettano un segnale sonoro durante la guida al di sotto dei 30 km/h.",
+    "issue_noise emissions": "Questo indicatore copre solo il rumore emesso durante la guida. Le emissioni acustiche sono affidabili per gli attuali veicoli medi. Si noti che per i veicoli futuri sono stati utilizzati i coefficienti di rumorosità dei veicoli a corrente. Inoltre, anche se i coefficienti di rumore differiscono tra i vari tipi di propulsori, non lo sono tra le varie classi di grandezza. Infine, si suppone che i veicoli elettrici emettano un segnale sonoro durante la guida al di sotto dei 30 km/h.",
     "issue_renewable primary energy": "",
     "issue_non-renewable primary energy": "",
     "issue_ownership cost": "I costi di proprietà per i veicoli attuali (2020) dovrebbero essere piuttosto affidabili. Il problema si pone per i veicoli del futuro, per i quali è molto difficile prevedere il prezzo delle materie prime energetiche (elettricità, gas naturale, combustibili liquidi). Pertanto, i costi di proprietà per i veicoli futuri devono essere considerati con molta cautela.\n"}

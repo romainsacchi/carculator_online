@@ -323,6 +323,9 @@
     "poor": "Faible",
     "moderate": "Moyenne",
     "good": "Elevée",
+    "most_robust": "Plus fiables",
+    "moderate_robust": "Moyennement fiables",
+    "least_robust": "Moins fiables",
     "description_agricultural land occupation": "décrit la superficie des terres agricoles temporairement occupées à la suite de la fabrication, de l'utilisation, de l'entretien et de la mise au rebut d'un véhicule en référence à 1 km.",
     "description_climate change":"décrit le rejet de gaz qui contribuent potentiellement au réchauffement de l'atmosphère en raison de la fabrication, de l'utilisation, de l'entretien et de la mise au rebut d'un véhicule en référence à 1 km.",
     "description_fossil depletion": "décrit l'utilisation d'énergie fossile résultant de la fabrication, de l'utilisation, de l'entretien et de la mise au rebut d'un véhicule en référence à 1 km.",
@@ -363,7 +366,7 @@
     "issue_terrestrial ecotoxicity": "",
     "issue_urban land occupation": "",
     "issue_water depletion": "",
-    "issue_noise emissions": "Les émissions sonores sont fiables pour les véhicules moyens actuels. Notez que pour les futurs véhicules, les coefficients de bruit des véhicules actuels ont été utilisés. En outre, si les coefficients de bruit diffèrent selon les groupes motopropulseurs, ils ne varient pas selon les classes de taille. Enfin, on suppose que les véhicules électriques émettent un signal sonore lorsqu'ils roulent à moins de 30 km/h.",
+    "issue_noise emissions": "Cet indicateur ne couvre que les émissions de bruit durant l'utilisation du véhicule. Les émissions sonores sont fiables pour les véhicules moyens actuels. Notez que pour les futurs véhicules, les coefficients de bruit des véhicules actuels ont été utilisés. En outre, si les coefficients de bruit diffèrent selon les groupes motopropulseurs, ils ne varient pas selon les classes de taille. Enfin, on suppose que les véhicules électriques émettent un signal sonore lorsqu'ils roulent à moins de 30 km/h.",
     "issue_renewable primary energy": "",
     "issue_non-renewable primary energy": "",
     "issue_ownership cost": "Les coûts de propriété des véhicules actuels (2020) devraient être assez fiables. Le problème se pose pour les futurs véhicules, pour lesquels le prix des produits énergétiques (électricité, gaz naturel, combustibles liquides) est très difficile à prévoir. Par conséquent, les coûts de propriété des futurs véhicules doivent être considérés avec beaucoup de prudence."}

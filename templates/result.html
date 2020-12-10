@@ -247,7 +247,12 @@
 										This helps identify which midpoint indicators are the most relevant.
 										You can add or remove indicators to consider.')}}
 										{{_('Because these indicators are normalized, they are not expressed in their original unit,
-										but as a fraction of the impact of an average person over the year 2010.')}}</p>
+										but as a fraction of the impact of an average person over the year 2010.')}}
+										{{_('Source for normalization factors and recommendations:')}}
+										<a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC109878/kjna28984enn_global_norm_factors.pdf" target="blank_">
+											European Commission, 2017
+										</a>
+									</p>
 									<table style="font-size:10px;background-color:transparent;" class="table-responsive">
 										<tbody>
 										<tr style="background-color:rgba(0, 210, 0, 0.1)">
@@ -518,8 +523,6 @@
 
     var data = {{data|safe}}
 
-    console.log(data);
-
     var lang_data = data[0]
 
     $.when($.ajax({
@@ -536,12 +539,64 @@
 
                 // fill-in select lists
 				var impact_categories = {{ impact_cat|safe }}
-				for (ic=0;ic<impact_categories.length;ic++){
-					$("#table_impact_cat").append('<li><a href="#" id="' + impact_categories[ic] + '">'+i18n(impact_categories[ic])+'</a></li>');
-					var o = new Option(i18n(impact_categories[ic]), impact_categories[ic]);
-					$(o).html(i18n(impact_categories[ic]));
-					$("#select_impact").append(o);
+
+				var d_reliability = {
+					"agricultural land occupation": "moderate",
+					"climate change":"good",
+					"fossil depletion": "good",
+					"freshwater ecotoxicity": "poor",
+					"freshwater eutrophication": "moderate",
+					"human toxicity": "poor",
+					"ionising radiation": "poor",
+					"marine ecotoxicity": "poor",
+					"marine eutrophication": "poor",
+					"metal depletion": "poor",
+					"natural land transformation": "moderate",
+					"ozone depletion": "good",
+					"particulate matter formation": "moderate",
+					"photochemical oxidant formation": "good",
+					"terrestrial acidification": "moderate",
+					"terrestrial ecotoxicity": "moderate",
+					"urban land occupation": "good",
+					"water depletion": "moderate",
+					"noise emissions": "moderate",
+					"renewable primary energy": "moderate",
+					"non-renewable primary energy": "moderate",
+					"ownership cost": "moderate",
+				}
+				var d_robust = {
+					"good":"most_robust",
+					"moderate":"moderate_robust",
+					"poor":"least_robust"
 				};
+				var list_reliability = ['good', 'moderate', 'poor']
+
+				for (r=0; r < list_reliability.length; r++){
+					$("#table_impact_cat").append('<li>'+i18n(d_robust[list_reliability[r]])+'<ul>')
+
+					for (ic=0;ic<impact_categories.length;ic++){
+						if (d_reliability[impact_categories[ic]]==list_reliability[r]){
+
+							var c = "";
+							if (d_reliability[impact_categories[ic]]=="good"){c="lightgreen"}
+							if (d_reliability[impact_categories[ic]]=="moderate"){c="orange"}
+							if (d_reliability[impact_categories[ic]]=="poor"){c="red"}
+
+							$("#table_impact_cat").append('<li><a style="color:' + c + '; font-weight:bold;" href="#" id="' + impact_categories[ic] + '">'+i18n(impact_categories[ic])+'</a></li>');
+							var o = new Option(i18n(impact_categories[ic]), impact_categories[ic]);
+							$(o).html(i18n(impact_categories[ic]));
+							$("#select_impact").append(o);
+
+						}
+
+					};
+
+
+					$("#table_impact_cat").append('</ul></li>')
+
+				}
+
+
 
 				$('#table_impact_cat li a').click(function (e) {
 					e.preventDefault();
@@ -590,7 +645,6 @@
 				generate_benchmark(data[2], "climate change");
 
 				// Generate line chart TtW energy
-				console.log(data);
 				generate_line_chart_TtW_energy(data[3]);
 
 				// Generate scatter chart

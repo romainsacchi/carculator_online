@@ -482,16 +482,18 @@ function generate_scatter_chart(data, qty, unit){
 };
 
 function generate_chart_accumulated_impacts(data, impact){
+    var colors = d3.scale.category20()
 
     var datum = [];
     for (var x=0; x < data.length; x++){
+
         if (data[x][0] == impact){
             var arr_data = [];
             for (var i = 0; i < 101; i++){
                 arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
             }
             var name = i18n(data[x][2]) + " - " + i18n(data[x][1]) + " - " + data[x][3]
-            datum.push({values:arr_data, key:name})
+            datum.push({values:arr_data, key:name, color:colors(x)})
         };
 
     };
@@ -554,7 +556,6 @@ function generate_chart_accumulated_impacts(data, impact){
     var impact_cat = $(this).text();
     var impact_name = $(this)[0].children[0].id;
     rearrange_data_for_LCA_chart(impact_cat)
-    console.log(impact_name);
     update_impact_definition_table(impact_name)
 });
 
@@ -568,7 +569,6 @@ function update_impact_definition_table(impact_name){
         var rowCount = tableRef.rows.length;
         }
 
-    console.log(impact_name)
 
     var d_reliability = {
         "agricultural land occupation": "moderate",
@@ -962,15 +962,12 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
         final_data.push(mid_data);
     }
 
-    var color_choice = ["#EDC951","#CC333F","#00A0B0", "#7FD61C", "#1C94D6", "#7A1CD6",
-                        "#D11CD6", "#D61C98", "#631CD6", "#1CD6D5"]
 
-    var margin = {top: 100, right: 120, bottom: 130, left: 120},
+
+    var margin = {top: 170, right: 120, bottom: 130, left: 120},
         width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-    var color = d3.scale.ordinal()
-        .range(color_choice);
 
     var radarChartOptions = {
       w: width,
@@ -979,7 +976,6 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
       maxValue: max_val,
       levels: 5,
       roundStrokes: true,
-      color: color,
       suffix: ' pt',
       precision: '.03f'
     };
@@ -999,7 +995,7 @@ function generate_radar_chart(data){
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
 
-    var margin = {top: 100, right: 120, bottom: 130, left: 120},
+    var margin = {top: 180, right: 120, bottom: 130, left: 120},
         width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
@@ -1075,8 +1071,6 @@ function generate_radar_chart(data){
         if (!list_cars.includes(car)){list_cars.push(car)};
     }
 
-    var color_choice = ["#EDC951","#CC333F","#00A0B0", "#7FD61C", "#1C94D6", "#7A1CD6",
-                        "#D11CD6", "#D61C98"]
 
     var max_val = 0;
 
@@ -1112,8 +1106,6 @@ function generate_radar_chart(data){
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
 
-    var color = d3.scale.ordinal()
-        .range(color_choice);
 
     var radarChartOptions = {
       w: width,
@@ -1122,7 +1114,6 @@ function generate_radar_chart(data){
       maxValue: max_val,
       levels: 5,
       roundStrokes: true,
-      color: color,
       suffix: '/1,000,000',
       precision: '.01f'
     };

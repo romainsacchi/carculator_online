@@ -19,7 +19,7 @@ function RadarChart(id, data, options) {
 	 opacityCircles: 0.1, 	//The opacity of the circles of each blob
 	 strokeWidth: 2, 		//The width of the stroke around each blob
 	 roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
-	 color: d3.scale.category10(),	//Color function
+	 color: d3.scale.category20(),	//Color function
 	 suffix: '',
 	 precision: '.01f'
 	};
@@ -61,6 +61,9 @@ function RadarChart(id, data, options) {
 	//Append a g element
 	var g = svg.append("g")
 			.attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + (cfg.h/2 + cfg.margin.top) + ")");
+
+
+
 
 	/////////////////////////////////////////////////////////
 	////////// Glow filter for some extra pizzazz ///////////
@@ -311,5 +314,39 @@ function RadarChart(id, data, options) {
 		}
 	  });
 	}//wrap
+
+	/////////////////////////////////////////////////////////
+	////////////////// Add a legend /////////////////////////
+	/////////////////////////////////////////////////////////
+
+    var left = 10;
+	for (var x=0; x < data.length; x++){
+
+	    var height = 20;
+	    if (x > 2 && x < 7){height = 50}
+	    if (x > 6 && x < 11){height = 80}
+
+	    if (x==3||x==7||x==11){left=10}
+
+	    var wrapper = svg.append("g")
+	        .attr('transform','translate(' + left + ', ' + height + ')')
+
+	    var dot = wrapper.append('circle')
+	        .attr("class", "nv-legend-symbol")
+	        .attr('r', '5')
+	        .attr('style', 'stroke-width:2; fill: ' + cfg.color(x) + '; fill-opacity:1; stroke: ' + cfg.color(x))
+
+	    var text = wrapper.append('text')
+	        .attr('text-anchor', 'start')
+	        .attr('class', 'nv-legend-text')
+	        .attr('dy', '.32em')
+	        .attr('dx', '8')
+	        .attr('fill', '#000')
+	        .attr('style', 'font:normal 12px Arial, sans-serif;')
+
+        left += 250
+
+	    text.text(data[x][0]['key'])
+	}
 
 }//RadarChart

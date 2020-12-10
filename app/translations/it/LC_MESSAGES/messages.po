@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-12-06 14:58+0100\n"
+"POT-Creation-Date: 2020-12-10 12:00+0100\n"
 "PO-Revision-Date: 2019-10-17 13:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: it\n"
@@ -220,21 +220,21 @@ msgstr ""
 #: templates/404.html:136 templates/index.html:1199 templates/login.html:114
 #: templates/maintenance.html:133 templates/new_car.html:471
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:483 templates/start.html:627 templates/tool.html:1031
+#: templates/result.html:488 templates/start.html:627 templates/tool.html:1031
 msgid "Copyright"
 msgstr "Diritti d’autore"
 
 #: templates/404.html:136 templates/index.html:1199 templates/login.html:114
 #: templates/maintenance.html:133 templates/new_car.html:471
 #: templates/param_table.html:116 templates/register.html:170
-#: templates/result.html:483 templates/start.html:627 templates/tool.html:1031
+#: templates/result.html:488 templates/start.html:627 templates/tool.html:1031
 msgid "Paul Scherrer Institut"
 msgstr ""
 
 #: templates/404.html:137 templates/index.html:1200 templates/login.html:115
 #: templates/maintenance.html:134 templates/new_car.html:472
 #: templates/param_table.html:117 templates/register.html:171
-#: templates/result.html:484 templates/start.html:628 templates/tool.html:1032
+#: templates/result.html:489 templates/start.html:628 templates/tool.html:1032
 msgid "All rights reserved"
 msgstr "Tutti i diritti sono riservati"
 
@@ -712,22 +712,22 @@ msgid "Choose an emission type to look at."
 msgstr "Scegliete il tipo di emissione di vostro interesse."
 
 #: templates/new_car.html:366 templates/new_car.html:423
-#: templates/result.html:257
+#: templates/result.html:262
 msgid "climate change"
 msgstr "Cambiamenti climatici"
 
 #: templates/new_car.html:369 templates/new_car.html:431
-#: templates/result.html:259
+#: templates/result.html:264
 msgid "particulate matter formation"
 msgstr "Formazione di particolato"
 
 #: templates/new_car.html:372 templates/new_car.html:438
-#: templates/result.html:267
+#: templates/result.html:272
 msgid "photochemical oxidant formation"
 msgstr "Formazione di smog"
 
 #: templates/new_car.html:375 templates/new_car.html:445
-#: templates/result.html:285
+#: templates/result.html:290
 msgid "fossil depletion"
 msgstr "Esaurimento delle risorse energetiche fossili"
 
@@ -943,71 +943,75 @@ msgstr ""
 "unità originaria, ma come una frazione dell'impatto di una persona media "
 "nell'anno 2010."
 
-#: templates/result.html:254
+#: templates/result.html:251
+msgid "Source for normalization factors and recommendations:"
+msgstr "Fonte dei fattori di normalizzazione e raccomandazioni:"
+
+#: templates/result.html:259
 msgid "Most recommended"
 msgstr "I più affidabili"
 
-#: templates/result.html:258
+#: templates/result.html:263
 msgid "ozone depletion"
 msgstr "Deterioramento dello strato di ozono"
 
-#: templates/result.html:263
+#: templates/result.html:268
 msgid "Recommended"
 msgstr "Racommandati"
 
-#: templates/result.html:266
+#: templates/result.html:271
 msgid "ionising radiation"
 msgstr "Radiazione ionizzante"
 
-#: templates/result.html:268
+#: templates/result.html:273
 msgid "terrestrial acidification"
 msgstr "Acidificazione terrestre"
 
-#: templates/result.html:269
+#: templates/result.html:274
 msgid "terrestrial eutrophication"
 msgstr "Eutrofizzazione terrestre"
 
-#: templates/result.html:273
+#: templates/result.html:278
 msgid "freshwater eutrophication"
 msgstr "Eutrofizzazione di ambienti acquatici non marini"
 
-#: templates/result.html:274
+#: templates/result.html:279
 msgid "marine eutrophication"
 msgstr "Eutrofizzazione di ambienti acquatici non marini"
 
-#: templates/result.html:275
+#: templates/result.html:280
 msgid "human toxicity - carcinogenic"
 msgstr "Tossicità umana - cancerogena"
 
-#: templates/result.html:276
+#: templates/result.html:281
 msgid "human toxicity - non-carcinogenic"
 msgstr "Tossicità umana - non cancerogena"
 
-#: templates/result.html:279
+#: templates/result.html:284
 msgid "Least reliable"
 msgstr "I meno affidabili"
 
-#: templates/result.html:282
+#: templates/result.html:287
 msgid "natural land transformation"
 msgstr "Trasformazione del terreno naturale"
 
-#: templates/result.html:283
+#: templates/result.html:288
 msgid "freshwater ecotoxicity"
 msgstr "Tossicità per gli ambienti acquatici non marini"
 
-#: templates/result.html:284
+#: templates/result.html:289
 msgid "water depletion"
 msgstr "Esaurimento delle riserve di acqua dolce"
 
-#: templates/result.html:288
+#: templates/result.html:293
 msgid "metal depletion"
 msgstr "Esaurimento delle risorse metalliche"
 
-#: templates/result.html:323
+#: templates/result.html:328
 msgid "LIFE CYCLE IMPACT ASSESSMENT - SINGLE SCORE"
 msgstr "VALUTAZIONE DELL'IMPATTO DEL CICLO DI VITA - PUNTEGGIO AGGREGATO"
 
-#: templates/result.html:327
+#: templates/result.html:332
 msgid ""
 "The environmental midpoint indicators listed above are characterized and "
 "grouped into three main\n"
@@ -1037,35 +1041,35 @@ msgstr ""
 "economico riducendone l'importanza allo 0 per cento in modo da mantenere "
 "solo i tre indicatori ambientali."
 
-#: templates/result.html:341
+#: templates/result.html:346
 msgid "Human health impacts"
 msgstr "Impatti sulla salute umana"
 
-#: templates/result.html:342
+#: templates/result.html:347
 msgid "Ecosystem impacts"
 msgstr "Impatti sull'ecosistema"
 
-#: templates/result.html:343
+#: templates/result.html:348
 msgid "Resource depletion"
 msgstr "Assottigliamento delle risorse"
 
-#: templates/result.html:344
+#: templates/result.html:349
 msgid "Cost of ownership"
 msgstr "Costi chilometrici"
 
-#: templates/result.html:355
+#: templates/result.html:360
 msgid "Midpoint indicators weighted contribution to single score"
 msgstr "Contributo degli indicatori di medio livello al punteggio aggregato"
 
-#: templates/result.html:358
+#: templates/result.html:363
 msgid "Endpoint indicators contribution to single score"
 msgstr "Contributo degli indicatori finali al punteggio aggregato"
 
-#: templates/result.html:386
+#: templates/result.html:391
 msgid "BENCHMARK"
 msgstr "CONFRONTO"
 
-#: templates/result.html:390
+#: templates/result.html:395
 msgid ""
 "This section compares the distance that can be driven by each vehicle\n"
 "\t\t\t\t\t\t\tgiven a life cycle budget."
@@ -1073,37 +1077,37 @@ msgstr ""
 "Questa sezione confronta la distanza che può essere percorsa da ciascun "
 "veicolo dato un budget del ciclo di vita."
 
-#: templates/result.html:392
+#: templates/result.html:397
 msgid "How long can the vehicles drive on a life cycle budget of 1"
 msgstr ""
 "Per quanto tempo i veicoli possono guidare con un budget del ciclo di "
 "vita di 1"
 
-#: templates/result.html:394
+#: templates/result.html:399
 msgid "kg CO2-eq."
 msgstr ""
 
-#: templates/result.html:395
+#: templates/result.html:400
 msgid "Euro"
 msgstr ""
 
-#: templates/result.html:396
+#: templates/result.html:401
 msgid "liter of petrol-eq."
 msgstr "litro di benzina-eq."
 
-#: templates/result.html:415
+#: templates/result.html:420
 msgid "OTHER INDICATORS"
 msgstr "ALTRI INDICATORI"
 
-#: templates/result.html:423
+#: templates/result.html:428
 msgid "Tank-to-Wheel cumulated energy consumption along driving cycle"
 msgstr "Consumo di energia accumulato da serbatoio a ruota lungo il ciclo di guida"
 
-#: templates/result.html:427
+#: templates/result.html:432
 msgid "GHG emissions vs. ownership costs"
 msgstr "Emissioni di gas serra rispetto ai costi di proprietà"
 
-#: templates/result.html:434
+#: templates/result.html:439
 msgid ""
 "The graph below shows the accumulated Tank-to-wheel energy required to "
 "perform the driving cycle.\n"
@@ -1128,7 +1132,7 @@ msgstr ""
 "durante la frenata, il che spiega le sezioni verso il basso della loro "
 "pendenza."
 
-#: templates/result.html:442
+#: templates/result.html:447
 msgid ""
 "The graph below illustrates trade-off between environmental performance "
 "(in terms of greenhouse gas\n"
