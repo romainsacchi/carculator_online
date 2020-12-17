@@ -522,6 +522,7 @@
 	<script>
 
     var data = {{data|safe}}
+    console.log(data)
 
     var lang_data = data[0]
 
@@ -606,6 +607,7 @@
 				name_default_impact = i18n("climate change");
 				rearrange_data_for_LCA_chart(name_default_impact);
 				update_impact_definition_table("climate change")
+
 
 				// Generate single scores
 				var slider_weight = document.getElementById('slider_weight');

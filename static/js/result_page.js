@@ -490,7 +490,7 @@ function generate_chart_accumulated_impacts(data, impact){
         if (data[x][0] == impact){
             var arr_data = [];
             for (var i = 0; i < 101; i++){
-                arr_data.push({"x":i * data[x][7] / 100, "y": data[x][5] + (data[x][6] * (i * data[x][7] / 100))})
+                arr_data.push({"x":i * data[x][6] / 100, "y": data[x][4] + (data[x][5] * (i * data[x][6] / 100))})
             }
             var name = i18n(data[x][2]) + " - " + i18n(data[x][1]) + " - " + data[x][3]
             datum.push({values:arr_data, key:name, color:colors(x)})
@@ -652,6 +652,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
         }
     };
 
+
     val.sort(function(x,y){return y[6] - x[6];});
 
     list_cat = [];
@@ -662,24 +663,30 @@ function rearrange_data_for_LCA_chart(impact_cat){
         };
     };
 
+
     var data_to_plot = [];
 
     for (a = 0; a < list_cat.length; a++){
         var impact_dict={};
         impact_dict['key'] = i18n(list_cat[a]);
-        impact_dict['values'] = [];
+        var data_imp = [];
 
         for (b=0; b < val.length; b++){
             if (val[b][4] == list_cat[a]){
-                impact_dict['values'].push({
-                    'x': i18n(val[b][2])+" - "+i18n(val[b][1])+" - "+val[b][3],
+                data_imp.push({
+                    'x': i18n(val[b][1])+" - "+i18n(val[b][2])+" - "+val[b][3],
                     'y': val[b][5]
                 })
             }
         }
 
+        impact_dict["values"] = data_imp
+        data_imp = [];
+
         data_to_plot.push(impact_dict)
+        impact_dict = {}
     };
+
 
 
     nv.addGraph(function() {
@@ -859,13 +866,11 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
         data_to_plot.push(impact_dict)
     };
 
-
     nv.addGraph(function() {
             var chart = nv.models.multiBarChart()
                     .margin({left:100, bottom:180})  //Adjust chart margins to give the x-axis some breathing room.
                     .stacked(true);
             chart.xAxis.rotateLabels(-30);
-
 
             var unit_name = i18n("total_impact");
 
@@ -873,13 +878,10 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
               .axisLabel(unit_name+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.03f'))
               .showMaxMin(false);
-
             d3.select('#chart_endpoint')
                 .datum(data_to_plot)
                 .transition().duration(500).call(chart);
-
             nv.utils.windowResize(chart.update);
-
             return chart;
         });
 
@@ -897,6 +899,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
         var car = i18n(processed_data[d][2]) + " - " + i18n(processed_data[d][1]) + " - " + processed_data[d][3]
         if (!list_cars.includes(car)){list_cars.push(car)}
     };
+
 
     var radarChart_data_endpoint = [];
 
@@ -961,7 +964,6 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
         }
         final_data.push(mid_data);
     }
-
 
 
     var margin = {top: 170, right: 120, bottom: 130, left: 120},
@@ -1102,6 +1104,7 @@ function generate_radar_chart(data){
     };
 
 
+
     //////////////////////////////////////////////////////////////
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
@@ -1119,6 +1122,7 @@ function generate_radar_chart(data){
     };
     //Call function to draw the Radar chart
     RadarChart("radarChart_mid", chart_data, radarChartOptions);
+
 
 };
 
