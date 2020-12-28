@@ -622,6 +622,9 @@ class Calculation:
         task.progress = 60
         db.session.commit()
 
+        print(cm.array.powertrain.values)
+        print(scope)
+
         total_cost = cm.calculate_cost_impacts(scope=scope).transpose(
             "size", "powertrain", "year", "value", "cost_type"
         ).astype("float64")
