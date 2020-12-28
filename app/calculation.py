@@ -697,7 +697,14 @@ class Calculation:
             self.ic.B.sel(activity=('market for glider, passenger car', 'GLO', 'kilogram', 'glider, passenger car'),
                      category="climate change")
         )
-        
+
+        print(
+
+            cm.array.sel(value=0,
+                         parameter=["glider base mass", "lightweighting"])
+
+        )
+
 
         results = (
             self.ic.calculate_impacts()
