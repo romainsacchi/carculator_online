@@ -627,6 +627,7 @@ class Calculation:
         db.session.commit()
 
         print(cm.array.powertrain.values)
+        scope = {"powertrain": pt, "size": s, "year": y}
         print(scope)
 
         total_cost = cm.calculate_cost_impacts(scope=scope).transpose(
