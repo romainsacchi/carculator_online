@@ -693,35 +693,11 @@ class Calculation:
         task.progress = 70
         db.session.commit()
 
-        print(
-            self.ic.B.sel(activity=('market for glider, passenger car', 'GLO', 'kilogram', 'glider, passenger car'),
-                     category="climate change")
-        )
-
-        print(
-
-            cm.array.sel(value=0,
-                         parameter=["glider base mass", "lightweighting", "lifetime kilometers"])
-
-        )
-
-
-
-
         results = (
             self.ic.calculate_impacts()
             .sel(value=0)
             .transpose("impact_category", "size", "powertrain", "year", "impact")
         ).astype("float64")
-
-        ind_a = [self.ic.inputs[i] for i in self.ic.inputs if "market for glider" in i[0]]
-        ind_b = [self.ic.inputs[i] for i in self.ic.inputs if "transport, passenger car" in i[0]]
-
-        print(
-
-            self.ic.A[:, ind_a, ind_b]
-
-        )
 
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
 
@@ -789,7 +765,6 @@ class Calculation:
             existing_list.append(x[1])
             dict_scatter[x[0]] = existing_list
 
-        a = [impact_category] + [s] + [pt] + [y] + [impact]
         a_wo_impact = [impact_category] + [s] + [pt] + [y]
         l_impacts_wo_impact = list(itertools.product(*a_wo_impact))
 
