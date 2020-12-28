@@ -697,6 +697,7 @@ class Calculation:
             self.ic.B.sel(activity=('market for glider, passenger car', 'GLO', 'kilogram', 'glider, passenger car'),
                      category="climate change")
         )
+        
 
         results = (
             self.ic.calculate_impacts()
