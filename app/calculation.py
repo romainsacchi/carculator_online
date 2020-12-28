@@ -562,6 +562,8 @@ class Calculation:
             "size": d[("Functional unit",)]["size"],
         }
 
+        print(scope)
+
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
@@ -579,6 +581,8 @@ class Calculation:
         a = [pt] + [s] + [y]
         l = list(itertools.product(*a))
         l = [i[0] + " - " + i[1] + " - " + str(i[2]) for i in l]
+
+        print(pt, s, y, l)
 
         cumsum = (
             cm.energy.sel(
