@@ -562,8 +562,6 @@ class Calculation:
             "size": d[("Functional unit",)]["size"],
         }
 
-        print(scope)
-
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
@@ -581,8 +579,6 @@ class Calculation:
         a = [pt] + [s] + [y]
         l = list(itertools.product(*a))
         l = [i[0] + " - " + i[1] + " - " + str(i[2]) for i in l]
-
-        print(pt, s, y, l)
 
         cumsum = (
             cm.energy.sel(
@@ -611,7 +607,6 @@ class Calculation:
                 }
             )
 
-
         # Functional unit
         fu_unit = d[("Functional unit",)]["fu"]["unit"]
         fu_qty = float(d[("Functional unit",)]["fu"]["quantity"])
@@ -626,17 +621,10 @@ class Calculation:
         task.progress = 60
         db.session.commit()
 
-        print(cm.array.powertrain.values)
         scope = {"powertrain": pt, "size": s, "year": y}
-        print(scope)
-
         total_cost = cm.calculate_cost_impacts(scope=scope).transpose(
             "size", "powertrain", "year", "value", "cost_type"
         ).astype("float64")
-
-        print("value of l", l)
-        print("length of l", len(l))
-        print("content of cost_benchmark", total_cost.sel(cost_type="total", value=0))
 
         cost_benchmark = total_cost.sel(cost_type="total", value=0).values.reshape(
             len(l)
@@ -704,6 +692,11 @@ class Calculation:
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 70
         db.session.commit()
+
+        print(
+            self.ic.B.sel(activity=('market for glider, passenger car', 'GLO', 'kilogram', 'glider, passenger car'),
+                     category="climate change")
+        )
 
         results = (
             self.ic.calculate_impacts()
