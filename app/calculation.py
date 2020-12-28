@@ -626,6 +626,10 @@ class Calculation:
             "size", "powertrain", "year", "value", "cost_type"
         ).astype("float64")
 
+        print("value of l", l)
+        print("length of l", len(l))
+        print("content of cost_benchmark", cost_benchmark)
+
         cost_benchmark = total_cost.sel(cost_type="total", value=0).values.reshape(
             len(l)
         )
