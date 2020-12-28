@@ -628,7 +628,7 @@ class Calculation:
 
         print("value of l", l)
         print("length of l", len(l))
-        print("content of cost_benchmark", cost_benchmark)
+        print("content of cost_benchmark", total_cost.sel(cost_type="total", value=0))
 
         cost_benchmark = total_cost.sel(cost_type="total", value=0).values.reshape(
             len(l)
