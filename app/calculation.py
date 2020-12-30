@@ -233,33 +233,14 @@ class Calculation:
 
         for pt in array.coords["powertrain"].values:
             for s in array.coords["size"].values:
-                for y in array.coords["year"].values.astype(int):
-                    electricity_mix = (
-                        self.electricity_mix.loc[
-                            dict(
-                                country=country,
-                                variable=[
-                                    "Hydro",
-                                    "Nuclear",
-                                    "Gas",
-                                    "Solar",
-                                    "Wind",
-                                    "Biomass",
-                                    "Coal",
-                                    "Oil",
-                                    "Geothermal",
-                                    "Waste",
-                                ],
-                            )
-                        ]
-                        .interp(year=y)
-                        .values.astype(float)
-                        .tolist()
-                    )
+                for y, year in enumerate(array.coords["year"].values.astype(int)):
+
+                    electricity_mix = dict_params[("Background",)]["custom electricity mix"][y]
+                    
                     params = [
                         pt,
                         s,
-                        int(y),
+                        int(year),
                         lifetime,
                         km_per_year,
                         passengers,
@@ -272,7 +253,7 @@ class Calculation:
                         array.sel(
                             powertrain=pt,
                             size=s,
-                            year=y,
+                            year=year,
                             value=0,
                             parameter=[
                                 "TtW energy",
@@ -336,7 +317,7 @@ class Calculation:
                                         scenario="SSP2-Base",
                                     )
                                     .interp(
-                                        year=y, kwargs={"fill_value": "extrapolate"}
+                                        year=year, kwargs={"fill_value": "extrapolate"}
                                     )
                                     .values.item(0)
                                 )
@@ -361,7 +342,7 @@ class Calculation:
                                     fuel_type="Biomass fuel",
                                     scenario="SSP2-Base",
                                 )
-                                .interp(year=y, kwargs={"fill_value": "extrapolate"})
+                                .interp(year=year, kwargs={"fill_value": "extrapolate"})
                                 .item(0)
                             )
                             (
@@ -384,13 +365,13 @@ class Calculation:
                                 ]["diesel"]["primary fuel"]["type"]
                                 primary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["diesel"]["primary fuel"]["share"][year.index(y)]
+                                ]["diesel"]["primary fuel"]["share"][y]
                                 secondary_fuel_type = dict_params[("Background",)][
                                     "fuel blend"
                                 ]["diesel"]["secondary fuel"]["type"]
                                 secondary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["diesel"]["secondary fuel"]["share"][year.index(y)]
+                                ]["diesel"]["secondary fuel"]["share"][y]
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = (
@@ -401,7 +382,7 @@ class Calculation:
                                         scenario="SSP2-Base",
                                     )
                                     .interp(
-                                        year=y, kwargs={"fill_value": "extrapolate"}
+                                        year=year, kwargs={"fill_value": "extrapolate"}
                                     )
                                     .values.item(0)
                                 )
@@ -425,7 +406,7 @@ class Calculation:
                                     fuel_type="Biomass fuel",
                                     scenario="SSP2-Base",
                                 )
-                                .interp(year=y, kwargs={"fill_value": "extrapolate"})
+                                .interp(year=year, kwargs={"fill_value": "extrapolate"})
                                 .values.item(0)
                             )
                             (
@@ -448,13 +429,13 @@ class Calculation:
                                 ]["cng"]["primary fuel"]["type"]
                                 primary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["cng"]["primary fuel"]["share"][year.index(y)]
+                                ]["cng"]["primary fuel"]["share"][y]
                                 secondary_fuel_type = dict_params[("Background",)][
                                     "fuel blend"
                                 ]["cng"]["secondary fuel"]["type"]
                                 secondary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["cng"]["secondary fuel"]["share"][year.index(y)]
+                                ]["cng"]["secondary fuel"]["share"][y]
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = (
@@ -465,7 +446,7 @@ class Calculation:
                                         scenario="SSP2-Base",
                                     )
                                     .interp(
-                                        year=y, kwargs={"fill_value": "extrapolate"}
+                                        year=year, kwargs={"fill_value": "extrapolate"}
                                     )
                                     .values.item(0)
                                 )
@@ -489,7 +470,7 @@ class Calculation:
                                     fuel_type="Biomass fuel",
                                     scenario="SSP2-Base",
                                 )
-                                .interp(year=y, kwargs={"fill_value": "extrapolate"})
+                                .interp(year=year, kwargs={"fill_value": "extrapolate"})
                                 .values.item(0)
                             )
                             (
