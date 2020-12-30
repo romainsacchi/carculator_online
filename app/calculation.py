@@ -236,7 +236,7 @@ class Calculation:
                 for y, year in enumerate(array.coords["year"].values.astype(int)):
 
                     electricity_mix = dict_params[("Background",)]["custom electricity mix"][y]
-                    
+
                     params = [
                         pt,
                         s,
@@ -300,13 +300,13 @@ class Calculation:
                                 ]["petrol"]["primary fuel"]["type"]
                                 primary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["petrol"]["primary fuel"]["share"][year.index(y)]
+                                ]["petrol"]["primary fuel"]["share"][y]
                                 secondary_fuel_type = dict_params[("Background",)][
                                     "fuel blend"
                                 ]["petrol"]["secondary fuel"]["type"]
                                 secondary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["petrol"]["secondary fuel"]["share"][year.index(y)]
+                                ]["petrol"]["secondary fuel"]["share"][y]
                             else:
                                 region = self.region_map[country]["RegionCode"]
                                 share_biofuel = (
@@ -493,13 +493,13 @@ class Calculation:
                                 ]["hydrogen"]["primary fuel"]["type"]
                                 primary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["hydrogen"]["primary fuel"]["share"][year.index(y)]
+                                ]["hydrogen"]["primary fuel"]["share"][y]
                                 secondary_fuel_type = dict_params[("Background",)][
                                     "fuel blend"
                                 ]["hydrogen"]["secondary fuel"]["type"]
                                 secondary_fuel_share = dict_params[("Background",)][
                                     "fuel blend"
-                                ]["hydrogen"]["secondary fuel"]["share"][year.index(y)]
+                                ]["hydrogen"]["secondary fuel"]["share"][y]
                             else:
                                 (
                                     primary_fuel_type,
