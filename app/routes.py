@@ -782,11 +782,6 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
     job = Job.fetch(job_key, connection=conn)
     export = job.result[1]
 
-    print("Exporting inventories for {} with ei v{} with ei compatibility = {}"\
-          .format(software, str(ecoinvent_version), compatibility)
-          )
-
-
     data = export.write_lci_to_excel(
         ecoinvent_version=ecoinvent_version,
         ecoinvent_compatibility=compatibility,
