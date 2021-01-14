@@ -34,7 +34,6 @@ import pickle
 app.calc = Calculation()
 progress_status = 0
 
-
 is_maintenance_mode = False
 
 # Always throw a 503 during maintenance: http://is.gd/DksGDm
