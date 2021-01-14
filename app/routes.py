@@ -789,12 +789,15 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
         export_format="string"
     )
 
+
     response.data = data
 
     if software == "brightway2":
-        file_name = "carculator_inventory_export_{}.xlsx".format(str(datetime.date.today()))
+        file_name = "carculator_inventory_{}_for_ei_{}_{}.xlsx".format(str(datetime.date.today()), ecoinvent_version,
+                                                                       software)
     else:
-        file_name = "carculator_inventory_export_{}.csv".format(str(datetime.date.today()))
+        file_name = "carculator_inventory_{}_for_ei_{}_{}.csv".format(str(datetime.date.today()), ecoinvent_version,
+                                                                      software)
 
     mimetype_tuple = mimetypes.guess_type(file_name)
     response_headers = {
