@@ -29,8 +29,6 @@ from app.models import User, Task
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 import uuid
-import io
-import xlsxwriter
 import pickle
 
 app.calc = Calculation()
@@ -70,7 +68,6 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html", title="Register", form=form)
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
@@ -92,7 +89,6 @@ def login():
                 next_page = url_for("start")
         return redirect(next_page)
     return render_template("login.html", title="Sign In", form=form)
-
 
 @app.route("/logout")
 def logout():
@@ -758,7 +754,6 @@ def set_language_for_result_display(language):
     session["language"] = language
     return make_response(jsonify({"current language": language}), 200)
 
-
 @app.route("/get_language")
 def get_language():
     lang = session.get("language", "en")
@@ -778,104 +773,9 @@ def get_language():
 
     return make_response(data, 200)
 
-def write_lci_to_excel(lci, name):
-    """
-        Export an Excel file that can be consumed by Brightway2.
-
-        :returns: returns the file path of the exported inventory.
-        :rtype: str.
-        """
-    list_act = lci
-    data = []
-
-    data.extend((["Database", name], ("format", "Excel spreadsheet")))
-    data.append([])
-
-    for k in list_act:
-        if k.get("exchanges"):
-            data.extend(
-                (
-                    ["Activity", k["name"]],
-                    ("location", k["location"]),
-                    ("production amount", float(k["production amount"])),
-                    ("reference product", k.get("reference product")),
-                    ("type", "process"),
-                    ("unit", k["unit"]),
-                    ("worksheet name", "None"),
-                    ["Exchanges"],
-                    [
-                        "name",
-                        "amount",
-                        "database",
-                        "location",
-                        "unit",
-                        "categories",
-                        "type",
-                        "reference product",
-                    ],
-                )
-            )
-
-            for e in k["exchanges"]:
-                data.append(
-                    [
-                        e["name"],
-                        float(e["amount"]),
-                        e["database"],
-                        e.get("location", "None"),
-                        e["unit"],
-                        "::".join(e.get("categories", ())),
-                        e["type"],
-                        e.get("reference product"),
-                    ]
-                )
-        else:
-            data.extend(
-                (
-                    ["Activity", k["name"]],
-                    ("type", "biosphere"),
-                    ("unit", k["unit"]),
-                    ("worksheet name", "None"),
-                )
-            )
-        data.append([])
-
-    output = io.BytesIO()
-    workbook = xlsxwriter.Workbook(output, {"in_memory": True})
-    bold = workbook.add_format({"bold": True})
-    bold.set_font_size(12)
-    highlighted = {
-        "Activity",
-        "Database",
-        "Exchanges",
-        "Parameters",
-        "Database parameters",
-        "Project parameters",
-    }
-    frmt = lambda x: bold if row[0] in highlighted else None
-    sheet = workbook.add_worksheet(name)
-
-    for row_index, row in enumerate(data):
-        for col_index, value in enumerate(row):
-            if value is None:
-                continue
-            elif isinstance(value, float):
-                sheet.write_number(row_index, col_index, value, frmt(value))
-            else:
-                sheet.write_string(row_index, col_index, value, frmt(value))
-
-    workbook.close()
-    output.seek(0)
-    return output.read()
-
-@app.route("/get_inventory_excel_for_bw/<compatibility>/<ecoinvent_version>/<job_key>")
+@app.route("/get_inventory/<compatibility>/<ecoinvent_version>/<job_key>/<software>")
 @login_required
-def get_inventory_excel_for_bw(compatibility, ecoinvent_version, job_key):
-
-    if compatibility == "True":
-        compatibility = True
-    else:
-        compatibility = False
+def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     response = Response()
     response.status_code = 200
@@ -883,15 +783,18 @@ def get_inventory_excel_for_bw(compatibility, ecoinvent_version, job_key):
     job = Job.fetch(job_key, connection=conn)
     export = job.result[1]
 
-    lci = export.write_lci(
-        presamples=False,
-        ecoinvent_compatibility=compatibility,
-        ecoinvent_version=ecoinvent_version,
-    )
-    data = write_lci_to_excel(lci, "carculator export")
+    data = export.export_lci_to_excel(ecoinvent_version=ecoinvent_version,
+                               ecoinvent_compatibility=compatibility,
+                               software_compatibility=software,
+                               export_format="string")
 
     response.data = data
-    file_name = "carculator_inventory_export_{}.xlsx".format(str(datetime.date.today()))
+
+    if software == "brightway2":
+        file_name = "carculator_inventory_export_{}.xlsx".format(str(datetime.date.today()))
+    else:
+        file_name = "carculator_inventory_export_{}.csv".format(str(datetime.date.today()))
+
     mimetype_tuple = mimetypes.guess_type(file_name)
     response_headers = {
         "Pragma": "public",  # required,
