@@ -786,6 +786,7 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
           .format(software, str(ecoinvent_version), compatibility)
           )
 
+
     data = export.write_lci_to_excel(
         ecoinvent_version=ecoinvent_version,
         ecoinvent_compatibility=compatibility,
