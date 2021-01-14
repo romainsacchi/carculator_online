@@ -782,7 +782,7 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
     job = Job.fetch(job_key, connection=conn)
     export = job.result[1]
 
-    data = export.export_lci_to_excel(ecoinvent_version=ecoinvent_version,
+    data = export.write_lci_to_excel(ecoinvent_version=ecoinvent_version,
                                ecoinvent_compatibility=compatibility,
                                software_compatibility=software,
                                export_format="string")
