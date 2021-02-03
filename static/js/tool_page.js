@@ -1623,7 +1623,7 @@ function collect_configuration(){
         $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
             sum_mix += Number(this.value)/100
         })
-        if (sum_mix <.98 | sum_mix > 1.02){
+        if (sum_mix <.99 | sum_mix > 1.01){
             var str_1 = i18n('mix_1')
             var str_2 = i18n('mix_2')
             $.notify({
