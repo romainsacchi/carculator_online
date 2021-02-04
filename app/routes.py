@@ -804,7 +804,6 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
         "Pragma": "public",  # required,
         "Expires": "0",
         "Cache-Control": "must-revalidate, post-check=0, pre-check=0",
-        "Cache-Control": "private",  # required for certain browsers,
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "Content-Disposition": 'attachment; filename="%s";' % file_name,
         "Content-Transfer-Encoding": "binary",
