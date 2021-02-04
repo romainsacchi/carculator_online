@@ -212,7 +212,7 @@ class Calculation:
     def get_dc(self, dc):
         return get_standard_driving_cycle(dc)
 
-    def create_config_array(self, dict_params, array):
+    def create_config_array(self, dict_params, array, mix):
 
         arr = []
         year = [int(y) for y in dict_params[("Functional unit",)]["year"]]
@@ -235,7 +235,7 @@ class Calculation:
             for s in array.coords["size"].values:
                 for y, year in enumerate(array.coords["year"].values.astype(int)):
 
-                    electricity_mix = dict_params[("Background",)]["custom electricity mix"][y]
+                    electricity_mix = mix[y].tolist()
 
                     params = [
                         pt,
@@ -874,7 +874,7 @@ class Calculation:
                     TtW_energy,
                     dict_scatter,
                     list_res_acc,
-                    self.create_config_array(d, cm.array),
+                    self.create_config_array(d, cm.array, self.ic.mix),
                     d[("Background",)]["country"],
                     d[("Functional unit",)]["fu"]["quantity"],
                     d[("Functional unit",)]["fu"]["unit"],
