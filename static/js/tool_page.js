@@ -3410,7 +3410,6 @@ function start(data){
     async function firstFunction(){
         fill_in_from_config_file(data)
         size_list_update()
-        fill_in_from_config_file(data)
         return;
     };
 
@@ -3422,6 +3421,19 @@ function start(data){
         update_electric_utility_sliders(data);
         update_energy_storage_table(data);
         update_efficiency_table(data);
+
+        // Electricity mix(es)
+        var mix = data['background params']['custom electricity mix']
+        for (var year = 0; year < data['year'].length; year++){
+            var i = 0;
+            var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
+            $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
+                this.value = parseInt(Math.ceil(Number(mix[year][i] / sum_mix *100)))
+                i++
+            })
+        }
+
+
         isConfig = false;
     };
 
