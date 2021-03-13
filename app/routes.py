@@ -30,6 +30,7 @@ from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 import uuid
 import pickle
+import math
 
 app.calc = Calculation()
 progress_status = 0
@@ -67,6 +68,7 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html", title="Register", form=form)
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
@@ -93,6 +95,16 @@ def login():
 def logout():
     logout_user()
     return redirect(session.get("url", url_for("start")))
+
+
+if not os.environ.get('IS_HEROKU', None) is None:
+    @app.before_request
+    def before_request():
+        if not request.is_secure:
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
+
 
 @app.route("/")
 def index():
@@ -193,7 +205,8 @@ def tool_page(country):
                         ],
                     )
                 ]
-                .interp(year=[2020])
+                .interp(year=np.arange(2020, 2036),
+                        kwargs={"fill_value": "extrapolate"})
                 .values
             )
         except KeyError:
@@ -220,7 +233,10 @@ def tool_page(country):
                         ],
                     )
                 ]
-                .interp(year=[2020])
+                .interp(year=np.arange(2020, 2036),
+                        kwargs={"fill_value": "extrapolate"}
+                        )
+                .mean(axis=0)
                 .values
             )
         response = np.round(
@@ -600,36 +616,69 @@ def send_email():
     email_out("Question", sender, recipients, body)
     return _("Email sent!")
 
-@app.route("/get_electricity_mix/<ISO>/<years>")
-def get_electricity_mix(ISO, years):
+@app.route("/get_electricity_mix/<ISO>/<years>/<lifetime>")
+def get_electricity_mix(ISO, years, lifetime):
     """ Return the electricity mix for the ISO country code and the year(s) given """
     years = [int(y) for y in years.split(",")]
-    response = (
-        app.calc.electricity_mix.loc[
-            dict(
-                country=ISO,
-                variable=[
-                    "Hydro",
-                    "Nuclear",
-                    "Gas",
-                    "Solar",
-                    "Wind",
-                    "Biomass",
-                    "Coal",
-                    "Oil",
-                    "Geothermal",
-                    "Waste",
-                    "Biogas CCS",
-                    "Biomass CCS",
-                    "Coal CCS",
-                    "Gas CCS",
-                    "Wood CCS",
-                ],
-            )
-        ]
-        .interp(year=years)
-        .values
-    )
+    lifetime = math.ceil(int(float(lifetime)))
+
+    response = [
+        app.calc.electricity_mix.sel(
+            country=ISO,
+            variable=[
+                "Hydro",
+                "Nuclear",
+                "Gas",
+                "Solar",
+                "Wind",
+                "Biomass",
+                "Coal",
+                "Oil",
+                "Geothermal",
+                "Waste",
+                "Biogas CCS",
+                "Biomass CCS",
+                "Coal CCS",
+                "Gas CCS",
+                "Wood CCS",
+            ],
+        )
+            .interp(
+            year=np.arange(year, year + lifetime),
+            kwargs={"fill_value": "extrapolate"},
+        )
+            .mean(axis=0)
+            .values
+        if y + lifetime <= 2050
+        else app.calc.electricity_mix.sel(
+            country=ISO,
+            variable=[
+                "Hydro",
+                "Nuclear",
+                "Gas",
+                "Solar",
+                "Wind",
+                "Biomass",
+                "Coal",
+                "Oil",
+                "Geothermal",
+                "Waste",
+                "Biogas CCS",
+                "Biomass CCS",
+                "Coal CCS",
+                "Gas CCS",
+                "Wood CCS",
+            ],
+        )
+            .interp(
+            year=np.arange(year, 2051), kwargs={"fill_value": "extrapolate"}
+        )
+            .mean(axis=0)
+            .values
+        for y, year in enumerate(years)
+    ]
+    response = np.clip(response, 0, 1) / np.clip(response, 0, 1).sum(axis=1)[:, None]
+
     response = np.true_divide(response.T, response.sum(axis=1)).T
     response = np.round(response, 2)
     return jsonify(response.tolist())

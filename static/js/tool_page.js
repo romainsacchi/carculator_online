@@ -929,13 +929,21 @@ function size_list_update(){
         $("#electricity_mix_table th:last-child, #electricity_mix_table td:last-child").remove();
     }
 
+    var slider_lifetime = document.getElementById('lifetime-slider');
+    var slider_mileage = document.getElementById('mileage-slider');
+
+    var list_lifetimes = [];
+    var lifetime_km = parseFloat(slider_lifetime.noUiSlider.get());
+    var annual_km = parseFloat(slider_mileage.noUiSlider.get());
+    var lifetime = lifetime_km/annual_km
+
     var list_years = [];
     for (var item = 0; item < listYears.length; item++){
         list_years.push(listYears[item].innerHTML);
             $.each($('#electricity_mix_table tr'), function(i, row) {
                 if (i==0){
                     let cell = document.createElement(i ? "td" : "th")
-                    cell.innerHTML = listYears[item].innerHTML
+                    cell.innerHTML = listYears[item].innerHTML + " - " + String(parseInt(listYears[item].innerHTML) + parseInt(lifetime))
                     row.appendChild(cell)
                 }
                 else {
@@ -1312,12 +1320,29 @@ function getSelectedCountries() {
   return selected;
 }
 
+function exists(data){
+   data !== null && data !== undefined
+}
+
 function get_electricity_mix(ISO){
     var listYears = document.querySelectorAll( '#years_list > li' );
     var list_year = [];
     for (var item = 0; item < listYears.length; item++){
         list_year.push(listYears[item].innerHTML);
     };
+
+    var slider_lifetime = document.getElementById('lifetime-slider');
+    var slider_mileage = document.getElementById('mileage-slider');
+
+    if (slider_lifetime.hasOwnProperty('noUiSlider') && slider_mileage.hasOwnProperty('noUiSlider')) {
+
+        var lifetime_km = parseFloat(slider_lifetime.noUiSlider.get());
+        var annual_km = parseFloat(slider_mileage.noUiSlider.get());
+        var lifetime = lifetime_km/annual_km
+
+    }else{
+        var lifetime = 16
+    }
 
     var opts = {
       method: 'GET',
@@ -1327,7 +1352,7 @@ function get_electricity_mix(ISO){
     // Fix
 
     $.when($.ajax({
-                url: "/get_electricity_mix/"+ISO+"/"+list_year,
+                url: "/get_electricity_mix/"+ISO+"/"+list_year+"/"+lifetime,
                 dataType: 'json',
                 type: 'GET',
                 success : function(data) {
@@ -1342,6 +1367,13 @@ function get_electricity_mix(ISO){
         for (var year = 0; year < list_year.length; year++){
             var i = 0;
             var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
+
+            $("#electricity_mix_table thead tr th").each(
+                function () {
+                    this.innerHTML=list_year[year] + " - " + String(parseInt(Number(list_year[year]) + lifetime))
+                }
+            )
+
             $("#electricity_mix_table td:nth-child("+String(year+2)+") :input").each(function () {
                 this.value = parseInt(Math.ceil(Number(mix[year][i]*100)))
                 i++
@@ -1396,6 +1428,10 @@ slider_lifetime.noUiSlider.on('update', function (values, handle) {
     lifetime_ValueElement.innerHTML = values[handle] + " km";
 });
 
+slider_lifetime.noUiSlider.on('change', function (values, handle) {
+    if ($("#country-selected").text()!= ""){get_electricity_mix($("#country-selected").text())}
+});
+
 var slider_mileage = document.getElementById('mileage-slider');
   noUiSlider.create(slider_mileage, {
      start: [12000],
@@ -1416,6 +1452,10 @@ var mileage_ValueElement = document.getElementById('mileage-value');
 
 slider_mileage.noUiSlider.on('update', function (values, handle) {
     mileage_ValueElement.innerHTML = values[handle] + " km";
+});
+
+slider_mileage.noUiSlider.on('change', function (values, handle) {
+    if ($("#country-selected").text()!= ""){get_electricity_mix($("#country-selected").text())}
 });
 
 var slider_passenger = document.getElementById('passenger-slider');

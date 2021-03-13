@@ -3,7 +3,6 @@ from carculator import *
 import json
 import itertools
 import csv
-from collections import defaultdict
 from app.models import Task
 import numpy as np
 
