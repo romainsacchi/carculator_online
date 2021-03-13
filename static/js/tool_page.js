@@ -3422,6 +3422,12 @@ function start(data){
         update_energy_storage_table(data);
         update_efficiency_table(data);
 
+        isConfig = false;
+    };
+
+    async function thirdFunction(){
+        await secondFunction();
+
         // Electricity mix(es)
         var mix = data['background params']['custom electricity mix']
         for (var year = 0; year < data['year'].length; year++){
@@ -3433,11 +3439,9 @@ function start(data){
             })
         }
 
+    }
 
-        isConfig = false;
-    };
-
-    secondFunction();
+    thirdFunction();
 
 }
 
