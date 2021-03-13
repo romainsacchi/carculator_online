@@ -26,3 +26,4 @@ redis==3.5.3
 -e git+https://github.com/romainsacchi/carculator#egg=carculator
 email-validator
 mysqlclient
+gunicorn
