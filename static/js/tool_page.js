@@ -1369,8 +1369,8 @@ function get_electricity_mix(ISO){
             var sum_mix = mix[year].reduce(function(a, b) { return a + b; }, 0);
 
             $("#electricity_mix_table thead tr th").each(
-                function () {
-                    this.innerHTML=list_year[year] + " - " + String(parseInt(Number(list_year[year]) + lifetime))
+                function (index) {
+                    this.innerHTML=list_year[index] + " - " + String(parseInt(Number(list_year[index]) + lifetime))
                 }
             )
 
