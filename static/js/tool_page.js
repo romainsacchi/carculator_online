@@ -2552,8 +2552,6 @@ function fill_in_from_config_file(data){
         };
     };
 
-
-
     // Number of passengers
     var num_pass = parseFloat(data['foreground params']['passenger-slider'])
     slider_passenger.noUiSlider.updateOptions({
@@ -2592,10 +2590,6 @@ function fill_in_from_config_file(data){
     // Fill in functional unit
     $("#functional_unit_select").val(data['fu']['unit']);
     $("#fu_distance").val(data['fu']['quantity']);
-
-
-
-
 
 };
 
@@ -3416,6 +3410,7 @@ function start(data){
     async function firstFunction(){
         fill_in_from_config_file(data)
         size_list_update()
+        fill_in_from_config_file(data)
         return;
     };
 
