@@ -2895,9 +2895,11 @@ function create_fuel_table() {
 
     var fuel_options = {
         'petrol': ['petrol', 'bioethanol - wheat straw', 'bioethanol - forest residues',
-                    'bioethanol - sugarbeet', 'bioethanol - maize starch', 'synthetic gasoline'
+                    'bioethanol - sugarbeet', 'bioethanol - maize starch', 'synthetic gasoline',
+                    'synthetic gasoline - energy allocation'
                     ],
-        'diesel': ['diesel', 'biodiesel - algae', 'biodiesel - cooking oil', 'synthetic diesel'],
+        'diesel': ['diesel', 'biodiesel - algae', 'biodiesel - cooking oil', 'synthetic diesel',
+        'synthetic diesel - energy allocation'],
         'cng': ['cng', 'biogas - sewage sludge', 'biogas - biowaste', 'syngas'],
         'electric': ['electric'],
         'hydrogen': ['smr - natural gas', 'electrolysis', 'smr - biogas', 'coal gasification',

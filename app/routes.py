@@ -838,7 +838,6 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
         export_format="string"
     )
 
-
     response.data = data
 
     if software == "brightway2":
