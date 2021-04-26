@@ -2741,7 +2741,7 @@ function prepare_data_for_energy_storage(){
                                 };
                             energy_data[[size]][[cat]] = arr
                         }
-                    energy_data[[size]]["type"] = "NMC"
+                    energy_data[[size]]["type"] = "NMC-111"
                     energy_data[[size]]["origin"] = "CN"
                     }
                 }
@@ -3260,7 +3260,7 @@ function create_energy_storage_table() {
 
             if (divs[i].id.split("_")[0] == "type"){
 
-                divs[i].innerHTML = '<select style="color:grey"><option value="NMC">Lithium nickel manganese cobalt oxide (NMC)</option>'
+                divs[i].innerHTML = '<select style="color:grey"><option value="NMC-111">Lithium nickel manganese cobalt oxide (NMC-111)</option>'
                                     + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
                                     + '<option value="LFP">Lithium iron phosphate (LFP)</option></select>'
 
