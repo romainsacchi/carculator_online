@@ -574,7 +574,7 @@ class Calculation:
             .values.reshape(len(l), -1).astype("float64")
         )
 
-        # Format teh data so that it can be consumed directly
+        # Format the data so that it can be consumed directly
         # by nvd3.js
         TtW_energy = []
         for i, vehicle in enumerate(l):

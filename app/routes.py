@@ -860,7 +860,7 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     if not mimetype_tuple[1] is None:
         response.update({"Content-Encoding": mimetype_tuple[1]})
-    response.headers = response_headers
+    response.headers.update(response_headers)
     return response
 
 @app.route("/get_param_table")
