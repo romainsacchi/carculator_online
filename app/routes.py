@@ -416,8 +416,12 @@ def direct_results():
         "SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM","ZW", "NO"
     ]
 
+    dic_uuids = {}
+
     for country in countries:
         job_id = str(uuid.uuid1())
+
+        dic_uuids[job_id] = country
     
         # Add task to db
         task = Task(id=job_id, progress=0,)
@@ -431,19 +435,41 @@ def direct_results():
                              ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 150.0},
                              ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2020, 'loc'): 200000.0},
                              ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2020, 'loc'): 12000.0}}}
-        data, _ = app.calc.process_results(d, "en", job_id)
+        data, i = app.calc.process_results(d, "en", job_id)
         data = json.loads(data)
         data.append(job_id)
 
-        with open('data/quick_results_{}'.format(country), 'wb') as f:
+        with open('data/quick_results_{}.pickle'.format(country), 'wb') as f:
             pickle.dump(data, f)
+
+
+        # generate inventories
+        for software in ["brightway2", "simapro"]:
+            for ecoinvent_version in ["3.5", "3.6", "3.7"]:
+                if software == "brightway2" or (software == "simapro" and ecoinvent_version =="3.6"):
+                    for compatibility in [True, False]:
+                        print(software, ecoinvent_version, compatibility)
+                        data = i.write_lci_to_excel(
+                            ecoinvent_version=ecoinvent_version,
+                            ecoinvent_compatibility=compatibility,
+                            software_compatibility=software,
+                            export_format="string"
+                        )
+
+                        with open('data/inventories/quick_inventory_{}_{}_{}_{}.pickle'.format(
+                                country, software, ecoinvent_version, compatibility),
+                                'wb') as f:
+                            pickle.dump(data, f)
+
+    with open('data/quick_results_job_ids.pickle', 'wb') as f:
+        pickle.dump(dic_uuids, f)
 
     res = make_response(jsonify({"job id": job_id}), 200)
     return res
 
 @app.route("/display_quick_results/<country>")
 def display_quick_results(country):
-    pickled_data = open('data/quick_results_{}'.format(country),'rb')
+    pickled_data = open('data/quick_results_{}.pickle'.format(country),'rb')
     data = pickle.load(pickled_data)
     pickled_data.close()
 
@@ -757,7 +783,14 @@ def display_result(job_key):
             return render_template("result.html", data=job.result[0], uuid=job_key, impact_cat=impact_cat)
 
     except NoSuchJobError:
-        return render_template("404.html", job_id=job_key)
+
+        # maybe it is a pre-calculated results page
+        d_uuids = get_list_uuids_countries()
+
+        if job_key in d_uuids.keys():
+            display_quick_results(d_uuids[job_key])
+        else:
+            return render_template("404.html", job_id=job_key)
 
 @app.route("/check_status/<job_key>")
 def get_job_status(job_key):
@@ -821,6 +854,16 @@ def get_language():
 
     return make_response(data, 200)
 
+def get_list_uuids_countries():
+    """Returns a dictionary with correspondence between uuids and countries
+    for pre-calculated countries"""
+    fp = r"data/quick_results_job_ids.pickle"
+    pickled_data = open(fp, 'rb')
+    data = pickle.load(pickled_data)
+    pickled_data.close()
+
+    return data
+
 @app.route("/get_inventory/<compatibility>/<ecoinvent_version>/<job_key>/<software>")
 @login_required
 def get_inventory(compatibility, ecoinvent_version, job_key, software):
@@ -828,15 +871,28 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
     response = Response()
     response.status_code = 200
 
-    job = Job.fetch(job_key, connection=conn)
-    export = job.result[1]
+    d_uuids = get_list_uuids_countries()
 
-    data = export.write_lci_to_excel(
-        ecoinvent_version=ecoinvent_version,
-        ecoinvent_compatibility=compatibility,
-        software_compatibility=software,
-        export_format="string"
-    )
+    if job_key in d_uuids.keys():
+
+        fp = r'data/inventories/quick_inventory_{}_{}_{}_{}.pickle'.format(
+                d_uuids[job_key], software, ecoinvent_version, compatibility)
+
+        pickled_data = open(fp, 'rb')
+        data = pickle.load(pickled_data)
+        pickled_data.close()
+
+    else:
+
+        job = Job.fetch(job_key, connection=conn)
+        export = job.result[1]
+
+        data = export.write_lci_to_excel(
+            ecoinvent_version=ecoinvent_version,
+            ecoinvent_compatibility=compatibility,
+            software_compatibility=software,
+            export_format="string"
+        )
 
     response.data = data
 
