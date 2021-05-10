@@ -1302,17 +1302,15 @@ function getSelectedCountries() {
                     if (divs[i].id != ""){
 
                         var div_year = divs[i].id.split('_')[1]
+                        var fuel = divs[i].id.split('_')[0]
                         var slider = divs[i]
                         slider.noUiSlider.updateOptions({
-                            start: parseInt(json[div_year]['primary']*100)
+                            start: parseInt(json[fuel]['primary'][list_year.indexOf(div_year)]*100)
                         });
                     }
                     }
                 }
             });
-
-
-
     }
 
     };

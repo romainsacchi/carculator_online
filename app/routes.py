@@ -181,7 +181,7 @@ def tool_page(country):
         config = {"config": "false"}
 
     else:
-        try:
+        if country in app.calc.electricity_mix.country.values:
             response = (
                 app.calc.electricity_mix.loc[
                     dict(
@@ -209,7 +209,7 @@ def tool_page(country):
                         kwargs={"fill_value": "extrapolate"})
                 .values
             )
-        except KeyError:
+        else:
             response = (
                 app.calc.electricity_mix.loc[
                     dict(
@@ -236,25 +236,54 @@ def tool_page(country):
                 .interp(year=np.arange(2020, 2036),
                         kwargs={"fill_value": "extrapolate"}
                         )
-                .mean(axis=0)
                 .values
             )
+
         response = np.round(
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()
 
-        try:
-            region = app.calc.region_map[country]["RegionCode"]
-        except KeyError:
-            region = "EUR"
+        """ Returns average share of biogasoline according to historical IEA stats """
+        if country in app.calc.biogasoline.country.values:
+            share_biogasoline = np.squeeze(np.clip(
+                app.calc.biogasoline.sel(
+                    country=country,
+                    variable="value"
+                )
+                    .interp(year=[2020], kwargs={"fill_value": "extrapolate"})
+                    .values
+                , 0, 1))
+            share_biogasoline = share_biogasoline.reshape(1)
+        else:
+            share_biogasoline = 0
 
-        share_biofuel = (
-            app.calc.biofuel.sel(
-                region=region, fuel_type="Biomass fuel", scenario="SSP2-Base",
-            )
-            .interp(year=[2020])
-            .values
-        )
+        """ Returns average share of biodiesel according to historical IEA stats """
+        if country in app.calc.biodiesel.country.values:
+            share_biodiesel = np.squeeze(np.clip(
+                app.calc.biodiesel.sel(
+                    country=country,
+                    variable="value"
+                )
+                    .interp(year=[2020], kwargs={"fill_value": "extrapolate"})
+                    .values
+                , 0, 1))
+            share_biodiesel = share_biodiesel.reshape(1)
+        else:
+            share_biodiesel = 0
+
+        """ Returns average share of biomethane according to historical IEA stats """
+        if country in app.calc.biomethane.country.values:
+            share_biomethane = np.squeeze(np.clip(
+                app.calc.biomethane.sel(
+                    country=country,
+                    variable="value"
+                )
+                    .interp(year=[2020], kwargs={"fill_value": "extrapolate"})
+                    .values
+                , 0, 1))
+            share_biomethane = share_biomethane.reshape(1)
+        else:
+            share_biomethane = np.array(0)
 
         config = {
             "year": ["2020"],
@@ -274,31 +303,31 @@ def tool_page(country):
                     "petrol": {
                         "primary fuel": {
                             "type": "petrol",
-                            "share": np.round((1.0 - share_biofuel), 2).tolist(),
+                            "share": np.round((1.0 - share_biogasoline), 2).tolist(),
                         },
                         "secondary fuel": {
                             "type": "bioethanol - wheat straw",
-                            "share": np.round(share_biofuel, 2).tolist(),
+                            "share": np.round(share_biogasoline, 2).tolist(),
                         },
                     },
                     "diesel": {
                         "primary fuel": {
                             "type": "diesel",
-                            "share": np.round((1.0 - share_biofuel), 2).tolist(),
+                            "share": np.round((1.0 - share_biodiesel), 2).tolist(),
                         },
                         "secondary fuel": {
-                            "type": "biodiesel - algae",
-                            "share": np.round(share_biofuel, 2).tolist(),
+                            "type": "biodiesel - cooking oil",
+                            "share": np.round(share_biodiesel, 2).tolist(),
                         },
                     },
                     "cng": {
                         "primary fuel": {
                             "type": "cng",
-                            "share": np.round((1.0 - share_biofuel), 2).tolist(),
+                            "share": np.round((1.0 - share_biomethane), 2).tolist(),
                         },
                         "secondary fuel": {
                             "type": "biogas - sewage sludge",
-                            "share": np.round(share_biofuel, 2).tolist(),
+                            "share": np.round(share_biomethane, 2).tolist(),
                         },
                     }
                 },
@@ -343,6 +372,7 @@ def tool_page(country):
                 "custom electricity mix": response,
             },
         }
+
 
     powertrains = [
         _("Petrol"),
@@ -953,20 +983,60 @@ def get_param_table():
 @app.route("/get_fuel_blend/<country>/<years>")
 def get_fuel_blend(country, years):
     years = [int(y) for y in years.split(",")]
-    region = app.calc.region_map[country]["RegionCode"]
 
-    share_biofuel = (
-        app.calc.biofuel.sel(
-            region=region, value=0, fuel_type="Biomass fuel", scenario="SSP2-Base",
-        )
-        .interp(year=years, kwargs={"fill_value": "extrapolate"})
-        .values
-    )
+    """ Returns average share of biogasoline according to historical IEA stats """
+    if country in app.calc.biogasoline.country.values:
+        share_biogasoline = np.squeeze(np.clip(
+            app.calc.biogasoline.sel(
+                country=country
+            )
+                .interp(year=years, kwargs={"fill_value": "extrapolate"})
+                .values
+            , 0, 1))
+    else:
+        share_biogasoline = np.zeros_like(years)
 
-    response = {}
-    for y in years:
-        response[y] = {
-            "primary": np.round(1 - share_biofuel, 2)[years.index(y)],
-            "secondary": np.round(share_biofuel, 2)[years.index(y)],
-        }
+    """ Returns average share of biodiesel according to historical IEA stats """
+    if country in app.calc.biodiesel.country.values:
+        share_biodiesel = np.squeeze(np.clip(
+            app.calc.biodiesel.sel(
+                country=country
+            )
+                .interp(year=years, kwargs={"fill_value": "extrapolate"})
+                .values
+            , 0, 1))
+    else:
+        share_biodiesel = np.zeros_like(years)
+
+    """ Returns average share of biomethane according to historical IEA stats """
+    if country in app.calc.biomethane.values:
+        share_biomethane = np.squeeze(np.clip(
+            app.calc.biomethane.sel(
+                country=country
+            )
+                .interp(year=years, kwargs={"fill_value": "extrapolate"})
+                .values
+            , 0, 1))
+    else:
+        share_biomethane = np.zeros_like(years)
+
+    response = {
+        "petrol": {
+            "primary": np.round(1 - share_biogasoline, 2),
+            "secondary": np.round(share_biogasoline, 2),
+        },
+        "diesel": {
+            "primary": np.round(1 - share_biodiesel, 2),
+            "secondary": np.round(share_biodiesel, 2),
+        },
+        "cng": {
+            "primary": np.round(1 - share_biomethane, 2),
+            "secondary": np.round(share_biomethane, 2),
+        },
+        "hydrogen": {
+            "primary": np.ones_like(years),
+            "secondary": np.zeros_like(years),
+        },
+    }
+
     return jsonify(response)

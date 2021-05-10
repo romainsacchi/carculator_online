@@ -12,7 +12,9 @@ class Calculation:
 
         bs = BackgroundSystemModel()
         self.electricity_mix = bs.electricity_mix
-        self.biofuel = bs.biofuel
+        self.biogasoline = bs.biogasoline
+        self.biodiesel = bs.biodiesel
+        self.biomethane = bs.biomethane
         self.region_map = bs.region_map
         self.cip = CarInputParameters()
         self.cip.static()
