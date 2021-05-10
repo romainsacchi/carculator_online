@@ -309,19 +309,16 @@ class Calculation:
                                     "fuel blend"
                                 ]["petrol"]["secondary fuel"]["share"][y]
                             else:
-                                region = self.region_map[country]["RegionCode"]
-                                share_biofuel = (
-                                    self.biofuel.sel(
-                                        region=region,
-                                        value=0,
-                                        fuel_type="Biomass fuel",
-                                        scenario="SSP2-Base",
-                                    )
-                                    .interp(
-                                        year=year, kwargs={"fill_value": "extrapolate"}
-                                    )
-                                    .values.item(0)
-                                )
+                                if country in self.biogasoline.country.values:
+                                    share_biogasoline = np.squeeze(np.clip(
+                                        self.biogasoline.sel(
+                                            country=country
+                                        )
+                                            .interp(year=year, kwargs={"fill_value": "extrapolate"})
+                                            .values
+                                        , 0, 1)).tolist()
+                                else:
+                                    share_biogasoline = 0
                                 (
                                     primary_fuel_type,
                                     primary_fuel_share,
@@ -329,23 +326,22 @@ class Calculation:
                                     secondary_fuel_share,
                                 ) = [
                                     "petrol",
-                                    1 - share_biofuel,
+                                    1 - share_biogasoline,
                                     "bioethanol - wheat straw",
-                                    share_biofuel,
+                                    share_biogasoline,
                                 ]
 
                         else:
-                            region = self.region_map[country]["RegionCode"]
-                            share_biofuel = (
-                                self.biofuel.sel(
-                                    region=region,
-                                    value=0,
-                                    fuel_type="Biomass fuel",
-                                    scenario="SSP2-Base",
-                                )
-                                .interp(year=year, kwargs={"fill_value": "extrapolate"})
-                                .item(0)
-                            )
+                            if country in self.biogasoline.country.values:
+                                share_biogasoline = np.squeeze(np.clip(
+                                    self.biogasoline.sel(
+                                        country=country
+                                    )
+                                        .interp(year=year, kwargs={"fill_value": "extrapolate"})
+                                        .values
+                                    , 0, 1)).tolist()
+                            else:
+                                share_biogasoline = 0
                             (
                                 primary_fuel_type,
                                 primary_fuel_share,
@@ -353,10 +349,11 @@ class Calculation:
                                 secondary_fuel_share,
                             ) = [
                                 "petrol",
-                                1 - share_biofuel,
+                                1 - share_biogasoline,
                                 "bioethanol - wheat straw",
-                                share_biofuel,
+                                share_biogasoline,
                             ]
+
 
                     if pt in ("ICEV-d", "PHEV-d", "HEV-d"):
                         if "fuel blend" in dict_params[("Background",)]:
@@ -374,19 +371,16 @@ class Calculation:
                                     "fuel blend"
                                 ]["diesel"]["secondary fuel"]["share"][y]
                             else:
-                                region = self.region_map[country]["RegionCode"]
-                                share_biofuel = (
-                                    self.biofuel.sel(
-                                        region=region,
-                                        value=0,
-                                        fuel_type="Biomass fuel",
-                                        scenario="SSP2-Base",
-                                    )
-                                    .interp(
-                                        year=year, kwargs={"fill_value": "extrapolate"}
-                                    )
-                                    .values.item(0)
-                                )
+                                if country in self.biodiesel.country.values:
+                                    share_biodiesel = np.squeeze(np.clip(
+                                        self.biodiesel.sel(
+                                            country=country
+                                        )
+                                            .interp(year=year, kwargs={"fill_value": "extrapolate"})
+                                            .values
+                                        , 0, 1)).tolist()
+                                else:
+                                    share_biodiesel = 0
                                 (
                                     primary_fuel_type,
                                     primary_fuel_share,
@@ -394,22 +388,22 @@ class Calculation:
                                     secondary_fuel_share,
                                 ) = [
                                     "diesel",
-                                    1 - share_biofuel,
-                                    "biodiesel - algae",
-                                    share_biofuel,
+                                    1 - share_biodiesel,
+                                    "biodiesel - cooking oil",
+                                    share_biodiesel,
                                 ]
+
                         else:
-                            region = self.region_map[country]["RegionCode"]
-                            share_biofuel = (
-                                self.biofuel.sel(
-                                    region=region,
-                                    value=0,
-                                    fuel_type="Biomass fuel",
-                                    scenario="SSP2-Base",
-                                )
-                                .interp(year=year, kwargs={"fill_value": "extrapolate"})
-                                .values.item(0)
-                            )
+                            if country in self.biodiesel.country.values:
+                                share_biodiesel = np.squeeze(np.clip(
+                                    self.biodiesel.sel(
+                                        country=country
+                                    )
+                                        .interp(year=year, kwargs={"fill_value": "extrapolate"})
+                                        .values
+                                    , 0, 1)).tolist()
+                            else:
+                                share_biodiesel = 0
                             (
                                 primary_fuel_type,
                                 primary_fuel_share,
@@ -417,9 +411,9 @@ class Calculation:
                                 secondary_fuel_share,
                             ) = [
                                 "diesel",
-                                1 - share_biofuel,
-                                "biodiesel - algae",
-                                share_biofuel,
+                                1 - share_biodiesel,
+                                "biodiesel - cooking oil",
+                                share_biodiesel,
                             ]
 
                     if pt in ("ICEV-g"):
@@ -438,19 +432,16 @@ class Calculation:
                                     "fuel blend"
                                 ]["cng"]["secondary fuel"]["share"][y]
                             else:
-                                region = self.region_map[country]["RegionCode"]
-                                share_biofuel = (
-                                    self.biofuel.sel(
-                                        region=region,
-                                        value=0,
-                                        fuel_type="Biomass fuel",
-                                        scenario="SSP2-Base",
-                                    )
-                                    .interp(
-                                        year=year, kwargs={"fill_value": "extrapolate"}
-                                    )
-                                    .values.item(0)
-                                )
+                                if country in self.biomethane.country.values:
+                                    share_biomethane = np.squeeze(np.clip(
+                                        self.biomethane.sel(
+                                            country=country
+                                        )
+                                            .interp(year=year, kwargs={"fill_value": "extrapolate"})
+                                            .values
+                                        , 0, 1)).tolist()
+                                else:
+                                    share_biomethane = 0
                                 (
                                     primary_fuel_type,
                                     primary_fuel_share,
@@ -458,22 +449,22 @@ class Calculation:
                                     secondary_fuel_share,
                                 ) = [
                                     "cng",
-                                    1 - share_biofuel,
+                                    1 - share_biomethane,
                                     "biogas - sewage sludge",
-                                    share_biofuel,
+                                    share_biomethane,
                                 ]
+
                         else:
-                            region = self.region_map[country]["RegionCode"]
-                            share_biofuel = (
-                                self.biofuel.sel(
-                                    region=region,
-                                    value=0,
-                                    fuel_type="Biomass fuel",
-                                    scenario="SSP2-Base",
-                                )
-                                .interp(year=year, kwargs={"fill_value": "extrapolate"})
-                                .values.item(0)
-                            )
+                            if country in self.biomethane.country.values:
+                                share_biomethane = np.squeeze(np.clip(
+                                    self.biomethane.sel(
+                                        country=country
+                                    )
+                                        .interp(year=year, kwargs={"fill_value": "extrapolate"})
+                                        .values
+                                    , 0, 1)).tolist()
+                            else:
+                                share_biomethane = 0
                             (
                                 primary_fuel_type,
                                 primary_fuel_share,
@@ -481,9 +472,9 @@ class Calculation:
                                 secondary_fuel_share,
                             ) = [
                                 "cng",
-                                1 - share_biofuel,
+                                1 - share_biomethane,
                                 "biogas - sewage sludge",
-                                share_biofuel,
+                                share_biomethane,
                             ]
 
                     if pt in ("FCEV"):
