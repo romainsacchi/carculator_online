@@ -992,7 +992,7 @@ def get_fuel_blend(country, years):
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
-            , 0, 1)).tolist()
+            , 0, 1))
     else:
         share_biogasoline = np.zeros_like(years)
 
@@ -1004,7 +1004,7 @@ def get_fuel_blend(country, years):
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
-            , 0, 1)).tolist()
+            , 0, 1))
     else:
         share_biodiesel = np.zeros_like(years)
 
@@ -1016,7 +1016,7 @@ def get_fuel_blend(country, years):
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
-            , 0, 1)).tolist()
+            , 0, 1))
     else:
         share_biomethane = np.zeros_like(years)
 
