@@ -183,6 +183,143 @@
             	</div>
         </section>
 
+		<!-- Start VEHICLES PARAMS -->
+		<section id="mu-about">
+			<div class="container" style="width:90%;">
+				<div class="row"  >
+					<h2><img class="image" src="/static/images/car-1299198_960_720.png"
+												  style="width:90px; border-right:3px solid rgba(0,0,0,0.6);
+														padding:15px;margin-bottom:0px;display:inline-block;"
+												 alt="image">
+						<span style="color:grey;">{{ _('VEHICLES SUMMARY') }}</span></h2>
+				</div>
+				<div class="mu-about-area" style="padding-top:20px;padding-bottom:0;">
+					<div class="col-md-12">
+						<p>{{ _("Here are the vehicles parameters considered for teh results presented below.") }}</p>
+						<p>{{ _("If you wish to modify some of these parameters (fuel blends, engine efficiency, battery size, etc.)
+							or if you wish to add other vehicles (other sizes, other years of manufacture), go
+							 to the ") }} <a target='_blank' href="{{ url_for('tool_page') }}" + {{data.7}}>{{ _("CONFIGURATION") }}</a> {{ _("(login required, registration completely free).") }} </p>
+
+						<table class="table-responsive">
+							<tr>
+								<th class="col-md-12"><h3>{{_('Impacts per kilometer')}}</h3></th>
+							</tr>
+
+							<tr>
+
+								<td colspan="2">
+									<table class="table" id="impact_description">
+										<thead><tr><th colspan="2" class="text-left"><h4>{{_('Information on selected indicator')}}</h4></th></tr></thead>
+										<tbody></tbody>
+									</table>
+								</td>
+
+							</tr>
+							<tr>
+								<td class="col-md-4">
+									<ol class = "select-table" style="width:20vw;height:auto;margin:0"
+										id="table_impact_cat">
+									</ol>
+								</td>
+								<td class="col-md-8">
+									<svg id="chart_impacts" style="width:65vw;height:60vh;"></svg>
+								</td>
+							</tr>
+						</table>
+						<table class="table-responsive" style="margin-top:20px;">
+							<tr>
+								<th class="col-md-6">
+									<h3>{{ _('Accumulated impacts over lifetime') }}</h3>
+								</th>
+								<th class="col-md-6">
+									<h3>{{ _('Midpoint indicators normalized by the average annual impact of a person') }}</h3>
+								</th>
+							</tr>
+							<tr>
+								<td class="col-md-6" style="vertical-align:top;">
+									<p>{{ _("The graph below illustrates the accumulated impacts of the vehicles along their use phase.
+										The intercept of the slope represents the impacts associated with the production of the vehicle, occurring
+										before the use phase, while the slope illustrates variable emissions associated with the preparation of the fuel
+										(or generation of the electricity) and direct exhaust and non-exhaust emissions. You may select an impact
+										category to consider from the dropdown menu below.") }}</p>
+								</td>
+								<td class="col-md-6">
+									<p>{{_('This graph shows midpoint indicators normalized by the average impacts of a person in 2010.
+										This helps identify which midpoint indicators are the most relevant.
+										You can add or remove indicators to consider.')}}
+										{{_('Because these indicators are normalized, they are not expressed in their original unit,
+										but as a fraction of the impact of an average person over the year 2010.')}}
+										{{_('Source for normalization factors and recommendations:')}}
+										<a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC109878/kjna28984enn_global_norm_factors.pdf" target="blank_">
+											European Commission, 2017
+										</a>
+									</p>
+									<table style="font-size:10px;background-color:transparent;" class="table-responsive">
+										<tbody>
+										<tr style="background-color:rgba(0, 210, 0, 0.1)">
+											<th colspan="4">{{_('Most recommended')}}</th>
+										</tr>
+										<tr style="background-color:rgba(0, 210, 0, 0.1)">
+											<td width="25%"><input type="checkbox" name="method_radar_graph" value="climate change - climate change total" style="margin:0 10px 0 10px;" checked>{{_('climate change')}}</td>
+											<td width="25%"><input type="checkbox" name="method_radar_graph" value="human health - ozone layer depletion" style="margin:0 10px 0 10px;" checked>{{_('ozone depletion')}}</td>
+											<td width="25%"><input type="checkbox" name="method_radar_graph" value="human health - respiratory effects" style="margin:0 10px 0 10px;" checked>{{_('particulate matter formation')}}</td>
+											<td width="25%"></td>
+										</tr>
+										<tr style="background-color:rgba(255, 225, 0, 0.1)">
+											<th colspan="4">{{_('Recommended')}}</th>
+										</tr>
+										<tr style="background-color:rgba(255, 225, 0, 0.1)">
+											<td><input type="checkbox" name="method_radar_graph" value="human health - ionising radiation" style="margin:0 10px 0 10px;" >{{_('ionising radiation')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="human health - photochemical ozone creation" style="margin:0 10px 0 10px;"  >{{_('photochemical oxidant formation')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="ecosystem quality - freshwater and terrestrial acidification" style="margin:0 10px 0 10px;" >{{_('terrestrial acidification')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="ecosystem quality - terrestrial eutrophication" style="margin:0 10px 0 10px;">{{_('terrestrial eutrophication')}}</td>
+										</tr>
+
+										<tr style="background-color:rgba(255, 225, 0, 0.1)">
+											<td><input type="checkbox" name="method_radar_graph" value="ecosystem quality - freshwater eutrophication" style="margin:0 10px 0 10px;" >{{_('freshwater eutrophication')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="ecosystem quality - marine eutrophication" style="margin:0 10px 0 10px;" >{{_('marine eutrophication')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="human health - carcinogenic effects" style="margin:0 10px 0 10px;" >{{_('human toxicity - carcinogenic')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="human health - non-carcinogenic effects" style="margin:0 10px 0 10px;" >{{_('human toxicity - non-carcinogenic')}}</td>
+										</tr>
+										<tr style="background-color:rgba(255, 170, 0, 0.1)">
+											<th colspan="4">{{_('Least reliable')}}</th>
+										</tr>
+										<tr style="background-color:rgba(255, 170, 0, 0.1)">
+											<td><input type="checkbox" name="method_radar_graph" value="resources - land use" style="margin:0 10px 0 10px;" >{{_('natural land transformation')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="ecosystem quality - freshwater ecotoxicity" style="margin:0 10px 0 10px;" >{{_('freshwater ecotoxicity')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="resources - dissipated water" style="margin:0 10px 0 10px;" >{{_('water depletion')}}</td>
+											<td><input type="checkbox" name="method_radar_graph" value="resources - fossils" style="margin:0 10px 0 10px;"  >{{_('fossil depletion')}}</td>
+										</tr>
+										<tr style="background-color:rgba(255, 170, 0, 0.1)">
+											<td><input type="checkbox" name="method_radar_graph" value="resources - minerals and metals" style="margin:0 10px 0 10px;" >{{_('metal depletion')}}</td>
+
+										</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="col-md-6">
+									<select id='select_impact' style='color:grey;'>
+									</select>
+									<div>
+										<svg id="chart-accumulated"
+											style="width:40vw;height:30vw;font-size:16px;color:grey;margin-bottom:20px;">
+										</svg>
+									</div>
+								</td>
+								<td class="col-md-6">
+									<div class="radarChart" style="margin: 0 auto;color:gray;" id="radarChart_mid"></div>
+								</td>
+
+							</tr>
+						</table>
+					</div>
+				</div>
+            </div>
+        </section>
+
+		<!-- Start MIDPOINT SCORES -->
 		<section id="mu-about">
 			<div class="container" style="width:90%;">
 				<div class="row"  >
@@ -318,7 +455,8 @@
 				</div>
             </div>
         </section>
-		<!-- Start SCOPE -->
+
+		<!-- Start SINGLE SCORE -->
 		<section id="mu-about" style="background-color:#f2f2f2;">
 			<div class="container" style="width:90%;">
 				<div class="row">

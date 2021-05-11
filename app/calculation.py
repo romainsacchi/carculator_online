@@ -538,6 +538,17 @@ class Calculation:
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
+
+        # remove hybridization for vehicles before 2030
+        pwt = list({"ICEV-p", "ICEV-d", "ICEV-g"}.intersection(set(scope["powertrain"])))
+        years_before_2030 = [y for y in arr["year"].values if y < 2030]
+
+
+        if pwt and years_before_2030:
+            arr.loc[dict(
+                powertrain=pwt, year=years_before_2030, parameter="combustion power share"
+            )] = 1
+
         cm = CarModel(arr, cycle=d[("Driving cycle",)])
 
         if "electric utility factor" in d[("Background",)]:
@@ -674,7 +685,7 @@ class Calculation:
 
         lifetime = int(cm.array.sel(parameter="lifetime kilometers").mean().values)
 
-        self.export = ExportInventory(self.ic.A, self.ic.rev_inputs)
+
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -850,12 +861,45 @@ class Calculation:
         task.progress = 85
         db.session.commit()
 
+        # reformat A for export
+        self.ic.inputs = self.ic.get_dict_input()
+        #self.ic.bs = BackgroundSystemModel()
+        self.ic.country = self.ic.get_country_of_use()
+        self.ic.add_additional_activities()
+        self.ic.rev_inputs = self.ic.get_rev_dict_input()
+        self.ic.A = self.ic.get_A_matrix()
+
+        # add vehicles datasets
+        self.ic.add_additional_activities_for_export()
+
+        # Update dictionary
+        self.ic.rev_inputs = self.ic.get_rev_dict_input()
+
+        # resize A matrix
+        self.ic.A = self.ic.get_A_matrix()
+
+        # Create electricity and fuel market datasets
+        self.ic.create_electricity_market_for_fuel_prep()
+
+        # Create fuel markets
+        self.ic.fuel_blends = {}
+        self.ic.fuel_dictionary = self.ic.create_fuel_dictionary()
+        self.ic.define_fuel_blends()
+        self.ic.set_actual_range()
+
+        # Create electricity market dataset for battery production
+        self.ic.create_electricity_market_for_battery_production()
+        self.ic.set_inputs_in_A_matrix_for_export(self.ic.array.values)
+
+        self.export = ExportInventory(self.ic.A, self.ic.rev_inputs)
+
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
         task.progress = 100
         db.session.commit()
 
         list_res.extend(list_res_costs)
+
 
         return (
             json.dumps(

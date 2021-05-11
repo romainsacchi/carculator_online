@@ -443,7 +443,7 @@ def direct_results():
         "CD", "CF", "CG", "CI", "CM", "DJ", "DZ", "EG", "ER", "ET", "GA", "GH", "GM", "GN", "GQ", "GW",
         "KE","LR", "LS", "LY", "MA", "ML", "MR", "MW", "MZ", "NE", "NG", "NL",
         "NM", "RW",  "SD", "SL",
-        "SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM","ZW", "NO"
+        "SN", "SO", "SS", "SZ","TD", "TG", "TN", "TZ",  "UG", "ZM", "ZW", "NO"
     ]
 
     dic_uuids = {}
@@ -478,11 +478,11 @@ def direct_results():
             for ecoinvent_version in ["3.5", "3.6", "3.7"]:
                 if software == "brightway2" or (software == "simapro" and ecoinvent_version =="3.6"):
                     for compatibility in [True, False]:
-                        print(software, ecoinvent_version, compatibility)
                         data = i.write_lci_to_excel(
                             ecoinvent_version=ecoinvent_version,
                             ecoinvent_compatibility=compatibility,
                             software_compatibility=software,
+
                             export_format="string"
                         )
 
@@ -992,9 +992,9 @@ def get_fuel_blend(country, years):
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
-            , 0, 1))
+            , 0, 1)).tolist()
     else:
-        share_biogasoline = np.zeros_like(years)
+        share_biogasoline = [0] * len(years)
 
     """ Returns average share of biodiesel according to historical IEA stats """
     if country in app.calc.biodiesel.country.values:
@@ -1004,9 +1004,9 @@ def get_fuel_blend(country, years):
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
-            , 0, 1))
+            , 0, 1)).tolist()
     else:
-        share_biodiesel = np.zeros_like(years)
+        share_biodiesel = [0] * len(years)
 
     """ Returns average share of biomethane according to historical IEA stats """
     if country in app.calc.biomethane.values:
@@ -1016,9 +1016,9 @@ def get_fuel_blend(country, years):
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
-            , 0, 1))
+            , 0, 1)).tolist()
     else:
-        share_biomethane = np.zeros_like(years)
+        share_biomethane = [0] * len(years)
 
     response = {
         "petrol": {
@@ -1034,8 +1034,8 @@ def get_fuel_blend(country, years):
             "secondary": np.round(share_biomethane, 2),
         },
         "hydrogen": {
-            "primary": np.ones_like(years),
-            "secondary": np.zeros_like(years),
+            "primary": [1] * len(years),
+            "secondary": [0] * len(years),
         },
     }
 
