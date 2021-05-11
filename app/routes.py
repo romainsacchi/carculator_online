@@ -336,8 +336,8 @@ def tool_page(country):
                         "Medium": {
                             "type": "NMC",
                             "origin": "CN",
-                            "energy battery mass": [385],
-                            "battery cell energy density": [0.23],
+                            "energy battery mass": [400],
+                            "battery cell energy density": [0.2],
                             "battery lifetime kilometers": [200000],
                         }
                     }

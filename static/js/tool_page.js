@@ -2761,7 +2761,7 @@ function prepare_data_for_energy_storage(){
 
 function update_energy_storage_table(data){
 
-    var battery_data = data["background params"]["energy storage"]["electric"];
+    var battery_data = data["background params"]["energy storage"]["BEV"];
 
     for (var size in battery_data) {
         // check if the property/key is defined in the object itself, not in parent
@@ -3424,6 +3424,8 @@ holder.ondrop = function(e) {
 };
 
 function start(data){
+
+    console.log(data)
 
     async function firstFunction(){
         fill_in_from_config_file(data)
