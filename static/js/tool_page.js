@@ -1304,8 +1304,14 @@ function getSelectedCountries() {
                         var div_year = divs[i].id.split('_')[1]
                         var fuel = divs[i].id.split('_')[0]
                         var slider = divs[i]
+
+                        var val = parseInt(json[fuel]['primary'][list_year.indexOf(div_year)]*100)
+
+                        // noUiSlider.update bugs if we update to 0
+                        if (val == 0){val = .001};
+
                         slider.noUiSlider.updateOptions({
-                            start: parseInt(json[fuel]['primary'][list_year.indexOf(div_year)]*100)
+                            start: val
                         });
                     }
                     }
@@ -3344,7 +3350,7 @@ function create_efficiency_table() {
                         step:0.01,
                         connect: true,
                         range: {
-                            'min': 0.01,
+                            'min': 0,
                             'max': 1
                         },
                         format: wNumb({

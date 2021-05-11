@@ -988,11 +988,14 @@ def get_fuel_blend(country, years):
     if country in app.calc.biogasoline.country.values:
         share_biogasoline = np.squeeze(np.clip(
             app.calc.biogasoline.sel(
-                country=country
+                country=country,
+                variable="value"
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
             , 0, 1))
+        if share_biogasoline.shape == ():
+            share_biogasoline = share_biogasoline.reshape(1)
     else:
         share_biogasoline = np.zeros_like(years)
 
@@ -1000,23 +1003,29 @@ def get_fuel_blend(country, years):
     if country in app.calc.biodiesel.country.values:
         share_biodiesel = np.squeeze(np.clip(
             app.calc.biodiesel.sel(
-                country=country
+                country=country,
+                variable="value"
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
             , 0, 1))
+        if share_biodiesel.shape == ():
+            share_biodiesel = share_biodiesel.reshape(1)
     else:
         share_biodiesel = np.zeros_like(years)
 
     """ Returns average share of biomethane according to historical IEA stats """
-    if country in app.calc.biomethane.values:
+    if country in app.calc.biomethane.country.values:
         share_biomethane = np.squeeze(np.clip(
             app.calc.biomethane.sel(
-                country=country
+                country=country,
+                variable="value"
             )
                 .interp(year=years, kwargs={"fill_value": "extrapolate"})
                 .values
             , 0, 1))
+        if share_biomethane.shape == ():
+            share_biomethane = share_biomethane.reshape(1)
     else:
         share_biomethane = np.zeros_like(years)
 
@@ -1038,5 +1047,5 @@ def get_fuel_blend(country, years):
             "secondary": np.zeros_like(years).tolist(),
         },
     }
-
+    
     return jsonify(response)
