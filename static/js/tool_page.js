@@ -2881,7 +2881,6 @@ function update_fuel_sliders(data){
 
 function create_fuel_table() {
 
-
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
 

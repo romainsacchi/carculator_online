@@ -373,6 +373,19 @@
     "issue_noise emissions": "Die Lärmemissionen sind für aktuelle Durchschnittsfahrzeuge zuverlässig. Für zukünftige Fahrzeuge wurde der Geräuschkoeffizient von aktuellen Fahrzeugen verwendet. Ausserdem unterscheiden sich die Geräuschkoeffizienten zwar zwischen den Antriebssträngen, nicht aber zwischen den Größenklassen. Schliesslich wird angenommen, dass Elektrofahrzeuge beim Fahren unter 30 km/h ein Geräuschsignal aussenden.",
     "issue_renewable primary energy": "",
     "issue_non-renewable primary energy": "",
-    "issue_ownership cost": "Die Betriebskosten für aktuelle Fahrzeuge (2020) sollten recht zuverlässig sein. Das Problem stellt sich bei zukünftigen Fahrzeugen, für die der Preis von Energierohstoffen (Strom, Erdgas, flüssige Kraftstoffe) sehr schwer vorherzusagen ist. Daher sind die Betriebskosten für zukünftige Fahrzeuge mit großer Vorsicht zu betrachten."
+    "issue_ownership cost": "Die Betriebskosten für aktuelle Fahrzeuge (2020) sollten recht zuverlässig sein. Das Problem stellt sich bei zukünftigen Fahrzeugen, für die der Preis von Energierohstoffen (Strom, Erdgas, flüssige Kraftstoffe) sehr schwer vorherzusagen ist. Daher sind die Betriebskosten für zukünftige Fahrzeuge mit großer Vorsicht zu betrachten.",
+    "lifetime": "Lebensdauer - km",
+    "driving mass": "Masse (inkl. Zuladung) - kg",
+    "combustion power": "Verbrennungsleistung - ps",
+    "electric power": "elektrische Leistung - ps",
+    "energy consumption": "Energieverbrauch - l Benzinäquiv./100 km",
+    "tank-to-wheel efficiency": "Tank-zu-Rad-Wirkungsgrad - %",
+    "number of passengers": "Anzahl der Fahrgäste -  ",
+    "driving cycle": "Fahrzyklus -  ",
+    "fuel blend": "Kraftstoffmischung -  ",
+    "range": "Reichweite - km",
+    "battery lifetime": "Batterielebensdauer - km",
+    "battery capacity": "Batteriekapazität - kWh",
+    "battery mass": "Batteriemasse - kg"
   }
 }

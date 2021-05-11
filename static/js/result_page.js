@@ -280,6 +280,125 @@ function find_currency(country){
     return [exchange_rate, currency]
 };
 
+function fill_in_vehicles_specs(specs){
+
+    var tableRef_head = document.getElementById('vehicles_specs').getElementsByTagName('thead')[0];
+    var tableRef_body = document.getElementById('vehicles_specs').getElementsByTagName('tbody')[0];
+
+    var newRow = tableRef_head.insertRow();
+
+    var row_content = "<td></td><td><i>" + i18n('unit') + "</i></td>";
+
+    if (specs.length < 7){
+        var row_no = specs.length
+    }else {
+        var row_no = 7
+    }
+
+    for (var row=0; row < row_no; row++){
+         row_content += '<td align="left">'
+         var pwt = i18n(specs[row][0]);
+         var year = i18n(specs[row][1]);
+         var size = i18n(specs[row][2]);
+         var vehicle_name = pwt + " - " + size + " - " + year
+         row_content += "<h5>" + vehicle_name + "</h5>";
+         row_content += '</td>';
+        }
+
+    newRow.innerHTML = row_content;
+    tableRef_head.append(newRow);
+
+
+
+    var params = [
+    "lifetime",
+    "driving mass",
+    "combustion power",
+    "electric power",
+    "energy consumption",
+    "tank-to-wheel efficiency",
+    "number of passengers",
+    "driving cycle",
+    "fuel blend",
+    "range",
+    "battery lifetime",
+    "battery capacity",
+    "battery mass"
+    ]
+
+    var d_map_param_indices = {
+        "lifetime":3,
+        "driving mass":11,
+        "combustion power":12,
+        "electric power":13,
+        "energy consumption":10,
+        "tank-to-wheel efficiency":17,
+        "number of passengers":5,
+        "driving cycle":7,
+        "fuel blend":[25, 26, 27, 28],
+        "range":14,
+        "battery lifetime":22,
+        "battery capacity":21,
+        "battery mass":19
+    }
+
+    for (var p=0; p < params.length; p++){
+
+        var newRow = tableRef_body.insertRow();
+        var row_content = "";
+        var param = params[p]
+        var unit = i18n(params[p]).split(" - ")[1]
+        row_content += "<td><b>" + i18n(params[p]).split(" - ")[0] + "</b></td><td><i>" + unit + "</i></td>"
+
+        for (var row=0; row < row_no; row++){
+
+            if (param == "tank-to-wheel efficiency"){
+                var val = (specs[row][d_map_param_indices[param]]*100).toFixed(0);
+            } else if (param == "number of passengers"){
+                var val = specs[row][d_map_param_indices[param]].toFixed(1);
+            } else if(["lifetime", "battery lifetime", "driving mass", "combustion power", "electric power",
+                        "range", "battery capacity", "battery mass"].includes(param)){
+                var val = specs[row][d_map_param_indices[param]];
+
+                if (["combustion power", "electric power"].includes(param)){
+                    val /= 1.34102
+                }
+
+                val = val.toLocaleString('en-US', {maximumFractionDigits:0})
+
+                if (val == 0){ val = ""};
+
+            } else if (param == "energy consumption"){
+                var val = specs[row][d_map_param_indices[param]];
+                val /= 34200
+                val *= 100
+                val = val.toLocaleString('en-US', {maximumFractionDigits:1})
+
+            } else if (param == "fuel blend"){
+
+                var fuel_blend = d_map_param_indices[param];
+                if (specs[row][fuel_blend[0]] != ""){
+
+                    var val = (specs[row][fuel_blend[1]] * 100).toFixed(0) + "% " +  i18n(specs[row][fuel_blend[0]])
+                    val += " - " + (specs[row][fuel_blend[3]] * 100).toFixed(0) + "% " +  i18n(specs[row][fuel_blend[2]])
+
+                } else {
+                    var mix = specs[row][9]
+                    var share_renew = mix[0] + mix[3] + mix[4] + mix[5] + mix[8] + mix[10] + mix[11] + mix[14]
+                    var share_fossil = 1 - share_renew
+                    var val = (share_renew * 100).toFixed(0) + "% renew. - " + (share_fossil * 100).toFixed(0) + "% fossil.";
+                }
+
+            } else {
+                var val = specs[row][d_map_param_indices[param]]
+            }
+            row_content += "<td>" + val + "</td>"
+        };
+        newRow.innerHTML = row_content;
+        tableRef_body.append(newRow);
+    }
+};
+
 // Fetch the currency name and exchange rate
 var currency_info = find_currency(data[7]);
 var currency_exch_rate = Number(currency_info[0]);

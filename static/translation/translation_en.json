@@ -363,7 +363,20 @@
     "issue_noise emissions": "This indicator only covers noise emitted during driving. Noise emissions should be reliable for current vehicles. Note that current noise coefficients have also been used for future vehicles. Also, while noise coefficients differ across powertrains, they do not across size classes. Finally, it is assumed that electric vehicles emit a sound signal while driving below 30 km/h.",
     "issue_renewable primary energy": "",
     "issue_non-renewable primary energy": "",
-    "issue_ownership cost": "Ownership costs for current vehicles (2020) should be rather reliable. The issue arises with future vehicles, for which the price of energy commodities (electricity, natural gas, liquid fuels) is very difficult to predict. Hence, ownership costs for future vehicles are to be considered very cautiously."
+    "issue_ownership cost": "Ownership costs for current vehicles (2020) should be rather reliable. The issue arises with future vehicles, for which the price of energy commodities (electricity, natural gas, liquid fuels) is very difficult to predict. Hence, ownership costs for future vehicles are to be considered very cautiously.",
+    "lifetime": "Vehicle lifetime - km",
+    "driving mass": "Mass (incl. pass.) - kg",
+    "combustion power": "Combustion engine - hp",
+    "electric power": "Electric engine - hp",
+    "energy consumption": "Energy consumption - l gas./100 km",
+    "tank-to-wheel efficiency": "Tank-to-wheel efficiency - %",
+    "number of passengers": "No. passengers -  ",
+    "driving cycle": "Driving cycle -  ",
+    "fuel blend": "Fuel blend -  ",
+    "range": "Range autonomy - km",
+    "battery lifetime": "Battery lifetime - km",
+    "battery capacity": "Battery capacity - kWh",
+    "battery mass": "Battery mass - kg"
   }
 }
 

@@ -1047,5 +1047,5 @@ def get_fuel_blend(country, years):
             "secondary": np.zeros_like(years).tolist(),
         },
     }
-    
+
     return jsonify(response)
