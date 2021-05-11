@@ -506,8 +506,8 @@ def display_quick_results(country):
     job_id = data[-1]
     data = data[:-1]
 
-    if not current_user.is_authenticated:
-        session["url"] = "/display_quick_results/" + job_id
+    #if not current_user.is_authenticated:
+    #    session["url"] = "/display_quick_results/" + job_id
 
     # retrieve impact categories
     impact_cat = [
