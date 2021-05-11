@@ -534,7 +534,7 @@ def display_quick_results(country):
      "non-renewable primary energy",
      "ownership cost"
     ]
-    return render_template("result.html", data=json.dumps(data), uuid=job_id, impact_cat=impact_cat)
+    return render_template("result.html", data=json.dumps(data), uuid=job_id, impact_cat=impact_cat, country=country)
 
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):
@@ -994,7 +994,7 @@ def get_fuel_blend(country, years):
                 .values
             , 0, 1)).tolist()
     else:
-        share_biogasoline = [0] * len(years)
+        share_biogasoline = np.zeros_like(years)
 
     """ Returns average share of biodiesel according to historical IEA stats """
     if country in app.calc.biodiesel.country.values:
@@ -1006,7 +1006,7 @@ def get_fuel_blend(country, years):
                 .values
             , 0, 1)).tolist()
     else:
-        share_biodiesel = [0] * len(years)
+        share_biodiesel = np.zeros_like(years)
 
     """ Returns average share of biomethane according to historical IEA stats """
     if country in app.calc.biomethane.values:
@@ -1018,24 +1018,24 @@ def get_fuel_blend(country, years):
                 .values
             , 0, 1)).tolist()
     else:
-        share_biomethane = [0] * len(years)
+        share_biomethane = np.zeros_like(years)
 
     response = {
         "petrol": {
-            "primary": np.round(1 - share_biogasoline, 2),
-            "secondary": np.round(share_biogasoline, 2),
+            "primary": np.round(1 - share_biogasoline, 2).tolist(),
+            "secondary": np.round(share_biogasoline, 2).tolist(),
         },
         "diesel": {
-            "primary": np.round(1 - share_biodiesel, 2),
-            "secondary": np.round(share_biodiesel, 2),
+            "primary": np.round(1 - share_biodiesel, 2).tolist(),
+            "secondary": np.round(share_biodiesel, 2).tolist(),
         },
         "cng": {
-            "primary": np.round(1 - share_biomethane, 2),
-            "secondary": np.round(share_biomethane, 2),
+            "primary": np.round(1 - share_biomethane, 2).tolist(),
+            "secondary": np.round(share_biomethane, 2).tolist(),
         },
         "hydrogen": {
-            "primary": [1] * len(years),
-            "secondary": [0] * len(years),
+            "primary": np.ones_like(years).tolist(),
+            "secondary": np.zeros_like(years).tolist(),
         },
     }
 
