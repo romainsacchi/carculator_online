@@ -106,7 +106,7 @@
 								onclick=" window.open('https://carculator.readthedocs.io/en/latest/modeling.html', '_blank'); return false;">{{ _('Modeling and assumptions') }}
 					</button>
 
-					<form action="{{ url_for('tool_page', country=country) }}" style="display:inline-block;float:right;margin-top:5px;">
+					<form action="{{ url_for('tool_page', country=country) if country else url_for('tool_page') }}" style="display:inline-block;float:right;margin-top:5px;">
 						<button class="online-button"
 								style="margin:5px;background-color:transparent;color:white;border:1px solid white;
 								display:inline-block;margin: 0 auto !important;float:right;">{{ _('Modify vehicles') }}</button>
@@ -204,7 +204,7 @@
 						<p>{{ _("Here are the vehicles parameters considered for the results presented below (limited to 6 vehicles).") }}</p>
 						<p style="border:2px solid grey;padding:15px;width:100%;">{{ _("If you wish to modify some of these parameters (fuel blends, engine efficiency, battery size, etc.)
 							or if you wish to add other vehicles (other sizes, other years of manufacture), go
-							to the ") }} <u><b><a target='_blank' href="{{ url_for('tool_page', country=country) }}">{{ _("CONFIGURATION") }}</a></b></u>
+							to the ") }} <u><b><a target='_blank' href="{{ url_for('tool_page', country=country) if country else url_for('tool_page') }}">{{ _("CONFIGURATION") }}</a></b></u>
 						{{ _("(login required, registration and use are completely free).") }} </p>
 
 						<table class="table-responsive" style="margin-bottom:15px;">
