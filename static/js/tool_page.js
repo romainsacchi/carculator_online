@@ -2751,8 +2751,8 @@ function prepare_data_for_energy_storage(){
                 }
                 var data = {};
                 data["year"] = arr_y;
-                data["background params"] = {"energy storage":{"electric":{}}};
-                data["background params"]["energy storage"]["electric"] = energy_data;
+                data["background params"] = {"energy storage":{"BEV":{}}};
+                data["background params"]["energy storage"]["BEV"] = energy_data;
                 update_energy_storage_table(data);
 
             });
@@ -2898,10 +2898,10 @@ function create_fuel_table() {
 
     var fuel_options = {
         'petrol': ['petrol', 'bioethanol - wheat straw', 'bioethanol - forest residues',
-                    'bioethanol - sugarbeet', 'bioethanol - maize starch', 'synthetic gasoline',
+                    'bioethanol - sugarbeet', 'bioethanol - maize starch', 'synthetic gasoline - economic allocation',
                     'synthetic gasoline - energy allocation'
                     ],
-        'diesel': ['diesel', 'biodiesel - algae', 'biodiesel - cooking oil', 'synthetic diesel',
+        'diesel': ['diesel', 'biodiesel - algae', 'biodiesel - cooking oil', 'synthetic diesel - economic allocation',
         'synthetic diesel - energy allocation'],
         'cng': ['cng', 'biogas - sewage sludge', 'biogas - biowaste', 'syngas'],
         'electric': ['electric'],
