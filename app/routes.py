@@ -771,7 +771,7 @@ def get_results():
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
 
-@app.route("fetch_results/<job_key>", methods=["GET"])
+@app.route("/fetch_results/<job_key>", methods=["GET"])
 def fetch_results(job_key):
     """ Return raw results is the job is completed. """
 
