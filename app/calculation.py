@@ -1027,9 +1027,15 @@ class Calculation:
                 cat = self.d_categories[name]
                 powertrain = "all"
                 size = "all"
-                val = [float(v.replace(" ", ""))] * len(
-                    new_dict[("Functional unit",)]["year"]
-                )
+
+                if isinstance(v, str):
+                    val = [float(v.replace(" ", ""))] * len(
+                        new_dict[("Functional unit",)]["year"]
+                    )
+                else:
+                    val = [float(v)] * len(
+                        new_dict[("Functional unit",)]["year"]
+                    )
             else:
 
                 k = tuple(k.split(","))
