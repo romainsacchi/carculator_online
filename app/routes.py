@@ -745,8 +745,6 @@ def get_results():
 
     job_id = str(uuid.uuid1())
 
-    print(request.get_json())
-
     # Add task to db
     task = Task(id=job_id, progress=0,)
     db.session.add(task)
@@ -754,8 +752,6 @@ def get_results():
 
     lang = session.get("language", "en")
     d = app.calc.format_dictionary(request.get_json(), lang, job_id)
-
-    print(d)
 
     # Create a connection to the Redis server
     q = Queue(connection=conn)
@@ -774,6 +770,23 @@ def get_results():
 
     res = make_response(jsonify({"job id": job.get_id()}), 200)
     return res
+
+@app.route("fetch_results/<job_key>", methods=["GET"])
+def fetch_results(job_key):
+    """ Return raw results is the job is completed. """
+
+    try:
+        job = Job.fetch(job_key, connection=conn)
+
+        if job.is_finished:
+            return make_response(jsonify(job.result[0]), 200)
+
+        else:
+            return make_response(jsonify({"message":"The JOB is not completed."}), 404)
+
+    except NoSuchJobError:
+        return make_response(jsonify({"message": "The JOB ID is not found."}), 404)
+
 
 @app.route("/display_result/<job_key>", methods=["GET"])
 def display_result(job_key):
