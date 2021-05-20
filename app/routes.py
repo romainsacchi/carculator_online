@@ -332,7 +332,7 @@ def tool_page(country):
                     }
                 },
                 "energy storage": {
-                    "BEV": {
+                    "electric": {
                         "Medium": {
                             "type": "NMC",
                             "origin": "CN",

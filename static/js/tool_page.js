@@ -2751,8 +2751,8 @@ function prepare_data_for_energy_storage(){
                 }
                 var data = {};
                 data["year"] = arr_y;
-                data["background params"] = {"energy storage":{"BEV":{}}};
-                data["background params"]["energy storage"]["BEV"] = energy_data;
+                data["background params"] = {"energy storage":{"electric":{}}};
+                data["background params"]["energy storage"]["electric"] = energy_data;
                 update_energy_storage_table(data);
 
             });
@@ -2761,7 +2761,7 @@ function prepare_data_for_energy_storage(){
 
 function update_energy_storage_table(data){
 
-    var battery_data = data["background params"]["energy storage"]["BEV"];
+    var battery_data = data["background params"]["energy storage"]["electric"];
 
     for (var size in battery_data) {
         // check if the property/key is defined in the object itself, not in parent
