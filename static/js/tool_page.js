@@ -1866,7 +1866,6 @@ function collect_configuration(){
             for (s=0;s<listSizes.length;s++){
                 energy_storage[i18n(listSizes[s].innerHTML)] = {
                     "energy battery mass":[],
-                    "battery cell energy density":[],
                     "battery lifetime kilometers":[],
                     "type": "",
                     "origin": ""
@@ -1875,6 +1874,8 @@ function collect_configuration(){
                 var div = $("[id='"+"type_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"']").children()
                 var select = $(div[0]).find("option:selected").val()
                 energy_storage[i18n(listSizes[s].innerHTML)]["type"] = select;
+
+                energy_storage[i18n(listSizes[s].innerHTML)]["battery cell energy density, " + select] = [];
 
                 var div = $("[id='"+"origin_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"']").children()
                 var select = $(div[0]).find("option:selected").val()
@@ -1889,7 +1890,7 @@ function collect_configuration(){
 
                     var slider = $("[id='"+"energy_density_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = parseFloat(slider.noUiSlider.get().split(" ")[0]);
-                    energy_storage[i18n(listSizes[s].innerHTML)]["battery cell energy density"].push(val)
+                    energy_storage[i18n(listSizes[s].innerHTML)]["battery cell energy density, " + select].push(val)
 
                     var slider = $("[id='"+"lifetime_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = slider.noUiSlider.get().split(" ")[0];
@@ -2756,7 +2757,6 @@ function prepare_data_for_energy_storage(){
                 update_energy_storage_table(data);
 
             });
-
 };
 
 function update_energy_storage_table(data){

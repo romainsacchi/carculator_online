@@ -213,7 +213,7 @@ class Calculation:
     def get_dc(self, dc):
         return get_standard_driving_cycle(dc)
 
-    def create_config_array(self, dict_params, array, mix):
+    def create_config_array(self, dict_params, array, mix, energy_storage):
 
         arr = []
         year = [int(y) for y in dict_params[("Functional unit",)]["year"]]
@@ -231,6 +231,8 @@ class Calculation:
         km_per_year = dict_params[("Foreground",)][
             ("Driving", "all", "all", "kilometers per year", "none")
         ][(year[0], "loc")]
+
+
 
         for pt in array.coords["powertrain"].values:
             for s in array.coords["size"].values:
@@ -267,7 +269,9 @@ class Calculation:
                                 "TtW efficiency",
                                 "battery discharge efficiency",
                                 "energy battery mass",
-                                "battery cell energy density",
+                                "battery cell energy density, " + energy_storage["electric"][pt]
+                                if pt in energy_storage["electric"]
+                                else "battery cell energy density, NMC-111",
                                 "electric energy stored",
                                 "battery lifetime kilometers",
                             ],
@@ -910,7 +914,7 @@ class Calculation:
                     TtW_energy,
                     dict_scatter,
                     list_res_acc,
-                    self.create_config_array(d, cm.array, self.ic.mix),
+                    self.create_config_array(d, cm.array, self.ic.mix, cm.energy_storage),
                     d[("Background",)]["country"],
                     d[("Functional unit",)]["fu"]["quantity"],
                     d[("Functional unit",)]["fu"]["unit"],

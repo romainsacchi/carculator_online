@@ -293,7 +293,7 @@ def tool_page(country):
             "fu": {"unit": "vkm", "quantity": 1},
             "foreground params": {
                 "passenger-slider": "1.5",
-                "cargo-slider": "150",
+                "cargo-slider": "20",
                 "lifetime-slider": "200 000",
                 "mileage-slider": "12 000",
             },
