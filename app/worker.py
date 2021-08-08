@@ -3,7 +3,6 @@ import redis
 from rq import Worker, Queue, Connection
 
 listen = ['default']
-
 redis_url = os.getenv('REDISCLOUD_URL', 'None')
 
 try:
