@@ -2,7 +2,7 @@ import os
 import redis
 from rq import Worker, Queue, Connection
 
-listen = ['0.0.0.0']
+listen = ['default']
 redis_url = os.getenv('REDISCLOUD_URL', 'None')
 
 try:
@@ -12,10 +12,6 @@ except ValueError:
     conn = None
 
 if __name__ == '__main__':
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-
-    #with Connection(conn):
-    #    worker = Worker(list(map(Queue, listen)))
-    #    worker.work()
+    with Connection(conn):
+        worker = Worker(list(map(Queue, listen)))
+        worker.work()
