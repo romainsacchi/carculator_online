@@ -337,7 +337,7 @@ def tool_page(country):
                             "type": "NMC-111",
                             "origin": "CN",
                             "energy battery mass": [400],
-                            "battery cell energy density, NMC-111": [0.2],
+                            "battery cell energy density": [0.2],
                             "battery lifetime kilometers": [200000],
                         }
                     }
