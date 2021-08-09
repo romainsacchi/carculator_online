@@ -1068,7 +1068,12 @@ class Calculation:
                     size = e
                     for p in energy_storage[e]:
                         if p not in ("type", "origin"):
-                            name = p
+
+                            if p == "battery energy cell density":
+                                name = p + ", " + energy_storage[e]["type"]
+                            else:
+                                name = p
+
                             cat = self.d_categories[name]
                             powertrain = "BEV"
                             val = energy_storage[e][p]
