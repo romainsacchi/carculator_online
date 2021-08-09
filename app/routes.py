@@ -637,14 +637,30 @@ def search_params(param_item, powertrain_filter, size_filter):
 
 @app.route("/get_param_value/<name>/<pt>/<s>/<y>")
 def get_param_value(name, pt, s, y):
-    name = name.split(",")
-
-    pt = [p for p in pt.split(",")]
-    s = [x for x in s.split(",")]
 
     y = y.split(",")
     y = [int(a) for a in y]
     arr = app.calc.interpolate_array(y)
+
+    if not any(
+        n in name for n in ["NMC", "NCA", "LFP"]
+    ):
+        name = name.split(",")
+    else:
+        if "NMC-111" in name:
+            add_param = "batter energy cell density, NMC-111"
+        if "NCA" in name:
+            add_param = "batter energy cell density, NCA"
+        if "LFP" in name:
+            add_param = "batter energy cell density, LFP"
+        name = name.split(",")
+        name = [n for n in name if n in arr.parameter.values]
+        name.append(add_param)
+
+    pt = [p for p in pt.split(",")]
+    s = [x for x in s.split(",")]
+
+
     val = (
         arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0)
         .values.round(2)
