@@ -1069,7 +1069,7 @@ class Calculation:
                     for p in energy_storage[e]:
                         if p not in ("type", "origin"):
 
-                            if p == "battery energy cell density":
+                            if p == "battery cell energy density":
                                 name = p + ", " + energy_storage[e]["type"]
                             else:
                                 name = p
