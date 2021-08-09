@@ -638,6 +638,7 @@ def search_params(param_item, powertrain_filter, size_filter):
 @app.route("/get_param_value/<name>/<pt>/<s>/<y>")
 def get_param_value(name, pt, s, y):
     name = name.split(",")
+
     pt = [p for p in pt.split(",")]
     s = [x for x in s.split(",")]
 

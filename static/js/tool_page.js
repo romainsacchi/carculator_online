@@ -2712,7 +2712,7 @@ function prepare_data_for_energy_storage(){
         arr_s.push(i18n(listSizes[s].innerHTML))
     };
 
-    var list_param = ["energy battery mass", "battery cell energy density", "battery lifetime kilometers"]
+    var list_param = ["energy battery mass", "battery cell energy density, NMC-111", "battery lifetime kilometers"]
 
     var data = $.when(
 
