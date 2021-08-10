@@ -269,9 +269,7 @@ class Calculation:
                                 "TtW efficiency",
                                 "battery discharge efficiency",
                                 "energy battery mass",
-                                "battery cell energy density, " + energy_storage["electric"][pt]
-                                if pt in energy_storage["electric"]
-                                else "battery cell energy density, NMC-111",
+                                "battery cell energy density",
                                 "electric energy stored",
                                 "battery lifetime kilometers",
                             ],
@@ -1068,11 +1066,6 @@ class Calculation:
                     size = e
                     for p in energy_storage[e]:
                         if p not in ("type", "origin"):
-
-                            if p == "battery cell energy density":
-                                name = p + ", " + energy_storage[e]["type"]
-                            else:
-                                name = p
 
                             cat = self.d_categories[name]
                             powertrain = "BEV"

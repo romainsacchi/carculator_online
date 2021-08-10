@@ -642,24 +642,10 @@ def get_param_value(name, pt, s, y):
     y = [int(a) for a in y]
     arr = app.calc.interpolate_array(y)
 
-    if not any(
-        n in name for n in ["NMC", "NCA", "LFP"]
-    ):
-        name = name.split(",")
-    else:
-        if "NMC-111" in name:
-            add_param = "batter cell energy density, NMC-111"
-        if "NCA" in name:
-            add_param = "batter cell energy density, NCA"
-        if "LFP" in name:
-            add_param = "batter cell energy density, LFP"
-        name = name.split(",")
-        name = [n for n in name if n in arr.parameter.values]
-        name.append(add_param)
+    name = name.split(",")
 
     pt = [p for p in pt.split(",")]
     s = [x for x in s.split(",")]
-
 
     val = (
         arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0)
