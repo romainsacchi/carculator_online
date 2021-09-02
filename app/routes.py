@@ -748,13 +748,20 @@ def get_results():
 
     job_id = str(uuid.uuid1())
 
+    lang = session.get("language", "en")
+    print(request.get_json())
+    d = app.calc.format_dictionary(request.get_json(), lang, job_id)
+    print(d)
+
     # Add task to db
     task = Task(id=job_id, progress=0,)
     db.session.add(task)
     db.session.commit()
 
-    lang = session.get("language", "en")
-    d = app.calc.format_dictionary(request.get_json(), lang, job_id)
+    # Update task progress to db
+    task = Task.query.filter_by(id=job_id).first()
+    task.progress = 10
+    db.session.commit()
 
     # Create a connection to the Redis server
     q = Queue(connection=conn)
@@ -764,6 +771,7 @@ def get_results():
         result_ttl=3600,
         job_id=job_id,
     )
+
 
     print("JOB SENT with job_id {}".format(job_id))
 

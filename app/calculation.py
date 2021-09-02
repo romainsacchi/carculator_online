@@ -929,10 +929,6 @@ class Calculation:
     def format_dictionary(self, raw_dict, lang, job_id):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
 
-        # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 10
-        db.session.commit()
 
         d_sliders = {
             "mileage-slider": "kilometers per year",
@@ -1082,7 +1078,7 @@ class Calculation:
                                 )
                             }
 
-                            f_d[(cat, powertrain, size, name, "none")] = d_val
+                            f_d[(cat, powertrain, size, p, "none")] = d_val
 
         if "efficiency" in raw_dict["background params"]:
             efficiency = raw_dict["background params"]["efficiency"]
@@ -1109,10 +1105,5 @@ class Calculation:
                             f_d[(cat, powertrain, size, name, "none")] = d_val
 
         new_dict[("Foreground",)] = f_d
-
-        # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 20
-        db.session.commit()
 
         return new_dict
