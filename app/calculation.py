@@ -537,6 +537,8 @@ class Calculation:
             "size": d[("Functional unit",)]["size"],
         }
 
+        print(d)
+
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
@@ -615,6 +617,8 @@ class Calculation:
         cost_benchmark = total_cost.sel(cost_type="total", value=0).values.reshape(
             len(l)
         )
+
+        print(total_cost)
 
         cost_types = [c for c in total_cost.cost_type.values if c != "total"]
 
