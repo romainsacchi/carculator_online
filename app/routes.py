@@ -168,7 +168,7 @@ def fetch_car_repl_results(country, cycle):
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-@login_required
+#@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -911,7 +911,7 @@ def get_list_uuids_countries():
     return data
 
 @app.route("/get_inventory/<compatibility>/<ecoinvent_version>/<job_key>/<software>")
-@login_required
+#@login_required
 def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     response = Response()
