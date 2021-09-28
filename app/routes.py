@@ -437,7 +437,8 @@ def direct_results():
     countries = [
         "AT","AU",
         "BE", "BG", "BR", "CA", "CH", "CL", "CN", "CY", "CZ", "DE", "DK", "EE",
-        "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IN", "IT", "IS", "JP", "LT", "LU",
+        "ES",
+        "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IN", "IT", "IS", "JP", "LT", "LU",
         "LV", "MT", "PL", "PT", "RO", "RU", "SE", "SI", "SK", "US", "ZA", "AO",
         "BF", "BI", "BJ", "BW",
         "CD", "CF", "CG", "CI", "CM", "DJ", "DZ", "EG", "ER", "ET", "GA", "GH", "GM", "GN", "GQ", "GW",
@@ -462,7 +463,7 @@ def direct_results():
            ('Driving cycle',): 'WLTC',
            ('Background',): {'country': country},
            ('Foreground',): {('Glider', 'all', 'all', 'average passengers', 'none'): {(2020, 'loc'): 1.5},
-                             ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 150.0},
+                             ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 20.0},
                              ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2020, 'loc'): 200000.0},
                              ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2020, 'loc'): 12000.0}}}
         data, i = app.calc.process_results(d, "en", job_id)
@@ -474,22 +475,20 @@ def direct_results():
 
 
         # generate inventories
-        for software in ["brightway2", "simapro"]:
-            for ecoinvent_version in ["3.5", "3.6", "3.7"]:
-                if software == "brightway2" or (software == "simapro" and ecoinvent_version =="3.6"):
-                    for compatibility in [True, False]:
-                        data = i.write_lci_to_excel(
-                            ecoinvent_version=ecoinvent_version,
-                            ecoinvent_compatibility=compatibility,
-                            software_compatibility=software,
-
-                            export_format="string"
-                        )
-
-                        with open('data/inventories/quick_inventory_{}_{}_{}_{}.pickle'.format(
-                                country, software, ecoinvent_version, compatibility),
-                                'wb') as f:
-                            pickle.dump(data, f)
+        # for software in ["brightway2", "simapro"]:
+        #     for ecoinvent_version in ["3.6", "3.7"]:
+        #         if software == "brightway2" or (software == "simapro" and ecoinvent_version =="3.6"):
+        #             data = i.write_lci_to_excel(
+        #                 ecoinvent_version=ecoinvent_version,
+        #                 ecoinvent_compatibility=True,
+        #                 software_compatibility=software,
+        #                 export_format="string"
+        #             )
+        #
+        #             with open('data/inventories/quick_inventory_{}_{}_{}.pickle'.format(
+        #                     country, software, ecoinvent_version),
+        #                     'wb') as f:
+        #                 pickle.dump(data, f)
 
     with open('data/quick_results_job_ids.pickle', 'wb') as f:
         pickle.dump(dic_uuids, f)
@@ -749,9 +748,7 @@ def get_results():
     job_id = str(uuid.uuid1())
 
     lang = session.get("language", "en")
-    print(request.get_json())
     d = app.calc.format_dictionary(request.get_json(), lang, job_id)
-    print(d)
 
     # Add task to db
     task = Task(id=job_id, progress=0,)
@@ -771,7 +768,6 @@ def get_results():
         result_ttl=3600,
         job_id=job_id,
     )
-
 
     print("JOB SENT with job_id {}".format(job_id))
 

@@ -23,7 +23,7 @@ pycountry==20.7.3
 stats_arrays==0.6.4
 PyPrind==2.11.2
 redis==3.5.3
--e git+https://github.com/romainsacchi/carculator#egg=carculator>=1.5.9
+-e git+https://github.com/romainsacchi/carculator#egg=carculator>=1.6.0
 email-validator
 mysqlclient
 gunicorn
