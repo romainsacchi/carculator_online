@@ -769,6 +769,8 @@ def get_results():
         job_id=job_id,
     )
 
+    print(uuid, d)
+
     print("JOB SENT with job_id {}".format(job_id))
 
     task = Task.query.filter_by(id=job_id).first()
