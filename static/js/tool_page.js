@@ -1502,7 +1502,7 @@ var slider_cargo = document.getElementById('cargo-slider');
      start: [20],
     range: {
         'min': [0],
-        'max': [500]
+        'max': [200]
     },
     step: 10,
     format: wNumb({
@@ -1514,7 +1514,7 @@ var slider_cargo = document.getElementById('cargo-slider');
 });
 
 slider_cargo.noUiSlider.on('update', function (values, handle) {
-    var val = parseFloat(values) / 5;
+    var val = parseFloat(values) / 2;
     $("#image_cargo").height(val);
     $('#cargo-value').text(values + " kg");
 });
