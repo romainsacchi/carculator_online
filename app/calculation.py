@@ -571,6 +571,7 @@ class Calculation:
         else:
             cm.set_all()
 
+            
         pt = cm.array.powertrain.values
         s = d[("Functional unit",)]["size"]
         y = d[("Functional unit",)]["year"]
