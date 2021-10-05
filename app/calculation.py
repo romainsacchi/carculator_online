@@ -555,15 +555,15 @@ class Calculation:
         cm = CarModel(arr, cycle=d[("Driving cycle",)])
 
         # adjust the electricity density of the battery cells
-        for p in d[('Foreground')]:
+        for p in d[('Foreground',)]:
             if p[3] == "battery cell energy density":
-                for y in d[('Foreground')][p]:
+                for y in d[("Foreground",)][p]:
                     cm.array.loc[
                         dict(
                             parameter="battery cell energy density",
                             year=y[0]
                         )
-                    ]= d[('Foreground')][p][y]
+                    ]= d[("Foreground",)][p][y]
 
         if "electric utility factor" in d[("Background",)]:
             uf = list(d[("Background",)]["electric utility factor"].values())
