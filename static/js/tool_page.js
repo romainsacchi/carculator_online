@@ -1499,9 +1499,9 @@ slider_passenger.noUiSlider.on('update', function (values, handle) {
 
 var slider_cargo = document.getElementById('cargo-slider');
   noUiSlider.create(slider_cargo, {
-     start: [150],
+     start: [20],
     range: {
-        'min': [50],
+        'min': [0],
         'max': [500]
     },
     step: 10,
