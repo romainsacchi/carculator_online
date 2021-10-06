@@ -361,7 +361,7 @@ function fill_in_vehicles_specs(specs){
                 var val = specs[row][d_map_param_indices[param]];
 
                 if (["combustion power", "electric power"].includes(param)){
-                    val /= 1.34102
+                    val *= 1.34102
                 }
 
                 val = val.toLocaleString('en-US', {maximumFractionDigits:0})
