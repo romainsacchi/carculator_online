@@ -769,7 +769,6 @@ def get_results():
         job_id=job_id,
     )
 
-    print(uuid, d)
 
     print("JOB SENT with job_id {}".format(job_id))
 
@@ -927,8 +926,8 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     if job_key in d_uuids.keys():
 
-        fp = r'data/inventories/quick_inventory_{}_{}_{}_{}.pickle'.format(
-                d_uuids[job_key], software, ecoinvent_version, compatibility)
+        fp = r'data/inventories/quick_inventory_{}_{}_{}.pickle'.format(
+                d_uuids[job_key], software, ecoinvent_version)
 
         pickled_data = open(fp, 'rb')
         data = pickle.load(pickled_data)
