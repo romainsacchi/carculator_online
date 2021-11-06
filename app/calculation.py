@@ -216,7 +216,7 @@ class Calculation:
 
     def load_params_file(self):
         with open("data/parameters definition.txt", "r", encoding="utf-8") as f:
-            data = csv.reader(f, delimiter="\t")
+            data = list(csv.reader(f, delimiter="\t"))
         return data
 
     def interpolate_array(self, years):

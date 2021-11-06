@@ -655,7 +655,7 @@ def display_quick_results(country):
 
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):
-    """ Return a list of params if param contain `search?item`"""
+    """ Return a list of params if param contain `search_item`"""
     lang = session.get("language", "en")
     parameters = [
         param
