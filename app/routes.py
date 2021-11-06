@@ -1,50 +1,40 @@
 """Flask App Project."""
 
-from app import app
-from app import db
-from flask import (
-    render_template,
-    jsonify,
-    request,
-    make_response,
-    session,
-    redirect,
-    url_for,
-    json,
-    flash,
-    Response,
-)
-import datetime
-import mimetypes
-from .email_support import email_out
-import numpy as np
 import os
+import datetime
+import math
+import mimetypes
+import pickle
+import uuid
+import numpy as np
+from flask import (Response, flash, json, jsonify, make_response, redirect, render_template, request, session, url_for)
+from flask_babel import _
+from flask_login import current_user, login_required, login_user, logout_user
 from rq import Queue
 from rq.job import Job, NoSuchJobError
-from .worker import conn
-from .calculation import Calculation
-from flask_babel import _
-from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Task
-from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
-import uuid
-import pickle
-import math
+
+from app import app
+from app import db
+from app.forms import LoginForm, RegistrationForm
+from app.models import Task, User
+from .calculation import Calculation
+from .email_support import email_out
+from .worker import conn
 
 app.calc = Calculation()
-progress_status = 0
+app.progress_status = 0
 
-is_maintenance_mode = False
-
+############## Maintenance mode ######################
+IS_MAINTENANCE_MODE = False
 # Always throw a 503 during maintenance: http://is.gd/DksGDm
-
 @app.before_request
 def check_for_maintenance():
-    if is_maintenance_mode and request.path != url_for('maintenance'):
+    if IS_MAINTENANCE_MODE and request.path != url_for('maintenance'):
         return redirect(url_for('maintenance'))
-        # Or alternatively, dont redirect
-        # return 'Sorry, off for maintenance!', 503
+    return redirect(url_for("index"))
+######################################################
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -103,7 +93,7 @@ if not os.environ.get('IS_HEROKU', None) is None:
         if not request.is_secure:
             url = request.url.replace('http://', 'https://', 1)
             code = 301
-            return redirect(url, code=code)
+        return redirect(url, code=code)
 
 
 @app.route("/")
@@ -150,10 +140,9 @@ def new_car(country):
     return render_template("new_car.html", country=country, vehicles=vehicles, lang=session.get("language", "en"))
 
 def get_car_repl_data(country, cycle):
-    fp = r"data/car replacement data/" + cycle + "_" + country + ".pickle"
-    pickled_data = open(fp, 'rb')
-    data = pickle.load(pickled_data)
-    pickled_data.close()
+    filepath = f"data/car replacement data/{cycle}_{country}.pickle"
+    with open(filepath, 'rb') as pickled_data:
+        data = pickle.load(pickled_data)
 
     return data
 
@@ -168,7 +157,7 @@ def fetch_car_repl_results(country, cycle):
 
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-#@login_required
+@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
@@ -243,7 +232,7 @@ def tool_page(country):
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()
 
-        """ Returns average share of biogasoline according to historical IEA stats """
+        # Returns average share of biogasoline according to historical IEA stats
         if country in app.calc.biogasoline.country.values:
             share_biogasoline = np.squeeze(np.clip(
                 app.calc.biogasoline.sel(
@@ -257,7 +246,7 @@ def tool_page(country):
         else:
             share_biogasoline = 0
 
-        """ Returns average share of biodiesel according to historical IEA stats """
+        # Returns average share of biodiesel according to historical IEA stats
         if country in app.calc.biodiesel.country.values:
             share_biodiesel = np.squeeze(np.clip(
                 app.calc.biodiesel.sel(
@@ -271,7 +260,7 @@ def tool_page(country):
         else:
             share_biodiesel = 0
 
-        """ Returns average share of biomethane according to historical IEA stats """
+        # Returns average share of biomethane according to historical IEA stats
         if country in app.calc.biomethane.country.values:
             share_biomethane = np.squeeze(np.clip(
                 app.calc.biomethane.sel(
@@ -394,7 +383,7 @@ def tool_page(country):
         _("SUV"),
         _("Van"),
     ]
-    years = [i for i in range(2000, 2051)]
+    years = range(2000, 2051)
     driving_cycles = [
         "WLTC",
         "WLTC 3.1",
@@ -459,36 +448,34 @@ def direct_results():
         db.session.add(task)
         db.session.commit()
     
-        d={('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020], 'size': ['Medium'], 'fu': {"unit": "vkm", "quantity": 1}},
+        params_dict = {('Functional unit',): {'powertrain': ['ICEV-p', 'ICEV-d', 'ICEV-g', 'BEV'], 'year': [2020], 'size': ['Medium'], 'fu': {"unit": "vkm", "quantity": 1}},
            ('Driving cycle',): 'WLTC',
            ('Background',): {'country': country},
            ('Foreground',): {('Glider', 'all', 'all', 'average passengers', 'none'): {(2020, 'loc'): 1.5},
                              ('Glider', 'all', 'all', 'cargo mass', 'none'): {(2020, 'loc'): 20.0},
                              ('Driving', 'all', 'all', 'lifetime kilometers', 'none'): {(2020, 'loc'): 200000.0},
                              ('Driving', 'all', 'all', 'kilometers per year', 'none'): {(2020, 'loc'): 12000.0}}}
-        data, i = app.calc.process_results(d, "en", job_id)
+        data, i = app.calc.process_results(params_dict, "en", job_id)
         data = json.loads(data)
         data.append(job_id)
 
-        with open('data/quick_results_{}.pickle'.format(country), 'wb') as f:
+        with open(f'data/quick_results_{country}.pickle', 'wb') as f:
             pickle.dump(data, f)
 
 
         # generate inventories
-        # for software in ["brightway2", "simapro"]:
-        #     for ecoinvent_version in ["3.6", "3.7"]:
-        #         if software == "brightway2" or (software == "simapro" and ecoinvent_version =="3.6"):
-        #             data = i.write_lci_to_excel(
-        #                 ecoinvent_version=ecoinvent_version,
-        #                 ecoinvent_compatibility=True,
-        #                 software_compatibility=software,
-        #                 export_format="string"
-        #             )
-        #
-        #             with open('data/inventories/quick_inventory_{}_{}_{}.pickle'.format(
-        #                     country, software, ecoinvent_version),
-        #                     'wb') as f:
-        #                 pickle.dump(data, f)
+        for software in ["brightway2", "simapro"]:
+            for ecoinvent_version in ["3.6", "3.7"]:
+                if software == "brightway2" or (software == "simapro" and ecoinvent_version == "3.6"):
+                    data = i.write_lci_to_excel(
+                        ecoinvent_version=ecoinvent_version,
+                        ecoinvent_compatibility=True,
+                        software_compatibility=software,
+                        export_format="string"
+                    )
+
+                    with open(f'data/inventories/quick_inventory_{country}_{software}_{ecoinvent_version}.pickle','wb') as f:
+                        pickle.dump(data, f)
 
     with open('data/quick_results_job_ids.pickle', 'wb') as f:
         pickle.dump(dic_uuids, f)
@@ -498,9 +485,9 @@ def direct_results():
 
 @app.route("/display_quick_results/<country>")
 def display_quick_results(country):
-    pickled_data = open('data/quick_results_{}.pickle'.format(country),'rb')
-    data = pickle.load(pickled_data)
-    pickled_data.close()
+    with open(f'data/quick_results_{country}.pickle','rb') as pickled_data:
+        data = pickle.load(pickled_data)
+
 
     job_id = data[-1]
     data = data[:-1]
@@ -643,8 +630,8 @@ def get_param_value(name, pt, s, y):
 
     name = name.split(",")
 
-    pt = [p for p in pt.split(",")]
-    s = [x for x in s.split(",")]
+    pt = pt.split(",")
+    s = s.split(",")
 
     val = (
         arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0)
@@ -668,21 +655,21 @@ def send_email():
     name = request.form["name_input"]
     email = request.form["email_input"]
     message = request.form["message_input"]
-    body = message + " email: {}, name: {}".format(email, name)
+    body = message + f" email: {email}, name: {name}"
     sender = app.config["ADMINS"]
     recipients = [app.config["RECIPIENT"]]
     email_out("Question", sender, recipients, body)
     return _("Email sent!")
 
-@app.route("/get_electricity_mix/<ISO>/<years>/<lifetime>")
-def get_electricity_mix(ISO, years, lifetime):
-    """ Return the electricity mix for the ISO country code and the year(s) given """
+@app.route("/get_electricity_mix/<iso_code>/<years>/<lifetime>")
+def get_electricity_mix(iso_code, years, lifetime):
+    """ Return the electricity mix for the iso_code country code and the year(s) given """
     years = [int(y) for y in years.split(",")]
     lifetime = math.ceil(int(float(lifetime)))
 
     response = [
         app.calc.electricity_mix.sel(
-            country=ISO,
+            country=iso_code,
             variable=[
                 "Hydro",
                 "Nuclear",
@@ -709,7 +696,7 @@ def get_electricity_mix(ISO, years, lifetime):
             .values
         if y + lifetime <= 2050
         else app.calc.electricity_mix.sel(
-            country=ISO,
+            country=iso_code,
             variable=[
                 "Hydro",
                 "Nuclear",
@@ -770,7 +757,7 @@ def get_results():
     )
 
 
-    print("JOB SENT with job_id {}".format(job_id))
+    print(f"JOB SENT with job_id {job_id}")
 
     task = Task.query.filter_by(id=job_id).first()
     task.progress = 30
@@ -789,8 +776,7 @@ def fetch_results(job_key):
         if job.is_finished:
             return make_response(jsonify(job.result[0]), 200)
 
-        else:
-            return make_response(jsonify({"message":"The JOB is not completed."}), 404)
+        return make_response(jsonify({"message":"The JOB is not completed."}), 404)
 
     except NoSuchJobError:
         return make_response(jsonify({"message": "The JOB ID is not found."}), 404)
@@ -839,7 +825,7 @@ def display_result(job_key):
         d_uuids = get_list_uuids_countries()
 
         if job_key in d_uuids.keys():
-            display_quick_results(d_uuids[job_key])
+            return redirect(url_for('display_quick_results', country=d_uuids[job_key]))
         else:
             return render_template("404.html", job_id=job_key)
 
@@ -850,18 +836,18 @@ def get_job_status(job_key):
         job = Job.fetch(job_key, connection=conn)
     except NoSuchJobError:
         response = jsonify({"job status": "job not found"})
-        print("NO SUCH JOB {}".format(job_key))
+        print(f"NO SUCH JOB {job_key}")
         return make_response(response, 404)
 
     try:
-        progress_status = Task.query.filter_by(id=job_key).first().progress
+        app.progress_status = Task.query.filter_by(id=job_key).first().progress
     except:
         response = jsonify({"job status": "failed"})
-        print("JOB FAIL {}".format(job_key))
+        print(f"JOB FAIL {job_key}")
         return make_response(response, 404)
 
     response = jsonify(
-        {"job status": job.get_status(), "progress_status": progress_status}
+        {"job status": job.get_status(), "progress_status": app.progress_status}
     )
 
     return make_response(response, 200)
@@ -908,15 +894,16 @@ def get_language():
 def get_list_uuids_countries():
     """Returns a dictionary with correspondence between uuids and countries
     for pre-calculated countries"""
-    fp = r"data/quick_results_job_ids.pickle"
-    pickled_data = open(fp, 'rb')
-    data = pickle.load(pickled_data)
-    pickled_data.close()
+    filepath = r"data/quick_results_job_ids.pickle"
+
+    with open(filepath, 'rb') as pickled_data:
+        data = pickle.load(pickled_data)
+
 
     return data
 
 @app.route("/get_inventory/<compatibility>/<ecoinvent_version>/<job_key>/<software>")
-#@login_required
+@login_required
 def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     response = Response()
@@ -926,12 +913,10 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     if job_key in d_uuids.keys():
 
-        fp = r'data/inventories/quick_inventory_{}_{}_{}.pickle'.format(
-                d_uuids[job_key], software, ecoinvent_version)
+        filepath = f'data/inventories/quick_inventory_{d_uuids[job_key]}_{software}_{ecoinvent_version}.pickle'
 
-        pickled_data = open(fp, 'rb')
-        data = pickle.load(pickled_data)
-        pickled_data.close()
+        with open(filepath, 'rb') as pickled_data:
+            data = pickle.load(pickled_data)
 
     else:
 
@@ -948,11 +933,11 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
     response.data = data
 
     if software == "brightway2":
-        file_name = "carculator_inventory_{}_for_ei_{}_{}.xlsx".format(str(datetime.date.today()), ecoinvent_version,
-                                                                       software)
+        file_ext = "xlsx"
     else:
-        file_name = "carculator_inventory_{}_for_ei_{}_{}.csv".format(str(datetime.date.today()), ecoinvent_version,
-                                                                      software)
+        file_ext = "csv"
+
+    file_name = f"carculator_inventory_{datetime.date.today()}_for_ei_{ecoinvent_version}_{software}.{file_ext}"
 
     mimetype_tuple = mimetypes.guess_type(file_name)
     response_headers = {
@@ -960,13 +945,14 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
         "Expires": "0",
         "Cache-Control": "must-revalidate, post-check=0, pre-check=0",
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "Content-Disposition": 'attachment; filename="%s";' % file_name,
+        "Content-Disposition": f"attachment; filename={file_name};",
         "Content-Transfer-Encoding": "binary",
         "Content-Length": len(response.data),
     }
 
     if not mimetype_tuple[1] is None:
-        response.update({"Content-Encoding": mimetype_tuple[1]})
+        response_headers["Content-Encoding"] = mimetype_tuple[1]
+
     response.headers.update(response_headers)
     return response
 
@@ -975,29 +961,29 @@ def get_param_table():
     lang = session.get("language", "en")
     params = app.calc.load_params_file()
 
-    for d in params:
-        if isinstance(d[4], str):
-            d[4] = [p.strip() for p in d[4].split(",")]
-        if isinstance(d[5], str):
-            d[5] = [p.strip() for p in d[5].split(",")]
-        if isinstance(d[6], str):
-            d[6] = [s.strip() for s in d[6].split(",")]
+    for param in params:
+        if isinstance(param[4], str):
+            param[4] = [p.strip() for p in param[4].split(",")]
+        if isinstance(param[5], str):
+            param[5] = [p.strip() for p in param[5].split(",")]
+        if isinstance(param[6], str):
+            param[6] = [s.strip() for s in param[6].split(",")]
 
         if lang == "en":
-            d[5] = [app.calc.d_rev_pt_en.get(pt, pt) for pt in d[5]]
-            d[6] = [app.calc.d_rev_size_en[pt] for pt in d[6]]
+            param[5] = [app.calc.d_rev_pt_en.get(pt, pt) for pt in param[5]]
+            param[6] = [app.calc.d_rev_size_en[pt] for pt in param[6]]
 
         if lang == "de":
-            d[5] = [app.calc.d_rev_pt_de.get(pt, pt) for pt in d[5]]
-            d[6] = [app.calc.d_rev_size_de[pt] for pt in d[6]]
+            param[5] = [app.calc.d_rev_pt_de.get(pt, pt) for pt in param[5]]
+            param[6] = [app.calc.d_rev_size_de[pt] for pt in param[6]]
 
         if lang == "fr":
-            d[5] = [app.calc.d_rev_pt_fr.get(pt, pt) for pt in d[5]]
-            d[6] = [app.calc.d_rev_size_fr[pt] for pt in d[6]]
+            param[5] = [app.calc.d_rev_pt_fr.get(pt, pt) for pt in param[5]]
+            param[6] = [app.calc.d_rev_size_fr[pt] for pt in param[6]]
 
         if lang == "it":
-            d[5] = [app.calc.d_rev_pt_it.get(pt, pt) for pt in d[5]]
-            d[6] = [app.calc.d_rev_size_it[pt] for pt in d[6]]
+            param[5] = [app.calc.d_rev_pt_it.get(pt, pt) for pt in param[5]]
+            param[6] = [app.calc.d_rev_size_it[pt] for pt in param[6]]
 
     return render_template("param_table.html", params=params)
 
@@ -1005,7 +991,7 @@ def get_param_table():
 def get_fuel_blend(country, years):
     years = [int(y) for y in years.split(",")]
 
-    """ Returns average share of biogasoline according to historical IEA stats """
+    # Returns average share of biogasoline according to historical IEA stats
     if country in app.calc.biogasoline.country.values:
         share_biogasoline = np.squeeze(np.clip(
             app.calc.biogasoline.sel(
@@ -1020,7 +1006,7 @@ def get_fuel_blend(country, years):
     else:
         share_biogasoline = np.zeros_like(years)
 
-    """ Returns average share of biodiesel according to historical IEA stats """
+    # Returns average share of biodiesel according to historical IEA stats
     if country in app.calc.biodiesel.country.values:
         share_biodiesel = np.squeeze(np.clip(
             app.calc.biodiesel.sel(
@@ -1035,7 +1021,7 @@ def get_fuel_blend(country, years):
     else:
         share_biodiesel = np.zeros_like(years)
 
-    """ Returns average share of biomethane according to historical IEA stats """
+    # Returns average share of biomethane according to historical IEA stats
     if country in app.calc.biomethane.country.values:
         share_biomethane = np.squeeze(np.clip(
             app.calc.biomethane.sel(
