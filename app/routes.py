@@ -493,9 +493,6 @@ def display_quick_results(country):
     job_id = data[-1]
     data = data[:-1]
 
-    #if not current_user.is_authenticated:
-    #    session["url"] = "/display_quick_results/" + job_id
-
     # retrieve impact categories
     impact_cat = [
      "climate change",
@@ -736,7 +733,7 @@ def get_results():
     job_id = str(uuid.uuid1())
 
     lang = session.get("language", "en")
-    d = app.calc.format_dictionary(request.get_json(), lang, job_id)
+    d = app.calc.format_dictionary(request.get_json())
 
     # Add task to db
     task = Task(id=job_id, progress=0,)
