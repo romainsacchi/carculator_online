@@ -952,7 +952,7 @@ class Calculation:
                     dict_scatter,
                     list_res_acc,
                     self.create_config_array(
-                        d, carmodel.array, self.ic.mix, carmodel.energy_storage
+                        d, carmodel.array, self.ic.mix
                     ),
                     d[("Background",)]["country"],
                     d[("Functional unit",)]["fu"]["quantity"],
