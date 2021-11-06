@@ -94,7 +94,7 @@ if not os.environ.get('IS_HEROKU', None) is None:
             url = request.url.replace('http://', 'https://', 1)
             code = 301
             return redirect(url, code=code)
-        return redirect(request.url)
+        return
 
 
 @app.route("/")
