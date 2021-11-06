@@ -1,15 +1,17 @@
-from flask import Flask, session, request
-from flask_mail import Mail
-from flask_babel import Babel, _
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
 import logging
-from logging.handlers import SMTPHandler
 import os
+from logging.handlers import SMTPHandler
+
+from flask import Flask, request, session
+from flask_babel import Babel
+from flask_login import LoginManager
+from flask_mail import Mail
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+
 from .version import __version__
 
-ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online");
+ROOT = os.path.join(os.path.abspath(os.pardir), "carculator_online")
 TEMPLATES_DIR = os.path.join(ROOT, "templates")
 STATIC_DIR = os.path.join(ROOT, "static")
 MIGRATION_DIR = os.path.join(ROOT, "migrations")
@@ -29,7 +31,6 @@ babel = Babel(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
-
 is_prod = os.environ.get('IS_HEROKU', None)
 
 if is_prod:
@@ -41,32 +42,21 @@ if is_prod:
     app.config['ADMINS'] = os.environ.get('ADMINS', None)
     app.config['RECIPIENT'] = os.environ.get('RECIPIENT', None)
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', None)
-    app.config['LANGUAGES'] = {
-                                'en': 'English',
-                                'it': 'Italian',
-                                'fr': 'French',
-                                'de': 'German'
-
-                            }
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
-    app.config["PROGRESS_STATUS"] = 0
-
-
 
 else:
     # Attach configuration file
     app.config.from_pyfile('..\instance\config.py')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bee698db94fa6e:02c34128@us-cdbr-iron-east-05.cleardb.net/heroku_9bb2a3349ea4243'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
-    app.config['LANGUAGES'] = {
-                                'en': 'English',
-                                'it': 'Italian',
-                                'fr': 'French',
-                                'de': 'German'
-                            }
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
+app.config['LANGUAGES'] = {
+                            'en': 'English',
+                            'it': 'Italian',
+                            'fr': 'French',
+                            'de': 'German'
+                        }
 
 # Initiate database
 db = SQLAlchemy(app)

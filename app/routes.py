@@ -32,7 +32,7 @@ IS_MAINTENANCE_MODE = False
 def check_for_maintenance():
     if IS_MAINTENANCE_MODE and request.path != url_for('maintenance'):
         return redirect(url_for('maintenance'))
-    return redirect(url_for("index"))
+    return
 ######################################################
 
 
@@ -93,7 +93,8 @@ if not os.environ.get('IS_HEROKU', None) is None:
         if not request.is_secure:
             url = request.url.replace('http://', 'https://', 1)
             code = 301
-        return redirect(url, code=code)
+            return redirect(url, code=code)
+        return redirect(request.url)
 
 
 @app.route("/")
