@@ -613,7 +613,7 @@ def direct_results():
 
 @app.route("/display_quick_results/<country>")
 def display_quick_results(country):
-    with open(f"data/quick_results_{country}.pickle", "rb") as pickled_data:
+    with open(f"data/quick_results_{country.upper()}.pickle", "rb") as pickled_data:
         data = pickle.load(pickled_data)
 
     job_id = data[-1]
