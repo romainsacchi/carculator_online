@@ -149,9 +149,9 @@ def new_car(country):
         _("Subcompact"),
         _("Compact"),
         _("Mid-size"),
-        _("Mid-size SUV"),
+        _("SUV (Mid-size)"),
         _("Large"),
-        _("Large SUV"),
+        _("SUV (Large)"),
         _("Van"),
     ]
 
