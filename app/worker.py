@@ -3,7 +3,7 @@ import redis
 from rq import Worker, Queue, Connection
 
 listen = ['default']
-redis_url = os.getenv('REDISCLOUD_URL', 'None')
+redis_url = os.getenv('STACKHERO_REDIS_URL_TLS', 'None')
 
 try:
     conn = redis.from_url(redis_url)
