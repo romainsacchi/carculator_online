@@ -614,7 +614,7 @@ class Calculation:
         scope = {"powertrain": powertrain, "size": size, "year": year}
         total_cost = (
             carmodel.calculate_cost_impacts(scope=scope)
-            .transpose("size", "powertrain", "year", "value", "cost_type")
+            .transpose("powertrain", "size", "year", "value", "cost_type")
             .astype("float64")
         )
 
@@ -690,6 +690,12 @@ class Calculation:
             .transpose("impact_category", "size", "powertrain", "year", "impact")
         ).astype("float64")
 
+        res_benchmark = (
+            self.ic.calculate_impacts()
+            .sel(value=0)
+            .transpose("impact_category", "powertrain", "size", "year", "impact")
+        ).astype("float64")
+
         lifetime = int(carmodel.array.sel(parameter="lifetime kilometers").mean().values)
 
         # Update task progress to db
@@ -712,7 +718,7 @@ class Calculation:
                     ],
                     zip(
                         l,
-                        results.sel(impact_category="climate change")
+                        res_benchmark.sel(impact_category="climate change")
                         .sum(dim="impact")
                         .values.reshape(len(l)),
                     ),
@@ -732,7 +738,7 @@ class Calculation:
                     ],
                     zip(
                         l,
-                        results.sel(impact_category="fossil depletion")
+                        res_benchmark.sel(impact_category="fossil depletion")
                         .sum(dim="impact")
                         .values.reshape(len(l)),
                     ),
