@@ -895,7 +895,7 @@ class Calculation:
 
         list_res = self.remove_micro_petrols_from_list(list_res)
         arr_benchmark = self.remove_micro_petrols_from_list(arr_benchmark)
-        tank_to_wheel_energy = self.remove_micro_petrols_from_dicts(tank_to_wheel_energy)
+        tank_to_wheel_energy = self.remove_micro_petrols_from_list_of_dicts(tank_to_wheel_energy)
         dict_scatter = self.remove_micro_petrols_from_dicts(dict_scatter)
         list_res_acc = self.remove_micro_petrols_from_list(list_res_acc)
 
@@ -925,6 +925,26 @@ class Calculation:
             ),
             self.export,
         )
+
+    def remove_micro_petrols_from_list_of_dicts(self, list_of_dicts):
+
+        forbidden_vehicles = [
+            "ICEV-p",
+            "ICEV-d",
+            "ICEV-g",
+            "HEV-p",
+            "HEV-d",
+            "FCEV",
+            "PHEV-p",
+            "PHEV-d",
+        ]
+
+        for i in list_of_dicts:
+            if "Micro" in i["key"]:
+                if any(pt in i["key"] for pt in forbidden_vehicles):
+                    list_of_dicts.remove(i)
+
+        return list_of_dicts
 
     def remove_micro_petrols_from_list(self, res):
 
@@ -962,7 +982,7 @@ class Calculation:
         ]
 
         list_keys_to_keep = [k for k in dicts if "Micro" not in k or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))]
-        dicts = {k:v for k, v in dicts.items() if k in list_keys_to_keep}
+        dicts = {k: v for k, v in dicts.items() if k in list_keys_to_keep}
 
         return dicts
 
