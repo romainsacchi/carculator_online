@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-25 15:48+0100\n"
+"POT-Creation-Date: 2021-11-25 16:00+0100\n"
 "PO-Revision-Date: 2019-10-17 10:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -152,8 +152,7 @@ msgstr "Berline compacte"
 msgid "Mid-size"
 msgstr "Berline familiale"
 
-#: app/routes.py:152
-#, fuzzy
+#: app/routes.py:152 app/routes.py:413
 msgid "SUV (Mid-size)"
 msgstr "SUV (compact)"
 
@@ -161,22 +160,13 @@ msgstr "SUV (compact)"
 msgid "Large"
 msgstr "Grande routière"
 
-#: app/routes.py:154
+#: app/routes.py:154 app/routes.py:415
 msgid "SUV (Large)"
 msgstr "SUV (grand)"
 
 #: app/routes.py:155 app/routes.py:416 templates/new_car.html:258
 msgid "Van"
 msgstr ""
-
-#: app/routes.py:413
-#, fuzzy
-msgid "Mid-size SUV"
-msgstr "Berline familiale"
-
-#: app/routes.py:415
-msgid "Large SUV"
-msgstr "SUV (grand)"
 
 #: app/routes.py:800
 msgid "Email sent!"
@@ -2782,4 +2772,10 @@ msgstr "nombre d'itérations"
 
 #~ msgid "fuel cell system efficiency"
 #~ msgstr ""
+
+#~ msgid "Mid-size SUV"
+#~ msgstr "Berline familiale"
+
+#~ msgid "Large SUV"
+#~ msgstr "SUV (grand)"
 

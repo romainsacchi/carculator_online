@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-25 15:48+0100\n"
+"POT-Creation-Date: 2021-11-25 16:00+0100\n"
 "PO-Revision-Date: 2019-10-18 09:26+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -153,7 +153,7 @@ msgstr "Kompaktklasse"
 msgid "Mid-size"
 msgstr "Mittelklasse"
 
-#: app/routes.py:152
+#: app/routes.py:152 app/routes.py:413
 #, fuzzy
 msgid "SUV (Mid-size)"
 msgstr "Geländewagen(kompakt)"
@@ -162,22 +162,13 @@ msgstr "Geländewagen(kompakt)"
 msgid "Large"
 msgstr "Oberklasse"
 
-#: app/routes.py:154
+#: app/routes.py:154 app/routes.py:415
 msgid "SUV (Large)"
 msgstr "Geländewagen(groß)"
 
 #: app/routes.py:155 app/routes.py:416 templates/new_car.html:258
 msgid "Van"
 msgstr "Van"
-
-#: app/routes.py:413
-#, fuzzy
-msgid "Mid-size SUV"
-msgstr "Geländewagen(kompakt)"
-
-#: app/routes.py:415
-msgid "Large SUV"
-msgstr "Geländewagen(groß)"
 
 #: app/routes.py:800
 msgid "Email sent!"
@@ -3494,4 +3485,10 @@ msgstr "Anzahl der Iterationen"
 
 #~ msgid "Export Brightway2-compatible inventories"
 #~ msgstr "Brightway2-kompatible Inventardaten exportieren"
+
+#~ msgid "Mid-size SUV"
+#~ msgstr "Geländewagen(kompakt)"
+
+#~ msgid "Large SUV"
+#~ msgstr "Geländewagen(groß)"
 
