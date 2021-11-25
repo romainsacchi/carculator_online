@@ -445,7 +445,7 @@ def search_car_model(search_item):
     lang = session.get("language", "en")
     cars = [
         car
-        for car in app.calc.load_map_file(lang)
+        for car in app.calc.f(lang)
         if any(search_item.lower() in x.lower() for x in car)
     ]
     return jsonify(cars[:5])

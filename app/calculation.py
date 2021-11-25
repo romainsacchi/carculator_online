@@ -1092,7 +1092,7 @@ class Calculation:
         for k, v in raw_dict["foreground params"].items():
             if k in d_sliders:
                 name = d_sliders[k]
-                cat = self.d_categories[name]
+                cat = self.d_categories.get(name, "Calculated")
                 powertrain = "all"
                 size = "all"
 
@@ -1106,7 +1106,8 @@ class Calculation:
 
                 k = tuple(k.split(","))
                 name = k[0]
-                cat = self.d_categories[name]
+
+                cat = self.d_categories.get(name, "Calculated")
                 powertrain = k[1]
                 size = k[2]
                 val = [float(n) for n in v] * len(
@@ -1131,7 +1132,7 @@ class Calculation:
                     for p in energy_storage[e]:
                         if p not in ("type", "origin"):
 
-                            cat = self.d_categories[name]
+                            cat = self.d_categories.get(name, "Calculated")
                             powertrain = "BEV"
                             val = energy_storage[e][p]
 
@@ -1156,7 +1157,7 @@ class Calculation:
                     size = s
                     for c in efficiency[eff][s]:
                         name = c
-                        cat = self.d_categories[name]
+                        cat = self.d_categories.get(name, "Calculated")
 
                         if np.sum(efficiency[eff][s][c]) != 0:
                             val = efficiency[eff][s][c]
