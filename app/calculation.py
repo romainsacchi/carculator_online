@@ -728,7 +728,7 @@ class Calculation:
                         x[0].split(" - ")[0],
                         x[0].split(" - ")[1],
                         x[0].split(" - ")[2],
-                        1 / x[1] * 0.755,  # 0.755 kg/L gasoline
+                        1 / x[1] * 0.755 if x[1] != 0 else 1,  # 0.755 kg/L gasoline
                     ],
                     zip(
                         l,
