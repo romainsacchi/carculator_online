@@ -21,7 +21,7 @@ from flask import (
 )
 from flask_babel import _
 from flask_login import current_user, login_required, login_user, logout_user
-from rq import Queue
+
 from rq.job import Job, NoSuchJobError
 from werkzeug.urls import url_parse
 
@@ -31,7 +31,7 @@ from app.forms import LoginForm, RegistrationForm
 from app.models import Task, User
 from .calculation import Calculation
 from .email_support import email_out
-from .worker import conn
+
 
 app.calc = Calculation()
 app.progress_status = 0
@@ -131,7 +131,7 @@ def start():
 @app.route("/new_car/<country>")
 def new_car(country):
     """Return new_car page."""
-    session["url"] = url_for("new_car") + "/" + country
+    session["url"] = url_for("new_car", country=country)
     powertrains = [
         _("Petrol"),
         _("Diesel"),
@@ -881,8 +881,7 @@ def get_results():
     db.session.commit()
 
     # Create a connection to the Redis server
-    q = Queue(connection=conn)
-    job = q.enqueue_call(
+    job = app.task_queue.enqueue_call(
         func=app.calc.process_results,
         args=(d, lang, job_id),
         result_ttl=3600,
@@ -904,7 +903,7 @@ def fetch_results(job_key):
     """ Return raw results is the job is completed. """
 
     try:
-        job = Job.fetch(job_key, connection=conn)
+        job = Job.fetch(job_key, connection=app.redis)
 
         if job.is_finished:
             return make_response(jsonify(job.result[0]), 200)
@@ -922,7 +921,7 @@ def display_result(job_key):
         session["url"] = "/display_result/" + job_key
 
     try:
-        job = Job.fetch(job_key, connection=conn)
+        job = Job.fetch(job_key, connection=app.redis)
 
         if job.is_finished:
             # retrieve impact categories
@@ -969,7 +968,7 @@ def display_result(job_key):
 def get_job_status(job_key):
     """ Check the status of the job for the given `job_id` """
     try:
-        job = Job.fetch(job_key, connection=conn)
+        job = Job.fetch(job_key, connection=app.redis)
     except NoSuchJobError:
         response = jsonify({"job status": "job not found"})
         print(f"NO SUCH JOB {job_key}")
@@ -1061,7 +1060,7 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
     else:
 
-        job = Job.fetch(job_key, connection=conn)
+        job = Job.fetch(job_key, connection=app.redis)
         export = job.result[1]
 
         data = export.write_lci_to_excel(

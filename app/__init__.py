@@ -1,6 +1,7 @@
 import logging
 import os
 from logging.handlers import SMTPHandler
+from .worker import conn
 
 from flask import Flask, request, session
 from flask_babel import Babel
@@ -8,6 +9,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from rq import Queue
 
 from .version import __version__
 
@@ -73,6 +75,9 @@ mail_handler = SMTPHandler(
     credentials=auth, secure=secure)
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
+
+app.redis = conn
+app.task_queue = Queue(connection=app.redis)
 
 @babel.localeselector
 def get_locale():
