@@ -23,7 +23,7 @@ pycountry==20.7.3
 stats_arrays==0.6.4
 PyPrind==2.11.2
 redis==3.5.3
-carculator==1.6.0
+carculator==1.6.2
 email-validator
 mysqlclient
 gunicorn

@@ -144,12 +144,14 @@ def new_car(country):
         _("(Plugin) Hybrid-diesel"),
     ]
     sizes = [
+        _("Micro"),
         _("Minicompact"),
         _("Subcompact"),
         _("Compact"),
         _("Mid-size"),
+        _("Mid-size SUV"),
         _("Large"),
-        _("SUV"),
+        _("Large SUV"),
         _("Van"),
     ]
 
@@ -352,7 +354,7 @@ def tool_page(country):
                 "energy storage": {
                     "electric": {
                         "Medium": {
-                            "type": "NMC-111",
+                            "type": "NMC-622",
                             "origin": "CN",
                             "energy battery mass": [400],
                             "battery cell energy density": [0.2],
@@ -403,12 +405,14 @@ def tool_page(country):
         _("(Plugin) Hybrid-diesel"),
     ]
     sizes = [
+        _("Micro"),
         _("Minicompact"),
         _("Subcompact"),
         _("Compact"),
         _("Mid-size"),
+        _("Mid-size SUV"),
         _("Large"),
-        _("SUV"),
+        _("Large SUV"),
         _("Van"),
     ]
     years = range(2000, 2051)

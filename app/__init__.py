@@ -46,10 +46,19 @@ if is_prod:
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', None)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
 
+    # Initiate connection to Redis
+    app.redis = conn
+    app.task_queue = Queue(connection=app.redis)
+
 else:
     # Attach configuration file
     app.config.from_pyfile('..\instance\config.py')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bee698db94fa6e:02c34128@us-cdbr-iron-east-05.cleardb.net/heroku_9bb2a3349ea4243'
+
+    # Initiate connection to Redis
+    app.redis = None
+    app.task_queue = None
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
@@ -76,8 +85,7 @@ mail_handler = SMTPHandler(
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
 
-app.redis = conn
-app.task_queue = Queue(connection=app.redis)
+
 
 @babel.localeselector
 def get_locale():
