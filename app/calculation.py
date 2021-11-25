@@ -893,6 +893,20 @@ class Calculation:
 
         list_res.extend(list_res_costs)
 
+        list_res = self.remove_micro_petrols_from_list(list_res)
+        arr_benchmark = self.remove_micro_petrols_from_list(arr_benchmark)
+        tank_to_wheel_energy = self.remove_micro_petrols_from_dicts(tank_to_wheel_energy)
+        dict_scatter = self.remove_micro_petrols_from_dicts(dict_scatter)
+        list_res_acc = self.remove_micro_petrols_from_list(list_res_acc)
+
+        config_array = self.create_config_array(
+                        d, carmodel.array, self.ic.mix
+                    )
+        config_array = self.remove_micro_petrols_from_list(config_array)
+
+        list_normalized_results = self.remove_micro_petrols_from_list(list_normalized_results)
+
+
         return (
             json.dumps(
                 [
@@ -902,9 +916,7 @@ class Calculation:
                     tank_to_wheel_energy,
                     dict_scatter,
                     list_res_acc,
-                    self.create_config_array(
-                        d, carmodel.array, self.ic.mix
-                    ),
+                    config_array,
                     d[("Background",)]["country"],
                     d[("Functional unit",)]["fu"]["quantity"],
                     d[("Functional unit",)]["fu"]["unit"],
@@ -913,6 +925,49 @@ class Calculation:
             ),
             self.export,
         )
+
+    def remove_micro_petrols_from_list(self, res):
+
+        forbidden_vehicles = [
+            "ICEV-p",
+            "ICEV-d",
+            "ICEV-g",
+            "HEV-p",
+            "HEV-d",
+            "FCEV",
+            "PHEV-p",
+            "PHEV-d",
+        ]
+        new_res = []
+        for r in res:
+            if "Micro" not in r:
+                new_res.append(r)
+            else:
+                if not any(pt in r for pt in forbidden_vehicles):
+                    new_res.append(r)
+
+        return new_res
+
+    def remove_micro_petrols_from_dicts(self, dicts):
+
+        forbidden_vehicles = [
+            "ICEV-p",
+            "ICEV-d",
+            "ICEV-g",
+            "HEV-p",
+            "HEV-d",
+            "FCEV",
+            "PHEV-p",
+            "PHEV-d",
+        ]
+
+        for key in dicts:
+            if "Micro" in key:
+                if any(pt in key for pt in forbidden_vehicles):
+                    del dicts[key]
+
+        return dicts
+
 
     def format_dictionary(self, raw_dict):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """

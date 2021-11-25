@@ -874,6 +874,7 @@ def get_results():
     lang = session.get("language", "en")
     d = app.calc.format_dictionary(request.get_json())
 
+
     # Add task to db
     task = Task(id=job_id, progress=0,)
     db.session.add(task)
