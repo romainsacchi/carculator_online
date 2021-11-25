@@ -708,7 +708,7 @@ class Calculation:
                         x[0].split(" - ")[0],
                         x[0].split(" - ")[1],
                         x[0].split(" - ")[2],
-                        1 / x[1],
+                        1 / x[1] if x[1] != 0 else 1,
                     ],
                     zip(
                         l,
