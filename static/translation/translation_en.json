@@ -172,6 +172,8 @@
     "Subcompact": "Small",
     "Compact": "Lower medium",
     "Mid-size": "Medium",
+    "SUV (Mid-size)": "Medium SUV",
+    "SUV (Large)": "Large SUV",
     "powertrain_not_existing": "One or several of the powertrains selected may not have been existing for the years selected. Therefore, consider the results with caution.",
     "insufficient_width": "The layout of this website has not been optimized for the screen width of your device. We suggest to use a device with a larger screen width.",
     "AT": "Austria",

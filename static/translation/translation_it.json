@@ -167,6 +167,8 @@
     "Large": "Berlina tre volumi",
     "Medium SUV": "SUV (compatto)",
     "Large SUV": "SUV (grande)",
+    "SUV (compatto)": "Medium SUV",
+    "SUV (grande)": "Large SUV",
     "Van": "Van",
     "Mini citycar": "Mini",
     "Citycar": "Small",
