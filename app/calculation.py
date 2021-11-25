@@ -961,10 +961,8 @@ class Calculation:
             "PHEV-d",
         ]
 
-        for key in dicts:
-            if "Micro" in key:
-                if any(pt in key for pt in forbidden_vehicles):
-                    del dicts[key]
+        list_keys_to_keep = [k for k in dicts if "Micro" not in k or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))]
+        dicts = {k:v for k, v in dicts.items() if k in list_keys_to_keep}
 
         return dicts
 
