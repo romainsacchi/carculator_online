@@ -631,7 +631,7 @@ class Calculation:
                     x[0].split(" - ")[0],
                     x[0].split(" - ")[1],
                     x[0].split(" - ")[2],
-                    1 / x[1],
+                    1 / x[1] if x[1] != 0 else 0,
                 ],
                 zip(l, cost_benchmark),
             )
@@ -708,7 +708,7 @@ class Calculation:
                         x[0].split(" - ")[0],
                         x[0].split(" - ")[1],
                         x[0].split(" - ")[2],
-                        1 / x[1] if x[1] != 0 else 1,
+                        1 / x[1] if x[1] != 0 else 0,
                     ],
                     zip(
                         l,
@@ -728,7 +728,7 @@ class Calculation:
                         x[0].split(" - ")[0],
                         x[0].split(" - ")[1],
                         x[0].split(" - ")[2],
-                        1 / x[1] * 0.755 if x[1] != 0 else 1,  # 0.755 kg/L gasoline
+                        1 / x[1] * 0.755 if x[1] != 0 else 0,  # 0.755 kg/L gasoline
                     ],
                     zip(
                         l,
