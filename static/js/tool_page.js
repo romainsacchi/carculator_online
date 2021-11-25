@@ -787,8 +787,8 @@ function size_list_update(){
 
             for (var s = 0; s < listSizes.length; s++){
 
-                if (!['Mini', 'Small', 'Lower medium', 'Medium',
-                        'Large', 'SUV', 'Van'].includes(
+                if (!['Micro', 'Mini', 'Small', 'Lower medium', 'Medium', 'Medium SUV',
+                        'Large', 'Large SUV', 'Van'].includes(
                         i18n(listSizes[s].innerHTML)
                         )
                         ){
