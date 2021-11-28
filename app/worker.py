@@ -8,7 +8,7 @@ redis_url = os.getenv('STACKHERO_REDIS_URL_TLS', 'None')
 try:
     conn = redis.from_url(redis_url,
                           health_check_interval=10,
-                          socket_connect_timeout=32,
+                          socket_connect_timeout=0,
                           socket_keepalive=True,
                           retry_on_timeout=True
                           )
