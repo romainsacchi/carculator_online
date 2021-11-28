@@ -48,7 +48,7 @@ if is_prod:
 
     # Initiate connection to Redis
     app.redis = conn
-    app.task_queue = Queue(connection=app.redis, default_timeout=-1)
+    app.task_queue = Queue(connection=app.redis)
 
 else:
     # Attach configuration file
