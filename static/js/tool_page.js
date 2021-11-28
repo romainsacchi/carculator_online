@@ -1114,6 +1114,7 @@ var map = AmCharts.makeChart("chartdiv", {
       {"id":"AT"},
         {"id":"AU"},
         {"id":"BE"},
+        {"id":"BD"},
         {"id":"BG"},
         {"id":"BR"},
         {"id":"CA"},
