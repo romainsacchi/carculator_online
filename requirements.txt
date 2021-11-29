@@ -4,7 +4,7 @@ scipy
 xarray==0.17.0
 pandas
 numexpr
-alembic=
+alembic
 Flask
 Flask_SQLAlchemy
 Flask_Mail
