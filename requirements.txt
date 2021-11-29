@@ -22,7 +22,7 @@ WTForms==2.3.3
 pycountry==20.7.3
 stats_arrays==0.6.4
 PyPrind==2.11.2
-redis
+redis==3.0.1
 -e git+https://github.com/romainsacchi/carculator#egg=carculator
 email-validator
 mysqlclient
