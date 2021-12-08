@@ -125,7 +125,12 @@ class Calculation:
             "Geländewagen(kompakt)": "Medium SUV",
             "Van": "Van",
         }
-        self.d_size_all = {**self.d_size_en, **self.d_size_fr, **self.d_size_it, **self.d_size_de}
+        self.d_size_all = {
+            **self.d_size_en,
+            **self.d_size_fr,
+            **self.d_size_it,
+            **self.d_size_de,
+        }
 
         self.d_rev_pt_en = {v: k for k, v, in self.d_pt_en.items()}
         self.d_rev_pt_fr = {v: k for k, v, in self.d_pt_fr.items()}
@@ -546,18 +551,34 @@ class Calculation:
                 )
             ] = 1
 
-        carmodel = CarModel(arr, cycle=d[("Driving cycle",)])
+        batt_type = "NMC-622"
+        en_stor = d[("Background")]["energy storage"]["electric"]
+        for _, s in en_stor.items():
+            if "type" in s:
+                batt_type = s["type"]
+
+        carmodel = CarModel(
+            arr,
+            cycle=d[("Driving cycle",)],
+            energy_storage={
+                "electric": {"BEV": batt_type, "PHEV-e": batt_type, "FCEV": batt_type}
+            },
+        )
 
         # adjust the electricity density of the battery cells
         for param in d[("Foreground",)]:
-            if param[3] == "battery cell energy density":
+            print(param)
+            if param[3] in ("battery cell energy density", "battery cell mass share"):
                 for year in d[("Foreground",)][param]:
+                    print(d[("Foreground",)][param][year])
                     carmodel.array.loc[
-                        dict(parameter="battery cell energy density", year=year[0])
+                        dict(parameter=param[3], year=year[0])
                     ] = d[("Foreground",)][param][year]
 
         if "electric utility factor" in d[("Background",)]:
-            utility_factor = list(d[("Background",)]["electric utility factor"].values())
+            utility_factor = list(
+                d[("Background",)]["electric utility factor"].values()
+            )
             carmodel.set_all(electric_utility_factor=utility_factor)
         else:
             carmodel.set_all()
@@ -696,7 +717,9 @@ class Calculation:
             .transpose("impact_category", "powertrain", "size", "year", "impact")
         ).astype("float64")
 
-        lifetime = int(carmodel.array.sel(parameter="lifetime kilometers").mean().values)
+        lifetime = int(
+            carmodel.array.sel(parameter="lifetime kilometers").mean().values
+        )
 
         # Update task progress to db
         task = Task.query.filter_by(id=job_id).first()
@@ -901,17 +924,18 @@ class Calculation:
 
         list_res = self.remove_micro_petrols_from_list(list_res)
         arr_benchmark = self.remove_micro_petrols_from_list(arr_benchmark)
-        tank_to_wheel_energy = self.remove_micro_petrols_from_list_of_dicts(tank_to_wheel_energy)
+        tank_to_wheel_energy = self.remove_micro_petrols_from_list_of_dicts(
+            tank_to_wheel_energy
+        )
         dict_scatter = self.remove_micro_petrols_from_dicts(dict_scatter)
         list_res_acc = self.remove_micro_petrols_from_list(list_res_acc)
 
-        config_array = self.create_config_array(
-                        d, carmodel.array, self.ic.mix
-                    )
+        config_array = self.create_config_array(d, carmodel.array, self.ic.mix)
         config_array = self.remove_micro_petrols_from_list(config_array)
 
-        list_normalized_results = self.remove_micro_petrols_from_list(list_normalized_results)
-
+        list_normalized_results = self.remove_micro_petrols_from_list(
+            list_normalized_results
+        )
 
         return (
             json.dumps(
@@ -987,11 +1011,15 @@ class Calculation:
             "PHEV-d",
         ]
 
-        list_keys_to_keep = [k for k in dicts if "Micro" not in k or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))]
+        list_keys_to_keep = [
+            k
+            for k in dicts
+            if "Micro" not in k
+            or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))
+        ]
         dicts = {k: v for k, v in dicts.items() if k in list_keys_to_keep}
 
         return dicts
-
 
     def format_dictionary(self, raw_dict):
         """ Format the dictionary sent by the user so that it can be understood by `carculator` """
