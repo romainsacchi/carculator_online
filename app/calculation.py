@@ -553,7 +553,7 @@ class Calculation:
             if param[3] == "battery cell energy density":
                 for year in d[("Foreground",)][param]:
                     carmodel.array.loc[
-                        dict(parameter="battery cell energy density", year=year[0])
+                        dict(parameter="battery cell energy density", year=year)
                     ] = d[("Foreground",)][param][year]
 
         if "electric utility factor" in d[("Background",)]:
