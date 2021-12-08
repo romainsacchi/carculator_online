@@ -552,7 +552,7 @@ class Calculation:
             ] = 1
 
         batt_type = "NMC-622"
-        en_stor = d[("Background")]["energy storage"]["electric"]
+        en_stor = d[("Background",)]["energy storage"]["electric"]
         for _, s in en_stor.items():
             if "type" in s:
                 batt_type = s["type"]
