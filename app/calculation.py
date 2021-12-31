@@ -552,10 +552,18 @@ class Calculation:
             ] = 1
 
         batt_type = "NMC-622"
+
         en_stor = d[("Background",)]["energy storage"]["electric"]
         for _, s in en_stor.items():
             if "type" in s:
                 batt_type = s["type"]
+            if "origin" in s:
+                batt_origin = s["origin"]
+
+        try:
+            d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
+        except:
+            d[("Background",)]["energy storage"]["electric"] = {"type": "NMC-622", "origin": "CN"}
 
         carmodel = CarModel(
             arr,
@@ -567,10 +575,8 @@ class Calculation:
 
         # adjust the electricity density of the battery cells
         for param in d[("Foreground",)]:
-            print(param)
             if param[3] in ("battery cell energy density", "battery cell mass share"):
                 for year in d[("Foreground",)][param]:
-                    print(d[("Foreground",)][param][year])
                     carmodel.array.loc[
                         dict(parameter=param[3], year=year[0])
                     ] = d[("Foreground",)][param][year]

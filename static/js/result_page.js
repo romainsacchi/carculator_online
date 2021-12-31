@@ -54,7 +54,7 @@ function export_results()
      'Primary fuel', 'Primary fuel share', 'Secondary fuel', 'Secondary fuel share']);
 
     data_to_parse.unshift([]);
-    data_to_parse.unshift(['carculator online 1.2.0', 'carculator 1.6.2', 'https://carculator.psi.ch']);
+    data_to_parse.unshift(['carculator online 1.2.1', 'carculator 1.6.3', 'https://carculator.psi.ch']);
 
     var csv = Papa.unparse(data_to_parse);
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
@@ -692,6 +692,7 @@ function update_impact_definition_table(impact_name){
     var d_reliability = {
         "agricultural land occupation": "moderate",
         "climate change":"good",
+        "climate change, incl. biogenic CO2":"good",
         "fossil depletion": "good",
         "freshwater ecotoxicity": "poor",
         "freshwater eutrophication": "moderate",

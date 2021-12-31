@@ -569,7 +569,17 @@ def direct_results():
                 "fu": {"unit": "vkm", "quantity": 1},
             },
             ("Driving cycle",): "WLTC",
-            ("Background",): {"country": country},
+            ("Background",): {
+                "country": country,
+                "energy storage": {
+                    "electric": {
+                        "Medium": {
+                            "type": "NMC-622",
+                            "origin": "CH"
+                        }
+                    }
+                }
+            },
             ("Foreground",): {
                 ("Glider", "all", "all", "average passengers", "none"): {
                     (2020, "loc"): 1.5
@@ -592,13 +602,12 @@ def direct_results():
 
         # generate inventories
         for software in ["brightway2", "simapro"]:
-            for ecoinvent_version in ["3.6", "3.7"]:
+            for ecoinvent_version in ["3.6", "3.7", "3.8"]:
                 if software == "brightway2" or (
                     software == "simapro" and ecoinvent_version == "3.6"
                 ):
                     data = i.write_lci_to_excel(
                         ecoinvent_version=ecoinvent_version,
-                        ecoinvent_compatibility=True,
                         software_compatibility=software,
                         export_format="string",
                     )
@@ -627,6 +636,7 @@ def display_quick_results(country):
     # retrieve impact categories
     impact_cat = [
         "climate change",
+        "climate change, incl. biogenic CO2",
         "agricultural land occupation",
         "fossil depletion",
         "freshwater ecotoxicity",
@@ -934,6 +944,7 @@ def display_result(job_key):
             # retrieve impact categories
             impact_cat = [
                 "climate change",
+                "climate change, incl. biogenic CO2",
                 "agricultural land occupation",
                 "fossil depletion",
                 "freshwater ecotoxicity",
@@ -1072,7 +1083,6 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
 
         data = export.write_lci_to_excel(
             ecoinvent_version=ecoinvent_version,
-            ecoinvent_compatibility=compatibility,
             software_compatibility=software,
             export_format="string",
         )
