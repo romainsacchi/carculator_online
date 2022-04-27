@@ -217,6 +217,12 @@ def tool_page(country):
                             "Coal CCS",
                             "Gas CCS",
                             "Wood CCS",
+                            "Hydro, reservoir",
+                            "Gas CCGT",
+                            "Gas CHP",
+                            "Solar, thermal",
+                            "Wind, offshore",
+                            "Lignite"
                         ],
                     )
                 ]
@@ -246,6 +252,12 @@ def tool_page(country):
                             "Coal CCS",
                             "Gas CCS",
                             "Wood CCS",
+                            "Hydro, reservoir",
+                            "Gas CCGT",
+                            "Gas CHP",
+                            "Solar, thermal",
+                            "Wind, offshore",
+                            "Lignite"
                         ],
                     )
                 ]
@@ -835,6 +847,12 @@ def get_electricity_mix(iso_code, years, lifetime):
                 "Coal CCS",
                 "Gas CCS",
                 "Wood CCS",
+                "Hydro, reservoir",
+                "Gas CCGT",
+                "Gas CHP",
+                "Solar, thermal",
+                "Wind, offshore",
+                "Lignite"
             ],
         )
         .interp(
@@ -861,6 +879,12 @@ def get_electricity_mix(iso_code, years, lifetime):
                 "Coal CCS",
                 "Gas CCS",
                 "Wood CCS",
+                "Hydro, reservoir",
+                "Gas CCGT",
+                "Gas CHP",
+                "Solar, thermal",
+                "Wind, offshore",
+                "Lignite"
             ],
         )
         .interp(year=np.arange(year, 2051), kwargs={"fill_value": "extrapolate"})
