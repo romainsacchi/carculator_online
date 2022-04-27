@@ -639,7 +639,7 @@ class Calculation:
         scope = {"powertrain": powertrain, "size": size, "year": year}
         total_cost = (
             carmodel.calculate_cost_impacts(scope=scope)
-            .transpose("powertrain", "size", "year", "value", "cost_type")
+            .transpose("powertrain", "size", "year", "value", "parameter")
             .astype("float64")
         )
 
