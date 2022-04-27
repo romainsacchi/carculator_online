@@ -1,3 +1,4 @@
+setuptools
 wurst
 Flask_Babel
 scipy
