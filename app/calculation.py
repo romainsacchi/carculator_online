@@ -643,11 +643,11 @@ class Calculation:
             .astype("float64")
         )
 
-        cost_benchmark = total_cost.sel(cost_type="total", value=0).values.reshape(
+        cost_benchmark = total_cost.sel(paramter="total", value=0).values.reshape(
             len(l)
         )
 
-        cost_types = [c for c in total_cost.cost_type.values if c != "total"]
+        cost_types = [c for c in total_cost.parameter.values if c != "total"]
 
         arr_benchmark = list(
             map(
@@ -669,7 +669,7 @@ class Calculation:
         }
 
         detailed_cost = (
-            total_cost.sel(value=0, cost_type=cost_types).values.reshape(
+            total_cost.sel(value=0, parameter=cost_types).values.reshape(
                 len(l), len(cost_types)
             )
             / load_factor
