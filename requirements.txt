@@ -1,4 +1,3 @@
-pathlib
 jinja2==3.0.3
 wurst
 Flask_Babel
