@@ -41,7 +41,7 @@ setup(
     license = "BSD",
     keywords = "example documentation tutorial",
     url = "https://github.com/romainsacchi/carculator_online",
-    packages=['carculator_online',],
+    packages=['app',],
     # namespace_packages = ['package_name'],
     install_requires=requires,
     long_description=read('README.md'),
