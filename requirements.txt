@@ -1,8 +1,9 @@
+pathlib
 jinja2==3.0.3
 wurst
 Flask_Babel
 scipy
-xarray==0.17.0
+xarray
 pandas
 numexpr
 alembic
@@ -24,7 +25,7 @@ pycountry
 stats_arrays
 PyPrind
 redis
--e git+https://github.com/romainsacchi/carculator#egg=carculator
 email-validator
 mysqlclient
 gunicorn
+-e git+https://github.com/romainsacchi/carculator#egg=carculator
