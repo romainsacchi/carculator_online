@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 requires = (
         "alembic",
@@ -11,22 +11,22 @@ requires = (
         "flask_migrate",
         "flask_sqlalchemy",
         "flask_wtf",
-        "klausen",
-        "numexpr",
+        #"klausen",
+        #"numexpr",
         "numpy",
         "pandas",
-        "pycountry",
+        #"pycountry",
         "pyprind",
         "PyYAML",
         "redis",
         "rq",
         "scipy",
         "setuptools",
-        "SQLAlchemy",
-        "stats_arrays",
-        "Werkzeug",
-        "WTForms",
-        "xarray",
+        #"SQLAlchemy",
+        #"stats_arrays",
+        #"Werkzeug",
+        #"WTForms",
+        #"xarray",
         )
 
 def read(fname):
@@ -41,7 +41,7 @@ setup(
     license = "BSD",
     keywords = "example documentation tutorial",
     url = "https://github.com/romainsacchi/carculator_online",
-    packages=['app',],
+    packages=find_packages(),
     # namespace_packages = ['package_name'],
     install_requires=requires,
     long_description=read('README.md'),
