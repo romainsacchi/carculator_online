@@ -568,9 +568,7 @@ class Calculation:
         carmodel = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
-            energy_storage={
-                "electric": {"BEV": batt_type, "PHEV-e": batt_type, "FCEV": batt_type}
-            },
+            energy_storage=d[("Background",)]["energy storage"],
         )
 
         # adjust the electricity density of the battery cells
