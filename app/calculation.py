@@ -643,7 +643,7 @@ class Calculation:
             .astype("float64")
         )
 
-        cost_benchmark = total_cost.sel(paramter="total", value=0).values.reshape(
+        cost_benchmark = total_cost.sel(parameter="total", value=0).values.reshape(
             len(l)
         )
 
