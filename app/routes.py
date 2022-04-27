@@ -181,10 +181,9 @@ def fetch_car_repl_results(country, cycle):
 
     return jsonify(response)
 
-
+#@login_required
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
-@login_required
 def tool_page(country):
     """Return tool page"""
     if not current_user.is_authenticated:
