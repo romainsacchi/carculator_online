@@ -28,7 +28,7 @@ requires = (
         "Werkzeug",
         "WTForms",
         "xarray",
-        "setuptools==47.1.1"
+        "pathlib2"
         )
 
 def read(fname):
