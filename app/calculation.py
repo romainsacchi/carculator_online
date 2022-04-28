@@ -1111,17 +1111,8 @@ class Calculation:
         if "energy storage" in raw_dict["background params"]:
             if "electric" in raw_dict["background params"]["energy storage"]:
                 if len(raw_dict["background params"]["energy storage"]["electric"]) > 0:
-                    energy_storage = raw_dict["background params"]["energy storage"][
-                        "electric"
-                    ]
-                    new_dict[("Background",)]["energy storage"] = {"electric": {}}
-
-                    for e in energy_storage:
-                        for p in energy_storage[e]:
-                            if p in ("type", "origin"):
-                                new_dict[("Background",)]["energy storage"]["electric"][
-                                    p
-                                ] = energy_storage[e][p]
+                    energy_storage = raw_dict["background params"]["energy storage"]
+                    new_dict[("Background",)]["energy storage"] = energy_storage
 
         for k, v in raw_dict["foreground params"].items():
             if k in d_sliders:
