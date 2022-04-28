@@ -699,6 +699,8 @@ class Calculation:
 
         list_res_costs = list(itertools.chain.from_iterable(list_res_costs))
 
+        print(d[("Background",)])
+
         self.ic = InventoryCalculation(
             carmodel.array,
             scope=d[("Functional unit",)]["fu"],
