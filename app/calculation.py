@@ -562,8 +562,22 @@ class Calculation:
                 if "origin" in s:
                     batt_origin = s["origin"]
 
-        d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
 
+
+        if "energy storage" in d[("Background",)]:
+            if "electric" in d[("Background",)]["energy storage"]:
+                d[("Background",)]["energy storage"]["electric"]["type"] = batt_type
+                d[("Background",)]["energy storage"]["electric"]["origin"] = batt_origin
+            else:
+                d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
+
+        else:
+            d[("Background",)]["energy storage"] = {
+                "electric": {
+                    "type": batt_type,
+                    "origin": batt_origin
+                }
+            }
 
 
         carmodel = CarModel(
