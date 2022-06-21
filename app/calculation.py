@@ -562,7 +562,6 @@ class Calculation:
                 if "origin" in s:
                     batt_origin = s["origin"]
 
-
         d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
 
 
