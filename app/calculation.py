@@ -552,18 +552,19 @@ class Calculation:
             ] = 1
 
         batt_type = "NMC-622"
+        batt_origin = "CN"
 
-        en_stor = d[("Background",)]["energy storage"]["electric"]
-        for _, s in en_stor.items():
-            if "type" in s:
-                batt_type = s["type"]
-            if "origin" in s:
-                batt_origin = s["origin"]
+        if "energy storage" in d[("Background",)]:
+            en_stor = d[("Background",)]["energy storage"]["electric"]
+            for _, s in en_stor.items():
+                if "type" in s:
+                    batt_type = s["type"]
+                if "origin" in s:
+                    batt_origin = s["origin"]
 
-        try:
-            d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
-        except:
-            d[("Background",)]["energy storage"]["electric"] = {"type": "NMC-622", "origin": "CN"}
+
+        d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
+
 
         carmodel = CarModel(
             arr,
