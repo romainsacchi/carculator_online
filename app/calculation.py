@@ -565,6 +565,7 @@ class Calculation:
         d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
 
 
+
         carmodel = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
