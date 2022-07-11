@@ -855,7 +855,29 @@ class Calculation:
             background_configuration=d[("Background",)],
             method="ilcd",
         )
+
+        list_impact_cat = [
+            'ecosystem quality - freshwater ecotoxicity',
+            'human health - non-carcinogenic effects',
+            'human health - carcinogenic effects',
+            'resources - minerals and metals',
+            'climate change - climate change biogenic',
+            'climate change - climate change fossil',
+            'climate change - climate change land use and land use change',
+            'climate change - climate change total',
+            'ecosystem quality - freshwater and terrestrial acidification',
+            'ecosystem quality - freshwater eutrophication',
+            'ecosystem quality - marine eutrophication',
+            'ecosystem quality - terrestrial eutrophication',
+            'human health - ionising radiation',
+            'human health - ozone layer depletion',
+            'human health - photochemical ozone creation',
+            'human health - respiratory effects',
+            'resources - dissipated water', 'resources - fossils',
+            'resources - land use'
+        ]
         results = self.ic.calculate_impacts().astype("float64")
+        results = results.sel(impact_category=list_impact_cat)
 
         nf = np.array(
             [
@@ -880,6 +902,8 @@ class Calculation:
                 1.4e6,
             ]
         )
+
+        print(results.sum(dim="impact"))
 
         nf_impact = (results / nf[:, None, None, None, None, None]).sum(dim="impact")
         impact_category = nf_impact.coords["impact_category"].values
