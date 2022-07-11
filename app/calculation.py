@@ -881,7 +881,7 @@ class Calculation:
             ]
         )
 
-        nf_impact = (results / nf[:, None, None, None, None, None]).sum(dim="impact")
+        nf_impact = (results.sum(dim="impact") / nf)
         impact_category = nf_impact.coords["impact_category"].values
 
         all_lists = [impact_category] + [size] + [powertrain] + [year]

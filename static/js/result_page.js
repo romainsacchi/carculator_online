@@ -1214,7 +1214,7 @@ function generate_radar_chart(data){
                     var s = i18n(list_cars[car].split(" - ")[1])
                     var y = i18n(list_cars[car].split(" - ")[2])
                    list_data_sub.push({axis:i18n(list_methods[imp]),
-                   value: data[l][4]*100000,
+                   value: data[l][4]*1000000,
                    key: pt + " - " + s + " - " + String(y)
                    })
                 }
