@@ -906,6 +906,8 @@ class Calculation:
         print(results.sum(dim="impact"))
         print(results.sel(impact_category="human health - carcinogenic effects").sum(dim="impact"))
         print(results.impact_category.values)
+        print("load", load_factor)
+        print("load", fu_qty)
 
         nf_impact = (results / nf[:, None, None, None, None, None]).sum(dim="impact")
         impact_category = nf_impact.coords["impact_category"].values
