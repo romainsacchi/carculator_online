@@ -3183,6 +3183,7 @@ function create_energy_storage_table() {
 
             var div_type = divs[i].id.split("_")[0];
 
+
             if (div_type == "mass"){
 
                 var slider = noUiSlider.create(divs[i], {
