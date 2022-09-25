@@ -3267,6 +3267,8 @@ function create_energy_storage_table() {
 
             if (divs[i].id.split("_")[0] == "type" && batt_specs_created == false){
 
+                console.log("creating batt specs 1")
+
                 divs[i].innerHTML = '<select style="color:grey">'
                                     + '<option value="NMC-622">Lithium nickel manganese cobalt oxide (NMC-622)</option>'
                                     + '<option value="NMC-111">Lithium nickel manganese cobalt oxide (NMC-111)</option>'
@@ -3276,6 +3278,8 @@ function create_energy_storage_table() {
             }
 
             if (divs[i].id.split("_")[0] == "origin" && batt_specs_created == false){
+
+                console.log("creating batt specs 2")
 
                 divs[i].innerHTML = '<select style="color:grey"><option value="CN">'+i18n("china")+'</option>'
                                     + '<option value="JP">'+i18n("japan")+'</option>'
