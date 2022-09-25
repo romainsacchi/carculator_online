@@ -703,18 +703,16 @@ class Calculation:
         list_res_costs = list(itertools.chain.from_iterable(list_res_costs))
 
 
-        pp.pprint(d[("Background",)])
-
         if "energy storage" in d[("Background",)]:
             if "electric" in d[("Background",)]["energy storage"]:
                 d[("Background",)]["energy storage"]["electric"] = {
-                    "type": batt_type,
+                    "type": list(batt_type.values())[0],
                     "origin": batt_origin,
                 }
             else:
                 d[("Background",)]["energy storage"] = {
                     "electric": {
-                        "type": batt_type,
+                        "type": list(batt_type.values())[0],
                         "origin": batt_origin,
                     }
                 }
