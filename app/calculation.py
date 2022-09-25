@@ -564,13 +564,10 @@ class Calculation:
                         batt_type[("BEV", key, year)] = val["type"]
                         batt_origin = val.get("origin", "CN")
 
-        print(batt_type)
 
         uf = None
-
         if "electric utility factor" in d[("Background",)]:
-            uf = list(d[("Background",)]["electric utility factor"].values())[0]
-
+            uf = d[("Background",)]["electric utility factor"]
 
         carmodel = CarModel(
             arr,
