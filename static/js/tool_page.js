@@ -3177,7 +3177,7 @@ function create_energy_storage_table() {
 
         var divs = $("#energy_storage_table > tbody").find('div');
 
-        const batt_specs_created = new Boolean(false);
+        var batt_specs_created = new Boolean(false);
 
         for (var i=0; i<divs.length; i++){
 
