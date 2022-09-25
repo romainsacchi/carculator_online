@@ -559,6 +559,11 @@ class Calculation:
         batt_type = en_stor.get("type", "NMC-622")
         batt_origin = en_stor.get("origin", "CN")
 
+        uf = None
+        if "electrcity" in d[("Background",)]:
+            if "electric utility factor" in d[("Background",)]["electricity"]:
+                uf = list(d[("Background",)]["electricity"]["electric utility factor"].values())[0]
+
         carmodel = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
@@ -571,7 +576,7 @@ class Calculation:
                     "HEV-p": batt_type,
                 },
             },
-            electric_utility_factor = d[("Background",)]["electricity"].get("utility factor"),
+            electric_utility_factor=uf,
         )
 
         # adjust the electricity density of the battery cells
