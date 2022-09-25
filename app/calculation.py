@@ -1,6 +1,9 @@
 import csv
 import itertools
 import json
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 import numpy as np
 from carculator import (
@@ -551,24 +554,23 @@ class Calculation:
                 )
             ] = 1
 
-        batt_type = "NMC-622"
 
         en_stor = d[("Background",)]["energy storage"]["electric"]
-        for _, s in en_stor.items():
-            if "type" in s:
-                batt_type = s["type"]
-            if "origin" in s:
-                batt_origin = s["origin"]
-
-        try:
-            d[("Background",)]["energy storage"]["electric"] = {"type": batt_type, "origin": batt_origin}
-        except:
-            d[("Background",)]["energy storage"]["electric"] = {"type": "NMC-622", "origin": "CN"}
+        batt_type = en_stor.get("type", "NMC-622")
+        batt_origin = en_stor.get("origin", "CN")
 
         carmodel = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
-            energy_storage=d[("Background",)]["energy storage"],
+            energy_storage={
+                "electric": {
+                    "BEV": batt_type,
+                    "PHEV-e": batt_type,
+                    "FCEV": batt_type,
+                    "HEV-d": batt_type,
+                    "HEV-p": batt_type,
+                },
+            }
         )
 
         # adjust the electricity density of the battery cells
@@ -699,7 +701,8 @@ class Calculation:
 
         list_res_costs = list(itertools.chain.from_iterable(list_res_costs))
 
-        print(d[("Background",)])
+
+        pp.print(d[("Background",)])
 
         self.ic = InventoryCalculation(
             carmodel.array,
