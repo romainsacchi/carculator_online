@@ -717,6 +717,7 @@ class Calculation:
                     }
                 }
 
+
         self.ic = InventoryCalculation(
             carmodel.array,
             scope=d[("Functional unit",)]["fu"],
