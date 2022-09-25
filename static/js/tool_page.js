@@ -3177,6 +3177,8 @@ function create_energy_storage_table() {
 
         var divs = $("#energy_storage_table > tbody").find('div');
 
+        var batt_specs_created = false;
+
         for (var i=0; i<divs.length; i++){
 
             var div_type = divs[i].id.split("_")[0];
@@ -3261,7 +3263,7 @@ function create_energy_storage_table() {
 
             };
 
-            if (divs[i].id.split("_")[0] == "type"){
+            if (divs[i].id.split("_")[0] == "type" && batt_specs_created == false){
 
                 divs[i].innerHTML = '<select style="color:grey">'
                                     + '<option value="NMC-622">Lithium nickel manganese cobalt oxide (NMC-622)</option>'
@@ -3271,7 +3273,7 @@ function create_energy_storage_table() {
 
             }
 
-            if (divs[i].id.split("_")[0] == "origin"){
+            if (divs[i].id.split("_")[0] == "origin" && batt_specs_created == false){
 
                 divs[i].innerHTML = '<select style="color:grey"><option value="CN">'+i18n("china")+'</option>'
                                     + '<option value="JP">'+i18n("japan")+'</option>'
@@ -3279,6 +3281,8 @@ function create_energy_storage_table() {
                                     + '<option value="NO">'+i18n("norway")+'</option>'
                                     + '<option value="US">'+i18n("united_states")+'</option></select>'
             }
+
+            batt_specs_created = true;
         }
     }
 
