@@ -560,9 +560,9 @@ class Calculation:
         batt_origin = en_stor.get("origin", "CN")
 
         uf = None
-        if "electrcity" in d[("Background",)]:
-            if "electric utility factor" in d[("Background",)]["electricity"]:
-                uf = list(d[("Background",)]["electricity"]["electric utility factor"].values())[0]
+
+        if "electric utility factor" in d[("Background",)]:
+            uf = list(d[("Background",)]["electricity"]["electric utility factor"].values())[0]
 
         print("UF", uf)
         print("batt type", batt_type)

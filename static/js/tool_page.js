@@ -3087,7 +3087,7 @@ function create_electric_utility_table() {
 
         var year = Number(divs[i].id.split("_")[2])
 
-        var utility_factor = parseInt(((year * .01434) - 28.67)*100)
+        var utility_factor = 47
 
            var slider = noUiSlider.create(divs[i], {
                 start: utility_factor,
