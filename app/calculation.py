@@ -556,12 +556,15 @@ class Calculation:
 
 
 
-        batt_type, batt_origin = ("NMC-622", "CN")
+        batt_type, batt_origin = ({}, "CN")
 
         if "energy storage" in d[("Background",)]:
             if "electric" in d[("Background",)]["energy storage"]:
                 en_stor = d[("Background",)]["energy storage"]["electric"]
-                for _, val in en_stor.items():
+                for key, val in en_stor.items():
+                    print(key, val)
+                    batt_type[("BEV", key, list(val.keys())[0])] = list(val.values())[0]
+
                     batt_type = val.get("type", "NMC-622")
                     batt_origin = val.get("origin", "CN")
 

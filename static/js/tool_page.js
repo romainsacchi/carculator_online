@@ -3177,7 +3177,6 @@ function create_energy_storage_table() {
 
         var divs = $("#energy_storage_table > tbody").find('div');
 
-        var batt_specs_created = new Boolean(false);
 
         for (var i=0; i<divs.length; i++){
 
@@ -3264,38 +3263,27 @@ function create_energy_storage_table() {
 
             };
 
-            console.log(batt_specs_created)
 
             if (divs[i].id.split("_")[0] == "type"){
 
-                if (batt_specs_created == false){
+                divs[i].innerHTML = '<select style="color:grey">'
+                                    + '<option value="NMC-622">Lithium nickel manganese cobalt oxide (NMC-622)</option>'
+                                    + '<option value="NMC-111">Lithium nickel manganese cobalt oxide (NMC-111)</option>'
+                                    + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
+                                    + '<option value="LFP">Lithium iron phosphate (LFP)</option></select>'
 
-                    console.log("creating batt specs 1")
-
-                    divs[i].innerHTML = '<select style="color:grey">'
-                                        + '<option value="NMC-622">Lithium nickel manganese cobalt oxide (NMC-622)</option>'
-                                        + '<option value="NMC-111">Lithium nickel manganese cobalt oxide (NMC-111)</option>'
-                                        + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
-                                        + '<option value="LFP">Lithium iron phosphate (LFP)</option></select>'
-                }
 
             }
 
             if (divs[i].id.split("_")[0] == "origin"){
 
-                if (batt_specs_created == false){
+                divs[i].innerHTML = '<select style="color:grey"><option value="CN">'+i18n("china")+'</option>'
+                                    + '<option value="JP">'+i18n("japan")+'</option>'
+                                    + '<option value="RER">'+i18n("europe")+'</option>'
+                                    + '<option value="NO">'+i18n("norway")+'</option>'
+                                    + '<option value="US">'+i18n("united_states")+'</option></select>'
 
-                    console.log("creating batt specs 2")
-
-                    divs[i].innerHTML = '<select style="color:grey"><option value="CN">'+i18n("china")+'</option>'
-                                        + '<option value="JP">'+i18n("japan")+'</option>'
-                                        + '<option value="RER">'+i18n("europe")+'</option>'
-                                        + '<option value="NO">'+i18n("norway")+'</option>'
-                                        + '<option value="US">'+i18n("united_states")+'</option></select>'
-                }
             }
-
-            batt_specs_created = true;
         }
     }
 
