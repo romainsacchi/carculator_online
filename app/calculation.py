@@ -557,7 +557,7 @@ class Calculation:
 
         en_stor = d[("Background",)]["energy storage"]["electric"]
         batt_type, batt_origin = ("NMC-622", "CN")
-        for _, val in en_stor.values():
+        for _, val in en_stor.items():
             batt_type = val.get("type", "NMC-622")
             batt_origin = val.get("origin", "CN")
 
