@@ -564,6 +564,9 @@ class Calculation:
             if "electric utility factor" in d[("Background",)]["electricity"]:
                 uf = list(d[("Background",)]["electricity"]["electric utility factor"].values())[0]
 
+        print("UF", uf)
+        print("batt type", batt_type)
+
         carmodel = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
