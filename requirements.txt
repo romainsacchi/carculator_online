@@ -1,7 +1,7 @@
 wurst
 Flask_Babel
 scipy
-xarray==0.17.0
+xarray
 pandas
 numexpr
 alembic
