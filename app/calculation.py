@@ -565,9 +565,10 @@ class Calculation:
                         batt_origin = val.get("origin", "CN")
 
 
-        uf = None
+        uf=None
         if "electric utility factor" in d[("Background",)]:
             uf = d[("Background",)]["electric utility factor"]
+            uf = {int(x): y for x, y in uf.items()}
 
         carmodel = CarModel(
             arr,
