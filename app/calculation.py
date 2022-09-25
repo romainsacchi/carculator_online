@@ -702,7 +702,7 @@ class Calculation:
         list_res_costs = list(itertools.chain.from_iterable(list_res_costs))
 
 
-        pp.print(d[("Background",)])
+        pp.pprint(d[("Background",)])
 
         self.ic = InventoryCalculation(
             carmodel.array,
