@@ -570,7 +570,8 @@ class Calculation:
                     "HEV-d": batt_type,
                     "HEV-p": batt_type,
                 },
-            }
+            },
+            electric_utility_factor = d[("Background",)]["electricity"].get("utility factor"),
         )
 
         # adjust the electricity density of the battery cells
@@ -581,13 +582,8 @@ class Calculation:
                         dict(parameter=param[3], year=year[0])
                     ] = d[("Foreground",)][param][year]
 
-        if "electric utility factor" in d[("Background",)]:
-            utility_factor = list(
-                d[("Background",)]["electric utility factor"].values()
-            )
-            carmodel.set_all(electric_utility_factor=utility_factor)
-        else:
-            carmodel.set_all()
+
+        carmodel.set_all()
 
         powertrain = carmodel.array.powertrain.values
         size = d[("Functional unit",)]["size"]
