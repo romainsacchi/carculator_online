@@ -555,11 +555,15 @@ class Calculation:
             ] = 1
 
 
-        en_stor = d[("Background",)]["energy storage"]["electric"]
+
         batt_type, batt_origin = ("NMC-622", "CN")
-        for _, val in en_stor.items():
-            batt_type = val.get("type", "NMC-622")
-            batt_origin = val.get("origin", "CN")
+
+        if "energy storage" in d[("Background",)]:
+            if "electric" in d[("Background",)]["energy storage"]:
+                en_stor = d[("Background",)]["energy storage"]["electric"]
+                for _, val in en_stor.items():
+                    batt_type = val.get("type", "NMC-622")
+                    batt_origin = val.get("origin", "CN")
 
         uf = None
 
@@ -717,8 +721,8 @@ class Calculation:
             else:
                 d[("Background",)]["energy storage"] = {
                     "electric": {
-                    "type": batt_type,
-                    "origin": batt_origin,
+                        "type": batt_type,
+                        "origin": batt_origin,
                     }
                 }
 
