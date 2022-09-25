@@ -23,7 +23,7 @@ pycountry
 stats_arrays
 PyPrind
 redis
-carculator
+-e git+https://github.com/romainsacchi/carculator#egg=carculator
 email-validator
 mysqlclient
 gunicorn
