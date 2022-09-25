@@ -708,10 +708,19 @@ class Calculation:
 
         pp.pprint(d[("Background",)])
 
-        d[("Background",)]["energy storage"]["electric"] = {
-            "type": batt_type,
-            "origin": batt_origin,
-        }
+        if "energy storage" in d[("Background",)]:
+            if "electric" in d[("Background",)]["energy storage"]:
+                d[("Background",)]["energy storage"]["electric"] = {
+                    "type": batt_type,
+                    "origin": batt_origin,
+                }
+            else:
+                d[("Background",)]["energy storage"] = {
+                    "electric": {
+                    "type": batt_type,
+                    "origin": batt_origin,
+                    }
+                }
 
         self.ic = InventoryCalculation(
             carmodel.array,
