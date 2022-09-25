@@ -566,9 +566,6 @@ class Calculation:
         if "electric utility factor" in d[("Background",)]:
             uf = list(d[("Background",)]["electric utility factor"].values())[0]
 
-        print("UF", uf)
-        print("batt type", batt_type)
-        print("batt origin", batt_origin)
 
         carmodel = CarModel(
             arr,
@@ -710,6 +707,11 @@ class Calculation:
 
 
         pp.pprint(d[("Background",)])
+
+        d[("Background",)]["energy storage"]["electric"] = {
+            "type": batt_type,
+            "origin": batt_origin,
+        }
 
         self.ic = InventoryCalculation(
             carmodel.array,
