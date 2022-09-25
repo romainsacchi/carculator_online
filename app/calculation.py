@@ -562,7 +562,7 @@ class Calculation:
         uf = None
 
         if "electric utility factor" in d[("Background",)]:
-            uf = list(d[("Background",)]["electricity"]["electric utility factor"].values())[0]
+            uf = list(d[("Background",)]["electric utility factor"].values())[0]
 
         print("UF", uf)
         print("batt type", batt_type)
