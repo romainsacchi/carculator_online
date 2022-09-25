@@ -556,8 +556,10 @@ class Calculation:
 
 
         en_stor = d[("Background",)]["energy storage"]["electric"]
-        batt_type = en_stor.get("type", "NMC-622")
-        batt_origin = en_stor.get("origin", "CN")
+        batt_type, batt_origin = ("NMC-622", "CN")
+        for _, val in en_stor.values():
+            batt_type = val.get("type", "NMC-622")
+            batt_origin = val.get("origin", "CN")
 
         uf = None
 
@@ -566,6 +568,7 @@ class Calculation:
 
         print("UF", uf)
         print("batt type", batt_type)
+        print("batt origin", batt_origin)
 
         carmodel = CarModel(
             arr,
