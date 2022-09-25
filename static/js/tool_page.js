@@ -3263,6 +3263,8 @@ function create_energy_storage_table() {
 
             };
 
+            console.log(batt_specs_created)
+
             if (divs[i].id.split("_")[0] == "type" && batt_specs_created == false){
 
                 divs[i].innerHTML = '<select style="color:grey">'
