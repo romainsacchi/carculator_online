@@ -554,19 +554,17 @@ class Calculation:
                 )
             ] = 1
 
-
-
         batt_type, batt_origin = ({}, "CN")
 
         if "energy storage" in d[("Background",)]:
             if "electric" in d[("Background",)]["energy storage"]:
                 en_stor = d[("Background",)]["energy storage"]["electric"]
                 for key, val in en_stor.items():
-                    print(key, val)
-                    batt_type[("BEV", key, list(val.keys())[0])] = list(val.values())[0]
+                    for year in d[("Functional unit",)]["year"]:
+                        batt_type[("BEV", key, year)] = val["type"]
+                        batt_origin = val.get("origin", "CN")
 
-                    batt_type = val.get("type", "NMC-622")
-                    batt_origin = val.get("origin", "CN")
+        print(batt_type)
 
         uf = None
 
@@ -577,15 +575,7 @@ class Calculation:
         carmodel = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
-            energy_storage={
-                "electric": {
-                    "BEV": batt_type,
-                    "PHEV-e": batt_type,
-                    "FCEV": batt_type,
-                    "HEV-d": batt_type,
-                    "HEV-p": batt_type,
-                },
-            },
+            energy_storage=batt_type,
             electric_utility_factor=uf,
         )
 
