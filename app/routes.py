@@ -586,7 +586,7 @@ def direct_results():
                     "electric": {
                         "Medium": {
                             "type": "NMC-622",
-                            "origin": "CH"
+                            "origin": "CN"
                         }
                     }
                 }
