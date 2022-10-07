@@ -135,12 +135,18 @@
 									<i class="icon-globe" style="color:white;font-size:50px;"></i>
 								</span>
 								<h2 class="mu-heading-title">{{_('Online')}}</h2>
-								<h3 class="mu-heading-title">carculator online 1.2.2</h3>
+								<h3 class="mu-heading-title">carculator online 1.2.3</h3>
 								<div style="text-align:center;">
 									<p style="color:white;">{{_('Make fast comparisons between different cars, under different scenarios. Save and export your results. Import them in your model.')}}</p>
 									<button class="online-button" onclick="window.open('/start', '_blank')" style="width:auto;">{{_('Try it out now!')}}</button>
 								</div>
 								<div style="padding:20px;border:2px solid white;margin-top:30px;color:white;text-align:left;width:100%;">
+
+									<h4>New in <b>1.2.3</b></h4>
+									<ul style="padding-left:10px;">
+										<li>uses carculator 1.7.2</li>
+										<li>fixes bugs with selection of battery chemistry</li>
+									</ul>
 
 									<h4>New in <b>1.2.2</b></h4>
 									<ul style="padding-left:10px;">
@@ -321,7 +327,7 @@
 								<h2 class="mu-heading-title">{{_('Install')}}</h2>
 								<span>
 
-									<h3 class="mu-heading-title">carculator 1.7.0</h3>
+									<h3 class="mu-heading-title">carculator 1.7.2</h3>
 									<div style="text-align:center;">
 									<p style="color:white;">{{_('Make detailed or fleet-wide analyses. Perform sensitivity and uncertainty analyses. Use results in other Python libraries. Export your inventories directly into Brightway2.')}}</p>
 
@@ -339,6 +345,15 @@
 								</p>
 
 								<div style="padding:20px;border:2px solid white;margin-top:10px;color:white;text-align:left;width:100%;">
+
+									<h4>New in <b>1.7.2</b></h4>
+									<ul style="padding-left:10px;">
+										<li>New electric utility factor for PHEVs (ICCT 2022)</li>
+										<li>New inventories for lithium, cobalt and graphite</li>
+										<li>Correct error in battery inventories</li>
+										<li>Update to REMIND v.3 for future background database</li>
+									</ul>
+									<br>
 
 									<h4>New in <b>1.7.0</b></h4>
 									<ul style="padding-left:10px;">
@@ -367,7 +382,7 @@
 										</ul>
 									<br>
 
-									<h4>New in <b>1.5.9</b></h4>
+									<!--<h4>New in <b>1.5.9</b></h4>
 									<ul style="padding-left:10px;">
 
 										<li>updates electricity mix projections for EU countries</li>
@@ -375,7 +390,7 @@
 										</ul>
 									<br>
 
-									<!--<h4>New in <b>1.5.6</b></h4>
+									<h4>New in <b>1.5.6</b></h4>
 									<ul style="padding-left:10px;">
 										<li>new calibration based on 2020 WLTC EU test cycle values</li>
 										<li>uses new electric utility factors for PHEVs based on ICCT findings</li>

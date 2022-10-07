@@ -54,7 +54,7 @@ function export_results()
      'Primary fuel', 'Primary fuel share', 'Secondary fuel', 'Secondary fuel share']);
 
     data_to_parse.unshift([]);
-    data_to_parse.unshift(['carculator online 1.2.2', 'carculator 1.7.0', 'https://carculator.psi.ch']);
+    data_to_parse.unshift(['carculator online 1.2.3', 'carculator 1.7.2', 'https://carculator.psi.ch']);
 
     var csv = Papa.unparse(data_to_parse);
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});

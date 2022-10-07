@@ -564,7 +564,6 @@ class Calculation:
                         batt_type[("BEV", key, year)] = val["type"]
                         batt_origin = val.get("origin", "CN")
 
-
         uf=None
         if "electric utility factor" in d[("Background",)]:
             uf = d[("Background",)]["electric utility factor"]
