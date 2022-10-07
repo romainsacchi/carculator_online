@@ -3208,7 +3208,7 @@ function create_energy_storage_table() {
                     var energy_density = $("[id='"+"energy_density_"+id+"']").text().split(" ")[0]
                     var capacity = $("[id='"+"capacity_"+id+"']")
                     var mass = parseInt(values[0].split(" ")[0]);
-                    capacity.text(parseInt(mass * 0.6 * energy_density) + " kWh");
+                    capacity.text(parseInt(mass * 0.7 * energy_density) + " kWh");
                  });
 
             };
