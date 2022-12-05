@@ -17,6 +17,7 @@ from carculator import (
     ExportInventory,
 )
 
+import app
 from app import db
 from app.models import Task
 
@@ -526,9 +527,10 @@ class Calculation:
         """ Calculate LCIA and store results in an array of arrays """
 
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 50
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 50
+            db.session.commit()
 
         scope = {
             "powertrain": d[("Functional unit",)]["powertrain"],
