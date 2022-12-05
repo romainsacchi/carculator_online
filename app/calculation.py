@@ -253,9 +253,7 @@ class Calculation:
                         battery_chem = dict_params[("Background",)]["energy storage"][
                             "electric"
                         ]["type"]
-                        battery_origin = dict_params[("Background",)]["energy storage"][
-                            "electric"
-                        ]["origin"]
+                        battery_origin = dict_params[("Background",)]["energy storage"]["origin"]
                         (
                             primary_fuel_type,
                             primary_fuel_share,
@@ -705,16 +703,18 @@ class Calculation:
 
         if "energy storage" in d[("Background",)]:
             if "electric" in d[("Background",)]["energy storage"]:
-                d[("Background",)]["energy storage"]["electric"] = {
-                    "type": list(batt_type.values())[0],
-                    "origin": batt_origin,
+                d[("Background",)]["energy storage"] = {
+                    "electric": {
+                        "type": list(batt_type.values())[0],
+                    },
+                    "origin": batt_origin
                 }
             else:
                 d[("Background",)]["energy storage"] = {
                     "electric": {
                         "type": list(batt_type.values())[0],
-                        "origin": batt_origin,
-                    }
+                    },
+                    "origin": batt_origin,
                 }
 
 
