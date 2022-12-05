@@ -17,7 +17,7 @@ from carculator import (
     ExportInventory,
 )
 
-import app
+from . import app
 from app import db
 from app.models import Task
 
