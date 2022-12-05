@@ -719,7 +719,7 @@ class Calculation:
 
 
         self.ic = InventoryCalculation(
-            carmodel.array,
+            carmodel,
             scope=d[("Functional unit",)]["fu"],
             background_configuration=d[("Background",)],
         )
@@ -857,7 +857,7 @@ class Calculation:
             db.session.commit()
 
         self.ic = InventoryCalculation(
-            carmodel.array,
+            carmodel,
             scope=d[("Functional unit",)]["fu"],
             background_configuration=d[("Background",)],
             method="ilcd",
