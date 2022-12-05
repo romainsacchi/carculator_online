@@ -634,9 +634,10 @@ class Calculation:
             load_factor = carmodel["average passengers"].mean().values
 
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 60
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 60
+            db.session.commit()
 
         scope = {"powertrain": powertrain, "size": size, "year": year}
         total_cost = (
@@ -723,9 +724,10 @@ class Calculation:
             background_configuration=d[("Background",)],
         )
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 70
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 70
+            db.session.commit()
 
         results = (
             self.ic.calculate_impacts()
@@ -744,9 +746,10 @@ class Calculation:
         )
 
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 80
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 80
+            db.session.commit()
 
         impact = results.coords["impact"].values.tolist()
         impact_category = results.coords["impact_category"].values
@@ -848,9 +851,10 @@ class Calculation:
         )
 
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 90
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 90
+            db.session.commit()
 
         self.ic = InventoryCalculation(
             carmodel.array,
@@ -901,9 +905,10 @@ class Calculation:
         )
 
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 85
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 85
+            db.session.commit()
 
         # reformat A for export
         self.ic.inputs = self.ic.get_dict_input()
@@ -938,9 +943,10 @@ class Calculation:
         self.export = ExportInventory(self.ic.A, self.ic.rev_inputs)
 
         # Update task progress to db
-        task = Task.query.filter_by(id=job_id).first()
-        task.progress = 100
-        db.session.commit()
+        with app.app_context():
+            task = Task.query.filter_by(id=job_id).first()
+            task.progress = 100
+            db.session.commit()
 
         list_res.extend(list_res_costs)
 
