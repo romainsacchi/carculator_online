@@ -1181,7 +1181,6 @@ function generate_radar_chart(data){
                 if (list_checked_methods.includes(meths[me])){
                         //$('input[name="method_radar_graph"][value="'+meths[me]+'"]').prop( "checked", false );
 
-
                 }
             }
         }
@@ -1223,8 +1222,6 @@ function generate_radar_chart(data){
         chart_data.push(list_data_sub)
     };
 
-
-
     //////////////////////////////////////////////////////////////
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
@@ -1245,9 +1242,3 @@ function generate_radar_chart(data){
 
 
 };
-
-
-
-
-
-
