@@ -3357,10 +3357,10 @@ function create_efficiency_table() {
                         connect: true,
                         range: {
                             'min': 0,
-                            'max': 1.0
+                            'max': 1.01
                         },
                         format: wNumb({
-                            decimals: 3
+                            decimals: 2
                         })
                     });
 
