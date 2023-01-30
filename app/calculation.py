@@ -891,18 +891,30 @@ class Calculation:
         nf_impact = (results / nf[:, None, None, None, None, None]).sum(dim="impact")
         impact_category = nf_impact.coords["impact_category"].values
 
-        all_lists = [impact_category] + [size] + [powertrain] + [year]
-        l_norm = list(itertools.product(*all_lists))
+        list_normalized_results = []
+        for impact in impact_category:
+            for s in size:
+                for p in powertrain:
+                    for y in year:
+                        list_normalized_results.append(
+                            [
+                                impact,
+                                s,
+                                p,
+                                y,
+                                np.sum(
+                                    nf_impact.sel(
+                                        impact_category=impact,
+                                        size=s,
+                                        powertrain=p,
+                                        year=y,
+                                    ).values
+                                )
+                                / load_factor
+                                * fu_qty,
+                            ]
+                        )
 
-        list_normalized_results = list(
-            map(
-                lambda x: [x[0][0], x[0][1], x[0][2], x[0][3], x[1]],
-                zip(
-                    l_norm,
-                    (nf_impact.values.reshape(len(l_norm)) / load_factor * fu_qty),
-                ),
-            )
-        )
 
         # Update task progress to db
         with app.app_context():
