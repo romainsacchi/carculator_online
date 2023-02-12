@@ -631,8 +631,6 @@ class Calculation:
             .transpose("impact_category", "size", "powertrain", "year", "impact")
         )
 
-        print(results.sel(impact_category="climate change").values)
-
         lifetime = int(self.cm.array.sel(parameter="lifetime kilometers").mean().values)
         impact_category = results.coords["impact_category"].values.tolist()
 
@@ -644,12 +642,16 @@ class Calculation:
             arr_benchmark, results, list_vehicles
         )
 
+        print(arr_benchmark)
+
         # add environmental impacts to scatter plot
         dict_scatter = self.add_environmental_results_for_scatter(
             dict_scatter=dict_scatter,
             results=results,
             list_vehicles=list_vehicles,
         )
+
+        print(dict_scatter)
 
         a_wo_impact = [
             impact_category,
