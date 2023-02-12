@@ -729,7 +729,7 @@ function update_impact_definition_table(impact_name){
     var d_reliability = {
         "agricultural land occupation": "moderate",
         "climate change":"good",
-        "climate change, incl. biogenic CO2":"good",
+        "GWP100a, incl. bio CO2":"good",
         "fossil depletion": "good",
         "freshwater ecotoxicity": "poor",
         "freshwater eutrophication": "moderate",
@@ -805,8 +805,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
             }else{
                 val.push(data[1][a]);
             };
-
-        }
+        };
     };
 
     val.sort(function(x,y){return y[6] - x[6];});
