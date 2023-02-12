@@ -598,9 +598,9 @@ class Calculation:
         fu_qty = float(d[("Functional unit",)]["fu"]["quantity"])
 
         if fu_unit == "vkm":
-            load_factor = 1
+            load_factor = 1.0
         else:
-            load_factor = self.cm["average passengers"].mean().values
+            load_factor = float(self.cm["average passengers"].mean().values)
 
         # Update task progress to db
         self.update_task_progress(60, job_id)
