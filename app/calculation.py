@@ -425,7 +425,7 @@ class Calculation:
         return array
 
     def add_environmental_results_for_scatter(
-            self, list_vehicles, results, dict_scatter, load_factor, fu_qty
+            self, list_vehicles, results, dict_scatter
     ):
 
         for vehicle in list_vehicles:
@@ -438,13 +438,11 @@ class Calculation:
                 )
                 .sum(dim="impact")
                 .values
-                / load_factor
-                * fu_qty
             )
 
         return dict_scatter
 
-    def generate_nomralized_results(self, results, load_factor, fu_qty):
+    def generate_nomralized_results(self, results):
 
         normalization_factors = load_yaml_file(NORMALIZATION_FACTORS)
         factors = np.fromiter(normalization_factors.values(), dtype=float)
@@ -457,8 +455,6 @@ class Calculation:
                     dim="impact"
                 )
                 / factors[:, None, None, None]
-                / load_factor
-                * fu_qty
         )
 
         list_normalized_results = []
@@ -649,8 +645,6 @@ class Calculation:
             dict_scatter=dict_scatter,
             results=results,
             list_vehicles=list_vehicles,
-            fu_qty=fu_qty,
-            load_factor=load_factor,
         )
 
         a_wo_impact = [
@@ -680,13 +674,13 @@ class Calculation:
                             powertrain=powertrain,
                             year=year,
                             impact=impact,
-                        ).values / load_factor * fu_qty,
+                        ).values,
                         results.sel(
                             impact_category=impact_cat,
                             size=size,
                             powertrain=powertrain,
                             year=year,
-                        ).sum().values / load_factor * fu_qty,
+                        ).sum().values,
                     ]
                 )
 
@@ -708,7 +702,7 @@ class Calculation:
                     "glider",
                     "EoL"
                 ]
-            ).sum(dim="impact").values * lifetime / load_factor * fu_qty
+            ).sum(dim="impact").values * lifetime
             var_burden = results.sel(
                 impact_category=impact_cat,
                 size=size,
@@ -721,7 +715,7 @@ class Calculation:
                     "maintenance",
                     "road"
                 ]
-            ).sum(dim="impact").values / load_factor * fu_qty
+            ).sum(dim="impact").values
             list_res_acc.append(
                 [
                     impact_cat,
@@ -748,7 +742,7 @@ class Calculation:
 
         # generate normalized results
         normalized_results = self.generate_nomralized_results(
-            results, load_factor, fu_qty
+            results
         )
 
         # Update task progress to db
