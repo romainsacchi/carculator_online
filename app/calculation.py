@@ -600,6 +600,9 @@ class Calculation:
         if "custom electricity mix" in d[("Background",)]:
             back_config = d[("Background",)]["custom electricity mix"]
 
+        print(fu_unit)
+        print(back_config)
+
         self.ic = InventoryCar(
             self.cm,
             functional_unit=fu_unit,
