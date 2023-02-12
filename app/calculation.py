@@ -284,8 +284,6 @@ class Calculation:
                     )
                 ] = year_val
 
-                print(f"Adjusting {param} for {pwt} - {size} - {year[0]} to {year_val}")
-
         return arr
 
     def get_cumulative_ttw_energy(self, list_vehicles):
@@ -765,15 +763,6 @@ class Calculation:
         config_array = self.remove_micro_petrols_from_list(config_array)
 
         normalized_results = self.remove_micro_petrols_from_list(normalized_results)
-
-        print("list_res")
-        print(list_res)
-        print("arr_benchmark")
-        print(arr_benchmark)
-        print("dict_scatter")
-        print(dict_scatter)
-        print("list_res_acc")
-        print(list_res_acc)
 
         return (
             json.dumps(

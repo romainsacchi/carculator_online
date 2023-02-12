@@ -837,7 +837,6 @@ function size_list_update(){
                 tableRef.deleteRow(2);
                 var rowCount = tableRef.rows.length;
             }
-            console.log("create fuel table")
             create_fuel_table();
             // fetch fuel shares
 
@@ -3154,7 +3153,6 @@ function create_energy_storage_table() {
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
     var listYears = document.querySelectorAll( '#years_list > li' );
     var listSizes = document.querySelectorAll( '#size_list > li' );
-
     var tableRef = document.getElementById('energy_storage_table').getElementsByTagName('tbody')[0];
     var rowCount = tableRef.rows.length;
 
@@ -3175,7 +3173,6 @@ function create_energy_storage_table() {
                 var size = listSizes[s].innerText;
                 for (var y = 0; y < listYears.length; y++){
                 var year = listYears[y].innerText;
-
                     var newRow = tableRef.insertRow();
 
                             if (y==0){
@@ -3194,8 +3191,6 @@ function create_energy_storage_table() {
                                 + '<td align="left" style="color:white"><div id="energy_density_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
                                 + '<td align="left" style="color:white"><div id="capacity_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
                                 + '<td align="left" style="color:white"><div id="lifetime_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:50px;margin-bottom:10px;"></div></td>'
-
-
                             };
 
                     newRow.innerHTML = row_content;
@@ -3213,12 +3208,8 @@ function create_energy_storage_table() {
 
         var divs = $("#energy_storage_table > tbody").find('div');
 
-
         for (var i=0; i<divs.length; i++){
-
             var div_type = divs[i].id.split("_")[0];
-
-
             if (div_type == "mass"){
 
                 var slider = noUiSlider.create(divs[i], {
@@ -3299,7 +3290,6 @@ function create_energy_storage_table() {
             };
 
             if (divs[i].id.split("_")[0] == "type"){
-
                 divs[i].innerHTML = '<select style="color:grey">'
                                     + '<option value="NMC-622">Lithium nickel manganese cobalt oxide (NMC-622)</option>'
                                     + '<option value="NMC-111">Lithium nickel manganese cobalt oxide (NMC-111)</option>'
@@ -3350,7 +3340,6 @@ function create_efficiency_table() {
 
                         // do not allow car of size Micro
                         if (size == "Micro"){
-                            console.log(size);
                             continue;
                         }
 

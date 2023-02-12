@@ -181,7 +181,8 @@ def fetch_car_repl_results(country, cycle):
 
     return jsonify(response)
 
-#@login_required
+
+# @login_required
 @app.route("/tool", defaults={"country": None})
 @app.route("/tool/<country>")
 def tool_page(country):
@@ -202,7 +203,9 @@ def tool_page(country):
         response = (
             app.calc.bs.electricity_mix.loc[
                 dict(
-                    country=country if country in app.calc.bs.electricity_mix.country.values else "RER",
+                    country=country
+                    if country in app.calc.bs.electricity_mix.country.values
+                    else "RER",
                     variable=[
                         "Hydro",
                         "Nuclear",
@@ -224,7 +227,7 @@ def tool_page(country):
                         "Gas CHP",
                         "Solar, thermal",
                         "Wind, offshore",
-                        "Lignite"
+                        "Lignite",
                     ],
                 )
             ]
@@ -260,7 +263,7 @@ def tool_page(country):
                     "petrol": {
                         "primary": {
                             "type": "petrol",
-                            "share": [np.round((1.0 - share_bioethanol), 2)]
+                            "share": [np.round((1.0 - share_bioethanol), 2)],
                         },
                         "secondary": {
                             "type": "bioethanol - wheat straw",
@@ -367,7 +370,7 @@ def tool_page(country):
 
 @app.route("/search_car_model/<search_item>")
 def search_car_model(search_item):
-    """ Return a list of cars if cars contain `search item`"""
+    """Return a list of cars if cars contain `search item`"""
     lang = session.get("language", "en")
     cars = [
         car
@@ -379,9 +382,9 @@ def search_car_model(search_item):
 
 @app.route("/direct_results")
 def direct_results():
-    """ This function is meant to produce quick results for all available countries and store them as pickles.
-        This allows to prevent a full calculation when results are accessed through the 'Simple' mode.
-        It is to be run every time substantial changes are made to 'carculator'."""
+    """This function is meant to produce quick results for all available countries and store them as pickles.
+    This allows to prevent a full calculation when results are accessed through the 'Simple' mode.
+    It is to be run every time substantial changes are made to 'carculator'."""
 
     countries = load_yaml_file("data/countries.yaml")
 
@@ -393,7 +396,10 @@ def direct_results():
         dic_uuids[job_id] = country
 
         # Add task to db
-        task = Task(id=job_id, progress=0,)
+        task = Task(
+            id=job_id,
+            progress=0,
+        )
         db.session.add(task)
         db.session.commit()
 
@@ -411,13 +417,8 @@ def direct_results():
             ("Background",): {
                 "country": country,
                 "energy storage": {
-                    "electric": {
-                        "Medium": {
-                            "type": "NMC-622",
-                            "origin": "CN"
-                        }
-                    }
-                }
+                    "electric": {"Medium": {"type": "NMC-622", "origin": "CN"}}
+                },
             },
             ("Foreground",): {
                 ("Glider", "all", "all", "average passengers", "none"): {
@@ -436,7 +437,9 @@ def direct_results():
         data = json.loads(data)
         data.append(job_id)
 
-        with open(f"data/precalculated results/quick_results_{country}.pickle", "wb") as f:
+        with open(
+            f"data/precalculated results/quick_results_{country}.pickle", "wb"
+        ) as f:
             pickle.dump(data, f)
 
         # generate inventories
@@ -466,7 +469,9 @@ def direct_results():
 
 @app.route("/display_quick_results/<country>")
 def display_quick_results(country):
-    with open(f"data/precalculated results/quick_results_{country.upper()}.pickle", "rb") as pickled_data:
+    with open(
+        f"data/precalculated results/quick_results_{country.upper()}.pickle", "rb"
+    ) as pickled_data:
         data = pickle.load(pickled_data)
 
     job_id = data[-1]
@@ -486,7 +491,7 @@ def display_quick_results(country):
 
 @app.route("/search_params/<param_item>/<powertrain_filter>/<size_filter>")
 def search_params(param_item, powertrain_filter, size_filter):
-    """ Return a list of params if param contain `search_item`"""
+    """Return a list of params if param contain `search_item`"""
     lang = session.get("language", "en")
     parameters = [
         param
@@ -596,18 +601,16 @@ def get_param_value(name, pt, s, y):
     pt = pt.split(",")
     s = s.split(",")
 
-    val = (
-        arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0)
-        .values
-        .tolist()
-    )
+    val = arr.sel(
+        powertrain=pt, size=s, year=y, parameter=name, value=0
+    ).values.tolist()
 
     return jsonify(val)
 
 
 @app.route("/get_driving_cycle/<driving_cycle>")
 def get_driving_cycle(driving_cycle):
-    """ Return a driving cycle"""
+    """Return a driving cycle"""
     dc = app.calc.get_dc(driving_cycle)
     dc[np.isnan(dc)] = 0
     # truncate the array after the last non-zero value
@@ -634,7 +637,7 @@ def send_email():
 
 @app.route("/get_electricity_mix/<iso_code>/<years>/<lifetime>")
 def get_electricity_mix(iso_code, years, lifetime):
-    """ Return the electricity mix for the iso_code country code and the year(s) given """
+    """Return the electricity mix for the iso_code country code and the year(s) given"""
     years = [int(y) for y in years.split(",")]
     lifetime = math.ceil(int(float(lifetime)))
 
@@ -662,11 +665,12 @@ def get_electricity_mix(iso_code, years, lifetime):
                 "Gas CHP",
                 "Solar, thermal",
                 "Wind, offshore",
-                "Lignite"
+                "Lignite",
             ],
         )
         .interp(
-            year=np.arange(year, year + lifetime), kwargs={"fill_value": "extrapolate"},
+            year=np.arange(year, year + lifetime),
+            kwargs={"fill_value": "extrapolate"},
         )
         .mean(axis=0)
         .values
@@ -694,7 +698,7 @@ def get_electricity_mix(iso_code, years, lifetime):
                 "Gas CHP",
                 "Solar, thermal",
                 "Wind, offshore",
-                "Lignite"
+                "Lignite",
             ],
         )
         .interp(year=np.arange(year, 2051), kwargs={"fill_value": "extrapolate"})
@@ -711,7 +715,7 @@ def get_electricity_mix(iso_code, years, lifetime):
 
 @app.route("/get_results/", methods=["POST"])
 def get_results():
-    """ Receive LCA calculation request and dispatch the job to the Redis server """
+    """Receive LCA calculation request and dispatch the job to the Redis server"""
 
     job_id = str(uuid.uuid1())
 
@@ -721,7 +725,10 @@ def get_results():
     print(d)
 
     # Add task to db
-    task = Task(id=job_id, progress=0,)
+    task = Task(
+        id=job_id,
+        progress=0,
+    )
     db.session.add(task)
     db.session.commit()
 
@@ -750,7 +757,7 @@ def get_results():
 
 @app.route("/fetch_results/<job_key>", methods=["GET"])
 def fetch_results(job_key):
-    """ Return raw results is the job is completed. """
+    """Return raw results is the job is completed."""
 
     try:
         job = Job.fetch(job_key, connection=app.redis)
@@ -766,7 +773,7 @@ def fetch_results(job_key):
 
 @app.route("/display_result/<job_key>", methods=["GET"])
 def display_result(job_key):
-    """ If the job is finished, render `result.html` along with the results """
+    """If the job is finished, render `result.html` along with the results"""
     if not current_user.is_authenticated:
         session["url"] = "/display_result/" + job_key
 
@@ -817,7 +824,7 @@ def display_result(job_key):
 
 @app.route("/check_status/<job_key>")
 def get_job_status(job_key):
-    """ Check the status of the job for the given `job_id` """
+    """Check the status of the job for the given `job_id`"""
     try:
         job = Job.fetch(job_key, connection=app.redis)
     except NoSuchJobError:
@@ -985,9 +992,13 @@ def get_fuel_blend(country, years):
     nd = lambda x: x if x.ndim else x[None]
 
     if country in app.calc.bs.bioethanol.country.values:
-        share_bioethanol = nd(app.calc.bs.get_share_biofuel("bioethanol", country, years))
+        share_bioethanol = nd(
+            app.calc.bs.get_share_biofuel("bioethanol", country, years)
+        )
         share_biodiesel = nd(app.calc.bs.get_share_biofuel("biodiesel", country, years))
-        share_biomethane = nd(app.calc.bs.get_share_biofuel("biomethane", country, years))
+        share_biomethane = nd(
+            app.calc.bs.get_share_biofuel("biomethane", country, years)
+        )
     else:
         share_bioethanol = nd(np.zeros_like(years))
         share_biodiesel = nd(np.zeros_like(years))
