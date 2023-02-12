@@ -547,15 +547,30 @@ class Calculation:
         for size, val in batteries.items():
             if "battery cell energy density" in val:
                 self.cm.array.loc[
-                    dict(size=size, parameter="battery cell energy density", value=0)
+                    dict(
+                        size=size,
+                        parameter="battery cell energy density",
+                        value=0,
+                        powertrain="BEV"
+                    )
                 ] = val["battery cell energy density"]
             if "energy battery mass" in val:
                 self.cm.array.loc[
-                    dict(size=size, parameter="energy battery mass", value=0)
+                    dict(
+                        size=size,
+                        parameter="energy battery mass",
+                        value=0,
+                        powertrain="BEV"
+                    )
                 ] = val["energy battery mass"]
             if "battery lifetime kilometers" in val:
                 self.cm.array.loc[
-                    dict(size=size, parameter="battery lifetime kilometers", value=0)
+                    dict(
+                        size=size,
+                        parameter="battery lifetime kilometers",
+                        value=0,
+                        powertrain="BEV"
+                    )
                 ] = val["battery lifetime kilometers"]
 
         self.cm.set_all()
@@ -598,7 +613,7 @@ class Calculation:
 
         back_config = None
         if "custom electricity mix" in d[("Background",)]:
-            back_config = {"custom electricity mix" :d[("Background",)]["custom electricity mix"]}
+            back_config = {"custom electricity mix": d[("Background",)]["custom electricity mix"]}
 
         print(fu_unit)
         print(back_config)
