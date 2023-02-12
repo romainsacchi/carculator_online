@@ -60,7 +60,6 @@ else:
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
 app.config['LANGUAGES'] = {
                             'en': 'English',
                             'it': 'Italian',
