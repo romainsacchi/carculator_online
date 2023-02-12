@@ -598,7 +598,7 @@ class Calculation:
 
         back_config = None
         if "custom electricity mix" in d[("Background",)]:
-            back_config = d[("Background",)]["custom electricity mix"]
+            back_config = {"custom electricity mix" :d[("Background",)]["custom electricity mix"]}
 
         print(fu_unit)
         print(back_config)
@@ -619,7 +619,6 @@ class Calculation:
         )
 
         lifetime = int(self.cm.array.sel(parameter="lifetime kilometers").mean().values)
-        impact_cat = results.coords["impact"].values.tolist()
         impact_category = results.coords["impact_category"].values.tolist()
 
         # Update task progress to db
