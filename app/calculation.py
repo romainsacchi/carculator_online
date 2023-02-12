@@ -418,7 +418,9 @@ class Calculation:
                             list_vehicles,
                             res_benchmark.sel(impact_category=i)
                             .sum(dim="impact")
-                            .values.reshape(len(list_vehicles)),
+                            .values
+                            .reshape(len(list_vehicles))
+                            .tolist(),
                         ),
                     )
                 )
@@ -440,6 +442,7 @@ class Calculation:
                 )
                 .sum(dim="impact")
                 .values
+                .tolist()
             )
 
         return dict_scatter
@@ -476,7 +479,7 @@ class Calculation:
                                         size=s,
                                         powertrain=p,
                                         year=y,
-                                    ).values
+                                    ).values.tolist()
                                 )
                             ]
                         )
