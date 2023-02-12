@@ -1,6 +1,5 @@
 import os
 import redis
-import threading
 from rq import Worker, Queue, Connection
 
 listen = ['default']

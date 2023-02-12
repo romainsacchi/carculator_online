@@ -68,7 +68,7 @@ app.config['LANGUAGES'] = {
                         }
 
 # Initiate database
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, engine_options={"pool_pre_ping": True})
 
 migrate = Migrate(app, db, directory=MIGRATION_DIR)
 
