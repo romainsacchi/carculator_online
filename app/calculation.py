@@ -613,9 +613,6 @@ class Calculation:
         if "custom electricity mix" in d[("Background",)]:
             back_config = {"custom electricity mix": d[("Background",)]["custom electricity mix"]}
 
-        print(fu_unit)
-        print(back_config)
-
         self.ic = InventoryCar(
             self.cm,
             functional_unit=fu_unit,
@@ -642,16 +639,12 @@ class Calculation:
             arr_benchmark, results, list_vehicles
         )
 
-        print(arr_benchmark)
-
         # add environmental impacts to scatter plot
         dict_scatter = self.add_environmental_results_for_scatter(
             dict_scatter=dict_scatter,
             results=results,
             list_vehicles=list_vehicles,
         )
-
-        print(dict_scatter)
 
         a_wo_impact = [
             impact_category,
@@ -769,6 +762,15 @@ class Calculation:
         config_array = self.remove_micro_petrols_from_list(config_array)
 
         normalized_results = self.remove_micro_petrols_from_list(normalized_results)
+
+        print("list_res")
+        print(list_res)
+        print("arr_benchmark")
+        print(arr_benchmark)
+        print("dict_scatter")
+        print(dict_scatter)
+        print("list_res_acc")
+        print(list_res_acc)
 
         return (
             json.dumps(
