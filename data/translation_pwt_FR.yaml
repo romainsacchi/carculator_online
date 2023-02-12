@@ -1,0 +1,9 @@
+Essence: ICEV-p
+Diesel: ICEV-d
+Gaz comprimé: ICEV-g
+Electrique: BEV
+Pile à combustible: FCEV
+Hybride-essence: HEV-p
+Hybride-diesel: HEV-d
+Hybride-essence rechargeable: PHEV-p
+Hybride-diesel rechargeable: PHEV-d

@@ -9,28 +9,54 @@ import numpy as np
 from carculator import (
     CarInputParameters,
     fill_xarray_from_input_parameters,
-    modify_xarray_from_custom_parameters,
-    get_standard_driving_cycle,
+    get_standard_driving_cycle_and_gradient,
     CarModel,
-    InventoryCalculation,
-    BackgroundSystemModel,
-    ExportInventory,
+    InventoryCar,
 )
+
+from carculator_utils import BackgroundSystemModel, ExportInventory
 
 from . import app
 from app import db
 from app.models import Task
+import yaml
+from pathlib import Path
+
+MAP_FUEL_BLEND = {
+    "ICEV-p": "petrol",
+    "ICEV-d": "diesel",
+    "ICEV-g": "cng",
+    "PHEV-p": "petrol",
+    "PHEV-d": "diesel",
+    "HEV-p": "petrol",
+    "HEV-d": "diesel",
+    "FCEV": "hydrogen",
+}
+
+NORMALIZATION_FACTORS = Path("./data/normalization factors.yaml")
+
+
+def np_encoder(object):
+    if isinstance(object, np.generic):
+        return object.item()
+
+
+def load_yaml_file(filepath):
+    """
+    Load a yaml file
+    :param filepath: path to the yaml file
+    :return: dictionary
+    """
+    with open(filepath, "r") as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
 
 
 class Calculation:
     def __init__(self):
 
+        self.scope = None
         bs = BackgroundSystemModel()
-        self.electricity_mix = bs.electricity_mix
-        self.biogasoline = bs.biogasoline
-        self.biodiesel = bs.biodiesel
-        self.biomethane = bs.biomethane
-        self.region_map = bs.region_map
+        self.bs = bs
         self.cip = CarInputParameters()
         self.cip.static()
         self.export = None
@@ -39,96 +65,17 @@ class Calculation:
             v["name"]: v["category"] for _, v in self.cip.metadata.items()
         }
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip)
-        self.d_pt_en = {
-            "Petrol": "ICEV-p",
-            "Diesel": "ICEV-d",
-            "CNG": "ICEV-g",
-            "Electric": "BEV",
-            "Fuel cell": "FCEV",
-            "Hybrid-petrol": "HEV-p",
-            "Hybrid-diesel": "HEV-d",
-            "(Plugin) Hybrid-petrol": "PHEV-p",
-            "(Plugin) Hybrid-diesel": "PHEV-d",
-        }
-        self.d_pt_it = {
-            "Benzina": "ICEV-p",
-            "Diesel": "ICEV-d",
-            "Gas compresso": "ICEV-g",
-            "Elettrica": "BEV",
-            "Cella a combustibile": "FCEV",
-            "Ibrido benzina": "HEV-p",
-            "Ibrido diesel": "HEV-d",
-            "Ibrido-benzina (Plugin)": "PHEV-p",
-            "Ibrido-diesel (Plugin)": "PHEV-d",
-        }
-        self.d_pt_de = {
-            "Benzin": "ICEV-p",
-            "Diesel": "ICEV-d",
-            "Komprimiertes Gas": "ICEV-g",
-            "Elektrisch": "BEV",
-            "Brennstoffzelle": "FCEV",
-            "Hybrid-Benzin": "HEV-p",
-            "Hybrid-Diesel": "HEV-d",
-            "(Plugin) Hybrid-Benzin": "PHEV-p",
-            "(Plugin) Hybrid-Diesel": "PHEV-d",
-        }
-        self.d_pt_fr = {
-            "Essence": "ICEV-p",
-            "Diesel": "ICEV-d",
-            "Gaz comprimé": "ICEV-g",
-            "Electrique": "BEV",
-            "Pile à combustible": "FCEV",
-            "Hybride-essence": "HEV-p",
-            "Hybride-diesel": "HEV-d",
-            "Hybride-essence rechargeable": "PHEV-p",
-            "Hybride-diesel rechargeable": "PHEV-d",
-        }
+        self.d_pt_en = load_yaml_file("./data/translation_pwt_EN.yaml")
+        self.d_pt_it = load_yaml_file("./data/translation_pwt_IT.yaml")
+        self.d_pt_de = load_yaml_file("./data/translation_pwt_DE.yaml")
+        self.d_pt_fr = load_yaml_file("./data/translation_pwt_FR.yaml")
         self.d_pt_all = {**self.d_pt_en, **self.d_pt_fr, **self.d_pt_it, **self.d_pt_de}
 
-        self.d_size_en = {
-            "Micro": "Micro",
-            "Minicompact": "Mini",
-            "Subcompact": "Small",
-            "Compact": "Lower medium",
-            "Mid-size": "Medium",
-            "SUV (Mid-size)": "Medium SUV",
-            "Large": "Large",
-            "SUV (Large)": "Large SUV",
-            "Van": "Van",
-        }
-        self.d_size_fr = {
-            "Micro": "Micro",
-            "Mini-citadine": "Mini",
-            "Citadine": "Small",
-            "Berline compacte": "Lower medium",
-            "Berline familiale": "Medium",
-            "Grande routière": "Large",
-            "SUV (compact)": "Medium SUV",
-            "SUV (grand)": "Large SUV",
-            "Van": "Van",
-        }
-        self.d_size_it = {
-            "Micro": "Micro",
-            "Mini citycar": "Mini",
-            "Citycar": "Small",
-            "Berlina compatta": "Lower medium",
-            "Berlina medio-grande": "Medium",
-            "Berlina tre volumi": "Large",
-            "SUV (compatto)": "Medium SUV",
-            "SUV (grande)": "Large SUV",
-            "Van": "Van",
-        }
-        self.d_size_de = {
-            "Mikroauto": "Micro",
-            "Kleinstwagen": "Mini",
-            "Kleinwagen": "Small",
-            "Kompaktklasse": "Lower medium",
-            "Mittelklasse": "Medium",
-            "Oberklasse": "Large",
-            "Geländewagen(groß)": "Large SUV",
-            "Geländewagen(kompakt)": "Medium SUV",
-            "Van": "Van",
-        }
+        self.d_size_en = load_yaml_file("./data/translation_size_EN.yaml")
+        self.d_size_fr = load_yaml_file("./data/translation_size_FR.yaml")
+        self.d_size_it = load_yaml_file("./data/translation_size_IT.yaml")
+        self.d_size_de = load_yaml_file("./data/translation_size_DE.yaml")
+
         self.d_size_all = {
             **self.d_size_en,
             **self.d_size_fr,
@@ -147,6 +94,7 @@ class Calculation:
         self.d_rev_size_de = {v: k for k, v, in self.d_size_de.items()}
 
         self.excel = ""
+        self.cm = None
 
     def load_map_file(self, lang):
         with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
@@ -183,9 +131,13 @@ class Calculation:
         return self.arr.interp(year=years, kwargs={"fill_value": "extrapolate"})
 
     def get_dc(self, dc):
-        return get_standard_driving_cycle(dc)
+        return get_standard_driving_cycle_and_gradient(
+            name=dc,
+            vehicle_type="car",
+            vehicle_sizes=["Small"]
+        )[0]
 
-    def create_config_array(self, dict_params, array, mix):
+    def create_config_array(self, dict_params):
 
         arr = []
         year = [int(y) for y in dict_params[("Functional unit",)]["year"]]
@@ -204,11 +156,13 @@ class Calculation:
             ("Driving", "all", "all", "kilometers per year", "none")
         ][(year[0], "loc")]
 
-        for powertrain in array.coords["powertrain"].values:
-            for size in array.coords["size"].values:
-                for iy, year in enumerate(array.coords["year"].values.astype(int)):
+        for powertrain in self.cm.array.coords["powertrain"].values:
+            for size in self.cm.array.coords["size"].values:
+                for iy, year in enumerate(
+                        self.cm.array.coords["year"].values.astype(int)
+                ):
 
-                    electricity_mix = mix[iy].tolist()
+                    electricity_mix = self.ic.mix[iy].tolist()
 
                     params = [
                         powertrain,
@@ -223,7 +177,7 @@ class Calculation:
                         electricity_mix,
                     ]
                     other_params = (
-                        array.sel(
+                        self.cm.array.sel(
                             powertrain=powertrain,
                             size=size,
                             year=year,
@@ -235,7 +189,7 @@ class Calculation:
                                 "electric power",
                                 "range",
                                 "engine efficiency",
-                                "drivetrain efficiency",
+                                "transmission efficiency",
                                 "TtW efficiency",
                                 "battery discharge efficiency",
                                 "energy battery mass",
@@ -249,271 +203,39 @@ class Calculation:
                     )
                     params.extend(other_params)
 
-                    if powertrain in ("BEV"):
-                        battery_chem = dict_params[("Background",)]["energy storage"][
-                            "electric"
-                        ]["type"]
-                        battery_origin = dict_params[("Background",)]["energy storage"]["origin"]
-                        (
-                            primary_fuel_type,
-                            primary_fuel_share,
-                            secondary_fuel_type,
-                            secondary_fuel_share,
-                        ) = ["", "", "", ""]
+                    battery_chem = self.cm.energy_storage["electric"].get(
+                        (powertrain, size, year), ""
+                    )
+                    battery_origin = (
+                        self.cm.energy_storage["origin"]
+                        if powertrain in ("BEV",)
+                        else ""
+                    )
+
+                    params.extend([battery_chem, battery_origin])
+
+                    if MAP_FUEL_BLEND.get(powertrain) in self.cm.fuel_blend:
+                        primary_fuel_type = self.cm.fuel_blend[
+                            MAP_FUEL_BLEND[powertrain]].get("primary", {}).get("type", "")
+                        primary_fuel_share = self.cm.fuel_blend[
+                            MAP_FUEL_BLEND[powertrain]].get("primary", {}).get("share", np.zeros(iy).tolist())
+
+                        secondary_fuel_type = self.cm.fuel_blend[
+                            MAP_FUEL_BLEND[powertrain]].get("secondary", {}).get("type", "")
+                        secondary_fuel_share = self.cm.fuel_blend[
+                            MAP_FUEL_BLEND[powertrain]].get("secondary", {}).get("share", np.zeros(iy).tolist())
                     else:
-                        battery_chem, battery_origin = ["", ""]
-
-                    if powertrain in ("ICEV-p", "PHEV-p", "HEV-p"):
-                        if "fuel blend" in dict_params[("Background",)]:
-                            if "petrol" in dict_params[("Background",)]["fuel blend"]:
-                                primary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["petrol"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["petrol"]["primary fuel"]["share"][iy]
-                                secondary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["petrol"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["petrol"]["secondary fuel"]["share"][iy]
-                            else:
-                                if country in self.biogasoline.country.values:
-                                    share_biogasoline = np.squeeze(
-                                        np.clip(
-                                            self.biogasoline.sel(country=country)
-                                            .interp(
-                                                year=year,
-                                                kwargs={"fill_value": "extrapolate"},
-                                            )
-                                            .values,
-                                            0,
-                                            1,
-                                        )
-                                    ).tolist()
-                                else:
-                                    share_biogasoline = 0
-                                (
-                                    primary_fuel_type,
-                                    primary_fuel_share,
-                                    secondary_fuel_type,
-                                    secondary_fuel_share,
-                                ) = [
-                                    "petrol",
-                                    1 - share_biogasoline,
-                                    "bioethanol - wheat straw",
-                                    share_biogasoline,
-                                ]
-
-                        else:
-                            if country in self.biogasoline.country.values:
-                                share_biogasoline = np.squeeze(
-                                    np.clip(
-                                        self.biogasoline.sel(country=country)
-                                        .interp(
-                                            year=year,
-                                            kwargs={"fill_value": "extrapolate"},
-                                        )
-                                        .values,
-                                        0,
-                                        1,
-                                    )
-                                ).tolist()
-                            else:
-                                share_biogasoline = 0
-                            (
-                                primary_fuel_type,
-                                primary_fuel_share,
-                                secondary_fuel_type,
-                                secondary_fuel_share,
-                            ) = [
-                                "petrol",
-                                1 - share_biogasoline,
-                                "bioethanol - wheat straw",
-                                share_biogasoline,
-                            ]
-
-                    if powertrain in ("ICEV-d", "PHEV-d", "HEV-d"):
-                        if "fuel blend" in dict_params[("Background",)]:
-                            if "diesel" in dict_params[("Background",)]["fuel blend"]:
-                                primary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["diesel"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["diesel"]["primary fuel"]["share"][iy]
-                                secondary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["diesel"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["diesel"]["secondary fuel"]["share"][iy]
-                            else:
-                                if country in self.biodiesel.country.values:
-                                    share_biodiesel = np.squeeze(
-                                        np.clip(
-                                            self.biodiesel.sel(country=country)
-                                            .interp(
-                                                year=year,
-                                                kwargs={"fill_value": "extrapolate"},
-                                            )
-                                            .values,
-                                            0,
-                                            1,
-                                        )
-                                    ).tolist()
-                                else:
-                                    share_biodiesel = 0
-                                (
-                                    primary_fuel_type,
-                                    primary_fuel_share,
-                                    secondary_fuel_type,
-                                    secondary_fuel_share,
-                                ) = [
-                                    "diesel",
-                                    1 - share_biodiesel,
-                                    "biodiesel - cooking oil",
-                                    share_biodiesel,
-                                ]
-
-                        else:
-                            if country in self.biodiesel.country.values:
-                                share_biodiesel = np.squeeze(
-                                    np.clip(
-                                        self.biodiesel.sel(country=country)
-                                        .interp(
-                                            year=year,
-                                            kwargs={"fill_value": "extrapolate"},
-                                        )
-                                        .values,
-                                        0,
-                                        1,
-                                    )
-                                ).tolist()
-                            else:
-                                share_biodiesel = 0
-                            (
-                                primary_fuel_type,
-                                primary_fuel_share,
-                                secondary_fuel_type,
-                                secondary_fuel_share,
-                            ) = [
-                                "diesel",
-                                1 - share_biodiesel,
-                                "biodiesel - cooking oil",
-                                share_biodiesel,
-                            ]
-
-                    if powertrain in ("ICEV-g"):
-                        if "fuel blend" in dict_params[("Background",)]:
-                            if "cng" in dict_params[("Background",)]["fuel blend"]:
-                                primary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["cng"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["cng"]["primary fuel"]["share"][iy]
-                                secondary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["cng"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["cng"]["secondary fuel"]["share"][iy]
-                            else:
-                                if country in self.biomethane.country.values:
-                                    share_biomethane = np.squeeze(
-                                        np.clip(
-                                            self.biomethane.sel(country=country)
-                                            .interp(
-                                                year=year,
-                                                kwargs={"fill_value": "extrapolate"},
-                                            )
-                                            .values,
-                                            0,
-                                            1,
-                                        )
-                                    ).tolist()
-                                else:
-                                    share_biomethane = 0
-                                (
-                                    primary_fuel_type,
-                                    primary_fuel_share,
-                                    secondary_fuel_type,
-                                    secondary_fuel_share,
-                                ) = [
-                                    "cng",
-                                    1 - share_biomethane,
-                                    "biogas - sewage sludge",
-                                    share_biomethane,
-                                ]
-
-                        else:
-                            if country in self.biomethane.country.values:
-                                share_biomethane = np.squeeze(
-                                    np.clip(
-                                        self.biomethane.sel(country=country)
-                                        .interp(
-                                            year=year,
-                                            kwargs={"fill_value": "extrapolate"},
-                                        )
-                                        .values,
-                                        0,
-                                        1,
-                                    )
-                                ).tolist()
-                            else:
-                                share_biomethane = 0
-                            (
-                                primary_fuel_type,
-                                primary_fuel_share,
-                                secondary_fuel_type,
-                                secondary_fuel_share,
-                            ) = [
-                                "cng",
-                                1 - share_biomethane,
-                                "biogas - sewage sludge",
-                                share_biomethane,
-                            ]
-
-                    if powertrain in ("FCEV"):
-                        if "fuel blend" in dict_params[("Background",)]:
-                            if "hydrogen" in dict_params[("Background",)]["fuel blend"]:
-                                primary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["hydrogen"]["primary fuel"]["type"]
-                                primary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["hydrogen"]["primary fuel"]["share"][iy]
-                                secondary_fuel_type = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["hydrogen"]["secondary fuel"]["type"]
-                                secondary_fuel_share = dict_params[("Background",)][
-                                    "fuel blend"
-                                ]["hydrogen"]["secondary fuel"]["share"][iy]
-                            else:
-                                (
-                                    primary_fuel_type,
-                                    primary_fuel_share,
-                                    secondary_fuel_type,
-                                    secondary_fuel_share,
-                                ) = ["electrolysis", 1, "", ""]
-                        else:
-                            (
-                                primary_fuel_type,
-                                primary_fuel_share,
-                                secondary_fuel_type,
-                                secondary_fuel_share,
-                            ) = ["electrolysis", 1, "", ""]
+                        primary_fuel_type = ""
+                        primary_fuel_share = np.zeros(iy)
+                        secondary_fuel_type = ""
+                        secondary_fuel_share = np.zeros(iy)
 
                     params.extend(
                         [
-                            battery_chem,
-                            battery_origin,
                             primary_fuel_type,
-                            primary_fuel_share,
+                            primary_fuel_share.tolist(),
                             secondary_fuel_type,
-                            secondary_fuel_share,
+                            secondary_fuel_share.tolist(),
                         ]
                     )
 
@@ -521,28 +243,9 @@ class Calculation:
 
         return arr
 
-    def process_results(self, d, lang, job_id):
-        """ Calculate LCIA and store results in an array of arrays """
-
-        # Update task progress to db
-        with app.app_context():
-            task = Task.query.filter_by(id=job_id).first()
-            task.progress = 50
-            db.session.commit()
-
-        scope = {
-            "powertrain": d[("Functional unit",)]["powertrain"],
-            "size": d[("Functional unit",)]["size"],
-        }
-
-        self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip, scope=scope)
-        arr = self.interpolate_array(d[("Functional unit",)]["year"])
-        modify_xarray_from_custom_parameters(d[("Foreground",)], arr)
-
+    def remove_hybridization(self, arr):
         # remove hybridization for vehicles before 2030
-        pwt = list(
-            {"ICEV-param", "ICEV-d", "ICEV-g"}.intersection(set(scope["powertrain"]))
-        )
+        pwt = list({"ICEV-p", "ICEV-d", "ICEV-g"}.intersection(arr.powertrain.values))
         years_before_2030 = [y for y in arr["year"].values if y < 2030]
 
         if pwt and years_before_2030:
@@ -554,98 +257,87 @@ class Calculation:
                 )
             ] = 1
 
-        batt_type, batt_origin = ({}, "CN")
+        return arr
 
-        if "energy storage" in d[("Background",)]:
-            if "electric" in d[("Background",)]["energy storage"]:
-                en_stor = d[("Background",)]["energy storage"]["electric"]
-                for key, val in en_stor.items():
-                    for year in d[("Functional unit",)]["year"]:
-                        batt_type[("BEV", key, year)] = val["type"]
-                        batt_origin = val.get("origin", "CN")
+    def adjust_input_parameters(self, arr, d):
 
-        uf=None
-        if "electric utility factor" in d[("Background",)]:
-            uf = d[("Background",)]["electric utility factor"]
-            uf = {int(x): y for x, y in uf.items()}
+        # adjust input parameters
+        for key, val in d[("Foreground",)].items():
+            pwt = key[1]
+            if pwt == "all":
+                pwt = arr.powertrain.values
 
-        carmodel = CarModel(
-            arr,
-            cycle=d[("Driving cycle",)],
-            energy_storage=batt_type,
-            electric_utility_factor=uf,
-        )
+            size = key[2]
+            if size == "all":
+                size = arr.coords["size"].values
 
-        # adjust the electricity density of the battery cells
-        for param in d[("Foreground",)]:
-            if param[3] in ("battery cell energy density", "battery cell mass share"):
-                for year in d[("Foreground",)][param]:
-                    carmodel.array.loc[
-                        dict(parameter=param[3], year=year[0])
-                    ] = d[("Foreground",)][param][year]
+            param = key[3]
 
+            for year, year_val in val.items():
+                arr.loc[
+                    dict(
+                        powertrain=pwt,
+                        size=size,
+                        year=year[0],
+                        parameter=param,
+                        value=0,
+                    )
+                ] = year_val
 
-        carmodel.set_all()
+        return arr
 
-        powertrain = carmodel.array.powertrain.values
-        size = d[("Functional unit",)]["size"]
-        year = d[("Functional unit",)]["year"]
-        all_lists = [powertrain] + [size] + [year]
-        l = list(itertools.product(*all_lists))
-        l = [i[0] + " - " + i[1] + " - " + str(i[2]) for i in l]
+    def get_cumulative_ttw_energy(self, list_vehicles):
 
-        cumsum = (
-            carmodel.energy.sel(
-                powertrain=powertrain,
-                size=size,
-                year=year,
+        ttw = self.cm.energy.sel(
+                powertrain=self.scope["powertrain"],
+                size=self.scope["size"],
+                year=self.scope["year"],
                 value=0,
                 parameter=["motive energy", "auxiliary energy", "recuperated energy"],
-            )
+            ).sum(dim="parameter")
+
+        # remove trailing zeros
+        ttw = ttw.where(ttw != 0, drop=True)
+
+
+        cumsum = (
+            ttw
             .cumsum(dim="second")
-            .sum(dim="parameter")
             .transpose("powertrain", "size", "year", "second")
-            .values.reshape(len(l), -1)
-            .astype("float64")
         )
 
         # Format the data so that it can be consumed directly
         # by nvd3.js
+        list_vehicles = [f"{v[0]} - {v[1]} - {v[2]}" for v in list_vehicles]
         tank_to_wheel_energy = []
-        for i, vehicle in enumerate(l):
+        for i, vehicle in enumerate(list_vehicles):
+            pwt, size, year = vehicle.split(" - ")
             tank_to_wheel_energy.append(
                 {
                     "key": vehicle,
                     "values": list(
-                        map(lambda e: {"x": e[0], "y": e[1]}, enumerate(cumsum[i]))
-                    ),
+                        map(lambda e: {"x": e[0], "y": e[1]}, enumerate(
+                            cumsum.sel(
+                                powertrain=pwt,
+                                size=size,
+                                year=int(year),
+                            ).values
+                        )
+                    )
+                    )
                 }
             )
 
-        # Functional unit
-        fu_unit = d[("Functional unit",)]["fu"]["unit"]
-        fu_qty = float(d[("Functional unit",)]["fu"]["quantity"])
+        return tank_to_wheel_energy
 
-        if fu_unit == "vkm":
-            load_factor = 1
-        else:
-            load_factor = carmodel["average passengers"].mean().values
+    def calculate_costs(self, list_vehicles, load_factor, fu):
 
-        # Update task progress to db
-        with app.app_context():
-            task = Task.query.filter_by(id=job_id).first()
-            task.progress = 60
-            db.session.commit()
-
-        scope = {"powertrain": powertrain, "size": size, "year": year}
-        total_cost = (
-            carmodel.calculate_cost_impacts(scope=scope)
-            .transpose("powertrain", "size", "year", "value", "parameter")
-            .astype("float64")
+        total_cost = self.cm.calculate_cost_impacts().transpose(
+            "powertrain", "size", "year", "value", "parameter"
         )
 
         cost_benchmark = total_cost.sel(parameter="total", value=0).values.reshape(
-            len(l)
+            len(list_vehicles)
         )
 
         cost_types = [c for c in total_cost.parameter.values if c != "total"]
@@ -654,31 +346,28 @@ class Calculation:
             map(
                 lambda x: [
                     "cost",
-                    x[0].split(" - ")[0],
-                    x[0].split(" - ")[1],
-                    x[0].split(" - ")[2],
+                    x[0][0],
+                    x[0][1],
+                    x[0][2],
                     1 / x[1] if x[1] != 0 else 0,
                 ],
-                zip(l, cost_benchmark),
+                zip(list_vehicles, cost_benchmark),
             )
         )
 
-        l_scatter = [x.replace(" - ", ", ") for x in l]
+        formatted_list_vehicles = [f"{v[0]}, {v[1]}, {v[2]}" for v in list_vehicles]
 
         dict_scatter = {
-            x[0]: [x[1]] for x in zip(l_scatter, cost_benchmark / load_factor * fu_qty)
+            x[0]: [x[1]] for x in zip(formatted_list_vehicles, cost_benchmark / load_factor * fu)
         }
 
         detailed_cost = (
-            total_cost.sel(value=0, parameter=cost_types).values.reshape(
-                len(l), len(cost_types)
-            )
-            / load_factor
-            * fu_qty
+                total_cost.sel(value=0, parameter=cost_types).values.reshape(
+                    len(formatted_list_vehicles), len(cost_types)
+                )
+                / load_factor
+                * fu
         )
-
-        all_lists = [powertrain] + [size] + [year]
-        l_cost = list(itertools.product(*all_lists))
 
         list_res_costs = list(
             map(
@@ -694,208 +383,89 @@ class Calculation:
                     ]
                     for y, z in enumerate(x[1])
                 ],
-                zip(l_cost, detailed_cost),
+                zip(list_vehicles, detailed_cost),
             )
         )
 
         list_res_costs = list(itertools.chain.from_iterable(list_res_costs))
 
+        return arr_benchmark, list_res_costs, dict_scatter
 
-        if "energy storage" in d[("Background",)]:
-            if "electric" in d[("Background",)]["energy storage"]:
-                d[("Background",)]["energy storage"] = {
-                    "electric": {
-                        "type": list(batt_type.values())[0],
-                    },
-                    "origin": batt_origin
-                }
-            else:
-                d[("Background",)]["energy storage"] = {
-                    "electric": {
-                        "type": list(batt_type.values())[0],
-                    },
-                    "origin": batt_origin,
-                }
+    def generate_results_for_benchmark(self, array, results, list_vehicles):
 
-
-        self.ic = InventoryCalculation(
-            carmodel,
-            scope=d[("Functional unit",)]["fu"],
-            background_configuration=d[("Background",)],
-        )
-        # Update task progress to db
-        with app.app_context():
-            task = Task.query.filter_by(id=job_id).first()
-            task.progress = 70
-            db.session.commit()
-
-        results = (
-            self.ic.calculate_impacts()
-            .sel(value=0)
-            .transpose("impact_category", "size", "powertrain", "year", "impact")
-        ).astype("float64")
-
-        res_benchmark = (
-            self.ic.calculate_impacts()
-            .sel(value=0)
-            .transpose("impact_category", "powertrain", "size", "year", "impact")
-        ).astype("float64")
-
-        lifetime = int(
-            carmodel.array.sel(parameter="lifetime kilometers").mean().values
+        res_benchmark = results.transpose(
+            "impact_category", "powertrain", "size", "year", "impact"
         )
 
-        # Update task progress to db
-        with app.app_context():
-            task = Task.query.filter_by(id=job_id).first()
-            task.progress = 80
-            db.session.commit()
-
-        impact = results.coords["impact"].values.tolist()
-        impact_category = results.coords["impact_category"].values
-
-        arr_benchmark.extend(
-            list(
-                map(
-                    lambda x: [
-                        "climate change",
-                        x[0].split(" - ")[0],
-                        x[0].split(" - ")[1],
-                        x[0].split(" - ")[2],
-                        1 / x[1] if x[1] != 0 else 0,
-                    ],
-                    zip(
-                        l,
-                        res_benchmark.sel(impact_category="climate change")
-                        .sum(dim="impact")
-                        .values.reshape(len(l)),
-                    ),
+        for i in ["climate change", "fossil depletion"]:
+            array.extend(
+                list(
+                    map(
+                        lambda x: [
+                            i,
+                            x[0][0],
+                            x[0][1],
+                            x[0][2],
+                            1 / x[1]
+                            if x[1] != 0
+                            else 0 * 0.755
+                            if i == "fossil depletion"
+                            else 1,
+                        ],
+                        zip(
+                            list_vehicles,
+                            res_benchmark.sel(impact_category=i)
+                            .sum(dim="impact")
+                            .values.reshape(len(list_vehicles)),
+                        ),
+                    )
                 )
             )
-        )
 
-        arr_benchmark.extend(
-            list(
-                map(
-                    lambda x: [
-                        "fossil depletion",
-                        x[0].split(" - ")[0],
-                        x[0].split(" - ")[1],
-                        x[0].split(" - ")[2],
-                        1 / x[1] * 0.755 if x[1] != 0 else 0,  # 0.755 kg/L gasoline
-                    ],
-                    zip(
-                        l,
-                        res_benchmark.sel(impact_category="fossil depletion")
-                        .sum(dim="impact")
-                        .values.reshape(len(l)),
-                    ),
+        return array
+
+    def add_environmental_results_for_scatter(
+            self, list_vehicles, results, dict_scatter, load_factor, fu_qty
+    ):
+
+        for vehicle in list_vehicles:
+            dict_scatter[', '.join(vehicle)].append(
+                results.sel(
+                    powertrain=vehicle[0],
+                    size=vehicle[1],
+                    year=int(vehicle[2]),
+                    impact_category="climate change",
                 )
+                .sum(dim="impact")
+                .values
+                / load_factor
+                * fu_qty
             )
+
+        return dict_scatter
+
+    def generate_nomralized_results(self, results, load_factor, fu_qty):
+
+        normalization_factors = load_yaml_file(NORMALIZATION_FACTORS)
+        factors = np.fromiter(normalization_factors.values(), dtype=float)
+
+        nf_impact = (
+                results.sel(
+                    impact_category=list(normalization_factors.keys()),
+                    value=0,
+                ).sum(
+                    dim="impact"
+                )
+                / factors[:, None, None, None]
+                / load_factor
+                * fu_qty
         )
-
-        for x in zip(
-            l_scatter,
-            results.sel(impact_category="climate change")
-            .sum(dim="impact")
-            .values.reshape(len(l))
-            / load_factor
-            * fu_qty,
-        ):
-            existing_list = dict_scatter[x[0]]
-            existing_list.append(x[1])
-            dict_scatter[x[0]] = existing_list
-
-        a_wo_impact = [impact_category] + [size] + [powertrain] + [year]
-        l_impacts_wo_impact = list(itertools.product(*a_wo_impact))
-
-        list_res = list(
-            map(
-                lambda x: [
-                    [x[0][0], x[0][1], x[0][2], x[0][3], impact[y], z, np.sum(x[1])]
-                    for y, z in enumerate(x[1])
-                ],
-                zip(
-                    l_impacts_wo_impact,
-                    (
-                        results.values.reshape(len(l_impacts_wo_impact), len(impact))
-                        / load_factor
-                        * fu_qty
-                    ),
-                ),
-            )
-        )
-
-        list_res = list(itertools.chain.from_iterable(list_res))
-
-        list_res_acc = list(
-            map(
-                lambda x: [
-                    x[0][0],
-                    x[0][1],
-                    x[0][2],
-                    x[0][3],
-                    np.sum(x[1][4:-1]) * lifetime,
-                    np.sum(x[1][[0, 1, 2, 3, -1]]),
-                    lifetime,
-                ],
-                zip(
-                    l_impacts_wo_impact,
-                    (
-                        results.values.reshape(len(l_impacts_wo_impact), len(impact),)
-                        / load_factor
-                        * fu_qty
-                    ),
-                ),
-            )
-        )
-
-        # Update task progress to db
-        with app.app_context():
-            task = Task.query.filter_by(id=job_id).first()
-            task.progress = 90
-            db.session.commit()
-
-        self.ic = InventoryCalculation(
-            carmodel,
-            scope=d[("Functional unit",)]["fu"],
-            background_configuration=d[("Background",)],
-            method="ilcd",
-        )
-        results = self.ic.calculate_impacts().astype("float64")
-
-        nf = np.array(
-            [
-                1.18e4,
-                4.75e-4,
-                3.85e-5,
-                6.36e-2,
-                8.4e3,
-                8.4e3,
-                8.4e3,
-                8.4e3,
-                5.55e1,
-                7.34e-1,
-                2.83e1,
-                1.77e2,
-                4.22e3,
-                2.34e-2,
-                4.06e1,
-                7.18e-4,
-                1.18e4,
-                6.53e4,
-                1.4e6,
-            ]
-        )
-
-        nf_impact = (results / nf[:, None, None, None, None, None]).sum(dim="impact")
-        impact_category = nf_impact.coords["impact_category"].values
 
         list_normalized_results = []
-        for impact in impact_category:
-            for s in size:
-                for p in powertrain:
-                    for y in year:
+        for impact in nf_impact.coords["impact_category"].values:
+            for s in nf_impact.coords["size"].values:
+                for p in nf_impact.coords["powertrain"].values:
+                    for y in nf_impact.coords["year"].values:
                         list_normalized_results.append(
                             [
                                 impact,
@@ -910,57 +480,265 @@ class Calculation:
                                         year=y,
                                     ).values
                                 )
-                                / load_factor
-                                * fu_qty,
                             ]
                         )
 
+        return list_normalized_results
 
-        # Update task progress to db
+    def update_task_progress(self, progress, job_id):
         with app.app_context():
             task = Task.query.filter_by(id=job_id).first()
-            task.progress = 85
+            task.progress = progress
             db.session.commit()
 
-        # reformat A for export
-        self.ic.inputs = self.ic.get_dict_input()
-        # self.ic.bs = BackgroundSystemModel()
-        self.ic.country = self.ic.get_country_of_use()
-        self.ic.add_additional_activities()
-        self.ic.rev_inputs = self.ic.get_rev_dict_input()
-        self.ic.A = self.ic.get_A_matrix()
-
-        # add vehicles datasets
-        self.ic.add_additional_activities_for_export()
-
-        # Update dictionary
-        self.ic.rev_inputs = self.ic.get_rev_dict_input()
-
-        # resize A matrix
-        self.ic.A = self.ic.get_A_matrix()
-
-        # Create electricity and fuel market datasets
-        self.ic.create_electricity_market_for_fuel_prep()
-
-        # Create fuel markets
-        self.ic.fuel_blends = {}
-        self.ic.fuel_dictionary = self.ic.create_fuel_dictionary()
-        self.ic.define_fuel_blends()
-        self.ic.set_actual_range()
-
-        # Create electricity market dataset for battery production
-        self.ic.create_electricity_market_for_battery_production()
-        self.ic.set_inputs_in_A_matrix_for_export(self.ic.array.values)
-
-        self.export = ExportInventory(self.ic.A, self.ic.rev_inputs)
+    def process_results(self, d, lang, job_id):
+        """Calculate LCIA and store results in an array of arrays"""
 
         # Update task progress to db
-        with app.app_context():
-            task = Task.query.filter_by(id=job_id).first()
-            task.progress = 100
-            db.session.commit()
+        self.update_task_progress(50, job_id)
+
+        self.scope = {
+            "powertrain": d[("Functional unit",)]["powertrain"],
+            "size": d[("Functional unit",)]["size"],
+        }
+
+        self.dcts, self.arr = fill_xarray_from_input_parameters(
+            self.cip, scope=self.scope
+        )
+        arr = self.interpolate_array(d[("Functional unit",)]["year"])
+        self.scope.update({"year": arr.coords["year"].values})
+
+        arr = self.remove_hybridization(arr)
+
+        # adjust input parameters
+        arr = self.adjust_input_parameters(arr, d)
+
+        # battery manufacture origin
+        batteries = d[("Background",)].get("energy storage", {"electric": {}})[
+            "electric"
+        ]
+        batt_origin = "CN"
+        for size, val in batteries.items():
+            if "origin" in val:
+                batt_origin = val["origin"]
+                break
+
+        uf = None
+        if "electric utility factor" in d[("Background",)]:
+            uf = d[("Background",)]["electric utility factor"]
+            uf = {int(x): y for x, y in uf.items()}
+
+        # extract fuel blends from d[("Background",)]["fuel blend"]
+        # and pass it to the CarModel constructor
+        fuel_blends = d[("Background",)].get("fuel blend", {})
+
+        self.cm = CarModel(
+            arr,
+            cycle=d[("Driving cycle",)],
+            energy_storage={
+                "origin": batt_origin,
+            },
+            electric_utility_factor=uf,
+            country=d[("Background",)]["country"],
+            fuel_blend=fuel_blends,
+        )
+
+        # adjust the electricity density of the battery cells
+        for size, val in batteries.items():
+            if "battery cell energy density" in val:
+                self.cm.array.loc[
+                    dict(size=size, parameter="battery cell energy density", value=0)
+                ] = val["battery cell energy density"]
+            if "energy battery mass" in val:
+                self.cm.array.loc[
+                    dict(size=size, parameter="energy battery mass", value=0)
+                ] = val["energy battery mass"]
+            if "battery lifetime kilometers" in val:
+                self.cm.array.loc[
+                    dict(size=size, parameter="battery lifetime kilometers", value=0)
+                ] = val["battery lifetime kilometers"]
+
+        self.cm.set_all()
+
+        # set battery type
+        battery_types = {}
+        for size, val in batteries.items():
+            if "type" in val:
+                for y in self.scope["year"]:
+                    battery_types[("BEV", size, y)] = val["type"]
+
+        self.cm.energy_storage.update({"electric": battery_types})
+
+        list_vehicles = list(
+            itertools.product(
+                self.scope["powertrain"],
+                self.scope["size"],
+                [str(y) for y in self.scope["year"]]
+            )
+        )
+
+        # fetch cumulative ttw energy
+        tank_to_wheel_energy = self.get_cumulative_ttw_energy(list_vehicles)
+
+        # Functional unit
+        fu_unit = d[("Functional unit",)]["fu"]["unit"]
+        fu_qty = float(d[("Functional unit",)]["fu"]["quantity"])
+
+        if fu_unit == "vkm":
+            load_factor = 1
+        else:
+            load_factor = self.cm["average passengers"].mean().values
+
+        # Update task progress to db
+        self.update_task_progress(60, job_id)
+
+        arr_benchmark, list_res_costs, dict_scatter = self.calculate_costs(
+            fu=fu_qty, list_vehicles=list_vehicles, load_factor=load_factor
+        )
+
+        back_config = None
+        if "custom electricity mix" in d[("Background",)]:
+            back_config = d[("Background",)]["custom electricity mix"]
+
+        self.ic = InventoryCar(
+            self.cm,
+            functional_unit=fu_unit,
+            background_configuration=back_config,
+        )
+
+        # Update task progress to db
+        self.update_task_progress(70, job_id)
+
+        results = (
+            self.ic.calculate_impacts()
+            .sel(value=0)
+            .transpose("impact_category", "size", "powertrain", "year", "impact")
+        )
+
+        lifetime = int(self.cm.array.sel(parameter="lifetime kilometers").mean().values)
+        impact_cat = results.coords["impact"].values.tolist()
+        impact_category = results.coords["impact_category"].values.tolist()
+
+        # Update task progress to db
+        self.update_task_progress(80, job_id)
+
+        # add other benchmark numbers
+        arr_benchmark = self.generate_results_for_benchmark(
+            arr_benchmark, results, list_vehicles
+        )
+
+        # add environmental impacts to scatter plot
+        dict_scatter = self.add_environmental_results_for_scatter(
+            dict_scatter=dict_scatter,
+            results=results,
+            list_vehicles=list_vehicles,
+            fu_qty=fu_qty,
+            load_factor=load_factor,
+        )
+
+        a_wo_impact = [
+            impact_category,
+            self.scope["size"],
+            self.scope["powertrain"],
+            [str(y) for y in self.scope["year"]]
+        ]
+
+        l_impacts_wo_impact = list(itertools.product(*a_wo_impact))
+
+        list_res = []
+        for vehicle in l_impacts_wo_impact:
+            impact_cat, size, powertrain, year = vehicle
+            year = int(year)
+            for impact in results.impact.values:
+                list_res.append(
+                    [
+                        impact_cat,
+                        size,
+                        powertrain,
+                        year,
+                        impact,
+                        results.sel(
+                            impact_category=impact_cat,
+                            size=size,
+                            powertrain=powertrain,
+                            year=year,
+                            impact=impact,
+                        ).values / load_factor * fu_qty,
+                        results.sel(
+                            impact_category=impact_cat,
+                            size=size,
+                            powertrain=powertrain,
+                            year=year,
+                        ).sum().values / load_factor * fu_qty,
+                    ]
+                )
 
         list_res.extend(list_res_costs)
+
+        list_res_acc = []
+
+        for vehicle in l_impacts_wo_impact:
+            impact_cat, size, powertrain, year = vehicle
+            year = int(year)
+            fix_burden = results.sel(
+                impact_category=impact_cat,
+                size=size,
+                powertrain=powertrain,
+                year=year,
+                impact=[
+                    "powertrain",
+                    "energy storage",
+                    "glider",
+                    "EoL"
+                ]
+            ).sum(dim="impact").values * lifetime / load_factor * fu_qty
+            var_burden = results.sel(
+                impact_category=impact_cat,
+                size=size,
+                powertrain=powertrain,
+                year=year,
+                impact=[
+                    "energy chain",
+                    "direct - exhaust",
+                    "direct - non-exhaust",
+                    "maintenance",
+                    "road"
+                ]
+            ).sum(dim="impact").values / load_factor * fu_qty
+            list_res_acc.append(
+                [
+                    impact_cat,
+                    size,
+                    powertrain,
+                    year,
+                    fix_burden,
+                    var_burden,
+                    lifetime,
+                ]
+            )
+
+        # Update task progress to db
+        self.update_task_progress(80, job_id)
+
+        self.ic = InventoryCar(
+            self.cm,
+            functional_unit=fu_unit,
+            background_configuration=back_config,
+            method="ilcd",
+        )
+
+        results = self.ic.calculate_impacts()
+
+        # generate normalized results
+        normalized_results = self.generate_nomralized_results(
+            results, load_factor, fu_qty
+        )
+
+        # Update task progress to db
+        self.update_task_progress(85, job_id)
+
+        # Update task progress to db
+        self.update_task_progress(100, job_id)
 
         list_res = self.remove_micro_petrols_from_list(list_res)
         arr_benchmark = self.remove_micro_petrols_from_list(arr_benchmark)
@@ -970,12 +748,10 @@ class Calculation:
         dict_scatter = self.remove_micro_petrols_from_dicts(dict_scatter)
         list_res_acc = self.remove_micro_petrols_from_list(list_res_acc)
 
-        config_array = self.create_config_array(d, carmodel.array, self.ic.mix)
+        config_array = self.create_config_array(d)
         config_array = self.remove_micro_petrols_from_list(config_array)
 
-        list_normalized_results = self.remove_micro_petrols_from_list(
-            list_normalized_results
-        )
+        normalized_results = self.remove_micro_petrols_from_list(normalized_results)
 
         return (
             json.dumps(
@@ -987,13 +763,14 @@ class Calculation:
                     dict_scatter,
                     list_res_acc,
                     config_array,
-                    d[("Background",)]["country"],
-                    d[("Functional unit",)]["fu"]["quantity"],
-                    d[("Functional unit",)]["fu"]["unit"],
-                    list_normalized_results,
-                ]
+                    self.cm.country,
+                    float(fu_qty),
+                    fu_unit,
+                    normalized_results,
+                ],
+                default=np_encoder
             ),
-            self.export,
+            self.ic,
         )
 
     def remove_micro_petrols_from_list_of_dicts(self, list_of_dicts):
@@ -1055,14 +832,14 @@ class Calculation:
             k
             for k in dicts
             if "Micro" not in k
-            or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))
+               or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))
         ]
         dicts = {k: v for k, v in dicts.items() if k in list_keys_to_keep}
 
         return dicts
 
     def format_dictionary(self, raw_dict):
-        """ Format the dictionary sent by the user so that it can be understood by `carculator` """
+        """Format the dictionary sent by the user so that it can be understood by `carculator`"""
 
         d_sliders = {
             "mileage-slider": "kilometers per year",
@@ -1086,57 +863,6 @@ class Calculation:
             for k, v in raw_dict["background params"].items()
             if k not in ("energy storage", "efficiency")
         }
-
-        # Ensure that the electricity mix is present
-        if "custom electricity mix" not in new_dict[("Background",)]:
-            years = new_dict[("Functional unit",)]["year"]
-            country = new_dict[("Background",)]["country"]
-            try:
-                response = (
-                    self.electricity_mix.loc[
-                        dict(
-                            country=country,
-                            variable=[
-                                "Hydro",
-                                "Nuclear",
-                                "Gas",
-                                "Solar",
-                                "Wind",
-                                "Biomass",
-                                "Coal",
-                                "Oil",
-                                "Geothermal",
-                                "Waste",
-                            ],
-                        )
-                    ]
-                    .interp(year=years)
-                    .values
-                )
-            except KeyError:
-                response = (
-                    self.electricity_mix.loc[
-                        dict(
-                            country="RER",
-                            variable=[
-                                "Hydro",
-                                "Nuclear",
-                                "Gas",
-                                "Solar",
-                                "Wind",
-                                "Biomass",
-                                "Coal",
-                                "Oil",
-                                "Geothermal",
-                                "Waste",
-                            ],
-                        )
-                    ]
-                    .interp(year=years)
-                    .values
-                )
-
-            new_dict[("Background",)]["custom electricity mix"] = response
 
         # Ensure that the electricity mix split equals 1
         for el in new_dict[("Background",)]["custom electricity mix"]:
@@ -1190,7 +916,6 @@ class Calculation:
                     size = e
                     for p in energy_storage[e]:
                         if p not in ("type", "origin"):
-
                             cat = self.d_categories.get(name, "Calculated")
                             powertrain = "BEV"
                             val = energy_storage[e][p]

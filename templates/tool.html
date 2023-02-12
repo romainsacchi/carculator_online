@@ -1117,7 +1117,6 @@
 					error: function(xhr, status, error){console.log(error)}})
 				).done(function(json){
 					i18n.translator.add(json);
-					console.log("i18n loaded 1");
 					if (config["config"] != "false"){
 						isConfig= true;
 						var data = config;

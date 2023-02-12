@@ -817,8 +817,6 @@ function size_list_update(){
                 }
             };
 
-
-
             for (var pt = 0; pt < listItems.length; pt++){
                 // if electric vehicles, display the section
                 // about energy storage
@@ -839,7 +837,11 @@ function size_list_update(){
                 tableRef.deleteRow(2);
                 var rowCount = tableRef.rows.length;
             }
+            console.log("create fuel table")
             create_fuel_table();
+            // fetch fuel shares
+
+            getSelectedCountries();
 
             // Create electric utility share table
             var tableRef = document.getElementById('electric_utility_factor_table');
@@ -1241,6 +1243,7 @@ function getSelectedCountries() {
         selected.push(map.dataProvider.areas[i].id);
     }
   }
+
   // At least two countries are selected
   if (selected.length>1){
     var existing_selection = $("#country-selected")
@@ -1268,9 +1271,8 @@ function getSelectedCountries() {
        get_electricity_mix(selected.slice(0,1));
     return selected.slice(0,1)
   };
-  // If country is selected, get electricity mixes
-  // Get also biofuel shares
 
+  // Get also biofuel shares
   if (selected.length>0){
 
     get_electricity_mix(selected)
@@ -1279,8 +1281,6 @@ function getSelectedCountries() {
     for (var item = 0; item < listYears.length; item++){
         list_year.push(listYears[item].innerHTML);
     };
-
-
 
     if (isConfig == false){
 
@@ -1310,9 +1310,8 @@ function getSelectedCountries() {
 
                         // noUiSlider.update bugs if we update to 0
                         if (val == 0){val = .001};
-
-                        slider.noUiSlider.updateOptions({
-                            start: val
+                            slider.noUiSlider.updateOptions({
+                                start: val
                         });
                     }
                     }
@@ -1320,7 +1319,7 @@ function getSelectedCountries() {
             });
     }
 
-    };
+  };
 
   return selected;
 }
@@ -1415,7 +1414,7 @@ var slider_lifetime = document.getElementById('lifetime-slider');
   noUiSlider.create(slider_lifetime, {
      start: [200000],
     range: {
-        'min': [100000],
+        'min': [50000],
         'max': [400000]
     },
     step: 10000,
@@ -1783,8 +1782,8 @@ function collect_configuration(){
 
                 // Ensure that no two same fuels are selected
 
-                var primary_fuel_select = document.getElementById(fuel+" primary fuel");
-                var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
+                var primary_fuel_select = document.getElementById(fuel+" primary");
+                var secondary_fuel_select = document.getElementById(fuel+" secondary");
 
                 if (primary_fuel_select.value == secondary_fuel_select.value){
 
@@ -1815,16 +1814,16 @@ function collect_configuration(){
 
                 if (fuel in fuel_blend){
 
-                    fuel_blend[fuel]['primary fuel']['share'].push(value)
-                    fuel_blend[fuel]['secondary fuel']['share'].push(1-value)
+                    fuel_blend[fuel]['primary']['share'].push(value)
+                    fuel_blend[fuel]['secondary']['share'].push(1-value)
 
                 } else {
 
-                    fuel_blend[fuel] = {'primary fuel': {
+                    fuel_blend[fuel] = {'primary': {
                                             'type':primary_fuel_select.value,
                                             'share':[value]
                     },
-                                        'secondary fuel': {
+                                        'secondary': {
                                             'type':secondary_fuel_select.value,
                                             'share':[1-value]
                     }
@@ -1918,7 +1917,7 @@ function collect_configuration(){
                     "battery discharge efficiency":[],
                     "fuel cell stack efficiency":[],
                     "engine efficiency":[],
-                    "drivetrain efficiency":[],
+                    "transmission efficiency":[],
                     };
 
                 for (y=0;y<listYears.length;y++){
@@ -1946,9 +1945,9 @@ function collect_configuration(){
                     var val = parseFloat(slider.noUiSlider.get());
                     efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["engine efficiency"].push(val)
 
-                    var slider = $("[id='"+"drivetrain_eff_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
+                    var slider = $("[id='"+"transmission_eff_"+i18n(listPowertrains[pt].innerHTML)+"_"+i18n(listSizes[s].innerHTML)+"_"+listYears[y].innerHTML+"']")[0]
                     var val = parseFloat(slider.noUiSlider.get());
-                    efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["drivetrain efficiency"].push(val)
+                    efficiency[i18n(listPowertrains[pt].innerHTML)][i18n(listSizes[s].innerHTML)]["transmission efficiency"].push(val)
 
 
                 }
@@ -2605,7 +2604,8 @@ function update_efficiency_table(data){
         "battery discharge efficiency": "storage_eff",
         "fuel cell stack efficiency": "storage_eff",
         "engine efficiency": "engine_eff",
-        "drivetrain efficiency": "drivetrain_eff"
+        "transmission efficiency": "transmission_eff",
+        "powertrain efficiency": "powertrain_eff",
     }
 
     for (var pt in efficiency_data) {
@@ -2616,27 +2616,63 @@ function update_efficiency_table(data){
 
                 for (y=0;y<data["year"].length;y++){
 
-                    for (var param in efficiency_data[pt][size]){
+                    for (var param in map_params){
 
                         p = map_params[param]
 
-                        if (efficiency_data[pt][size][param][y] != 0){
+                        // check if param present in efficiency_data
+                        if (param in efficiency_data[pt][size]){
+                            if (efficiency_data[pt][size][param][y] != 0){
+                                if ($("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']").length > 0){
+                                        var slider = $("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
+                                        slider.noUiSlider.updateOptions({
+                                            start: efficiency_data[pt][size][param][y]
+                                        });
+                                    };
+                                }
 
-                            if ($("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']").length > 0){
-                            var slider = $("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']")[0]
-
-                            slider.noUiSlider.updateOptions({
-                                        start: efficiency_data[pt][size][param][y]
-                            });
-
-                        };
+                           };
                         }
+
+                        // update overal efficiency
+                        // it is a text box and we need to update its value
+
+                        if ($("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']").length > 0){
+                            var pwt_eff_txtbox = $("[id='"+p+"_"+pt+"_"+size+"_"+data["year"][y]+"']")
+                            var efficiency = 1;
+
+                            if ("battery discharge efficiency" in efficiency_data[pt][size]){
+                                // check that the value is different from 0
+                                if (efficiency_data[pt][size]["battery discharge efficiency"][y] != 0){
+                                    efficiency *= efficiency_data[pt][size]["battery discharge efficiency"][y]
+                                };
+                            };
+                            if ("fuel cell stack efficiency" in efficiency_data[pt][size]){
+                                // check that the value is different from 0
+                                if (efficiency_data[pt][size]["fuel cell stack efficiency"][y] != 0){
+                                    efficiency *= efficiency_data[pt][size]["fuel cell stack efficiency"][y]
+                                };
+                            };
+                            if ("engine efficiency" in efficiency_data[pt][size]){
+                                // check that the value is different from 0
+                                if (efficiency_data[pt][size]["engine efficiency"][y] != 0){
+                                    efficiency *= efficiency_data[pt][size]["engine efficiency"][y]
+                                };
+                            };
+                            if ("transmission efficiency" in efficiency_data[pt][size]){
+                                // check that the value is different from 0
+                                if (efficiency_data[pt][size]["transmission efficiency"][y] != 0){
+                                    efficiency *= efficiency_data[pt][size]["transmission efficiency"][y]
+                                };
+                            };
+                            pwt_eff_txtbox.text(parseInt(efficiency*100) + " %");
+                        };
                     };
                 };
             };
-        }
-    }
-};
+        };
+    };
+
 
 function prepare_data_for_efficiency(){
     var listPowertrains = document.querySelectorAll( '#powertrain_list > li' );
@@ -2652,7 +2688,7 @@ function prepare_data_for_efficiency(){
     for (var s = 0; s < listSizes.length; s++){arr_s.push(i18n(listSizes[s].innerHTML))};
     for (var pt = 0; pt < listPowertrains.length; pt++){arr_pt.push(i18n(listPowertrains[pt].innerHTML))};
 
-    var list_param = ["battery discharge efficiency", "fuel cell stack efficiency", "engine efficiency", "drivetrain efficiency"]
+    var list_param = ["battery discharge efficiency", "fuel cell stack efficiency", "engine efficiency", "transmission efficiency"]
 
     var data = $.when(
 
@@ -2838,6 +2874,7 @@ function update_electric_utility_sliders(data){
 function update_fuel_sliders(data){
     // Fuel pathways
     var fuel_blend = data['background params']['fuel blend']
+
     var energy_storage = data['background params']['energy storage']
     var listYears = document.querySelectorAll( '#years_list > li' );
 
@@ -2846,16 +2883,16 @@ function update_fuel_sliders(data){
         if (fuel_blend.hasOwnProperty(key)) {
 
             var fuel = key;
-            var primary_fuel = fuel_blend[key]['primary fuel']['type']
-            var primary_fuel_share = fuel_blend[key]['primary fuel']['share']
-            var secondary_fuel = fuel_blend[key]['secondary fuel']['type']
-            var secondary_fuel_share = fuel_blend[key]['secondary fuel']['share']
+            var primary_fuel = fuel_blend[key]['primary']['type']
+            var primary_fuel_share = fuel_blend[key]['primary']['share']
+            var secondary_fuel = fuel_blend[key]['secondary']['type']
+            var secondary_fuel_share = fuel_blend[key]['secondary']['share']
 
             for (y=0; y<listYears.length; y++){
                 var year = listYears[y].innerText;
                 var slider_div = $('#'+String(fuel+'_'+year))
 
-                if (slider_div.length){
+                if (slider_div.length > 0){
 
                     var slider = slider_div[0]
 
@@ -2863,15 +2900,14 @@ function update_fuel_sliders(data){
                     var val = parseInt(primary_fuel_share[y]*100)
                     if (val==0){val +=.001}
 
-
                     slider.noUiSlider.updateOptions({
                         start: val
                     });
 
                     // Change selected options
-                    var primary_fuel_select = document.getElementById(fuel+" primary fuel");
+                    var primary_fuel_select = document.getElementById(fuel+" primary");
                     primary_fuel_select.value = primary_fuel;
-                    var secondary_fuel_select = document.getElementById(fuel+" secondary fuel");
+                    var secondary_fuel_select = document.getElementById(fuel+" secondary");
                     secondary_fuel_select.value = secondary_fuel;
                 }
             }
@@ -2949,7 +2985,7 @@ function create_fuel_table() {
 
                     row_content += '</td><td align="left" style="color:white">'
 
-                    row_content += '<select id="' + fuel + ' primary fuel" style="color:grey">'
+                    row_content += '<select id="' + fuel + ' primary" style="color:grey">'
 
                     for (f=0; f < fuel_options[fuel].length; f++){
                         row_content += '<option value="' + fuel_options[fuel][f] + '">' + i18n(fuel_options[fuel][f]) + '</option>'
@@ -2958,7 +2994,7 @@ function create_fuel_table() {
                     row_content += '</select></td>'
                     row_content += '<td align="left" style="color:white">'+inner_table+'</td>'
                     row_content += '</td><td align="left" style="color:white">'
-                    row_content += '<select id="' + fuel + ' secondary fuel" style="color:grey">'
+                    row_content += '<select id="' + fuel + ' secondary" style="color:grey">'
 
                     for (f=1; f < fuel_options[fuel].length; f++){
                         row_content += '<option value="' + fuel_options[fuel][f] + '">' + i18n(fuel_options[fuel][f]) + '</option>'
@@ -3249,7 +3285,7 @@ function create_energy_storage_table() {
                         connect: true,
                         step: 10000,
                         range: {
-                            'min': 100000,
+                            'min': 50000,
                             'max': 500000
                         },
                         format: wNumb({
@@ -3260,9 +3296,7 @@ function create_energy_storage_table() {
                     });
 
                 slider.id = "_"+divs[i].id
-
             };
-
 
             if (divs[i].id.split("_")[0] == "type"){
 
@@ -3271,8 +3305,6 @@ function create_energy_storage_table() {
                                     + '<option value="NMC-111">Lithium nickel manganese cobalt oxide (NMC-111)</option>'
                                     + '<option value="NCA">Lithium nickel cobalt aluminum oxide (NCA)</option>'
                                     + '<option value="LFP">Lithium iron phosphate (LFP)</option></select>'
-
-
             }
 
             if (divs[i].id.split("_")[0] == "origin"){
@@ -3316,18 +3348,26 @@ function create_efficiency_table() {
 
                     if (!["BEV", "FCEV"].includes(i18n(listPowertrains[pt].innerText))){
 
+                        // do not allow car of size Micro
+                        if (size == "Micro"){
+                            console.log(size);
+                            continue;
+                        }
+
                         var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
                         '</td><td align="left" style="color:white"></td>'
                         + '<td align="left" style="color:white"><div id="engine_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="transmission_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
                         + '<td align="left" style="color:white"><div id="powertrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
 
                     }else{
 
+
+
                         var row_content = '<td align="left" style="color:white;">'+ listPowertrains[pt].innerText +', '+ size +', '+ year +
                         '</td><td align="left" style="color:white"><div id="storage_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
                         + '<td align="left" style="color:white"><div id="engine_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
-                        + '<td align="left" style="color:white"><div id="drivetrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
+                        + '<td align="left" style="color:white"><div id="transmission_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
                         + '<td align="left" style="color:white"><div id="powertrain_eff_'+i18n(listPowertrains[pt].innerText)+'_'+i18n(size)+'_'+year+'" style="width:200px;margin-top:45px;margin-bottom:10px;"></div></td>'
                     }
 
@@ -3348,7 +3388,6 @@ function create_efficiency_table() {
 
         for (var i=0; i<divs.length; i++){
             if (divs[i].id.split("_")[0]!="powertrain"){
-
 
                 var slider = noUiSlider.create(divs[i], {
                         start: 0.9,
@@ -3376,17 +3415,13 @@ function create_efficiency_table() {
                     };
 
                     var engine_eff = parseFloat($("[id='"+"engine_eff_"+id+"']").text())
-                    var drivetrain_eff = parseFloat($("[id='"+"drivetrain_eff_"+id+"']").text())
-
-                    var efficiency = storage_eff * engine_eff * drivetrain_eff;
-
+                    var transmission_eff = parseFloat($("[id='"+"transmission_eff_"+id+"']").text())
+                    var efficiency = storage_eff * engine_eff * transmission_eff;
                     var total_efficiency = $("[id='"+"powertrain_eff_"+id+"']")
                     total_efficiency.text(parseInt(efficiency*100) + " %");
                  });
 
             };
-
-
         };
     };
 };
@@ -3431,8 +3466,6 @@ holder.ondrop = function(e) {
 };
 
 function start(data){
-
-    console.log(data)
 
     async function firstFunction(){
         fill_in_from_config_file(data)

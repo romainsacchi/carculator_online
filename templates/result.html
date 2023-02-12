@@ -41,9 +41,6 @@
 	  <!-- Alternative to Georgia -->
 	  <link href="https://fonts.googleapis.com/css?family=Neuton:300&display=swap" rel="stylesheet">
 
-
-
-
 	<!-- NoUISlider -->
 	  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.css" rel="stylesheet">
 
@@ -179,7 +176,7 @@
 								<br>Sacchi R., Bauer C., Cox B., Mutel C.
 									<br>Renewable and Sustainable Energy Reviews. <a target='_blank' href="https://doi.org/10.1016/J.RSER.2022.112475"><u>Article (PDF)</u></a>.
 								<br>
-								<br><i>carculator online (1.2.3), carculator (1.7.2)</i>
+								<br><i>carculator online (1.3.0), carculator (1.8.0)</i>
 								</p>
 							</div>
                 		</div>
@@ -204,10 +201,11 @@
 							to the ") }} <u><b><a target='_blank' href="{{ url_for('tool_page', country=country) if country else url_for('tool_page') }}">{{ _("CONFIGURATION") }}</a></b></u>
 						{{ _("(login required, registration and use are completely free).") }} </p>
 
+						<div id="geo_specs"></div>
+
 						<table class="table-responsive" style="margin-bottom:15px;">
 
 							<tr>
-
 								<td colspan="2">
 									<table class="table table-hover" id="vehicles_specs">
 										<thead></thead>
@@ -591,7 +589,7 @@
 				var d_reliability = {
 					"agricultural land occupation": "moderate",
 					"climate change":"good",
-					"climate change, incl. biogenic CO2":"good",
+					"GWP100a, incl. bio CO2":"good",
 					"fossil depletion": "good",
 					"freshwater ecotoxicity": "poor",
 					"freshwater eutrophication": "moderate",
@@ -635,17 +633,12 @@
 							var o = new Option(i18n(impact_categories[ic]), impact_categories[ic]);
 							$(o).html(i18n(impact_categories[ic]));
 							$("#select_impact").append(o);
-
 						}
-
 					};
-
 
 					$("#table_impact_cat").append('</ul></li>')
 
 				}
-
-
 
 				$('#table_impact_cat li a').click(function (e) {
 					e.preventDefault();
@@ -708,8 +701,6 @@
 				generate_radar_chart(data[10])
             });
 
-
-
     $('#select_benchmark').on('change', function() {
 	  generate_benchmark(data[2], this.value);
 	});
@@ -733,6 +724,7 @@
 		}
 	  }
 	}
+
 
 
 

@@ -1,5 +1,5 @@
 wurst
-Flask_Babel
+Flask_Babel<3.0.0
 scipy
 xarray
 pandas
@@ -23,8 +23,10 @@ pycountry
 stats_arrays
 PyPrind
 redis
-carculator==1.7.3
-#-e git+https://github.com/romainsacchi/carculator#egg=carculator
+#carculator==1.8.0
+-e git+https://github.com/romainsacchi/carculator#egg=carculator
+-e git+https://github.com/romainsacchi/carculator_utils#egg=carculator_utils
 email-validator
 mysqlclient
 gunicorn
+pyyaml

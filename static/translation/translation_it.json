@@ -38,7 +38,7 @@
     "chart_title_cost": "Costo di proprietà nel ciclo di vita, Euro per veicolo-chilometro",
     "agricultural land occupation": "Occupazione di terreni agricoli",
     "climate change": "Cambiamenti climatici",
-    "climate change, incl. biogenic CO2": "Cambiamenti climatici, incl. la CO2 biogenica",
+    "GWP100a, incl. bio CO2": "Cambiamenti climatici, incl. la CO2 biogenica",
     "fossil depletion": "Esaurimento delle risorse energetiche fossili",
     "freshwater ecotoxicity": "Tossicità per gli ambienti acquatici non marini",
     "freshwater eutrophication": "Eutrofizzazione di ambienti acquatici non marini",
@@ -64,7 +64,7 @@
     "resource": "Assottigliamento delle risorse",
     "unit_agricultural land occupation": "Metro quadrato all'anno",
     "unit_climate change": "kg CO2-equivalente",
-    "unit_climate change, incl. biogenic CO2": "kg CO2-equivalente",
+    "unit_GWP100a, incl. bio CO2": "kg CO2-equivalente",
     "unit_fossil depletion": "kg olio-equivalente",
     "unit_freshwater ecotoxicity": "kg Diclorobenzene-equivalente",
     "unit_freshwater eutrophication": "kg Fosfato-equivalente",
@@ -393,6 +393,8 @@
     "range": "Autonomia - km",
     "battery lifetime": "Durata della batteria - km",
     "battery capacity": "Capacità della batteria - kWh",
-    "battery mass": "Massa della batteria - kg"
+    "battery mass": "Massa della batteria - kg",
+    "country": "Paese",
+    "functional_unit": "Unità funzionale"
   }
 }

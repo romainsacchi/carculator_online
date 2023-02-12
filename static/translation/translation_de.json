@@ -38,7 +38,7 @@
     "chart_title_cost": "Betriebskosten über den gesamten Lebenszyklus, Euro pro Fahrzeugkilometer",
     "agricultural land occupation":"Ackerlandnutzung",
     "climate change":"Klimawandel",
-    "climate change, incl. biogenic CO2":"Klimawandel, inkl. bio CO2",
+    "GWP100a, incl. bio CO2":"Klimawandel, inkl. bio CO2",
     "fossil depletion":"Erschöpfung fossiler Energieressourcen",
     "freshwater ecotoxicity":"Toxizität in Gewässern ausserhalb des Meeres",
     "freshwater eutrophication":"Eutrophierung von Gewässern ausserhalb des Meeres",
@@ -64,7 +64,7 @@
     "resource": "Erschöpfung der Ressourcen",
     "unit_agricultural land occupation": "Quadratmeter pro Jahr",
     "unit_climate change":"kg CO2-Äquivalent",
-    "unit_climate change, incl. biogenic CO2":"kg CO2-Äquivalent",
+    "unit_GWP100a, incl. bio CO2":"kg CO2-Äquivalent",
     "unit_fossil depletion": "kg Öl-Äquivalent",
     "unit_freshwater ecotoxicity": "kg Dichlorbenzol-Äquivalent",
     "unit_freshwater eutrophication": "kg Phosphat-Äquivalent",
@@ -393,6 +393,8 @@
     "range": "Reichweite - km",
     "battery lifetime": "Batterielebensdauer - km",
     "battery capacity": "Batteriekapazität - kWh",
-    "battery mass": "Batteriemasse - kg"
+    "battery mass": "Batteriemasse - kg",
+    "country": "Lande",
+    "functional_unit": "Funktionseinheit"
   }
 }

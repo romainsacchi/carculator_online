@@ -38,7 +38,7 @@
     "chart_title_cost": "Ownership cost over life cycle, Euro per vehicle-kilometer",
     "agricultural land occupation":"Occupation of arable land",
     "climate change":"Climate change",
-    "climate change, incl. biogenic CO2":"Climate change, incl. biogenic CO2",
+    "GWP100a, incl. bio CO2":"Climate change, incl. biogenic CO2",
     "fossil depletion":"Depletion of fossil energy resources",
     "freshwater ecotoxicity":"Toxicity of non-marine aquatic environments",
     "freshwater eutrophication":"Eutrophication of non-marine aquatic environments",
@@ -64,7 +64,7 @@
     "resource": "Resources depletion",
     "unit_agricultural land occupation": "Square meters per year",
     "unit_climate change":"kg CO2-equivalent",
-    "unit_climate change, incl. biogenic CO2":"kg CO2-equivalent",
+    "unit_GWP100a, incl. bio CO2":"kg CO2-equivalent",
     "unit_fossil depletion": "kg of oil-equivalent",
     "unit_freshwater ecotoxicity": "kg Dichlorobenzene-equivalent",
     "unit_freshwater eutrophication": "kg Phosphate-equivalent",
@@ -384,7 +384,9 @@
     "range": "Range autonomy - km",
     "battery lifetime": "Battery lifetime - km",
     "battery capacity": "Battery capacity - kWh",
-    "battery mass": "Battery mass - kg"
+    "battery mass": "Battery mass - kg",
+    "country": "Country",
+    "functional_unit": "Functional unit"
   }
 }
 

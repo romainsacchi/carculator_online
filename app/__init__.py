@@ -85,7 +85,6 @@ mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
 
 
-
 @babel.localeselector
 def get_locale():
     """

@@ -29,7 +29,7 @@ from app import app
 from app import db
 from app.forms import LoginForm, RegistrationForm
 from app.models import Task, User
-from .calculation import Calculation
+from .calculation import Calculation, load_yaml_file
 from .email_support import email_out
 
 
@@ -155,7 +155,7 @@ def new_car(country):
         _("Van"),
     ]
 
-    vehicles = [x + ", " + y for x in powertrains for y in sizes]
+    vehicles = [f"{x}, {y}" for x in powertrains for y in sizes]
 
     return render_template(
         "new_car.html",
@@ -196,128 +196,54 @@ def tool_page(country):
         config = {"config": "false"}
 
     else:
-        if country in app.calc.electricity_mix.country.values:
-            response = (
-                app.calc.electricity_mix.loc[
-                    dict(
-                        country=country,
-                        variable=[
-                            "Hydro",
-                            "Nuclear",
-                            "Gas",
-                            "Solar",
-                            "Wind",
-                            "Biomass",
-                            "Coal",
-                            "Oil",
-                            "Geothermal",
-                            "Waste",
-                            "Biogas CCS",
-                            "Biomass CCS",
-                            "Coal CCS",
-                            "Gas CCS",
-                            "Wood CCS",
-                            "Hydro, reservoir",
-                            "Gas CCGT",
-                            "Gas CHP",
-                            "Solar, thermal",
-                            "Wind, offshore",
-                            "Lignite"
-                        ],
-                    )
-                ]
-                .interp(
-                    year=np.arange(2020, 2036), kwargs={"fill_value": "extrapolate"}
+        # fetch current year
+        year = int(datetime.datetime.now().year)
+
+        response = (
+            app.calc.bs.electricity_mix.loc[
+                dict(
+                    country=country if country in app.calc.bs.electricity_mix.country.values else "RER",
+                    variable=[
+                        "Hydro",
+                        "Nuclear",
+                        "Gas",
+                        "Solar",
+                        "Wind",
+                        "Biomass",
+                        "Coal",
+                        "Oil",
+                        "Geothermal",
+                        "Waste",
+                        "Biogas CCS",
+                        "Biomass CCS",
+                        "Coal CCS",
+                        "Gas CCS",
+                        "Wood CCS",
+                        "Hydro, reservoir",
+                        "Gas CCGT",
+                        "Gas CHP",
+                        "Solar, thermal",
+                        "Wind, offshore",
+                        "Lignite"
+                    ],
                 )
-                .values
+            ]
+            .interp(
+                year=np.arange(year, year + 16), kwargs={"fill_value": "extrapolate"}
             )
-        else:
-            response = (
-                app.calc.electricity_mix.loc[
-                    dict(
-                        country="RER",
-                        variable=[
-                            "Hydro",
-                            "Nuclear",
-                            "Gas",
-                            "Solar",
-                            "Wind",
-                            "Biomass",
-                            "Coal",
-                            "Oil",
-                            "Geothermal",
-                            "Waste",
-                            "Biogas CCS",
-                            "Biomass CCS",
-                            "Coal CCS",
-                            "Gas CCS",
-                            "Wood CCS",
-                            "Hydro, reservoir",
-                            "Gas CCGT",
-                            "Gas CHP",
-                            "Solar, thermal",
-                            "Wind, offshore",
-                            "Lignite"
-                        ],
-                    )
-                ]
-                .interp(
-                    year=np.arange(2020, 2036), kwargs={"fill_value": "extrapolate"}
-                )
-                .values
-            )
+            .values
+        )
 
         response = np.round(
             np.true_divide(response.T, response.sum(axis=1)).T, 2
         ).tolist()
 
-        # Returns average share of biogasoline according to historical IEA stats
-        if country in app.calc.biogasoline.country.values:
-            share_biogasoline = np.squeeze(
-                np.clip(
-                    app.calc.biogasoline.sel(country=country, variable="value")
-                    .interp(year=[2020], kwargs={"fill_value": "extrapolate"})
-                    .values,
-                    0,
-                    1,
-                )
-            )
-            share_biogasoline = share_biogasoline.reshape(1)
-        else:
-            share_biogasoline = 0
-
-        # Returns average share of biodiesel according to historical IEA stats
-        if country in app.calc.biodiesel.country.values:
-            share_biodiesel = np.squeeze(
-                np.clip(
-                    app.calc.biodiesel.sel(country=country, variable="value")
-                    .interp(year=[2020], kwargs={"fill_value": "extrapolate"})
-                    .values,
-                    0,
-                    1,
-                )
-            )
-            share_biodiesel = share_biodiesel.reshape(1)
-        else:
-            share_biodiesel = 0
-
-        # Returns average share of biomethane according to historical IEA stats
-        if country in app.calc.biomethane.country.values:
-            share_biomethane = np.squeeze(
-                np.clip(
-                    app.calc.biomethane.sel(country=country, variable="value")
-                    .interp(year=[2020], kwargs={"fill_value": "extrapolate"})
-                    .values,
-                    0,
-                    1,
-                )
-            )
-            share_biomethane = share_biomethane.reshape(1)
-        else:
-            share_biomethane = np.array(0)
+        share_bioethanol = app.calc.bs.get_share_biofuel("bioethanol", country, year)
+        share_biodiesel = app.calc.bs.get_share_biofuel("biodiesel", country, year)
+        share_biomethane = app.calc.bs.get_share_biofuel("biomethane", country, year)
 
         config = {
-            "year": ["2020"],
+            "year": ["2023"],
             "type": ["ICEV-p", "ICEV-d", "ICEV-g", "BEV"],
             "size": ["Medium"],
             "driving_cycle": "WLTC",
@@ -332,33 +258,33 @@ def tool_page(country):
                 "country": country,
                 "fuel blend": {
                     "petrol": {
-                        "primary fuel": {
+                        "primary": {
                             "type": "petrol",
-                            "share": np.round((1.0 - share_biogasoline), 2).tolist(),
+                            "share": [np.round((1.0 - share_bioethanol), 2)]
                         },
-                        "secondary fuel": {
+                        "secondary": {
                             "type": "bioethanol - wheat straw",
-                            "share": np.round(share_biogasoline, 2).tolist(),
+                            "share": [np.round(share_bioethanol, 2)],
                         },
                     },
                     "diesel": {
-                        "primary fuel": {
+                        "primary": {
                             "type": "diesel",
-                            "share": np.round((1.0 - share_biodiesel), 2).tolist(),
+                            "share": [np.round((1.0 - share_biodiesel), 2)],
                         },
-                        "secondary fuel": {
+                        "secondary": {
                             "type": "biodiesel - cooking oil",
-                            "share": np.round(share_biodiesel, 2).tolist(),
+                            "share": [np.round(share_biodiesel, 2)],
                         },
                     },
                     "cng": {
-                        "primary fuel": {
+                        "primary": {
                             "type": "cng",
-                            "share": np.round((1.0 - share_biomethane), 2).tolist(),
+                            "share": [np.round((1.0 - share_biomethane), 2)],
                         },
-                        "secondary fuel": {
+                        "secondary": {
                             "type": "biogas - sewage sludge",
-                            "share": np.round(share_biomethane, 2).tolist(),
+                            "share": [np.round(share_biomethane, 2).tolist()],
                         },
                     },
                 },
@@ -368,7 +294,7 @@ def tool_page(country):
                             "type": "NMC-622",
                             "origin": "CN",
                             "energy battery mass": [400],
-                            "battery cell energy density": [0.2],
+                            "battery cell energy density": [0.22],
                             "battery lifetime kilometers": [200000],
                         }
                     }
@@ -377,25 +303,25 @@ def tool_page(country):
                     "ICEV-p": {
                         "Medium": {
                             "engine efficiency": [0.27],
-                            "drivetrain efficiency": [0.81],
+                            "transmission efficiency": [0.81],
                         }
                     },
                     "ICEV-d": {
                         "Medium": {
                             "engine efficiency": [0.3],
-                            "drivetrain efficiency": [0.81],
+                            "transmission efficiency": [0.81],
                         }
                     },
                     "ICEV-g": {
                         "Medium": {
                             "engine efficiency": [0.26],
-                            "drivetrain efficiency": [0.81],
+                            "transmission efficiency": [0.81],
                         }
                     },
                     "BEV": {
                         "Medium": {
                             "engine efficiency": [0.85],
-                            "drivetrain efficiency": [0.85],
+                            "transmission efficiency": [0.85],
                             "battery discharge efficiency": [0.88],
                         }
                     },
@@ -427,19 +353,8 @@ def tool_page(country):
         _("Van"),
     ]
     years = range(2000, 2051)
-    driving_cycles = [
-        "WLTC",
-        "WLTC 3.1",
-        "WLTC 3.2",
-        "WLTC 3.3",
-        "WLTC 3.4",
-        "CADC Urban",
-        "CADC Road",
-        "CADC Motorway",
-        "CADC Motorway 130",
-        "CADC",
-        "NEDC",
-    ]
+    driving_cycles = load_yaml_file("data/driving cycles.yaml")
+
     return render_template(
         "tool.html",
         powertrains=powertrains,
@@ -468,97 +383,7 @@ def direct_results():
         This allows to prevent a full calculation when results are accessed through the 'Simple' mode.
         It is to be run every time substantial changes are made to 'carculator'."""
 
-    countries = [
-        "AT",
-        "AU",
-        "BD",
-        "BE",
-        "BG",
-        "BR",
-        "CA",
-        "CH",
-        "CL",
-        "CN",
-        "CY",
-        "CZ",
-        "DE",
-        "DK",
-        "EE",
-        "ES",
-        "FI",
-        "FR",
-        "GB",
-        "GR",
-        "HR",
-        "HU",
-        "IE",
-        "IN",
-        "IT",
-        "IS",
-        "JP",
-        "LT",
-        "LU",
-        "LV",
-        "MT",
-        "PL",
-        "PT",
-        "RO",
-        "RU",
-        "SE",
-        "SI",
-        "SK",
-        "US",
-        "ZA",
-        "AO",
-        "BF",
-        "BI",
-        "BJ",
-        "BW",
-        "CD",
-        "CF",
-        "CG",
-        "CI",
-        "CM",
-        "DJ",
-        "DZ",
-        "EG",
-        "ER",
-        "ET",
-        "GA",
-        "GH",
-        "GM",
-        "GN",
-        "GQ",
-        "GW",
-        "KE",
-        "LR",
-        "LS",
-        "LY",
-        "MA",
-        "ML",
-        "MR",
-        "MW",
-        "MZ",
-        "NE",
-        "NG",
-        "NL",
-        "NM",
-        "RW",
-        "SD",
-        "SL",
-        "SN",
-        "SO",
-        "SS",
-        "SZ",
-        "TD",
-        "TG",
-        "TN",
-        "TZ",
-        "UG",
-        "ZM",
-        "ZW",
-        "NO",
-    ]
+    countries = load_yaml_file("data/countries.yaml")
 
     dic_uuids = {}
 
@@ -572,10 +397,13 @@ def direct_results():
         db.session.add(task)
         db.session.commit()
 
+        # fetch current year
+        year = int(datetime.datetime.now().year)
+
         params_dict = {
             ("Functional unit",): {
                 "powertrain": ["ICEV-p", "ICEV-d", "ICEV-g", "BEV"],
-                "year": [2020],
+                "year": [year],
                 "size": ["Medium"],
                 "fu": {"unit": "vkm", "quantity": 1},
             },
@@ -593,14 +421,14 @@ def direct_results():
             },
             ("Foreground",): {
                 ("Glider", "all", "all", "average passengers", "none"): {
-                    (2020, "loc"): 1.5
+                    (year, "loc"): 1.5
                 },
-                ("Glider", "all", "all", "cargo mass", "none"): {(2020, "loc"): 20.0},
+                ("Glider", "all", "all", "cargo mass", "none"): {(year, "loc"): 20.0},
                 ("Driving", "all", "all", "lifetime kilometers", "none"): {
-                    (2020, "loc"): 200000.0
+                    (year, "loc"): 200000.0
                 },
                 ("Driving", "all", "all", "kilometers per year", "none"): {
-                    (2020, "loc"): 12000.0
+                    (year, "loc"): 12000.0
                 },
             },
         }
@@ -608,19 +436,19 @@ def direct_results():
         data = json.loads(data)
         data.append(job_id)
 
-        with open(f"data/quick_results_{country}.pickle", "wb") as f:
+        with open(f"data/precalculated results/quick_results_{country}.pickle", "wb") as f:
             pickle.dump(data, f)
 
         # generate inventories
         for software in ["brightway2", "simapro"]:
             for ecoinvent_version in ["3.6", "3.7", "3.8"]:
                 if software == "brightway2" or (
-                    software == "simapro" and ecoinvent_version == "3.6"
+                    software == "simapro" and ecoinvent_version == "3.7"
                 ):
-                    data = i.write_lci_to_excel(
+                    data = i.export_lci(
                         ecoinvent_version=ecoinvent_version,
-                        software_compatibility=software,
-                        export_format="string",
+                        software=software,
+                        format="string",
                     )
 
                     with open(
@@ -629,47 +457,24 @@ def direct_results():
                     ) as f:
                         pickle.dump(data, f)
 
-    with open("data/quick_results_job_ids.pickle", "wb") as f:
+    with open("data/precalculated results/quick_results_job_ids.pickle", "wb") as f:
         pickle.dump(dic_uuids, f)
 
-    res = make_response(jsonify({"job id": job_id}), 200)
+    res = make_response(jsonify({"job id": 0}), 200)
     return res
 
 
 @app.route("/display_quick_results/<country>")
 def display_quick_results(country):
-    with open(f"data/quick_results_{country.upper()}.pickle", "rb") as pickled_data:
+    with open(f"data/precalculated results/quick_results_{country.upper()}.pickle", "rb") as pickled_data:
         data = pickle.load(pickled_data)
 
     job_id = data[-1]
     data = data[:-1]
 
     # retrieve impact categories
-    impact_cat = [
-        "climate change",
-        "climate change, incl. biogenic CO2",
-        "agricultural land occupation",
-        "fossil depletion",
-        "freshwater ecotoxicity",
-        "freshwater eutrophication",
-        "human toxicity",
-        "ionising radiation",
-        "marine ecotoxicity",
-        "marine eutrophication",
-        "metal depletion",
-        "natural land transformation",
-        "ozone depletion",
-        "particulate matter formation",
-        "photochemical oxidant formation",
-        "terrestrial acidification",
-        "terrestrial ecotoxicity",
-        "urban land occupation",
-        "water depletion",
-        "noise emissions",
-        "renewable primary energy",
-        "non-renewable primary energy",
-        "ownership cost",
-    ]
+    impact_cat = load_yaml_file("data/impact categories.yaml")
+
     return render_template(
         "result.html",
         data=json.dumps(data),
@@ -793,9 +598,10 @@ def get_param_value(name, pt, s, y):
 
     val = (
         arr.sel(powertrain=pt, size=s, year=y, parameter=name, value=0)
-        .values.round(2)
+        .values
         .tolist()
     )
+
     return jsonify(val)
 
 
@@ -803,7 +609,11 @@ def get_param_value(name, pt, s, y):
 def get_driving_cycle(driving_cycle):
     """ Return a driving cycle"""
     dc = app.calc.get_dc(driving_cycle)
-    return jsonify(dc.tolist())
+    dc[np.isnan(dc)] = 0
+    # truncate the array after the last non-zero value
+    dc = np.trim_zeros(dc, "b")
+
+    return jsonify(np.squeeze(dc).tolist())
 
 
 @app.route("/send_email", methods=["POST"])
@@ -829,7 +639,7 @@ def get_electricity_mix(iso_code, years, lifetime):
     lifetime = math.ceil(int(float(lifetime)))
 
     response = [
-        app.calc.electricity_mix.sel(
+        app.calc.bs.electricity_mix.sel(
             country=iso_code,
             variable=[
                 "Hydro",
@@ -861,7 +671,7 @@ def get_electricity_mix(iso_code, years, lifetime):
         .mean(axis=0)
         .values
         if y + lifetime <= 2050
-        else app.calc.electricity_mix.sel(
+        else app.calc.bs.electricity_mix.sel(
             country=iso_code,
             variable=[
                 "Hydro",
@@ -1075,7 +885,7 @@ def get_language():
 def get_list_uuids_countries():
     """Returns a dictionary with correspondence between uuids and countries
     for pre-calculated countries"""
-    filepath = r"data/quick_results_job_ids.pickle"
+    filepath = r"data/precalculated results/quick_results_job_ids.pickle"
 
     with open(filepath, "rb") as pickled_data:
         data = pickle.load(pickled_data)
@@ -1093,21 +903,19 @@ def get_inventory(compatibility, ecoinvent_version, job_key, software):
     d_uuids = get_list_uuids_countries()
 
     if job_key in d_uuids.keys():
-
         filepath = f"data/inventories/quick_inventory_{d_uuids[job_key]}_{software}_{ecoinvent_version}.pickle"
 
         with open(filepath, "rb") as pickled_data:
             data = pickle.load(pickled_data)
 
     else:
-
         job = Job.fetch(job_key, connection=app.redis)
-        export = job.result[1]
+        export = job.return_value()[1]
 
-        data = export.write_lci_to_excel(
+        data = export.export_lci(
             ecoinvent_version=ecoinvent_version,
-            software_compatibility=software,
-            export_format="string",
+            software=software,
+            format="string",
         )
 
     response.data = data
@@ -1173,58 +981,22 @@ def get_param_table():
 def get_fuel_blend(country, years):
     years = [int(y) for y in years.split(",")]
 
-    # Returns average share of biogasoline according to historical IEA stats
-    if country in app.calc.biogasoline.country.values:
-        share_biogasoline = np.squeeze(
-            np.clip(
-                app.calc.biogasoline.sel(country=country, variable="value")
-                .interp(year=years, kwargs={"fill_value": "extrapolate"})
-                .values,
-                0,
-                1,
-            )
-        )
-        if share_biogasoline.shape == ():
-            share_biogasoline = share_biogasoline.reshape(1)
-    else:
-        share_biogasoline = np.zeros_like(years)
+    # add a dimension to the array if ndim == 0
+    nd = lambda x: x if x.ndim else x[None]
 
-    # Returns average share of biodiesel according to historical IEA stats
-    if country in app.calc.biodiesel.country.values:
-        share_biodiesel = np.squeeze(
-            np.clip(
-                app.calc.biodiesel.sel(country=country, variable="value")
-                .interp(year=years, kwargs={"fill_value": "extrapolate"})
-                .values,
-                0,
-                1,
-            )
-        )
-        if share_biodiesel.shape == ():
-            share_biodiesel = share_biodiesel.reshape(1)
+    if country in app.calc.bs.bioethanol.country.values:
+        share_bioethanol = nd(app.calc.bs.get_share_biofuel("bioethanol", country, years))
+        share_biodiesel = nd(app.calc.bs.get_share_biofuel("biodiesel", country, years))
+        share_biomethane = nd(app.calc.bs.get_share_biofuel("biomethane", country, years))
     else:
-        share_biodiesel = np.zeros_like(years)
-
-    # Returns average share of biomethane according to historical IEA stats
-    if country in app.calc.biomethane.country.values:
-        share_biomethane = np.squeeze(
-            np.clip(
-                app.calc.biomethane.sel(country=country, variable="value")
-                .interp(year=years, kwargs={"fill_value": "extrapolate"})
-                .values,
-                0,
-                1,
-            )
-        )
-        if share_biomethane.shape == ():
-            share_biomethane = share_biomethane.reshape(1)
-    else:
-        share_biomethane = np.zeros_like(years)
+        share_bioethanol = nd(np.zeros_like(years))
+        share_biodiesel = nd(np.zeros_like(years))
+        share_biomethane = nd(np.zeros_like(years))
 
     response = {
         "petrol": {
-            "primary": np.round(1 - share_biogasoline, 2).tolist(),
-            "secondary": np.round(share_biogasoline, 2).tolist(),
+            "primary": np.round(1 - share_bioethanol, 2).tolist(),
+            "secondary": np.round(share_bioethanol, 2).tolist(),
         },
         "diesel": {
             "primary": np.round(1 - share_biodiesel, 2).tolist(),

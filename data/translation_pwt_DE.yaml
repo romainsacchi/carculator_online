@@ -1,0 +1,9 @@
+Benzin: ICEV-p
+Diesel: ICEV-d
+Komprimiertes Gas: ICEV-g
+Elektrisch: BEV
+Brennstoffzelle: FCEV
+Hybrid-Benzin: HEV-p
+Hybrid-Diesel: HEV-d
+(Plugin) Hybrid-Benzin: PHEV-p
+(Plugin) Hybrid-Diesel: PHEV-d
