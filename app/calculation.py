@@ -420,7 +420,7 @@ class Calculation:
                             .sum(dim="impact")
                             .values
                             .reshape(len(list_vehicles))
-                            .tolist(),
+                            .astype(float),
                         ),
                     )
                 )
@@ -442,12 +442,12 @@ class Calculation:
                 )
                 .sum(dim="impact")
                 .values
-                .tolist()
+                .astype(float)
             )
 
         return dict_scatter
 
-    def generate_nomralized_results(self, results):
+    def generate_normalized_results(self, results):
 
         normalization_factors = load_yaml_file(NORMALIZATION_FACTORS)
         factors = np.fromiter(normalization_factors.values(), dtype=float)
@@ -479,7 +479,7 @@ class Calculation:
                                         size=s,
                                         powertrain=p,
                                         year=y,
-                                    ).values.tolist()
+                                    ).values.astype(float)
                                 )
                             ]
                         )
@@ -743,7 +743,7 @@ class Calculation:
         results = self.ic.calculate_impacts()
 
         # generate normalized results
-        normalized_results = self.generate_nomralized_results(
+        normalized_results = self.generate_normalized_results(
             results
         )
 
