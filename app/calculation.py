@@ -419,8 +419,7 @@ class Calculation:
                             res_benchmark.sel(impact_category=i)
                             .sum(dim="impact")
                             .values
-                            .reshape(len(list_vehicles))
-                            .item(0),
+                            .reshape(len(list_vehicles)),
                         ),
                     )
                 )
