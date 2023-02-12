@@ -777,7 +777,7 @@ def display_result(job_key):
             # retrieve impact categories
             impact_cat = [
                 "climate change",
-                "climate change, incl. biogenic CO2",
+                "GWP100a, incl. bio CO2",
                 "agricultural land occupation",
                 "fossil depletion",
                 "freshwater ecotoxicity",
