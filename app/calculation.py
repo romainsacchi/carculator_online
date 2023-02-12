@@ -284,6 +284,8 @@ class Calculation:
                     )
                 ] = year_val
 
+                print(f"Adjusting {param} for {pwt} - {size} - {year[0]} to {year_val}")
+
         return arr
 
     def get_cumulative_ttw_energy(self, list_vehicles):
