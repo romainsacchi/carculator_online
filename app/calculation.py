@@ -631,7 +631,7 @@ class Calculation:
             .transpose("impact_category", "size", "powertrain", "year", "impact")
         )
 
-        print(results.sel(immpact_category="climate change").values)
+        print(results.sel(impact_category="climate change").values)
 
         lifetime = int(self.cm.array.sel(parameter="lifetime kilometers").mean().values)
         impact_category = results.coords["impact_category"].values.tolist()
