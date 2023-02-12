@@ -1,0 +1,9 @@
+Petrol: ICEV-p
+Diesel: ICEV-d
+CNG: ICEV-g
+Electric: BEV
+Fuel cell: FCEV
+Hybrid-petrol: HEV-p
+Hybrid-diesel: HEV-d
+(Plugin) Hybrid-petrol: PHEV-p
+(Plugin) Hybrid-diesel: PHEV-d
