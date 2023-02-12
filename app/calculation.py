@@ -675,13 +675,13 @@ class Calculation:
                             powertrain=powertrain,
                             year=year,
                             impact=impact,
-                        ).values,
+                        ).values.item(0),
                         results.sel(
                             impact_category=impact_cat,
                             size=size,
                             powertrain=powertrain,
                             year=year,
-                        ).sum().values,
+                        ).sum().values.item(0),
                     ]
                 )
 
@@ -703,7 +703,7 @@ class Calculation:
                     "glider",
                     "EoL"
                 ]
-            ).sum(dim="impact").values * lifetime
+            ).sum(dim="impact").values.item(0) * lifetime
             var_burden = results.sel(
                 impact_category=impact_cat,
                 size=size,
@@ -716,7 +716,8 @@ class Calculation:
                     "maintenance",
                     "road"
                 ]
-            ).sum(dim="impact").values
+            ).sum(dim="impact").values.item(0)
+
             list_res_acc.append(
                 [
                     impact_cat,
