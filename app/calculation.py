@@ -420,7 +420,7 @@ class Calculation:
                             .sum(dim="impact")
                             .values
                             .reshape(len(list_vehicles))
-                            .astype(float),
+                            .item(0),
                         ),
                     )
                 )
@@ -442,7 +442,7 @@ class Calculation:
                 )
                 .sum(dim="impact")
                 .values
-                .astype(float)
+                .item(0)
             )
 
         return dict_scatter
@@ -479,7 +479,7 @@ class Calculation:
                                         size=s,
                                         powertrain=p,
                                         year=y,
-                                    ).values.astype(float)
+                                    ).values.item(0)
                                 )
                             ]
                         )
