@@ -340,6 +340,7 @@ class Calculation:
             len(list_vehicles)
         )
 
+
         cost_types = [c for c in total_cost.parameter.values if c != "total"]
 
         arr_benchmark = list(
