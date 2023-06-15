@@ -3129,7 +3129,7 @@ function create_electric_utility_table() {
                 connect: true,
                 range: {
                     'min': 0,
-                    'max': 70
+                    'max': 90
                 }
             });
 

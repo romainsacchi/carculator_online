@@ -336,14 +336,9 @@ class Calculation:
             "powertrain", "size", "year", "value", "parameter"
         )
 
-        print(total_cost.shape)
-        print(total_cost.sel(parameter="total", value=0).values.shape)
-        print(list_vehicles)
-
         cost_benchmark = total_cost.sel(parameter="total", value=0).values.reshape(
             len(list_vehicles)
         )
-
 
         cost_types = [c for c in total_cost.parameter.values if c != "total"]
 
@@ -599,8 +594,6 @@ class Calculation:
                 [str(y) for y in self.scope["year"]]
             )
         )
-
-        print(self.scope)
 
         # fetch cumulative ttw energy
         tank_to_wheel_energy = self.get_cumulative_ttw_energy(list_vehicles)
