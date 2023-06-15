@@ -338,6 +338,7 @@ class Calculation:
 
         print(total_cost.shape)
         print(total_cost.sel(parameter="total", value=0).values.shape)
+        print(list_vehicles)
 
         cost_benchmark = total_cost.sel(parameter="total", value=0).values.reshape(
             len(list_vehicles)
