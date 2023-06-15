@@ -511,6 +511,11 @@ class Calculation:
         arr = self.interpolate_array(d[("Functional unit",)]["year"])
         self.scope.update({"year": arr.coords["year"].values})
 
+        # remove PHEV-e, PHEV-c-p and PHEV-c-d from self.scope["powertrain"]
+
+        self.scope["powertrain"] = [x for x in self.scope["powertrain"] if x not in ["PHEV-e", "PHEV-c-p", "PHEV-c-d"]]
+
+
         arr = self.remove_hybridization(arr)
 
         # adjust input parameters
