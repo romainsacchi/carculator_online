@@ -53,11 +53,12 @@ def load_yaml_file(filepath):
 
 def extract_efficiency(variable, lst):
     efficiency_dict = {}
-    for item in lst:
-        if item[0][3] == variable:  # check if this item refers to engine efficiency
-            key = (item[0][1], item[0][2], list(item[1].keys())[0][0])  # construct the tuple key
-            value = list(item[1].values())[0]  # get the efficiency value
-            efficiency_dict[key] = value  # add the entry to the dictionary
+    for k, v in lst.items():
+        if k[3] == variable:  # check if this item refers to engine efficiency
+            key = (k[1], k[2],)
+            for year, val in v.items():
+                key += (year[0],)  # add the year to the key
+                efficiency_dict[key] = val  # add the entry to the dictionary
     return efficiency_dict
 
 class Calculation:
