@@ -390,6 +390,7 @@ def direct_results():
 
     dic_uuids = {}
 
+    #for country in ["CH",]:
     for country in countries:
         job_id = str(uuid.uuid1())
 
@@ -444,7 +445,11 @@ def direct_results():
 
         # generate inventories
         for software in ["brightway2", "simapro"]:
-            for ecoinvent_version in ["3.6", "3.7", "3.8"]:
+            for ecoinvent_version in [
+                #"3.6",
+                #"3.7",
+                "3.8"
+            ]:
                 if software == "brightway2" or (
                     software == "simapro" and ecoinvent_version == "3.7"
                 ):
