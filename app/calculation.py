@@ -554,9 +554,6 @@ class Calculation:
         except IndexError:
             transmission_eff = None
 
-        print(engine_eff)
-        print(transmission_eff)
-
         self.cm = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
