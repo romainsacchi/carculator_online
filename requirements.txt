@@ -23,7 +23,6 @@ pycountry
 stats_arrays
 PyPrind
 redis
-#carculator==1.8.0
 -e git+https://github.com/romainsacchi/carculator#egg=carculator
 -e git+https://github.com/romainsacchi/carculator_utils#egg=carculator_utils
 email-validator

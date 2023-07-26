@@ -1,7 +1,7 @@
 import logging
 import os
 from logging.handlers import SMTPHandler
-from .worker import conn
+from app.worker import conn
 
 from flask import Flask, request, session
 from flask_babel import Babel

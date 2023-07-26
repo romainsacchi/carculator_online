@@ -30,7 +30,7 @@ from app import db
 from app.forms import LoginForm, RegistrationForm
 from app.models import Task, User
 from .calculation import Calculation, load_yaml_file
-from .email_support import email_out
+from app.email_support import email_out
 
 
 app.calc = Calculation()
@@ -252,7 +252,7 @@ def tool_page(country):
             "driving_cycle": "WLTC",
             "fu": {"unit": "vkm", "quantity": 1},
             "foreground params": {
-                "passenger-slider": "1.5",
+                "passenger-slider": "1.6",
                 "cargo-slider": "20",
                 "lifetime-slider": "200 000",
                 "mileage-slider": "12 000",
@@ -297,7 +297,7 @@ def tool_page(country):
                             "type": "NMC-622",
                             "origin": "CN",
                             "energy battery mass": [400],
-                            "battery cell energy density": [0.22],
+                            "battery cell energy density": [0.23],
                             "battery lifetime kilometers": [200000],
                         }
                     }
@@ -305,27 +305,27 @@ def tool_page(country):
                 "efficiency": {
                     "ICEV-p": {
                         "Medium": {
-                            "engine efficiency": [0.27],
-                            "transmission efficiency": [0.81],
+                            "engine efficiency": [0.27990268],
+                            "transmission efficiency": [.8],
                         }
                     },
                     "ICEV-d": {
                         "Medium": {
-                            "engine efficiency": [0.3],
-                            "transmission efficiency": [0.81],
+                            "engine efficiency": [0.34627573],
+                            "transmission efficiency": [.8],
                         }
                     },
                     "ICEV-g": {
                         "Medium": {
-                            "engine efficiency": [0.26],
-                            "transmission efficiency": [0.81],
+                            "engine efficiency": [0.27980667],
+                            "transmission efficiency": [.8],
                         }
                     },
                     "BEV": {
                         "Medium": {
-                            "engine efficiency": [0.85],
-                            "transmission efficiency": [0.85],
-                            "battery discharge efficiency": [0.88],
+                            "engine efficiency": [0.96642206],
+                            "transmission efficiency": [.852020],
+                            "battery discharge efficiency": [0.8826],
                         }
                     },
                 },
@@ -422,7 +422,7 @@ def direct_results():
             },
             ("Foreground",): {
                 ("Glider", "all", "all", "average passengers", "none"): {
-                    (year, "loc"): 1.5
+                    (year, "loc"): 1.6
                 },
                 ("Glider", "all", "all", "cargo mass", "none"): {(year, "loc"): 20.0},
                 ("Driving", "all", "all", "lifetime kilometers", "none"): {
@@ -706,10 +706,14 @@ def get_electricity_mix(iso_code, years, lifetime):
         .values
         for y, year in enumerate(years)
     ]
-    response = np.clip(response, 0, 1) / np.clip(response, 0, 1).sum(axis=1)[:, None]
 
+    # ensure the sum of floats in response equal 1
+    response = np.array(response)
+    response = response.astype(float)
+    response = np.around(response, decimals=2)
     response = np.true_divide(response.T, response.sum(axis=1)).T
     response = np.round(response, 2)
+
     return jsonify(response.tolist())
 
 
@@ -720,6 +724,9 @@ def get_results():
     job_id = str(uuid.uuid1())
 
     lang = session.get("language", "en")
+
+    print(request.get_json())
+
     d = app.calc.format_dictionary(request.get_json())
 
     print(d)

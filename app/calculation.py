@@ -51,6 +51,15 @@ def load_yaml_file(filepath):
         return yaml.load(f, Loader=yaml.FullLoader)
 
 
+def extract_efficiency(variable, lst):
+    efficiency_dict = {}
+    for item in lst:
+        if item[0][3] == variable:  # check if this item refers to engine efficiency
+            key = (item[0][1], item[0][2], list(item[1].keys())[0][0])  # construct the tuple key
+            value = list(item[1].values())[0]  # get the efficiency value
+            efficiency_dict[key] = value  # add the entry to the dictionary
+    return efficiency_dict
+
 class Calculation:
     def __init__(self):
 
@@ -136,6 +145,7 @@ class Calculation:
             vehicle_type="car",
             vehicle_sizes=["Small"]
         )[0]
+
 
     def create_config_array(self, dict_params):
 
@@ -510,7 +520,6 @@ class Calculation:
 
         self.scope["powertrain"] = [x for x in self.scope["powertrain"] if x not in ["PHEV-e", "PHEV-c-p", "PHEV-c-d"]]
 
-
         arr = self.remove_hybridization(arr)
 
         # adjust input parameters
@@ -535,6 +544,18 @@ class Calculation:
         # and pass it to the CarModel constructor
         fuel_blends = d[("Background",)].get("fuel blend", {})
 
+        try:
+            engine_eff = extract_efficiency("engine efficiency", d[("Foreground",)])
+        except IndexError:
+            engine_eff = None
+        try:
+            transmission_eff = extract_efficiency("transmission efficiency", d[("Foreground",)])
+        except IndexError:
+            transmission_eff = None
+
+        print(engine_eff)
+        print(transmission_eff)
+
         self.cm = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
@@ -544,6 +565,8 @@ class Calculation:
             electric_utility_factor=uf,
             country=d[("Background",)]["country"],
             fuel_blend=fuel_blends,
+            engine_efficiency=engine_eff,
+            transmission_efficiency=transmission_eff,
         )
 
         # adjust the electricity density of the battery cells
@@ -927,7 +950,6 @@ class Calculation:
                 energy_storage = raw_dict["background params"]["energy storage"][
                     "electric"
                 ]
-
                 for e in energy_storage:
                     size = e
                     for p in energy_storage[e]:
