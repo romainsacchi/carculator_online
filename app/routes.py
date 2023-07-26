@@ -252,7 +252,7 @@ def tool_page(country):
             "driving_cycle": "WLTC",
             "fu": {"unit": "vkm", "quantity": 1},
             "foreground params": {
-                "passenger-slider": "1.6",
+                "passenger-slider": "1.5",
                 "cargo-slider": "20",
                 "lifetime-slider": "200 000",
                 "mileage-slider": "12 000",
@@ -422,7 +422,7 @@ def direct_results():
             },
             ("Foreground",): {
                 ("Glider", "all", "all", "average passengers", "none"): {
-                    (year, "loc"): 1.6
+                    (year, "loc"): 1.5
                 },
                 ("Glider", "all", "all", "cargo mass", "none"): {(year, "loc"): 20.0},
                 ("Driving", "all", "all", "lifetime kilometers", "none"): {
@@ -724,8 +724,6 @@ def get_results():
     job_id = str(uuid.uuid1())
 
     lang = session.get("language", "en")
-
-    print(request.get_json())
 
     d = app.calc.format_dictionary(request.get_json())
 

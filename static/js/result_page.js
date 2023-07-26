@@ -392,7 +392,7 @@ function fill_in_vehicles_specs(specs){
 
             } else if (param == "energy consumption"){
                 var val = specs[row][d_map_param_indices[param]];
-                val /= 34200
+                val /= 32000
                 val *= 100
                 val = val.toLocaleString('en-US', {maximumFractionDigits:1})
 
