@@ -305,26 +305,26 @@ def tool_page(country):
                 "efficiency": {
                     "ICEV-p": {
                         "Medium": {
-                            "engine efficiency": [0.283590029684954],
+                            "engine efficiency": [0.289],
                             "transmission efficiency": [.8],
                         }
                     },
                     "ICEV-d": {
                         "Medium": {
-                            "engine efficiency": [0.366236059086114],
+                            "engine efficiency": [0.301],
                             "transmission efficiency": [.8],
                         }
                     },
                     "ICEV-g": {
                         "Medium": {
-                            "engine efficiency": [0.283590029684954],
+                            "engine efficiency": [0.264],
                             "transmission efficiency": [.8],
                         }
                     },
                     "BEV": {
                         "Medium": {
-                            "engine efficiency": [0.96642206],
-                            "transmission efficiency": [.852020],
+                            "engine efficiency": [0.93],
+                            "transmission efficiency": [.9],
                             "battery discharge efficiency": [0.8826],
                         }
                     },
