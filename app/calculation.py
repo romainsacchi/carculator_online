@@ -602,7 +602,6 @@ class Calculation:
         print(self.cm["TtW energy"])
 
 
-
         # set battery type
         battery_types = {}
         for size, val in batteries.items():
