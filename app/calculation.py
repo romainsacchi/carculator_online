@@ -599,7 +599,7 @@ class Calculation:
 
         self.cm.set_all()
 
-        print(cm["TtW energy"])
+        print(self.cm["TtW energy"])
 
 
 
