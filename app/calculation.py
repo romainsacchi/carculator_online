@@ -295,6 +295,9 @@ class Calculation:
                     )
                 ] = year_val
 
+        print("fuel cell stack efficiency")
+        print(arr.loc[dict(parameter="fuel cell stack efficiency")])
+
         return arr
 
     def get_cumulative_ttw_energy(self, list_vehicles):
@@ -578,6 +581,7 @@ class Calculation:
                         powertrain="BEV"
                     )
                 ] = val["battery cell energy density"]
+
             if "energy battery mass" in val:
                 self.cm.array.loc[
                     dict(
@@ -587,6 +591,7 @@ class Calculation:
                         powertrain="BEV"
                     )
                 ] = val["energy battery mass"]
+
             if "battery lifetime kilometers" in val:
                 self.cm.array.loc[
                     dict(
