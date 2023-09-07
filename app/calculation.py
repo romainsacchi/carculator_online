@@ -610,6 +610,7 @@ class Calculation:
         print(arr.loc[dict(parameter="fuel cell stack efficiency")])
         print("fuel cell system efficiency")
         print(arr.loc[dict(parameter="fuel cell system efficiency")])
+        print(arr.loc[dict(parameter="TtW efficiency")])
 
         # set battery type
         battery_types = {}
