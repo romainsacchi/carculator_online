@@ -22,6 +22,7 @@ from app.models import Task
 import yaml
 from pathlib import Path
 
+
 MAP_FUEL_BLEND = {
     "ICEV-p": "petrol",
     "ICEV-d": "diesel",
@@ -294,9 +295,6 @@ class Calculation:
                         value=0,
                     )
                 ] = year_val
-
-        print("fuel cell stack efficiency")
-        print(arr.loc[dict(parameter="fuel cell stack efficiency")])
 
         return arr
 
