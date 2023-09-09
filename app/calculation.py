@@ -604,15 +604,6 @@ class Calculation:
 
         self.cm.set_all()
 
-        print(self.cm["TtW energy"])
-
-        print("fuel cell stack efficiency")
-        print(arr.loc[dict(parameter="fuel cell stack efficiency")])
-        print("fuel cell system efficiency")
-        print(arr.loc[dict(parameter="fuel cell system efficiency")])
-        print(arr.loc[dict(parameter="TtW efficiency")])
-
-
         # set battery type
         battery_types = {}
         for size, val in batteries.items():
