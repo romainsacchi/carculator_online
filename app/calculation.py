@@ -621,6 +621,7 @@ class Calculation:
             )
         )
 
+
         # fetch cumulative ttw energy
         tank_to_wheel_energy = self.get_cumulative_ttw_energy(list_vehicles)
 
