@@ -612,6 +612,7 @@ class Calculation:
         print(arr.loc[dict(parameter="fuel cell system efficiency")])
         print(arr.loc[dict(parameter="TtW efficiency")])
 
+
         # set battery type
         battery_types = {}
         for size, val in batteries.items():
