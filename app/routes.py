@@ -176,7 +176,11 @@ def get_car_repl_data(country, cycle):
     # check if file exists
     print(os.path.isfile(filepath))
 
-    return xr.open_dataarray(filepath)
+    # load pickle
+    with open(f'{cycle}_{country}.pickle', 'rb') as handle:
+        data = pickle.load(handle)
+
+    return data
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
