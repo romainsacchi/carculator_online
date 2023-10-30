@@ -179,7 +179,7 @@ def get_car_repl_data(country, cycle):
     CRD_DIR = os.path.join(DATA_DIR, 'car_replacement_data')
 
 
-    return xr.open_dataset(f"{CRD_DIR}/{cycle}_{country}.nc")
+    return xr.open_dataarray(f"{CRD_DIR}/{cycle}_{country}.nc")
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
