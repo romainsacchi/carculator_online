@@ -176,7 +176,7 @@ def get_car_repl_data(country, cycle):
     current_dir = Path(os.path.dirname(os.path.abspath(__file__)))
 
     # Navigate to the "data" folder
-    data_folder = current_dir.parent / "data" / "car_replacement_data"
+    data_folder = current_dir.parent / "car_replacement_data"
 
     filepath = data_folder / f"{cycle}_{country}.nc"
 
