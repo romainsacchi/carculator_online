@@ -743,6 +743,7 @@ function fill_in_dropdowns(){
         //"ZW", "ZM", "SS", "UG", "RW", "GH", "DJ", "MW", "NG", "MZ", "KE",
         // "AO", "BJ","BW","BF","BI", "CM", "TD","CL","GQ","SZ",
         // "SN","SL", "SO", "SD", "TG", "TN"
+
     ]
 
     for (var c = 0; c < list_countries.length; c++){
