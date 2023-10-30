@@ -718,6 +718,7 @@ function fill_in_dropdowns(){
         "Small",
         "Lower medium",
         "Medium",
+        "Medium SUV",
         "Large",
         "SUV",
         "Van",
@@ -814,7 +815,7 @@ noUiSlider.create(slider_replacement, {
 // When updating the lifetime slider, its value must become the max range
 // of the replacement time slider
 // Also, it defines the minimum range for the annual mileage
-// so that the manafacture year of the second vehicle does
+// so that the manufacture year of the second vehicle does
 // not go above 2040
 // Also, when updated, trigger graphs generation
 slider_lifetime.noUiSlider.on('set', function (values, handle) {
@@ -922,9 +923,6 @@ function get_results_replacement_car(){
                         data_array.push([pt, s, y, imp, impacts_current_car[imp][0], impacts_current_car[imp][1]])
                         }
                     }
-
-
-
 
                 var ol = document.getElementById("list_selection");
                 var items = ol.getElementsByTagName("li");
@@ -1041,6 +1039,7 @@ function generate_graph(data){
             }
         };
 
+
         for (var i = 0; i < items.length; ++i) {
 
 
@@ -1084,12 +1083,12 @@ function generate_graph(data){
             var impact_alt_scenario = [];
 
             // Increment of 1000 km and calculate impacts of old car
-            var prod_impact = Number(sub_array[0][3]) / 1000;
-            var km_impact = Number(sub_array[0][4]) / 1000;
+            var prod_impact_alt = Number(sub_array[0][3]) / 1000;
+            var km_impact_alt = Number(sub_array[0][4]) / 1000;
             for (km=0; km <= replacement; km += 1000){
 
                 impact_alt_scenario.push({"x": km,
-                    "y": Number((prod_impact + (km_impact * km)))})
+                    "y": Number((prod_impact_alt + (km_impact_alt * km)))})
             }
 
             // Append impacts of new car for a given year
@@ -1104,15 +1103,15 @@ function generate_graph(data){
             for (c=1; c <= sub_array.length - 1; c ++){
 
                 if ((sub_array[c][0] == pt) && (sub_array[c][1] == s) && (sub_array[c][2] == y)){
-                    var prod_impact = Number(sub_array[c][3]) / 1000;
-                    var km_impact = Number(sub_array[c][4]) / 1000;
+                    prod_impact_alt = Number(sub_array[c][3]) / 1000;
+                    km_impact_alt = Number(sub_array[c][4]) / 1000;
                 };
             };
 
             for (km=1000; km <= lifetime; km += 1000){
 
                 impact_alt_scenario.push({"x": km + last_km,
-                "y": Number(last_val + (prod_impact + (km_impact * km)))})
+                "y": Number(last_val + (prod_impact_alt + (km_impact_alt * km)))})
             }
 
             data_alt = {values: impact_alt_scenario, key: i18n("Early replacement"), color:"#10C613"};

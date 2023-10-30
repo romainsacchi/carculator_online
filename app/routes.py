@@ -6,6 +6,7 @@ import math
 import mimetypes
 import pickle
 import uuid
+import xarray as xr
 import numpy as np
 from flask import (
     Response,
@@ -144,7 +145,6 @@ def new_car(country):
         _("(Plugin) Hybrid-diesel"),
     ]
     sizes = [
-        _("Micro"),
         _("Minicompact"),
         _("Subcompact"),
         _("Compact"),
@@ -166,11 +166,9 @@ def new_car(country):
 
 
 def get_car_repl_data(country, cycle):
-    filepath = f"data/car replacement data/{cycle}_{country}.pickle"
-    with open(filepath, "rb") as pickled_data:
-        data = pickle.load(pickled_data)
+    filepath = f"data/car replacement data/{cycle}_{country}.nc"
 
-    return data
+    return xr.open_dataarray(filepath)
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")

@@ -26,8 +26,24 @@ app = Flask(__name__,
 # app version
 app.version = __version__
 
+
+def get_locale():
+    """
+    Retrieve the favorite language of the browser and display text in the corresponding language.
+    :return:
+    """
+    try:
+        language = session['language']
+    except KeyError:
+        language = None
+    if language is not None:
+        return language
+    session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
+    return session['language']
+
 # Setup flask-babel
 babel = Babel(app)
+babel.init_app(app, locale_selector=get_locale)
 
 # Instantiate flask-login
 login = LoginManager(app)
@@ -84,20 +100,7 @@ mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
 
 
-@babel.localeselector
-def get_locale():
-    """
-    Retrieve the favorite language of the browser and display text in the corresponding language.
-    :return:
-    """
-    try:
-        language = session['language']
-    except KeyError:
-        language = None
-    if language is not None:
-        return language
-    session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
-    return session['language']
+
 
 # Setup flask-mail
 mail = Mail(app)
