@@ -732,14 +732,17 @@ function fill_in_dropdowns(){
     var $dropdown = $("#country_current");
 
     var list_countries = [
-        "DZ","AO","AU","AT","BE","BJ","BW","BR","BG","BF","BI",
-        "CM","CA","CF","TD","CL","CN","CG","CI","HR","CY","CZ",
-        "CD","DK","DJ","EG","GQ","ER","EE","SZ","ET","FI","FR",
-        "GA","GM","DE","GH","GR","GN","GW","HU","IN","IE","IT",
-        "JP","KE","LV","LS","LR","LY","LT","LU","MW","ML","MT",
-        "MR","MA","MZ","NM","NE","NG","NO","PL","PT","RO","RU",
-        "RW","SN","SL","SK","SI","SO","ZA","SS","ES","SD","SE",
-        "CH","TZ","TG","TN","UG","GB","US","ZM","ZW",
+        "DZ","AU","AT","BE","BR","BG",
+        "CA","CF","CN","CG","CI","HR","CY","CZ",
+        "CD","DK","EG","ER","EE","ET","FI","FR",
+        "GA","GM","DE","GR","GN","GW","HU","IN","IE","IT",
+        "JP","LV","LS","LR","LY","LT","LU","ML","MT",
+        "MR","MA","NM","NE","NO","PL","PT","RO","RU",
+        "SK","SI","ZA","ES","SE",
+        "CH","TZ","GB","US",
+        //"ZW", "ZM", "SS", "UG", "RW", "GH", "DJ", "MW", "NG", "MZ", "KE",
+        // "AO", "BJ","BW","BF","BI", "CM", "TD","CL","GQ","SZ",
+        // "SN","SL", "SO", "SD", "TG", "TN"
     ]
 
     for (var c = 0; c < list_countries.length; c++){
