@@ -173,14 +173,7 @@ def get_car_repl_data(country, cycle):
     DATA_DIR = Path().cwd().parent.parent.parent / "data" / "car_replacement_data"
     filepath = f"data/car_replacement_data/{cycle}_{country}.nc"
 
-    # check if file exists
-    print(os.path.isfile(filepath))
-
-    # load pickle
-    with open(f'data/car_replacement_data/{cycle}_{country}.pickle', 'rb') as handle:
-        data = pickle.load(handle)
-
-    return data
+    return xr.open_dataset(filepath)
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
