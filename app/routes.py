@@ -171,7 +171,14 @@ def get_car_repl_data(country, cycle):
 
     # define data folder, which is a folder above the app folder
     DATA_DIR = Path().cwd().parent.parent.parent / "data" / "car_replacement_data"
-    filepath = f"../data/car_replacement_data/{cycle}_{country}.nc"
+
+    # Get the current script's directory
+    current_dir = Path(os.path.dirname(os.path.abspath(__file__)))
+
+    # Navigate to the "data" folder
+    data_folder = current_dir.parent / "data" / "car_replacement_data"
+
+    filepath = data_folder / f"{cycle}_{country}.nc"
 
     return xr.open_dataset(filepath)
 
