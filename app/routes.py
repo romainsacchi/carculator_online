@@ -177,7 +177,7 @@ def get_car_repl_data(country, cycle):
     print(os.path.isfile(filepath))
 
     # load pickle
-    with open(f'{cycle}_{country}.pickle', 'rb') as handle:
+    with open(f'data/car_replacement_data/{cycle}_{country}.pickle', 'rb') as handle:
         data = pickle.load(handle)
 
     return data
