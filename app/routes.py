@@ -176,7 +176,7 @@ def get_car_repl_data(country, cycle):
     if not os.path.isfile(filepath):
         print(f"File {filepath} does not exist.")
 
-    return xr.open_dataarray(filepath, engine="h5netcdf")
+    return xr.open_dataarray(filepath, engine="scipy")
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
