@@ -169,8 +169,9 @@ def new_car(country):
 def get_car_repl_data(country, cycle):
     """Return car replacement data"""
 
-    DATA_DIR = "data/car replacement data/"
-    filepath = DATA_DIR + f"{cycle}_{country}.nc"
+    # define data folder, which is a folder above the app folder
+    DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "car replacement data"
+    filepath = DATA_DIR / f"{cycle}_{country}.nc"
 
     # check if file exists
     if not os.path.isfile(filepath):
