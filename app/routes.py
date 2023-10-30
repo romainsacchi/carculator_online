@@ -169,7 +169,7 @@ def new_car(country):
 def get_car_repl_data(country, cycle):
     """Return car replacement data"""
 
-    DATA_DIR = Path(__file__).parent / "data" / "car replacement data"
+    DATA_DIR = Path("data" / "car replacement data")
     filepath = DATA_DIR / f"{cycle}_{country}.nc"
 
     # check if file exists
