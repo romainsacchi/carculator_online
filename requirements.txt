@@ -30,3 +30,4 @@ mysqlclient
 gunicorn
 pyyaml
 werkzeug<3.0
+netCDF4
