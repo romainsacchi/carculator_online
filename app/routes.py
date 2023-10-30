@@ -178,7 +178,6 @@ def get_car_repl_data(country, cycle):
     # to car_replacement_data
     CRD_DIR = os.path.join(DATA_DIR, 'car_replacement_data')
 
-
     return xr.open_dataarray(f"{CRD_DIR}/{cycle}_{country}.nc")
 
 

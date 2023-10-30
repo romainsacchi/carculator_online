@@ -732,18 +732,14 @@ function fill_in_dropdowns(){
     var $dropdown = $("#country_current");
 
     var list_countries = [
-        "DZ","AU","AT","BE","BR","BG",
-        "CA","CF","CN","CG","CI","HR","CY","CZ",
-        "CD","DK","EG","ER","EE","ET","FI","FR",
-        "GA","GM","DE","GR","GN","GW","HU","IN","IE","IT",
+        "AU","AT","BE","BR","BG",
+        "CN","HR","CY","CZ",
+        "DK","FI","FR",
+        "DE","GR","HU","IN","IE","IT",
         "JP","LV","LS","LR","LY","LT","LU","ML","MT",
-        "MR","MA","NM","NE","NO","PL","PT","RO","RU",
-        "SK","SI","ZA","ES","SE",
-        "CH","TZ","GB","US",
-        //"ZW", "ZM", "SS", "UG", "RW", "GH", "DJ", "MW", "NG", "MZ", "KE",
-        // "AO", "BJ","BW","BF","BI", "CM", "TD","CL","GQ","SZ",
-        // "SN","SL", "SO", "SD", "TG", "TN"
-
+        "NO","PL","PT","RO","RU",
+        "SK","SI","ES","SE",
+        "CH","GB","US",
     ]
 
     for (var c = 0; c < list_countries.length; c++){
@@ -752,7 +748,6 @@ function fill_in_dropdowns(){
 
     // Select current location
     $dropdown.val(country);
-
 
 };
 
