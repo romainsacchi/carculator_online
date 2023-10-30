@@ -171,7 +171,7 @@ def get_car_repl_data(country, cycle):
 
     # define data folder, which is a folder above the app folder
     DATA_DIR = Path().cwd().parent.parent.parent / "data" / "car_replacement_data"
-    filepath = f"../data/car_replacement_data/{cycle}_{country}.nc"
+    filepath = f"data/car_replacement_data/{cycle}_{country}.nc"
 
     # check if file exists
     if not os.path.isfile(filepath):
