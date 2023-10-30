@@ -7,6 +7,7 @@ import mimetypes
 import pickle
 import uuid
 import xarray as xr
+import netCDF4 as nc
 from pathlib import Path
 import numpy as np
 from flask import (
@@ -179,8 +180,9 @@ def get_car_repl_data(country, cycle):
     data_folder = current_dir.parent / "car_replacement_data"
 
     filepath = f"car_replacement_data/{cycle}_{country}.nc"
+    return nc.Dataset(filepath)
 
-    return xr.open_dataset(filepath)
+    #return xr.open_dataset(filepath)
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
