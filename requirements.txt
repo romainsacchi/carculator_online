@@ -29,3 +29,4 @@ email-validator
 mysqlclient
 gunicorn
 pyyaml
+werkzeug<3.0
