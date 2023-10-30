@@ -1,7 +1,7 @@
 wurst
 flask-babel
 scipy
-xarray==2023.10.1
+xarray[complete]
 xarray[io]
 pandas
 numexpr
