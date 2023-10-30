@@ -41,15 +41,17 @@ def get_locale():
     session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
     return session['language']
 
+is_prod = os.environ.get('IS_HEROKU', None)
+
 # Setup flask-babel
-babel = Babel(app)
-babel.init_app(app, locale_selector=get_locale)
+babel = Babel(app, locale_selector=get_locale)
+
 
 # Instantiate flask-login
 login = LoginManager(app)
 login.login_view = 'login'
 
-is_prod = os.environ.get('IS_HEROKU', None)
+
 
 if is_prod:
     app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', None)
