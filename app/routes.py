@@ -174,8 +174,7 @@ def get_car_repl_data(country, cycle):
     filepath = f"data/car_replacement_data/{cycle}_{country}.nc"
 
     # check if file exists
-    if not os.path.isfile(filepath):
-        print(f"File {filepath} does not exist.")
+    print(os.path.isfile(filepath))
 
     return xr.open_dataarray(filepath)
 
