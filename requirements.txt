@@ -2,6 +2,7 @@ wurst
 flask-babel
 scipy
 xarray
+xarray[io]
 pandas
 numexpr
 alembic
