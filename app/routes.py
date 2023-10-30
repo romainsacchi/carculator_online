@@ -178,7 +178,7 @@ def get_car_repl_data(country, cycle):
     # Navigate to the "data" folder
     data_folder = current_dir.parent / "car_replacement_data"
 
-    filepath = data_folder / f"{cycle}_{country}.nc"
+    filepath = f"car_replacement_data/{cycle}_{country}.nc"
 
     return xr.open_dataset(filepath)
 
