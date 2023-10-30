@@ -176,7 +176,7 @@ def get_car_repl_data(country, cycle):
     # check if file exists
     print(os.path.isfile(filepath))
 
-    return xr.open_dataarray(filepath)
+    return xr.open_dataarray(filepath, engine="netcdf4")
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
