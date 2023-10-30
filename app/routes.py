@@ -7,6 +7,7 @@ import mimetypes
 import pickle
 import uuid
 import xarray as xr
+from pathlib import Path
 import numpy as np
 from flask import (
     Response,
@@ -166,7 +167,10 @@ def new_car(country):
 
 
 def get_car_repl_data(country, cycle):
-    filepath = f"data/car replacement data/{cycle}_{country}.nc"
+    """Return car replacement data"""
+
+    DATA_DIR = Path(__file__).parent / "data" / "car replacement data"
+    filepath = DATA_DIR / f"{cycle}_{country}.nc"
 
     # check if file exists
     if not os.path.isfile(filepath):
