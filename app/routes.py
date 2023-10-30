@@ -170,18 +170,16 @@ def new_car(country):
 def get_car_repl_data(country, cycle):
     """Return car_replacement_data"""
 
-    # define data folder, which is a folder above the app folder
-    DATA_DIR = Path().cwd().parent.parent.parent / "data" / "car_replacement_data"
+    # absolute path to this file
+    FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # absolute path to this file's root directory
+    PARENT_DIR = os.path.join(FILE_DIR, os.pardir)
+    DATA_DIR = os.path.join(PARENT_DIR, 'data')
+    # to car_replacement_data
+    CRD_DIR = os.path.join(DATA_DIR, 'car_replacement_data')
 
-    # Get the directory of the current script
-    script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # Navigate to the "data" folder relative to the script's directory
-    relative_path_to_data = os.path.join(script_dir, '...', 'data')
-
-    #return nc.Dataset(f"{relative_path_to_data}/car_replacement_data/{cycle}_{country}.nc")
-
-    return xr.open_dataset(f"{relative_path_to_data}/car_replacement_data/{cycle}_{country}.nc")
+    return xr.open_dataset(f"{CRD_DIR}/{cycle}_{country}.nc")
 
 
 @app.route("/fetch_car_repl_results/<country>/<cycle>")
