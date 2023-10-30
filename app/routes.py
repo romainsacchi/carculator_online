@@ -179,7 +179,7 @@ def get_car_repl_data(country, cycle):
     # Navigate to the "data" folder relative to the script's directory
     relative_path_to_data = os.path.join(script_dir, '..', 'data')
 
-    return nc.Dataset(relative_path_to_data / "car_replacement_data" / filepath)
+    return nc.Dataset(f"{relative_path_to_data}/car_replacement_data/{filepath}")
 
     #return xr.open_dataset(filepath)
 
