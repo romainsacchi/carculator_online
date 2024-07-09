@@ -415,7 +415,7 @@ class Calculation:
 
         print(res_benchmark.coords["impact_category"].values.tolist())
 
-        for i in ["climate change", "fossil depletion"]:
+        for i in ["climate change", "energy resources: non-renewable, fossil"]:
             array.extend(
                 list(
                     map(
@@ -427,7 +427,7 @@ class Calculation:
                             1 / x[1]
                             if x[1] != 0
                             else 0 * 0.755
-                            if i == "fossil depletion"
+                            if i == "energy resources: non-renewable, fossil"
                             else 1,
                         ],
                         zip(
