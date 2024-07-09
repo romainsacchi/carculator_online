@@ -407,6 +407,8 @@ class Calculation:
             "impact_category", "powertrain", "size", "year", "impact"
         )
 
+        print(res_benchmark.coords["impact_category"].values.tolist())
+
         for i in ["climate change", "fossil depletion"]:
             array.extend(
                 list(
