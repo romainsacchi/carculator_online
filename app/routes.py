@@ -274,7 +274,7 @@ def tool_page(country):
                             "share": [np.round((1.0 - share_bioethanol), 2)],
                         },
                         "secondary": {
-                            "type": "bioethanol - wheat straw",
+                            "type": "petrol - bioethanol - wheat straw",
                             "share": [np.round(share_bioethanol, 2)],
                         },
                     },
@@ -284,17 +284,17 @@ def tool_page(country):
                             "share": [np.round((1.0 - share_biodiesel), 2)],
                         },
                         "secondary": {
-                            "type": "biodiesel - cooking oil",
+                            "type": "diesel - biodiesel - cooking oil",
                             "share": [np.round(share_biodiesel, 2)],
                         },
                     },
                     "cng": {
                         "primary": {
-                            "type": "cng",
+                            "type": "methane",
                             "share": [np.round((1.0 - share_biomethane), 2)],
                         },
                         "secondary": {
-                            "type": "biogas - sewage sludge",
+                            "type": "methane - biomethane - sewage sludge",
                             "share": [np.round(share_biomethane, 2).tolist()],
                         },
                     },
@@ -1031,7 +1031,7 @@ def get_fuel_blend(country, years):
             "primary": np.round(1 - share_biodiesel, 2).tolist(),
             "secondary": np.round(share_biodiesel, 2).tolist(),
         },
-        "cng": {
+        "methane": {
             "primary": np.round(1 - share_biomethane, 2).tolist(),
             "secondary": np.round(share_biomethane, 2).tolist(),
         },
