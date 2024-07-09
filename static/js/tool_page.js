@@ -2932,17 +2932,38 @@ function create_fuel_table() {
     }
 
     var fuel_options = {
-        'petrol': ['petrol', 'bioethanol - wheat straw', 'bioethanol - forest residues',
-                    'bioethanol - sugarbeet', 'bioethanol - maize starch', 'synthetic gasoline - economic allocation',
-                    'synthetic gasoline - energy allocation'
-                    ],
-        'diesel': ['diesel', 'biodiesel - algae', 'biodiesel - cooking oil', 'synthetic diesel - economic allocation',
-        'synthetic diesel - energy allocation'],
-        'cng': ['cng', 'biogas - sewage sludge', 'biogas - biowaste', 'syngas'],
+        'petrol': [
+        'petrol', 'petrol - bioethanol - wheat straw',
+        'petrol - bioethanol - forest residues',
+         'petrol - bioethanol - sugarbeet',
+         'petrol - bioethanol - maize starch',
+         'petrol - synthetic - methanol - electrolysis - economic allocation',
+          'petrol - synthetic - methanol - electrolysis - energy allocation'
+          ],
+        'diesel': [
+        'diesel',
+        'diesel - biodiesel - algae',
+        'diesel - biodiesel - cooking oil',
+        'diesel - synthetic - FT - electrolysis - economic allocation',
+        'diesel - synthetic - FT - electrolysis - energy allocation'
+        ],
+        'cng': [
+        'methane',
+        'methane - biomethane - sewage sludge',
+        'methane - synthetic - biological',
+        'methane - synthetic - electrochemical'
+        ],
         'electric': ['electric'],
-        'hydrogen': ['smr - natural gas', 'electrolysis', 'smr - biogas', 'coal gasification',
-                    'wood gasification', 'smr - natural gas with CCS', 'smr - biogas with CCS',
-                    'wood gasification with CCS']
+        'hydrogen': [
+        'hydrogen - smr - natural gas',
+        'hydrogen - electrolysis - PEM',
+        'hydrogen - smr - biogas',
+        'hydrogen - coal gasification',
+        'hydrogen - wood gasification',
+        'hydrogen - smr - natural gas with CCS',
+        'hydrogen - smr - biogas with CCS',
+        'hydrogen - wood gasification with CCS'
+        ]
     }
 
     for (var l_f=0; l_f < list_fuel.length; l_f++){
