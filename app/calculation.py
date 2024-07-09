@@ -56,10 +56,8 @@ def extract_efficiency(variable, lst):
     efficiency_dict = {}
     for k, v in lst.items():
         if k[3] == variable:  # check if this item refers to engine efficiency
-            key = (k[1], k[2],)
             for year, val in v.items():
-                key += (year[0],)  # add the year to the key
-                efficiency_dict[key] = val  # add the entry to the dictionary
+                efficiency_dict[(k[1], k[2], year[0])] = val  # add the entry to the dictionary
     return efficiency_dict
 
 class Calculation:
