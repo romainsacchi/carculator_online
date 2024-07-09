@@ -557,6 +557,7 @@ class Calculation:
 
         print(engine_eff)
         print(transmission_eff)
+        print(fuel_blends)
         self.cm = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
