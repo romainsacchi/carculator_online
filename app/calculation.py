@@ -26,7 +26,7 @@ from pathlib import Path
 MAP_FUEL_BLEND = {
     "ICEV-p": "petrol",
     "ICEV-d": "diesel",
-    "ICEV-g": "cng",
+    "ICEV-g": "methanol",
     "PHEV-p": "petrol",
     "PHEV-d": "diesel",
     "HEV-p": "petrol",
@@ -223,6 +223,10 @@ class Calculation:
                     )
 
                     params.extend([battery_chem, battery_origin])
+
+                    print(MAP_FUEL_BLEND)
+                    print()
+                    print(self.cm.fuel_blend)
 
                     if MAP_FUEL_BLEND.get(powertrain) in self.cm.fuel_blend:
                         primary_fuel_type = self.cm.fuel_blend[
