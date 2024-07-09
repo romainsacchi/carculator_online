@@ -2921,12 +2921,12 @@ function create_fuel_table() {
 
     var tableRef = document.getElementById('fuel_pathway_table').getElementsByTagName('tbody')[0];
 
-    var list_fuel = ['petrol', 'diesel', 'cng', 'hydrogen', 'electric'];
+    var list_fuel = ['petrol', 'diesel', 'methane', 'hydrogen', 'electric'];
 
     var map_pt_to_fuel = {
         'petrol': ['ICEV-p', 'HEV-p', 'PHEV-p'],
         'diesel': ['ICEV-d', 'HEV-d', 'PHEV-d'],
-        'cng': ['ICEV-g'],
+        'methane': ['ICEV-g'],
         'electric': ['BEV', 'PHEV-p', 'PHEV-d'],
         'hydrogen': ['FCEV']
     }
@@ -2947,7 +2947,7 @@ function create_fuel_table() {
         'diesel - synthetic - FT - electrolysis - economic allocation',
         'diesel - synthetic - FT - electrolysis - energy allocation'
         ],
-        'cng': [
+        'methane': [
         'methane',
         'methane - biomethane - sewage sludge',
         'methane - synthetic - biological',
