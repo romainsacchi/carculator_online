@@ -576,6 +576,7 @@ class Calculation:
             engine_efficiency=engine_eff,
             transmission_efficiency=transmission_eff,
         )
+        print(self.cm.fuel_blend)
 
         # adjust the electricity density of the battery cells
         for size, val in batteries.items():
