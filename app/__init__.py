@@ -91,7 +91,7 @@ with open(client_key_path, "w") as key_file:
     key_file.write(os.environ["SSL_KEY"])
 
 ssl_args = {
-    "ssl_key": client_key_path,
+    "ssl_ca": client_key_path,
 }
 
 # Initiate database
