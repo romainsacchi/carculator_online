@@ -61,6 +61,8 @@ app.config['ADMINS'] = os.environ.get('ADMINS')
 app.config['RECIPIENT'] = os.environ.get('RECIPIENT')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key')
+
 
 # Use centralized Redis connection
 app.redis = redis_connection
