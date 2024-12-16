@@ -1,8 +1,6 @@
 import logging
 import os
 from logging.handlers import SMTPHandler
-from app.worker import conn
-
 from flask import Flask, request, session
 from flask_babel import Babel
 from flask_login import LoginManager
@@ -10,6 +8,7 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from rq import Queue
+from redis import Redis
 
 from .version import __version__
 
@@ -23,14 +22,13 @@ app = Flask(__name__,
             template_folder="../templates",
             static_folder="../static")
 
-# app version
+# App version
 app.version = __version__
 
 
 def get_locale():
     """
     Retrieve the favorite language of the browser and display text in the corresponding language.
-    :return:
     """
     try:
         language = session['language']
@@ -41,58 +39,55 @@ def get_locale():
     session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
     return session['language']
 
+
 is_prod = os.environ.get('IS_HEROKU', None)
 
 # Setup flask-babel
 babel = Babel(app, locale_selector=get_locale)
 
-
 # Instantiate flask-login
 login = LoginManager(app)
 login.login_view = 'login'
 
-
-
+# Production configuration
 if is_prod:
-    app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', None)
-    app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', None))
-    app.config['MAIL_USE_TLS'] = int(os.environ.get('MAIL_USE_TLS', None))
-    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', None)
-    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', None)
-    app.config['ADMINS'] = os.environ.get('ADMINS', None)
-    app.config['RECIPIENT'] = os.environ.get('RECIPIENT', None)
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', None)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL', None)
+    app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
+    app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT'))
+    app.config['MAIL_USE_TLS'] = bool(int(os.environ.get('MAIL_USE_TLS')))
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+    app.config['ADMINS'] = os.environ.get('ADMINS')
+    app.config['RECIPIENT'] = os.environ.get('RECIPIENT')
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
 
-    # Initiate connection to Redis
-    app.redis = conn
+    # Initialize Redis and attach task queue
+    redis_url = os.getenv('STACKHERO_REDIS_URL_TLS', 'redis://localhost:6379/0')
+    app.redis = Redis.from_url(redis_url, health_check_interval=10, retry_on_timeout=True, socket_keepalive=True)
     app.task_queue = Queue(connection=app.redis)
-
 else:
-    # Attach configuration file
+    # Attach configuration file for local development
     app.config.from_pyfile('config.py')
 
-    # Initiate connection to Redis
-    app.redis = None
-    app.task_queue = None
-
+    # Initialize Redis and task queue for local development (if needed)
+    app.redis = Redis.from_url('redis://localhost:6379/0')
+    app.task_queue = Queue(connection=app.redis)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['LANGUAGES'] = {
-                            'en': 'English',
-                            'it': 'Italian',
-                            'fr': 'French',
-                            'de': 'German'
-                        }
+    'en': 'English',
+    'it': 'Italian',
+    'fr': 'French',
+    'de': 'German'
+}
 
-# Path for the CA certificate
+# CA Certificate Handling
 ca_cert_path = "/tmp/ca-cert.pem"
+if 'SSL_KEY' in os.environ:
+    with open(ca_cert_path, "w") as ca_file:
+        ca_file.write(os.environ["SSL_KEY"])
 
-# Write the CA certificate from environment variable
-with open(ca_cert_path, "w") as ca_file:
-    ca_file.write(os.environ["SSL_KEY"])
-
-# SSL arguments for SQLAlchemy
+# SSL Arguments for SQLAlchemy
 ssl_args = {
     'ssl': {
         'ca': ca_cert_path,  # Path to the CA certificate
@@ -102,22 +97,26 @@ ssl_args = {
 # Initiate database
 db = SQLAlchemy(app, engine_options={"connect_args": ssl_args, "pool_pre_ping": True})
 
+# Migrate setup
 migrate = Migrate(app, db, directory=MIGRATION_DIR)
 
 # Setup logger to log errors by email
-auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-secure = ()
-mail_handler = SMTPHandler(
-    mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-    fromaddr='no-reply@' + app.config['ADMINS'],
-    toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
-    credentials=auth, secure=secure)
-mail_handler.setLevel(logging.ERROR)
-app.logger.addHandler(mail_handler)
-
+if is_prod:
+    auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+    secure = ()
+    mail_handler = SMTPHandler(
+        mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+        fromaddr=f"no-reply@{app.config['ADMINS']}",
+        toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
+        credentials=auth, secure=secure
+    )
+    mail_handler.setLevel(logging.ERROR)
+    app.logger.addHandler(mail_handler)
 
 # Setup flask-mail
 mail = Mail(app)
+
+# Import other components
 from app import email_support
 from app import routes, models
 
