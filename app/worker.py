@@ -1,6 +1,6 @@
 import os
 import redis
-from rq import Worker, Queue, Connection
+from rq import Worker, Queue
 
 listen = ['default']
 redis_url = os.getenv('STACKHERO_REDIS_URL_TLS', 'None')
