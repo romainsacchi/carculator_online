@@ -15,7 +15,6 @@ try:
         health_check_interval=10,
         retry_on_timeout=True,
         socket_keepalive=True,
-        ssl=True,  # Ensure SSL is enabled
     )
     conn.ping()  # Test the Redis connection
     print("Successfully connected to Redis.")
