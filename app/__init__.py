@@ -90,9 +90,11 @@ client_key_path = "/tmp/client-key.pem"
 with open(client_key_path, "w") as key_file:
     key_file.write(os.environ["SSL_KEY"])
 
-ssl_args = {
-    "ssl_ca": client_key_path,
-}
+ssl_args = {'ssl':
+                {
+                     'key': client_key_path,
+                }
+            }
 
 # Initiate database
 db = SQLAlchemy(app, engine_options={"connect_args": ssl_args, "pool_pre_ping": True})
