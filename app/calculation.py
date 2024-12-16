@@ -775,7 +775,7 @@ class Calculation:
             self.cm,
             functional_unit=fu_unit,
             background_configuration=back_config,
-            method="ilcd",
+            method="ef",
         )
 
         results = self.ic.calculate_impacts()
