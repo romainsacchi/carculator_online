@@ -85,16 +85,19 @@ app.config['LANGUAGES'] = {
                             'de': 'German'
                         }
 
-client_key_path = "/tmp/client-key.pem"
+# Path for the CA certificate
+ca_cert_path = "/tmp/ca-cert.pem"
 
-with open(client_key_path, "w") as key_file:
-    key_file.write(os.environ["SSL_KEY"])
+# Write the CA certificate from environment variable
+with open(ca_cert_path, "w") as ca_file:
+    ca_file.write(os.environ["SSL_KEY"])
 
-ssl_args = {'ssl':
-                {
-                     'key': client_key_path,
-                }
-            }
+# SSL arguments for SQLAlchemy
+ssl_args = {
+    'ssl': {
+        'ca': ca_cert_path,  # Path to the CA certificate
+    }
+}
 
 # Initiate database
 db = SQLAlchemy(app, engine_options={"connect_args": ssl_args, "pool_pre_ping": True})
