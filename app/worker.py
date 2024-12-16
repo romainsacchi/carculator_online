@@ -20,5 +20,5 @@ except ValueError:
 
 if __name__ == '__main__':
     with Connection(conn):
-        worker = Worker(list(map(Queue, listen)))
+        worker = Worker(list(map(Queue, listen)), connection=conn)
         worker.work()
