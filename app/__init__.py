@@ -52,24 +52,21 @@ login = LoginManager(app)
 login.login_view = 'login'
 
 # Production configuration
-if is_prod:
-    app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
-    app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT'))
-    app.config['MAIL_USE_TLS'] = bool(int(os.environ.get('MAIL_USE_TLS')))
-    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
-    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-    app.config['ADMINS'] = os.environ.get('ADMINS')
-    app.config['RECIPIENT'] = os.environ.get('RECIPIENT')
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
 
-    # Use centralized Redis connection
-    app.redis = redis_connection
-    app.task_queue = Queue(connection=app.redis)
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT'))
+app.config['MAIL_USE_TLS'] = bool(int(os.environ.get('MAIL_USE_TLS')))
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['ADMINS'] = os.environ.get('ADMINS')
+app.config['RECIPIENT'] = os.environ.get('RECIPIENT')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
 
-else:
-    app.redis = None
-    app.task_queue = None
+# Use centralized Redis connection
+app.redis = redis_connection
+app.task_queue = Queue(connection=app.redis)
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['LANGUAGES'] = {
