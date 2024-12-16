@@ -1,6 +1,6 @@
 import os
 from redis import Redis
-from rq import Worker, Queue, Connection
+from rq import Worker, Queue
 
 # Get the Redis URL from the environment variable
 redis_url = os.getenv('STACKHERO_REDIS_URL_TLS')
@@ -26,9 +26,12 @@ except Exception as e:
 listen = ['default']
 
 if __name__ == '__main__':
-    with Connection(conn):
-        # Create a worker for the specified queues
-        queues = [Queue(name) for name in listen]
-        worker = Worker(queues)
-        print("Starting worker...")
-        worker.work()
+    # Create queues to listen on
+    queues = [Queue(name, connection=conn) for name in listen]
+
+    # Initialize the worker
+    worker = Worker(queues, connection=conn)
+
+    # Start processing jobs
+    print("Starting worker...")
+    worker.work()
