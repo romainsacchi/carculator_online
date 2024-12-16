@@ -62,7 +62,7 @@ if is_prod:
     app.config['ADMINS'] = os.environ.get('ADMINS', None)
     app.config['RECIPIENT'] = os.environ.get('RECIPIENT', None)
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', None)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CLEARDB_DATABASE_URL', None)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL', None)
 
     # Initiate connection to Redis
     app.redis = conn
@@ -100,8 +100,6 @@ mail_handler = SMTPHandler(
     credentials=auth, secure=secure)
 mail_handler.setLevel(logging.ERROR)
 app.logger.addHandler(mail_handler)
-
-
 
 
 # Setup flask-mail
