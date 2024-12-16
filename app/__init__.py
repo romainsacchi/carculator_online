@@ -8,7 +8,6 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from rq import Queue
-from redis import Redis
 from app.redis import redis_connection
 
 
@@ -53,8 +52,8 @@ login.login_view = 'login'
 
 # Production configuration
 
-app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT'))
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT'), 465)
 app.config['MAIL_USE_TLS'] = bool(int(os.environ.get('MAIL_USE_TLS')))
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
