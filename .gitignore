@@ -7,6 +7,8 @@ __pycache__/
 *.so
 *.xml
 
+/certs
+
 # Distribution / packaging
 .Python
 env/
