@@ -1,4 +1,4 @@
-from app.redis import redis_connection
+from app.redis_connection import redis_connection
 from rq import Worker, Queue
 
 # Queues to listen to

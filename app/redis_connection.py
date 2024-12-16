@@ -1,5 +1,5 @@
 import os
-from redis import Redis
+from redis_connection import Redis
 
 # Get Redis URL from environment variable
 redis_url = os.getenv('STACKHERO_REDIS_URL_TLS')
