@@ -7,7 +7,6 @@ import mimetypes
 import pickle
 import uuid
 import xarray as xr
-import netCDF4 as nc
 from pathlib import Path
 import numpy as np
 from flask import (

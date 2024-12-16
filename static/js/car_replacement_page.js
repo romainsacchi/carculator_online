@@ -1041,7 +1041,6 @@ function generate_graph(data){
 
         for (var i = 0; i < items.length; ++i) {
 
-
             var impact_ref_scenario = [];
 
             // Increment of 1000 km and calculate impacts of old car
