@@ -19,6 +19,9 @@ except ValueError:
 
 
 if __name__ == '__main__':
-    queues = [Queue(name, connection=conn) for name in listen]
-    worker = Worker(queues, connection=conn)
-    worker.work()
+    if conn is not None:
+        queues = [Queue(name, connection=conn) for name in listen]
+        worker = Worker(queues, connection=conn)
+        worker.work()
+    else:
+        print("Failed to connect to Redis. Worker cannot be started.")
