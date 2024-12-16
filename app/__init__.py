@@ -86,9 +86,9 @@ app.config['LANGUAGES'] = {
                         }
 
 # Initiate database
-#db = SQLAlchemy(app, engine_options={"pool_pre_ping": True})
+db = SQLAlchemy(app, engine_options={"pool_pre_ping": True})
 
-#migrate = Migrate(app, db, directory=MIGRATION_DIR)
+migrate = Migrate(app, db, directory=MIGRATION_DIR)
 
 # Setup logger to log errors by email
 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
