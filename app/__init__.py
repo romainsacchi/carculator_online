@@ -9,6 +9,8 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from rq import Queue
 from redis import Redis
+from app.redis import redis_connection
+
 
 from .version import __version__
 
@@ -61,17 +63,13 @@ if is_prod:
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
 
-    # Initialize Redis and attach task queue
-    redis_url = os.getenv('STACKHERO_REDIS_URL_TLS', 'redis://localhost:6379/0')
-    app.redis = Redis.from_url(redis_url, health_check_interval=10, retry_on_timeout=True, socket_keepalive=True)
+    # Use centralized Redis connection
+    app.redis = redis_connection
     app.task_queue = Queue(connection=app.redis)
-else:
-    # Attach configuration file for local development
-    app.config.from_pyfile('config.py')
 
-    # Initialize Redis and task queue for local development (if needed)
-    app.redis = Redis.from_url('redis://localhost:6379/0')
-    app.task_queue = Queue(connection=app.redis)
+else:
+    app.redis = None
+    app.task_queue = None
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['LANGUAGES'] = {
