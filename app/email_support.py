@@ -8,6 +8,7 @@ def send_async_email(app, msg):
         mail.send(msg)
 
 def email_out(subject, sender, recipients, text_body, attachments=None, sync=False):
+    print(f"Sending email to {recipients}, with subject {subject}, from {sender}")
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     if attachments:
