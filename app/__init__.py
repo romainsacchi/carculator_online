@@ -97,17 +97,17 @@ db = SQLAlchemy(app, engine_options={"connect_args": ssl_args, "pool_pre_ping": 
 migrate = Migrate(app, db, directory=MIGRATION_DIR)
 
 # Setup logger to log errors by email
-if is_prod:
-    auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-    secure = ()
-    mail_handler = SMTPHandler(
-        mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-        fromaddr=f"no-reply@{app.config['ADMINS']}",
-        toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
-        credentials=auth, secure=secure
-    )
-    mail_handler.setLevel(logging.ERROR)
-    app.logger.addHandler(mail_handler)
+
+auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+secure = ()
+mail_handler = SMTPHandler(
+    mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+    fromaddr=f"no-reply@{app.config['ADMINS']}",
+    toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
+    credentials=auth, secure=secure
+)
+mail_handler.setLevel(logging.ERROR)
+app.logger.addHandler(mail_handler)
 
 # Setup flask-mail
 mail = Mail(app)
