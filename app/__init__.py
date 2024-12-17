@@ -54,7 +54,8 @@ login.login_view = 'login'
 
 app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
 app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 465))
-app.config['MAIL_USE_TLS'] = bool(int(os.environ.get('MAIL_USE_TLS', 1)))
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['ADMINS'] = os.environ.get('ADMINS', 'ADMIN')
