@@ -859,6 +859,7 @@ slider_annual_mileage.noUiSlider.on('set', function (values, handle) {
     }
 );
 
+var list_impact_cat = [];
 
 // Fetch data for the cars
 function get_results_replacement_car(){
@@ -893,8 +894,6 @@ function get_results_replacement_car(){
 
     var radio_group = $("input[name=driving_cycle]");
     var cycle = radio_group.filter(":checked").attr("id");
-
-    var list_impact_cat = [];
 
     $.when($.ajax({
                 url: "/fetch_car_repl_results/" + country + "/" + cycle,
