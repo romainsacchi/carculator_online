@@ -54,11 +54,12 @@ login.login_view = 'login'
 
 app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
 app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 465))
-app.config['MAIL_USE_TLS'] = bool(int(os.environ.get('MAIL_USE_TLS', 1)))
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-app.config['ADMINS'] = os.environ.get('ADMINS')
-app.config['RECIPIENT'] = os.environ.get('RECIPIENT')
+app.config['ADMINS'] = os.environ.get('ADMINS', 'ADMIN')
+app.config['RECIPIENT'] = os.environ.get('RECIPIENT', 'carculator@psi.ch')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key')
@@ -97,17 +98,17 @@ db = SQLAlchemy(app, engine_options={"connect_args": ssl_args, "pool_pre_ping": 
 migrate = Migrate(app, db, directory=MIGRATION_DIR)
 
 # Setup logger to log errors by email
-if is_prod:
-    auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-    secure = ()
-    mail_handler = SMTPHandler(
-        mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-        fromaddr=f"no-reply@{app.config['ADMINS']}",
-        toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
-        credentials=auth, secure=secure
-    )
-    mail_handler.setLevel(logging.ERROR)
-    app.logger.addHandler(mail_handler)
+
+auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+secure = ()
+mail_handler = SMTPHandler(
+    mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+    fromaddr=f"no-reply@{app.config['ADMINS']}",
+    toaddrs=app.config['RECIPIENT'], subject='Error on carculator_online',
+    credentials=auth, secure=secure
+)
+mail_handler.setLevel(logging.ERROR)
+app.logger.addHandler(mail_handler)
 
 # Setup flask-mail
 mail = Mail(app)
