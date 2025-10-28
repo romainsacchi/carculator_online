@@ -5,6 +5,9 @@
 /////////// Inspired by the code of alangrafu ///////////
 /////////////////////////////////////////////////////////
 
+
+
+
 function RadarChart(id, data, options) {
 	var cfg = {
 	 w: 600,				//Width of the circle
@@ -31,10 +34,46 @@ function RadarChart(id, data, options) {
 	  }//for i
 	}//if
 
-	data = (data || []).filter(function (s) {
-		return Array.isArray(s) && s.length > 0 &&
-			   s.every(function (p) { return p && typeof p.value === 'number'; });
+	// --- helpers to validate/clean + log offenders ---
+	function cleanSeries(series, sIdx) {
+	  if (!Array.isArray(series)) {
+		console.error(`[RadarChart] series ${sIdx} is not an array:`, series);
+		return [];
+	  }
+	  if (series.length === 0) {
+		console.warn(`[RadarChart] series ${sIdx} is EMPTY []`);
+		return [];
+	  }
+	  const cleaned = [];
+	  series.forEach((pt, pIdx) => {
+		const okAxis = pt && typeof pt.axis === 'string' && pt.axis.length > 0;
+		const okVal  = pt && Number.isFinite(+pt.value);
+		if (!okAxis || !okVal) {
+		  console.error(`[RadarChart] BAD POINT s=${sIdx}, p=${pIdx}`, {point: pt, okAxis, okVal});
+		} else {
+		  cleaned.push({axis: pt.axis, value: +pt.value, key: pt.key});
+		}
 	  });
+	  if (!cleaned.length) {
+		console.warn(`[RadarChart] series ${sIdx} dropped (no valid points left)`);
+	  }
+	  return cleaned;
+	}
+
+	function summarizeData(d) {
+	  try {
+		console.table(d.map((s, i) => ({
+		  seriesIndex: i,
+		  length: Array.isArray(s) ? s.length : '(not array)',
+		  firstAxis: s && s[0] ? s[0].axis : '(none)',
+		  firstKey:  s && s[0] ? (s[0].key ?? '(none)') : '(none)'
+		})));
+	  } catch (_) {}
+	}
+
+	data = (data || []).map(cleanSeries).filter(s => s.length > 0);
+    summarizeData(data);
+
 
 	// If nothing to plot, clear previous chart and exit gracefully
 	  if (!data.length) {
