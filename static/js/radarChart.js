@@ -31,6 +31,22 @@ function RadarChart(id, data, options) {
 	  }//for i
 	}//if
 
+	data = (data || []).filter(function (s) {
+		return Array.isArray(s) && s.length > 0 &&
+			   s.every(function (p) { return p && typeof p.value === 'number'; });
+	  });
+
+	// If nothing to plot, clear previous chart and exit gracefully
+	  if (!data.length) {
+		d3.select('#' + id).select("svg").remove();
+		return;
+	  }
+
+	  // --- NEW: safe maxValue ---
+	  var computedMax = d3.max(data, function (series) {
+		return d3.max(series, function (o) { return o.value; });
+	  });
+
 	//If the supplied maxValue is smaller than the actual one, replace by the max in the data
 	var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
 
@@ -184,7 +200,9 @@ function RadarChart(id, data, options) {
 				.attr('y', newY)
 				.attr('font-size', '14px')
 				.attr('font-weight', 'bold')
-				.text(d[0]['key'])
+				.text(function(d){
+				  return (d && d[0] && d[0].key) ? d[0].key : '';
+				})
 				.transition().duration(200)
 				.style('opacity', 1);
 
@@ -200,7 +218,9 @@ function RadarChart(id, data, options) {
 				.attr('y', newY)
 				.attr('font-size', '14px')
 				.attr('font-weight', 'bold')
-				.text(d[0]['key'])
+				.text(function(d){
+				  return (d && d[0] && d[0].key) ? d[0].key : '';
+				})
 				.transition().duration(200)
 				.style('opacity', 1);
 
@@ -346,7 +366,8 @@ function RadarChart(id, data, options) {
 
         left += 250
 
-	    text.text(data[x][0]['key'])
+	    var label = (data[x] && data[x][0] && data[x][0].key) ? data[x][0].key : ('Series ' + (x + 1));
+		text.text(label);
 	}
 
 }//RadarChart

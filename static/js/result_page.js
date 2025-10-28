@@ -1113,7 +1113,9 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
                 mid_data.push(radarChart_data_endpoint[d][c])
             }
         }
-        final_data.push(mid_data);
+        if (mid_data.length) {       // <-- add this guard
+            final_data.push(mid_data);
+          }
     }
 
 
@@ -1250,7 +1252,9 @@ function generate_radar_chart(data){
                 }
             };
         };
-        chart_data.push(list_data_sub)
+        if (list_data_sub.length) {  // <-- add this guard
+            chart_data.push(list_data_sub);
+          }
     };
 
     //////////////////////////////////////////////////////////////
