@@ -72,6 +72,15 @@ function RadarChart(id, data, options) {
 	data = (data || []).map(cleanSeries).filter(s => s.length > 0);
     summarizeData(id, data);
 
+	if (!data.length) {
+	  var sel = d3.select('#' + id);
+	  sel.selectAll('*').interrupt();     // stop transitions
+	  sel.select('svg').remove();         // clear previous chart
+	  console.warn(`[RadarChart/${id}] No valid series to plot. (All empty/invalid.)`);
+	  return;
+	}
+
+
 
 	// If nothing to plot, clear previous chart and exit gracefully
 	  if (!data.length) {

@@ -1279,10 +1279,13 @@ function generate_radar_chart(data){
     };
     //Call function to draw the Radar chart
     if (!chart_data.length || !chart_data.every(s => s && s.length)) {
-      d3.select('#radarChart_mid').select('svg').remove();
+      var sel = d3.select('#radarChart_mid');
+      sel.selectAll('*').interrupt();     // stop transitions
+      sel.select('svg').remove();         // remove any prior chart
       console.warn('[generate_radar_chart] no data to plot for mid-radar');
       return;
     }
+
     RadarChart("radarChart_mid", chart_data, radarChartOptions);
 
 
