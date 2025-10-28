@@ -21,6 +21,7 @@ function share_results(){
     );
  };
 
+
 function export_results()
 {
     var data_to_parse = data[1];
