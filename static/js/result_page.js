@@ -1,3 +1,9 @@
+window.addEventListener('error', function (e) {
+  console.log('[GlobalError]', e.message, e.filename + ':' + e.lineno + ':' + e.colno);
+  if (e.error && e.error.stack) console.log(e.error.stack);
+});
+
+
 function share_results(){
  	var str = i18n('save_results')
     $.notify(
@@ -1280,8 +1286,10 @@ function generate_radar_chart(data){
     //Call function to draw the Radar chart
     if (!chart_data.length || !chart_data.every(s => s && s.length)) {
       var sel = d3.select('#radarChart_mid');
-      sel.selectAll('*').interrupt();     // stop transitions
-      sel.select('svg').remove();         // remove any prior chart
+      sel.on('.zoom', null);                 // remove namespaced listeners if any
+      sel.selectAll('*').on('.zoom', null);  // (just in case)
+      sel.selectAll('*').interrupt();        // stop transitions
+      sel.select('svg').remove();            // remove old chart
       console.warn('[generate_radar_chart] no data to plot for mid-radar');
       return;
     }
