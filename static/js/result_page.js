@@ -1135,6 +1135,11 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
       precision: '.03f'
     };
     //Call function to draw the Radar chart
+    if (!final_data.length || !final_data.every(s => s && s.length)) {
+      d3.select('#radarChart_end').select('svg').remove();
+      console.warn('[rearrange_data_for_endpoint_chart] no data to plot for end-radar');
+      return;
+    }
     RadarChart("radarChart_end", final_data, radarChartOptions);
     }
 
@@ -1273,6 +1278,11 @@ function generate_radar_chart(data){
       precision: '.01f'
     };
     //Call function to draw the Radar chart
+    if (!chart_data.length || !chart_data.every(s => s && s.length)) {
+      d3.select('#radarChart_mid').select('svg').remove();
+      console.warn('[generate_radar_chart] no data to plot for mid-radar');
+      return;
+    }
     RadarChart("radarChart_mid", chart_data, radarChartOptions);
 
 

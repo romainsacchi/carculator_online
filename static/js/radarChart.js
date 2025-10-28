@@ -5,9 +5,6 @@
 /////////// Inspired by the code of alangrafu ///////////
 /////////////////////////////////////////////////////////
 
-
-
-
 function RadarChart(id, data, options) {
 	var cfg = {
 	 w: 600,				//Width of the circle
@@ -60,19 +57,20 @@ function RadarChart(id, data, options) {
 	  return cleaned;
 	}
 
-	function summarizeData(d) {
-	  try {
-		console.table(d.map((s, i) => ({
-		  seriesIndex: i,
-		  length: Array.isArray(s) ? s.length : '(not array)',
-		  firstAxis: s && s[0] ? s[0].axis : '(none)',
-		  firstKey:  s && s[0] ? (s[0].key ?? '(none)') : '(none)'
-		})));
-	  } catch (_) {}
+	function summarizeData(id, d) {
+	  const summary = d.map((s, i) => ({
+		seriesIndex: i,
+		length: Array.isArray(s) ? s.length : '(not array)',
+		firstAxis: s && s[0] ? s[0].axis : '(none)',
+		firstKey:  s && s[0] ? (s[0].key ?? '(none)') : '(none)'
+	  }));
+	  console.log(`[RadarChart/${id}] series summary:`);
+	  console.table(summary);
 	}
 
+
 	data = (data || []).map(cleanSeries).filter(s => s.length > 0);
-    summarizeData(data);
+    summarizeData(id, data);
 
 
 	// If nothing to plot, clear previous chart and exit gracefully
