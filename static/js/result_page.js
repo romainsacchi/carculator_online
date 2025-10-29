@@ -700,7 +700,9 @@ function _sanitizeSeriesForMultiBarWithIndex(s) {
 }
 
 
-//////////////////// Multibar diagnostics ////////////////////
+
+
+//////////////////// Multibar diagnostics (pinpoint row + missing) ////////////////////
 function _isNum(x){ return typeof x === 'number' && isFinite(x); }
 function _toNum(x){ const v = Number(x); return isFinite(v) ? v : NaN; }
 
@@ -708,118 +710,106 @@ function debugScanLCAData(data1, impact_cat, i18nFn){
   const problems = [];
   const rows = [];
 
-  // 1) Filter rows for this impact (converting cost later if needed)
+  // Collect rows for this translated impact category
   for (let idx = 0; idx < data1.length; idx++){
     const r = data1[idx];
     if (!Array.isArray(r) || r.length < 7){
-      problems.push({type:'shape', idx, row:r, msg:'row not array or length < 7'});
+      problems.push({ kind:'shape', idx, row: r });
       continue;
     }
     const impRaw = r[0];
     if (i18nFn(impRaw) !== impact_cat) continue;
 
-    // Validate pieces we rely on
     const size = r[1], pwt = r[2], year = r[3], subcat = r[4], perFU = r[5], total = r[6];
-    const issues = [];
-    if (typeof size !== 'string') issues.push('size not string');
-    if (typeof pwt  !== 'string') issues.push('powertrain not string');
-    if (!_isNum(_toNum(year))) issues.push('year not numeric');
-    if (typeof subcat !== 'string') issues.push('subcat not string');
-    if (!_isNum(_toNum(perFU))) issues.push('perFU not finite number');
-    if (!_isNum(_toNum(total))) issues.push('total not finite number');
+    const errs = [];
+    if (typeof size !== 'string') errs.push('size !string');
+    if (typeof pwt  !== 'string') errs.push('pwt !string');
+    if (!_isNum(_toNum(year))) errs.push('year !num');
+    if (typeof subcat !== 'string') errs.push('subcat !string');
+    if (!_isNum(_toNum(perFU))) errs.push('perFU !finite');
+    if (!_isNum(_toNum(total))) errs.push('total !finite');
 
-    if (issues.length){
-      problems.push({type:'row-invalid', idx, row:r, msg:issues.join(', ')});
+    if (errs.length){
+      problems.push({ kind:'row-invalid', idx, err: errs, row: r.slice(0,7) });
     } else {
-      rows.push({ idx, size, pwt, year:_toNum(year), subcat, perFU:_toNum(perFU), total:_toNum(total) });
+      rows.push({
+        idx,
+        size, pwt, year: _toNum(year),
+        subcat, perFU: _toNum(perFU), total: _toNum(total),
+        label: `${i18nFn(size)} - ${i18nFn(pwt)} - ${_toNum(year)}`
+      });
     }
   }
 
-  // 2) Build labels and detect duplicates per (size,pwt,year)
-  const labelKey = d => `${i18nFn(d.size)} - ${i18nFn(d.pwt)} - ${d.year}`;
-  const labelIndex = new Map();      // label -> index
-  const labelSources = new Map();    // label -> [indices that wrote it]
-  const labels = [];
-  function addLabel(lbl, srcIdx){
-    if (!labelIndex.has(lbl)){
-      labelIndex.set(lbl, labels.length);
-      labels.push(lbl);
-      labelSources.set(lbl, [srcIdx]);
-    } else {
-      labelSources.get(lbl).push(srcIdx);
-    }
-  }
-  rows.forEach(r => addLabel(labelKey(r), r.idx));
+  // x-domain and coverage
+  const labels = [...new Set(rows.map(r => r.label))];
+  const subcats = [...new Set(rows.map(r => r.subcat))];
 
-  // 3) Group by subcat and map coverage
-  const subcats = [...new Set(rows.map(r=>r.subcat))];
-  const coverage = {}; // subcat -> Set of label indices present
-  subcats.forEach(sc => coverage[sc] = new Set());
-  rows.forEach(r => coverage[r.subcat].add(labelIndex.get(labelKey(r))));
+  // Coverage map per subcat -> set of labels present
+  const cover = new Map();
+  subcats.forEach(sc => cover.set(sc, new Set()));
+  rows.forEach(r => cover.get(r.subcat).add(r.label));
 
-  // 4) Report label duplicates (same label written multiple times)
-  for (const [lbl, writers] of labelSources.entries()){
-    if (writers.length > 1){
-      problems.push({type:'duplicate-label', label:lbl, writers});
-    }
-  }
+  // Duplicated labels (same x) within same subcat
+  const dupes = [];
+  const seenKey = new Set();
+  rows.forEach(r => {
+    const k = `${r.subcat}|||${r.label}`;
+    if (seenKey.has(k)) dupes.push({ subcat: r.subcat, label: r.label, idx: r.idx });
+    seenKey.add(k);
+  });
 
-  // 5) Find holes: labels missing in some subcats
-  const holes = []; // array of {subcat, missingLabel, labelIdx}
-  for (const sc of subcats){
-    for (let i = 0; i < labels.length; i++){
-      if (!coverage[sc].has(i)){
-        holes.push({ subcat: sc, label: labels[i], labelIdx: i });
-      }
-    }
-  }
+  // Missing x per subcat
+  const holes = [];
+  subcats.forEach(sc => {
+    const s = cover.get(sc);
+    labels.forEach(lbl => { if (!s.has(lbl)) holes.push({ subcat: sc, label: lbl }); });
+  });
 
-  // 6) Print concise summaries
-  console.groupCollapsed('[multibar/debug] summary');
-  console.log('impact_cat:', impact_cat, '| real subcats:', subcats);
-  console.log('labels (x-axis):', labels);
-  console.log('rows considered (count):', rows.length);
-  console.groupEnd();
+  // Map label -> row indices for easy tracing
+  const labelToIdx = new Map();
+  labels.forEach(lbl => labelToIdx.set(lbl, []));
+  rows.forEach(r => labelToIdx.get(r.label).push(r.idx));
 
+  // Log in a way that cannot be collapsed into “Object”
+  console.log('[multibar/debug] impact_cat:', impact_cat, '| rows considered:', rows.length);
   if (problems.length){
-    console.group('[multibar/debug] problems');
-    problems.forEach(p => console.warn(p));
-    console.groupEnd();
+    console.warn('[multibar/debug] PROBLEMS (first 10):');
+    problems.slice(0,10).forEach(p => {
+      console.warn(
+        `  - kind=${p.kind} idx=${p.idx}`,
+        JSON.stringify(p.err || []),
+        JSON.stringify(p.row)
+      );
+    });
+    if (problems.length > 10) console.warn(`  ... and ${problems.length-10} more`);
   } else {
     console.log('[multibar/debug] basic shape/number validation: OK');
   }
 
-  if (holes.length){
-    // Group holes per subcat to make it readable
-    const perSc = {};
-    holes.forEach(h => { (perSc[h.subcat] ||= []).push(h); });
-    console.group('[multibar/debug] missing x slots per series (these cause NVD3 crash)');
-    Object.entries(perSc).forEach(([sc, arr]) => {
-      console.warn(`subcat "${sc}" is missing ${arr.length} label(s):`);
-      // show first 10 only, not to spam
-      arr.slice(0,10).forEach(h => console.warn('  -', h.label, `(x=${h.labelIdx})`));
-      if (arr.length > 10) console.warn(`  ... and ${arr.length-10} more`);
-    });
-    console.groupEnd();
+  if (dupes.length){
+    console.warn('[multibar/debug] DUPLICATE label within subcat (first 10):');
+    dupes.slice(0,10).forEach(d => console.warn(`  - subcat=${d.subcat} label="${d.label}" sample idx=${d.idx}`));
+  }
 
-    // Pinpoint the underlying data[1] rows for one missing label per subcat
-    console.group('[multibar/debug] suggest where to look in data[1]');
-    Object.entries(perSc).forEach(([sc, arr]) => {
-      const firstMissing = arr[0];
-      // Find rows that DO provide that label (any subcat) so you can compare
-      const lbl = firstMissing.label;
-      const matchingRows = rows.filter(r => labelKey(r) === lbl);
-      console.log(`For subcat "${sc}", investigate label "${lbl}"`);
-      console.log('Rows that have this label (other subcats):', matchingRows.map(r => r.idx));
-      console.log('Look for a row with same size/pwt/year but subcat:', sc);
+  if (holes.length){
+    // Show a compact per-subcat list (first 8 each)
+    console.warn('[multibar/debug] MISSING x-labels by subcat (these cause NVD3 stacked errors):');
+    const per = {};
+    holes.forEach(h => { (per[h.subcat] ||= []).push(h.label); });
+    Object.entries(per).forEach(([sc, arr]) => {
+      console.warn(`  - ${sc}: missing ${arr.length} label(s). Examples:`, arr.slice(0,8));
+      // For the first missing label, show which indices DO exist for that label
+      const sample = arr[0];
+      console.warn(`      compare with existing rows for "${sample}":`, labelToIdx.get(sample));
     });
-    console.groupEnd();
   } else {
     console.log('[multibar/debug] all series cover identical x-domain: OK');
   }
 
-  return { rows, labels, subcats, problems, holes };
+  return { rows, labels, subcats, problems, holes, dupes, labelToIdx };
 }
+
 
 
 function rearrange_data_for_LCA_chart(impact_cat){
@@ -831,7 +821,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
   for (let a = 0; a < data[1].length; a++){
     if (i18n(data[1][a][0]) === impact_cat){
       real_impact_name = data[1][a][0];
-      const dbg = debugScanLCAData(data[1], impact_cat, i18n);
+      debugScanLCAData(data[1], impact_cat, i18n);
       if (real_impact_name === "ownership cost"){
         const r = data[1][a].slice();
         r[6] = Number(r[6]) * currency_exch_rate; // total
