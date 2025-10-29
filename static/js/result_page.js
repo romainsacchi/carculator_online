@@ -888,6 +888,76 @@ function _padMissingIndicesWithZero(labelsLen, dataset){
 }
 
 
+function _validateNvMultiBarTupleDataset(nvDataset, labels) {
+  try {
+    if (!Array.isArray(nvDataset)) {
+      console.error('[nv-validate] dataset is not an array:', nvDataset);
+      return false;
+    }
+
+    // High-level summary
+    console.log('[nv-validate] series count:', nvDataset.length, '| labels:', labels.length);
+
+    for (let si = 0; si < nvDataset.length; si++) {
+      const s = nvDataset[si];
+      if (!s || typeof s !== 'object') {
+        console.error('[nv-validate] series not object', { si, s });
+        return false;
+      }
+      if (!('key' in s)) {
+        console.error('[nv-validate] series missing "key"', { si, s });
+        return false;
+      }
+      if (!Array.isArray(s.values)) {
+        console.error('[nv-validate] series.values not array', { si, key: s.key, values: s.values });
+        return false;
+      }
+
+      for (let pi = 0; pi < s.values.length; pi++) {
+        const pt = s.values[pi];
+
+        if (!Array.isArray(pt)) {
+          console.error('[nv-validate] point is not array', { si, key: s.key, pi, pt });
+          return false;
+        }
+        if (pt.length < 2) {
+          console.error('[nv-validate] point has length < 2', { si, key: s.key, pi, pt });
+          return false;
+        }
+
+        const x = pt[0], y = pt[1];
+
+        if (!Number.isFinite(x)) {
+          console.error('[nv-validate] x not finite', { si, key: s.key, pi, x, pt });
+          return false;
+        }
+        if (!Number.isFinite(y)) {
+          console.error('[nv-validate] y not finite', { si, key: s.key, pi, y, pt });
+          return false;
+        }
+
+        const ix = Math.round(x);
+        if (ix < 0 || ix >= labels.length) {
+          console.error('[nv-validate] x index out of label range', { si, key: s.key, pi, ix, labelsLen: labels.length, label: labels[ix] });
+          return false;
+        }
+
+        // Catch sneaky undefineds in tuple
+        if (pt[0] === undefined || pt[1] === undefined) {
+          console.error('[nv-validate] tuple contains undefined', { si, key: s.key, pi, pt });
+          return false;
+        }
+      }
+    }
+    console.log('[nv-validate] dataset looks OK for NVD3 tuple input.');
+    return true;
+  } catch (e) {
+    console.error('[nv-validate] threw while scanning:', e);
+    return false;
+  }
+}
+
+
 function rearrange_data_for_LCA_chart(impact_cat){
 
   // ---- local helpers ----
@@ -1097,11 +1167,27 @@ function rearrange_data_for_LCA_chart(impact_cat){
       .tickFormat(yFmt)
       .showMaxMin(false);
 
-    // NOTE: feed the tuple-compat dataset
+    // Validate deeply before we call NVD3.
+    // If there is *any* bad point, we log exactly which one and abort.
+    if (!_validateNvMultiBarTupleDataset(nvDataset, labels)) {
+      console.error('[rearrange_data_for_LCA_chart] Aborting render due to invalid nvDataset.');
+      // Optional: dump a compact preview of each series first 5 points
+      try {
+        const preview = nvDataset.map(s => ({
+          key: s.key,
+          head: (s.values || []).slice(0, 5)
+        }));
+        console.log('[nv-validate] preview head:', preview);
+      } catch(_) {}
+      d3.select('#chart_impacts').select('svg').remove();
+      return;
+    }
+
     d3.select('#chart_impacts')
       .datum(nvDataset)
       .transition().duration(500)
       .call(chart);
+
 
     nv.utils.windowResize(chart.update);
     return chart;
