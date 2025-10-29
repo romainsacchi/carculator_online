@@ -170,6 +170,21 @@ def np_encoder(object):
         return object.item()
 
 
+def _normalize_foreground_keys(d):
+    """Drop a trailing 'none' from Foreground keys, in-place."""
+    FG = ("Foreground",)
+    if FG not in d:
+        return d
+    new_fg = {}
+    for k, v in d[FG].items():
+        if isinstance(k, tuple) and len(k) == 5 and k[-1] == "none":
+            new_fg[k[:-1]] = v  # strip the last element
+        else:
+            new_fg[k] = v
+    d[FG] = new_fg
+    return d
+
+
 def load_yaml_file(filepath):
     """
     Load a yaml file
@@ -635,6 +650,8 @@ class Calculation:
 
     def process_results(self, d, lang, job_id):
         """Calculate LCIA and store results in an array of arrays"""
+
+        d = _normalize_foreground_keys(d)
 
         # Update task progress to db
         self.update_task_progress(50, job_id)
