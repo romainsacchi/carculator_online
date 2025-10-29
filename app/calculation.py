@@ -651,7 +651,7 @@ class Calculation:
     def process_results(self, d, lang, job_id):
         """Calculate LCIA and store results in an array of arrays"""
 
-        d = _normalize_foreground_keys(d)
+        # d = _normalize_foreground_keys(d)
 
         print(d)
 
