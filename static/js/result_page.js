@@ -1,8 +1,55 @@
+// ---------- Global error logger ----------
 window.addEventListener('error', function (e) {
   console.log('[GlobalError]', e.message, e.filename + ':' + e.lineno + ':' + e.colno);
   if (e.error && e.error.stack) console.log(e.error.stack);
 });
 
+//////////////////// Radar helpers: sanitize + diagnostics ////////////////////
+function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
+
+function _sanitizeRadarSeriesObjects(series) {
+  // series: array of {axis, value, key}
+  const axes = (Array.isArray(series) ? series : [])
+    .filter(p => p && typeof p.axis === 'string' && _isFiniteNum(Number(p.value)))
+    .map(p => ({ axis: String(p.axis), value: Number(p.value), key: p.key ?? '' }));
+  return axes;
+}
+
+function _sanitizeRadarDataset(dataset) {
+  // dataset: [ series0, series1, ... ] where each series is [{axis,value,key}, ...]
+  const cleaned = [];
+  const issues = [];
+  (Array.isArray(dataset) ? dataset : []).forEach((series, si) => {
+    const axes = _sanitizeRadarSeriesObjects(series);
+    if (!axes.length) {
+      issues.push(`series ${si} empty/invalid`);
+    } else {
+      // Find any problem points (shouldn't happen after sanitize, but be verbose)
+      const badIdx = axes.findIndex(p => typeof p.axis !== 'string' || !_isFiniteNum(p.value));
+      if (badIdx >= 0) {
+        issues.push(`series ${si} has bad point at ${badIdx}: ${JSON.stringify(axes[badIdx])}`);
+      }
+      cleaned.push(axes);
+    }
+  });
+  if (issues.length) console.warn('[radar] sanitize issues:', issues);
+  return cleaned;
+}
+
+function _describeRadar(dataset) {
+  try {
+    const desc = (dataset || []).map((series, i) => ({
+      i,
+      len: Array.isArray(series) ? series.length : -1,
+      first: (Array.isArray(series) && series.length) ? `${series[0].axis}:${series[0].value}` : '(none)'
+    }));
+    console.log('[radar] series summary:', desc);
+  } catch(e) {
+    console.warn('[radar] describe failed:', e);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
 
 function share_results(){
  	var str = i18n('save_results')
@@ -27,7 +74,6 @@ function share_results(){
     );
  };
 
-
 function export_results()
 {
     var data_to_parse = data[1];
@@ -35,7 +81,6 @@ function export_results()
         var impact_cat = data_to_parse[d][0];
         for (sub=0;sub<data_to_parse[d].length;sub++){
             data_to_parse[d][sub] = i18n(data_to_parse[d][sub]);
-
         };
         data_to_parse[d].splice(6,1)
         data_to_parse[d].push(i18n('unit_'+impact_cat))
@@ -129,131 +174,11 @@ function find_currency(country){
 
     // A dictionary to map ISO country code to currency code
     dict_country_currency = {
-        "AT":"EUR",
-        "AU":"AUD",
-        "BE":"EUR",
-        "BG":"BGN",
-        "BR":"BRL",
-        "CA":"CAD",
-        "CH":"CHF",
-        "CL":"CLP",
-        "CN":"CNY",
-        "CY":"CYP",
-        "CZ":"CZK",
-        "DE":"EUR",
-        "DK":"DKK",
-        "EE":"EEK",
-        "ES":"EUR",
-        "FI":"EUR",
-        "FR":"EUR",
-        "GB":"GBP",
-        "GR":"EUR",
-        "HR":"HRK",
-        "HU":"HUF",
-        "IE":"EUR",
-        "IN":"INR",
-        "IT":"EUR",
-        "IS":"ISK",
-        "JP":"JPY",
-        "LT":"LTL",
-        "LU":"EUR",
-        "LV":"LVL",
-        "MT":"MTL",
-        "PL":"PLN",
-        "PT":"EUR",
-        "RO":"ROL",
-        "RU":"RUR",
-        "SE":"SEK",
-        "SI":"SIT",
-        "SK":"SKK",
-        "US":"USD",
-        "ZA":"ZAR",
-        "AO":"AOA",
-        "BF":"XOF",
-        "BI":"BIF",
-        "BJ":"XOF",
-        "BW":"BWP",
-        "CD":"CDF",
-        "CF":"XAF",
-        "CG":"XAF",
-        "CI":"XOF",
-        "CM":"XAF",
-        "DJ":"DJF",
-        "DZ":"DZD",
-        "EG":"EGP",
-        "ER":"ERN",
-        "ET":"ETB",
-        "GA":"XAF",
-        "GH":"GHC",
-        "GM":"GMD",
-        "GN":"GNF",
-        "GQ":"XAF",
-        "GW":"GWP",
-        "KE":"KES",
-        "LR":"LRD",
-        "LS":"ZAR",
-        "LY":"LYD",
-        "MA":"MAD",
-        "ML":"XOF",
-        "MR":"MRO",
-        "MW":"MWK",
-        "MZ":"MZM",
-        "NE":"XOF",
-        "NG":"NGN",
-        "NL":"EUR",
-        "NM":"NAD",
-        "RW":"RWF",
-        "SD":"SDD",
-        "SL":"SLL",
-        "SN":"XOF",
-        "SO":"SOS",
-        "SS":"SDD",
-        "SZ":"SZL",
-        "TD":"XAF",
-        "TG":"XOF",
-        "TN":"TND",
-        "TZ":"TZS",
-        "UG":"UGX",
-        "ZM":"ZMK",
-        "ZW":"ZWD",
-        "NO":"NOK",
+        "AT":"EUR","AU":"AUD","BE":"EUR","BG":"BGN","BR":"BRL","CA":"CAD","CH":"CHF","CL":"CLP","CN":"CNY","CY":"CYP","CZ":"CZK","DE":"EUR","DK":"DKK","EE":"EEK","ES":"EUR","FI":"EUR","FR":"EUR","GB":"GBP","GR":"EUR","HR":"HRK","HU":"HUF","IE":"EUR","IN":"INR","IT":"EUR","IS":"ISK","JP":"JPY","LT":"LTL","LU":"EUR","LV":"LVL","MT":"MTL","PL":"PLN","PT":"EUR","RO":"ROL","RU":"RUR","SE":"SEK","SI":"SIT","SK":"SKK","US":"USD","ZA":"ZAR","AO":"AOA","BF":"XOF","BI":"BIF","BJ":"XOF","BW":"BWP","CD":"CDF","CF":"XAF","CG":"XAF","CI":"XOF","CM":"XAF","DJ":"DJF","DZ":"DZD","EG":"EGP","ER":"ERN","ET":"ETB","GA":"XAF","GH":"GHC","GM":"GMD","GN":"GNF","GQ":"XAF","GW":"GWP","KE":"KES","LR":"LRD","LS":"ZAR","LY":"LYD","MA":"MAD","ML":"XOF","MR":"MRO","MW":"MWK","MZ":"MZM","NE":"XOF","NG":"NGN","NL":"EUR","NM":"NAD","RW":"RWF","SD":"SDD","SL":"SLL","SN":"XOF","SO":"SOS","SS":"SDD","SZ":"SZL","TD":"XAF","TG":"XOF","TN":"TND","TZ":"TZS","UG":"UGX","ZM":"ZMK","ZW":"ZWD","NO":"NOK",
     };
 
     var dict_currency_rates = {
-        "EUR":"1",
-        "AUD":"1.63",
-        "BGN":"1.96",
-        "BRL":"6.31",
-        "CAD":"1.57",
-        "CHF":"1.08",
-        "CNY":"8.1",
-        "CZK":"26.7",
-        "DKK":"7.44",
-        "RON":"4.86",
-        "RUR":"89.5",
-        "SEK":"10.4",
-        "XOF":"120",
-        "XAF":"120",
-        "SDD":"65.7",
-        "TND":"3.26",
-        "ZMK":"23.7",
-        "NOK":"10.7",
-        "AMD":"577",
-        "AZN":"2.02",
-        "BYN":"3.125",
-        "BAM":"1.96",
-        "HRK":"7.54",
-        "GEL":"3.7",
-        "HUF":"357",
-        "ISK":"160",
-        "MDL":"19.6",
-        "MKD":"61",
-        "PLN":"4.45",
-        "RSD":"118",
-        "TRY":"8.9",
-        "UAH":"33",
-        "GBP":"0.92",
-        "USD":"0.84",
+        "EUR":"1","AUD":"1.63","BGN":"1.96","BRL":"6.31","CAD":"1.57","CHF":"1.08","CNY":"8.1","CZK":"26.7","DKK":"7.44","RON":"4.86","RUR":"89.5","SEK":"10.4","XOF":"120","XAF":"120","SDD":"65.7","TND":"3.26","ZMK":"23.7","NOK":"10.7","AMD":"577","AZN":"2.02","BYN":"3.125","BAM":"1.96","HRK":"7.54","GEL":"3.7","HUF":"357","ISK":"160","MDL":"19.6","MKD":"61","PLN":"4.45","RSD":"118","TRY":"8.9","UAH":"33","GBP":"0.92","USD":"0.84",
     };
 
     var currency = dict_country_currency[country]
@@ -434,7 +359,6 @@ var currency_info = find_currency(data[7]);
 var currency_exch_rate = Number(currency_info[0]);
 var currency_name = currency_info[1];
 
-
 // Update label in benchmark dropdown list
 document.getElementById('select_benchmark')[1].innerHTML = currency_name;
 
@@ -524,7 +448,6 @@ function generate_benchmark(data, cat){
 
 function generate_line_chart_TtW_energy(data){
 
-
     var max_y_val = 0
     var max_x_val = 0
 
@@ -537,35 +460,22 @@ function generate_line_chart_TtW_energy(data){
         if (parseFloat(data[v]["values"].slice(-1)[0]["x"]) > max_x_val){ max_x_val = Math.round(parseFloat(data[v]["values"].slice(-1)[0]["x"]))}
     };
 
-
     nv.addGraph(function() {
       var chart = nv.models.lineChart()
-                    .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
-                    .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-                    //.transitionDuration(350)  //how fast do you want the lines to transition?
-                    .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-                    .showYAxis(true)        //Show the y-axis
-                    .showXAxis(true)        //Show the x-axis
+                    .margin({left:60, bottom:40, right:30})
+                    .useInteractiveGuideline(true)
+                    .showLegend(true)
+                    .showYAxis(true)
+                    .showXAxis(true)
                     .forceY([0, max_y_val * 1.1])
                     .forceX([0, max_x_val]);
 
       var dc_str = i18n("driving_cycle");
-      chart.xAxis     //Chart x-axis settings
-          .axisLabel(dc_str)
-          .tickFormat(d3.format(',r'))
-          ;
-      chart.yAxis     //Chart y-axis settings
-          .axisLabel('Kilojoule')
-          .tickFormat(d3.format(',d'))
-          .showMaxMin(false);
+      chart.xAxis.axisLabel(dc_str).tickFormat(d3.format(',r'));
+      chart.yAxis.axisLabel('Kilojoule').tickFormat(d3.format(',d')).showMaxMin(false);
 
-      d3.select('#chart-ttw-energy')    //Select the <svg> element you want to render the chart in.
-          .datum(data)         //Populate the <svg> element with chart data...
-          .call(chart);          //Finally, render the chart!
-
-      //d3.selectAll('.nv-axis .tick line').attr('display','none')
+      d3.select('#chart-ttw-energy').datum(data).call(chart);
       d3.select('#chart-ttw-energy').style('fill', "white");
-      //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
     });
@@ -575,13 +485,11 @@ function generate_scatter_chart(data, qty, unit){
 
     var datum = [];
     for (var key in data) {
-        // check if the property/key is defined in the object itself, not in parent
         if (data.hasOwnProperty(key)) {
             var arr_names = key.split(", ");
             var pt = i18n(arr_names[0]);
             var y = arr_names[1];
             var size = i18n(arr_names[2]);
-            // we convert the cost in the user's currency
             datum.push({values:[{"x": data[key][0]*currency_exch_rate,
                                  "y":data[key][1], "size":400, "shape":"circle"}],
                                  key:pt+" - " + size + " - " + y})
@@ -590,10 +498,10 @@ function generate_scatter_chart(data, qty, unit){
 
     nv.addGraph(function() {
       var chart = nv.models.scatterChart()
-                    .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
-                    .showYAxis(true)        //Show the y-axis
-                    .showXAxis(true)        //Show the x-axis
-                    .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
+                    .margin({left:60, bottom:40, right:30})
+                    .showYAxis(true)
+                    .showXAxis(true)
+                    .showDistX(true)
                     .showDistY(true)
                     .color(d3.scale.category10().range())
                     .pointRange([70,70])
@@ -606,24 +514,13 @@ function generate_scatter_chart(data, qty, unit){
           return html;
         })
       var gwp_str = i18n("cc_per_km");
-      chart.yAxis     //Chart y-axis settings
-          .axisLabel(gwp_str)
-          .tickFormat(d3.format('.02f'))
-          .ticks(10);
+      chart.yAxis.axisLabel(gwp_str).tickFormat(d3.format('.02f')).ticks(10);
 
       var cost_str = currency_name + "/" + qty + " - " + unit;
-      chart.xAxis     //Chart x-axis settings
-          .axisLabel(cost_str)
-          .tickFormat(d3.format('.02f'))
-          .ticks(10);
+      chart.xAxis.axisLabel(cost_str).tickFormat(d3.format('.02f')).ticks(10);
 
-      d3.select('#chart-scatter')    //Select the <svg> element you want to render the chart in.
-          .datum(datum)         //Populate the <svg> element with chart data...
-          .call(chart);       //Finally, render the chart!
-
-
+      d3.select('#chart-scatter').datum(datum).call(chart);
       d3.select('#chart-scatter').style('fill', "white");
-      //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart.update() });
       return chart;
 
@@ -635,7 +532,6 @@ function generate_chart_accumulated_impacts(data, impact){
 
     var datum = [];
     for (var x=0; x < data.length; x++){
-
         if (data[x][0] == impact){
             var arr_data = [];
             for (var i = 0; i < 101; i++){
@@ -644,70 +540,42 @@ function generate_chart_accumulated_impacts(data, impact){
             var name = i18n(data[x][2]) + " - " + i18n(data[x][1]) + " - " + data[x][3]
             datum.push({values:arr_data, key:name, color:colors(x)})
         };
-
     };
 
     nv.addGraph(function() {
     var chart_acc = nv.models.lineChart()
-                    .margin({left:60, bottom:40, right:30})  //Adjust chart margins to give the x-axis some breathing room.
-                    .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-                    .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-                    .showYAxis(true)        //Show the y-axis
+                    .margin({left:60, bottom:40, right:30})
+                    .useInteractiveGuideline(true)
+                    .showLegend(true)
+                    .showYAxis(true)
                     .forceY([0])
-                    .showXAxis(true);        //Show the x-axis
+                    .showXAxis(true);
 
-      chart_acc.xAxis     //Chart x-axis settings
-          .axisLabel(i18n('use'))
-          .tickFormat(d3.format(',d'))
-          ;
+      chart_acc.xAxis.axisLabel(i18n('use')).tickFormat(d3.format(',d'));
 
       if (impact == "ozone depletion" ){
-          chart_acc.yAxis     //Chart y-axis settings
-          .axisLabel(i18n("unit_"+impact))
-          .tickFormat(d3.format('.0e'))
-          .showMaxMin(false);
+          chart_acc.yAxis.axisLabel(i18n("unit_"+impact)).tickFormat(d3.format('.0e')).showMaxMin(false);
       }
-
       else{
             if (impact == "human noise"){
-              chart_acc.yAxis     //Chart y-axis settings
-              .axisLabel(i18n("unit_"+impact))
-              .tickFormat(d3.format('s'))
-              .showMaxMin(false);
-
+              chart_acc.yAxis.axisLabel(i18n("unit_"+impact)).tickFormat(d3.format('s')).showMaxMin(false);
             }else{
-              chart_acc.yAxis     //Chart y-axis settings
-              .axisLabel(i18n("unit_"+impact))
-              .tickFormat(d3.format(',d'))
-              .showMaxMin(false);
-
+              chart_acc.yAxis.axisLabel(i18n("unit_"+impact)).tickFormat(d3.format(',d')).showMaxMin(false);
             };
       };
 
-      // generate a tooltip that shows all series with corresponding values
       chart_acc.interactiveLayer.tooltip.contentGenerator(function (d) {
-            var html = "<h4 style='margin:15px;'>"+d.value+" km</h2> <ul>";
+            var html = "<h4 style='margin:15px;'>" + d.value + " km</h2> <ul>";
             for (var i = 0; i < d.series.length; i++) {
-            // add colored square and name of series
-
-            html += "<li style='margin-left:30px;list-style-type: none'><span style='color:" + d.series[i].color + ";'>●</span> " + d.series[i].key + ": " + d.series[i].value.toFixed(2) + " " + i18n("unit_"+impact) + "</li>";
-
-
+              html += "<li style='margin-left:30px;list-style-type: none'><span style='color:" + d.series[i].color + ";'>●</span> " + d.series[i].key + ": " + d.series[i].value.toFixed(2) + " " + i18n("unit_"+impact) + "</li>";
             }
             html += "</ul>";
             return html;
-            }
-      );
+      });
 
-
-      d3.select('#chart-accumulated')    //Select the <svg> element you want to render the chart in.
-          .datum(datum)         //Populate the <svg> element with chart data...
-          .call(chart_acc);          //Finally, render the chart!
-
-      //d3.selectAll('.nv-axis .tick line').attr('display','none')
+      d3.select('#chart-accumulated').datum(datum).call(chart_acc);
       d3.select('#chart-accumulated').style('fill', "gray");
       d3.selectAll('.nvd3 g.nv-groups g path.nv-line').attr('stroke-width','5px')
-      //Update the chart when window resizes.
       nv.utils.windowResize(function() { chart_acc.update() });
       return chart_acc;
     });
@@ -731,7 +599,6 @@ function update_impact_definition_table(impact_name){
         tableRef.deleteRow(0);
         var rowCount = tableRef.rows.length;
         }
-
 
     var d_reliability = {
         "agricultural land occupation": "moderate",
@@ -761,15 +628,12 @@ function update_impact_definition_table(impact_name){
 
     var newRow = tableRef.insertRow();
     newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('name') + '</td><td>' + i18n(impact_name) + '</td></tr>'
-    // Append table to div
     tableRef.append(newRow);
     var newRow = tableRef.insertRow();
     newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('unit') + '</td><td>' + i18n('unit_'+impact_name) + '</td></tr>'
-    // Append table to div
     tableRef.append(newRow);
     var newRow = tableRef.insertRow();
     newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('description_impact') + '</td><td>' + i18n('description_' + impact_name) + '</td></tr>'
-    // Append table to div
     tableRef.append(newRow);
     var newRow = tableRef.insertRow();
     newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('reliability_impact')
@@ -782,12 +646,9 @@ function update_impact_definition_table(impact_name){
     if (d_reliability[impact_name] == "poor"){
          newRow.innerHTML += '</td><td style="color:red;"><b>' + i18n(d_reliability[impact_name]) + '</b></td></tr>'
     }
-
-    // Append table to div
     tableRef.append(newRow);
     var newRow = tableRef.insertRow();
     newRow.innerHTML = '<tr class="text-left"><td width="25%">' + i18n('issue_impact') + '</td><td>' + i18n('issue_'+impact_name) + '</td></tr>'
-    // Append table to div
     tableRef.append(newRow);
 }
 
@@ -800,8 +661,6 @@ function rearrange_data_for_LCA_chart(impact_cat){
         if (i18n(data[1][a][0]) == impact_cat){
             real_impact_name = data[1][a][0];
 
-            // if impact_cat is cost, we need to convert
-            // to the user's currency
             if (real_impact_name=="ownership cost"){
                 var data_to_insert = data[1][a].slice();
                 var cost_val_total = data_to_insert[6] * currency_exch_rate
@@ -848,12 +707,12 @@ function rearrange_data_for_LCA_chart(impact_cat){
 
     nv.addGraph(function() {
             var chart = nv.models.multiBarChart()
-                    .margin({left:100, bottom:180})  //Adjust chart margins to give the x-axis some breathing room.
+                    .margin({left:100, bottom:180})
                     .stacked(true);
             chart.xAxis.rotateLabels(-30);
             var unit_name = "unit_"+real_impact_name;
 
-            chart.yAxis     //Chart y-axis settings
+            chart.yAxis
               .axisLabel(i18n(unit_name)+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.03f'))
               .showMaxMin(false);
@@ -861,14 +720,10 @@ function rearrange_data_for_LCA_chart(impact_cat){
             if (["ozone depletion", "freshwater eutrophication", "marine eutrophication", "natural land transformation",
                     "particulate matter formation", "photochemical oxidant formation", "terrestrial acidification",
                     "terrestrial ecotoxicity"].includes(real_impact_name)){
-                  chart.yAxis
-                  .tickFormat(d3.format('.02e'))
-                  .showMaxMin(false);
+                  chart.yAxis.tickFormat(d3.format('.02e')).showMaxMin(false);
               }
             if (real_impact_name == "human noise"){
-              chart.yAxis
-              .tickFormat(d3.format('s'))
-              .showMaxMin(false);
+              chart.yAxis.tickFormat(d3.format('s')).showMaxMin(false);
             };
 
             if (real_impact_name == "ownership cost"){
@@ -876,7 +731,6 @@ function rearrange_data_for_LCA_chart(impact_cat){
               .axisLabel(currency_name+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.02f'))
               .showMaxMin(false);
-
             };
             d3.select('#chart_impacts')
                 .datum(data_to_plot)
@@ -887,7 +741,6 @@ function rearrange_data_for_LCA_chart(impact_cat){
             return chart;
         });
 };
-
 
 function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, resource_val, cost_val){
     var mid_to_end = {
@@ -921,10 +774,8 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
 
     var processed_data = [];
 
-
     for (recipient=0;recipient<list_recipient.length;recipient++){
         for (a=0; a<data[1].length;a++){
-
             if (data[1][a][0] in mid_to_end){
                 for (b=0;b<mid_to_end[data[1][a][0]].length;b++){
                     if (mid_to_end[data[1][a][0]][b]["name"]==list_recipient[recipient]){
@@ -963,38 +814,23 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
                                                     data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_cost*(cost_val/100),
                                                     data[1][a][0]])
                         };
-
                     }
+                }
             }
-
-            };
-
         }
     };
 
     var data_to_plot = [];
 
-
     for (a = 0; a < list_recipient.length; a++){
         var impact_dict={};
-
         impact_dict['key'] = i18n(list_recipient[a]);
-
         impact_dict['values'] = [];
 
-        if (list_recipient[a] == "human health"){
-            impact_dict['color'] = "#1f77b4"
-        }
-        if (list_recipient[a] == "ecosystem"){
-            impact_dict['color'] = "#98df8a"
-        }
-        if (list_recipient[a] == "resource"){
-            impact_dict['color'] = "#ff7f0e"
-        }
-        if (list_recipient[a] == "ownership cost"){
-            impact_dict['color'] = "#d62728"
-        }
-
+        if (list_recipient[a] == "human health"){ impact_dict['color'] = "#1f77b4" }
+        if (list_recipient[a] == "ecosystem"){ impact_dict['color'] = "#98df8a" }
+        if (list_recipient[a] == "resource"){ impact_dict['color'] = "#ff7f0e" }
+        if (list_recipient[a] == "ownership cost"){ impact_dict['color'] = "#d62728" }
 
         var list_vehicles = [];
 
@@ -1022,13 +858,13 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
 
     nv.addGraph(function() {
             var chart = nv.models.multiBarChart()
-                    .margin({left:100, bottom:180})  //Adjust chart margins to give the x-axis some breathing room.
+                    .margin({left:100, bottom:180})
                     .stacked(true);
             chart.xAxis.rotateLabels(-30);
 
             var unit_name = i18n("total_impact");
 
-            chart.yAxis     //Chart y-axis settings
+            chart.yAxis
               .axisLabel(unit_name+"/"+data[8]+" - "+ data[9])
               .tickFormat(d3.format('.03f'))
               .showMaxMin(false);
@@ -1046,9 +882,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
     var chart_data = [];
 
     var list_impacts = [];
-    var list_colors = [];
     var list_cars = [];
-    var list_data = [];
 
     for (var d=0; d < processed_data.length; d++){
         if (!list_impacts.includes(processed_data[d][6])){list_impacts.push(processed_data[d][6])}
@@ -1056,38 +890,26 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
         if (!list_cars.includes(car)){list_cars.push(car)}
     };
 
-
     var radarChart_data_endpoint = [];
 
     for (var car = 0; car < list_cars.length; car++){
         var car_data = [];
         for (var imp = 0; imp < list_impacts.length; imp++){
             var impact = 0
-
             for (var d = 0; d < processed_data.length; d++){
                 var c = i18n(processed_data[d][2]) + " - " + i18n(processed_data[d][1]) + " - " + processed_data[d][3]
-
                 if (c == list_cars[car] && processed_data[d][6] == list_impacts[imp]){
                     impact += processed_data[d][5]
-
                 }
             }
-
             if (impact > 0 ){
-
-                car_data.push({
-                    'axis': i18n(list_impacts[imp]),
-                    'value': impact,
-                    'key': list_cars[car]
-                    })
+                car_data.push({ 'axis': i18n(list_impacts[imp]), 'value': impact, 'key': list_cars[car] })
             }
         }
-          radarChart_data_endpoint.push(car_data)
-        }
-
+        radarChart_data_endpoint.push(car_data)
+    }
 
     var max_val = 0;
-
     for (var d=0; d < radarChart_data_endpoint.length; d++){
         for (var c=0; c < radarChart_data_endpoint[d].length; c++){
             if (radarChart_data_endpoint[d][c]["value"] > max_val){max_val = radarChart_data_endpoint[d][c]["value"]}
@@ -1097,10 +919,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
     var final_data= [];
 
     var keep_impact = {};
-
-    for (var i = 0; i < list_impacts.length; i++){
-        keep_impact[i18n(list_impacts[i])] = 0
-    }
+    for (var i = 0; i < list_impacts.length; i++){ keep_impact[i18n(list_impacts[i])] = 0 }
 
     for (var d=0; d < radarChart_data_endpoint.length; d++){
         for (var c=0; c < radarChart_data_endpoint[d].length; c++){
@@ -1114,21 +933,16 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
     for (var d=0; d < radarChart_data_endpoint.length; d++){
         var mid_data = [];
         for (var c=0; c < radarChart_data_endpoint[d].length; c++){
-
             if (keep_impact[radarChart_data_endpoint[d][c]["axis"]] < list_cars.length){
                 mid_data.push(radarChart_data_endpoint[d][c])
             }
         }
-        if (mid_data.length) {       // <-- add this guard
-            final_data.push(mid_data);
-          }
+        if (mid_data.length) { final_data.push(mid_data); }
     }
-
 
     var margin = {top: 170, right: 120, bottom: 130, left: 120},
         width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-
 
     var radarChartOptions = {
       w: width,
@@ -1140,19 +954,21 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
       suffix: ' pt',
       precision: '.03f'
     };
-    //Call function to draw the Radar chart
-    if (!final_data.length || !final_data.every(s => s && s.length)) {
+
+    // ---- NEW: sanitize + describe + guard for endpoint radar ----
+    const cleaned = _sanitizeRadarDataset(final_data);
+    _describeRadar(cleaned);
+    if (!cleaned.length) {
       d3.select('#radarChart_end').select('svg').remove();
       console.warn('[rearrange_data_for_endpoint_chart] no data to plot for end-radar');
       return;
     }
-    RadarChart("radarChart_end", final_data, radarChartOptions);
-    }
-
+    RadarChart("radarChart_end", cleaned, radarChartOptions);
+}
 
 $('input[name="method_radar_graph"]').click(function() {
         generate_radar_chart(data[10]);
-    });
+});
 
 function generate_radar_chart(data){
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
@@ -1192,39 +1008,27 @@ function generate_radar_chart(data){
     }
 
     for (meth=0; meth < list_checked_methods.length; meth++){
-
         if (['cat1', 'cat2', 'cat3'].includes(list_checked_methods[meth])){
-
             var meths = d_meth_cat[list_checked_methods[meth]];
-
             for (var m=0; m < meths.length; m++){
-
-                list_methods.push(
-                    meths[m]
-                );
+                list_methods.push(meths[m]);
                 $('input[name="method_radar_graph"][value="'+meths[m]+'"]').prop( "checked", true );
             };
         }else{
             if (!list_methods.includes(list_checked_methods[meth])){
-                list_methods.push(
-                    list_checked_methods[meth]
-                )
+                list_methods.push(list_checked_methods[meth])
             }
-
         }
     }
 
     var meth_cat = ["cat1", "cat2", "cat3"];
 
     for (var m=0; m < meth_cat.length; m++){
-
         if (!list_checked_methods.includes(meth_cat[m])){
             var meths = d_meth_cat[meth_cat[m]];
-
             for (var me=0; me < meths.length; me++){
                 if (list_checked_methods.includes(meths[me])){
-                        //$('input[name="method_radar_graph"][value="'+meths[me]+'"]').prop( "checked", false );
-
+                    // left as-is (UI sync)
                 }
             }
         }
@@ -1236,9 +1040,7 @@ function generate_radar_chart(data){
         if (!list_cars.includes(car)){list_cars.push(car)};
     }
 
-
     var max_val = 0;
-
     for (var l=0; l < data.length; l++){
         if (list_methods.includes(data[l][0])){
             if (data[l][4] > max_val){
@@ -1257,21 +1059,20 @@ function generate_radar_chart(data){
                     var s = i18n(list_cars[car].split(" - ")[1])
                     var y = i18n(list_cars[car].split(" - ")[2])
                    list_data_sub.push({axis:i18n(list_methods[imp]),
-                   value: data[l][4]*1000000,
+                   value: Number(data[l][4]) * 1000000,
                    key: pt + " - " + s + " - " + String(y)
                    })
                 }
             };
         };
-        if (list_data_sub.length) {  // <-- add this guard
+        if (list_data_sub.length) {
             chart_data.push(list_data_sub);
-          }
+        }
     };
 
     //////////////////////////////////////////////////////////////
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
-
 
     var radarChartOptions = {
       w: width,
@@ -1283,18 +1084,19 @@ function generate_radar_chart(data){
       suffix: '/1,000,000',
       precision: '.01f'
     };
-    //Call function to draw the Radar chart
-    if (!chart_data.length || !chart_data.every(s => s && s.length)) {
+
+    // ---- NEW: sanitize + describe + guard for mid-radar ----
+    const cleaned = _sanitizeRadarDataset(chart_data);
+    _describeRadar(cleaned);
+    if (!cleaned.length) {
       var sel = d3.select('#radarChart_mid');
-      sel.on('.zoom', null);                 // remove namespaced listeners if any
-      sel.selectAll('*').on('.zoom', null);  // (just in case)
-      sel.selectAll('*').interrupt();        // stop transitions
-      sel.select('svg').remove();            // remove old chart
+      sel.on('.zoom', null);
+      sel.selectAll('*').on('.zoom', null);
+      sel.selectAll('*').interrupt();
+      sel.select('svg').remove();
       console.warn('[generate_radar_chart] no data to plot for mid-radar');
       return;
     }
 
-    RadarChart("radarChart_mid", chart_data, radarChartOptions);
-
-
+    RadarChart("radarChart_mid", cleaned, radarChartOptions);
 };
