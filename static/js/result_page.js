@@ -890,7 +890,7 @@ function _padMissingIndicesWithZero(labelsLen, dataset){
 
 function rearrange_data_for_LCA_chart(impact_cat){
 
-  // ---- local helpers (scoped to this function) ----
+  // ---- local helpers ----
   function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
 
   function _sanitizeSeriesForMultiBarWithIndex(series, labelsLen){
@@ -975,13 +975,12 @@ function rearrange_data_for_LCA_chart(impact_cat){
     }
   }
 
-  // quick visibility on how many rows we’re feeding
   console.log('[multibar/debug] impact_cat:', impact_cat, '| rows considered:', rows.length);
 
   // Sort by total (index 6)
   rows.sort((x,y) => Number(y[6]||0) - Number(x[6]||0));
 
-  // Build label -> index map (unique X categories across *all* series)
+  // Build label -> index map (unique X categories)
   const labels = [];
   function pushLabel(lbl){
     const s = String(lbl ?? '');
@@ -1007,8 +1006,8 @@ function rearrange_data_for_LCA_chart(impact_cat){
     for (let r=0; r<rows.length; r++){
       if (rows[r][4] === subcats[s]){
         const label =
-          String(i18n(rows[r][1])) + " - " +
-          String(i18n(rows[r][2])) + " - " +
+          String(i18n(rows[r][1])) + ' - ' +
+          String(i18n(rows[r][2])) + ' - ' +
           String(rows[r][3]);
         const xIdx = pushLabel(label);
         const yVal = Number(rows[r][5]);
@@ -1022,40 +1021,20 @@ function rearrange_data_for_LCA_chart(impact_cat){
     rawSeries.push({ key, values });
   }
 
-  // sanitize each series against the label domain size
+  // Sanitize against label domain
   let dataset = rawSeries
     .map(s => _sanitizeSeriesForMultiBarWithIndex(s, labels.length))
     .filter(Boolean);
 
-  // basic shape check
   const allNums = dataset.every(s => Array.isArray(s.values) && s.values.every(p => Number.isInteger(p.x) && _isFiniteNum(p.y)));
   console.log('[multibar/debug] basic shape/number validation:', allNums ? 'OK' : 'PROBLEM');
 
-  // If any series has fewer points than labels, pad missing x with y=0
-  const someShort = dataset.some(s => s.values.length !== labels.length);
-  if (someShort) {
+  // Pad missing x with zero (so every series has values for each label)
+  if (dataset.some(s => s.values.length !== labels.length)) {
     _padMissingIndicesWithZero(labels.length, dataset);
   }
 
-  // Deep validation & pinpoint logging
-  let badFound = false;
-  dataset.forEach((s, si) => {
-    s.values.forEach((p, pi) => {
-      if (!Number.isInteger(p.x) || p.x < 0 || p.x >= labels.length) {
-        console.error(`[multibar/validate] BAD x index at series ${si} "${s.key}" point ${pi}:`, p, '| labelsLen=', labels.length, '| label@x=', labels[p.x]);
-        badFound = true;
-      }
-      if (!_isFiniteNum(p.y)) {
-        console.error(`[multibar/validate] BAD y at series ${si} "${s.key}" point ${pi}:`, p);
-        badFound = true;
-      }
-    });
-  });
-  if (badFound) {
-    console.warn('[multibar/validate] Found invalid points even after sanitize/pad. Check logs above.');
-  }
-
-  // describe for debugging
+  // Describe
   try {
     const desc = dataset.map((s,i)=>({
       i, key: s.key, len: s.values.length,
@@ -1071,6 +1050,14 @@ function rearrange_data_for_LCA_chart(impact_cat){
     return;
   }
 
+  // ---- NVD3 compatibility: explicit accessors + tuple fallback ----
+  // Some older NVD3 builds ignore x()/y() and read points as [x,y].
+  // Build a shallow, draw-only copy with tuple points to be safe.
+  const nvDataset = dataset.map(s => ({
+    key: s.key,
+    values: s.values.map(p => [p.x, p.y])  // <-- tuple form for legacy multiBar
+  }));
+
   // remove old svg to avoid residual state
   d3.select('#chart_impacts').select('svg').remove();
 
@@ -1079,15 +1066,17 @@ function rearrange_data_for_LCA_chart(impact_cat){
       .margin({left:100, bottom:180})
       .stacked(true);
 
+    // Try to force accessors anyway (newer NVD3 respects these)
+    chart.x(function(d){ return Array.isArray(d) ? d[0] : d.x; })
+         .y(function(d){ return Array.isArray(d) ? d[1] : d.y; });
+
     chart.xAxis
       .rotateLabels(-30)
       .tickFormat(function(i){
-        // safety: i could be float or out of range; coerce and clamp
         const idx = Math.max(0, Math.min(labels.length-1, Math.round(i)));
         return labels[idx] || '';
       });
 
-    // y-axis label & format
     var unit_name = "unit_" + real_impact_name;
     const yFmt =
       (["ozone depletion", "freshwater eutrophication", "marine eutrophication",
@@ -1108,8 +1097,9 @@ function rearrange_data_for_LCA_chart(impact_cat){
       .tickFormat(yFmt)
       .showMaxMin(false);
 
+    // NOTE: feed the tuple-compat dataset
     d3.select('#chart_impacts')
-      .datum(dataset)
+      .datum(nvDataset)
       .transition().duration(500)
       .call(chart);
 
@@ -1117,6 +1107,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
     return chart;
   });
 }
+
 
 
 
