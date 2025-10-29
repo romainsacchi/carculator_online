@@ -653,6 +653,8 @@ class Calculation:
 
         d = _normalize_foreground_keys(d)
 
+        print(d)
+
         # Update task progress to db
         self.update_task_progress(50, job_id)
 
