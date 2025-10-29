@@ -352,10 +352,6 @@ class Calculation:
 
                     params.extend([battery_chem, battery_origin])
 
-                    print(MAP_FUEL_BLEND)
-                    print()
-                    print(self.cm.fuel_blend)
-                    print()
 
                     # --- fuel blend (safe defaults) ---
                     if MAP_FUEL_BLEND.get(powertrain) in self.cm.fuel_blend:
