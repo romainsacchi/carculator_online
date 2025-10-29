@@ -758,7 +758,7 @@ def get_results():
     job = app.task_queue.enqueue_call(
         func=app.calc.process_results,
         args=(d, lang, job_id),
-        result_ttl=3600,
+        result_ttl=0,
         job_id=job_id,
     )
 
