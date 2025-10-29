@@ -4,6 +4,11 @@ window.addEventListener('error', function (e) {
   if (e.error && e.error.stack) console.log(e.error.stack);
 });
 
+//////////////////// Safe helpers ////////////////////
+function _safeArr(a){ return Array.isArray(a) ? a : []; }
+function _safeNum(x, def=0){ var n = Number(x); return Number.isFinite(n) ? n : def; }
+function _get(a, i, def=0){ return (Array.isArray(a) && i >= 0 && i < a.length) ? _safeNum(a[i], def) : def; }
+
 //////////////////// Radar helpers: sanitize + diagnostics ////////////////////
 function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
 
@@ -24,7 +29,6 @@ function _sanitizeRadarDataset(dataset) {
     if (!axes.length) {
       issues.push(`series ${si} empty/invalid`);
     } else {
-      // Find any problem points (shouldn't happen after sanitize, but be verbose)
       const badIdx = axes.findIndex(p => typeof p.axis !== 'string' || !_isFiniteNum(p.value));
       if (badIdx >= 0) {
         issues.push(`series ${si} has bad point at ${badIdx}: ${JSON.stringify(axes[badIdx])}`);
@@ -337,11 +341,18 @@ function fill_in_vehicles_specs(specs){
                     val += " - " + (specs[row][fuel_blend[3]] * 100).toFixed(0) + "% " +  i18n(specs[row][fuel_blend[2]])
 
                 } else {
-                    var mix = specs[row][9]
-                    var share_renew = mix[0] + mix[3] + mix[4] + mix[5] + mix[8] + mix[10] + mix[11] + mix[14]
-                    var share_nuclear = mix[1]
-                    var share_fossil = 1 - share_renew - share_nuclear
-                    var val = (share_renew * 100).toFixed(0) + "% renew. - " + (share_fossil * 100).toFixed(0) + "% fossil. " + (share_nuclear * 100).toFixed(0) + "% nuclear.";
+                    // ---- Hardened electricity-mix branch ----
+                    var mix = _safeArr(specs[row][9]);
+                    var share_renew = _get(mix,0) + _get(mix,3) + _get(mix,4) + _get(mix,5) +
+                                      _get(mix,8) + _get(mix,10) + _get(mix,11) + _get(mix,14);
+                    var share_nuclear = _get(mix,1);
+                    var share_fossil = 1 - share_renew - share_nuclear;
+                    if (!Number.isFinite(share_fossil)) share_fossil = 0;
+                    if (share_fossil < 0) share_fossil = 0;
+
+                    var val = (share_renew * 100).toFixed(0) + "% renew. - " +
+                              (share_fossil * 100).toFixed(0) + "% fossil. " +
+                              (share_nuclear * 100).toFixed(0) + "% nuclear.";
                 }
 
             } else {
@@ -955,7 +966,7 @@ function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, reso
       precision: '.03f'
     };
 
-    // ---- NEW: sanitize + describe + guard for endpoint radar ----
+    // ---- sanitize + describe + guard for endpoint radar ----
     const cleaned = _sanitizeRadarDataset(final_data);
     _describeRadar(cleaned);
     if (!cleaned.length) {
@@ -1085,7 +1096,7 @@ function generate_radar_chart(data){
       precision: '.01f'
     };
 
-    // ---- NEW: sanitize + describe + guard for mid-radar ----
+    // ---- sanitize + describe + guard for mid-radar ----
     const cleaned = _sanitizeRadarDataset(chart_data);
     _describeRadar(cleaned);
     if (!cleaned.length) {
