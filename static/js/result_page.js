@@ -810,6 +810,94 @@ function debugScanLCAData(data1, impact_cat, i18nFn){
   return { rows, labels, subcats, problems, holes, dupes, labelToIdx };
 }
 
+//////////////////// MultiBar hard sanitizer + pinpoint logs ////////////////////
+function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
+
+function sanitizeMultiBarDataset(seriesArr){
+  const cleaned = [];
+  let badCount = 0;
+
+  if (!Array.isArray(seriesArr)) {
+    console.error('[multibar/sanitize] dataset is not an array:', seriesArr);
+    return [];
+  }
+
+  seriesArr.forEach((series, si) => {
+    if (!series || typeof series !== 'object') {
+      console.error(`[multibar/sanitize] series ${si} is not an object:`, series);
+      badCount++;
+      return;
+    }
+    const key = String(series.key ?? `(no-key-${si})`);
+    const values = Array.isArray(series.values) ? series.values : [];
+    const keep = [];
+
+    values.forEach((pt, pi) => {
+      // Accept either {x:..., y:...} objects or [x,y] tuples (we convert tuples).
+      let x, y;
+
+      if (pt && typeof pt === 'object' && !Array.isArray(pt)) {
+        x = pt.x;
+        y = pt.y;
+      } else if (Array.isArray(pt) && pt.length >= 2) {
+        x = pt[0];
+        y = pt[1];
+      } else {
+        console.error(`[multibar/sanitize] BAD point (neither object nor [x,y]) at series ${si} ("${key}") point ${pi}:`, pt);
+        badCount++;
+        return;
+      }
+
+      // Validate x/y
+      const xOk = (typeof x === 'string') || (typeof x === 'number');
+      const yNum = Number(y);
+      const yOk = _isFiniteNum(yNum);
+
+      if (!xOk || !yOk) {
+        console.error(
+          `[multibar/sanitize] BAD point content at series ${si} ("${key}") point ${pi}:`,
+          { x, y }
+        );
+        badCount++;
+        return;
+      }
+
+      // Normalize to {x:string, y:number}
+      keep.push({ x: String(x), y: yNum });
+    });
+
+    if (!keep.length) {
+      console.warn(`[multibar/sanitize] dropping EMPTY series ${si} ("${key}") after cleaning`);
+      return;
+    }
+
+    cleaned.push({ key, values: keep });
+  });
+
+  // Extra: verify all series share the same x-domain; if not, pad with y=0 to avoid NVD3 indexing issues
+  const xUniverse = Array.from(new Set(cleaned.flatMap(s => s.values.map(p => p.x))));
+  cleaned.forEach((s, si) => {
+    const have = new Set(s.values.map(p => p.x));
+    const missing = xUniverse.filter(x => !have.has(x));
+    if (missing.length) {
+      console.warn(`[multibar/sanitize] series ${si} ("${s.key}") missing ${missing.length} x-label(s). Padding with 0. Examples:`, missing.slice(0, 8));
+      // pad with 0 values
+      missing.forEach(x => s.values.push({ x, y: 0 }));
+      // keep x order stable
+      s.values.sort((a,b) => xUniverse.indexOf(a.x) - xUniverse.indexOf(b.x));
+    }
+  });
+
+  if (badCount) {
+    console.warn(`[multibar/sanitize] removed ${badCount} bad point(s). Final series count: ${cleaned.length}`);
+  }
+  // Short summary for quick glance
+  console.log(
+    '[multibar/sanitize] summary:',
+    cleaned.map((s,i) => ({ i, key: s.key, n: s.values.length }))
+  );
+  return cleaned;
+}
 
 
 function rearrange_data_for_LCA_chart(impact_cat){
@@ -899,48 +987,44 @@ function rearrange_data_for_LCA_chart(impact_cat){
   // remove old svg to avoid residual state
   d3.select('#chart_impacts').select('svg').remove();
 
-  nv.addGraph(function() {
-    var chart = nv.models.multiBarChart()
-      .margin({left:100, bottom:180})
-      .stacked(true);
+  // pinpoint + scrub before rendering
+    const cleanedMulti = sanitizeMultiBarDataset(data_to_plot);
 
-    chart.xAxis
-      .rotateLabels(-30)
-      .tickFormat(function(i){
-        // safety: i could be float or out of range; coerce and clamp
-        const idx = Math.max(0, Math.min(labels.length-1, Math.round(i)));
-        return labels[idx] || '';
-      });
+    nv.addGraph(function() {
+      var chart = nv.models.multiBarChart()
+                    .margin({left:100, bottom:180})
+                    .stacked(true);
+      chart.xAxis.rotateLabels(-30);
+      var unit_name = "unit_"+real_impact_name;
 
-    // y-axis label & format
-    var unit_name = "unit_" + real_impact_name;
-    const yFmt =
-      (["ozone depletion", "freshwater eutrophication", "marine eutrophication",
-        "natural land transformation", "particulate matter formation",
-        "photochemical oxidant formation", "terrestrial acidification",
-        "terrestrial ecotoxicity"].includes(real_impact_name))
-        ? d3.format('.02e')
-        : (real_impact_name === "human noise" ? d3.format('s')
-           : (real_impact_name === "ownership cost" ? d3.format('.02f')
-              : d3.format('.03f')));
+      chart.yAxis
+        .axisLabel(i18n(unit_name)+"/"+data[8]+" - "+ data[9])
+        .tickFormat(d3.format('.03f'))
+        .showMaxMin(false);
 
-    chart.yAxis
-      .axisLabel(
-        real_impact_name === "ownership cost"
-          ? (currency_name + "/" + data[8] + " - " + data[9])
-          : (i18n(unit_name) + "/" + data[8] + " - " + data[9])
-      )
-      .tickFormat(yFmt)
-      .showMaxMin(false);
+      if (["ozone depletion", "freshwater eutrophication", "marine eutrophication", "natural land transformation",
+           "particulate matter formation", "photochemical oxidant formation", "terrestrial acidification",
+           "terrestrial ecotoxicity"].includes(real_impact_name)) {
+        chart.yAxis.tickFormat(d3.format('.02e')).showMaxMin(false);
+      }
+      if (real_impact_name == "human noise") {
+        chart.yAxis.tickFormat(d3.format('s')).showMaxMin(false);
+      }
+      if (real_impact_name == "ownership cost") {
+        chart.yAxis
+          .axisLabel(currency_name+"/"+data[8]+" - "+ data[9])
+          .tickFormat(d3.format('.02f'))
+          .showMaxMin(false);
+      }
 
-    d3.select('#chart_impacts')
-      .datum(dataset)
-      .transition().duration(500)
-      .call(chart);
+      // Render with sanitized data
+      d3.select('#chart_impacts')
+        .datum(cleanedMulti)
+        .transition().duration(500).call(chart);
 
-    nv.utils.windowResize(chart.update);
-    return chart;
-  });
+      nv.utils.windowResize(chart.update);
+      return chart;
+    });
 }
 
 
