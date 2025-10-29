@@ -37,9 +37,152 @@ MAP_FUEL_BLEND = {
 NORMALIZATION_FACTORS = Path("./data/normalization factors.yaml")
 
 
+
+import math
+
+def _num(x, default=0.0):
+    """Return a plain float; coerce None/NaN/inf/np types to finite numbers."""
+    try:
+        xf = float(x)
+    except Exception:
+        return float(default)
+    if math.isfinite(xf):
+        return xf
+    return float(default)
+
+def _clean_seq(obj):
+    """Recursively clean lists/dicts -> plain Python types with finite numbers."""
+    if isinstance(obj, dict):
+        return {k: _clean_seq(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [ _clean_seq(v) for v in obj ]
+    # numpy scalars
+    if hasattr(obj, "item") and callable(getattr(obj, "item")):
+        try:
+            obj = obj.item()
+        except Exception:
+            pass
+    # numbers
+    if isinstance(obj, (int, float, np.number)):
+        return _num(obj)
+    # everything else left as-is (strings, booleans)
+    return obj
+
+def _has_bad_number(x):
+    try:
+        xf = float(x)
+        return not math.isfinite(xf)
+    except Exception:
+        return False
+
+def _inspect_payload(payload):
+    """Print a concise validation report of each top-level block."""
+    issues = []
+
+    # [0] lang (string)
+    if not isinstance(payload[0], str):
+        issues.append("[0] lang not a string")
+
+    # [1] list_res: list of [impact,size,pt,year,impact_part,val,total]
+    for i, row in enumerate(payload[1]):
+        if not (isinstance(row, list) and len(row) >= 7):
+            issues.append(f"[1] row {i} wrong length/shape: {row[:3] if isinstance(row, list) else type(row)}")
+            continue
+        if _has_bad_number(row[5]) or _has_bad_number(row[6]):
+            issues.append(f"[1] row {i} has bad numbers at indices 5/6: {row[5]}, {row[6]}")
+
+    # [2] arr_benchmark: list of [cat, pt, size, year, val]
+    for i, row in enumerate(payload[2]):
+        if not (isinstance(row, list) and len(row) >= 5):
+            issues.append(f"[2] row {i} wrong length/shape")
+            continue
+        if _has_bad_number(row[4]):
+            issues.append(f"[2] row {i} val is bad: {row[4]}")
+
+    # [3] tank_to_wheel_energy: [{key:str, values:[{x:int,y:num}...]}]
+    for i, serie in enumerate(payload[3]):
+        if not isinstance(serie, dict):
+            issues.append(f"[3] series {i} not dict")
+            continue
+        if "values" not in serie or not isinstance(serie["values"], list):
+            issues.append(f"[3] series {i} values missing")
+            continue
+        for j, pt in enumerate(serie["values"]):
+            if not isinstance(pt, dict) or "x" not in pt or "y" not in pt:
+                issues.append(f"[3] series {i} point {j} malformed")
+                continue
+            if _has_bad_number(pt["y"]):
+                issues.append(f"[3] series {i} point {j} y bad: {pt['y']}")
+
+    # [4] dict_scatter: { "PT, Size, Year": [cost, gwp] }
+    if not isinstance(payload[4], dict):
+        issues.append("[4] dict_scatter not dict")
+    else:
+        for k, v in payload[4].items():
+            if not (isinstance(v, list) and len(v) >= 2):
+                issues.append(f"[4] key {k} value malformed: {v}")
+                continue
+            if _has_bad_number(v[0]) or _has_bad_number(v[1]):
+                issues.append(f"[4] key {k} has bad numbers: {v}")
+
+    # [5] list_res_acc: [impact,size,pt,year,fix,var,lifetime]
+    for i, row in enumerate(payload[5]):
+        if not (isinstance(row, list) and len(row) >= 7):
+            issues.append(f"[5] row {i} wrong shape")
+            continue
+        if any(_has_bad_number(row[idx]) for idx in (4,5,6)):
+            issues.append(f"[5] row {i} has bad numbers in (4,5,6): {row[4:7]}")
+
+    # [6] config_array: list per vehicle (strings then many numbers/arrays)
+    # We’ll just ensure the first 10 numeric slots are finite where numeric.
+    for i, row in enumerate(payload[6]):
+        if not isinstance(row, list) or len(row) < 10:
+            issues.append(f"[6] row {i} too short/malformed")
+            continue
+        for idx in range(3, 10):  # lifetime..electricity_mix (mix is list—skip)
+            if idx == 9:
+                break
+            if isinstance(row[idx], (int, float, np.number)) and _has_bad_number(row[idx]):
+                issues.append(f"[6] row {i} bad number at {idx}: {row[idx]}")
+
+    # [8] fu_qty
+    if _has_bad_number(payload[8]):
+        issues.append("[8] fu_qty bad")
+
+    # [10] normalized_results: [impact,size,pt,year,val]
+    for i, row in enumerate(payload[10]):
+        if not (isinstance(row, list) and len(row) >= 5):
+            issues.append(f"[10] row {i} wrong shape")
+            continue
+        if _has_bad_number(row[4]):
+            issues.append(f"[10] row {i} val bad: {row[4]}")
+
+    if issues:
+        print("\n[process_results] VALIDATION PROBLEMS:")
+        for msg in issues[:100]:
+            print("  -", msg)
+    else:
+        print("[process_results] Payload validated: OK")
+
+
 def np_encoder(object):
     if isinstance(object, np.generic):
         return object.item()
+
+
+def _normalize_foreground_keys(d):
+    """Drop a trailing 'none' from Foreground keys, in-place."""
+    FG = ("Foreground",)
+    if FG not in d:
+        return d
+    new_fg = {}
+    for k, v in d[FG].items():
+        if isinstance(k, tuple) and len(k) == 5 and k[-1] == "none":
+            new_fg[k[:-1]] = v  # strip the last element
+        else:
+            new_fg[k] = v
+    d[FG] = new_fg
+    return d
 
 
 def load_yaml_file(filepath):
@@ -224,36 +367,24 @@ class Calculation:
 
                     params.extend([battery_chem, battery_origin])
 
-                    print(MAP_FUEL_BLEND)
-                    print()
-                    print(self.cm.fuel_blend)
-                    print()
 
-
+                    # --- fuel blend (safe defaults) ---
                     if MAP_FUEL_BLEND.get(powertrain) in self.cm.fuel_blend:
-                        primary_fuel_type = self.cm.fuel_blend[
-                            MAP_FUEL_BLEND[powertrain]].get("primary", {}).get("type", "")
-                        primary_fuel_share = self.cm.fuel_blend[
-                            MAP_FUEL_BLEND[powertrain]].get("primary", {}).get("share", np.zeros(iy).tolist())
+                        fb = self.cm.fuel_blend[MAP_FUEL_BLEND[powertrain]]
+                        primary = fb.get("primary", {})
+                        secondary = fb.get("secondary", {})
 
-                        secondary_fuel_type = self.cm.fuel_blend[
-                            MAP_FUEL_BLEND[powertrain]].get("secondary", {}).get("type", "")
-                        secondary_fuel_share = self.cm.fuel_blend[
-                            MAP_FUEL_BLEND[powertrain]].get("secondary", {}).get("share", np.zeros(iy).tolist())
+                        primary_fuel_type = primary.get("type", "") or ""
+                        # default to 0.0 (float), NEVER to [] which later breaks JS math
+                        primary_fuel_share = _num(primary.get("share", 0.0))
+
+                        secondary_fuel_type = secondary.get("type", "") or ""
+                        secondary_fuel_share = _num(secondary.get("share", 0.0))
                     else:
-                        primary_fuel_type = ""
-                        primary_fuel_share = np.zeros(iy)
-                        secondary_fuel_type = ""
-                        secondary_fuel_share = np.zeros(iy)
+                        primary_fuel_type, primary_fuel_share = "", 0.0
+                        secondary_fuel_type, secondary_fuel_share = "", 0.0
 
-                    params.extend(
-                        [
-                            primary_fuel_type,
-                            primary_fuel_share.tolist(),
-                            secondary_fuel_type,
-                            secondary_fuel_share.tolist(),
-                        ]
-                    )
+                    params.extend([primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share])
 
                     arr.append(params)
 
@@ -322,6 +453,10 @@ class Calculation:
             .transpose("powertrain", "size", "year", "second")
         )
 
+        # --- ensure finite TtW cumulative energy ---
+        cumsum = cumsum.astype(float)
+        np.nan_to_num(cumsum.data, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
+
         # Format the data so that it can be consumed directly
         # by nvd3.js
         list_vehicles = [f"{v[0]} - {v[1]} - {v[2]}" for v in list_vehicles]
@@ -373,9 +508,10 @@ class Calculation:
 
         formatted_list_vehicles = [f"{v[0]}, {v[1]}, {v[2]}" for v in list_vehicles]
 
-        dict_scatter = {
-            x[0]: [x[1]] for x in zip(formatted_list_vehicles, cost_benchmark / load_factor * fu)
-        }
+        scatter_costs = cost_benchmark / load_factor * fu
+        np.nan_to_num(scatter_costs, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
+
+        dict_scatter = {name: [float(val)] for name, val in zip(formatted_list_vehicles, scatter_costs)}
 
         detailed_cost = (
                 total_cost.sel(value=0, parameter=cost_types).values.reshape(
@@ -384,6 +520,10 @@ class Calculation:
                 / load_factor
                 * fu
         )
+
+        # --- force finiteness for costs ---
+        np.nan_to_num(cost_benchmark, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
+        np.nan_to_num(detailed_cost, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
 
         list_res_costs = list(
             map(
@@ -465,17 +605,18 @@ class Calculation:
     def generate_normalized_results(self, results):
 
         normalization_factors = load_yaml_file(NORMALIZATION_FACTORS)
-        factors = np.fromiter(normalization_factors.values(), dtype=float)
+        keys = list(normalization_factors.keys())
+        factors = np.array([float(normalization_factors[k]) or np.nan for k in keys], dtype=float)
 
         nf_impact = (
-                results.sel(
-                    impact_category=list(normalization_factors.keys()),
-                    value=0,
-                ).sum(
-                    dim="impact"
-                )
-                / factors[:, None, None, None]
+            results.sel(impact_category=keys, value=0).sum(dim="impact")
         )
+
+        # divide with care
+        vals = nf_impact.values.astype(float)
+        np.divide(vals, factors[:, None, None, None], out=vals, where=np.isfinite(factors)[:, None, None, None])
+        np.nan_to_num(vals, copy=False)
+        nf_impact.values[:] = vals
 
         list_normalized_results = []
         for impact in nf_impact.coords["impact_category"].values:
@@ -509,6 +650,10 @@ class Calculation:
 
     def process_results(self, d, lang, job_id):
         """Calculate LCIA and store results in an array of arrays"""
+
+        d = _normalize_foreground_keys(d)
+
+        print(d)
 
         # Update task progress to db
         self.update_task_progress(50, job_id)
@@ -668,6 +813,10 @@ class Calculation:
             .transpose("impact_category", "size", "powertrain", "year", "impact")
         )
 
+        # --- make all numbers finite (NaN/±inf -> 0.0) ---
+        results = results.astype(float)
+        np.nan_to_num(results.data, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
+
         lifetime = int(self.cm.array.sel(parameter="lifetime kilometers").mean().values)
         impact_category = results.coords["impact_category"].values.tolist()
 
@@ -780,6 +929,10 @@ class Calculation:
 
         results = self.ic.calculate_impacts()
 
+        # --- make EF results finite before any division ---
+        results = results.astype(float)
+        np.nan_to_num(results.data, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
+
         # generate normalized results
         normalized_results = self.generate_normalized_results(
             results
@@ -804,25 +957,27 @@ class Calculation:
 
         normalized_results = self.remove_micro_petrols_from_list(normalized_results)
 
-        return (
-            json.dumps(
-                [
-                    lang,
-                    list_res,
-                    arr_benchmark,
-                    tank_to_wheel_energy,
-                    dict_scatter,
-                    list_res_acc,
-                    config_array,
-                    self.cm.country,
-                    float(fu_qty),
-                    fu_unit,
-                    normalized_results,
-                ],
-                default=np_encoder
-            ),
-            self.ic,
-        )
+        payload = [
+            lang,
+            list_res,
+            arr_benchmark,
+            tank_to_wheel_energy,
+            dict_scatter,
+            list_res_acc,
+            config_array,
+            self.cm.country,
+            float(fu_qty),
+            fu_unit,
+            normalized_results,
+        ]
+
+        # deep-clean to plain types and finite numbers
+        payload = _clean_seq(payload)
+
+        # print a concise validation report with indices if anything is off
+        _inspect_payload(payload)
+
+        return json.dumps(payload, default=np_encoder), self.ic
 
     def remove_micro_petrols_from_list_of_dicts(self, list_of_dicts):
 
