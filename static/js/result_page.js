@@ -1411,24 +1411,27 @@ $('input[name="method_radar_graph"]').click(function() {
 function generate_radar_chart(data){
   /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
+  // ---------- helpers ----------
+  function norm(s){
+    if (s == null) return '';
+    return String(s)
+      .replace(/[\u2013\u2014]/g, '-')      // en/em dash -> hyphen
+      .replace(/\s+/g, ' ')                 // collapse spaces
+      .trim()
+      .toLowerCase();
+  }
+
   // ---------- Set-Up ----------
   var margin = {top: 180, right: 120, bottom: 130, left: 120},
       width  = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
       height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-  // ---------- Data prep ----------
-  var list_cars = [];
-  var list_methods = [];
-  var chart_data = [];
-
-  // What’s checked right now?
-  var checked_methods = $('input[name="method_radar_graph"]:checked');
+  // ---------- Collect UI selections ----------
+  var checked = $('input[name="method_radar_graph"]:checked');
   var list_checked_methods = [];
-  for (var m=0; m < checked_methods.length; m++){
-      list_checked_methods.push(checked_methods[m]['defaultValue']);
-  }
+  for (var m=0; m<checked.length; m++) list_checked_methods.push(checked[m].defaultValue);
 
-  // Categories → methods mapping (must match raw strings in data[l][0])
+  // Map categories → methods (these must match the *raw* data strings, not translated)
   var d_meth_cat = {
     'cat1': ['climate change - climate change total', 'human health - ozone layer depletion',
              'human health - respiratory effects'],
@@ -1440,93 +1443,124 @@ function generate_radar_chart(data){
              'resources - dissipated water', 'resources - fossils', 'resources - minerals and metals'],
   };
 
-  // Expand selections
-  for (var i=0; i < list_checked_methods.length; i++){
-    var val = list_checked_methods[i];
-    if (['cat1', 'cat2', 'cat3'].includes(val)){
-      var meths = d_meth_cat[val] || [];
-      for (var k=0; k < meths.length; k++){
-        if (!list_methods.includes(meths[k])) list_methods.push(meths[k]);
-        // sync UI (optional)
-        $('input[name="method_radar_graph"][value="'+meths[k]+'"]').prop("checked", true);
-      }
+  // Expand category selections to method list (RAW strings)
+  var list_methods = [];
+  for (var i=0; i<list_checked_methods.length; i++){
+    var v = list_checked_methods[i];
+    if (['cat1','cat2','cat3'].includes(v)){
+      var meths = d_meth_cat[v] || [];
+      meths.forEach(mm => { if (!list_methods.includes(mm)) list_methods.push(mm); });
+      // optional UI sync
+      meths.forEach(mm => $('input[name="method_radar_graph"][value="'+mm+'"]').prop("checked", true));
     } else {
-      if (!list_methods.includes(val)) list_methods.push(val);
+      if (!list_methods.includes(v)) list_methods.push(v);
     }
   }
 
-  // If nothing was checked, default to cat1
+  // Derive cars & method inventory from data (RAW + normalized)
+  var list_cars = [];
+  var methodsInDataRaw = [];
+  var methodsInDataNorm = new Set();
+  var rowsByCarNorm = new Map(); // carNorm -> array of rows for that car
+
+  for (var l=0; l<data.length; l++){
+    var rawCar = data[l][2] + ' - ' + data[l][1] + ' - ' + data[l][3];
+    var carNorm = norm(rawCar);
+    if (!list_cars.includes(rawCar)) list_cars.push(rawCar);
+
+    var mRaw = data[l][0];
+    var mNorm = norm(mRaw);
+    if (!methodsInDataNorm.has(mNorm)) {
+      methodsInDataNorm.add(mNorm);
+      methodsInDataRaw.push(mRaw);
+    }
+
+    if (!rowsByCarNorm.has(carNorm)) rowsByCarNorm.set(carNorm, []);
+    rowsByCarNorm.get(carNorm).push({
+      methodRaw: mRaw,
+      methodNorm: mNorm,
+      value: Number(data[l][4]),
+      rawCar, carNorm
+    });
+  }
+
+  // If no UI methods, default to cat1
   if (!list_methods.length){
     console.warn('[radar/mid] No methods checked. Defaulting to cat1.');
-    list_methods = d_meth_cat['cat1'].slice();
-    // (optional) sync UI:
+    list_methods = (d_meth_cat['cat1'] || []).slice();
     list_methods.forEach(v => $('input[name="method_radar_graph"][value="'+v+'"]').prop("checked", true));
   }
 
-  // If still empty (e.g., values mismatch UI), derive from data itself
-  if (!list_methods.length){
-    console.warn('[radar/mid] Still empty after default. Deriving from data.');
-    var allMethods = [];
-    for (var l=0; l<data.length; l++){
-      var mname = data[l][0];
-      if (typeof mname === 'string' && !allMethods.includes(mname)) allMethods.push(mname);
-    }
-    // take first few to avoid huge radar
-    list_methods = allMethods.slice(0, 8);
-  }
+  // Normalize requested methods for matching
+  var list_methods_norm = list_methods.map(norm);
 
-  // Unique cars
-  for (var l=0; l < data.length; l++){
-    var car = data[l][2] + " - " + data[l][1] + " - " + data[l][3];
-    if (!list_cars.includes(car)) list_cars.push(car);
-  }
+  // Diagnostics: what do we have vs what we want
+  console.log('[radar/mid] checked (raw):', list_checked_methods);
+  console.log('[radar/mid] methods (raw):', list_methods);
+  console.log('[radar/mid] methods in data (sample, raw):', methodsInDataRaw.slice(0,15));
+  console.log('[radar/mid] methods (norm):', list_methods_norm);
+  console.log('[radar/mid] methodsInData (norm, count):', methodsInDataNorm.size);
 
-  // Max value (only across chosen methods)
+  // Compute max over chosen methods (normalized match)
   var max_val = 0;
-  for (var j=0; j < data.length; j++){
-    if (list_methods.includes(data[j][0])) {
-      var v = Number(data[j][4]);
-      if (Number.isFinite(v) && v > max_val) max_val = v;
-    }
-  }
+  rowsByCarNorm.forEach(arr => {
+    arr.forEach(r => {
+      if (list_methods_norm.includes(r.methodNorm) && Number.isFinite(r.value) && r.value > max_val){
+        max_val = r.value;
+      }
+    });
+  });
 
-  // Build per-car series
-  for (var c=0; c < list_cars.length; c++){
-    var carLabel = list_cars[c];
+  // Build chart_data
+  var chart_data = [];
+  var missingReport = []; // detailed per-car missing methods
+
+  for (var c=0; c<list_cars.length; c++){
+    var rawCar = list_cars[c];
+    var carNorm = norm(rawCar);
+    var carRows = rowsByCarNorm.get(carNorm) || [];
+
+    // index this car's methods by methodNorm for O(1)
+    var valByMethodNorm = new Map();
+    carRows.forEach(r => { if (Number.isFinite(r.value)) valByMethodNorm.set(r.methodNorm, r.value); });
+
     var list_data_sub = [];
-    for (var mi=0; mi < list_methods.length; mi++){
-      var methName = list_methods[mi];
-      // Find the row matching this car + method
-      for (var r=0; r < data.length; r++){
-        var carKey = data[r][2] + " - " + data[r][1] + " - " + data[r][3];
-        if (data[r][0] === methName && carKey === carLabel){
-          var pt = i18n(carLabel.split(" - ")[0]);
-          var s  = i18n(carLabel.split(" - ")[1]);
-          var y  = i18n(carLabel.split(" - ")[2]);
+    var missingForCar = [];
 
-          var rawVal = Number(data[r][4]);
-          if (!Number.isFinite(rawVal)) {
-            console.warn('[radar/mid] skipping non-finite value for', {car: carLabel, method: methName, raw: data[r][4]});
-            continue;
-          }
+    for (var mi=0; mi<list_methods.length; mi++){
+      var mRaw = list_methods[mi];
+      var mNorm = list_methods_norm[mi];
 
-          list_data_sub.push({
-            axis: i18n(methName),
-            value: rawVal * 1e6, // your original scale
-            key: pt + " - " + s + " - " + String(y)
-          });
-          break; // next method
-        }
+      if (valByMethodNorm.has(mNorm)){
+        var v = valByMethodNorm.get(mNorm);
+        var pt = i18n(rawCar.split(' - ')[0]);
+        var s  = i18n(rawCar.split(' - ')[1]);
+        var y  = i18n(rawCar.split(' - ')[2]);
+        list_data_sub.push({
+          axis: i18n(mRaw),
+          value: v * 1e6, // same scale as before
+          key:  pt + ' - ' + s + ' - ' + String(y)
+        });
+      } else {
+        // remember what we’re missing for this car
+        missingForCar.push(mRaw);
       }
     }
-    if (list_data_sub.length) chart_data.push(list_data_sub);
+
+    if (list_data_sub.length){
+      chart_data.push(list_data_sub);
+    }
+    if (missingForCar.length){
+      // Only log if *some* data existed for this car, or if you want all
+      missingReport.push({ car: rawCar, missing: missingForCar });
+    }
   }
 
-  // Helpful diagnostics
-  console.log('[radar/mid] checked:', list_checked_methods);
-  console.log('[radar/mid] methods (final):', list_methods);
   console.log('[radar/mid] cars:', list_cars);
   console.log('[radar/mid] chart_data length:', chart_data.length, '| max_val:', max_val);
+  if (missingReport.length){
+    console.warn('[radar/mid] per-car missing methods (raw):', missingReport.slice(0, 10));
+  }
 
   // ---------- Draw ----------
   var radarChartOptions = {
@@ -1548,8 +1582,15 @@ function generate_radar_chart(data){
     sel.selectAll('*').on('.zoom', null);
     sel.selectAll('*').interrupt();
     sel.select('svg').remove();
-    console.warn('[generate_radar_chart] no data to plot for mid-radar',
-                 {checked:list_checked_methods, methods:list_methods, cars:list_cars});
+
+    // Extra guidance if everything is empty
+    if (!list_methods_norm.some(m => methodsInDataNorm.has(m))) {
+      console.error('[generate_radar_chart] None of the selected methods exist in the data.',
+        { selectedRaw: list_methods, selectedNorm: list_methods_norm,
+          availableRawSample: methodsInDataRaw.slice(0,20) });
+    } else {
+      console.warn('[generate_radar_chart] No data to plot for mid-radar (values missing for selected methods & cars).');
+    }
     return;
   }
 
