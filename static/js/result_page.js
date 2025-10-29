@@ -4,6 +4,32 @@ window.addEventListener('error', function (e) {
   if (e.error && e.error.stack) console.log(e.error.stack);
 });
 
+function _sanitizeMultiBarSeries(s) {
+  // Expect: { key: string, values: [{x: string, y: number}, ...] }
+  if (!s || typeof s.key !== 'string' || !Array.isArray(s.values)) return null;
+  const cleanedVals = s.values
+    .map(p => ({ x: String(p && p.x != null ? p.x : ''), y: Number(p && p.y) }))
+    .filter(p => p.x.length && Number.isFinite(p.y));
+  if (!cleanedVals.length) return null;
+  return { key: s.key, values: cleanedVals };
+}
+
+function _describeMultiBar(dataset) {
+  try {
+    const desc = (dataset || []).map((s, i) => ({
+      i,
+      key: s.key,
+      len: Array.isArray(s.values) ? s.values.length : -1,
+      firstX: (s.values && s.values[0]) ? s.values[0].x : '(none)',
+      firstY: (s.values && s.values[0]) ? s.values[0].y : '(none)'
+    }));
+    console.log('[multibar] series summary:', desc);
+  } catch(e) {
+    console.warn('[multibar] describe failed:', e);
+  }
+}
+
+
 //////////////////// Safe helpers ////////////////////
 function _safeArr(a){ return Array.isArray(a) ? a : []; }
 function _safeNum(x, def=0){ var n = Number(x); return Number.isFinite(n) ? n : def; }
@@ -665,93 +691,114 @@ function update_impact_definition_table(impact_name){
 
 function rearrange_data_for_LCA_chart(impact_cat){
 
-    val = [];
-    var real_impact_name = "";
+    let val = [];
+    let real_impact_name = "";
 
-    for (a = 0; a < data[1].length; a++){
-        if (i18n(data[1][a][0]) == impact_cat){
+    // collect matching rows (and convert cost to user currency)
+    for (let a = 0; a < data[1].length; a++){
+        if (i18n(data[1][a][0]) === impact_cat){
             real_impact_name = data[1][a][0];
-
-            if (real_impact_name=="ownership cost"){
-                var data_to_insert = data[1][a].slice();
-                var cost_val_total = data_to_insert[6] * currency_exch_rate
-                var cost_val = data_to_insert[5] * currency_exch_rate
-                data_to_insert[6] = cost_val_total;
-                data_to_insert[5] = cost_val;
-                val.push(data_to_insert);
-            }else{
+            if (real_impact_name === "ownership cost"){
+                const row = data[1][a].slice();
+                row[6] = Number(row[6]) * currency_exch_rate; // total
+                row[5] = Number(row[5]) * currency_exch_rate; // per FU
+                val.push(row);
+            } else {
                 val.push(data[1][a]);
-            };
-        };
-    };
-
-    val.sort(function(x,y){return y[6] - x[6];});
-
-    list_cat = [];
-
-    for (a = 0; a < val.length; a++){
-        if (!list_cat.includes(val[a][4])){
-            list_cat.push(val[a][4])
-        };
-    };
-
-    var data_to_plot = [];
-
-    for (a = 0; a < list_cat.length; a++){
-        var impact_dict={
-            'key': i18n(list_cat[a]),
-        };
-        impact_dict["values"] = [];
-
-        for (b=0; b < val.length; b++){
-            if (val[b][4] == list_cat[a]){
-                impact_dict["values"].push({
-                    'x': i18n(val[b][1])+" - "+i18n(val[b][2])+" - "+val[b][3],
-                    'y': val[b][5]
-                })
             }
-        };
+        }
+    }
 
-        data_to_plot.push(impact_dict);
-        impact_dict = {};
-    };
+    // Sort by total (index 6)
+    val.sort(function(x,y){ return Number(y[6]||0) - Number(x[6]||0); });
+
+    // build list of subcategories (index 4)
+    let list_cat = [];
+    for (let a = 0; a < val.length; a++){
+        const sub = val[a][4];
+        if (sub != null && !list_cat.includes(sub)){
+            list_cat.push(sub);
+        }
+    }
+
+    // build raw series (keys: subcategory; values: [{x: label, y: value}])
+    let raw = [];
+    for (let a = 0; a < list_cat.length; a++){
+        let impact_dict = { key: i18n(list_cat[a]), values: [] };
+
+        for (let b = 0; b < val.length; b++){
+            if (val[b][4] === list_cat[a]){
+                const xLabel =
+                    String(i18n(val[b][1])) + " - " +
+                    String(i18n(val[b][2])) + " - " +
+                    String(val[b][3]);
+
+                const yVal = Number(val[b][5]);
+
+                // keep only valid points
+                if (xLabel.length && Number.isFinite(yVal)) {
+                    impact_dict.values.push({ x: xLabel, y: yVal });
+                }
+            }
+        }
+        raw.push(impact_dict);
+    }
+
+    // sanitize: drop empty/invalid series & points
+    const data_to_plot = raw
+        .map(_sanitizeMultiBarSeries)
+        .filter(Boolean);
+
+    _describeMultiBar(data_to_plot);
+
+    // guard: nothing valid to draw
+    if (!data_to_plot.length) {
+        d3.select('#chart_impacts').select('svg').remove();
+        console.warn('[rearrange_data_for_LCA_chart] no valid data to plot');
+        return;
+    }
+
+    // (optional) remove old svg to avoid residual state
+    d3.select('#chart_impacts').select('svg').remove();
 
     nv.addGraph(function() {
-            var chart = nv.models.multiBarChart()
-                    .margin({left:100, bottom:180})
-                    .stacked(true);
-            chart.xAxis.rotateLabels(-30);
-            var unit_name = "unit_"+real_impact_name;
+        var chart = nv.models.multiBarChart()
+            .margin({left:100, bottom:180})
+            .stacked(true);
 
-            chart.yAxis
-              .axisLabel(i18n(unit_name)+"/"+data[8]+" - "+ data[9])
-              .tickFormat(d3.format('.03f'))
-              .showMaxMin(false);
+        chart.xAxis.rotateLabels(-30);
 
-            if (["ozone depletion", "freshwater eutrophication", "marine eutrophication", "natural land transformation",
-                    "particulate matter formation", "photochemical oxidant formation", "terrestrial acidification",
-                    "terrestrial ecotoxicity"].includes(real_impact_name)){
-                  chart.yAxis.tickFormat(d3.format('.02e')).showMaxMin(false);
-              }
-            if (real_impact_name == "human noise"){
-              chart.yAxis.tickFormat(d3.format('s')).showMaxMin(false);
-            };
+        // y-axis label & format
+        var unit_name = "unit_" + real_impact_name;
 
-            if (real_impact_name == "ownership cost"){
-              chart.yAxis
-              .axisLabel(currency_name+"/"+data[8]+" - "+ data[9])
-              .tickFormat(d3.format('.02f'))
-              .showMaxMin(false);
-            };
-            d3.select('#chart_impacts')
-                .datum(data_to_plot)
-                .transition().duration(500).call(chart);
+        chart.yAxis
+          .axisLabel(
+            real_impact_name === "ownership cost"
+              ? (currency_name + "/" + data[8] + " - " + data[9])
+              : (i18n(unit_name) + "/" + data[8] + " - " + data[9])
+          )
+          .tickFormat(
+            (["ozone depletion", "freshwater eutrophication", "marine eutrophication",
+              "natural land transformation", "particulate matter formation",
+              "photochemical oxidant formation", "terrestrial acidification",
+              "terrestrial ecotoxicity"].includes(real_impact_name))
+              ? d3.format('.02e')
+              : (real_impact_name === "human noise" ? d3.format('s') :
+                 (real_impact_name === "ownership cost" ? d3.format('.02f') : d3.format('.03f')))
+          )
+          .showMaxMin(false);
 
-            nv.utils.windowResize(chart.update);
+        d3.select('#chart_impacts')
+          .datum(data_to_plot)
+          .transition().duration(500)
+          .call(chart);
 
-            return chart;
-        });
-};
+        nv.utils.windowResize(chart.update);
+
+        return chart;
+    });
+}
+
 
 function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, resource_val, cost_val){
     var mid_to_end = {
