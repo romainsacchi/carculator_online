@@ -831,11 +831,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
   for (let a = 0; a < data[1].length; a++){
     if (i18n(data[1][a][0]) === impact_cat){
       real_impact_name = data[1][a][0];
-
-      // pinpoints which sub-array is bad
-    const dbg = debugScanLCAData(data[1], impact_cat, i18n);
-
-
+      const dbg = debugScanLCAData(data[1], impact_cat, i18n);
       if (real_impact_name === "ownership cost"){
         const r = data[1][a].slice();
         r[6] = Number(r[6]) * currency_exch_rate; // total
@@ -850,7 +846,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
   // Sort by total (index 6)
   rows.sort((x,y) => Number(y[6]||0) - Number(x[6]||0));
 
-  // Build global label list (unique X categories across all series)
+  // Build label -> index map (unique X categories across *all* series)
   const labels = [];
   function pushLabel(lbl){
     const s = String(lbl || '');
@@ -861,83 +857,67 @@ function rearrange_data_for_LCA_chart(impact_cat){
     return labels.length - 1;
   }
 
-  // Collect sub-categories (stack keys)
+  // list of sub-categories (index 4)
   const subcats = [];
   for (let a=0; a<rows.length; a++){
     const sc = rows[a][4];
     if (sc != null && !subcats.includes(sc)) subcats.push(sc);
   }
 
-  // Prepare a sparse map for each subcat: xIdx -> y
-  const sparseSeries = subcats.map(sc => ({
-    key: i18n(sc),
-    map: new Map()
-  }));
-
-  for (let r=0; r<rows.length; r++){
-    const sc = rows[r][4];
-    const label =
-      String(i18n(rows[r][1])) + " - " +
-      String(i18n(rows[r][2])) + " - " +
-      String(rows[r][3]);
-    const xIdx = pushLabel(label);
-    const yVal = Number(rows[r][5]);
-    if (xIdx >= 0 && Number.isFinite(yVal)) {
-      const sIdx = subcats.indexOf(sc);
-      if (sIdx >= 0) {
-        // sum duplicates into the same x slot if any
-        const prev = sparseSeries[sIdx].map.get(xIdx) || 0;
-        sparseSeries[sIdx].map.set(xIdx, prev + yVal);
+  // Assemble raw series with numeric x
+  const rawSeries = [];
+  for (let s=0; s<subcats.length; s++){
+    const key = i18n(subcats[s]);
+    const values = [];
+    for (let r=0; r<rows.length; r++){
+      if (rows[r][4] === subcats[s]){
+        const label =
+          String(i18n(rows[r][1])) + " - " +
+          String(i18n(rows[r][2])) + " - " +
+          String(rows[r][3]);
+        const xIdx = pushLabel(label);
+        const yVal = Number(rows[r][5]);
+        if (xIdx >= 0 && Number.isFinite(yVal)) {
+          values.push({ x: xIdx, y: yVal });
+        }
       }
     }
+    rawSeries.push({ key, values });
   }
 
-  // Densify every series to a full values array of length labels.length
-  const dataset = [];
-  for (const s of sparseSeries) {
-    const values = new Array(labels.length);
-    for (let i=0; i<labels.length; i++){
-      const y = s.map.get(i);
-      values[i] = { x: i, y: Number.isFinite(y) ? y : 0 };
-    }
-    // keep only if some bar is > 0 (avoid totally empty series)
-    const hasData = values.some(p => p.y && Number.isFinite(p.y));
-    if (hasData) dataset.push({ key: s.key, values });
-  }
+  // sanitize series
+  const dataset = rawSeries
+    .map(_sanitizeSeriesForMultiBarWithIndex)
+    .filter(Boolean);
 
-  // Debug summary
+  // describe for debugging
   try {
     const desc = dataset.map((s,i)=>({
       i, key: s.key, len: s.values.length,
       first: s.values.length ? `(${s.values[0].x}, ${s.values[0].y})` : '(none)'
     }));
     console.log('[multibar] series summary:', desc);
-    // Also useful once: console.log('[multibar] labels:', labels);
   } catch(_) {}
 
-  // Guard
+  // guard: nothing valid to draw
   if (!dataset.length || !labels.length){
     d3.select('#chart_impacts').select('svg').remove();
     console.warn('[rearrange_data_for_LCA_chart] no valid data to plot');
     return;
   }
 
-  // Clean previous svg to avoid stale state
+  // remove old svg to avoid residual state
   d3.select('#chart_impacts').select('svg').remove();
 
   nv.addGraph(function() {
     var chart = nv.models.multiBarChart()
       .margin({left:100, bottom:180})
-      .stacked(true)
-      .reduceXTicks(false); // more labels -> avoid auto-thinning issues
-
-    // Explicit accessors (paranoia)
-    chart.x(function(d){ return d.x; });
-    chart.y(function(d){ return d.y; });
+      .stacked(true);
 
     chart.xAxis
       .rotateLabels(-30)
       .tickFormat(function(i){
+        // safety: i could be float or out of range; coerce and clamp
         const idx = Math.max(0, Math.min(labels.length-1, Math.round(i)));
         return labels[idx] || '';
       });
@@ -973,6 +953,231 @@ function rearrange_data_for_LCA_chart(impact_cat){
   });
 }
 
+
+
+function rearrange_data_for_endpoint_chart(human_health_val, ecosystem_val, resource_val, cost_val){
+    var mid_to_end = {
+         "climate change":[{"name":"human health", "CF":9.28e-7},{"name":"ecosystem", "CF":2.8e-9 + 7.65e-14}],
+         "agricultural land occupation":[{"name":"ecosystem", "CF":8.88e-9}],
+         "fossil depletion":[{"name":"resource", "CF":0.46}],
+         "freshwater ecotoxicity":[{"name":"ecosystem", "CF":6.95e-10}],
+         "freshwater eutrophication":[{"name":"ecosystem", "CF":6.71e-7}],
+         "human toxicity":[{"name":"human health", "CF":3.32e-6}],
+         "ionising radiation":[{"name":"human health", "CF":8.5e-9}],
+         "marine ecotoxicity":[{"name":"ecosystem", "CF":1.05e-10}],
+         "marine eutrophication":[{"name":"ecosystem", "CF":1.7e-9}],
+         "metal depletion":[{"name":"resource", "CF":6.19e-2 * 2.31e-1}],
+         "natural land transformation":[{"name":"ecosystem", "CF":8.88e-9}],
+         "ozone depletion":[{"name":"human health", "CF":5.31e-4}],
+         "particulate matter formation":[{"name":"human health", "CF":6.29e-4}],
+         "photochemical oxidant formation":[{"name":"human health", "CF":9.1e-7},{"name":"ecosystem", "CF":1.29e-7}],
+         "terrestrial acidification":[{"name":"ecosystem", "CF":2.12e-7}],
+         "terrestrial ecotoxicity":[{"name":"ecosystem", "CF":1.14e-11}],
+         "urban land occupation":[{"name":"ecosystem", "CF":8.88e-9}],
+         "water depletion":[{"name":"human health", "CF":2.22e-6},{"name":"ecosystem", "CF":1.35e-8 + 6.04e-13}],
+         "noise emissions":[{"name":"human health", "CF":5.66e-10}],
+         "ownership cost":[{"name":"ownership cost", "CF":1}]
+    };
+
+    var list_recipient = ["human health", "ecosystem", "resource", "ownership cost"];
+    var CF_human_health = 7.4e4
+    var CF_ecosystem = 3.08e7
+    var CF_resource = 1.0
+    var CF_cost = 1.0
+
+    var processed_data = [];
+
+    for (recipient=0;recipient<list_recipient.length;recipient++){
+        for (a=0; a<data[1].length;a++){
+            if (data[1][a][0] in mid_to_end){
+                for (b=0;b<mid_to_end[data[1][a][0]].length;b++){
+                    if (mid_to_end[data[1][a][0]][b]["name"]==list_recipient[recipient]){
+                        if (list_recipient[recipient] == "human health"){
+                            processed_data.push(["human health",
+                                                    data[1][a][1],
+                                                    data[1][a][2],
+                                                    data[1][a][3],
+                                                    data[1][a][4],
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_human_health*(human_health_val/100),
+                                                    data[1][a][0]
+                                                    ])
+                        };
+                        if (list_recipient[recipient] == "ecosystem"){
+                            processed_data.push(["ecosystem",
+                                                    data[1][a][1],
+                                                    data[1][a][2],
+                                                    data[1][a][3],
+                                                    data[1][a][4],
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_ecosystem*(ecosystem_val/100),
+                                                    data[1][a][0]])
+                        };
+                        if (list_recipient[recipient] == "resource"){
+                            processed_data.push(["resource", data[1][a][1],
+                                                                data[1][a][2],
+                                                                data[1][a][3],
+                                                                data[1][a][4],
+                                                                data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_resource*(resource_val/100),
+                                                    data[1][a][0]])
+                        };
+                        if (list_recipient[recipient] == "ownership cost"){
+                            processed_data.push(["ownership cost", data[1][a][1],
+                                                    data[1][a][2],
+                                                    data[1][a][3],
+                                                    data[1][a][4],
+                                                    data[1][a][5]*mid_to_end[data[1][a][0]][b]["CF"]*CF_cost*(cost_val/100),
+                                                    data[1][a][0]])
+                        };
+                    }
+                }
+            }
+        }
+    };
+
+    var data_to_plot = [];
+
+    for (a = 0; a < list_recipient.length; a++){
+        var impact_dict={};
+        impact_dict['key'] = i18n(list_recipient[a]);
+        impact_dict['values'] = [];
+
+        if (list_recipient[a] == "human health"){ impact_dict['color'] = "#1f77b4" }
+        if (list_recipient[a] == "ecosystem"){ impact_dict['color'] = "#98df8a" }
+        if (list_recipient[a] == "resource"){ impact_dict['color'] = "#ff7f0e" }
+        if (list_recipient[a] == "ownership cost"){ impact_dict['color'] = "#d62728" }
+
+        var list_vehicles = [];
+
+        for (b=0; b < processed_data.length; b++){
+            if (processed_data[b][0] == list_recipient[a]){
+                var vehicle = i18n(processed_data[b][2])+" - "+i18n(processed_data[b][1])+" - "+processed_data[b][3];
+
+                if (!list_vehicles.includes(vehicle)){
+                    impact_dict['values'].push({
+                    'x': vehicle,
+                    'y': processed_data[b][5]
+                    });
+                    list_vehicles.push(vehicle);
+                }else{
+                    for (c=0;c<impact_dict['values'].length;c++){
+                        if (impact_dict['values'][c]["x"] == vehicle){
+                            impact_dict['values'][c]["y"] += processed_data[b][5]
+                        }
+                    };
+                };
+            }
+        }
+        data_to_plot.push(impact_dict)
+    };
+
+    nv.addGraph(function() {
+            var chart = nv.models.multiBarChart()
+                    .margin({left:100, bottom:180})
+                    .stacked(true);
+            chart.xAxis.rotateLabels(-30);
+
+            var unit_name = i18n("total_impact");
+
+            chart.yAxis
+              .axisLabel(unit_name+"/"+data[8]+" - "+ data[9])
+              .tickFormat(d3.format('.03f'))
+              .showMaxMin(false);
+
+            d3.select('#chart_endpoint')
+                .datum(data_to_plot)
+                .transition().duration(500).call(chart);
+
+            nv.utils.windowResize(chart.update);
+            return chart;
+        });
+
+    // Prepare data for radar graph as well
+
+    var chart_data = [];
+
+    var list_impacts = [];
+    var list_cars = [];
+
+    for (var d=0; d < processed_data.length; d++){
+        if (!list_impacts.includes(processed_data[d][6])){list_impacts.push(processed_data[d][6])}
+        var car = i18n(processed_data[d][2]) + " - " + i18n(processed_data[d][1]) + " - " + processed_data[d][3]
+        if (!list_cars.includes(car)){list_cars.push(car)}
+    };
+
+    var radarChart_data_endpoint = [];
+
+    for (var car = 0; car < list_cars.length; car++){
+        var car_data = [];
+        for (var imp = 0; imp < list_impacts.length; imp++){
+            var impact = 0
+            for (var d = 0; d < processed_data.length; d++){
+                var c = i18n(processed_data[d][2]) + " - " + i18n(processed_data[d][1]) + " - " + processed_data[d][3]
+                if (c == list_cars[car] && processed_data[d][6] == list_impacts[imp]){
+                    impact += processed_data[d][5]
+                }
+            }
+            if (impact > 0 ){
+                car_data.push({ 'axis': i18n(list_impacts[imp]), 'value': impact, 'key': list_cars[car] })
+            }
+        }
+        radarChart_data_endpoint.push(car_data)
+    }
+
+    var max_val = 0;
+    for (var d=0; d < radarChart_data_endpoint.length; d++){
+        for (var c=0; c < radarChart_data_endpoint[d].length; c++){
+            if (radarChart_data_endpoint[d][c]["value"] > max_val){max_val = radarChart_data_endpoint[d][c]["value"]}
+        }
+    }
+
+    var final_data= [];
+
+    var keep_impact = {};
+    for (var i = 0; i < list_impacts.length; i++){ keep_impact[i18n(list_impacts[i])] = 0 }
+
+    for (var d=0; d < radarChart_data_endpoint.length; d++){
+        for (var c=0; c < radarChart_data_endpoint[d].length; c++){
+            var val = parseFloat(radarChart_data_endpoint[d][c]["value"])
+            if (val < (0.05 * max_val)){
+                keep_impact[radarChart_data_endpoint[d][c]["axis"]] += 1
+            }
+        }
+    }
+
+    for (var d=0; d < radarChart_data_endpoint.length; d++){
+        var mid_data = [];
+        for (var c=0; c < radarChart_data_endpoint[d].length; c++){
+            if (keep_impact[radarChart_data_endpoint[d][c]["axis"]] < list_cars.length){
+                mid_data.push(radarChart_data_endpoint[d][c])
+            }
+        }
+        if (mid_data.length) { final_data.push(mid_data); }
+    }
+
+    var margin = {top: 170, right: 120, bottom: 130, left: 120},
+        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+    var radarChartOptions = {
+      w: width,
+      h: height,
+      margin: margin,
+      maxValue: max_val,
+      levels: 5,
+      roundStrokes: true,
+      suffix: ' pt',
+      precision: '.03f'
+    };
+
+    // ---- sanitize + describe + guard for endpoint radar ----
+    const cleaned = _sanitizeRadarDataset(final_data);
+    _describeRadar(cleaned);
+    if (!cleaned.length) {
+      d3.select('#radarChart_end').select('svg').remove();
+      console.warn('[rearrange_data_for_endpoint_chart] no data to plot for end-radar');
+      return;
+    }
+    RadarChart("radarChart_end", cleaned, radarChartOptions);
+}
 
 $('input[name="method_radar_graph"]').click(function() {
         generate_radar_chart(data[10]);
