@@ -957,80 +957,12 @@ function _validateNvMultiBarTupleDataset(nvDataset, labels) {
   }
 }
 
-
 function rearrange_data_for_LCA_chart(impact_cat){
 
-  // ---- local helpers ----
-  function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
-
-  function _sanitizeSeriesForMultiBarWithIndex(series, labelsLen){
-    if (!series || typeof series !== 'object' || !Array.isArray(series.values)) {
-      console.error('[multibar/sanitize] bad series object:', series);
-      return null;
-    }
-    const key = String(series.key ?? '(no-key)');
-    const out = [];
-
-    series.values.forEach((p, pi) => {
-      let x = Number(p?.x);
-      let y = Number(p?.y);
-
-      if (!Number.isFinite(x)) {
-        console.error(`[multibar/sanitize] drop point: non-numeric x at series "${key}" idx ${pi}:`, p);
-        return;
-      }
-      if (!_isFiniteNum(y)) {
-        console.error(`[multibar/sanitize] drop point: non-finite y at series "${key}" idx ${pi}:`, p);
-        return;
-      }
-
-      if (x < 0 || x >= labelsLen) {
-        console.warn(`[multibar/sanitize] x out of domain for "${key}" idx ${pi}: x=${x}, labelsLen=${labelsLen}. Dropping.`, p);
-        return;
-      }
-
-      x = Math.round(x); // ensure integer index
-      out.push({ x, y });
-    });
-
-    // sort and collapse duplicate x
-    out.sort((a,b) => a.x - b.x);
-    const collapsed = [];
-    for (const pt of out) {
-      const last = collapsed[collapsed.length - 1];
-      if (last && last.x === pt.x) {
-        last.y += pt.y;
-      } else {
-        collapsed.push({ x: pt.x, y: pt.y });
-      }
-    }
-
-    if (!collapsed.length) {
-      console.warn(`[multibar/sanitize] series "${key}" ended empty after cleaning`);
-      return null;
-    }
-
-    return { key, values: collapsed };
-  }
-
-  function _padMissingIndicesWithZero(labelsLen, dataset){
-    const expected = new Set(Array.from({length: labelsLen}, (_,i)=>i));
-    dataset.forEach((s, si) => {
-      const have = new Set(s.values.map(p => p.x));
-      const missing = [...expected].filter(i => !have.has(i));
-      if (missing.length) {
-        console.warn(`[multibar/pad] series ${si} "${s.key}" missing ${missing.length} x index(es). Examples:`, missing.slice(0, 12));
-        missing.forEach(i => s.values.push({ x: i, y: 0 }));
-        s.values.sort((a,b)=>a.x-b.x);
-      }
-    });
-  }
-  // ---- end helpers ----
-
+  // ---------- 1) Collect rows (converting cost to user currency if needed) ----------
   let rows = [];
   let real_impact_name = "";
 
-  // collect matching rows (convert cost to user currency)
   for (let a = 0; a < data[1].length; a++){
     if (i18n(data[1][a][0]) === impact_cat){
       real_impact_name = data[1][a][0];
@@ -1045,90 +977,126 @@ function rearrange_data_for_LCA_chart(impact_cat){
     }
   }
 
-  console.log('[multibar/debug] impact_cat:', impact_cat, '| rows considered:', rows.length);
-
-  // Sort by total (index 6)
-  rows.sort((x,y) => Number(y[6]||0) - Number(x[6]||0));
-
-  // Build label -> index map (unique X categories)
-  const labels = [];
-  function pushLabel(lbl){
-    const s = String(lbl ?? '');
-    if (!s.length) return -1;
-    const idx = labels.indexOf(s);
-    if (idx >= 0) return idx;
-    labels.push(s);
-    return labels.length - 1;
-  }
-
-  // list of sub-categories (index 4)
-  const subcats = [];
-  for (let a=0; a<rows.length; a++){
-    const sc = rows[a][4];
-    if (sc != null && !subcats.includes(sc)) subcats.push(sc);
-  }
-
-  // Assemble raw series with numeric x
-  const rawSeries = [];
-  for (let s=0; s<subcats.length; s++){
-    const key = i18n(subcats[s]);
-    const values = [];
-    for (let r=0; r<rows.length; r++){
-      if (rows[r][4] === subcats[s]){
-        const label =
-          String(i18n(rows[r][1])) + ' - ' +
-          String(i18n(rows[r][2])) + ' - ' +
-          String(rows[r][3]);
-        const xIdx = pushLabel(label);
-        const yVal = Number(rows[r][5]);
-        if (xIdx >= 0 && Number.isFinite(yVal)) {
-          values.push({ x: xIdx, y: yVal });
-        } else {
-          console.warn('[multibar/debug] skipping point due to bad x/y', {key, label, xIdx, yVal, row: rows[r]});
-        }
-      }
-    }
-    rawSeries.push({ key, values });
-  }
-
-  // Sanitize against label domain
-  let dataset = rawSeries
-    .map(s => _sanitizeSeriesForMultiBarWithIndex(s, labels.length))
-    .filter(Boolean);
-
-  const allNums = dataset.every(s => Array.isArray(s.values) && s.values.every(p => Number.isInteger(p.x) && _isFiniteNum(p.y)));
-  console.log('[multibar/debug] basic shape/number validation:', allNums ? 'OK' : 'PROBLEM');
-
-  // Pad missing x with zero (so every series has values for each label)
-  if (dataset.some(s => s.values.length !== labels.length)) {
-    _padMissingIndicesWithZero(labels.length, dataset);
-  }
-
-  // Describe
-  try {
-    const desc = dataset.map((s,i)=>({
-      i, key: s.key, len: s.values.length,
-      first: s.values.length ? `(${s.values[0].x}:${labels[s.values[0].x]} , ${s.values[0].y})` : '(none)'
-    }));
-    console.log('[multibar] series summary:', desc);
-  } catch(_) {}
-
-  // guard: nothing valid to draw
-  if (!dataset.length || !labels.length){
+  // nothing? bail early
+  if (!rows.length){
     d3.select('#chart_impacts').select('svg').remove();
-    console.warn('[rearrange_data_for_LCA_chart] no valid data to plot');
+    console.warn('[rearrange_data_for_LCA_chart] no rows for impact:', impact_cat);
     return;
   }
 
-  // ---- NVD3 compatibility: explicit accessors + tuple fallback ----
-  // Some older NVD3 builds ignore x()/y() and read points as [x,y].
-  // Build a shallow, draw-only copy with tuple points to be safe.
-  const nvDataset = dataset.map(s => ({
-    key: s.key,
-    values: s.values.map(p => [p.x, p.y])  // <-- tuple form for legacy multiBar
-  }));
+  // ---------- 2) Sort rows by total (index 6) ----------
+  rows.sort((x,y) => Number(y[6]||0) - Number(x[6]||0));
 
-  // remove old svg to avoid residual state
+  // ---------- 3) Build global label list (x ticks) ----------
+  const labels = [];
+  const labelSet = new Set();
+  function pushLabel(lbl){
+    const s = String(lbl || '');
+    if (!s) return -1;
+    if (!labelSet.has(s)){
+      labelSet.add(s);
+      labels.push(s);
+    }
+    return labels.indexOf(s);
+  }
+
+  // compute all x labels
+  for (let r=0; r<rows.length; r++){
+    const lab = String(i18n(rows[r][1])) + " - " + String(i18n(rows[r][2])) + " - " + String(rows[r][3]);
+    pushLabel(lab);
+  }
+
+  // guard
+  if (!labels.length){
+    d3.select('#chart_impacts').select('svg').remove();
+    console.warn('[rearrange_data_for_LCA_chart] no x labels.');
+    return;
+  }
+
+  // ---------- 4) List unique subcategories (index 4) ----------
+  const subcats = [];
+  const subSet = new Set();
+  for (let r=0; r<rows.length; r++){
+    const sc = rows[r][4];
+    if (sc != null && !subSet.has(sc)){
+      subSet.add(sc);
+      subcats.push(sc);
+    }
+  }
+
+  // If there are no subcats, make a single group to still plot something
+  if (!subcats.length){
+    subcats.push('(total)');
+  }
+
+  // ---------- 5) Build dense object-shaped dataset for NVD3 ----------
+  // Shape: [{ key, values: [{x:int, y:number}, ... all labels ...] }, ...]
+  const series = subcats.map(sc => {
+    const key = i18n(sc);
+    // init with zeros across all labels
+    const values = labels.map((_, ix) => ({ x: ix, y: 0 }));
+    // fill actual values
+    for (let r=0; r<rows.length; r++){
+      if (rows[r][4] === sc){
+        const lab = String(i18n(rows[r][1])) + " - " + String(i18n(rows[r][2])) + " - " + String(rows[r][3]);
+        const ix = labels.indexOf(lab);
+        if (ix >= 0){
+          const yVal = Number(rows[r][5]);
+          if (Number.isFinite(yVal)){
+            values[ix].y = yVal;
+          }
+        }
+      }
+    }
+    return { key, values };
+  });
+
+  // ---------- 6) Deep validation for object shape ----------
+  function _validateNvMultiBarObjectDataset(ds, labs){
+    try{
+      if (!Array.isArray(ds)){ console.error('[nv-validate-obj] dataset not array', ds); return false; }
+      console.log('[nv-validate-obj] series count:', ds.length, '| labels:', labs.length);
+      for (let si=0; si<ds.length; si++){
+        const s = ds[si];
+        if (!s || typeof s !== 'object'){ console.error('[nv-validate-obj] series not object', {si, s}); return false; }
+        if (typeof s.key !== 'string'){ console.error('[nv-validate-obj] series.key not string', {si, key: s.key}); return false; }
+        if (!Array.isArray(s.values)){ console.error('[nv-validate-obj] series.values not array', {si, key: s.key}); return false; }
+        if (s.values.length !== labs.length){
+          console.warn('[nv-validate-obj] series.values length != labels length', {si, key: s.key, vlen:s.values.length, llen: labs.length});
+        }
+        for (let pi=0; pi<s.values.length; pi++){
+          const pt = s.values[pi];
+          if (!pt || typeof pt !== 'object'){ console.error('[nv-validate-obj] point not object', {si, key:s.key, pi, pt}); return false; }
+          if (!Number.isFinite(pt.x) || !Number.isFinite(pt.y)){
+            console.error('[nv-validate-obj] x/y not finite', {si, key:s.key, pi, pt});
+            return false;
+          }
+          const ix = Math.round(pt.x);
+          if (ix < 0 || ix >= labs.length){
+            console.error('[nv-validate-obj] x index out of range', {si, key:s.key, pi, ix, labsLen: labs.length, label: labs[ix]});
+            return false;
+          }
+          if (pt.y === undefined){
+            console.error('[nv-validate-obj] y is undefined', {si, key:s.key, pi, pt});
+            return false;
+          }
+        }
+      }
+      console.log('[nv-validate-obj] dataset looks OK for NVD3 object input.');
+      return true;
+    }catch(e){
+      console.error('[nv-validate-obj] threw while scanning:', e);
+      return false;
+    }
+  }
+
+  if (!_validateNvMultiBarObjectDataset(series, labels)){
+    console.error('[rearrange_data_for_LCA_chart] Aborting render due to invalid object dataset.');
+    d3.select('#chart_impacts').select('svg').remove();
+    return;
+  }
+
+  // ---------- 7) Render (object shape) ----------
   d3.select('#chart_impacts').select('svg').remove();
 
   nv.addGraph(function() {
@@ -1136,9 +1104,10 @@ function rearrange_data_for_LCA_chart(impact_cat){
       .margin({left:100, bottom:180})
       .stacked(true);
 
-    // Try to force accessors anyway (newer NVD3 respects these)
-    chart.x(function(d){ return Array.isArray(d) ? d[0] : d.x; })
-         .y(function(d){ return Array.isArray(d) ? d[1] : d.y; });
+    // tell chart to use object fields
+    chart.multibar
+      .x(function(d){ return d.x; })
+      .y(function(d){ return d.y; });
 
     chart.xAxis
       .rotateLabels(-30)
@@ -1147,6 +1116,7 @@ function rearrange_data_for_LCA_chart(impact_cat){
         return labels[idx] || '';
       });
 
+    // y format & label
     var unit_name = "unit_" + real_impact_name;
     const yFmt =
       (["ozone depletion", "freshwater eutrophication", "marine eutrophication",
@@ -1167,34 +1137,46 @@ function rearrange_data_for_LCA_chart(impact_cat){
       .tickFormat(yFmt)
       .showMaxMin(false);
 
-    // Validate deeply before we call NVD3.
-    // If there is *any* bad point, we log exactly which one and abort.
-    if (!_validateNvMultiBarTupleDataset(nvDataset, labels)) {
-      console.error('[rearrange_data_for_LCA_chart] Aborting render due to invalid nvDataset.');
-      // Optional: dump a compact preview of each series first 5 points
-      try {
-        const preview = nvDataset.map(s => ({
-          key: s.key,
-          head: (s.values || []).slice(0, 5)
-        }));
-        console.log('[nv-validate] preview head:', preview);
-      } catch(_) {}
-      d3.select('#chart_impacts').select('svg').remove();
+    // Try full render; if it throws, we progressively bisect to identify the culprit series
+    try {
+      d3.select('#chart_impacts').datum(series).transition().duration(500).call(chart);
+    } catch (e) {
+      console.error('[rearrange_data_for_LCA_chart] full render threw, isolating...', e);
+      // binary search isolation
+      function tryRender(subset) {
+        d3.select('#chart_impacts').select('svg').remove();
+        d3.select('#chart_impacts').append('svg');
+        try {
+          d3.select('#chart_impacts').datum(subset).call(chart);
+          return true;
+        } catch (err) {
+          return false;
+        }
+      }
+      let left = 0, right = series.length - 1, culpritIdx = -1;
+      while (left <= right) {
+        const mid = Math.floor((left + right)/2);
+        const okLeft = tryRender(series.slice(0, mid+1));
+        if (!okLeft) {
+          culpritIdx = mid;
+          right = mid - 1;
+        } else {
+          left = mid + 1;
+        }
+      }
+      if (culpritIdx >= 0) {
+        console.error('[rearrange_data_for_LCA_chart] culprit series key:', series[culpritIdx].key, 'index:', culpritIdx, 'values(head):', series[culpritIdx].values.slice(0,5));
+      } else {
+        console.error('[rearrange_data_for_LCA_chart] could not isolate culprit — chart may be failing elsewhere.');
+      }
+      // bail
       return;
     }
-
-    d3.select('#chart_impacts')
-      .datum(nvDataset)
-      .transition().duration(500)
-      .call(chart);
-
 
     nv.utils.windowResize(chart.update);
     return chart;
   });
 }
-
-
 
 
 
