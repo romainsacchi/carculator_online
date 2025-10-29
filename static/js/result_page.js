@@ -1409,132 +1409,149 @@ $('input[name="method_radar_graph"]').click(function() {
 });
 
 function generate_radar_chart(data){
-    /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+  /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
-    //////////////////////////////////////////////////////////////
-    //////////////////////// Set-Up //////////////////////////////
-    //////////////////////////////////////////////////////////////
+  // ---------- Set-Up ----------
+  var margin = {top: 180, right: 120, bottom: 130, left: 120},
+      width  = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+      height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-    var margin = {top: 180, right: 120, bottom: 130, left: 120},
-        width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+  // ---------- Data prep ----------
+  var list_cars = [];
+  var list_methods = [];
+  var chart_data = [];
 
-    //////////////////////////////////////////////////////////////
-    ////////////////////////// Data //////////////////////////////
-    //////////////////////////////////////////////////////////////
+  // What’s checked right now?
+  var checked_methods = $('input[name="method_radar_graph"]:checked');
+  var list_checked_methods = [];
+  for (var m=0; m < checked_methods.length; m++){
+      list_checked_methods.push(checked_methods[m]['defaultValue']);
+  }
 
-    var list_cars = [];
-    var list_methods = [];
-    var chart_data = [];
+  // Categories → methods mapping (must match raw strings in data[l][0])
+  var d_meth_cat = {
+    'cat1': ['climate change - climate change total', 'human health - ozone layer depletion',
+             'human health - respiratory effects'],
+    'cat2': ['human health - ionising radiation', 'human health - photochemical ozone formation',
+             'ecosystem quality - freshwater and terrestrial acidification', 'ecosystem quality - terrestrial eutrophication',
+             'ecosystem quality - freshwater eutrophication', 'ecosystem quality - marine eutrophication'],
+    'cat3': ['human health - carcinogenic effects', 'human health - non-carcinogenic effects',
+             'resources - land use', 'ecosystem quality - freshwater ecotoxicity',
+             'resources - dissipated water', 'resources - fossils', 'resources - minerals and metals'],
+  };
 
-    var checked_methods = $('input[name="method_radar_graph"]:checked');
-    var list_checked_methods = [];
-
-    for (var m=0; m < checked_methods.length; m++){
-        list_checked_methods.push(checked_methods[m]['defaultValue'])
+  // Expand selections
+  for (var i=0; i < list_checked_methods.length; i++){
+    var val = list_checked_methods[i];
+    if (['cat1', 'cat2', 'cat3'].includes(val)){
+      var meths = d_meth_cat[val] || [];
+      for (var k=0; k < meths.length; k++){
+        if (!list_methods.includes(meths[k])) list_methods.push(meths[k]);
+        // sync UI (optional)
+        $('input[name="method_radar_graph"][value="'+meths[k]+'"]').prop("checked", true);
+      }
+    } else {
+      if (!list_methods.includes(val)) list_methods.push(val);
     }
+  }
 
-    var d_meth_cat = {
-        'cat1': ['climate change - climate change total', 'human health - ozone layer depletion',
-                'human health - respiratory effects'],
-        'cat2': ['human health - ionising radiation', 'human health - photochemical ozone formation',
-                'ecosystem quality - freshwater and terrestrial acidification', 'ecosystem quality - terrestrial eutrophication',
-                'ecosystem quality - freshwater eutrophication', 'ecosystem quality - marine eutrophication'],
-        'cat3': ['human health - carcinogenic effects', 'human health - non-carcinogenic effects',
-                'resources - land use', 'ecosystem quality - freshwater ecotoxicity',
-                'resources - dissipated water', 'resources - fossils', 'resources - minerals and metals'],
+  // If nothing was checked, default to cat1
+  if (!list_methods.length){
+    console.warn('[radar/mid] No methods checked. Defaulting to cat1.');
+    list_methods = d_meth_cat['cat1'].slice();
+    // (optional) sync UI:
+    list_methods.forEach(v => $('input[name="method_radar_graph"][value="'+v+'"]').prop("checked", true));
+  }
+
+  // If still empty (e.g., values mismatch UI), derive from data itself
+  if (!list_methods.length){
+    console.warn('[radar/mid] Still empty after default. Deriving from data.');
+    var allMethods = [];
+    for (var l=0; l<data.length; l++){
+      var mname = data[l][0];
+      if (typeof mname === 'string' && !allMethods.includes(mname)) allMethods.push(mname);
     }
+    // take first few to avoid huge radar
+    list_methods = allMethods.slice(0, 8);
+  }
 
-    for (meth=0; meth < list_checked_methods.length; meth++){
-        if (['cat1', 'cat2', 'cat3'].includes(list_checked_methods[meth])){
-            var meths = d_meth_cat[list_checked_methods[meth]];
-            for (var m=0; m < meths.length; m++){
-                list_methods.push(meths[m]);
-                $('input[name="method_radar_graph"][value="'+meths[m]+'"]').prop( "checked", true );
-            };
-        }else{
-            if (!list_methods.includes(list_checked_methods[meth])){
-                list_methods.push(list_checked_methods[meth])
-            }
+  // Unique cars
+  for (var l=0; l < data.length; l++){
+    var car = data[l][2] + " - " + data[l][1] + " - " + data[l][3];
+    if (!list_cars.includes(car)) list_cars.push(car);
+  }
+
+  // Max value (only across chosen methods)
+  var max_val = 0;
+  for (var j=0; j < data.length; j++){
+    if (list_methods.includes(data[j][0])) {
+      var v = Number(data[j][4]);
+      if (Number.isFinite(v) && v > max_val) max_val = v;
+    }
+  }
+
+  // Build per-car series
+  for (var c=0; c < list_cars.length; c++){
+    var carLabel = list_cars[c];
+    var list_data_sub = [];
+    for (var mi=0; mi < list_methods.length; mi++){
+      var methName = list_methods[mi];
+      // Find the row matching this car + method
+      for (var r=0; r < data.length; r++){
+        var carKey = data[r][2] + " - " + data[r][1] + " - " + data[r][3];
+        if (data[r][0] === methName && carKey === carLabel){
+          var pt = i18n(carLabel.split(" - ")[0]);
+          var s  = i18n(carLabel.split(" - ")[1]);
+          var y  = i18n(carLabel.split(" - ")[2]);
+
+          var rawVal = Number(data[r][4]);
+          if (!Number.isFinite(rawVal)) {
+            console.warn('[radar/mid] skipping non-finite value for', {car: carLabel, method: methName, raw: data[r][4]});
+            continue;
+          }
+
+          list_data_sub.push({
+            axis: i18n(methName),
+            value: rawVal * 1e6, // your original scale
+            key: pt + " - " + s + " - " + String(y)
+          });
+          break; // next method
         }
+      }
     }
+    if (list_data_sub.length) chart_data.push(list_data_sub);
+  }
 
-    var meth_cat = ["cat1", "cat2", "cat3"];
+  // Helpful diagnostics
+  console.log('[radar/mid] checked:', list_checked_methods);
+  console.log('[radar/mid] methods (final):', list_methods);
+  console.log('[radar/mid] cars:', list_cars);
+  console.log('[radar/mid] chart_data length:', chart_data.length, '| max_val:', max_val);
 
-    for (var m=0; m < meth_cat.length; m++){
-        if (!list_checked_methods.includes(meth_cat[m])){
-            var meths = d_meth_cat[meth_cat[m]];
-            for (var me=0; me < meths.length; me++){
-                if (list_checked_methods.includes(meths[me])){
-                    // left as-is (UI sync)
-                }
-            }
-        }
-    }
+  // ---------- Draw ----------
+  var radarChartOptions = {
+    w: width,
+    h: height,
+    margin: margin,
+    maxValue: max_val,
+    levels: 5,
+    roundStrokes: true,
+    suffix: '/1,000,000',
+    precision: '.01f'
+  };
 
-    for (var l=0; l < data.length; l++){
-        var car = data[l][2] + " - " + data[l][1] + " - " + data[l][3]
-        var method = data[l][0]
-        if (!list_cars.includes(car)){list_cars.push(car)};
-    }
+  const cleaned = _sanitizeRadarDataset(chart_data);
+  _describeRadar(cleaned);
+  if (!cleaned.length) {
+    var sel = d3.select('#radarChart_mid');
+    sel.on('.zoom', null);
+    sel.selectAll('*').on('.zoom', null);
+    sel.selectAll('*').interrupt();
+    sel.select('svg').remove();
+    console.warn('[generate_radar_chart] no data to plot for mid-radar',
+                 {checked:list_checked_methods, methods:list_methods, cars:list_cars});
+    return;
+  }
 
-    var max_val = 0;
-    for (var l=0; l < data.length; l++){
-        if (list_methods.includes(data[l][0])){
-            if (data[l][4] > max_val){
-                max_val = data[l][4]
-            }
-        };
-    };
-
-    for (var car=0; car < list_cars.length; car++){
-        var list_data_sub = [];
-        for (var imp=0; imp < list_methods.length; imp++){
-            for (var l=0; l < data.length; l++){
-                var c = data[l][2] + " - " + data[l][1] + " - " + data[l][3]
-                if ((data[l][0] == list_methods[imp])&(c == list_cars[car])){
-                    var pt = i18n(list_cars[car].split(" - ")[0])
-                    var s = i18n(list_cars[car].split(" - ")[1])
-                    var y = i18n(list_cars[car].split(" - ")[2])
-                   list_data_sub.push({axis:i18n(list_methods[imp]),
-                   value: Number(data[l][4]) * 1000000,
-                   key: pt + " - " + s + " - " + String(y)
-                   })
-                }
-            };
-        };
-        if (list_data_sub.length) {
-            chart_data.push(list_data_sub);
-        }
-    };
-
-    //////////////////////////////////////////////////////////////
-    //////////////////// Draw the Chart //////////////////////////
-    //////////////////////////////////////////////////////////////
-
-    var radarChartOptions = {
-      w: width,
-      h: height,
-      margin: margin,
-      maxValue: max_val,
-      levels: 5,
-      roundStrokes: true,
-      suffix: '/1,000,000',
-      precision: '.01f'
-    };
-
-    // ---- sanitize + describe + guard for mid-radar ----
-    const cleaned = _sanitizeRadarDataset(chart_data);
-    _describeRadar(cleaned);
-    if (!cleaned.length) {
-      var sel = d3.select('#radarChart_mid');
-      sel.on('.zoom', null);
-      sel.selectAll('*').on('.zoom', null);
-      sel.selectAll('*').interrupt();
-      sel.select('svg').remove();
-      console.warn('[generate_radar_chart] no data to plot for mid-radar');
-      return;
-    }
-
-    RadarChart("radarChart_mid", cleaned, radarChartOptions);
-};
+  RadarChart("radarChart_mid", cleaned, radarChartOptions);
+}
