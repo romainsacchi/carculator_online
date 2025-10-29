@@ -1421,6 +1421,33 @@ function generate_radar_chart(data){
       .toLowerCase();
   }
 
+  // Map legacy/old UI labels -> actual labels present in data[l][0]
+    const METHOD_ALIASES = {
+      // Old -> New (EF-style)
+      'climate change - climate change total': 'climate change',
+      'human health - ozone layer depletion': 'ozone depletion',
+      'human health - respiratory effects': 'particulate matter formation',
+
+      // If you ever use these older forms elsewhere, map them too:
+      'ecosystem quality - freshwater and terrestrial acidification': 'acidification',
+      'ecosystem quality - terrestrial eutrophication': 'eutrophication: terrestrial',
+      'ecosystem quality - freshwater eutrophication': 'eutrophication: freshwater',
+      'ecosystem quality - marine eutrophication': 'eutrophication: marine',
+      'human health - ionising radiation': 'ionising radiation: human health',
+      'human health - photochemical ozone formation': 'photochemical oxidant formation: human health',
+      'ecosystem quality - freshwater ecotoxicity': 'ecotoxicity: freshwater',
+      'resources - dissipated water': 'water use',
+      'resources - fossils': 'energy resources: non-renewable',
+      'resources - minerals and metals': 'material resources: metals/minerals',
+      'resources - land use': 'land use'
+    };
+
+    // Replace requested method names via alias map (before normalization)
+    function applyMethodAliases(methodListRaw) {
+      return methodListRaw.map(m => METHOD_ALIASES[m] || m);
+    }
+
+
   // ---------- Set-Up ----------
   var margin = {top: 180, right: 120, bottom: 130, left: 120},
       width  = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
@@ -1491,8 +1518,15 @@ function generate_radar_chart(data){
     list_methods.forEach(v => $('input[name="method_radar_graph"][value="'+v+'"]').prop("checked", true));
   }
 
-  // Normalize requested methods for matching
-  var list_methods_norm = list_methods.map(norm);
+  // After you have list_methods (raw strings), normalize via alias map first
+    list_methods = applyMethodAliases(list_methods);
+
+    // Now continue as before:
+    var list_methods_norm = list_methods.map(norm);
+
+    // Optional: log what changed
+    console.log('[radar/mid] methods after alias map (raw):', list_methods);
+
 
   // Diagnostics: what do we have vs what we want
   console.log('[radar/mid] checked (raw):', list_checked_methods);
