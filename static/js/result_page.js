@@ -813,94 +813,149 @@ function debugScanLCAData(data1, impact_cat, i18nFn){
 //////////////////// MultiBar hard sanitizer + pinpoint logs ////////////////////
 function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
 
-function sanitizeMultiBarDataset(seriesArr){
-  const cleaned = [];
-  let badCount = 0;
-
-  if (!Array.isArray(seriesArr)) {
-    console.error('[multibar/sanitize] dataset is not an array:', seriesArr);
-    return [];
+/**
+ * Sanitize one series that uses index-based x.
+ * - Drops points with invalid x or y
+ * - Clamps x to [0, labelsLen-1] (but logs if it had to)
+ * - Sorts by x
+ * - Collapses duplicate x by summing y
+ */
+function _sanitizeSeriesForMultiBarWithIndex(series, labelsLen){
+  if (!series || typeof series !== 'object' || !Array.isArray(series.values)) {
+    console.error('[multibar/sanitize] bad series object:', series);
+    return null;
   }
+  const key = String(series.key ?? '(no-key)');
+  const out = [];
 
-  seriesArr.forEach((series, si) => {
-    if (!series || typeof series !== 'object') {
-      console.error(`[multibar/sanitize] series ${si} is not an object:`, series);
-      badCount++;
+  series.values.forEach((p, pi) => {
+    let x = Number(p?.x);
+    let y = Number(p?.y);
+
+    if (!Number.isFinite(x)) {
+      console.error(`[multibar/sanitize] drop point: non-numeric x at series "${key}" idx ${pi}:`, p);
       return;
     }
-    const key = String(series.key ?? `(no-key-${si})`);
-    const values = Array.isArray(series.values) ? series.values : [];
-    const keep = [];
-
-    values.forEach((pt, pi) => {
-      // Accept either {x:..., y:...} objects or [x,y] tuples (we convert tuples).
-      let x, y;
-
-      if (pt && typeof pt === 'object' && !Array.isArray(pt)) {
-        x = pt.x;
-        y = pt.y;
-      } else if (Array.isArray(pt) && pt.length >= 2) {
-        x = pt[0];
-        y = pt[1];
-      } else {
-        console.error(`[multibar/sanitize] BAD point (neither object nor [x,y]) at series ${si} ("${key}") point ${pi}:`, pt);
-        badCount++;
-        return;
-      }
-
-      // Validate x/y
-      const xOk = (typeof x === 'string') || (typeof x === 'number');
-      const yNum = Number(y);
-      const yOk = _isFiniteNum(yNum);
-
-      if (!xOk || !yOk) {
-        console.error(
-          `[multibar/sanitize] BAD point content at series ${si} ("${key}") point ${pi}:`,
-          { x, y }
-        );
-        badCount++;
-        return;
-      }
-
-      // Normalize to {x:string, y:number}
-      keep.push({ x: String(x), y: yNum });
-    });
-
-    if (!keep.length) {
-      console.warn(`[multibar/sanitize] dropping EMPTY series ${si} ("${key}") after cleaning`);
+    if (!_isFiniteNum(y)) {
+      console.error(`[multibar/sanitize] drop point: non-finite y at series "${key}" idx ${pi}:`, p);
       return;
     }
 
-    cleaned.push({ key, values: keep });
+    if (x < 0 || x >= labelsLen) {
+      console.warn(`[multibar/sanitize] x out of domain for "${key}" idx ${pi}: x=${x}, labelsLen=${labelsLen}. Dropping.`);
+      return;
+    }
+
+    x = Math.round(x); // ensure integer index
+    out.push({ x, y });
   });
 
-  // Extra: verify all series share the same x-domain; if not, pad with y=0 to avoid NVD3 indexing issues
-  const xUniverse = Array.from(new Set(cleaned.flatMap(s => s.values.map(p => p.x))));
-  cleaned.forEach((s, si) => {
+  // sort and collapse duplicate x
+  out.sort((a,b) => a.x - b.x);
+  const collapsed = [];
+  for (const pt of out) {
+    const last = collapsed[collapsed.length - 1];
+    if (last && last.x === pt.x) {
+      last.y += pt.y;
+    } else {
+      collapsed.push({ x: pt.x, y: pt.y });
+    }
+  }
+
+  if (!collapsed.length) {
+    console.warn(`[multibar/sanitize] series "${key}" ended empty after cleaning`);
+    return null;
+  }
+
+  return { key, values: collapsed };
+}
+
+/**
+ * Ensure every series has all x indices [0..labelsLen-1].
+ * Pads missing with y=0 and logs what was missing.
+ */
+function _padMissingIndicesWithZero(labelsLen, dataset){
+  const expected = new Set(Array.from({length: labelsLen}, (_,i)=>i));
+  dataset.forEach((s, si) => {
     const have = new Set(s.values.map(p => p.x));
-    const missing = xUniverse.filter(x => !have.has(x));
+    const missing = [...expected].filter(i => !have.has(i));
     if (missing.length) {
-      console.warn(`[multibar/sanitize] series ${si} ("${s.key}") missing ${missing.length} x-label(s). Padding with 0. Examples:`, missing.slice(0, 8));
-      // pad with 0 values
-      missing.forEach(x => s.values.push({ x, y: 0 }));
-      // keep x order stable
-      s.values.sort((a,b) => xUniverse.indexOf(a.x) - xUniverse.indexOf(b.x));
+      console.warn(`[multibar/pad] series ${si} "${s.key}" missing ${missing.length} x index(es). Examples:`, missing.slice(0, 12));
+      missing.forEach(i => s.values.push({ x: i, y: 0 }));
+      s.values.sort((a,b)=>a.x-b.x);
     }
   });
-
-  if (badCount) {
-    console.warn(`[multibar/sanitize] removed ${badCount} bad point(s). Final series count: ${cleaned.length}`);
-  }
-  // Short summary for quick glance
-  console.log(
-    '[multibar/sanitize] summary:',
-    cleaned.map((s,i) => ({ i, key: s.key, n: s.values.length }))
-  );
-  return cleaned;
 }
 
 
 function rearrange_data_for_LCA_chart(impact_cat){
+
+  // ---- local helpers (scoped to this function) ----
+  function _isFiniteNum(x){ return typeof x === 'number' && isFinite(x); }
+
+  function _sanitizeSeriesForMultiBarWithIndex(series, labelsLen){
+    if (!series || typeof series !== 'object' || !Array.isArray(series.values)) {
+      console.error('[multibar/sanitize] bad series object:', series);
+      return null;
+    }
+    const key = String(series.key ?? '(no-key)');
+    const out = [];
+
+    series.values.forEach((p, pi) => {
+      let x = Number(p?.x);
+      let y = Number(p?.y);
+
+      if (!Number.isFinite(x)) {
+        console.error(`[multibar/sanitize] drop point: non-numeric x at series "${key}" idx ${pi}:`, p);
+        return;
+      }
+      if (!_isFiniteNum(y)) {
+        console.error(`[multibar/sanitize] drop point: non-finite y at series "${key}" idx ${pi}:`, p);
+        return;
+      }
+
+      if (x < 0 || x >= labelsLen) {
+        console.warn(`[multibar/sanitize] x out of domain for "${key}" idx ${pi}: x=${x}, labelsLen=${labelsLen}. Dropping.`, p);
+        return;
+      }
+
+      x = Math.round(x); // ensure integer index
+      out.push({ x, y });
+    });
+
+    // sort and collapse duplicate x
+    out.sort((a,b) => a.x - b.x);
+    const collapsed = [];
+    for (const pt of out) {
+      const last = collapsed[collapsed.length - 1];
+      if (last && last.x === pt.x) {
+        last.y += pt.y;
+      } else {
+        collapsed.push({ x: pt.x, y: pt.y });
+      }
+    }
+
+    if (!collapsed.length) {
+      console.warn(`[multibar/sanitize] series "${key}" ended empty after cleaning`);
+      return null;
+    }
+
+    return { key, values: collapsed };
+  }
+
+  function _padMissingIndicesWithZero(labelsLen, dataset){
+    const expected = new Set(Array.from({length: labelsLen}, (_,i)=>i));
+    dataset.forEach((s, si) => {
+      const have = new Set(s.values.map(p => p.x));
+      const missing = [...expected].filter(i => !have.has(i));
+      if (missing.length) {
+        console.warn(`[multibar/pad] series ${si} "${s.key}" missing ${missing.length} x index(es). Examples:`, missing.slice(0, 12));
+        missing.forEach(i => s.values.push({ x: i, y: 0 }));
+        s.values.sort((a,b)=>a.x-b.x);
+      }
+    });
+  }
+  // ---- end helpers ----
 
   let rows = [];
   let real_impact_name = "";
@@ -909,7 +964,6 @@ function rearrange_data_for_LCA_chart(impact_cat){
   for (let a = 0; a < data[1].length; a++){
     if (i18n(data[1][a][0]) === impact_cat){
       real_impact_name = data[1][a][0];
-      debugScanLCAData(data[1], impact_cat, i18n);
       if (real_impact_name === "ownership cost"){
         const r = data[1][a].slice();
         r[6] = Number(r[6]) * currency_exch_rate; // total
@@ -921,13 +975,16 @@ function rearrange_data_for_LCA_chart(impact_cat){
     }
   }
 
+  // quick visibility on how many rows we’re feeding
+  console.log('[multibar/debug] impact_cat:', impact_cat, '| rows considered:', rows.length);
+
   // Sort by total (index 6)
   rows.sort((x,y) => Number(y[6]||0) - Number(x[6]||0));
 
   // Build label -> index map (unique X categories across *all* series)
   const labels = [];
   function pushLabel(lbl){
-    const s = String(lbl || '');
+    const s = String(lbl ?? '');
     if (!s.length) return -1;
     const idx = labels.indexOf(s);
     if (idx >= 0) return idx;
@@ -957,22 +1014,52 @@ function rearrange_data_for_LCA_chart(impact_cat){
         const yVal = Number(rows[r][5]);
         if (xIdx >= 0 && Number.isFinite(yVal)) {
           values.push({ x: xIdx, y: yVal });
+        } else {
+          console.warn('[multibar/debug] skipping point due to bad x/y', {key, label, xIdx, yVal, row: rows[r]});
         }
       }
     }
     rawSeries.push({ key, values });
   }
 
-  // sanitize series
-  const dataset = rawSeries
-    .map(_sanitizeSeriesForMultiBarWithIndex)
+  // sanitize each series against the label domain size
+  let dataset = rawSeries
+    .map(s => _sanitizeSeriesForMultiBarWithIndex(s, labels.length))
     .filter(Boolean);
+
+  // basic shape check
+  const allNums = dataset.every(s => Array.isArray(s.values) && s.values.every(p => Number.isInteger(p.x) && _isFiniteNum(p.y)));
+  console.log('[multibar/debug] basic shape/number validation:', allNums ? 'OK' : 'PROBLEM');
+
+  // If any series has fewer points than labels, pad missing x with y=0
+  const someShort = dataset.some(s => s.values.length !== labels.length);
+  if (someShort) {
+    _padMissingIndicesWithZero(labels.length, dataset);
+  }
+
+  // Deep validation & pinpoint logging
+  let badFound = false;
+  dataset.forEach((s, si) => {
+    s.values.forEach((p, pi) => {
+      if (!Number.isInteger(p.x) || p.x < 0 || p.x >= labels.length) {
+        console.error(`[multibar/validate] BAD x index at series ${si} "${s.key}" point ${pi}:`, p, '| labelsLen=', labels.length, '| label@x=', labels[p.x]);
+        badFound = true;
+      }
+      if (!_isFiniteNum(p.y)) {
+        console.error(`[multibar/validate] BAD y at series ${si} "${s.key}" point ${pi}:`, p);
+        badFound = true;
+      }
+    });
+  });
+  if (badFound) {
+    console.warn('[multibar/validate] Found invalid points even after sanitize/pad. Check logs above.');
+  }
 
   // describe for debugging
   try {
     const desc = dataset.map((s,i)=>({
       i, key: s.key, len: s.values.length,
-      first: s.values.length ? `(${s.values[0].x}, ${s.values[0].y})` : '(none)'
+      first: s.values.length ? `(${s.values[0].x}:${labels[s.values[0].x]} , ${s.values[0].y})` : '(none)'
     }));
     console.log('[multibar] series summary:', desc);
   } catch(_) {}
@@ -987,45 +1074,50 @@ function rearrange_data_for_LCA_chart(impact_cat){
   // remove old svg to avoid residual state
   d3.select('#chart_impacts').select('svg').remove();
 
-  // pinpoint + scrub before rendering
-    const cleanedMulti = sanitizeMultiBarDataset(data_to_plot);
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart()
+      .margin({left:100, bottom:180})
+      .stacked(true);
 
-    nv.addGraph(function() {
-      var chart = nv.models.multiBarChart()
-                    .margin({left:100, bottom:180})
-                    .stacked(true);
-      chart.xAxis.rotateLabels(-30);
-      var unit_name = "unit_"+real_impact_name;
+    chart.xAxis
+      .rotateLabels(-30)
+      .tickFormat(function(i){
+        // safety: i could be float or out of range; coerce and clamp
+        const idx = Math.max(0, Math.min(labels.length-1, Math.round(i)));
+        return labels[idx] || '';
+      });
 
-      chart.yAxis
-        .axisLabel(i18n(unit_name)+"/"+data[8]+" - "+ data[9])
-        .tickFormat(d3.format('.03f'))
-        .showMaxMin(false);
+    // y-axis label & format
+    var unit_name = "unit_" + real_impact_name;
+    const yFmt =
+      (["ozone depletion", "freshwater eutrophication", "marine eutrophication",
+        "natural land transformation", "particulate matter formation",
+        "photochemical oxidant formation", "terrestrial acidification",
+        "terrestrial ecotoxicity"].includes(real_impact_name))
+        ? d3.format('.02e')
+        : (real_impact_name === "human noise" ? d3.format('s')
+           : (real_impact_name === "ownership cost" ? d3.format('.02f')
+              : d3.format('.03f')));
 
-      if (["ozone depletion", "freshwater eutrophication", "marine eutrophication", "natural land transformation",
-           "particulate matter formation", "photochemical oxidant formation", "terrestrial acidification",
-           "terrestrial ecotoxicity"].includes(real_impact_name)) {
-        chart.yAxis.tickFormat(d3.format('.02e')).showMaxMin(false);
-      }
-      if (real_impact_name == "human noise") {
-        chart.yAxis.tickFormat(d3.format('s')).showMaxMin(false);
-      }
-      if (real_impact_name == "ownership cost") {
-        chart.yAxis
-          .axisLabel(currency_name+"/"+data[8]+" - "+ data[9])
-          .tickFormat(d3.format('.02f'))
-          .showMaxMin(false);
-      }
+    chart.yAxis
+      .axisLabel(
+        real_impact_name === "ownership cost"
+          ? (currency_name + "/" + data[8] + " - " + data[9])
+          : (i18n(unit_name) + "/" + data[8] + " - " + data[9])
+      )
+      .tickFormat(yFmt)
+      .showMaxMin(false);
 
-      // Render with sanitized data
-      d3.select('#chart_impacts')
-        .datum(cleanedMulti)
-        .transition().duration(500).call(chart);
+    d3.select('#chart_impacts')
+      .datum(dataset)
+      .transition().duration(500)
+      .call(chart);
 
-      nv.utils.windowResize(chart.update);
-      return chart;
-    });
+    nv.utils.windowResize(chart.update);
+    return chart;
+  });
 }
+
 
 
 
