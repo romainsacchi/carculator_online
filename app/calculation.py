@@ -553,7 +553,7 @@ class Calculation:
             "impact_category", "powertrain", "size", "year", "impact"
         )
 
-        for i in ["climate change", "energy resources: non-renewable"]:
+        for i in ["climate change", "non-renewable primary energy"]:
             array.extend(
                 list(
                     map(
@@ -565,7 +565,7 @@ class Calculation:
                             1 / x[1]
                             if x[1] != 0
                             else 0 * 0.755
-                            if i == "energy resources: non-renewable"
+                            if i == "non-renewable primary energy"
                             else 1,
                         ],
                         zip(
