@@ -1434,14 +1434,28 @@ function generate_radar_chart(data){
 
   // Map categories → methods (these must match the *raw* data strings, not translated)
   var d_meth_cat = {
-    'cat1': ['climate change - climate change total', 'human health - ozone layer depletion',
-             'human health - respiratory effects'],
-    'cat2': ['human health - ionising radiation', 'human health - photochemical ozone formation',
-             'ecosystem quality - freshwater and terrestrial acidification', 'ecosystem quality - terrestrial eutrophication',
-             'ecosystem quality - freshwater eutrophication', 'ecosystem quality - marine eutrophication'],
-    'cat3': ['human health - carcinogenic effects', 'human health - non-carcinogenic effects',
-             'resources - land use', 'ecosystem quality - freshwater ecotoxicity',
-             'resources - dissipated water', 'resources - fossils', 'resources - minerals and metals'],
+    'cat1': [
+        'climate change',
+        'ozone depletion',
+        'particulate matter formation'
+    ],
+    'cat2': [
+        'ionising radiation: human health',
+        'photochemical oxidant formation: human health',
+        'acidification',
+        'eutrophication: terrestrial',
+        'eutrophication: freshwater',
+        'eutrophication: marine'
+    ],
+    'cat3': [
+        'human toxicity: carcinogenic',
+        'human toxicity: non-carcinogenic',
+        'land use',
+        'ecotoxicity: freshwater',
+        'water use',
+        'energy resources: non-renewable',
+        'material resources: metals/minerals'
+    ],
   };
 
   // Expand category selections to method list (RAW strings)
