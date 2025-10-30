@@ -835,6 +835,8 @@ class Calculation:
             ]
         )
 
+        print(results.coords["impact_category"].values)
+
         results = (
             results
             .sel(value=0)
