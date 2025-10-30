@@ -1509,9 +1509,6 @@ function generate_radar_chart(data){
     // Now continue as before:
     var list_methods_norm = list_methods.map(norm);
 
-    // Optional: log what changed
-    console.log('[radar/mid] methods after alias map (raw):', list_methods);
-
 
   // Diagnostics: what do we have vs what we want
   console.log('[radar/mid] checked (raw):', list_checked_methods);
