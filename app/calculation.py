@@ -553,8 +553,6 @@ class Calculation:
             "impact_category", "powertrain", "size", "year", "impact"
         )
 
-        print(res_benchmark.coords["impact_category"].values.tolist())
-
         for i in ["climate change", "energy resources: non-renewable"]:
             array.extend(
                 list(
@@ -651,10 +649,6 @@ class Calculation:
     def process_results(self, d, lang, job_id):
         """Calculate LCIA and store results in an array of arrays"""
 
-        # d = _normalize_foreground_keys(d)
-
-        print(d)
-
         # Update task progress to db
         self.update_task_progress(50, job_id)
 
@@ -706,9 +700,6 @@ class Calculation:
         except IndexError:
             transmission_eff = None
 
-        print(engine_eff)
-        print(transmission_eff)
-        print(fuel_blends)
         self.cm = CarModel(
             arr,
             cycle=d[("Driving cycle",)],
@@ -721,7 +712,6 @@ class Calculation:
             engine_efficiency=engine_eff,
             transmission_efficiency=transmission_eff,
         )
-        print(self.cm.fuel_blend)
 
         # adjust the electricity density of the battery cells
         for size, val in batteries.items():
@@ -807,8 +797,46 @@ class Calculation:
         # Update task progress to db
         self.update_task_progress(70, job_id)
 
+        results = self.ic.calculate_impacts()
+
+        # translate new impact category names to old ones
+        map_names = {
+            'climate change': 'climate change',
+             'climate change w bio': 'GWP100a, incl. bio CO2',
+             'land use': 'agricultural land occupation',
+             'energy resources depletion: non-renewablee': 'fossil depletion',
+             'ecotoxicity: freshwater': 'freshwater ecotoxicity',
+             'eutrophication: freshwater': 'freshwater eutrophication',
+             'human toxicity: non-carcinogenic': 'human toxicity',
+             'ionising radiation': 'ionising radiation',
+             'ecotoxicity: marine': 'marine ecotoxicity',
+             'eutrophication: marine': 'marine eutrophication',
+             'material resources: metals/minerals': 'metal depletion',
+             'natural land transformation': 'natural land transformation',
+             'ozone depletion': 'ozone depletion',
+             'particulate matter formation': 'particulate matter formation',
+             'photochemical oxidant formation: human health': 'photochemical oxidant formation',
+             'acidification: terrestrial': 'terrestrial acidification',
+             'ecotoxicity: terrestrial': 'terrestrial ecotoxicity',
+             'urban land occupation': 'urban land occupation',
+             'water use': 'water depletion',
+             'Human noise impacts': 'noise emissions',
+             'energy resources: renewable': 'renewable primary energy',
+             'energy resources: non-renewable': 'non-renewable primary energy'
+        }
+
+        # Build a mapping only for existing impact categories
+        existing_map = {k: v for k, v in map_names.items() if k in results['impact_category'].values}
+
+        # Apply the renaming
+        results = results.assign_coords(
+            impact_category=[
+                existing_map.get(cat, cat) for cat in results['impact_category'].values
+            ]
+        )
+
         results = (
-            self.ic.calculate_impacts()
+            results
             .sel(value=0)
             .transpose("impact_category", "size", "powertrain", "year", "impact")
         )
