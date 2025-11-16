@@ -78,31 +78,9 @@ app.config['LANGUAGES'] = {
     'de': 'German'
 }
 
-# CA Certificate Handling
-ca_cert_path = "/tmp/ca-cert.pem"
-ssl_args = {}  # default: no special SSL config
-
-ssl_key = os.environ.get("SSL_KEY")
-if ssl_key:
-    with open(ca_cert_path, "w") as ca_file:
-        ca_file.write(ssl_key)
-    ssl_args = {
-        "ssl": {
-            "ca": ca_cert_path,
-        }
-    }
-
-if ssl_key:
-    app.logger.info("Using custom DB CA cert, length=%d", len(ssl_key))
-else:
-    app.logger.info("No SSL_KEY provided, using default SSL behavior for DB")
-
-
+# Just use pool_pre_ping to avoid stale connections
 engine_options = {"pool_pre_ping": True}
-if ssl_args:
-    engine_options["connect_args"] = ssl_args
 
-# Initiate database
 db = SQLAlchemy(app, engine_options=engine_options)
 
 
