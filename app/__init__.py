@@ -61,7 +61,7 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['ADMINS'] = os.environ.get('ADMINS', 'ADMIN')
 app.config['RECIPIENT'] = os.environ.get('RECIPIENT', 'carculator@psi.ch')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('STACKHERO_MYSQL_DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_MARIA_URL')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 
