@@ -107,3 +107,6 @@ ENV/
 #user data
 extract_users.py
 users_extract.csv
+
+# Local agent guidance
+AGENTS.md
