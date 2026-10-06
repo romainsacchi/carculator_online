@@ -5,23 +5,23 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
+from pathlib import Path
+
 import numpy as np
+import yaml
+from app import db
+from app.models import Task
 from carculator import (
     CarInputParameters,
-    fill_xarray_from_input_parameters,
-    get_standard_driving_cycle_and_gradient,
     CarModel,
     InventoryCar,
+    fill_xarray_from_input_parameters,
+    get_standard_driving_cycle_and_gradient,
 )
 
 from carculator_utils import BackgroundSystemModel, ExportInventory
 
 from . import app
-from app import db
-from app.models import Task
-import yaml
-from pathlib import Path
-
 
 MAP_FUEL_BLEND = {
     "ICEV-p": "petrol",
@@ -34,46 +34,14 @@ MAP_FUEL_BLEND = {
     "FCEV": "hydrogen",
 }
 
-NORMALIZATION_FACTORS = Path("./data/normalization factors.yaml")
+NORMALIZATION_FACTORS = (
+    Path(__file__).resolve().parent.parent / "data" / "normalization factors.yaml"
+)
 
 
+from .resources import DATA_DIR, load_yaml_file
+from .serialization import _clean_seq, _has_bad_number, _num
 
-import math
-
-def _num(x, default=0.0):
-    """Return a plain float; coerce None/NaN/inf/np types to finite numbers."""
-    try:
-        xf = float(x)
-    except Exception:
-        return float(default)
-    if math.isfinite(xf):
-        return xf
-    return float(default)
-
-def _clean_seq(obj):
-    """Recursively clean lists/dicts -> plain Python types with finite numbers."""
-    if isinstance(obj, dict):
-        return {k: _clean_seq(v) for k, v in obj.items()}
-    if isinstance(obj, (list, tuple)):
-        return [ _clean_seq(v) for v in obj ]
-    # numpy scalars
-    if hasattr(obj, "item") and callable(getattr(obj, "item")):
-        try:
-            obj = obj.item()
-        except Exception:
-            pass
-    # numbers
-    if isinstance(obj, (int, float, np.number)):
-        return _num(obj)
-    # everything else left as-is (strings, booleans)
-    return obj
-
-def _has_bad_number(x):
-    try:
-        xf = float(x)
-        return not math.isfinite(xf)
-    except Exception:
-        return False
 
 def _inspect_payload(payload):
     """Print a concise validation report of each top-level block."""
@@ -86,10 +54,14 @@ def _inspect_payload(payload):
     # [1] list_res: list of [impact,size,pt,year,impact_part,val,total]
     for i, row in enumerate(payload[1]):
         if not (isinstance(row, list) and len(row) >= 7):
-            issues.append(f"[1] row {i} wrong length/shape: {row[:3] if isinstance(row, list) else type(row)}")
+            issues.append(
+                f"[1] row {i} wrong length/shape: {row[:3] if isinstance(row, list) else type(row)}"
+            )
             continue
         if _has_bad_number(row[5]) or _has_bad_number(row[6]):
-            issues.append(f"[1] row {i} has bad numbers at indices 5/6: {row[5]}, {row[6]}")
+            issues.append(
+                f"[1] row {i} has bad numbers at indices 5/6: {row[5]}, {row[6]}"
+            )
 
     # [2] arr_benchmark: list of [cat, pt, size, year, val]
     for i, row in enumerate(payload[2]):
@@ -130,7 +102,7 @@ def _inspect_payload(payload):
         if not (isinstance(row, list) and len(row) >= 7):
             issues.append(f"[5] row {i} wrong shape")
             continue
-        if any(_has_bad_number(row[idx]) for idx in (4,5,6)):
+        if any(_has_bad_number(row[idx]) for idx in (4, 5, 6)):
             issues.append(f"[5] row {i} has bad numbers in (4,5,6): {row[4:7]}")
 
     # [6] config_array: list per vehicle (strings then many numbers/arrays)
@@ -142,7 +114,9 @@ def _inspect_payload(payload):
         for idx in range(3, 10):  # lifetime..electricity_mix (mix is list—skip)
             if idx == 9:
                 break
-            if isinstance(row[idx], (int, float, np.number)) and _has_bad_number(row[idx]):
+            if isinstance(row[idx], (int, float, np.number)) and _has_bad_number(
+                row[idx]
+            ):
                 issues.append(f"[6] row {i} bad number at {idx}: {row[idx]}")
 
     # [8] fu_qty
@@ -185,23 +159,16 @@ def _normalize_foreground_keys(d):
     return d
 
 
-def load_yaml_file(filepath):
-    """
-    Load a yaml file
-    :param filepath: path to the yaml file
-    :return: dictionary
-    """
-    with open(filepath, "r") as f:
-        return yaml.load(f, Loader=yaml.FullLoader)
-
-
 def extract_efficiency(variable, lst):
     efficiency_dict = {}
     for k, v in lst.items():
         if k[3] == variable:  # check if this item refers to engine efficiency
             for year, val in v.items():
-                efficiency_dict[(k[1], k[2], year[0])] = val  # add the entry to the dictionary
+                efficiency_dict[(k[1], k[2], year[0])] = (
+                    val  # add the entry to the dictionary
+                )
     return efficiency_dict
+
 
 class Calculation:
     def __init__(self):
@@ -217,16 +184,16 @@ class Calculation:
             v["name"]: v["category"] for _, v in self.cip.metadata.items()
         }
         self.dcts, self.arr = fill_xarray_from_input_parameters(self.cip)
-        self.d_pt_en = load_yaml_file("./data/translation_pwt_EN.yaml")
-        self.d_pt_it = load_yaml_file("./data/translation_pwt_IT.yaml")
-        self.d_pt_de = load_yaml_file("./data/translation_pwt_DE.yaml")
-        self.d_pt_fr = load_yaml_file("./data/translation_pwt_FR.yaml")
+        self.d_pt_en = load_yaml_file(DATA_DIR / "translation_pwt_EN.yaml")
+        self.d_pt_it = load_yaml_file(DATA_DIR / "translation_pwt_IT.yaml")
+        self.d_pt_de = load_yaml_file(DATA_DIR / "translation_pwt_DE.yaml")
+        self.d_pt_fr = load_yaml_file(DATA_DIR / "translation_pwt_FR.yaml")
         self.d_pt_all = {**self.d_pt_en, **self.d_pt_fr, **self.d_pt_it, **self.d_pt_de}
 
-        self.d_size_en = load_yaml_file("./data/translation_size_EN.yaml")
-        self.d_size_fr = load_yaml_file("./data/translation_size_FR.yaml")
-        self.d_size_it = load_yaml_file("./data/translation_size_IT.yaml")
-        self.d_size_de = load_yaml_file("./data/translation_size_DE.yaml")
+        self.d_size_en = load_yaml_file(DATA_DIR / "translation_size_EN.yaml")
+        self.d_size_fr = load_yaml_file(DATA_DIR / "translation_size_FR.yaml")
+        self.d_size_it = load_yaml_file(DATA_DIR / "translation_size_IT.yaml")
+        self.d_size_de = load_yaml_file(DATA_DIR / "translation_size_DE.yaml")
 
         self.d_size_all = {
             **self.d_size_en,
@@ -249,7 +216,7 @@ class Calculation:
         self.cm = None
 
     def load_map_file(self, lang):
-        with open("data/car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
+        with open(DATA_DIR / "car_to_class_map.csv", "r", encoding="ISO-8859-1") as f:
             data = [list(line) for line in csv.reader(f, delimiter=";")]
 
             if lang == "en":
@@ -275,7 +242,7 @@ class Calculation:
         return data
 
     def load_params_file(self):
-        with open("data/parameters definition.txt", "r", encoding="utf-8") as f:
+        with open(DATA_DIR / "parameters definition.txt", "r", encoding="utf-8") as f:
             data = list(csv.reader(f, delimiter="\t"))
         return data
 
@@ -284,11 +251,8 @@ class Calculation:
 
     def get_dc(self, dc):
         return get_standard_driving_cycle_and_gradient(
-            name=dc,
-            vehicle_type="car",
-            vehicle_sizes=["Small"]
+            name=dc, vehicle_type="car", vehicle_sizes=["Small"]
         )[0]
-
 
     def create_config_array(self, dict_params):
 
@@ -312,7 +276,7 @@ class Calculation:
         for powertrain in self.cm.array.coords["powertrain"].values:
             for size in self.cm.array.coords["size"].values:
                 for iy, year in enumerate(
-                        self.cm.array.coords["year"].values.astype(int)
+                    self.cm.array.coords["year"].values.astype(int)
                 ):
 
                     electricity_mix = self.ic.mix[iy].tolist()
@@ -367,7 +331,6 @@ class Calculation:
 
                     params.extend([battery_chem, battery_origin])
 
-
                     # --- fuel blend (safe defaults) ---
                     if MAP_FUEL_BLEND.get(powertrain) in self.cm.fuel_blend:
                         fb = self.cm.fuel_blend[MAP_FUEL_BLEND[powertrain]]
@@ -384,7 +347,14 @@ class Calculation:
                         primary_fuel_type, primary_fuel_share = "", 0.0
                         secondary_fuel_type, secondary_fuel_share = "", 0.0
 
-                    params.extend([primary_fuel_type, primary_fuel_share, secondary_fuel_type, secondary_fuel_share])
+                    params.extend(
+                        [
+                            primary_fuel_type,
+                            primary_fuel_share,
+                            secondary_fuel_type,
+                            secondary_fuel_share,
+                        ]
+                    )
 
                     arr.append(params)
 
@@ -436,21 +406,18 @@ class Calculation:
     def get_cumulative_ttw_energy(self, list_vehicles):
 
         ttw = self.cm.energy.sel(
-                powertrain=self.scope["powertrain"],
-                size=self.scope["size"],
-                year=self.scope["year"],
-                value=0,
-                parameter=["motive energy", "auxiliary energy", "recuperated energy"],
-            ).sum(dim="parameter")
+            powertrain=self.scope["powertrain"],
+            size=self.scope["size"],
+            year=self.scope["year"],
+            value=0,
+            parameter=["motive energy", "auxiliary energy", "recuperated energy"],
+        ).sum(dim="parameter")
 
         # remove trailing zeros
         ttw = ttw.where(ttw != 0, drop=True)
 
-
-        cumsum = (
-            ttw
-            .cumsum(dim="second")
-            .transpose("powertrain", "size", "year", "second")
+        cumsum = ttw.cumsum(dim="second").transpose(
+            "powertrain", "size", "year", "second"
         )
 
         # --- ensure finite TtW cumulative energy ---
@@ -467,15 +434,17 @@ class Calculation:
                 {
                     "key": vehicle,
                     "values": list(
-                        map(lambda e: {"x": e[0], "y": e[1]}, enumerate(
-                            cumsum.sel(
-                                powertrain=pwt,
-                                size=size,
-                                year=int(year),
-                            ).values
+                        map(
+                            lambda e: {"x": e[0], "y": e[1]},
+                            enumerate(
+                                cumsum.sel(
+                                    powertrain=pwt,
+                                    size=size,
+                                    year=int(year),
+                                ).values
+                            ),
                         )
-                    )
-                    )
+                    ),
                 }
             )
 
@@ -511,14 +480,17 @@ class Calculation:
         scatter_costs = cost_benchmark / load_factor * fu
         np.nan_to_num(scatter_costs, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
 
-        dict_scatter = {name: [float(val)] for name, val in zip(formatted_list_vehicles, scatter_costs)}
+        dict_scatter = {
+            name: [float(val)]
+            for name, val in zip(formatted_list_vehicles, scatter_costs)
+        }
 
         detailed_cost = (
-                total_cost.sel(value=0, parameter=cost_types).values.reshape(
-                    len(formatted_list_vehicles), len(cost_types)
-                )
-                / load_factor
-                * fu
+            total_cost.sel(value=0, parameter=cost_types).values.reshape(
+                len(formatted_list_vehicles), len(cost_types)
+            )
+            / load_factor
+            * fu
         )
 
         # --- force finiteness for costs ---
@@ -562,18 +534,21 @@ class Calculation:
                             x[0][0],
                             x[0][1],
                             x[0][2],
-                            1 / x[1]
-                            if x[1] != 0
-                            else 0 * 0.755
-                            if i == "non-renewable primary energy"
-                            else 1,
+                            (
+                                1 / x[1]
+                                if x[1] != 0
+                                else (
+                                    0 * 0.755
+                                    if i == "non-renewable primary energy"
+                                    else 1
+                                )
+                            ),
                         ],
                         zip(
                             list_vehicles,
                             res_benchmark.sel(impact_category=i)
                             .sum(dim="impact")
-                            .values
-                            .reshape(len(list_vehicles)),
+                            .values.reshape(len(list_vehicles)),
                         ),
                     )
                 )
@@ -582,11 +557,11 @@ class Calculation:
         return array
 
     def add_environmental_results_for_scatter(
-            self, list_vehicles, results, dict_scatter
+        self, list_vehicles, results, dict_scatter
     ):
 
         for vehicle in list_vehicles:
-            dict_scatter[', '.join(vehicle)].append(
+            dict_scatter[", ".join(vehicle)].append(
                 results.sel(
                     powertrain=vehicle[0],
                     size=vehicle[1],
@@ -594,8 +569,7 @@ class Calculation:
                     impact_category="climate change",
                 )
                 .sum(dim="impact")
-                .values
-                .item(0)
+                .values.item(0)
             )
 
         return dict_scatter
@@ -604,15 +578,20 @@ class Calculation:
 
         normalization_factors = load_yaml_file(NORMALIZATION_FACTORS)
         keys = list(normalization_factors.keys())
-        factors = np.array([float(normalization_factors[k]) or np.nan for k in keys], dtype=float)
-
-        nf_impact = (
-            results.sel(impact_category=keys, value=0).sum(dim="impact")
+        factors = np.array(
+            [float(normalization_factors[k]) or np.nan for k in keys], dtype=float
         )
+
+        nf_impact = results.sel(impact_category=keys, value=0).sum(dim="impact")
 
         # divide with care
         vals = nf_impact.values.astype(float)
-        np.divide(vals, factors[:, None, None, None], out=vals, where=np.isfinite(factors)[:, None, None, None])
+        np.divide(
+            vals,
+            factors[:, None, None, None],
+            out=vals,
+            where=np.isfinite(factors)[:, None, None, None],
+        )
         np.nan_to_num(vals, copy=False)
         nf_impact.values[:] = vals
 
@@ -634,7 +613,7 @@ class Calculation:
                                         powertrain=p,
                                         year=y,
                                     ).values.item(0)
-                                )
+                                ),
                             ]
                         )
 
@@ -665,7 +644,11 @@ class Calculation:
 
         # remove PHEV-e, PHEV-c-p and PHEV-c-d from self.scope["powertrain"]
 
-        self.scope["powertrain"] = [x for x in self.scope["powertrain"] if x not in ["PHEV-e", "PHEV-c-p", "PHEV-c-d"]]
+        self.scope["powertrain"] = [
+            x
+            for x in self.scope["powertrain"]
+            if x not in ["PHEV-e", "PHEV-c-p", "PHEV-c-d"]
+        ]
 
         arr = self.remove_hybridization(arr)
 
@@ -696,7 +679,9 @@ class Calculation:
         except IndexError:
             engine_eff = None
         try:
-            transmission_eff = extract_efficiency("transmission efficiency", d[("Foreground",)])
+            transmission_eff = extract_efficiency(
+                "transmission efficiency", d[("Foreground",)]
+            )
         except IndexError:
             transmission_eff = None
 
@@ -721,7 +706,7 @@ class Calculation:
                         size=size,
                         parameter="battery cell energy density",
                         value=0,
-                        powertrain="BEV"
+                        powertrain="BEV",
                     )
                 ] = val["battery cell energy density"]
 
@@ -731,7 +716,7 @@ class Calculation:
                         size=size,
                         parameter="energy battery mass",
                         value=0,
-                        powertrain="BEV"
+                        powertrain="BEV",
                     )
                 ] = val["energy battery mass"]
 
@@ -741,7 +726,7 @@ class Calculation:
                         size=size,
                         parameter="battery lifetime kilometers",
                         value=0,
-                        powertrain="BEV"
+                        powertrain="BEV",
                     )
                 ] = val["battery lifetime kilometers"]
 
@@ -760,10 +745,9 @@ class Calculation:
             itertools.product(
                 self.scope["powertrain"],
                 self.scope["size"],
-                [str(y) for y in self.scope["year"]]
+                [str(y) for y in self.scope["year"]],
             )
         )
-
 
         # fetch cumulative ttw energy
         tank_to_wheel_energy = self.get_cumulative_ttw_energy(list_vehicles)
@@ -786,7 +770,9 @@ class Calculation:
 
         back_config = None
         if "custom electricity mix" in d[("Background",)]:
-            back_config = {"custom electricity mix": d[("Background",)]["custom electricity mix"]}
+            back_config = {
+                "custom electricity mix": d[("Background",)]["custom electricity mix"]
+            }
 
         self.ic = InventoryCar(
             self.cm,
@@ -801,45 +787,44 @@ class Calculation:
 
         # translate new impact category names to old ones
         map_names = {
-            'climate change': 'climate change',
-             'climate change w bio': 'GWP100a, incl. bio CO2',
-             'land use': 'agricultural land occupation',
-             'energy resources depletion: non-renewablee': 'fossil depletion',
-             'ecotoxicity: freshwater': 'freshwater ecotoxicity',
-             'eutrophication: freshwater': 'freshwater eutrophication',
-             'human toxicity: non-carcinogenic': 'human toxicity',
-             'ionising radiation': 'ionising radiation',
-             'ecotoxicity: marine': 'marine ecotoxicity',
-             'eutrophication: marine': 'marine eutrophication',
-             'material resources: metals/minerals': 'metal depletion',
-             'natural land transformation': 'natural land transformation',
-             'ozone depletion': 'ozone depletion',
-             'particulate matter formation': 'particulate matter formation',
-             'photochemical oxidant formation: human health': 'photochemical oxidant formation',
-             'acidification: terrestrial': 'terrestrial acidification',
-             'ecotoxicity: terrestrial': 'terrestrial ecotoxicity',
-             'urban land occupation': 'urban land occupation',
-             'water use': 'water depletion',
-             'Human noise impacts': 'noise emissions',
-             'energy resources: renewable': 'renewable primary energy',
-             'energy resources: non-renewable': 'non-renewable primary energy'
+            "climate change": "climate change",
+            "climate change w bio": "GWP100a, incl. bio CO2",
+            "land use": "agricultural land occupation",
+            "energy resources depletion: non-renewablee": "fossil depletion",
+            "ecotoxicity: freshwater": "freshwater ecotoxicity",
+            "eutrophication: freshwater": "freshwater eutrophication",
+            "human toxicity: non-carcinogenic": "human toxicity",
+            "ionising radiation": "ionising radiation",
+            "ecotoxicity: marine": "marine ecotoxicity",
+            "eutrophication: marine": "marine eutrophication",
+            "material resources: metals/minerals": "metal depletion",
+            "natural land transformation": "natural land transformation",
+            "ozone depletion": "ozone depletion",
+            "particulate matter formation": "particulate matter formation",
+            "photochemical oxidant formation: human health": "photochemical oxidant formation",
+            "acidification: terrestrial": "terrestrial acidification",
+            "ecotoxicity: terrestrial": "terrestrial ecotoxicity",
+            "urban land occupation": "urban land occupation",
+            "water use": "water depletion",
+            "Human noise impacts": "noise emissions",
+            "energy resources: renewable": "renewable primary energy",
+            "energy resources: non-renewable": "non-renewable primary energy",
         }
 
         # Build a mapping only for existing impact categories
-        existing_map = {k: v for k, v in map_names.items() if k in results['impact_category'].values}
+        existing_map = {
+            k: v for k, v in map_names.items() if k in results["impact_category"].values
+        }
 
         # Apply the renaming
         results = results.assign_coords(
             impact_category=[
-                existing_map.get(cat, cat) for cat in results['impact_category'].values
+                existing_map.get(cat, cat) for cat in results["impact_category"].values
             ]
         )
 
-
-        results = (
-            results
-            .sel(value=0)
-            .transpose("impact_category", "size", "powertrain", "year", "impact")
+        results = results.sel(value=0).transpose(
+            "impact_category", "size", "powertrain", "year", "impact"
         )
 
         # --- make all numbers finite (NaN/±inf -> 0.0) ---
@@ -868,7 +853,7 @@ class Calculation:
             impact_category,
             self.scope["size"],
             self.scope["powertrain"],
-            [str(y) for y in self.scope["year"]]
+            [str(y) for y in self.scope["year"]],
         ]
 
         l_impacts_wo_impact = list(itertools.product(*a_wo_impact))
@@ -897,7 +882,9 @@ class Calculation:
                             size=size,
                             powertrain=powertrain,
                             year=year,
-                        ).sum().values.item(0),
+                        )
+                        .sum()
+                        .values.item(0),
                     ]
                 )
 
@@ -908,31 +895,35 @@ class Calculation:
         for vehicle in l_impacts_wo_impact:
             impact_cat, size, powertrain, year = vehicle
             year = int(year)
-            fix_burden = results.sel(
-                impact_category=impact_cat,
-                size=size,
-                powertrain=powertrain,
-                year=year,
-                impact=[
-                    "powertrain",
-                    "energy storage",
-                    "glider",
-                    "EoL"
-                ]
-            ).sum(dim="impact").values.item(0) * lifetime
-            var_burden = results.sel(
-                impact_category=impact_cat,
-                size=size,
-                powertrain=powertrain,
-                year=year,
-                impact=[
-                    "energy chain",
-                    "direct - exhaust",
-                    "direct - non-exhaust",
-                    "maintenance",
-                    "road"
-                ]
-            ).sum(dim="impact").values.item(0)
+            fix_burden = (
+                results.sel(
+                    impact_category=impact_cat,
+                    size=size,
+                    powertrain=powertrain,
+                    year=year,
+                    impact=["powertrain", "energy storage", "glider", "EoL"],
+                )
+                .sum(dim="impact")
+                .values.item(0)
+                * lifetime
+            )
+            var_burden = (
+                results.sel(
+                    impact_category=impact_cat,
+                    size=size,
+                    powertrain=powertrain,
+                    year=year,
+                    impact=[
+                        "energy chain",
+                        "direct - exhaust",
+                        "direct - non-exhaust",
+                        "maintenance",
+                        "road",
+                    ],
+                )
+                .sum(dim="impact")
+                .values.item(0)
+            )
 
             list_res_acc.append(
                 [
@@ -963,9 +954,7 @@ class Calculation:
         np.nan_to_num(results.data, copy=False, nan=0.0, posinf=0.0, neginf=0.0)
 
         # generate normalized results
-        normalized_results = self.generate_normalized_results(
-            results
-        )
+        normalized_results = self.generate_normalized_results(results)
 
         # Update task progress to db
         self.update_task_progress(85, job_id)
@@ -1067,7 +1056,7 @@ class Calculation:
             k
             for k in dicts
             if "Micro" not in k
-               or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))
+            or ("Micro" in k and not any(pt in k for pt in forbidden_vehicles))
         ]
         dicts = {k: v for k, v in dicts.items() if k in list_keys_to_keep}
 
